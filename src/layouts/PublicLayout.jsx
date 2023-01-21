@@ -48,7 +48,7 @@ const PublicLayout = () => {
                      
                 </ul>
             </div>
-             <div className='bg-amber-50 rounded shadow-sm p-10 p-lg-15 mx-auto'>
+             <div className='bg-amber-50 rounded shadow-sm'>
                     <Outlet />
                 </div>
           
