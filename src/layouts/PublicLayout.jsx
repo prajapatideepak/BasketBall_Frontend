@@ -1,11 +1,16 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { Link, Outlet } from 'react-router-dom'
-
+import logo from "/images/cbl.webp"
 const PublicLayout = () => {
     return (
-        <>
-            <div className='bg-orange-500 py-3'>
-                <ul className='flex justify-center items-center space-x-10 text-xl font-semibold text-white'>
+        <div className='min-h-screen'>
+            <div className='bg-orange-600  py-4 px-6 flex items-center justify-between'>
+               <div className='inline-block'>
+                <h1 className='font-bold text-3xl font-mono '>TheCBL</h1>
+                        {/* <img className='h-16 w-16'  src={logo} /> */}
+               </div>
+               <div>
+                 <ul className='flex justify-center items-center space-x-10 text-xl font-semibold text-gray-800'>
                     <li className='cursor-pointer'>
                         <Link to={"/"}>
                         Home
@@ -47,12 +52,13 @@ const PublicLayout = () => {
                
                      
                 </ul>
+               </div>
             </div>
-             <div className='bg-amber-50 rounded shadow-sm'>
+             <div className='bg-[#F5F5F7] w-full'>
                     <Outlet />
                 </div>
           
-        </>
+        </div>
 
     )
 }
