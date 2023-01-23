@@ -13,7 +13,6 @@ const PublicLayout = () => {
             <div className="py-3 bg-black px-9 md:flex items-center justify-between absolute w-full">
                 <div className='inline-block'>
                     <h1 className='font-bold text-3xl font-mono text-white'>The<span className='text-[#ee6730]'>CBL</span></h1>
-                    {/* <img className='h-16 w-16'  src={logo} /> */}
                 </div>
                 <div className='text-3xl text-white absolute right-8 top-4 cursor-pointer lg:hidden' onClick={() => setOpen(!open)}>
                     <ion-icon name={open ? "close" : "menu"} ></ion-icon>
