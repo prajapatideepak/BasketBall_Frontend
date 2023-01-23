@@ -19,7 +19,7 @@ const News = () => {
             <NewsCard />
           </div>
         </div>
-          <div className="grid py-3 grid-cols-1   lg:grid-cols-3 gap-5">
+          <div className="grid py-3 grid-cols-1   lg:grid-cols-2 gap-5">
                 {
                     defaultArray.map(()=>{
                         return  <NewsCard />        

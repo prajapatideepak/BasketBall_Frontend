@@ -19,8 +19,6 @@ const PublicRoutes = () => (
             <Route path="/login" element={<Login />} /> 
             <Route path="/news" element={<News />} />
             <Route path="/galary" element={<Galary />} /> 
- 
-
             <Route index element={<LandingPage />} />
 
         </Route>
@@ -28,3 +26,5 @@ const PublicRoutes = () => (
 )
 
 export default PublicRoutes
+ 
+
