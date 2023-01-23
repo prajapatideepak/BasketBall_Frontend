@@ -1,5 +1,5 @@
 import React from "react"
-import image from "../../../public/CBL_Images/7xm.xyz272003.jpg"
+import image from "/CBL_Images/7xm.xyz272003.jpg"
 
 
 function LandingPage() {
