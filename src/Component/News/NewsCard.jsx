@@ -1,7 +1,7 @@
 import React from "react";
 export default function NewsCard() {
   return (
-    <div className="w-full relative shadow-2xl  rounded-2xl ">
+    <div className="w-full cursor-pointer relative shadow-2xl  rounded-2xl ">
       <div className="">
         <img
           className=" rounded-2xl"

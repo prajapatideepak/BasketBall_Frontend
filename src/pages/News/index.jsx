@@ -18,8 +18,8 @@ const News = () => {
       ) : (
         <>
           <div className="flex  relative justify-center items-center text-[#ee6730] p-2 space-x-3 font-bold text-3xl">
-            <h1 className="text-black underline"> News</h1>
-            <GiBasketballBall className="animate-bounce	 text-[#ee6730] " />
+            <h1 className="text-black text-4xl "> News</h1>
+            {/* <GiBasketballBall className="animate-bounce	 text-[#ee6730] " /> */}
           </div>
           <div className="mx-6 lg:mx-12 pt-5">
             <div className="flex flex-col lg:flex-row space-x-0 lg:space-x-4 space-y-4  items-center justify-center">
