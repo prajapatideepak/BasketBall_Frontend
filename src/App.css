@@ -14,17 +14,3 @@
     width: 100%;
 }
 
-.img-area img{
-    position: absolute;
-    left: 0;
-    height: 300px;
-    width: 400px;
-    transition: opacity 1s ease-in-out;
-    
-}
-
-.img-area img #img-front:hover{
-opacity: 0;
-cursor: pointer;
-
-}

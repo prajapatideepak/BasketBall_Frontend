@@ -4,7 +4,7 @@ export default function NewsCard() {
     <div className="w-full relative shadow-2xl  rounded-2xl ">
       <div className="">
         <img
-          className="opacity-80 rounded-2xl"
+          className=" rounded-2xl"
           src={"/CBL_Images/7xm.xyz972781.webp"}
         />
       </div>
@@ -17,7 +17,7 @@ export default function NewsCard() {
             26/03/12
           </span>
         </div>
-        <div className="py-1 lg:py-3 uppercase leading-relaxed">
+        <div className="py-1 lg:py-3  leading-relaxed">
           <h1 className="text-sm md:text-lg lg:text-lg font-bold opacity-100">
             {" "}
             Wellbenix created amazing basketball web application people are
