@@ -34,8 +34,8 @@ const PublicLayout = () => {
                         </Link>
                     </li>
                       <li className='cursor-pointer'>
-                        <Link to={"/galary"}>
-                        Galary
+                        <Link to={"/gallery"}>
+                        Gallery
                         </Link>
                     </li>
                      <li className='cursor-pointer'>
@@ -56,7 +56,7 @@ const PublicLayout = () => {
             </div>
              <div className='bg-[#F5F5F7] w-full'>
                     <Outlet />
-                </div>
+            </div>
           
         </div>
 
