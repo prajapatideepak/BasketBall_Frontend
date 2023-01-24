@@ -8,6 +8,8 @@ import Login from '../pages/Login'
 import News from '../pages/News'
 import Register from '../pages/Register'
 import "../App.css"
+import Passlink from '../pages/Pass/Passlink'
+import Password from '../pages/Pass/Password'
 
 const PublicRoutes = () => (
     <Routes>
@@ -19,6 +21,8 @@ const PublicRoutes = () => (
             <Route path="/login" element={<Login />} /> 
             <Route path="/news" element={<News />} />
             <Route path="/galary" element={<Galary />} /> 
+            <Route path="/ForgetPass" element={<Passlink />} /> 
+            <Route path="/Password" element={<Password />} /> 
             <Route index element={<LandingPage />} />
 
         </Route>

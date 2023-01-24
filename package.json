@@ -9,11 +9,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "formik": "^2.2.9",
+    "navigate": "^0.3.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.7.1",
     "react-lazy": "^1.1.0",
-    "react-router-dom": "^6.6.2"
+    "react-router-dom": "^6.6.2",
+    "react-toastify": "^9.1.1",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@types/react": "^18.0.26",
