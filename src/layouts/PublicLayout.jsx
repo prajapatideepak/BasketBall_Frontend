@@ -50,9 +50,9 @@ const PublicLayout = () => {
                             </Link>
                         </li>
                         <li className="nav-item" onClick={() => setOpen(!open)}>
-                            <Link className='Link' to={"/galary"} >
+                            <Link className='Link' to={"/gallery"} >
                                 <h1 className='relative text-white text-base md:text-lg lg:text-base xl:text-lg  my-4 lg:my-0'>
-                                Galary
+                                Gallery
                                 </h1>
                             </Link>
                         </li>
