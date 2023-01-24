@@ -1,0 +1,16 @@
+.nav-item h1:after {
+    content: "";
+    position: absolute;
+    background-color: #ffffff;
+    height: 3px;
+    width: 0;
+    left: 50%;
+    bottom: -5px;
+    transition: .5s ease-out;
+}
+
+ .nav-item h1:hover:after {
+    left: 0%;
+    width: 100%;
+}
+

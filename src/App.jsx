@@ -1,6 +1,7 @@
 import React from 'react'
 import AppRoutes from './routes/index.jsx'
 
+
 function App() {
   if(process.env.NODE_ENV == 'development'){
     document.getElementById("root").classList.add('debug-screens')

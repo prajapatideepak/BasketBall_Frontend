@@ -7,6 +7,7 @@ import LandingPage from '../pages/LandingPage'
 import Login from '../pages/Login'
 import News from '../pages/News'
 import Register from '../pages/Register'
+import "../App.css"
 
 const PublicRoutes = () => (
     <Routes>
@@ -18,7 +19,6 @@ const PublicRoutes = () => (
             <Route path="/login" element={<Login />} /> 
             <Route path="/news" element={<News />} />
             <Route path="/gallery" element={<Gallery />} /> 
-
             <Route index element={<LandingPage />} />
 
         </Route>
@@ -26,3 +26,5 @@ const PublicRoutes = () => (
 )
 
 export default PublicRoutes
+ 
+
