@@ -4,7 +4,7 @@ import PrivateLayout from '../layouts/PrivateLayout'
 
 const PrivateRoutes = () => {
     // const ProfilePage = lazy(() => import('../pages/profile'))
-    const Dashboard = lazy(() => import('../pages/dashboard'))
+    const Dashboard = lazy(() => import('../pages/Dashboard'))
     // const Configurations = lazy(() => import('../pages/configurations'))
     // const Patients = lazy(() => import('../pages/patients'))
     // const Pharama = lazy(() => import('../pages/pharma'))
