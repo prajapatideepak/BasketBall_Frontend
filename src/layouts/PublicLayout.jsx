@@ -56,15 +56,15 @@ const PublicLayout = () => {
                                 </h1>
                             </Link>
                         </li>
-                        <li className='cursor-pointer  text-white border rounded-2xl text-center lg:px-8 lg py-2 hover:border-[#ee6730] hover:bg-[#ee6730]
-                        hover:text-white text-base md:text-lg lg:text-base xl:text-lg duration-700' onClick={() => setOpen(!open)}>
+                        <li className='cursor-pointer  text-white border rounded-2xl text-center lg:px-8 lg py-1 hover:border-[#ee6730] hover:bg-[#ee6730]
+                        hover:text-white text-base md:text-lg lg:text-base xl:text-sm duration-700' onClick={() => setOpen(!open)}>
                             <Link to={"/login"}>
 
                                 login
                             </Link>
                         </li>
-                        <li className='cursor-pointer text-white border rounded-2xl text-center  lg:px-8 py-2 hover:border-[#ee6730] hover:bg-[#ee6730]
-                        hover:text-white text-base md:text-lg lg:text-base xl:text-lg duration-700 my-4 lg:my-0' onClick={() => setOpen(!open)}>
+                        <li className='cursor-pointer text-white border rounded-2xl text-center  lg:px-8 py-1 hover:border-[#ee6730] hover:bg-[#ee6730]
+                        hover:text-white text-base md:text-lg lg:text-base xl:text-sm duration-700 my-4 lg:my-0' onClick={() => setOpen(!open)}>
                             <Link to={"/register"}>
                                 Register
                             </Link>

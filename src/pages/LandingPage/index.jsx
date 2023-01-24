@@ -4,7 +4,7 @@ import image from "../../../public/CBL_Images/7xm.xyz290762.jpg"
 
 function LandingPage() {
     return (
-        <>
+        <div className="bg-black">
             <div className="bg-black h-screen ">
                 <div className="img absolute bottom-10 sm:bottom-0 md:bottom-0 lg:bottom-0 2xl:bottom-0 right-0  ">
                     <img src={image} alt="landing" className=" h-[250px] sm:h-[400px] sm:w-[500px] md:h-[450px] md:w-[550px] lg:h-[500px] lg:w-[650px] xl:h-[580px] xl:w-full 2xl:h-[600px]  " />
@@ -21,7 +21,7 @@ function LandingPage() {
             </div>
 
 
-        </>
+        </div>
     )
 }
 
