@@ -4,7 +4,7 @@ export default function NewsCard() {
   return (
     <div className='w-full relative shadow-2xl rounded-2xl '>
         <div className="">
-            <img className='opacity-80 '  src={"/CBL_Images/7xm.xyz946052.webp"} />
+            <img className='opacity-80 '  src={"/CBL_Images/7xm.xyz972781.webp"} />
         </div>
         <div className='absolute flex flex-col hover:h-full duration-500 transition space-y-0 md:space-y-0 justify-end w-full  bottom-0 text-white bg-gradient-to-l   from-transparent via-black  to-gray-900 px-2 lg:px-8 py-2 lg:pt-4 pb-2 opacity-90 '>
             <div className='flex space-x-2 lg:space-x-4 italic items-center uppercase text-xs font-bold '>
