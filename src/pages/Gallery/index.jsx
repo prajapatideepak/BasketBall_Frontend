@@ -1,7 +1,14 @@
 import React from 'react';
 import Masonry from 'react-masonry-css'
 import LazyLoad from 'react-lazyload';
+import {
+  Button,
+  DialogBody,
+  DialogHeader,
+  Dialog,
+} from "@material-tailwind/react";
 import './Gallery.css';
+import { AiFillCloseCircle } from 'react-icons/ai';
 
 const Gallery = () => {
     const breakpointColumnsObj = {
@@ -67,7 +74,8 @@ const Gallery = () => {
     const [currentTab, setCurrentTab] = React.useState(0)
     const [currentTabImages, setCurrentTabImages] = React.useState(allImages)
     const [champsImages, setChampsImages] = React.useState([])
-    const [awardsImages, setAwardsImages] = React.useState([])
+    const [awardsImages, setAwardsImages] = React.useState([]);
+    const [previewImage, setPreviewImage] = React.useState('')
 
     React.useEffect(() => {
         let champs = []
@@ -97,6 +105,7 @@ const Gallery = () => {
     },[currentTab])
 
     return (
+        <>
         <div className='min-h-screen'>
             <div className='heading-container flex justify-center items-center h-24 sm:h-32 md:h-48 bg-black'>
                 <span className='text-xl sm:text-2xl md:text-3xl lg:text-5xl font-semibold text-white'>
@@ -125,7 +134,7 @@ const Gallery = () => {
                     {
                         currentTabImages.map((item, i) =>{
                             return(
-                                <div key={i} className='bg-gray-200 break-inside-avoid'>
+                                <div key={i} className='bg-gray-200 break-inside-avoid cursor-pointer' onClick={()=> setPreviewImage(item.imageUrl)}>
                                     <LazyLoad placeholder={<Placeholder/>} once>
                                     <img src={item.imageUrl} alt="" effect='blur' className='w-full h-full' />
 
@@ -136,7 +145,25 @@ const Gallery = () => {
                     }
                 </Masonry>
             </div>
+            
+        {
+            previewImage != ''
+            ?
+                <div tabindex="-1" aria-hidden="true" className="fixed bg-black top-0 left-0 right-0 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
+                <div class="w-full h-full">
+                    <div className='flex justify-end items-center px-5 py-3'>
+                        <AiFillCloseCircle className='cursor-pointer text-xl text-white text-orange-600' onClick={() => setPreviewImage('')}>close</AiFillCloseCircle>
+                    </div>
+                    <div className='flex justify-center items-center w-full mt-auto'>
+                        <img src={previewImage} className='w-2/4' alt="" />
+                    </div>
+                </div>
+                </div>
+            : 
+                null
+        }
         </div>
+        </>
     );
 }
 
