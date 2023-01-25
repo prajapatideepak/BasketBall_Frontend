@@ -5,7 +5,7 @@ export default function NewsCard({path , small}) {
   return (
     <div className="w-full cursor-pointer relative shadow-2xl  rounded-2xl ">
       <div className="">
-            <LazyLoad  placeholder={<Deepak/>} once>
+            <LazyLoad   placeholder={<Deepak/>} once>
         <img
           className=" rounded-2xl"
           src={path}
@@ -36,9 +36,9 @@ export default function NewsCard({path , small}) {
   );
 }
 const Deepak = () =>{
-    return  <div className='bg-orange-700 blur-sm min-h-screen '>
+    return  <div className='bg-orange-700 blur-sm h-72 '>
 <img src="/CBL_Images/cbl.webp" className="w-full h-full" />
-<h1 className="opacity-0">. Est nobis quam dicta optio voluptates aut eius voluptatum explicabo placeat? Harum exercitationem rerum adipisci quam eveniet qui saepe odio tempore magnam incidunt? Voluptatum placeat quas dolorem? Quia recusandae harum quisquam esse, quos impedit vel neque provident placeat accusantium et, repellendus amet.</h1>
+{/* <h1 className="opacity-0">qui saepe odio tempore magnam incidunt? Voluptatum placeat quas dolorem? Quia recusandae harum quisquam esse, quos impedit vel neque provident placeat accusantium et, repellendus amet.</h1> */}
     </div>
 
 }
