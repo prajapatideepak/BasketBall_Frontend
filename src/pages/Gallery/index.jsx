@@ -115,13 +115,13 @@ const Gallery = () => {
             <div className='flex justify-center items-center mt-12'>
                 <div className="flex flex-wrap justify-center items-center gap-3 md:gap-5">
                     <span 
-                    className={`${currentTab == 0 ? 'bg-orange-600 text-white' : 'bg-orange-100 text-gray-600'} cursor-pointer px-4 py-1.5 text-xs sm:text-sm md:text-base rounded-full text-center`} 
+                    className={`${currentTab == 0 ? 'bg-[#ee6730] text-white' : 'bg-orange-100 text-gray-600'} cursor-pointer px-4 py-1.5 text-xs sm:text-sm md:text-base rounded-full text-center`} 
                     onClick={()=>setCurrentTab(0)}>All</span>
                     <span 
-                    className={`${currentTab == 1 ? 'bg-orange-600 text-white' : 'bg-orange-100 text-gray-600'} cursor-pointer px-4 py-1.5 text-xs sm:text-sm md:text-base rounded-full text-center`} 
+                    className={`${currentTab == 1 ? 'bg-[#ee6730] text-white' : 'bg-orange-100 text-gray-600'} cursor-pointer px-4 py-1.5 text-xs sm:text-sm md:text-base rounded-full text-center`} 
                     onClick={()=>setCurrentTab(1)}>Champions</span>
                     <span 
-                    className={`${currentTab == 2 ? 'bg-orange-600 text-white' : 'bg-orange-100 text-gray-600'} cursor-pointer px-4 py-1.5 text-xs sm:text-sm md:text-base rounded-full text-center`} 
+                    className={`${currentTab == 2 ? 'bg-[#ee6730] text-white' : 'bg-orange-100 text-gray-600'} cursor-pointer px-4 py-1.5 text-xs sm:text-sm md:text-base rounded-full text-center`} 
                     onClick={()=>setCurrentTab(2)}>Achievement & Awards</span>
                 </div>
             </div>
@@ -149,13 +149,13 @@ const Gallery = () => {
         {
             previewImage != ''
             ?
-                <div tabindex="-1" aria-hidden="true" className="fixed bg-black top-0 left-0 right-0 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
-                <div class="w-full h-full">
-                    <div className='flex justify-end items-center px-5 py-3'>
-                        <AiFillCloseCircle className='cursor-pointer text-xl text-white text-orange-600' onClick={() => setPreviewImage('')}>close</AiFillCloseCircle>
-                    </div>
-                    <div className='flex justify-center items-center w-full mt-auto'>
-                        <img src={previewImage} className='w-2/4' alt="" />
+                <div tabindex="-1" aria-hidden="true" className="fixed bg-black top-0 left-0 right-0 w-full min-h-screen p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full z-[999]">
+                <div className='flex justify-end items-center px-5 py-3'>
+                    <AiFillCloseCircle className='cursor-pointer text-xl text-white text-[#ee6730]' onClick={() => setPreviewImage('')}>close</AiFillCloseCircle>
+                </div>
+                <div class="w-full flex justify-center items-center">
+                    <div className='flex justify-center items-center w-full mt-20'>
+                        <img src={previewImage} className='lg:w-2/4' alt="" />
                     </div>
                 </div>
                 </div>
