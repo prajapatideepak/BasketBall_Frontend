@@ -2,6 +2,7 @@ import React from "react";
 import NewsCard from "../../Component/News/NewsCard";
 import { GiBasketballBall } from "react-icons/gi";
 import Loader from "../../Component/Loader/Loader";
+
 const News = () => {
   const defaultArray = [1, 2, 3, 4];
   const [loader, setloader] = React.useState(true);
@@ -23,9 +24,10 @@ const path=["/CBL_Images/7xm.xyz343615.webp" ,"/CBL_Images/landeeng.webp","/CBL_
             <GiBasketballBall className="animate-bounce	 text-[#ee6730] " />
           </div>
           <div className="mx-6 lg:mx-12 pt-5">
-            <div className="lg:grid space-y-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5     ">
+            <div className="lg:grid space-y-5 grid-cols-1 md:grid-cols-2 grid-rows-2 lg:grid-cols-4 gap-5     ">
               <div className="w-full col-span-3 row-span-2 h-full">
                 <NewsCard path={path[0]} />
+
               </div>
               <div className=" col-span-1 md:row-span-2   flex  justify-center flex-col space-y-3">
                 <h1 className="hidden lg:block px-2 font-bold text-center text-2xl"> Latest Update</h1>
@@ -44,5 +46,8 @@ const path=["/CBL_Images/7xm.xyz343615.webp" ,"/CBL_Images/landeeng.webp","/CBL_
     </div>
   );
 };
+
+
+
 
 export default News;

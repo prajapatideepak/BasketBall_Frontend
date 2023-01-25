@@ -26,7 +26,11 @@ const features = ["All-in-one app for basketball",
         <AboutUsCard key={1} name={1} />
       </div>
       <div>
+        <div className="text-center">
+
               <h1 className="text-3xl text-center ">CBL Features</h1>
+              <p className="w-full md:w-2/3 mx-auto p-2 text-gray-800 italic"><span className="text-2xl text-black">"</span> Unleash the full potential of your basketball passion with our all-in-one web portal, featuring live scores, tournament updates, stats, and more<span className="text-2xl text-black">"</span></p>
+        </div>
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 mt-10">
                 {features.map(feature=>{
                     return <AboutusFeatureCard key={feature} feature={feature}  />

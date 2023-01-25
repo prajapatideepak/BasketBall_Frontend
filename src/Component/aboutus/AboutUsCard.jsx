@@ -1,4 +1,5 @@
 import React from 'react'
+import LazyLoad from 'react-lazyload';
 
 export default function AboutUsCard({name}) {
     console.log(name)
@@ -14,11 +15,23 @@ export default function AboutUsCard({name}) {
 </p>  
           </div>
           <div className={`w-full lg:w-1/2 flex  ${name%2==0 ? "justify-start items-start": "items-end"} `}>
+            <LazyLoad placeholder={<Placeholder/>} once>
+
             <img
               className="w-full lg:w-3/4 rounded "
               src={"/CBL_Images/Picsart_23-01-24_18-35-25-774.png"}
-            />
+              />
+              </LazyLoad>
           </div>
         </div>
   )
+}
+
+function Placeholder(){
+  return (
+    <div className="bg-gray-400  w-[337px] h-[225px]">
+
+    </div>
+  )
+
 }
