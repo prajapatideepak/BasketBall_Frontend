@@ -149,13 +149,13 @@ const Gallery = () => {
         {
             previewImage != ''
             ?
-                <div tabindex="-1" aria-hidden="true" className="fixed bg-black top-0 left-0 right-0 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
-                <div class="w-full h-full">
-                    <div className='flex justify-end items-center px-5 py-3'>
-                        <AiFillCloseCircle className='cursor-pointer text-xl text-white text-orange-600' onClick={() => setPreviewImage('')}>close</AiFillCloseCircle>
-                    </div>
-                    <div className='flex justify-center items-center w-full mt-auto'>
-                        <img src={previewImage} className='w-2/4' alt="" />
+                <div tabindex="-1" aria-hidden="true" className="fixed bg-black top-0 left-0 right-0 w-full min-h-screen p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full z-[999]">
+                <div className='flex justify-end items-center px-5 py-3'>
+                    <AiFillCloseCircle className='cursor-pointer text-xl text-white text-orange-600' onClick={() => setPreviewImage('')}>close</AiFillCloseCircle>
+                </div>
+                <div class="w-full flex justify-center items-center">
+                    <div className='flex justify-center items-center w-full mt-20'>
+                        <img src={previewImage} className='lg:w-2/4' alt="" />
                     </div>
                 </div>
                 </div>
