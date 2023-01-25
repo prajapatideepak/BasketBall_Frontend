@@ -36,7 +36,7 @@ export default function NewsCard({path , small}) {
   );
 }
 const Deepak = () =>{
-    return  <div className='bg-orange-700 blur-sm h-72 '>
+    return  <div className='bg-orange-700  h-72 '>
 <img src="/CBL_Images/cbl.webp" className="w-full h-full" />
 {/* <h1 className="opacity-0">qui saepe odio tempore magnam incidunt? Voluptatum placeat quas dolorem? Quia recusandae harum quisquam esse, quos impedit vel neque provident placeat accusantium et, repellendus amet.</h1> */}
     </div>

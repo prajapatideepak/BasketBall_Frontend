@@ -1,5 +1,5 @@
 import React from "react"
-import image from "../../../public/CBL_Images/7xm.xyz290762.jpg"
+import image from "/CBL_Images/7xm.xyz290762.jpg"
 import { Link, Outlet } from 'react-router-dom'
 import { RxArrowRight } from "react-icons/rx"
 
