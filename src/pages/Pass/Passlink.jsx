@@ -31,7 +31,10 @@ function Passlink() {
             console.log(res, "Res")
             setIsOnSubmit(true)
             notify()
-            navigate("/Password")
+            setTimeout(function() {
+                navigate("/Password")
+            }, 2000);
+               
         }
     })
 
