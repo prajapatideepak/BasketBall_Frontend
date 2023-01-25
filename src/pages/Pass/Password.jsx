@@ -43,10 +43,10 @@ function Password() {
     return (
         <div className='flex sm:justify-center lg:justify-start xl:justify-between items-center h-screen bg-white px-10 lg:px-20'>
             <div className="img  hidden lg:block">
-                <img src={image} alt="landing" className="lg:w-[500px] lg:h-[500px]  xl:w-[650px] xl:h-[650px] 2xl:h-[500px] 2xl:w-[700px]" />
+                <img src={image} alt="landing" className="lg:w-[500px] lg:h-[400px]  xl:w-[650px] xl:h-[500px] 2xl:h-[500px] 2xl:w-[700px]" />
             </div>
             <div className='lg:px-10 lg:py-10  lg:relative 2xl:right-20'>
-                <div className='flex justify-center items-center py-5 '>
+                <div className='flex justify-center items-center mt-4 py-5 '>
                     <div className='bg-[#ee663024] px-2 py-2 rounded-full'>
                         <div className='bg-[#ee66304f] px-2 py-2 rounded-full'>
                             <FiKey className='  text-[#ee6730] rounded-full  text-xl ' />
