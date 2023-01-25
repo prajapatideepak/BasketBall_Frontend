@@ -18,7 +18,7 @@ const PublicLayout = () => {
                     <ion-icon name={open ? "close" : "menu"} ></ion-icon>
                 </div>
                 <div className=''>
-                    <ul className={`lg:space-x-10 font-semibold text-gray-800 pb-10 lg:pb-0  absolute lg:static  lg:z-auto
+                    <ul className={`lg:space-x-10 font-semibold text-gray-800 pb-10 lg:pb-0  absolute lg:static lg:z-auto
                      z-[-1] left-0 pl-9 lg:pl-0 pr-9 lg:pr-0 w-full lg:w-auto  bg-black flex flex-col lg:flex-row lg:items-center
                      duration-500 ease-in ${open ? "top-12 opacity-100" : "top-[-500px] lg:opacity-100 opacity-0"}`}>
                         <li className="nav-item" onClick={() => setOpen(!open)}>
