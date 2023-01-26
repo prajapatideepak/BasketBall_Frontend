@@ -7,16 +7,17 @@ import { useFormik } from 'formik'
 import * as Yup from "yup"
 import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
+import "yup-phone"
 
 const signUpSchema = Yup.object({
-    email : Yup.string().email().required("Please enter your email")
+    phone : Yup.string().phone(null , true , "Invalid phone number").required("Please enter your phone number")
 });
 
 const initialValues = {
-    email: ""
+    phone: ""
 };
 
-function Passlink() {
+function ForgetPassword() {
    
 
     const notify = () => toast("Link Send Successfully!!");
@@ -64,19 +65,19 @@ function Passlink() {
             </div>
             <div className={`${isOnSubmit ? "hidden" : "block"} py-3`}>
                 <form action="" className=' space-y-2' onSubmit={handleSubmit}>
-                    <label htmlFor="Email" className='font-semibold text-base'>Email</label>
-                    <input type="Email"
-                        value={values.email}
-                        placeholder='Enter Your Email'
+                    <label htmlFor="Email" className='font-semibold text-base'>Phone</label>
+                    <input type="text"
+                        value={values.phone}
+                        placeholder='Enter your phone number'
                         autoComplete='off'
-                        name='email'
-                        id='email'
+                        name='phone'
+                        id='phone'
                         onChange={handleChange}
                         onBlur={handleBlur}
                         className='w-full rounded-md py-2 px-3 outline-none focus:outline-[#ee6730] outline-slate-300 ' />
-                    {errors.email && touched.email
+                    {errors.phone && touched.phone
                         ?
-                        <p className='form-error text-red-600 text-sm font-semibold'>{errors.email}</p>
+                        <p className='form-error text-red-600 text-sm font-semibold'>{errors.phone}</p>
                         :
                         null}
 
@@ -102,4 +103,4 @@ function Passlink() {
 
 
 
-export default Passlink
+export default ForgetPassword
