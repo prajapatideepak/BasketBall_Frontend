@@ -3,19 +3,85 @@ import NewsCard from "../../Component/News/NewsCard";
 import { GiBasketballBall } from "react-icons/gi";
 import Loader from "../../Component/Loader/Loader";
 
-const NewsPage = () => {
-  const defaultArray = [1, 2, 3, 4];
-  const [loader, setloader] = React.useState(true);
-  const path = [
-    "/CBL_Images/7xm.xyz343615.webp",
-    "/CBL_Images/landeeng.webp",
-    "/CBL_Images/7xm.xyz851458.webp",
-    "/CBL_Images/7xm.xyz946052.webp",
-    "/CBL_Images/7xm.xyz343615.webp",
-    "/CBL_Images/7xm.xyz160722 (1).webp",
-    "/CBL_Images/7xm.xyz928823.webp",
+ export const newsDetail = [
+    {
+      id: 1,
+      title: "Wellbenix created amazing web application for basketball",
+      priority: 2,
+      tags: "CBL, wellebnix , work",
+      image: "/CBL_Images/7xm.xyz928823.webp",
+      description:
+        " Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione porro dolor aspernatur esse assumenda, nisi dolorum labore eos repellendus, alias tenetur. Iure placeat eveniet necessitatibus similique ducimus cumque veritatis. Vero.",
+    },
+
+    {
+      id: 4,
+      title: "Monu created amazing web application for basketball",
+      priority: 2,
+      tags: "CBL, wellebnix , work",
+      image: "/CBL_Images/7xm.xyz946052.webp",
+
+      description:
+        " Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione porro dolor aspernatur esse assumenda, nisi dolorum labore eos repellendus, alias tenetur. Iure placeat eveniet necessitatibus similique ducimus cumque veritatis. Vero.",
+    },
+    {
+      id: 5,
+      title: "Shad created amazing web application for basketball",
+      priority: 2,
+      tags: "CBL, wellebnix , work",
+      image: "/CBL_Images/7xm.xyz851458.webp",
+
+      description:
+        " Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione porro dolor aspernatur esse assumenda, nisi dolorum labore eos repellendus, alias tenetur. Iure placeat eveniet necessitatibus similique ducimus cumque veritatis. Vero.",
+    },
+    {
+      id: 6,
+      title: "Sadik created amazing web application for basketball",
+      priority: 2,
+      tags: "CBL, wellebnix , work",
+      image: "/CBL_Images/landeeng.webp",
+
+      description:
+        " Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione porro dolor aspernatur esse assumenda, nisi dolorum labore eos repellendus, alias tenetur. Iure placeat eveniet necessitatibus similique ducimus cumque veritatis. Vero.",
+    },
+    {
+      id: 7,
+      title: "Deepak created amazing web application for basketball",
+      priority: 2,
+      tags: "CBL, wellebnix , work",
+      image: "/CBL_Images/7xm.xyz343615.webp",
+
+      description:
+        " Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione porro dolor aspernatur esse assumenda, nisi dolorum labore eos repellendus, alias tenetur. Iure placeat eveniet necessitatibus similique ducimus cumque veritatis. Vero.",
+    },
+        {
+      id: 2,
+      title: "LJ created amazing web application for basketball",
+      priority: 2,
+      tags: "CBL, wellebnix , work",
+      image: "/CBL_Images/7xm.xyz160722 (1).webp",
+      description:
+        " Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione porro dolor aspernatur esse assumenda, nisi dolorum labore eos repellendus, alias tenetur. Iure placeat eveniet necessitatibus similique ducimus cumque veritatis. Vero.",
+    },
+    {
+      id: 3,
+      title: "Bhavin sir created amazing web application for basketball",
+      priority: 2,
+      tags: "CBL, wellebnix , work",
+      image: "/CBL_Images/7xm.xyz343615.webp",
+
+      description:
+        " Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione porro dolor aspernatur esse assumenda, nisi dolorum labore eos repellendus, alias tenetur. Iure placeat eveniet necessitatibus similique ducimus cumque veritatis. Vero.",
+    },
   ];
 
+
+ const NewsPage = () => {
+  const defaultArray = [1, 2, 3, 4];
+  const [loader, setloader] = React.useState(true);
+  const path = [];
+
+  
   React.useEffect(() => {
     setTimeout(() => {
       setloader(() => false);
@@ -27,30 +93,34 @@ const NewsPage = () => {
         <Loader />
       ) : (
         <>
-          <div className="flex  relative justify-center items-center text-[#ee6730] p-2 space-x-3 text-3xl">
+          <div className="flex   justify-center items-center text-[#ee6730] p-2 space-x-3 text-3xl">
             <h1 className="text-black text-4xl "> News</h1>
             <GiBasketballBall className="animate-bounce	 text-[#ee6730] " />
           </div>
           <div className="mx-6 lg:mx-12 pt-5">
-            <div className="lg:grid space-y-5 grid-cols-1 md:grid-cols-2 grid-rows-2 lg:grid-cols-4 gap-8     ">
-              <div className="w-full col-span-3 row-span-2 h-full">
-                {defaultArray.map((m, i) => {
-                  if (i < 1) return <NewsCard path={path[0]} />;
-                  else return;
-                })}
+            <div className="lg:grid space-y-5 grid-cols-1 md:grid-cols-2  lg:grid-cols-4 gap-8     ">
+              <div className="w-full col-span-3 row-span-1 h-full">
+                 <NewsCard news={newsDetail[0]} />;
+                
               </div>
-              <div className=" col-span-1 md:row-span-2   flex  justify-center flex-col space-y-3">
+              <div className=" col-span-1   flex  justify-start flex-col space-y-3">
                 <h1 className="hidden lg:block px-2 font-bold text-center text-2xl">
                   {" "}
                   Latest Update
                 </h1>
-                <NewsCard key={1} small={true} path={path[1]} />
-                <NewsCard key={3} small={true} path={path[2]} />
+                <div className="flex flex-col space-y-3 ">
+                <NewsCard key={1} small={true} news={newsDetail[1]} />
+
+                
+                <NewsCard key={3} small={true} news={newsDetail[2]} />
+
+                </div>
               </div>
             </div>
             <div className="grid py-3 grid-cols-1   lg:grid-cols-2 gap-8">
-              {defaultArray.map((m, i) => {
-                return <NewsCard path={path[i + 3]} />;
+              {newsDetail.map((m, i) => {
+                if(i < newsDetail.length-3 ) return <NewsCard news={newsDetail[i + 3]} />
+                else return
               })}
             </div>
           </div>
