@@ -9,6 +9,7 @@ import Loader from "../../Component/Loader/Loader";
       title: "Wellbenix created amazing web application for basketball",
       priority: 2,
       tags: "CBL, wellebnix , work",
+      date:"22/3/21",
       image: "/CBL_Images/7xm.xyz928823.webp",
       description:
         " Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione porro dolor aspernatur esse assumenda, nisi dolorum labore eos repellendus, alias tenetur. Iure placeat eveniet necessitatibus similique ducimus cumque veritatis. Vero.",
@@ -19,6 +20,7 @@ import Loader from "../../Component/Loader/Loader";
       title: "Monu created amazing web application for basketball",
       priority: 2,
       tags: "CBL, wellebnix , work",
+      date:"22/3/21",
       image: "/CBL_Images/7xm.xyz946052.webp",
 
       description:
@@ -29,6 +31,7 @@ import Loader from "../../Component/Loader/Loader";
       title: "Shad created amazing web application for basketball",
       priority: 2,
       tags: "CBL, wellebnix , work",
+      date:"22/3/21",
       image: "/CBL_Images/7xm.xyz851458.webp",
 
       description:
@@ -39,6 +42,7 @@ import Loader from "../../Component/Loader/Loader";
       title: "Sadik created amazing web application for basketball",
       priority: 2,
       tags: "CBL, wellebnix , work",
+      date:"22/3/21",
       image: "/CBL_Images/landeeng.webp",
 
       description:
@@ -49,6 +53,7 @@ import Loader from "../../Component/Loader/Loader";
       title: "Deepak created amazing web application for basketball",
       priority: 2,
       tags: "CBL, wellebnix , work",
+      date:"22/3/21",
       image: "/CBL_Images/7xm.xyz343615.webp",
 
       description:
@@ -59,6 +64,7 @@ import Loader from "../../Component/Loader/Loader";
       title: "LJ created amazing web application for basketball",
       priority: 2,
       tags: "CBL, wellebnix , work",
+      date:"22/3/21",
       image: "/CBL_Images/7xm.xyz160722 (1).webp",
       description:
         " Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione porro dolor aspernatur esse assumenda, nisi dolorum labore eos repellendus, alias tenetur. Iure placeat eveniet necessitatibus similique ducimus cumque veritatis. Vero.",
@@ -68,6 +74,7 @@ import Loader from "../../Component/Loader/Loader";
       title: "Bhavin sir created amazing web application for basketball",
       priority: 2,
       tags: "CBL, wellebnix , work",
+      date:"22/3/21",
       image: "/CBL_Images/7xm.xyz343615.webp",
 
       description:

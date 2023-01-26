@@ -10,7 +10,7 @@ const News = () => {
             <Routes>
                 <Route >
                     <Route path='/' element={<NewsPage />} />
-                   <Route path='/:id/*' element={<NewsDetail />} />
+                   <Route path='/:id/:title' element={<NewsDetail />} />
 
                     <Route index element={<NewsPage />} />
                 </Route>
