@@ -9,8 +9,8 @@ const PublicLayout = () => {
     const [open, setOpen] = React.useState(false);
 
     return (
-        <div className='w-full relative'>
-            <div className="py-3 bg-black px-9 md:flex items-center justify-between absolute w-full">
+        <div className='w-full min-h-screen'>
+            <div className="py-3 bg-black px-9 md:flex items-center justify-between fixed  w-full">
                 <div className='inline-block'>
                     <h1 className='font-bold text-3xl font-mono text-white'>The<span className='text-[#ee6730]'>CBL</span></h1>
                 </div>
@@ -73,7 +73,7 @@ const PublicLayout = () => {
                 </div>
 
             </div>
-            <div className='bg-[#F5F5F7] w-full absolute top-0 -z-50  '>
+            <div className='bg-[#F5F5F7] w-full  absolute top-0 -z-50  '>
                 <Outlet />
             </div>
 
