@@ -1,6 +1,7 @@
 import React from 'react'
 import {ImSearch} from 'react-icons/im'
 import {BiEdit} from 'react-icons/bi'
+import {MdDelete} from 'react-icons/md'
 import { toast } from "react-toastify";
 import * as Yup from 'yup';
 import { useFormik } from 'formik'
@@ -25,12 +26,10 @@ function TeamRegistration() {
   })
 
 
-  const {values, errors, touched, isSubmitting, handleBlur, handleChange, handleSubmit} = useFormik({
+  const {values, errors, touched, isSubmitting, resetForm, handleBlur, handleChange, handleSubmit} = useFormik({
       validationSchema,
       initialValues,
-      onSubmit : (e, data) => {
-        e.preventDefault();
-
+      onSubmit : (data) => {
         //Cant select more than 12 players
         if(selectedPlayers.length < 5){
           toast.error("Please select atleast 5 players")
@@ -58,7 +57,7 @@ function TeamRegistration() {
 
   const handleSearchPlayerClick = (player_id)=>{
     //Cant select more than 12 players
-    if(selectedPlayers.length == 1){
+    if(selectedPlayers.length == 2){
       toast.error("Can't select more than 12 players")
       return;
     }
@@ -92,7 +91,7 @@ function TeamRegistration() {
       selectedPlayers.map(item =>{
         return {
           ...item,
-          isEditable: item.id == player_id
+          isEditable: item.id == player_id ? true : item.isEditable
         }
       })
     )
@@ -103,8 +102,16 @@ function TeamRegistration() {
       selectedPlayers.map(item =>{
         return {
           ...item,
-          isEditable: false
+          isEditable: item.id == player_id ? false : item.isEditable
         }
+      })
+    )
+  }
+
+  const handleRemovePlayer = (player_id) => {
+    setSelectedPlayers(
+      selectedPlayers.filter(item =>{
+        return item.id != player_id
       })
     )
   }
@@ -143,7 +150,7 @@ function TeamRegistration() {
                   }
                 </div>
                 <div className="flex flex-col mt-5">
-                  <label className="mb-2">Choose Logo</label>
+                  <label className="mb-2">Choose Logo ( PNG, JPG, JPEG )</label>
                   <input
                     className="w-full cursor-pointer rounded-lg bg-white border-2 border-gray-200 p-1 sm:p-2 text-sm"
                     type="file"
@@ -163,6 +170,7 @@ function TeamRegistration() {
                     placeholder='Write something about your team' 
                     rows="6" 
                     onChange={handleChange}
+                    onBlur={handleBlur}
                   />
                 </div>
               </div>
@@ -181,6 +189,7 @@ function TeamRegistration() {
                     name="coach_name"
                     id="coach_name"
                     onChange={handleChange}
+                    onBlur={handleBlur}
                   />
                   {
                     errors.coach_name && touched.coach_name 
@@ -199,6 +208,7 @@ function TeamRegistration() {
                     name="coach_mobile"
                     id="coach_mobile"
                     onChange={handleChange}
+                    onBlur={handleBlur}
                   />
                   {
                     errors.coach_mobile && touched.coach_mobile 
@@ -219,6 +229,7 @@ function TeamRegistration() {
                     name="assistant_coach_name"
                     id="assistant_coach_name"
                     onChange={handleChange}
+                    onBlur={handleBlur}
                   />
                   {
                     errors.assistant_coach_name && touched.assistant_coach_name 
@@ -237,6 +248,7 @@ function TeamRegistration() {
                     name="assistant_coach_mobile"
                     id="assistant_coach_mobile"
                     onChange={handleChange}
+                    onBlur={handleBlur}
                   />
                   {
                     errors.assistant_coach_mobile && touched.assistant_coach_mobile 
@@ -252,7 +264,7 @@ function TeamRegistration() {
               <h3 className='text-2xl font-semibold text-[#ee6730]'>Player Selection:</h3>
             </div>
             <div className='player-selection w-full flex flex-col xl:flex-row gap-6'>
-              <div className='player-search-input-container flex flex-1 flex-col mt-4'>
+              <div className='relative player-search-input-container flex flex-1 flex-col mt-4'>
                 <div className="player-input border-2 flex w-full mt-5 rounded-lg border-2 border-gray-200 bg-white flex justify-center items-center outline-blue-200">
                   <span className="text-xl ml-4 text-gray-500"><ImSearch/></span>
                   <input type="text" 
@@ -266,7 +278,7 @@ function TeamRegistration() {
                 {
                   searchValue != ''
                   ?
-                    <div className={`players-search-list-container w-full mt-2 bg-white px-4 py-4 border-2 rounded-lg`}>
+                    <div className={`absolute top-16 players-search-list-container w-full mt-2 bg-white px-4 py-4 border-2 rounded-lg`}>
                       <table className="items-center bg-transparent w-full border-collapse ">
                         <thead>
                           <tr>
@@ -284,7 +296,7 @@ function TeamRegistration() {
                           ?
                             searchedPlayers.map((player, index) =>{
                               return(
-                                <tr key={index} className="cursor-pointer" onClick={()=> handleSearchPlayerClick(player.id)}>
+                                <tr key={index} className="cursor-pointer border-b" onClick={()=> handleSearchPlayerClick(player.id)}>
                                   <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-gray-700 capitalize">
                                     {player.name}
                                   </th>
@@ -301,15 +313,6 @@ function TeamRegistration() {
                             </td>
                           </tr>
                         }
-                        {/* <Select 
-                        className="w-2/4" 
-                        options={[
-                          {value: 'point_guard', label: 'Point Guard'},
-                          {value: 'shooting_guard', label: 'Shooting Guard'},
-                          {value: 'center', label: 'Center'},
-                          {value: 'power_forward', label: 'Power Forward'},
-                          {value: 'shooting_forward', label: 'Shooting Forward'},
-                        ]} /> */}
                         </tbody>
                       </table>
                     </div>
@@ -317,35 +320,41 @@ function TeamRegistration() {
                     null
                 }
               </div>
-              <div className="players-list-container flex flex-1 lg:mt-0 mt-5">
-                  <div className="players-list w-full">
-                    <h4 className="text-lg font-semibold text-center text-gray-700">Selected Players</h4>
-                    <table className="items-center bg-transparent w-full border-collapse mt-2">
-                      <thead>
+              <div className="players-list-container flex flex-col flex-1 lg:mt-0 mt-5 ">
+                  <h4 className="text-lg font-semibold text-center text-gray-700">Selected Players</h4>
+                  <div className="players-list w-full overflow-x-auto">
+                    <table className="w-full mt-2 rounded-md overflow-hidden">
+                      <thead className='bg-gray-700'>
                         <tr>
-                          <th className="pl-6 bg-gray-50 text-gray-500 border border-solid border-gray-100 py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                          <th className="pl-6 border py-3 text-sm text-gray-300 uppercase border-gray-700 whitespace-nowrap font-semibold text-left">
+                            Sr.
+                          </th>
+                          <th className="border py-3 text-sm text-gray-300 uppercase border-gray-700 whitespace-nowrap font-semibold text-left">
                             Name
                           </th>
-                          <th className="bg-gray-50 text-gray-500 border border-solid border-gray-100 py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                          <th className="border py-3 text-sm text-gray-300 uppercase border-gray-700 whitespace-nowrap font-semibold text-left">
                             Position
                           </th>
-                          <th className="bg-gray-50 text-gray-500 border border-solid border-gray-100 py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                          <th className="border py-3 text-sm text-gray-300 uppercase border-gray-700 whitespace-nowrap font-semibold text-left">
                             Action
                           </th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody className="bg-white">
                       {
                         selectedPlayers.length > 0 
                         ?
                           selectedPlayers.map((player, index) =>{
                             return(
-                              <tr key={index}>
+                              <tr key={index} className="border-t-2">
                                 <th className="border-t-0 px-6 border-l-0 border-r-0 text-sm whitespace-nowrap pl-6 py-4 text-left text-gray-700 capitalize">
+                                  {index + 1}
+                                </th>
+                                <th className="text-left text-gray-700 capitalize">
                                   {player.name}
                                 </th>
                                 <td>
-                                  <select name="" id="" className='sm:px-1 py-1 rounded-md outline-blue-200 text-sm' disabled={!player.isEditable}>
+                                  <select name="" id="" className='sm:px-1 py-1 rounded-md outline-blue-200 text-sm bg-gray-200' disabled={!player.isEditable}>
                                     <option value="point_guard">Point Guard</option>
                                     <option value="shooting_guard">Shooting Guard</option>
                                     <option value="center">Center</option>
@@ -359,7 +368,11 @@ function TeamRegistration() {
                                     ?
                                       <button className="px-2 py-0.5 text-white text-sm rounded-md bg-green-600" onClick={()=>handleSavePosition(player.id)}>Save</button>
                                     :
-                                      <BiEdit className="cursor-pointer text-xl text-blue-500" onClick={()=>handleEditPosition(player.id)} />
+                                      <span className="flex">
+                                        <BiEdit className="cursor-pointer text-xl text-blue-500 mr-4" onClick={()=>handleEditPosition(player.id)} />
+  
+                                        <MdDelete className="cursor-pointer text-xl text-red-500" onClick={()=>handleRemovePlayer(player.id)}/>
+                                      </span>
                                   }
                                 </td>
                               </tr>
@@ -367,7 +380,7 @@ function TeamRegistration() {
                           })
                         : 
                         <tr>
-                          <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4 font-semibold text-red-500" colSpan="2">
+                          <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4 font-semibold text-red-500" colSpan="4">
                             No players selected
                           </td>
                         </tr>
@@ -378,7 +391,22 @@ function TeamRegistration() {
               </div>
             </div>
             <div className="w-full flex justify-end mt-5 sm:mt-10">
-              <button type="submit" className="bg-[#ee6730] rounded-md text-white px-6 py-1.5" onClick={handleSubmit}>Submit</button>
+              <button 
+                type="reset" 
+                className="bg-[#ee6730] relative inline-flex items-center justify-center px-8 py-2 overflow-hidden text-white rounded-lg cursor-pointer group mr-3"
+                onClick={()=>{resetForm(); setSelectedPlayers([])}} 
+              >
+                <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-slate-900 rounded-lg group-hover:w-full group-hover:h-56"></span>
+                <span className="relative">Clear</span>
+              </button>
+              <button 
+                type="submit" 
+                className="bg-slate-900 relative inline-flex items-center justify-center px-6 py-2 overflow-hidden text-white rounded-lg cursor-pointer group"
+                onClick={handleSubmit} 
+              >
+                <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#ee6730] rounded-lg group-hover:w-full group-hover:h-56"></span>
+                <span className="relative">SUBMIT</span>
+              </button>
             </div>
           </form>
         </div>
