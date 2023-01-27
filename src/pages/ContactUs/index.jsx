@@ -10,19 +10,19 @@ import { useFormik } from 'formik';
 
 
 const ContactUs = () => {
-    const validationSchema = Yup.object({
-        name: Yup.string().min(2).max(25).required("Please enter name"),
-        email: Yup.string().email().required("Please enter email"),
-        message: Yup.string().required("Please enter your message"),
-    })
-
     const initialValues={
         name: '',
         email: '',
         message: ''
     }
+    const validationSchema = Yup.object({
+        name: Yup.string().matches(/^[a-zA-Z]+$/, "Please enter only characters").min(2).max(25).required("Name is required"),
+        email: Yup.string().email().required("Email is required"),
+        message: Yup.string().required("Message is required"),
+    })
 
-    const {values, errors, touched, handleBlur, handleChange, handleSubmit} = useFormik({
+
+    const {values, errors, touched, isSubmitting, handleBlur, handleChange, handleSubmit} = useFormik({
         validationSchema,
         initialValues,
         onSubmit : (data) => {
@@ -40,10 +40,10 @@ const ContactUs = () => {
     <>
       <section className=''>
         <div className='heading-container flex justify-center items-center h-24 sm:h-32 md:h-48 bg-black'>
-                <span className='text-xl sm:text-2xl md:text-3xl lg:text-5xl font-semibold text-white'>
-                    Contact Us
-                </span>
-            </div>
+            <span className='text-xl sm:text-2xl md:text-3xl lg:text-5xl font-semibold text-white'>
+                Contact Us
+            </span>
+        </div>
         <div className='flex justify-start'>
             <div className='right-content w-full sm:w-2/4 lg:mx-32 md:mx-28 sm:mx-20 mx-10 my-2'>
                 <h1 className='capitalize lg:mt-32 mb-5 sm:text-4xl text-xl font-medium text-[#ee6730]'>Get in touch</h1>
@@ -59,10 +59,11 @@ const ContactUs = () => {
                                     type="text" 
                                     id="input-group-1" 
                                     name="name"
-                                    className="bg-gray-50 border border-gray-400 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-2 block w-full pl-10 p-2.5" 
+                                    className="bg-gray-50 border border-gray-400 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-2 block w-full pl-10 p-2.5 outline-blue-200" 
                                     placeholder="Enter your name"
                                     value={values.name}
                                     onChange={handleChange}
+                                    onBlur={handleBlur}
                                 />
                             </div>
                             <div className="mb-6">
@@ -86,10 +87,11 @@ const ContactUs = () => {
                                     type="text" 
                                     id="input-group-1" 
                                     name="email"
-                                    className="bg-gray-50 border border-gray-400 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-2 block w-full pl-10 p-2.5" 
+                                    className="bg-gray-50 border border-gray-400 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-2 block w-full pl-10 p-2.5 outline-blue-200" 
                                     placeholder="Enter your email"
                                     value={values.email}
                                     onChange={handleChange}
+                                    onBlur={handleBlur}
                                 />
                             </div>
                             <div className="mb-6">
@@ -110,10 +112,11 @@ const ContactUs = () => {
                                 id="message" 
                                 rows="5" 
                                 name="message"
-                                className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-400 focus:outline-none focus:ring-2" 
+                                className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-400 outline-blue-200" 
                                 placeholder="Enter your message..." 
                                 value={values.message}
                                 onChange={handleChange}
+                                onBlur={handleBlur}
                             />
                         </div>
                         <div className="mb-6">
@@ -129,9 +132,9 @@ const ContactUs = () => {
                         
 
                         <div>
-                        <button type="submit" className="bg-slate-900 my-10 relative inline-flex items-center justify-center w-full px-4 py-1.5 sm:px-8 sm:py-3 overflow-hidden font-mono font-medium tracking-tighter text-white rounded-lg cursor-pointer group">
+                        <button type="submit" className="bg-slate-900 my-10 relative inline-flex items-center justify-center w-full px-4 py-1.5 sm:px-8 sm:py-3 overflow-hidden font-medium tracking-tighter text-white rounded-lg cursor-pointer group">
                             <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#ee6730] rounded-lg group-hover:w-full group-hover:h-56"></span>
-                            <span className="relative">Submit</span>
+                            <span className="relative">SUBMIT</span>
                         </button>
                         </div>
 

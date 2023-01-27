@@ -1,7 +1,7 @@
 import React from "react";
 import NewsCard from "../../Component/News/NewsCard";
 import { GiBasketballBall } from "react-icons/gi";
-import Loader from "../../Component/Loader/Loader";
+import Loader from "../../Component/Loader";
 
 const News = () => {
   const defaultArray = [1, 2, 3, 4];
