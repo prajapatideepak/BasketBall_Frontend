@@ -7,9 +7,9 @@ import Login from '../pages/Login'
 import News from '../pages/News'
 import Register from '../pages/Register'
 import "../App.css"
-import Passlink from '../pages/Pass/Passlink'
 import Password from '../pages/Pass/Password'
 import Gallery from '../pages/Gallery'
+import ForgetPassword from "../pages/Pass/ForgetPassword"
 
 const PublicRoutes = () => (
     <Routes>
@@ -19,9 +19,9 @@ const PublicRoutes = () => (
             <Route path='/about' element={<AboutUs />}  />
             <Route path='/contact' element={<ContactUs />}  />
             <Route path="/login" element={<Login />} /> 
-            <Route path="/news" element={<News />} />
+            <Route path="news/*" element={<News />} />
             <Route path="/gallery" element={<Gallery />} />
-            <Route path="/ForgetPass" element={<Passlink />} /> 
+            <Route path="/ForgetPassword" element={<ForgetPassword />} />
             <Route path="/Password" element={<Password />} /> 
             <Route index element={<LandingPage />} />
         </Route>
