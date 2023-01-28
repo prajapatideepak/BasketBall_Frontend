@@ -54,7 +54,7 @@ import Loader from "../../Component/Loader/Loader";
       priority: 2,
       tags: "CBL, wellebnix , work",
       date:"22/3/21",
-      image: "/CBL_Images/7xm.xyz343615.webp",
+      image: "/CBL_Images/Screenshot (50).png",
 
       description:
         " Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione porro dolor aspernatur esse assumenda, nisi dolorum labore eos repellendus, alias tenetur. Iure placeat eveniet necessitatibus similique ducimus cumque veritatis. Vero.",
@@ -107,7 +107,7 @@ import Loader from "../../Component/Loader/Loader";
           <div className="mx-6 lg:mx-12 pt-5">
             <div className="lg:grid space-y-5 grid-cols-1 md:grid-cols-2  lg:grid-cols-4 gap-8     ">
               <div className="w-full col-span-3 row-span-1 h-full">
-                 <NewsCard news={newsDetail[0]} />;
+                 <NewsCard news={newsDetail[0]} />
                 
               </div>
               <div className=" col-span-1   flex  justify-start flex-col space-y-3">
@@ -124,7 +124,7 @@ import Loader from "../../Component/Loader/Loader";
                 </div>
               </div>
             </div>
-            <div className="grid py-3 grid-cols-1   lg:grid-cols-2 gap-8">
+            <div className="grid py-3 grid-cols-1   lg:grid-cols-3 gap-8">
               {newsDetail.map((m, i) => {
                 if(i < newsDetail.length-3 ) return <NewsCard news={newsDetail[i + 3]} />
                 else return

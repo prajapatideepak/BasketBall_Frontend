@@ -44,7 +44,7 @@ const NewsDetail = () => {
               quote={"nothing "}
             >
               <WhatsappIcon
-                className="animate-pulse w-10 hover:w-12 duration-300"
+                className="animate-pulse w-10 lg:w-12 hover:w-16 duration-300"
                 round={true}
               />
             </WhatsappShareButton>

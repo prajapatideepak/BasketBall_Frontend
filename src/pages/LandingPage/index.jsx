@@ -6,7 +6,7 @@ import { RxArrowRight } from "react-icons/rx"
 
 function LandingPage() {
     return (
-        <div className="bg-black h-screen xl:px-10">
+        <div className="bg-black h-screen xl:px-10 ">
             <div className=" flex flex-col justify-center items-center  md:items-start   ">
                 <div className=" z-40 space-y-2 sm:space-y-3 2xl:space-y-6 text-white font-sans mx-10 h-[100%] || pt-5 md:pt-5 lg:pt-32 xl:pt-28 2xl:pt-20 || 
                 flex flex-col justify-start items-center sm:items-start md:items-start lg:items-start  ">
@@ -22,7 +22,7 @@ function LandingPage() {
                         </div>
                     </Link>
                 </div>
-                <div className="img  absolute  bottom-5 sm:bottom-0 md:bottom-0 lg:bottom-10 xl:bottom-14 right-0   ">
+                <div className="img  absolute  bottom-5 sm:bottom-0 md:bottom-0 lg:bottom-10 xl:bottom-1 right-0   ">
                     <img src={image} alt="landing" className=" h-[280px] sm:h-[350px] sm:w-[500px] md:h-[400px] md:w-[550px] lg:h-[500px] lg:w-[650px] xl:h-[550px] xl:w-[750px] 2xl:h-[600px] 2xl:w-[850px]  " />
                 </div>
             </div>
