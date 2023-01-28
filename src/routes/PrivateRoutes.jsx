@@ -12,7 +12,7 @@ const PrivateRoutes = () => {
     return (
         <Routes>
             <Route element={<PrivateLayout />}>
-                <Route path='' element={<Navigate to='/dashboard' />} />
+                <Route path='/' element={<Navigate to='/dashboard' />} />
 
                 {/* <Route
                     path='profile/*'
@@ -23,7 +23,7 @@ const PrivateRoutes = () => {
                     }
                 /> */}
                 <Route
-                    path='dashboard'
+                    path='/'
                     element={
                         <Dashboard />
                     }

@@ -73,11 +73,11 @@ const PublicLayout = () => {
                 </div>
 
             </div>
-            <div className='bg-[#F5F5F7] w-full  -z-50  '>
+            <div className='bg-[#F5F5F7] w-full -z-50  '>
                 <Outlet />
             </div>
 
-        </div >
+        </div>
 
     )
 }
