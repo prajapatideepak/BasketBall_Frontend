@@ -10,26 +10,26 @@ import { useFormik } from 'formik';
 
 
 const ContactUs = () => {
-  const validationSchema = Yup.object({
-    name: Yup.string().min(2).max(25).required("Please enter name"),
-    email: Yup.string().email().required("Please enter email"),
-    message: Yup.string().required("Please enter your message"),
-  })
-
-  const initialValues = {
-    name: '',
-    email: '',
-    message: ''
-  }
-
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
-    validationSchema,
-    initialValues,
-    onSubmit: (data) => {
-      console.log(data)
+    const initialValues={
+        name: '',
+        email: '',
+        message: ''
     }
-  })
+    const validationSchema = Yup.object({
+        name: Yup.string().matches(/^[a-zA-Z]+$/, "Please enter only characters").min(2).max(25).required("Name is required"),
+        email: Yup.string().email().required("Email is required"),
+        message: Yup.string().required("Message is required"),
+    })
 
+
+    const {values, errors, touched, isSubmitting, handleBlur, handleChange, handleSubmit} = useFormik({
+        validationSchema,
+        initialValues,
+        onSubmit : (data) => {
+            console.log(data)
+        }
+    })
+  
   const [open, setOpen] = React.useState(1);
 
   const handleOpen = (value) => {
@@ -63,6 +63,7 @@ const ContactUs = () => {
                       placeholder="Enter your name"
                       value={values.name}
                       onChange={handleChange}
+                      onBlur={handleBlur}
                     />
                   </div>
                   <div className="mb-6">
@@ -90,6 +91,7 @@ const ContactUs = () => {
                       placeholder="Enter your email"
                       value={values.email}
                       onChange={handleChange}
+                      onBlur={handleBlur}
                     />
                   </div>
                   <div className="mb-6">
@@ -114,6 +116,7 @@ const ContactUs = () => {
                     placeholder="Enter your message..."
                     value={values.message}
                     onChange={handleChange}
+                      onBlur={handleBlur}
                   />
                 </div>
                 <div className="mb-6">
@@ -248,7 +251,6 @@ const ContactUs = () => {
           </div>
         </div>
       </section>
-
     </>
   )
 }

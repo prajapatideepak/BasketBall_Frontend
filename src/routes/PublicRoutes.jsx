@@ -22,11 +22,10 @@ const PublicRoutes = () => (
             <Route path="/login" element={<Login />} /> 
             <Route path="news/*" element={<News />} />
             <Route path='/role' element={<Role />} />
-            <Route path="/Gallery" element={<Gallery />} />
+            <Route path="/gallery" element={<Gallery />} />
             <Route path="/ForgetPassword" element={<ForgetPassword />} />
             <Route path="/Password" element={<Password />} /> 
             <Route index element={<LandingPage />} />
-
         </Route>
     </Routes>
 )
