@@ -1,7 +1,7 @@
 import React from "react";
 import NewsCard from "../../Component/News/NewsCard";
 import { GiBasketballBall } from "react-icons/gi";
-import Loader from "../../Component/Loader/Loader";
+import Loader from "../../Component/Loader";
 
  export const newsDetail = [
     {
