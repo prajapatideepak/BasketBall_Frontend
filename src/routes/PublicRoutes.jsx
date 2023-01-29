@@ -10,6 +10,7 @@ import "../App.css"
 import Password from '../pages/Pass/Password'
 import Gallery from '../pages/Gallery'
 import ForgetPassword from "../pages/Pass/ForgetPassword"
+import Role from '../pages/Role'
 
 const PublicRoutes = () => (
     <Routes>
@@ -19,12 +20,12 @@ const PublicRoutes = () => (
             <Route path='/about' element={<AboutUs />}  />
             <Route path='/contact' element={<ContactUs />}  />
             <Route path="/login" element={<Login />} /> 
-            <Route path="/news" element={<News />} />
-            <Route path="/Gallery" element={<Gallery />} />
+            <Route path="news/*" element={<News />} />
+            <Route path='/role' element={<Role />} />
+            <Route path="/gallery" element={<Gallery />} />
             <Route path="/ForgetPassword" element={<ForgetPassword />} />
             <Route path="/Password" element={<Password />} /> 
             <Route index element={<LandingPage />} />
-
         </Route>
     </Routes>
 )

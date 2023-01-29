@@ -56,7 +56,7 @@ function Register() {
 
     return (
         <>
-            <div className="min-h-screen flex justify-center items-center px-10 sm:px-20 bg-white ">
+            <div className="min-h-screen  flex justify-center items-center px-10 sm:px-20 pt-16 bg-white ">
                 <div className="flex xl:flow-row justify-center items-center">
                     <div className=" 2xl:w-[50%]  xl:block hidden">
                         <img src={image} alt="" />

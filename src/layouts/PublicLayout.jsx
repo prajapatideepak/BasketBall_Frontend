@@ -10,9 +10,11 @@ const PublicLayout = () => {
 
     return (
         <div className='w-full'>
-            <div className="py-3 bg-black px-9 md:flex items-center justify-between z-50 relative w-full">
+            <div className="py-3 bg-black px-9 md:flex items-center justify-between fixed z-50  w-full">
                 <div className='inline-block'>
-                    <h1 className='font-bold text-3xl font-mono text-white'>The<span className='text-[#ee6730]'>CBL</span></h1>
+                    <Link to={"/"}>
+                        <h1 className='font-bold text-3xl font-mono text-white'>The<span className='text-[#ee6730]'>CBL</span></h1>
+                    </Link>
                 </div>
                 <div className='text-3xl text-white absolute right-8 top-4 cursor-pointer lg:hidden' onClick={() => setOpen(!open)}>
                     <ion-icon name={open ? "close" : "menu"} ></ion-icon>

@@ -1,18 +1,18 @@
 import { lazy } from 'react'
 import { Route, Routes, Navigate } from 'react-router-dom'
 import PrivateLayout from '../layouts/PrivateLayout'
+import Dashboard from '../pages/Dashboard'
+import Profile from '../pages/Profile'
+import Registration from '../pages/Registration'
+import TeamRegistration from '../pages/TeamRegistration'
+import Tournamentregistration from '../pages/Tournament'
 
 const PrivateRoutes = () => {
-    // const ProfilePage = lazy(() => import('../pages/profile'))
-    const Dashboard = lazy(() => import('../pages/Dashboard'))
-    // const Configurations = lazy(() => import('../pages/configurations'))
-    // const Patients = lazy(() => import('../pages/patients'))
-    // const Pharama = lazy(() => import('../pages/pharma'))
 
     return (
         <Routes>
             <Route element={<PrivateLayout />}>
-                <Route path='/' element={<Navigate to='/dashboard' />} />
+                {/* <Route path='/' element={<Navigate to='/dashboard' />} /> */}
 
                 {/* <Route
                     path='profile/*'
@@ -23,12 +23,36 @@ const PrivateRoutes = () => {
                     }
                 /> */}
                 <Route
-                    path='/'
+                    path='/dashboard'
                     element={
                         <Dashboard />
                     }
                 />
-                {/* /> */}
+                <Route
+                    path='/team-registration'
+                    element={
+                        <TeamRegistration />
+                    }
+                />
+                <Route
+                    path='/Registration'
+                    element={
+                        <Registration />
+                    }
+                />
+                <Route
+                    path='/Tournament-registration'
+                    element={
+                        <Tournamentregistration />
+                    }
+                />
+                <Route
+                    path='/Profile'
+                    element={
+                        <Profile />
+                    }
+                />
+                <Route index element={<Dashboard />} />
             </Route>
         </Routes>
     )

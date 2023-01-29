@@ -20,6 +20,12 @@ const features = ["All-in-one app for basketball",
 "Rules and regulations "]
 
   return (
+    <div>
+       {/* <div className='heading-container flex justify-center items-center h-24 sm:h-32 md:h-48 bg-black'>
+                <span className='text-xl sm:text-2xl md:text-3xl lg:text-5xl font-semibold text-white'>
+                    About us
+                </span>
+            </div> */}
     <div className="px-4 text-center lg:text-left lg:px-12 py-20  min-h-screen">
       <h1 className="text-4xl text-center ">About us</h1>
       <div className="py-8 ">
@@ -39,6 +45,7 @@ const features = ["All-in-one app for basketball",
 
           
       </div>
+    </div>
     </div>
   );
 }
