@@ -41,7 +41,7 @@ export default function Role() {
   }
 
   function handleSubmit(){
-    
+    console.log("clicked")
   }
   return (
     <div className="flex flex-col  justify-center px-8  md:pt-20 md:px-20  min-h-screen ">
@@ -104,7 +104,7 @@ export default function Role() {
 
       <div className="flex justify-end items-center">
         <div className="">
-            <Button onClick={e=>console.log("clicked")}  text={"Submit"}></Button>
+            <Button onClick={e=> console.log("sda")}  text={"Submit"}></Button>
           {/* <button className="px-4  border py-1 rounded-md bg-[#ee6730] text-white  "> Submit</button> */}
         </div>
       </div>
