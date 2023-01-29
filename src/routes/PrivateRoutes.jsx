@@ -6,6 +6,7 @@ import ContactUs from "../pages/ContactUs";
 import Dashboard from "../pages/Dashboard";
 import Gallery from "../pages/Gallery";
 import News from "../pages/News";
+import Player from "../pages/Player";
 import Role from "../pages/Role";
 import TeamRegistration from "../pages/TeamRegistration";
 
@@ -19,6 +20,7 @@ const PrivateRoutes = () => {
         <Route path="/about" element={<AboutUs />} />
         <Route path="news/*" element={<News />} />
         <Route path="/gallery" element={<Gallery />} />
+        <Route path="player/*" element={<Player />} />
 
         <Route path="/contact" element={<ContactUs />} />
         <Route index element={<Dashboard />} />

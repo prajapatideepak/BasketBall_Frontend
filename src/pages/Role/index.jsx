@@ -5,32 +5,31 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Button from "../../Component/Button";
 export default function Role() {
-        const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [role, setRole] = React.useState([
     {
       title: "Visitor",
       isSelected: false,
-      path:"/player/registration",
+      path: "/player/registration",
       icon: "/icons/user_icon.png",
-
     },
     {
       title: "Player",
       isSelected: false,
-      path:"/player/registration",
+      path: "/player/registration",
       icon: "/icons/player_icon.png",
     },
     {
       title: "Team Owner/Manager",
       isSelected: false,
-      path:"/player/registration",
+      path: "/team-registration",
       icon: "/icons/team_icon.png",
     },
     {
       title: "Tournament Host",
       isSelected: false,
-      path:"/player/registration",
+      path: "/player/registration",
       icon: "/icons/tournament_icon.png",
     },
   ]);
@@ -49,21 +48,20 @@ export default function Role() {
     setRole(() => newArray);
   }
 
-  function handleSubmit(){
-    let selected = false
-        role.map(role=>{
-            if(role.isSelected){
-                    navigate(role.path)  
-                    selected =true 
-                    return
-            }
-        })
+  function handleSubmit() {
+    let selected = false;
+    role.map((role) => {
+      if (role.isSelected) {
+        navigate(role.path);
+        selected = true;
+        return;
+      }
+    });
 
-        if(!selected){
-            toast.error("Please Select Your Role")
-        }
-
-}
+    if (!selected) {
+      toast.error("Please Select Your Role");
+    }
+  }
   return (
     <div className="flex flex-col  justify-center px-8  lg:pt-20 lg:px-20  min-h-screen ">
       <div className="space-y-1 mt-10 text-center ">
@@ -84,21 +82,21 @@ export default function Role() {
                   ? "rgba(0, 0, 0, 0.35) 0px 5px 15px"
                   : "",
               }}
-                 transition={{
-                              duration: 1.5,
-                            }}
+              transition={{
+                duration: 1.5,
+              }}
               onClick={(e) => handleClick(i)}
               key={i}
               className="cursor-pointer relative bg-gray-100 rounded-lg shadow border border-black  "
             >
               <motion.div
-              key={i}
+                key={i}
                 initial={{
                   opacity: 0,
                 }}
                 animate={{
                   backgroundColor: r.isSelected ? "#ee6730" : "#F3F4F6",
-                 
+
                   opacity: 1,
                 }}
                 transition={{
@@ -126,7 +124,7 @@ export default function Role() {
 
       <div className="flex justify-end items-center">
         <div className="">
-            <Button onClick={e=> handleSubmit()}  text={"Submit"}></Button>
+          <Button onClick={(e) => handleSubmit()} text={"Submit"}></Button>
           {/* <button className="px-4  border py-1 rounded-md bg-[#ee6730] text-white  "> Submit</button> */}
         </div>
       </div>
