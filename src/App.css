@@ -20,7 +20,7 @@
 
 .main-heading::before{
     content: "";
-    background-image: url("CBL_Images/heading_background_image.png");
+    background-image: url("/CBL_Images/heading_background_image.png");
     background-repeat: no-repeat;
     width: 340px;
     height: 60px;
