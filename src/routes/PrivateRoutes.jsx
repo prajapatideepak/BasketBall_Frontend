@@ -19,12 +19,13 @@ const PrivateRoutes = () => {
       <Route element={<PrivateLayout />}>
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/team-registration" element={<TeamRegistration />} />
+        <Route path="/tournament-registration" element={<Tournamentregistration />} />
         <Route path="/role" element={<Role />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="news/*" element={<News />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="player/*" element={<Player />} />
-
+        
         <Route path="/contact" element={<ContactUs />} />
         <Route index element={<Dashboard />} />
       </Route>

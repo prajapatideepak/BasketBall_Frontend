@@ -290,7 +290,6 @@ function Tournamentregistration() {
                                 <div className="flex flex-col w-full">
                                     <label className="mb-2">Age cutoff</label>
                                     <select name=""
-                                    disabled={true}
                                         className="w-full cursor-pointer  px-2 rounded-lg bg-white border-2 outline-blue-200 border-gray-200 py-3 text-sm"
                                         id="age_cutoff"
                                         onChange={handleChange}
