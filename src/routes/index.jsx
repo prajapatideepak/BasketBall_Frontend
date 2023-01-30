@@ -4,7 +4,7 @@ import PublicRoutes from './PublicRoutes'
 import PrivateRoutes from './PrivateRoutes'
 
 const AppRoutes = () => {
-    const currentUser = false;
+    const currentUser = true;
     return (
         <>
             <BrowserRouter>

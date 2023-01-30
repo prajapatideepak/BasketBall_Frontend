@@ -54,7 +54,7 @@ function AsideMenuMain() {
                             </Link>
                         </li>
                         <li className="nav-item" onClick={() => setOpen(!open)}>
-                            <Link className='Link' to={"/team-registration"} >
+                            <Link className='Link' to={"/team-profile"} >
                                 <h1 className='relative text-white text-base md:text-lg lg:text-base xl:text-lg  my-4 lg:my-0'>
                                 Team
                                 </h1>
