@@ -30,7 +30,7 @@ function DropDownmenu() {
                 <div className={`${isMenu ? "h-72 duration-300 opacity-100 " : "h-0 duration-300 opacity-0 "} bg-black shadow-lg p-2 absolute duration-500 lg:right-5 right-2 w-64 top-16  rounded-md `}>
                     <ul className='py-3 px-2'>
                         <p className='text-gray-400 py-2'>Profile settings</p>
-                        <Link to={"/Profile"}>
+                        <Link to={"/Visitor-profile"}>
                             <li onClick={() => setismenu(false)}
                                 className="flex items-center justify-between my-2 cursor-pointer hover:bg-[#ee6730] duration-150 px-2  py-2 rounded-md  ">
                                 <div className="flex items-center space-x-3 text-white">
