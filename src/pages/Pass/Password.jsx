@@ -73,7 +73,7 @@ function Password() {
                                     id='password'
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    className='w-full rounded-md py-2 px-3 outline-none focus:outline-[#ee6730] outline-slate-300' />
+                                    className='w-full rounded-md py-2 px-3 outline-non border border-slate-300 outline-blue-200' />
                                 {errors.password && touched.password
                                     ?
                                     <p className='form-error text-red-600 text-sm font-semibold'>{errors.password}</p>
@@ -90,7 +90,7 @@ function Password() {
                                     id='confirm_password'
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    className='w-full rounded-md py-2 px-3 outline-none focus:outline-[#ee6730] outline-slate-300 ' />
+                                    className='w-full rounded-md py-2 px-3 outline-non border border-slate-300 outline-blue-200 ' />
                                     {errors.confirm_password && touched.confirm_password
                                     ?
                                     <p className='form-error text-red-600 text-sm font-semibold'>{errors.confirm_password}</p>
@@ -98,16 +98,17 @@ function Password() {
                                     null}
                             </div>
                         </div>
-                        <div className='py-6'>
-                            <button type='submit' className='py-2 bg-[#ee6730]  hover:shadow-none hover:border-[#ee6730] border-[#ee6730] border hover:bg-white hover:text-[#ee6730] duration-500 shadow-sm font-sans shadow-[#ee6730] px-20 rounded-md w-full text-white font-semibold text-base'>
-                                Reset  Password
-                            </button>
+                        <div className='py-10'>
+                        <button type="submit" className="bg-slate-900  relative inline-flex items-center justify-center w-full px-4 py-1.5 sm:px-8 sm:py-[10px] overflow-hidden font-medium tracking-tighter text-white rounded-lg cursor-pointer group">
+                            <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#ee6730] rounded-lg group-hover:w-full group-hover:h-56"></span>
+                            <span className="relative">Reset Password</span>
+                        </button>
                         </div>
                     </form>
 
                 </div>
                 <Link to={"/login"}>
-                    <div className='flex justify-center py-3 items-center font-semibold text-slate-400 cursor-pointer hover:text-black space-x-2'>
+                    <div className='flex justify-center  items-center font-semibold text-slate-400 cursor-pointer hover:text-black space-x-2'>
                         <HiArrowLeft className='text-xl' />
                         <p className=''>Back to Log in</p>
                     </div>
