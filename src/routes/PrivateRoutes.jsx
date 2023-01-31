@@ -11,12 +11,16 @@ import Gallery from "../pages/Gallery";
 import News from "../pages/News";
 import Player from "../pages/Player";
 import Role from "../pages/Role";
+import Tournamentregistration from '../pages/Tournament'
+import VisitorProfile from "../pages/Profile";
 
 const PrivateRoutes = () => {
   return (
     <Routes>
       <Route element={<PrivateLayout />}>
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/tournament-registration" element={<Tournamentregistration />} />
+        <Route path="/Visitor-profile" element={<VisitorProfile />} />
         <Route path="/role" element={<Role />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="news/*" element={<News />} />

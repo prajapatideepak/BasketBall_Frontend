@@ -143,11 +143,11 @@ function TeamProfileDetail() {
     },[currentTab])
 
     React.useEffect(() => {
-        let history = []
+        let past = []
         let upcoming = []
         allMatches.map((match)=>{
             if(match.isSuccessfull == 1){
-                history.push(match)
+                past.push(match)
             }
             else if(match.isSuccessfull == 0){
                 upcoming.push(match)
@@ -155,7 +155,7 @@ function TeamProfileDetail() {
         })
 
         setCurrentTabMatches(upcoming)
-        setPastMatches(history);
+        setPastMatches(past);
         setUpcomingMatches(upcoming)
     }, []);
 
@@ -357,7 +357,7 @@ function TeamProfileDetail() {
                         <div className='flex justify-center items-center mt-8 md:mt-3'>
                             <div className="w-2/3 sm:w-2/4 lg:w-1/4 flex justify-around items-center">
                                 <div className={`${currentTab == 1 ? 'bg-[#ee6730]' : 'bg-orange-100'} hover:bg-[#ee6730] group cursor-pointer w-full text-center p-1`} onClick={()=> setCurrentTab(1)}>
-                                    <h3 className={`${currentTab == 1 ? 'text-white' : 'text-gray-400'} group-hover:text-white font-semibold`}>History</h3>
+                                    <h3 className={`${currentTab == 1 ? 'text-white' : 'text-gray-400'} group-hover:text-white font-semibold`}>Past</h3>
                                 </div>
                                 <div className={`${currentTab == 2 ? 'bg-[#ee6730]' : 'bg-orange-100'} hover:bg-[#ee6730] group cursor-pointer w-full text-center p-1`} onClick={()=> setCurrentTab(2)}>
                                     <h3 className={`${currentTab == 2 ? 'text-white' : 'text-gray-400'} group-hover:text-white font-semibold`}>Upcoming</h3>
