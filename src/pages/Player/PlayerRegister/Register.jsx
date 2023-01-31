@@ -5,14 +5,23 @@ import BasicInfo from "./BasicInfo";
 export default function PlayerRegister() {
   return (
     <div className="px-8 lg:px-16 py-20 min-h-screen">
-      <h1 className="text-center pb-5  text-3xl">Player Registration</h1>
-
-      <div className="  rounded-lg shadow-lg  ">
-        <div className="flex justify-center space-x-14 ">
-          <span className="w-12 h-12 rounded-full flex justify-center items-center text-xl  border-2 border-orange-600  shadow-xl">
+      <div className=" flex justify-center items-center">
+        <div>
+          <h1 className=" items-end  text-center  text-3xl">
+            Player Registration
+          </h1>
+        </div>
+        <img src={"/icons/playing_icon.png"} className=" w-20" />
+      </div>
+      <p className="text-center text-gray-700 italic pb-5">
+        Be the player that raises the bar, be relentless, be a game changer.
+      </p>
+      <div className="  rounded-lg shadow-xl  py-2  ">
+        <div className="flex justify-center space-x-8  ">
+          <span className="w-8 h-8 rounded-full flex justify-center items-center text-xl  border-2 border-orange-600  shadow-xl">
             1
           </span>
-          <span className="w-12 h-12 rounded-full flex justify-center items-center text-xl border-2 border-gray-400 text-gray-400 ">
+          <span className="w-8 h-8 rounded-full flex justify-center items-center text-lg border-2 border-gray-400 text-gray-400 ">
             2
           </span>
         </div>

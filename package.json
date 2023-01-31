@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@material-tailwind/react": "^1.2.5",
+    "@reduxjs/toolkit": "^1.9.2",
     "formik": "^2.2.9",
     "framer-motion": "^8.5.4",
     "navigate": "^0.3.6",

@@ -5,7 +5,7 @@ const BasicInfo = () => {
     <form className="flex w-full  space-x-3">
       <div className="w-full  px-5  m-auto dark:bg-gray-800">
         <h1 className="py-2 text-xl text-orange-600">Basic Information</h1>
-        <div className="grid text-lg lg:text-base grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-5   lg:gap-10">
+        <div className="grid text-lg lg:text-base grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-5   lg:gap-5">
           <div className="  ">
             <label htmlFor="required-email" className="text-gray-700">
               First Name
