@@ -1,8 +1,8 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { newsDetail } from "./NewsPage.jsx";
-import { WhatsappIcon } from "react-share";
-import { WhatsappShareButton } from "react-share";
+// import { WhatsappIcon } from "react-share";
+// import { WhatsappShareButton } from "react-share";
 import {useNavigate} from "react-router-dom"
 import {BiArrowBack} from "react-icons/bi"
 const NewsDetail = () => {
