@@ -124,7 +124,7 @@ export default function Role() {
 
       <div className="flex justify-end items-center">
         <div className="">
-          <Button onClick={(e) => handleSubmit()} text={"Submit"}></Button>
+          <Button onClick={(e) => handleSubmit()} text={"Continue"}></Button>
           {/* <button className="px-4  border py-1 rounded-md bg-[#ee6730] text-white  "> Submit</button> */}
         </div>
       </div>
