@@ -4,7 +4,6 @@ import { GiBasketballBall } from "react-icons/gi";
 import Loader from "../../Component/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { getNewsData } from "../../redux/actions/News";
-import { setNews } from "../../redux/slices/newsSlice";
 
 const NewsPage = () => {
   const dispatch = useDispatch();
