@@ -263,7 +263,7 @@ function TeamProfileDetail() {
                     <div className=''>
                         <h3 className='text-xl sm:text-2xl font-semibold text-[#ee6730]'>Players:</h3>
                     </div>
-                    <div className="player-container w-full flex flex-nowrap px-4 gap-8 sm:gap-16 md:gap-20 mt-10 overflow-x-auto py-5">
+                    <div className="player-container w-full flex flex-nowrap gap-8 sm:gap-16 md:gap-20 mt-10 overflow-x-auto py-5">
                         {
                             teamDetails.players.length > 0
                             ?

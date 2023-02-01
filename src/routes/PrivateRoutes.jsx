@@ -13,6 +13,7 @@ import Player from "../pages/Player";
 import Role from "../pages/Role";
 import Tournamentregistration from '../pages/Tournament'
 import VisitorProfile from "../pages/Profile";
+import Tournaments from '../pages/Tournaments'
 
 const PrivateRoutes = () => {
   return (
@@ -20,6 +21,7 @@ const PrivateRoutes = () => {
       <Route element={<PrivateLayout />}>
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/tournament-registration" element={<Tournamentregistration />} />
+        <Route path="/tournaments" element={<Tournaments />} />
         <Route path="/Visitor-profile" element={<VisitorProfile />} />
         <Route path="/role" element={<Role />} />
         <Route path="/about" element={<AboutUs />} />

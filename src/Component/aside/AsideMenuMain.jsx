@@ -12,8 +12,8 @@ function AsideMenuMain() {
 
 
     return (
-        <div className='w-full relative'>
-            <div className="py-3 bg-black px-5 lg:px-9 flex top-0 items-center justify-between fixed w-full z-[9999]">
+        <div className='w-full'>
+            <div className="py-3 bg-black px-5 lg:px-9 flex sticky top-0 items-center justify-between w-full z-[9999]">
                 <div className=''>
                     <h1 className='font-bold text-3xl font-mono text-white'>The<span className='text-[#ee6730]'>CBL</span></h1>
                 </div>
@@ -34,7 +34,7 @@ function AsideMenuMain() {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link className='Link' to={"/contact"} >
+                            <Link className='Link' to={"/tournaments"} >
                                 <h1 className='relative text-white text-base md:text-base lg:text-base xl:text-lg  my-5 md:my-0'>
                                     Tournament
                                 </h1>
