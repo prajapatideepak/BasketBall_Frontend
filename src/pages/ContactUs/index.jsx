@@ -1,5 +1,4 @@
 import React from 'react';
-// import '../index.css';
 import { IoLocationSharp } from 'react-icons/io5';
 import { HiPhone } from 'react-icons/hi';
 import { IoMdMailOpen } from 'react-icons/io';
@@ -16,7 +15,7 @@ const ContactUs = () => {
         message: ''
     }
     const validationSchema = Yup.object({
-        name: Yup.string().matches(/^[a-zA-Z]+$/, "Please enter only characters").min(2).max(25).required("Name is required"),
+        name: Yup.string().matches(/^[a-zA-Z ]+$/, "Please enter only characters").min(2).max(25).required("Name is required"),
         email: Yup.string().email().required("Email is required"),
         message: Yup.string().required("Message is required"),
     })
@@ -38,15 +37,17 @@ const ContactUs = () => {
 
   return (
     <>
-      <section className=''>
-        <div className=' flex justify-center  items-center h-24 sm:h-32 md:h-48 bg-black'>
-          <span className='text-xl sm:text-2xl md:text-3xl lg:text-5xl font-semibold text-white'>
-            Contact Us
-          </span>
+      <section className='py-14'>
+        <div className='flex justify-center bg-black  items-center h-24 sm:h-32 md:h-48'>
+          <div className="main-heading">
+            <span className='text-xl sm:text-2xl md:text-3xl lg:text-5xl font-semibold text-white'>
+              Contact Us
+            </span>
+          </div>
         </div>
         <div className='flex justify-start -z-50'>
           <div className='right-content w-full sm:w-2/4 lg:mx-32 md:mx-28 sm:mx-20 mx-10 my-2'>
-            <h1 className='capitalize lg:mt-32 mb-5 sm:text-4xl text-xl font-medium text-[#ee6730]'>Get in touch</h1>
+            <h1 className='capitalize lg:mt-20 mb-5 sm:text-4xl text-xl font-medium text-[#ee6730]'>Get in touch</h1>
             <form onSubmit={handleSubmit}>
               <div className="">
                 <div>

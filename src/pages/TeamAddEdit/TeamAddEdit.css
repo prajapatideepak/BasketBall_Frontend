@@ -1,0 +1,38 @@
+.main-heading{
+    position: relative;
+}
+
+.main-heading::before{
+    content: "";
+    background-image: url("CBL_Images/heading_background_image.png");
+    background-repeat: no-repeat;
+    width: 480px;
+    height: 60px;
+    background-size: 480px 60px;
+    opacity: 0.9;
+    position: absolute;
+    top: 0;
+    left: -30px;
+    z-index: -1;
+}
+
+@media (max-width: 1023.5px){
+    .main-heading::before{
+        width: 340px;
+        background-size: 340px 45px;
+    }
+}
+
+@media (max-width: 767.5px){
+    .main-heading::before{
+        width: 280px;
+        background-size: 280px 40px;
+    }
+}
+
+@media (max-width: 639.5px){
+    .main-heading::before{
+        width: 240px;
+        background-size: 240px 35px;
+    }
+}
