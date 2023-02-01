@@ -100,7 +100,7 @@ import Loader from "../../Component/Loader";
         <Loader />
       ) : (
         <>
-          <div className="flex   justify-center items-center text-[#ee6730] p-2 space-x-3 text-3xl">
+          <div className="flex  justify-center items-center text-[#ee6730] p-2 space-x-3 text-3xl">
             <h1 className="text-black text-4xl "> News</h1>
             <GiBasketballBall className="animate-bounce	 text-[#ee6730] " />
           </div>
@@ -124,7 +124,7 @@ import Loader from "../../Component/Loader";
                 </div>
               </div>
             </div>
-            <div className="grid py-3 grid-cols-1   lg:grid-cols-3 gap-8">
+            <div className="grid py-3  grid-cols-1 lg:grid-cols-3 gap-8">
               {newsDetail.map((m, i) => {
                 if(i < newsDetail.length-3 ) return <NewsCard news={newsDetail[i + 3]} />
                 else return

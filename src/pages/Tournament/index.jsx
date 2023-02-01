@@ -113,8 +113,8 @@ function Tournamentregistration() {
 
     return (
         <>
-            <section>
-                <div className='heading-container flex justify-center items-center h-24 sm:h-32 md:h-48 '>
+            <section className="py-8">
+                <div className='heading-container  flex justify-center items-center h-24 sm:h-32 md:h-48 '>
                     <span className='text-xl sm:text-2xl md:text-3xl lg:text-5xl font-semibold text-[#ee6730]'>
                         Tournament Registration
                     </span>

@@ -44,7 +44,7 @@ const ContactUs = () => {
             Contact Us
           </span>
         </div>
-        <div className='flex justify-start'>
+        <div className='flex justify-start -z-50'>
           <div className='right-content w-full sm:w-2/4 lg:mx-32 md:mx-28 sm:mx-20 mx-10 my-2'>
             <h1 className='capitalize lg:mt-32 mb-5 sm:text-4xl text-xl font-medium text-[#ee6730]'>Get in touch</h1>
             <form onSubmit={handleSubmit}>
@@ -59,7 +59,7 @@ const ContactUs = () => {
                       type="text"
                       id="input-group-1"
                       name="name"
-                      className="bg-gray-50 border border-gray-400 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-2 block w-full pl-10 p-2.5"
+                      className="bg-gray-50 border  border-gray-400 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-2 block w-full pl-10 p-2.5"
                       placeholder="Enter your name"
                       value={values.name}
                       onChange={handleChange}

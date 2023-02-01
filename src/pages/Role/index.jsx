@@ -29,7 +29,7 @@ export default function Role() {
     {
       title: "Tournament Host",
       isSelected: false,
-      path: "/player/registration",
+      path: "/tournament-registration",
       icon: "/icons/tournament_icon.png",
     },
   ]);
