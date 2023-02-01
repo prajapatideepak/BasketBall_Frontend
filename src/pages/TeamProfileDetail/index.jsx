@@ -174,7 +174,7 @@ function TeamProfileDetail() {
                     </div> */}
                     <div className="flex flex-col xl:flex-row gap-12 mt-8">
                         <div className="flex flex-col lg:flex-row flex-1 xl:border-r-2 xl:pr-14 gap-5 lg:gap-12 xl:gap-6">
-                            <div className="left-container order-2 flex flex-1 flex-col">
+                            <div className="left-container lg:order-1 order-2 flex flex-1 flex-col">
                                 <div className="flex flex-col">
                                     <label className="mb-2 text-gray-400">Coach Name</label>
                                     <div className="border-2 border-orange-100 px-2 py-2 rounded-lg bg-white capitalize font-medium">
@@ -215,7 +215,7 @@ function TeamProfileDetail() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="right-container order-1 flex flex-1 flex-col">
+                            <div className="right-container lg:order-2 order-1 flex flex-1 flex-col">
                                 <div className="flex flex-col">
                                     <label className="mb-2 text-gray-400">About Team</label>
                                     <div className="border-2 border-orange-100 px-2 py-2 rounded-lg bg-white h-32 lg:h-[328px] overflow-y-auto">
