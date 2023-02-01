@@ -4,7 +4,7 @@ import BasicInfo from "./BasicInfo";
 
 export default function PlayerRegister() {
   return (
-    <div className="px-8 lg:px-16 py-20 min-h-screen">
+    <div className="px-8 lg:px-16 py-5 min-h-screen">
       <div className=" flex justify-center items-center">
         <div>
           <h1 className=" items-end  text-center  text-3xl">

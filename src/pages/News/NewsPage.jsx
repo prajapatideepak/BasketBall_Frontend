@@ -11,13 +11,10 @@ const NewsPage = () => {
 
   const { NewsList } = useSelector((state) => state.newsReducer);
 
-  const defaultArray = [1, 2, 3, 4];
-  const [loader, setloader] = React.useState(true);
-  const path = [];
-
   React.useEffect(() => {
     dispatch(getNewsData());
   }, []);
+
   return (
     <div className="min-h-screen  md:px-8 py-5">
       {NewsList?.length < 1 ? (
