@@ -1,7 +1,6 @@
 import { setNews, getNewsDetail } from "../slices/newsSlice";
 
-export const GetNewsData = () => {
-  console.log("call ho raha he");
+export const getNewsData = () => {
   return async (dispatch) => {
     console.log("andar nahi ho raha he");
     const newsDetail = [
