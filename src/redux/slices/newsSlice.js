@@ -8,6 +8,8 @@ const NewsSlice = createSlice({
   },
   reducers: {
     setNews: (state, action) => {
+      console.log("hmm");
+      console.log(action);
       state.NewsList = action.payload;
     },
     getNewsDetail: (state, action) => {

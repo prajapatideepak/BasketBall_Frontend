@@ -1,8 +1,9 @@
 import { setNews, getNewsDetail } from "../slices/newsSlice";
-// import { useDispatch } from "react-redux";
 
 export const GetNewsData = () => {
+  console.log("call ho raha he");
   return async (dispatch) => {
+    console.log("andar nahi ho raha he");
     const newsDetail = [
       {
         id: 1,
@@ -81,7 +82,6 @@ export const GetNewsData = () => {
           " Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione porro dolor aspernatur esse assumenda, nisi dolorum labore eos repellendus, alias tenetur. Iure placeat eveniet necessitatibus similique ducimus cumque veritatis. Vero.",
       },
     ];
-
     dispatch(setNews(newsDetail));
   };
 };

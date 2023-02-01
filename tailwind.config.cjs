@@ -1,5 +1,4 @@
 /** @type {import('tailwindcss').Config} */
-const debugScreen = require('tailwindcss-debug-screens');
 
 module.exports = {
   content: [
@@ -9,6 +8,7 @@ module.exports = {
     extend: {},
   },
   plugins: [
-    debugScreen
+    require('tailwindcss-debug-screens'),
+    require('@tailwindcss/line-clamp'),
   ],
 }

@@ -1,0 +1,13 @@
+.player-container::-webkit-scrollbar {
+  height: 4px;
+  background-color: rgba(0,0,0,0);
+}
+
+.player-container::-webkit-scrollbar-thumb {
+  background: #ee6730;
+  border-radius: 5px;
+}
+
+.player-container::-webkit-scrollbar-track {
+  background: black;
+}

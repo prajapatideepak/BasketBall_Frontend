@@ -1,8 +1,8 @@
-import newsSlice from "./newsSlice";
+import newsReducer from "./newsSlice";
 
 //yaha ham sare reducer ko combine karege
 const Reducers = {
-  newsSlice,
+  newsReducer,
 };
 
 export default Reducers;
