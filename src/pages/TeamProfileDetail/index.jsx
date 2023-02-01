@@ -1,6 +1,5 @@
 import React from 'react'
 import { useParams, useNavigate } from 'react-router-dom';
-import Toaster from '../../../../../Electron/Nasir_sir_classes/src/hooks/showToaster';
 import PlayerCard from './PlayerCard'
 import './TeamProfileDetail.css'
 import { AxiosError } from 'axios';

@@ -37,15 +37,15 @@ const ContactUs = () => {
 
   return (
     <>
-      <section className=''>
-        <div className='flex justify-center  items-center h-24 sm:h-32 md:h-48'>
+      <section className='py-14'>
+        <div className='flex justify-center bg-black  items-center h-24 sm:h-32 md:h-48'>
           <div className="main-heading">
             <span className='text-xl sm:text-2xl md:text-3xl lg:text-5xl font-semibold text-white'>
               Contact Us
             </span>
           </div>
         </div>
-        <div className='flex justify-start'>
+        <div className='flex justify-start -z-50'>
           <div className='right-content w-full sm:w-2/4 lg:mx-32 md:mx-28 sm:mx-20 mx-10 my-2'>
             <h1 className='capitalize lg:mt-20 mb-5 sm:text-4xl text-xl font-medium text-[#ee6730]'>Get in touch</h1>
             <form onSubmit={handleSubmit}>
@@ -60,7 +60,7 @@ const ContactUs = () => {
                       type="text"
                       id="input-group-1"
                       name="name"
-                      className="bg-gray-50 border border-gray-400 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-2 block w-full pl-10 p-2.5"
+                      className="bg-gray-50 border  border-gray-400 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-2 block w-full pl-10 p-2.5"
                       placeholder="Enter your name"
                       value={values.name}
                       onChange={handleChange}
