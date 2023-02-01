@@ -7,3 +7,7 @@
   background: #ee6730;
   border-radius: 5px;
 }
+
+.player-container::-webkit-scrollbar-track {
+  background: black;
+}

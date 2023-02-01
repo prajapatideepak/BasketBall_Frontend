@@ -257,7 +257,9 @@ function TeamProfileDetail() {
                         </div>
                     </div>
                 </div>
-                <div className="mt-20 md:mt-32">
+            </div>
+            <div className="mx-auto px-10 py-12 sm:px-20 sm:py-12 md:px-20 md:py-16 lg:px-24 xl:px-28 2xl:px-32 mt-20 md:mt-20 w-full bg-black ">
+                <div className="">
                     <div className=''>
                         <h3 className='text-xl sm:text-2xl font-semibold text-[#ee6730]'>Players:</h3>
                     </div>
@@ -284,7 +286,9 @@ function TeamProfileDetail() {
                         }
                     </div>
                 </div>
-                <div className='mt-20 md:mt-32'>
+            </div>
+            <div className='mx-auto px-10 py-12 sm:px-20 sm:py-12 md:px-20 md:py-16 lg:px-24 xl:px-28 2xl:px-32'>
+                <div className='mt-8 md:mt-16'>
                     <div>
                         <h3 className='text-xl sm:text-2xl font-semibold text-[#ee6730] mt-8'>Tournament Enrollment:</h3>
                     </div>
