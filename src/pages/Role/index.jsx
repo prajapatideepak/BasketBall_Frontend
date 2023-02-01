@@ -63,8 +63,8 @@ export default function Role() {
     }
   }
   return (
-    <div className="flex flex-col  justify-center px-8  lg:pt-20 lg:px-20  min-h-screen ">
-      <div className="space-y-1 mt-10 text-center ">
+    <div className="flex flex-col  justify-center px-8   lg:px-20  min-h-screen ">
+      <div className="space-y-1  text-center ">
         <h1 className="text-4xl  "> Who are You ?</h1>
         <p className="italic text-gray-700 p-1">
           Rise to the Top: Choose Your Role as Visitor, Player, Tournament Host,

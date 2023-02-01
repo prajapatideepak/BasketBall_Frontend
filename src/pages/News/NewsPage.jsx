@@ -19,7 +19,7 @@ const NewsPage = () => {
     dispatch(getNewsData());
   }, []);
   return (
-    <div className="min-h-screen  md:px-8 py-20">
+    <div className="min-h-screen  md:px-8 py-5">
       {NewsList?.length < 1 ? (
         <Loader />
       ) : (
