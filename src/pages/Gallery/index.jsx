@@ -134,9 +134,9 @@ const Gallery = () => {
                     {
                         currentTabImages.map((item, i) =>{
                             return(
-                                <div key={i} className='bg-gray-200 break-inside-avoid cursor-pointer' onClick={()=> setPreviewImage(item.imageUrl)}>
+                                <div key={i} className='bg-gray-200 break-inside-avoid cursor-pointer overflow-hidden' onClick={()=> setPreviewImage(item.imageUrl)}>
                                     <LazyLoad placeholder={<Placeholder/>} once>
-                                    <img src={item.imageUrl} alt="" effect='blur' className='w-full h-full' />
+                                    <img src={item.imageUrl} alt="" effect='blur' className='w-full h-full hover:scale-105 transition-all duration-500' />
 
                                     </LazyLoad>
                                 </div>

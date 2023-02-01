@@ -1,40 +1,100 @@
 import React from 'react'
+import {useNavigate, useLocation} from 'react-router-dom'
 import {ImSearch} from 'react-icons/im'
 import {BiEdit} from 'react-icons/bi'
 import {MdDelete} from 'react-icons/md'
 import { toast } from "react-toastify";
 import * as Yup from 'yup';
 import { useFormik } from 'formik'
+import Select from 'react-select';
 
-function TeamRegistration() {
+function TeamAddEdit() {
+  const navigate = useNavigate();
+  // const location = useLocation();
+  const location ={
+    // state:{
+    //   team_id: 123,
+    //   team_name: 'Jetha ke jabaaz',
+    //   about_team: 'Lorem ipsum dolor sit amet, consectetur adip, Lorem, Lorem ipsum dolor sit amet, consectetur adip, Lorem',
+    //   coach_name: 'sadik',
+    //   coach_mobile: '8777643526',
+    //   assistant_coach_name: 'moin',
+    //   assistant_coach_mobile: '9999999999',
+    //   players: [
+    //     {id: 1, name:'Sadikali karadiya', position:'point guard', isEditable: false},
+    //     {id: 2, name:'Deepak Prajapati', position:'center', isEditable: false},
+    //   ],
+    //   captain: 1,
+    //   isEdit: true
+    // }
+  }
+
   const initialValues={
-    team_name:'',
-    team_logo:'',
-    about_team:'',
-    coach_name: '',
-    coach_mobile: '',
-    assistant_coach_name: '',
-    assistant_coach_mobile: ''
+    team_name: location?.state?.isEdit ? location?.state?.team_name : '',
+    team_logo: location?.state?.isEdit ? location?.state?.team_logo : '',
+    about_team: location?.state?.isEdit ? location?.state?.about_team : '',
+    coach_name: location?.state?.isEdit ? location?.state?.coach_name : '',
+    coach_mobile: location?.state?.isEdit ? location?.state?.coach_mobile : '',
+    assistant_coach_name: location?.state?.isEdit ? location?.state?.assistant_coach_name : '',
+    assistant_coach_mobile: location?.state?.isEdit ? location?.state?.assistant_coach_mobile : '',
+    captain: location?.state?.isEdit ? location?.state?.captain : ''
   }
 
   const validationSchema = Yup.object({
-    team_name: Yup.string().matches(/^[a-zA-Z]+$/, "Please enter only characters").min(2, "Team name must be at least 2 characters").max(25,"Team name should not be more than 25 characters").required("Name is required"),
-    coach_name: Yup.string().matches(/^[a-zA-Z]+$/, "Please enter only characters").min(2, "Coach name must be at least 2 characters").max(25,"Coach name should not be more than 25 characters"),
+    team_name: Yup.string().matches(/^[a-zA-Z ]+$/, "Please enter only characters").min(2, "Team name must be at least 2 characters").max(25,"Team name should not be more than 25 characters").required("Name is required"),
+    coach_name: Yup.string().matches(/^[a-zA-Z ]+$/, "Please enter only characters").min(2, "Coach name must be at least 2 characters").max(25,"Coach name should not be more than 25 characters"),
     coach_mobile: Yup.string().matches(/^[0-9]+$/, "Please enter only numbers").min(10, "Mobile number should be at least 10 digits").max(10, "Mobile number should be at least 10 digits"),
-    assistant_coach_name: Yup.string().matches(/^[a-zA-Z]+$/, "Please enter only characters").min(2, "Asst. Coach name must be at least 2 characters").max(25,"Asst. Coach name should not be more than 25 characters"),
+    assistant_coach_name: Yup.string().matches(/^[a-zA-Z ]+$/, "Please enter only characters").min(2, "Asst. Coach name must be at least 2 characters").max(25,"Asst. Coach name should not be more than 25 characters"),
     assistant_coach_mobile: Yup.string().matches(/^[0-9]+$/, "Please enter only numbers").min(10, "Mobile number should be at least 10 digits").max(10, "Mobile number should be at least 10 digits"),
   })
+
+  const customStyles = {
+    control: (provided, state) => ({
+      ...provided,
+      background: '#fff',
+      borderColor: 'rgb(229 231 235)',
+      minHeight: '35px',
+      height: '35px',
+      boxShadow: state.isFocused ? null : null,
+    }),
+
+    valueContainer: (provided, state) => ({
+      ...provided,
+      height: '35px',
+      padding: '0 6px'
+    }),
+
+    input: (provided, state) => ({
+      ...provided,
+      margin: '0px',
+    }),
+    indicatorSeparator: state => ({
+      display: 'none',
+    }),
+    indicatorsContainer: (provided, state) => ({
+      ...provided,
+      height: '35px',
+    }),
+  };
 
 
   const {values, errors, touched, isSubmitting, resetForm, handleBlur, handleChange, handleSubmit} = useFormik({
       validationSchema,
       initialValues,
       onSubmit : (data) => {
-        //Cant select more than 12 players
+
+        // //If captain not selected
+        // if(data.captain.value == ''){
+        //   toast.error("Please select team captain")
+        //   return;
+        // }
+
+        //Can't select more than 12 players
         if(selectedPlayers.length < 5){
           toast.error("Please select atleast 5 players")
           return;
         }
+
 
         try{
 
@@ -46,8 +106,8 @@ function TeamRegistration() {
   })
 
   const [searchedPlayers, setSearchedPlayers] = React.useState([
-    {id:1, name:'Sadikali karadiya', position:'Forward', isEditable: false},
-    {id: 2, name:'Moin', position:'Center', isEditable: false}])
+    {id: 1, name:'Sadikali karadiya', position:'point guard', isEditable: false},
+    {id: 2, name:'Moin', position:'center', isEditable: false}])
   const [searchValue, setSearchValue] = React.useState('');
   const [selectedPlayers, setSelectedPlayers] = React.useState([])
 
@@ -97,7 +157,7 @@ function TeamRegistration() {
     )
   }
 
-  const handleSavePosition = (player_id)=>{
+  const handleSave = (player_id)=>{
     setSelectedPlayers(
       selectedPlayers.map(item =>{
         return {
@@ -109,6 +169,7 @@ function TeamRegistration() {
   }
 
   const handleRemovePlayer = (player_id) => {
+    resetForm('captain')
     setSelectedPlayers(
       selectedPlayers.filter(item =>{
         return item.id != player_id
@@ -116,12 +177,30 @@ function TeamRegistration() {
     )
   }
 
+  const handlePositionChange = (e, player_id) =>{
+    console.log(e.target.value)
+    setSelectedPlayers(
+      selectedPlayers.map(item =>{
+        return {
+          ...item,
+          position: item.id == player_id ? e.target.value : item.position
+        }
+      })
+    )
+  }
+
+  React.useEffect(() =>{
+    setSelectedPlayers(location?.state?.isEdit ? location?.state?.players : [] )
+  },[])
+
   return (
     <section>
-        <div className='heading-container flex justify-center items-center h-24 sm:h-32 md:h-48 bg-black'>
-            <span className='text-xl sm:text-2xl md:text-3xl lg:text-5xl font-semibold text-white'>
-                Team Registration
-            </span>
+        <div className='heading-container flex justify-center items-center h-24 sm:h-32 md:h-48'>
+            <div className=''>
+              <h2 className="main-heading text-xl sm:text-2xl md:text-3xl lg:text-5xl font-semibold text-white">
+                {location?.state?.isEdit ? 'Edit Team' : 'Team Registration'}
+              </h2>
+            </div>
         </div>
         <div className='mx-auto px-10 py-12 sm:px-20 sm:py-12 md:px-20 md:py-16 lg:px-24 xl:px-28 2xl:px-32'>
           <form action="" onSubmit={handleSubmit}>
@@ -138,6 +217,7 @@ function TeamRegistration() {
                     type="text"
                     name="team_name"
                     id="team_name"
+                    value={values.team_name}
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
@@ -150,13 +230,14 @@ function TeamRegistration() {
                   }
                 </div>
                 <div className="flex flex-col mt-5">
-                  <label className="mb-2">Choose Logo ( PNG, JPG, JPEG )</label>
+                  <label className="mb-2">Choose Logo ( PNG, JPG, JPEG ) (size &lt; 1MB)</label>
                   <input
                     className="w-full cursor-pointer rounded-lg bg-white border-2 border-gray-200 p-1 sm:p-2 text-sm"
                     type="file"
                     name="team_logo"
                     id="team_logo"
                     accept='.png, .jpg, .jpeg'
+                    value={values.team_logo}
                     onChange={handleChange}
                   />
                 </div>
@@ -169,6 +250,7 @@ function TeamRegistration() {
                     name="about_team" 
                     placeholder='Write something about your team' 
                     rows="6" 
+                    value={values.about_team}
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
@@ -188,6 +270,7 @@ function TeamRegistration() {
                     type="text"
                     name="coach_name"
                     id="coach_name"
+                    value={values.coach_name}
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
@@ -207,6 +290,7 @@ function TeamRegistration() {
                     type="text"
                     name="coach_mobile"
                     id="coach_mobile"
+                    value={values.coach_mobile}
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
@@ -228,6 +312,7 @@ function TeamRegistration() {
                     type="text"
                     name="assistant_coach_name"
                     id="assistant_coach_name"
+                    value={values.assistant_coach_name}
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
@@ -247,6 +332,7 @@ function TeamRegistration() {
                     type="text"
                     name="assistant_coach_mobile"
                     id="assistant_coach_mobile"
+                    value={values.assistant_coach_mobile}
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
@@ -354,19 +440,23 @@ function TeamRegistration() {
                                   {player.name}
                                 </th>
                                 <td>
-                                  <select name="" id="" className='sm:px-1 py-1 rounded-md outline-blue-200 text-sm bg-gray-200' disabled={!player.isEditable}>
-                                    <option value="point_guard">Point Guard</option>
-                                    <option value="shooting_guard">Shooting Guard</option>
+                                  <select name="" id="" className='sm:px-1 py-1 rounded-md outline-blue-200 text-sm bg-white border border-gray-200' 
+                                  disabled={!player.isEditable}
+                                  value={player.position}
+                                  onChange={(e)=>handlePositionChange(e, player.id)}
+                                  >
+                                    <option value="point guard">Point Guard</option>
+                                    <option value="shooting guard">Shooting Guard</option>
                                     <option value="center">Center</option>
-                                    <option value="power_forward">Power Forward</option>
-                                    <option value="shooting_forward">Shooting Forward</option>
+                                    <option value="power forward">Power Forward</option>
+                                    <option value="shooting forward">Shooting Forward</option>
                                   </select>
                                 </td>
                                 <td>
                                   {
                                     player.isEditable
                                     ?
-                                      <button className="px-2 py-0.5 text-white text-sm rounded-md bg-green-600" onClick={()=>handleSavePosition(player.id)}>Save</button>
+                                      <button className="px-2 py-0.5 text-white text-sm rounded-md bg-green-600" onClick={()=>handleSave(player.id)}>Save</button>
                                     :
                                       <span className="flex">
                                         <BiEdit className="cursor-pointer text-xl text-blue-500 mr-4" onClick={()=>handleEditPosition(player.id)} />
@@ -388,24 +478,66 @@ function TeamRegistration() {
                       </tbody>
                     </table>
                   </div>
+                  {/* <div className="mt-8">
+                    <div className="flex">
+                      <p className="font-medium text-lg text-purple-600 tracking-wide">*Captain:</p>
+                      <div className="flex flex-col w-52 ml-4">
+                        <Select
+                          className='w-full outline-blue-200'
+                          name="captain"
+                          value={values.captain}
+                          onChange={e => {
+                            let event = {target: {name: 'captain', value: e}}
+                            handleChange(event)
+                          }}
+                          // onChange={handleChange}
+                          onBlur={() => {
+                            handleBlur({target: {name: 'captain'}});
+                          }}
+                          isSearchable={true}
+                          styles={customStyles}
+                          options={
+                            selectedPlayers.map(item => {
+                              return{
+                                value: item.id, label: item.name
+                              }
+                            })
+                          }
+                        />
+                      </div>
+                    </div>
+                  </div> */}
               </div>
             </div>
             <div className="w-full flex justify-end mt-5 sm:mt-10">
-              <button 
-                type="reset" 
-                className="bg-[#ee6730] relative inline-flex items-center justify-center px-8 py-2 overflow-hidden text-white rounded-lg cursor-pointer group mr-3"
-                onClick={()=>{resetForm(); setSelectedPlayers([])}} 
-              >
-                <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-slate-900 rounded-lg group-hover:w-full group-hover:h-56"></span>
-                <span className="relative">Clear</span>
-              </button>
+              {
+                location?.state?.isEdit
+                ?
+                  <button 
+                    type="button" 
+                    className="bg-[#ee6730] relative inline-flex items-center justify-center px-7 py-2 overflow-hidden text-white rounded-lg cursor-pointer group mr-3"
+                    onClick={()=> navigate(-1)} 
+                  >
+                    <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-slate-900 rounded-lg group-hover:w-full group-hover:h-56"></span>
+                    <span className="relative">Cancel</span>
+                  </button>
+                :
+                  <button 
+                    type="reset" 
+                    className="bg-[#ee6730] relative inline-flex items-center justify-center px-8 py-2 overflow-hidden text-white rounded-lg cursor-pointer group mr-3"
+                    onClick={()=>{resetForm(); setSelectedPlayers([])}} 
+                  >
+                    <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-slate-900 rounded-lg group-hover:w-full group-hover:h-56"></span>
+                    <span className="relative">Clear</span>
+                  </button>
+              }
               <button 
                 type="submit" 
                 className="bg-slate-900 relative inline-flex items-center justify-center px-6 py-2 overflow-hidden text-white rounded-lg cursor-pointer group"
                 onClick={handleSubmit} 
               >
                 <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#ee6730] rounded-lg group-hover:w-full group-hover:h-56"></span>
-                <span className="relative">SUBMIT</span>
+                <span className="relative">{location?.state?.isEdit ? "UPDATE" : "SUBMIT"}</span>
               </button>
             </div>
           </form>
@@ -414,4 +546,4 @@ function TeamRegistration() {
   )
 }
 
-export default TeamRegistration
+export default TeamAddEdit
