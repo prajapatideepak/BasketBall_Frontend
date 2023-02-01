@@ -2,50 +2,54 @@ import React from "react";
 import AboutUsCard from "../../Component/aboutus/AboutUsCard";
 import AboutusFeatureCard from "../../Component/aboutus/AboutusFeatureCard";
 function AboutUs() {
-const features = ["All-in-one app for basketball",
-"Free to use",
-"Live scoring",
-"Fixtures",
-"Player registration",
-"Player profiling",
-"Player Ranking",
-"Tournament registration",
-"Tournament updates",
-"Team registration",
-"Team Profile",
-"Volleyball news",
-"Scoreboard",
-"Set points",
-"Time-outs",
-"Rules and regulations "]
+  const features = [
+    "All-in-one app for basketball",
+    "Free to use",
+    "Live scoring",
+    "Fixtures",
+    "Player registration",
+    "Player profiling",
+    "Player Ranking",
+    "Tournament registration",
+    "Tournament updates",
+    "Team registration",
+    "Team Profile",
+    "Volleyball news",
+    "Scoreboard",
+    "Set points",
+    "Time-outs",
+    "Rules and regulations ",
+  ];
 
   return (
     <div>
-       {/* <div className='heading-container flex justify-center items-center h-24 sm:h-32 md:h-48 bg-black'>
+      {/* <div className='heading-container flex justify-center items-center h-24 sm:h-32 md:h-48 bg-black'>
                 <span className='text-xl sm:text-2xl md:text-3xl lg:text-5xl font-semibold text-white'>
                     About us
                 </span>
             </div> */}
-    <div className="px-4 text-center lg:text-left lg:px-12 py-20  min-h-screen">
-      <h1 className="text-4xl text-center ">About us</h1>
-      <div className="py-8 ">
-        <AboutUsCard key={1} name={1} />
-      </div>
-      <div>
-        <div className="text-center">
-
-              <h1 className="text-3xl text-center ">CBL Features</h1>
-              <p className="w-full md:w-2/3 mx-auto p-2 text-gray-800 italic"><span className="text-2xl text-black">"</span> Unleash the full potential of your basketball passion with our all-in-one web portal, featuring live scores, tournament updates, stats, and more<span className="text-2xl text-black">"</span></p>
+      <div className="px-4 text-center lg:text-left lg:px-12 py-5  min-h-screen">
+        <h1 className="text-4xl text-center ">About us</h1>
+        <div className="py-8 ">
+          <AboutUsCard key={1} name={1} />
         </div>
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 mt-10">
-                {features.map(feature=>{
-                    return <AboutusFeatureCard key={feature} feature={feature}  />
-                })}
-              </div>
-
-          
+        <div>
+          <div className="text-center">
+            <h1 className="text-3xl text-center ">CBL Features</h1>
+            <p className="w-full md:w-2/3 mx-auto p-2 text-gray-800 italic">
+              <span className="text-2xl text-black">"</span> Unleash the full
+              potential of your basketball passion with our all-in-one web
+              portal, featuring live scores, tournament updates, stats, and more
+              <span className="text-2xl text-black">"</span>
+            </p>
+          </div>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 mt-10">
+            {features.map((feature) => {
+              return <AboutusFeatureCard key={feature} feature={feature} />;
+            })}
+          </div>
+        </div>
       </div>
-    </div>
     </div>
   );
 }
