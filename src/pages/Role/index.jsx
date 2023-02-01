@@ -11,13 +11,13 @@ export default function Role() {
     {
       title: "Visitor",
       isSelected: false,
-      path: "/player/registration",
+      path: "/",
       icon: "/icons/user_icon.png",
     },
     {
       title: "Player",
       isSelected: false,
-      path: "/player/registration",
+      path: "/player/register",
       icon: "/icons/player_icon.png",
     },
     {
@@ -29,7 +29,7 @@ export default function Role() {
     {
       title: "Tournament Host",
       isSelected: false,
-      path: "/player/registration",
+      path: "/tournament-registration",
       icon: "/icons/tournament_icon.png",
     },
   ]);
