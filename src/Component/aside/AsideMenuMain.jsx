@@ -12,7 +12,7 @@ function AsideMenuMain() {
 
   return (
     <div className="w-full relative">
-      <div className="py-3 bg-black relative px-5 lg:px-9 flex sticky top-0 items-center justify-between w-full z-[9999]">
+      <div className="py-3 bg-black  px-5 lg:px-9 flex sticky top-0 items-center justify-between w-full z-[9999]">
         <div className="">
           <h1 className="font-bold text-3xl font-mono text-white">
             The<span className="text-[#ee6730]">CBL</span>
@@ -28,7 +28,7 @@ function AsideMenuMain() {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="Link" to={"/about"}>
+              <Link className="Link" to={"/team-profile"}>
                 <h1 className="relative text-white text-base md:text-base lg:text-base xl:text-lg  my-5 md:my-0">
                   Teams
                 </h1>
@@ -55,13 +55,6 @@ function AsideMenuMain() {
                 </h1>
               </Link>
             </li>
-            <li className="nav-item" onClick={() => setOpen(!open)}>
-              <Link className="Link" to={"/team-profile"}>
-                <h1 className="relative text-white text-base md:text-lg lg:text-base xl:text-lg  my-4 lg:my-0">
-                  Team
-                </h1>
-              </Link>
-            </li>
             <li className="nav-item">
               <Link className="Link" to={"/Registration"}>
                 <h1 className="relative text-white text-base md:text-base lg:text-base xl:text-lg  my-4 md:my-0">
@@ -72,8 +65,8 @@ function AsideMenuMain() {
           </ul>
         </div>
         <div
-          className={` font-semibold text-gray-800 pb-10 lg:pb-0 lg:space-y-10 absolute
-                     z-auto  pl-9 md:pl-0 right-0 w-full md:w-72 md:h-screen bg-black lg:pr-0  flex flex-col justify-start items-start lg:justify-start md:items-center
+          className={` font-semibold text-gray-800 pb-10 lg:pb-0 lg:space-y-10 fixed
+                     z-50  pl-9 md:pl-0 right-0 w-full md:w-72 md:h-screen bg-black lg:pr-0  flex flex-col justify-start items-start lg:justify-start md:items-center
                      duration-500 ease-in ${
                        open
                          ? "top-[60px] opacity-100"
@@ -89,7 +82,7 @@ function AsideMenuMain() {
               </Link>
             </li>
             <li className="nav-item md:hidden" onClick={() => setOpen(!open)}>
-              <Link className="Link" to={""}>
+              <Link className="Link" to={"/team-profile"}>
                 <h1 className="relative text-white text-base md:text-base lg:text-base xl:text-lg my-[16px] lg:my-0">
                   Teams
                 </h1>
@@ -99,21 +92,21 @@ function AsideMenuMain() {
               className="nav-item hidden md:block"
               onClick={() => setOpen(!open)}
             >
-              <Link className="Link" to={""}>
+              <Link className="Link" to={"/About"}>
                 <h1 className="relative text-white text-base md:text-base lg:text-base xl:text-lg my-[16px] lg:my-0">
                   About
                 </h1>
               </Link>
             </li>
             <li className="nav-item md:hidden" onClick={() => setOpen(!open)}>
-              <Link className="Link" to={""}>
+              <Link className="Link" to={"/tournaments"}>
                 <h1 className="relative text-white text-base md:text-base lg:text-base xl:text-lg my-[16px] lg:my-0">
                   Tournament
                 </h1>
               </Link>
             </li>
             <li className="nav-item md:hidden" onClick={() => setOpen(!open)}>
-              <Link className="Link" to={""}>
+              <Link className="Link" to={"/news"}>
                 <h1 className="relative text-white text-base md:text-base lg:text-base xl:text-lg my-[16px] lg:my-0">
                   News
                 </h1>
@@ -127,21 +120,21 @@ function AsideMenuMain() {
               </Link>
             </li>
             <li className="nav-item md:hidden" onClick={() => setOpen(!open)}>
-              <Link className="Link" to={""}>
+              <Link className="Link" to={"/gallery"}>
                 <h1 className="relative text-white text-base md:text-base lg:text-base xl:text-lg my-[16px] lg:my-0">
                   Gallery
                 </h1>
               </Link>
             </li>
             <li className="nav-item" onClick={() => setOpen(!open)}>
-              <Link className="Link" to={""}>
+              <Link className="Link" to={"/contact"}>
                 <h1 className="relative text-white text-base md:text-base lg:text-base xl:text-lg my-[16px] lg:my-0">
                   Contact
                 </h1>
               </Link>
             </li>
             <li className="nav-item md:hidden" onClick={() => setOpen(!open)}>
-              <Link className="Link" to={""}>
+              <Link className="Link" to={"/About"}>
                 <h1 className="relative text-white text-base md:text-base lg:text-base xl:text-lg my-[16px] lg:my-0">
                   About
                 </h1>
