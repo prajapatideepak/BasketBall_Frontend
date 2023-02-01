@@ -11,13 +11,13 @@ export default function Role() {
     {
       title: "Visitor",
       isSelected: false,
-      path: "/player/registration",
+      path: "/",
       icon: "/icons/user_icon.png",
     },
     {
       title: "Player",
       isSelected: false,
-      path: "/player/registration",
+      path: "/player/register",
       icon: "/icons/player_icon.png",
     },
     {
@@ -29,7 +29,7 @@ export default function Role() {
     {
       title: "Tournament Host",
       isSelected: false,
-      path: "/player/registration",
+      path: "/tournament-registration",
       icon: "/icons/tournament_icon.png",
     },
   ]);
@@ -63,8 +63,8 @@ export default function Role() {
     }
   }
   return (
-    <div className="flex flex-col  justify-center px-8  lg:pt-20 lg:px-20  min-h-screen ">
-      <div className="space-y-1 mt-10 text-center ">
+    <div className="flex flex-col  justify-center px-8   lg:px-20  min-h-screen ">
+      <div className="space-y-1  text-center ">
         <h1 className="text-4xl  "> Who are You ?</h1>
         <p className="italic text-gray-700 p-1">
           Rise to the Top: Choose Your Role as Visitor, Player, Tournament Host,
@@ -124,7 +124,7 @@ export default function Role() {
 
       <div className="flex justify-end items-center">
         <div className="">
-          <Button onClick={(e) => handleSubmit()} text={"Submit"}></Button>
+          <Button onClick={(e) => handleSubmit()} text={"Continue"}></Button>
           {/* <button className="px-4  border py-1 rounded-md bg-[#ee6730] text-white  "> Submit</button> */}
         </div>
       </div>

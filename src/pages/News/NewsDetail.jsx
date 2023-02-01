@@ -1,12 +1,91 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { newsDetail } from "./NewsPage.jsx";
-// import { WhatsappIcon } from "react-share";
-// import { WhatsappShareButton } from "react-share";
-import {useNavigate} from "react-router-dom"
-import {BiArrowBack} from "react-icons/bi"
+import { WhatsappIcon } from "react-share";
+import { WhatsappShareButton } from "react-share";
+import { useNavigate } from "react-router-dom";
+import { BiArrowBack } from "react-icons/bi";
+
+const newsDetail = [
+  {
+    id: 1,
+    title: "Wellbenix created amazing web application for basketball",
+    priority: 2,
+    tags: "CBL, wellebnix , work",
+    date: "22/3/21",
+    image: "/CBL_Images/7xm.xyz928823.webp",
+    description:
+      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione porro dolor aspernatur esse assumenda, nisi dolorum labore eos repellendus, alias tenetur. Iure placeat eveniet necessitatibus similique ducimus cumque veritatis. Vero.",
+  },
+
+  {
+    id: 4,
+    title: "Monu created amazing web application for basketball",
+    priority: 2,
+    tags: "CBL, wellebnix , work",
+    date: "22/3/21",
+    image: "/CBL_Images/7xm.xyz946052.webp",
+
+    description:
+      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione porro dolor aspernatur esse assumenda, nisi dolorum labore eos repellendus, alias tenetur. Iure placeat eveniet necessitatibus similique ducimus cumque veritatis. Vero.",
+  },
+  {
+    id: 5,
+    title: "Shad created amazing web application for basketball",
+    priority: 2,
+    tags: "CBL, wellebnix , work",
+    date: "22/3/21",
+    image: "/CBL_Images/7xm.xyz851458.webp",
+
+    description:
+      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione porro dolor aspernatur esse assumenda, nisi dolorum labore eos repellendus, alias tenetur. Iure placeat eveniet necessitatibus similique ducimus cumque veritatis. Vero.",
+  },
+  {
+    id: 6,
+    title: "Sadik created amazing web application for basketball",
+    priority: 2,
+    tags: "CBL, wellebnix , work",
+    date: "22/3/21",
+    image: "/CBL_Images/landeeng.webp",
+
+    description:
+      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione porro dolor aspernatur esse assumenda, nisi dolorum labore eos repellendus, alias tenetur. Iure placeat eveniet necessitatibus similique ducimus cumque veritatis. Vero.",
+  },
+  {
+    id: 7,
+    title: "Deepak created amazing web application for basketball",
+    priority: 2,
+    tags: "CBL, wellebnix , work",
+    date: "22/3/21",
+    image: "/CBL_Images/Screenshot (50).png",
+
+    description:
+      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione porro dolor aspernatur esse assumenda, nisi dolorum labore eos repellendus, alias tenetur. Iure placeat eveniet necessitatibus similique ducimus cumque veritatis. Vero.",
+  },
+  {
+    id: 2,
+    title: "LJ created amazing web application for basketball",
+    priority: 2,
+    tags: "CBL, wellebnix , work",
+    date: "22/3/21",
+    image: "/CBL_Images/7xm.xyz160722 (1).webp",
+    description:
+      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione porro dolor aspernatur esse assumenda, nisi dolorum labore eos repellendus, alias tenetur. Iure placeat eveniet necessitatibus similique ducimus cumque veritatis. Vero.",
+  },
+  {
+    id: 3,
+    title: "Bhavin sir created amazing web application for basketball",
+    priority: 2,
+    tags: "CBL, wellebnix , work",
+    date: "22/3/21",
+    image: "/CBL_Images/7xm.xyz343615.webp",
+
+    description:
+      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione porro dolor aspernatur esse assumenda, nisi dolorum labore eos repellendus, alias tenetur. Iure placeat eveniet necessitatibus similique ducimus cumque veritatis. Vero.",
+  },
+];
+
 const NewsDetail = () => {
-    const navigate = useNavigate()
+  const navigate = useNavigate();
   console.log(newsDetail);
   const params = useParams();
   console.log(params);
@@ -21,7 +100,15 @@ const NewsDetail = () => {
     <div className="flex justify-center min-h-screen ">
       <div className=" lg:px-28 py-20 lg:w-5/4 ">
         <div className="flex justify-end">
-          <button onClick={e=> navigate(-1)} className={"px-4  font-bold bg-black rounded-xl hover:scale-110 duration-200 hover:bg-orange-600 text-white flex justify-center items-center space-x-2 text-lg py-1"}> <BiArrowBack /> <span className="text-sm"> Go back </span></button>
+          <button
+            onClick={(e) => navigate(-1)}
+            className={
+              "px-4  font-bold bg-black rounded-xl hover:scale-110 duration-200 hover:bg-orange-600 text-white flex justify-center items-center space-x-2 text-lg py-1"
+            }
+          >
+            {" "}
+            <BiArrowBack /> <span className="text-sm"> Go back </span>
+          </button>
         </div>
         <div className=" px-12 py-4 space-y-3 ">
           <h1 className="text-2xl  lg:text-5xl ">{news?.title}</h1>
