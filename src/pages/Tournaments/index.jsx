@@ -4,7 +4,7 @@ function Tournaments() {
     const [currentTab, setCurrentTab] = React.useState(1);
 
     return (
-        <section>
+        <section className="min-h-screen">
             <div className='mx-auto px-10 py-12 sm:px-20 sm:py-12 md:px-20 md:py-16 lg:px-24 xl:px-28 2xl:px-32'>
                 <div className='flex justify-center items-center'>
                     <div className="w-2/3 sm:w-2/4 lg:w-1/3 p-1 rounded-full flex justify-around items-center bg-black">

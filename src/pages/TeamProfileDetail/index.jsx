@@ -160,8 +160,8 @@ function TeamProfileDetail() {
     }, []);
 
     return (
-        <section>
-            <div className='mx-auto px-10 py-12 sm:px-20 sm:py-12 md:px-20 md:py-16 lg:px-24 xl:px-28 2xl:px-32 mt-10'>
+        <section className='min-h-screen'>
+            <div className='mx-auto px-10 py-12 sm:px-20 sm:py-12 md:px-20 md:py-16 lg:px-24 xl:px-28 2xl:px-32'>
                 <div>
                     <div className="team-logo-container flex justify-center items-center rounded-full">
                         <img src={teamDetails.team_logo} className="rounded-full border-2 shadow-lg w-24 sm:w-32"/>
