@@ -4,20 +4,15 @@ import { GiBasketballBall } from "react-icons/gi";
 import Loader from "../../Component/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { getNewsData } from "../../redux/actions/News";
-import { setNews } from "../../redux/slices/newsSlice";
 
 const NewsPage = () => {
   const dispatch = useDispatch();
-
   const { NewsList } = useSelector((state) => state.newsReducer);
-
-  const defaultArray = [1, 2, 3, 4];
-  const [loader, setloader] = React.useState(true);
-  const path = [];
 
   React.useEffect(() => {
     dispatch(getNewsData());
   }, []);
+
   return (
     <div className="min-h-screen  md:px-8 py-5">
       {NewsList?.length < 1 ? (
