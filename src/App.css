@@ -51,6 +51,8 @@
     }
 }
 
+/* Scrollbar style for browser */
+
 /* width */
 ::-webkit-scrollbar {
   width: 8px;
@@ -65,3 +67,20 @@
 ::-webkit-scrollbar-thumb {
   background: rgb(177, 177, 177);
 }
+
+
+/* Scrollbar style for table in responsive */
+
+.table-container::-webkit-scrollbar {
+  height: 4px;
+}
+
+.table-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+  background: rgb(177, 177, 177);
+  border-radius: 5px;
+}
+

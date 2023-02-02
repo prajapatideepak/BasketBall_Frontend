@@ -24,7 +24,7 @@ const NewsPage = () => {
         <Loader />
       ) : (
         <>
-          <div className="flex   justify-center items-center text-[#ee6730] p-2 space-x-3 text-3xl">
+          <div className="flex  justify-center items-center text-[#ee6730] p-2 space-x-3 text-3xl">
             <h1 className="text-black text-4xl "> News</h1>
             <GiBasketballBall className="animate-bounce	 text-[#ee6730] " />
           </div>

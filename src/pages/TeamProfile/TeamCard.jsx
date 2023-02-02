@@ -7,7 +7,7 @@ function TeamCard({teamDetails}) {
     const {team_id, team_logo, team_name, description, total_players, matches_played, matches_won, matches_lost} = teamDetails
 
   return (
-    <div className="w-full bg-gray-800 mt-2 rounded-lg cursor-pointer hover:opacity-80" onClick={()=> navigate(`/team-profile-detail/${team_id}`)}>
+    <div className="w-full bg-gray-800 mt-2 mb-5 rounded-lg cursor-pointer hover:opacity-80" onClick={()=> navigate(`/team-profile-detail/${team_id}`)}>
         <div className='flex lg:flex-row flex-col lg:justify-start justify-center items-center p-5 h-full'>
             <div className='flex w-full sm:w-4/5 md:w-2/4 lg:w-2/5'>
                 <div className="team_logo overflow-hidden flex justify-center items-center">
