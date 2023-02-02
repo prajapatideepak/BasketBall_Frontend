@@ -56,7 +56,7 @@ function AsideMenuMain() {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="Link" to={"/Registration"}>
+              <Link className="Link" to={"/registration"}>
                 <h1 className="relative text-white text-base md:text-base lg:text-base xl:text-lg  my-4 md:my-0">
                   Registration
                 </h1>
@@ -141,7 +141,7 @@ function AsideMenuMain() {
               </Link>
             </li>
             <li className="nav-item md:hidden " onClick={() => setOpen(!open)}>
-              <Link className="Link" to={"/Registration"}>
+              <Link className="Link" to={"/role"}>
                 <h1 className="relative text-white text-base md:text-base lg:text-base xl:text-lg my-[16px] lg:my-0">
                   Registration
                 </h1>
@@ -149,9 +149,9 @@ function AsideMenuMain() {
             </li>
           </ul>
           <div className="flex justify-center space-x-7 pt-10">
-            <AiFillInstagram className="text-white text-[26px] cursor-pointer" />
-            <FaFacebookSquare className="text-white text-[26px] cursor-pointer" />
-            <AiOutlineTwitter className="text-white text-[26px] cursor-pointer" />
+            <AiFillInstagram className=" rounded-full hover:text-white hover:bg-[#ee6730] text-[26px] bg-white text-[#ee6730] h-10 w-10 p-2 duration-200 hover:scale-110 cursor-pointer" />
+            <FaFacebookSquare className=" rounded-full hover:text-white hover:bg-[#ee6730] text-[26px] bg-white text-[#ee6730] h-10 w-10 p-2 duration-200 hover:scale-110 cursor-pointer" />
+            <AiOutlineTwitter className=" rounded-full hover:text-white hover:bg-[#ee6730] text-[26px] bg-white text-[#ee6730] h-10 w-10 p-2 duration-200 hover:scale-110 cursor-pointer" />
           </div>
         </div>
 

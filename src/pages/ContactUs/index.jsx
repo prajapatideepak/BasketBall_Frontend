@@ -37,7 +37,7 @@ const ContactUs = () => {
 
   return (
     <>
-      <section className='py-14'>
+      <section className=''>
         <div className='flex justify-center bg-black  items-center h-24 sm:h-32 md:h-48'>
           <div className="main-heading">
             <span className='text-xl sm:text-2xl md:text-3xl lg:text-5xl font-semibold text-white'>

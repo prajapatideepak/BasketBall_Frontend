@@ -5,7 +5,7 @@ function Registration(){
     return(
         <>
          <div className="h-screen flex justify-center items-center">
-         <Link to={"/Tournament-registration"}>
+         <Link to={"/tournament/register"}>
             Tournament 
          </Link>
 

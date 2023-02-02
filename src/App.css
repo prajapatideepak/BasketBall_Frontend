@@ -65,3 +65,22 @@
 ::-webkit-scrollbar-thumb {
   background: rgb(177, 177, 177);
 }
+
+
+/* Landing page  */
+
+.img{
+    transition: 0.6s ease-out;
+    transform: rotateX(0deg) rotateY(0deg);
+    perspective: 1000px;
+    transform-style: preserve-3d;
+}
+
+.body:hover{
+    transition: all 0.3s linear;
+    transform: scale(1.1);
+}
+
+.img img{
+    transform: translateZ(40px);
+}
