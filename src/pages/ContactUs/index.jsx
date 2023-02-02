@@ -37,8 +37,8 @@ const ContactUs = () => {
 
   return (
     <>
-      <section className='py-14'>
-        <div className='flex justify-center bg-black  items-center h-24 sm:h-32 md:h-48'>
+      <section className='min-h-screen'>
+        <div className='flex justify-center  items-center h-24 sm:h-32 md:h-48'>
           <div className="main-heading">
             <span className='text-xl sm:text-2xl md:text-3xl lg:text-5xl font-semibold text-white'>
               Contact Us
