@@ -1,0 +1,35 @@
+.main-heading{
+    position: relative;
+    z-index: 2;
+}
+
+.main-heading::before{
+    content: "";
+    background-image: url("/CBL_Images/heading_background_image.png");
+    background-repeat: no-repeat;
+    width: 135%;
+    height: 120%;
+    background-size: 100% 100%;
+    position: absolute;
+    top: 0;
+    left: -12%;
+    z-index: -1;
+}
+
+@media (max-width: 1023.5px){
+    .main-heading::before{
+        height: 110%;
+    }
+}
+
+@media (max-width: 767.5px){
+    .main-heading::before{
+        height: 110%;
+    }
+}
+
+@media (max-width: 329.5px){
+    .main-heading::before{
+        height: 110%;
+    }
+}

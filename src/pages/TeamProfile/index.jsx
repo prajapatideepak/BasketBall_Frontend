@@ -1,5 +1,6 @@
 import React from 'react'
 import TeamCard from './TeamCard'
+import Heading from '../../Component/Heading'
 
 function TeamProfile() {
     const teamDetails = [
@@ -28,7 +29,7 @@ function TeamProfile() {
     <section className='min-h-screen'>
         <div className="mx-auto px-10 py-12 sm:px-20 sm:py-12 md:px-20 md:py-16 lg:px-24 xl:px-28 2xl:px-32">
             <div className='team-profile-heading-container mb-16 w-full flex justify-center items-center mb-10'>
-                <h2 className="main-heading text-xl text-white sm:text-2xl md:text-3xl lg:text-5xl font-semibold">Your Teams</h2>
+                <Heading text="Your Teams" />
             </div>
             {
                 teamDetails.length > 0
