@@ -7,7 +7,6 @@ import { getNewsData } from "../../redux/actions/News";
 
 const NewsPage = () => {
   const dispatch = useDispatch();
-
   const { NewsList } = useSelector((state) => state.newsReducer);
 
   React.useEffect(() => {
