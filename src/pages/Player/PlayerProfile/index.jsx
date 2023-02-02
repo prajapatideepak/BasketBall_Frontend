@@ -1,8 +1,11 @@
 import React from "react";
 
 export default function PlayerProfile() {
+  const [currentTab, setCurrentTab] = React.useState(2);
+
   const player = {
     basicinfo: {
+      img: "/CBL_Images/player-default-profile.webp",
       firstName: "Deepak",
       lastName: "Prajapati",
       dateofbirth: new Date(),
@@ -15,7 +18,7 @@ export default function PlayerProfile() {
       playerPosition: "Center",
       JerseyNumber: "69",
       Experience:
-        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Architecto reprehenderit mollitia quibusdam consequuntur amet. Tempora aspernatur accusantium ipsam adipisci voluptatibus.",
+        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. ur amet. Tempora aspernatur accusantium ipsam adipisci voluptatibus.",
     },
     statics: {
       totalMatch: 100,
@@ -63,11 +66,39 @@ export default function PlayerProfile() {
     },
   };
   return (
-    <div className="justify-center items-center min-h-screen">
-      <div>
-        <h1 className="text-3xl font-semibold ">
-          {player.basicinfo.firstName} {player.basicinfo.lastName}{" "}
-        </h1>
+    <div className="flex min-h-screen  ">
+      <div className="flex">
+        <div className="w-2/3 flex flex-col items-center  mx-auto   p-4">
+          <img
+            className="mx-auto lg:w-1/3  shadow rounded-full"
+            src={player.basicinfo.img}
+          />
+
+          <div className="p-2 ">
+            <h1 className="text-3xl text-center text-gray-900">
+              {player.basicinfo.firstName} {player.basicinfo.lastName}
+            </h1>
+            <div className="flex items-center justify-center">
+              <span className="px-2    text-xs italic bg-orange-600 font-semibold text-white rounded-lg ">
+                {player.teamDetails.team_name}{" "}
+              </span>
+              <span>-</span>
+              <span className="px-2  text-xs italic bg-gray-800 font-semibold text-white rounded-lg ">
+                {player.gameinfo.playerPosition}
+              </span>
+            </div>
+            <p className="text-center text-gray-600 text-sm lg:w-1/3 mx-auto">
+              {player.gameinfo.Experience}
+            </p>
+          </div>
+        </div>
+        {/* for up */}
+        <div className="flex-1">
+          <div>
+            <span>Last Game</span>
+            <span>Next Game</span>
+          </div>
+        </div>
       </div>
     </div>
   );
