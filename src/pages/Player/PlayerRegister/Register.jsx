@@ -18,7 +18,7 @@ export default function PlayerRegister() {
             Player Registration
           </h1>
         </div>
-        <img src={"/icons/playing_icon.png"} className=" w-20" />
+        <img src={"/icons/playing_icon.png"} className="w-20" />
       </div>
       <p className="text-center text-gray-700 text-sm md:text-base italic pb-5">
         Be the player that raises the bar, be relentless, be a game changer.
