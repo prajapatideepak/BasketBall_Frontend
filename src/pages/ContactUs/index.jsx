@@ -6,7 +6,7 @@ import { IoMdPerson } from 'react-icons/io';
 import { Accordion, AccordionHeader, AccordionBody } from "@material-tailwind/react";
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
-
+import Heading from '../../Component/Heading';
 
 const ContactUs = () => {
     const initialValues={
@@ -39,10 +39,8 @@ const ContactUs = () => {
     <>
       <section className='min-h-screen'>
         <div className='flex justify-center  items-center h-24 sm:h-32 md:h-48'>
-          <div className="main-heading">
-            <span className='text-xl sm:text-2xl md:text-3xl lg:text-5xl font-semibold text-white'>
-              Contact Us
-            </span>
+          <div className="">
+            <Heading text="Contact Us" />
           </div>
         </div>
         <div className='flex justify-start -z-50'>

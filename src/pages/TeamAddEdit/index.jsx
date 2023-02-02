@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import * as Yup from 'yup';
 import { useFormik } from 'formik'
 import Select from 'react-select';
+import Heading from '../../Component/Heading'
 
 function TeamAddEdit() {
   const navigate = useNavigate();
@@ -197,9 +198,7 @@ function TeamAddEdit() {
     <section className='min-h-screen'>
         <div className='heading-container flex justify-center items-center h-24 sm:h-32 md:h-48'>
             <div className=''>
-              <h2 className="main-heading text-xl sm:text-2xl md:text-3xl lg:text-5xl font-semibold text-white">
-                {location?.state?.isEdit ? 'Edit Team' : 'Team Registration'}
-              </h2>
+              <Heading text={location?.state?.isEdit ? 'Edit Team' : 'Team Registration'} />
             </div>
         </div>
         <div className='mx-auto px-10 py-12 sm:px-20 sm:py-12 md:px-20 md:py-16 lg:px-24 xl:px-28 2xl:px-32'>
