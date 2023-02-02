@@ -14,43 +14,6 @@
     width: 100%;
 }
 
-.main-heading{
-    position: relative;
-}
-
-.main-heading::before{
-    content: "";
-    background-image: url("/CBL_Images/heading_background_image.png");
-    background-repeat: no-repeat;
-    width: 340px;
-    height: 60px;
-    background-size: 340px 60px;
-    position: absolute;
-    top: 0;
-    z-index: -1;
-}
-
-@media (max-width: 1023.5px){
-    .main-heading::before{
-        width: 220px;
-        background-size: 220px 45px;
-    }
-}
-
-@media (max-width: 767.5px){
-    .main-heading::before{
-        width: 200px;
-        background-size: 200px 40px;
-    }
-}
-
-@media (max-width: 639.5px){
-    .main-heading::before{
-        width: 160px;
-        background-size: 160px 35px;
-    }
-}
-
 /* Scrollbar style for browser */
 
 /* width */
