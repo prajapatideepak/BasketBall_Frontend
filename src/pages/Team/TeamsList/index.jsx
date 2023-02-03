@@ -1,12 +1,12 @@
 import React from 'react'
-import TeamCard from '../../Component/TeamCard'
-import Heading from '../../Component/Heading'
+import TeamCard from '../../../Component/TeamCard'
+import Heading from '../../../Component/Heading'
 
 function TeamsList() {
-    const teamDetails = [
+    const allTeams = [
         {
             team_id: 1001,
-            team_logo: 'CBL_Images/basketball_team_logo_1.webp',
+            team_logo: '/CBL_Images/basketball_team_logo_1.webp',
             team_name: 'Mehta Ke Mahaarathi',
             description: 'Lorem ipsum dolor sit amet, consectetur adip, Lorem ipsum dolor sit amet, consectetur adip',
             total_players: 7,
@@ -16,7 +16,7 @@ function TeamsList() {
         },
         {
             team_id: 1002,
-            team_logo: 'CBL_Images/basketball_team_logo_2.webp',
+            team_logo: '/CBL_Images/basketball_team_logo_2.webp',
             team_name: 'Jetha Ke Jabaaz',
             description: '',
             total_players: 8,
@@ -32,9 +32,9 @@ function TeamsList() {
                 <Heading text="All Teams" />
             </div>
             {
-                teamDetails.length > 0
+                allTeams.length > 0
                 ?
-                    teamDetails.map((team, i) =>{
+                    allTeams.map((team, i) =>{
                         return(
                             <TeamCard key={i} teamDetails={team}/>
                         )                        
@@ -47,4 +47,4 @@ function TeamsList() {
   )
 }
 
-export default TeasListe
+export default TeamsList
