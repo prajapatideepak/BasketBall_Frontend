@@ -11,24 +11,7 @@ import Heading from '../../../Component/Heading'
 
 function TeamAddEdit() {
   const navigate = useNavigate();
-  // const location = useLocation();
-  const location ={
-    // state:{
-    //   team_id: 123,
-    //   team_name: 'Jetha ke jabaaz',
-    //   about_team: 'Lorem ipsum dolor sit amet, consectetur adip, Lorem, Lorem ipsum dolor sit amet, consectetur adip, Lorem',
-    //   coach_name: 'sadik',
-    //   coach_mobile: '8777643526',
-    //   assistant_coach_name: 'moin',
-    //   assistant_coach_mobile: '9999999999',
-    //   players: [
-    //     {id: 1, name:'Sadikali karadiya', position:'point guard', isEditable: false},
-    //     {id: 2, name:'Deepak Prajapati', position:'center', isEditable: false},
-    //   ],
-    //   captain: 1,
-    //   isEdit: true
-    // }
-  }
+  const location = useLocation();
 
   const initialValues={
     team_name: location?.state?.isEdit ? location?.state?.team_name : '',
@@ -195,7 +178,7 @@ function TeamAddEdit() {
   },[])
 
   return (
-    <section className='min-h-screen'>
+    <section className='min-h-screen-fit'>
         <div className='heading-container flex justify-center items-center h-24 sm:h-32 md:h-48'>
             <div className=''>
               <Heading text={location?.state?.isEdit ? 'Edit Team' : 'Team Registration'} />

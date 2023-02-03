@@ -1,8 +1,9 @@
 import React from 'react'
-import TournamentCard from './TournamentCard';
+import TournamentCard from '../../Component/TournamentCard';
 import { GiDiamondTrophy } from 'react-icons/gi';
+import Heading from '../../Component/Heading';
 
-function Tournaments() {
+function TournamentsList() {
     const [currentTab, setCurrentTab] = React.useState(1);
     const [currentTabTournaments, setCurrentTabTournaments] = React.useState([])
 
@@ -10,7 +11,7 @@ function Tournaments() {
         {
             tournament_id: 1,
             logo: '/CBL_Images/tournament_logo_1.webp',
-            tournament_name: 'Kon Banega Murga',
+            tournament_name: 'Kon Banega Champion',
             start_date: '10/02/2023',
             end_date: '10/13/2023',
             level: 'National',
@@ -19,7 +20,7 @@ function Tournaments() {
         {
             tournament_id: 1,
             logo: '/CBL_Images/tournament_logo_2.webp',
-            tournament_name: 'Banega Kon Murga',
+            tournament_name: 'Youngster League',
             start_date: '11/08/2023',
             end_date: '11/19/2023',
             level: 'National',
@@ -31,7 +32,7 @@ function Tournaments() {
         {
             tournament_id: 1,
             logo: '/CBL_Images/tournament_logo_1.webp',
-            tournament_name: 'Murga Kon Banega',
+            tournament_name: 'LJ Cup',
             start_date: '01/11/2023',
             end_date: '01/22/2023',
             level: 'National',
@@ -55,8 +56,9 @@ function Tournaments() {
     },[currentTab])
 
     return (
-        <section className="min-h-screen">
+        <section className="min-h-screen-fit">
             <div className='mx-auto px-10 py-12 sm:px-20 sm:py-12 md:px-20 md:py-16 lg:px-24 xl:px-28 2xl:px-32'>
+                <Heading text="Tournaments"/>
                 <div className='flex justify-center items-center'>
                     <div className="xs:w-4/5 sm:w-2/4 lg:w-1/3 p-1 rounded-full flex justify-around items-center bg-black">
                         <div className={`${currentTab == 1 ? 'bg-[#ee6730]' : ''} hover:bg-[#ee6730] group cursor-pointer w-full text-center p-1 rounded-full`} onClick={()=> setCurrentTab(1)}>
@@ -91,4 +93,4 @@ function Tournaments() {
     )
 }
 
-export default Tournaments
+export default TournamentsList

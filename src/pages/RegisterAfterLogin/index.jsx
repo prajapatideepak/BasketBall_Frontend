@@ -4,6 +4,7 @@ import { MdDone } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Button from "../../Component/Button";
+import Heading from "../../Component/Heading";
 export default function AfterRole() {
   const navigate = useNavigate();
 
