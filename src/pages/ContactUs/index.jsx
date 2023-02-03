@@ -37,15 +37,13 @@ const ContactUs = () => {
 
   return (
     <>
-      <section className='min-h-screen'>
-        <div className='flex justify-center  items-center h-24 sm:h-32 md:h-48'>
-          <div className="">
+      <section className=''>
+          <div className="pt-8 md:pt-12 lg:pt-20">
             <Heading text="Contact Us" />
           </div>
-        </div>
         <div className='flex justify-start -z-50'>
-          <div className='right-content w-full sm:w-2/4 lg:mx-32 md:mx-28 sm:mx-20 mx-10 my-2'>
-            <h1 className='capitalize lg:mt-20 mb-5 sm:text-4xl text-xl font-medium text-[#ee6730]'>Get in touch</h1>
+          <div className='right-content w-full sm:w-2/4 lg:mx-32 md:mx-28 sm:mx-20 m-10 my-2'>
+            <h1 className='capitalize lg:mt-10 mb-5 sm:text-4xl text-xl font-medium text-[#ee6730]'>Get in touch</h1>
             <form onSubmit={handleSubmit}>
               <div className="">
                 <div>
@@ -145,7 +143,7 @@ const ContactUs = () => {
 
       <section className='FAQs'>
         <div className='flex justify-start lg:mx-32 md:mx-28 sm:mx-20 mx-10 my-2'>
-          <div className='left-content w-3/4 lg:my-24 md:mt-16 mt-12'>
+          <div className='left-content w-3/4 lg:my-24 md:my-16 my-12'>
             <div className=''>
               <h1 className='capitalize mt-2 mb-5 sm:text-4xl text-xl font-medium text-[#ee6730]'>Frequently asked questions</h1>
             </div>
