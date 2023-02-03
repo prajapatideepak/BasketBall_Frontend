@@ -55,7 +55,8 @@ function Tournamentregistration() {
         sponsor_name: location?.state?.isEdit ? location?.state?.sponsor_name : '',
         sponsor_mobile: location?.state?.isEdit ? location?.state?.sponsor_mobile : '',
         age_restriction: location?.state?.isEdit ? location?.state?.age_restriction : 'no',
-        age_cutoff: location?.state?.isEdit ? location?.state?.age_cutoff : 'Under 21'
+        age_cutoff: location?.state?.isEdit ? location?.state?.age_cutoff : 'Under 21',
+        price: location?.state?.isEdit ? location?.state?.price : ''
 
     }
 
@@ -105,11 +106,7 @@ function Tournamentregistration() {
         console.log(gettodatevalue, "gettodatevalue")
     }
 
-    const handleagerestriction = (e) => {
-        const age_restriction = e.target.value;
-        setIsDisabled(false)
-        console.log(age_restriction, "age_restriction")
-    }
+
 
     return (
         <>
@@ -274,8 +271,27 @@ function Tournamentregistration() {
                                 }
                             </div>
                         </div>
-                        {/* City_name && age_restriction && age_cutoff */}
-                        <div className="flex flex-col md:flex-row  gap-6 my-7 ">
+                        {/* City name && Price Money */}
+                        <div className="flex flex-col md:flex-row  2 gap-6 my-7 ">
+                            <div className="flex flex-col w-full">
+                                <label className="mb-2">Price Money</label>
+                                <input
+                                    className="w-full outline-blue-200 rounded-lg border-2 border-gray-200 py-3 px-3 text-sm"
+                                    placeholder="Enter Price Money"
+                                    type="text"
+                                    name="price"
+                                    id="price"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                />
+                                {
+                                    errors.price && touched.price
+                                        ?
+                                        <small className='text-red-600 mt-2'>{errors.price}</small>
+                                        :
+                                        null
+                                }
+                            </div>
                             <div className="flex flex-col w-full">
                                 <label className="mb-2">City Name *</label>
                                 <input
@@ -295,10 +311,13 @@ function Tournamentregistration() {
                                         null
                                 }
                             </div>
+                        </div>
+                        {/*  age_restriction && age_cutoff */}
+                        <div className="flex flex-col md:flex-row  gap-6 my-7 ">
                             <div className="flex space-x-5 items-center  w-full ">
                                 <div className="w-full flex-col">
                                     <label className="">Age Restriction</label>
-                                    <div className="flex justify-start items-center space-x-7 my-4 ">
+                                    <div className="flex justify-center mt-2 items-center bg-white border-2 rounded-lg px-3 w-auto outline-blue-200 border-gray-200 focus: py-[10px] space-x-20 ">
                                         <div className="flex items-center space-x-1">
                                             <input type="radio"
                                                 className="cursor-pointer"
@@ -318,7 +337,7 @@ function Tournamentregistration() {
                                                 name="age_restriction"
                                                 id="yes"
                                                 value="yes"
-                                                onChange={handleagerestriction}
+                                                onChange={handleChange}
                                                 onBlur={handleBlur}
                                             />
                                             <label htmlFor="No">Yes</label>
