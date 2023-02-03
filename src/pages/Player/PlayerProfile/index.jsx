@@ -95,7 +95,7 @@ export default function PlayerProfile() {
             src={player.basicinfo.img}
           />
 
-          <div className="p-2 ">
+          <div className="p-2 space-y-1">
             <h1 className="text-3xl text-center text-gray-900">
               {player.basicinfo.firstName} {player.basicinfo.lastName}
             </h1>
