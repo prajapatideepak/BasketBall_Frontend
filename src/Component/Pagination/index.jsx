@@ -15,7 +15,7 @@ import './pagination.css'
 // <Paginate data={carData} setPaginationData={setPaginationData} itemsPerPage={10} />
 
 
-function Paginate({data, setPaginationData, itemsPerPage}) {
+function Paginate({data, setPaginationData, itemsPerPage = 10}) {
     const [itemOffset, setItemOffset] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [pageCount, setPageCount] = useState(0);
@@ -37,7 +37,7 @@ function Paginate({data, setPaginationData, itemsPerPage}) {
     <div className="w-full flex justify-center">
         <div className="w-full xs:w-4/5 md:w-2/4">
             <Pagination
-                total={data.length}
+                total={pageCount}
                 current={currentPage}
                 onPageChange={(page)=> handlePageClick(page)}
             />

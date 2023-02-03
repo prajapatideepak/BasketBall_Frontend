@@ -5,12 +5,9 @@ import Paginate from '../../../Component/Pagination';
 import { AiOutlineTeam } from 'react-icons/ai';
 
 function TeamsList() {
-
-    //--------pagination variables-------
     const [paginationData, setPaginationData] = React.useState([]);
-    //------------------------------------
 
-    const all_teams = [
+    const [allTeams, setAllTeams] = React.useState([
         {
             team_id: 1001,
             team_logo: '/CBL_Images/basketball_team_logo_1.webp',
@@ -31,8 +28,7 @@ function TeamsList() {
             matches_won: 8,
             matches_lost: 4
         },
-    ]
-    const [allTeams, setAllTeams] = React.useState(all_teams);
+    ]);
 
 
   return (
@@ -56,7 +52,7 @@ function TeamsList() {
                     </div>
             }
             
-            <Paginate data={allTeams} setPaginationData={setPaginationData} itemsPerPage={1} />
+            <Paginate data={allTeams} setPaginationData={setPaginationData} />
         </div>
     </section>
   )
