@@ -28,7 +28,7 @@ function AboutUs() {
                     About us
                 </span>
             </div> */}
-      <div className=" text-center lg:text-left mx-auto px-10 py-12 sm:px-20 sm:py-12 md:px-20 md:py-16 lg:px-24 xl:px-28 2xl:px-32">
+      <div className=" text-center lg:text-left mx-auto px-10 py-12 sm:px-20 sm:py-12 md:px-20 md:py-12 lg:px-20 xl:px-20 2xl:px-32">
         <h1 className="text-4xl text-center ">About us</h1>
         <div className="py-8 ">
           <AboutUsCard key={1} name={1} />

@@ -1,8 +1,10 @@
 import React from "react";
 import Heading from "../../../Component/Heading";
 import MatchCard from "../../../Component/MatchCard";
-
+import TeamCard from "../../../Component/TeamCard";
+import { motion } from "framer-motion";
 export default function PlayerProfile() {
+  const [tab, setTab] = React.useState(1);
   const [currentTab, setCurrentTab] = React.useState(2);
   const match = {
     match_id: 12,
@@ -119,6 +121,7 @@ export default function PlayerProfile() {
               <Heading
                 text={"Player Information"}
                 className="text-2xl text-center  "
+                margin={true}
               />
             </div>
             {/*  */}
@@ -213,19 +216,51 @@ export default function PlayerProfile() {
           </div>
         </div>
       </div>
-      {/* <divs className="w-1/3 py-4">
-        <div className="px-1 w-2/3 mx-auto  py-1 text-white  flex  text-center justify-center items-center mt-2 rounded-full space-x-2 bg-black">
-          <span className="   bg-[#ee6730]  rounded-full  w-1/2 py-2 text-sm shadow-2xl">
-            Last Game
-          </span>
-          <span className=" bg-black  rounded-full  w-1/2 py-2 text-sm shadow-2xl">
-            Next Game
-          </span>
+      {/* new sec */}
+      <div className=":flex">
+        <div className=" p-4 space-y-8  mt-4">
+          <div className=" flex justify-center">
+            <Heading
+              text={"Team"}
+              className={"text-center py-1 px-3 text-3xl"}
+              margin={true}
+            />
+          </div>
+          <div className="flex lg:w-2/3 mx-auto">
+            <TeamCard teamDetails={player.teamDetails} />
+          </div>
         </div>
-        <div className=" px-4 py-2">
-          <MatchCard match={match} />
+        <div className=" py-4">
+          <div className="px-1 text-lg lg:w-1/3 mx-auto  py-1 text-white  flex  text-center justify-center items-center mt-2 rounded-full space-x-2 bg-black">
+            <motion.span
+              animate={{
+                backgroundColor: tab === 1 ? "#ee6730" : "#000000",
+              }}
+              onClick={(e) => setTab(1)}
+              className=" cursor-pointer    rounded-full  w-1/2 py-2 text-sm shadow-2xl"
+            >
+              Past
+            </motion.span>
+            <motion.span
+              animate={{
+                backgroundColor: tab === 1 ? "#000000" : "#ee6730",
+              }}
+              onClick={(e) => setTab(2)}
+              className=" bg-black cursor-pointer  rounded-full  w-1/2 py-2 text-sm shadow-2xl"
+            >
+              Upcomming
+            </motion.span>
+          </div>
+          <div className="   px-2 py-2 player-container w-full flex flex-nowrap gap-8 sm:gap-16 md:gap-20 mt-10 overflow-x-auto ">
+            <MatchCard match={match} />
+            <MatchCard match={match} />
+            <MatchCard match={match} />
+            <MatchCard match={match} />
+            <MatchCard match={match} />
+            <MatchCard match={match} />
+          </div>
         </div>
-      </divs> */}
+      </div>
     </div>
   );
 }
