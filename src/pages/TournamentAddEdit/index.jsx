@@ -5,10 +5,12 @@ import { FaUserPlus } from "react-icons/fa"
 import { MdDelete } from "react-icons/md"
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2'
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import Heading from '../../Component/Heading'
+
 
 function Tournamentregistration() {
-
+    // const location = useLocation();
     const [refereelist, setRefereelist] = React.useState([{ Referee: "" }])
     const [sponsorlist, setsponsorlist] = React.useState([{ Sponsor: "" }])
     const [isDisabled, setIsDisabled] = React.useState(true);
@@ -39,29 +41,28 @@ function Tournamentregistration() {
 
     // ------------ Form Validation ------------ 
     const initialValues = {
-        tournament_name: '',
-        tournament_logo: '',
-        starting_date: '',
-        ending_date: '',
-        tournament_type: '',
-        tournament_category: '',
-        tournament_level: '',
-        city_name: '',
-        about_tournament: '',
-        referee_name: '',
-        referee_mobile: '',
-        sponsor_name: '',
-        sponsor_mobile: '',
-        age_restriction: 'no',
-        age_cutoff: 'Under 21'
+        tournament_name: location?.state?.isEdit ? location?.state?.tournament_name : '',
+        tournament_logo: location?.state?.isEdit ? location?.state?.tournament_logo : '',
+        starting_date: location?.state?.isEdit ? location?.state?.starting_date : '',
+        ending_date: location?.state?.isEdit ? location?.state?.ending_date : '',
+        tournament_type: location?.state?.isEdit ? location?.state?.tournament_type : '',
+        tournament_category: location?.state?.isEdit ? location?.state?.tournament_category : '',
+        tournament_level: location?.state?.isEdit ? location?.state?.tournament_level : '',
+        city_name: location?.state?.isEdit ? location?.state?.city_name : '',
+        about_tournament: location?.state?.isEdit ? location?.state?.about_tournament : '',
+        referee_name: location?.state?.isEdit ? location?.state?.referee_name : '',
+        referee_mobile: location?.state?.isEdit ? location?.state?.referee_mobile : '',
+        sponsor_name: location?.state?.isEdit ? location?.state?.sponsor_name : '',
+        sponsor_mobile: location?.state?.isEdit ? location?.state?.sponsor_mobile : '',
+        age_restriction: location?.state?.isEdit ? location?.state?.age_restriction : 'no',
+        age_cutoff: location?.state?.isEdit ? location?.state?.age_cutoff : 'Under 21',
+        price: location?.state?.isEdit ? location?.state?.price : ''
 
     }
 
     const validationSchema = Yup.object({
         tournament_name: Yup.string().matches(/^[a-zA-Z]+$/, "Please enter only characters").min(2, "Team name must be at least 2 characters").max(25, "Team name should not be more than 25 characters").required("Name is required"),
         city_name: Yup.string().matches(/^[a-zA-Z]+$/, "Please enter only characters").required("City name is required"),
-        // starting_date: Yup.string().matches(new Date(), "Select correct date   ").required("Starting Date is required"),
-        // ending_date: Yup.string().matches(new Date(), "Select correct date   ").required("Ending Date is required"),
         tournament_type: Yup.string().required("Tournament Type is required"),
         tournament_category: Yup.string().required("Tournament Category is required"),
         tournament_level: Yup.string().required("Tournament Level is required"),
@@ -88,7 +89,7 @@ function Tournamentregistration() {
                 if (result.isConfirmed) {
                     const response = "Create";
                     if (response) {
-                        navigate('/');
+                        navigate('/tournaments');
                         toast.success('Tournament Create Successfully!')
                     }
                     else {
@@ -105,21 +106,17 @@ function Tournamentregistration() {
         console.log(gettodatevalue, "gettodatevalue")
     }
 
-    const handleagerestriction = (e) => {
-        const age_restriction = e.target.value;
-        setIsDisabled(false)
-        console.log(age_restriction, "age_restriction")
-    }
+
 
     return (
         <>
-            <section className="py-8">
-                <div className='heading-container  flex justify-center items-center h-24 sm:h-32 md:h-48 '>
-                    <span className='text-xl sm:text-2xl md:text-3xl lg:text-5xl font-semibold text-[#ee6730]'>
-                        Tournament Registration
-                    </span>
+            <section className="min-h-screen">
+                <div className='heading-container flex justify-center items-center h-24 sm:h-32 md:h-48'>
+                    <div className=''>
+                        <Heading text={location?.state?.isEdit ? 'Edit Tournament' : 'Tournament Registration'} />
+                    </div>
                 </div>
-                <div className='mx-auto px-10 py-12 sm:px-20 sm:py-12 md:px-20 md:py-16 2xl:py-0 lg:px-24 xl:px-28 2xl:px-32'>
+                <div className='mx-auto px-10 py-12 sm:px-20 sm:py-12 md:px-20 md:py-16 lg:px-24 xl:px-28 2xl:px-32'>
                     <form action="" onSubmit={handleSubmit}>
                         {/* -----------------------Tounament_Details---------------------------*/}
                         <div className=''>
@@ -274,8 +271,27 @@ function Tournamentregistration() {
                                 }
                             </div>
                         </div>
-                        {/* City_name && age_restriction && age_cutoff */}
-                        <div className="flex flex-col md:flex-row  gap-6 my-7 ">
+                        {/* City name && Price Money */}
+                        <div className="flex flex-col md:flex-row  2 gap-6 my-7 ">
+                            <div className="flex flex-col w-full">
+                                <label className="mb-2">Price Money</label>
+                                <input
+                                    className="w-full outline-blue-200 rounded-lg border-2 border-gray-200 py-3 px-3 text-sm"
+                                    placeholder="Enter Price Money"
+                                    type="text"
+                                    name="price"
+                                    id="price"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                />
+                                {
+                                    errors.price && touched.price
+                                        ?
+                                        <small className='text-red-600 mt-2'>{errors.price}</small>
+                                        :
+                                        null
+                                }
+                            </div>
                             <div className="flex flex-col w-full">
                                 <label className="mb-2">City Name *</label>
                                 <input
@@ -295,10 +311,13 @@ function Tournamentregistration() {
                                         null
                                 }
                             </div>
+                        </div>
+                        {/*  age_restriction && age_cutoff */}
+                        <div className="flex flex-col md:flex-row  gap-6 my-7 ">
                             <div className="flex space-x-5 items-center  w-full ">
                                 <div className="w-full flex-col">
                                     <label className="">Age Restriction</label>
-                                    <div className="flex justify-start items-center space-x-7 my-4 ">
+                                    <div className="flex justify-center mt-2 items-center bg-white border-2 rounded-lg px-3 w-auto outline-blue-200 border-gray-200 focus: py-[10px] space-x-20 ">
                                         <div className="flex items-center space-x-1">
                                             <input type="radio"
                                                 className="cursor-pointer"
@@ -318,7 +337,7 @@ function Tournamentregistration() {
                                                 name="age_restriction"
                                                 id="yes"
                                                 value="yes"
-                                                onChange={handleagerestriction}
+                                                onChange={handleChange}
                                                 onBlur={handleBlur}
                                             />
                                             <label htmlFor="No">Yes</label>
@@ -418,14 +437,14 @@ function Tournamentregistration() {
                                         }
                                     </div>
                                     {refereelist.length - 1 === index && (
-                                        <div className="flex lg:justify-end items-center justify-center lg:items-end w-full" onClick={handleadd}>
-                                            <div className="bg-green-500 relative inline-flex items-center justify-center px-3 py-2 hover:text-green-500 border-2 hover:border-green-500 overflow-hidden text-white
+                                        <div className="flex justify-center items-center lg:justify-end lg:items-end w-full" onClick={handleaddsponsor}>
+                                            <div className="bg-green-500 border-2 hover:border-green-500 hover:text-green-500 relative inline-flex items-center justify-center px-3 py-2 overflow-hidden text-white
                                                      rounded-lg cursor-pointer group">
                                                 <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-white rounded-lg group-hover:w-full group-hover:h-56"></span>
                                                 <span className="relative flex items-center space-x-2 ">
                                                     <FaUserPlus className="text-xl" />
                                                     <h1 className="text-sm">
-                                                        Add Referee
+                                                        Add Sponsor
                                                     </h1>
                                                 </span>
                                             </div>
@@ -503,22 +522,35 @@ function Tournamentregistration() {
 
 
                         {/* Clear_Button && Submit_Button */}
-                        <div className="w-full flex justify-center md:justify-end lg:justify-end py-5 lg:py-6">
-                            <button
-                                type="reset"
-                                className="bg-[#ee6730] relative inline-flex items-center justify-center px-8 py-2 overflow-hidden text-white rounded-lg cursor-pointer group mr-3"
-                                onClick={() => { resetForm() }}
-                            >
-                                <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-slate-900 rounded-lg group-hover:w-full group-hover:h-56"></span>
-                                <span className="relative">Clear</span>
-                            </button>
+                        <div className="w-full flex justify-end mt-5 sm:mt-10">
+                            {
+                                location?.state?.isEdit
+                                    ?
+                                    <button
+                                        type="button"
+                                        className="bg-[#ee6730] relative inline-flex items-center justify-center px-7 py-2 overflow-hidden text-white rounded-lg cursor-pointer group mr-3"
+                                        onClick={() => navigate(-1)}
+                                    >
+                                        <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-slate-900 rounded-lg group-hover:w-full group-hover:h-56"></span>
+                                        <span className="relative">Cancel</span>
+                                    </button>
+                                    :
+                                    <button
+                                        type="reset"
+                                        className="bg-[#ee6730] relative inline-flex items-center justify-center px-8 py-2 overflow-hidden text-white rounded-lg cursor-pointer group mr-3"
+                                        onClick={() => { resetForm(); setSelectedPlayers([]) }}
+                                    >
+                                        <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-slate-900 rounded-lg group-hover:w-full group-hover:h-56"></span>
+                                        <span className="relative">Clear</span>
+                                    </button>
+                            }
                             <button
                                 type="submit"
                                 className="bg-slate-900 relative inline-flex items-center justify-center px-6 py-2 overflow-hidden text-white rounded-lg cursor-pointer group"
                                 onClick={handleSubmit}
                             >
                                 <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#ee6730] rounded-lg group-hover:w-full group-hover:h-56"></span>
-                                <span className="relative">SUBMIT</span>
+                                <span className="relative">{location?.state?.isEdit ? "UPDATE" : "SUBMIT"}</span>
                             </button>
                         </div>
                     </form>

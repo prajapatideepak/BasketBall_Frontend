@@ -9,7 +9,7 @@ import Gallery from "../pages/Gallery";
 import News from "../pages/News";
 import Player from "../pages/Player";
 import Role from "../pages/Role";
-import Tournamentregistration from '../pages/Tournament'
+import Tournamentregistration from '../pages/TournamentAddEdit'
 import VisitorProfile from "../pages/Profile";
 import Tournaments from '../pages/TournamentsList'
 import TournamentsOfOrganizer from '../pages/TournamentsOfOrganizer';
