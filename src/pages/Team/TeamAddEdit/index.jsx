@@ -11,24 +11,7 @@ import Heading from '../../../Component/Heading'
 
 function TeamAddEdit() {
   const navigate = useNavigate();
-  // const location = useLocation();
-  const location ={
-    // state:{
-    //   team_id: 123,
-    //   team_name: 'Jetha ke jabaaz',
-    //   about_team: 'Lorem ipsum dolor sit amet, consectetur adip, Lorem, Lorem ipsum dolor sit amet, consectetur adip, Lorem',
-    //   coach_name: 'sadik',
-    //   coach_mobile: '8777643526',
-    //   assistant_coach_name: 'moin',
-    //   assistant_coach_mobile: '9999999999',
-    //   players: [
-    //     {id: 1, name:'Sadikali karadiya', position:'point guard', isEditable: false},
-    //     {id: 2, name:'Deepak Prajapati', position:'center', isEditable: false},
-    //   ],
-    //   captain: 1,
-    //   isEdit: true
-    // }
-  }
+  const location = useLocation();
 
   const initialValues={
     team_name: location?.state?.isEdit ? location?.state?.team_name : '',

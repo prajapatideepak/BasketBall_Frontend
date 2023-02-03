@@ -138,6 +138,26 @@ function TeamProfileDetail() {
         }
     }
 
+    const handleEdit = () => {
+        navigate('/team/add-edit',
+            {state: {
+                isEdit:true, 
+                players:[
+                    {id: 1, name:'Sadikali karadiya', position:'point guard', isEditable: false},
+                    {id: 2, name:'Moin', position:'center', isEditable: false}
+                ],
+                team_name: teamDetails.team_name,
+                team_id: teamDetails.team_id,
+                about_team: teamDetails.description,
+                coach_name: teamDetails.coach_name,
+                coach_mobile: teamDetails.coach_mobile,
+                assistant_coach_name: teamDetails.assistant_coach_name,
+                assistant_coach_mobile: teamDetails.assistant_coach_mobile,
+                captain: 1
+            }}
+        )
+    }
+
     const navigateToTournamentProfile = (tournament_id) => {
         navigate(`/tournament-profile/${tournament_id}`);
     }
@@ -223,7 +243,7 @@ function TeamProfileDetail() {
                                     ?
                                         <div className='mt-2 w-full flex justify-center lg:justify-end items-center'>
                                             <div className="w-full sm:w-2/4 lg:w-full">
-                                                <Button text="Edit Team" onClick={()=>{navigate('/team/add-edit')}} />
+                                                <Button text="Edit Team" onClick={handleEdit} />
                                             </div>
                                         </div>
                                     :
