@@ -6,14 +6,14 @@ import {BsCalendar2Week} from 'react-icons/bs'
 function TournamentCard({tournament}) {
   const navigate = useNavigate();
 
-  const month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
   ];
 
   let startDate = new Date(tournament.start_date)
   let endDate = new Date(tournament.end_date)
 
-  startDate = `${startDate.getDate()} ${month[endDate.getMonth()]} ${startDate.getFullYear()}`
-  endDate = `${endDate.getDate()} ${month[endDate.getMonth()]} ${endDate.getFullYear()}`
+  startDate = `${startDate.getDate()} ${months[endDate.getMonth()]} ${startDate.getFullYear()}`
+  endDate = `${endDate.getDate()} ${months[endDate.getMonth()]} ${endDate.getFullYear()}`
 
   const handleClick = () =>{
     navigate(`/Tournament-details/${tournament.tournament_id}`)

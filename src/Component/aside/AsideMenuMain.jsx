@@ -29,8 +29,7 @@ function AsideMenuMain() {
               </Link>
             </li>
             <li className="nav-item">
-            <Link className="Link" to={"/team-profile"}>
-            <Link className="Link" to={"/team-profile"}>
+            <Link className="Link" to={"/team/profile"}>
                 <h1 className="relative text-white text-base md:text-base lg:text-base xl:text-lg  my-5 md:my-0">
                   Teams
                 </h1>
@@ -86,8 +85,7 @@ function AsideMenuMain() {
               </Link>
             </li>
             <li className="nav-item md:hidden" onClick={() => setOpen(!open)}>
-              <Link className="Link" to={"/team-profile"}>
-            <Link className="Link" to={"/team-profile"}>
+              <Link className="Link" to={"/team/profile"}>
                 <h1 className="relative text-white text-base md:text-base lg:text-base xl:text-lg my-[16px] lg:my-0">
                   Teams
                 </h1>

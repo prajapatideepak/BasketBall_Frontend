@@ -3,12 +3,14 @@ import { useParams, useNavigate } from 'react-router-dom';
 import PlayerCard from './PlayerCard'
 import './TeamProfileDetail.css'
 import { AxiosError } from 'axios';
-import Button from '../../Component/Button'
-import MatchCard from './MatchCard'
+import Button from '../../../Component/Button'
+import MatchCard from '../../../Component/MatchCard'
 
 function TeamProfileDetail() {
     const params = useParams();
     const navigate = useNavigate();
+
+    const isPublicView = false;
 
     const [enrolledTournaments, setEntrolledtournaments] = React.useState([
         {
@@ -68,7 +70,9 @@ function TeamProfileDetail() {
             team_2_score: 22,
             duration: 45,
             address: 'Amber tower, Sarkhej, Ahmedabad 380055',
-            isSuccessfull: 1,
+            is_successfull: 1,
+            time: '9:45 AM',
+            won_team: 'Jetha Ke Jabaaz',
             date: '12/12/2022'
         },
         {
@@ -82,7 +86,9 @@ function TeamProfileDetail() {
             team_2_score: 22,
             duration: 45,
             address: 'Amber tower, Sarkhej, Ahmedabad 380055',
-            isSuccessfull: 0,
+            is_successfull: 0,
+            time: '9:45 AM',
+            won_team: '',
             date: '12/12/2022'
         },
         {
@@ -96,7 +102,9 @@ function TeamProfileDetail() {
             team_2_score: 22,
             duration: 45,
             address: 'Amber tower, Sarkhej, Ahmedabad 380055',
-            isSuccessfull: 0,
+            is_successfull: 0,
+            time: '9:45 AM',
+            won_team: '',
             date: '12/12/2022'
         },
         {
@@ -110,7 +118,9 @@ function TeamProfileDetail() {
             team_2_score: 22,
             duration: 45,
             address: 'Amber tower, Sarkhej, Ahmedabad 380055',
-            isSuccessfull: 0,
+            is_successfull: 0,
+            time: '9:45 AM',
+            won_team: '',
             date: '12/12/2022'
         },
     ]
@@ -145,10 +155,10 @@ function TeamProfileDetail() {
         let past = []
         let upcoming = []
         allMatches.map((match)=>{
-            if(match.isSuccessfull == 1){
+            if(match.is_successfull == 1){
                 past.push(match)
             }
-            else if(match.isSuccessfull == 0){
+            else if(match.is_successfull == 0){
                 upcoming.push(match)
             }
         })
@@ -190,7 +200,7 @@ function TeamProfileDetail() {
                                         </p>
                                     </div>
                                 </div>
-                                <div className="flex flex-col text-xs xs:text-sm sm:text-base sm:flex-row gap-4">
+                                <div className={`flex ${isPublicView ? 'flex-col sm:max-lg:flex-row sm:max-lg:gap-4' : 'flex-col sm:flex-row gap-4' } text-xs xs:text-sm sm:text-base`}>
                                     <div className="flex flex-1 flex-col mt-5">
                                         <label className="mb-2 text-gray-400">Coach Mobile</label>
                                         <div className="border-2 border-orange-100 px-2 py-2 rounded-lg bg-white font-medium">
@@ -208,22 +218,28 @@ function TeamProfileDetail() {
                                         </div>
                                     </div>
                                 </div>
-                                <div className='mt-2 w-full flex justify-center lg:justify-end items-center'>
-                                    <div className="w-full sm:w-2/4 lg:w-full">
-                                        <Button text="Edit Team" onClick={()=>{navigate('/team-add-edit')}} />
-                                    </div>
-                                </div>
+                                {
+                                    !isPublicView
+                                    ?
+                                        <div className='mt-2 w-full flex justify-center lg:justify-end items-center'>
+                                            <div className="w-full sm:w-2/4 lg:w-full">
+                                                <Button text="Edit Team" onClick={()=>{navigate('/team/add-edit')}} />
+                                            </div>
+                                        </div>
+                                    :
+                                        null
+                                }
                             </div>
                             <div className="right-container lg:order-2 order-1 flex flex-1 flex-col">
                                 <div className="flex flex-col text-xs xs:text-sm sm:text-base">
                                     <label className="mb-2 text-gray-400">About Team</label>
-                                    <div className="border-2 border-orange-100 px-2 py-2 rounded-lg bg-white h-32 lg:h-[328px] overflow-y-auto">
+                                    <div className={`border-2 border-orange-100 px-2 py-2 rounded-lg bg-white ${isPublicView ? 'h-32 lg:h-[328px]' : 'h-32 lg:h-[328px]' } overflow-y-auto`}>
                                         {teamDetails.description}
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div className="flex justify-center items-center">
+                        <div className="flex justify-center items-center xs:mt-8 sm:mt-10">
                             <div className='flex flex-row flex-wrap xl:flex-col justify-center items-center gap-6 lg:gap-10'>
                                 <div 
                                     className='w-40 md:w-44 lg:w-48 flex flex-col justify-center items-center bg-white p-3 rounded-lg hover:bg-[#ee6730] group'
@@ -292,7 +308,7 @@ function TeamProfileDetail() {
                         <h3 className='text-xl sm:text-2xl font-semibold text-[#ee6730] mt-8'>Tournament Enrollment:</h3>
                     </div>
                     <div className="table-container w-full flex lg:justify-center overflow-x-auto mt-5 ">
-                        <table className="min-w-[750px] lg:w-full xl:w-3/4 mt-2 rounded-md overflow-hidden sm:text-base text-xs xs:text-sm">
+                        <table className="whitespace-nowrap md:min-w-[750px] md:w-full xl:w-3/4 mt-2 rounded-md overflow-hidden sm:text-base text-xs xs:text-sm">
                             <thead className='bg-gray-700'>
                                 <tr>
                                     <th className="pl-5 border whitespace-nowrap pr-2 py-3 text-sm text-gray-300 uppercase border-gray-700 whitespace-nowrap font-semibold text-left sm:text-base text-xs xs:text-sm">
@@ -310,9 +326,15 @@ function TeamProfileDetail() {
                                     <th className="border whitespace-nowrap px-2 py-3 text-sm text-gray-300 uppercase border-gray-700 whitespace-nowrap font-semibold text-left sm:text-base text-xs xs:text-sm">
                                         City
                                     </th>
-                                    <th className="border whitespace-nowrap px-2 py-3 text-sm text-gray-300 uppercase border-gray-700 whitespace-nowrap font-semibold text-left sm:text-base text-xs xs:text-sm">
-                                        Action
-                                    </th>
+                                    {
+                                        !isPublicView
+                                        ?
+                                            <th className="border whitespace-nowrap px-2 py-3 text-sm text-gray-300 uppercase border-gray-700 whitespace-nowrap font-semibold text-left sm:text-base text-xs xs:text-sm">
+                                                Action
+                                            </th>
+                                        :
+                                            null
+                                    }
                                 </tr>
                             </thead>
                             <tbody className="bg-white">
@@ -334,10 +356,16 @@ function TeamProfileDetail() {
                                         <td className='whitespace-nowrap px-2'>{item.start_date}</td>
                                         <td className='whitespace-nowrap px-2'>{item.end_date}</td>
                                         <td className='whitespace-nowrap px-2'>{item.city}</td>
-                                        <td className='whitespace-nowrap px-2'>
-                                            {/* if tournament started then disable it */}
-                                            <button className='bg-red-500 text-white px-2 py-0.5 rounded-md hover:opacity-60' onClick={()=>handleUnenrollTournament(item.id)}>Unenroll</button>
-                                        </td>
+                                        {
+                                            !isPublicView
+                                            ?
+                                                <td className='whitespace-nowrap px-2'>
+                                                    {/* if tournament started then disable it */}
+                                                    <button className='bg-red-500 text-white px-2 py-0.5 rounded-md hover:opacity-60' onClick={()=>handleUnenrollTournament(item.id)}>Unenroll</button>
+                                                </td>
+                                            :
+                                                null
+                                        }
                                     </tr>
                                     )
                                 })

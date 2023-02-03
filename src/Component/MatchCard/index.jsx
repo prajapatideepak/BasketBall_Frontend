@@ -7,11 +7,18 @@ function MatchCard({match}) {
   const handleClick = () =>{
     navigate(`/match-details/${match.match_id}`)
   }
-  
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+  ];
+
+  let match_date = new Date(match.date)
+  match_date = `${match_date.getDate()} ${months[match_date.getMonth()]} ${match_date.getFullYear()}`
+
+  // const match_time
+
   return (
     <>
-      <div className="relative min-w-[260px] xs:min-w-[320px] sm:min-w-[350px] md:min-w-[380px] max-w-[440px] h-[190px] sm:h-[200px] md:h-[230px] group rounded-lg">
-        <div className="absolute transition-all duration-300 ease-in-out cursor-pointer w-full h-full p-5 bg-white shadow-lg flex flex-col justify-center items-center rounded-lg" onClick={handleClick}>
+      <div className="relative min-w-[260px] xs:min-w-[320px] sm:min-w-[350px] md:min-w-[380px] max-w-[440px] h-[190px] sm:h-[200px] md:h-[230px] border-0 hover:border-2 hover:border-gray-400 hover:border-dashed group rounded-lg">
+        <div className="absolute transition-all duration-300 ease-in-out cursor-pointer top-[-2px] left-[-2px] w-full h-full group-hover:left-[-10px] group-hover:top-[-10px] hover:left-[-10px] hover:top-[-10px] p-5 bg-white shadow-lg flex flex-col justify-center items-center rounded-lg" onClick={handleClick}>
             <div className='text-center w-full'>
               <p className="pb-3 text-gray-700 text-xs xs:text-sm sm:text-base capitalize font-medium">{match.tournament_name}</p>
             </div>
@@ -38,13 +45,27 @@ function MatchCard({match}) {
                 </div>
               </div>
             </div>
-            <div className='w-full text-center'>
-              <p className="pt-3 text-gray-500 text-xs xs:text-sm sm:text-base">{match.date}</p>
-            </div>
+            {
+              match.is_successfull
+              ?
+                <div className='w-full text-center'>
+                  <p className="pt-3 text-gray-500 text-xs xs:text-sm sm:text-base">
+                    <span className="text-green-600 font-medium">{match.won_team} </span>
+                    won the match
+                  </p>
+                </div>
+              :
+                <div className='w-full text-center'>
+                  <p className="pt-3 text-gray-500 text-xs xs:text-sm sm:text-base">{match_date}
+                    <span className="ml-2 font-medium">{match.time}</span>
+                  </p>
+                </div>
+            }
         </div>
       </div>
     </>
   )
 }
+
 
 export default MatchCard
