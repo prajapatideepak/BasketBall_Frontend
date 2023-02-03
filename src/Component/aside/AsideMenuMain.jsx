@@ -5,18 +5,19 @@ import { AiFillInstagram } from "react-icons/ai";
 import { FaFacebookSquare } from "react-icons/fa";
 import { AiOutlineTwitter } from "react-icons/ai";
 import DropDownmenu from "./DropDownmenu";
-import { NavLink, Link, Outlet } from "react-router-dom";
+import { NavLink, Link, Outlet , useNavigate } from "react-router-dom";
 
 function AsideMenuMain() {
   const [open, setOpen] = React.useState(false);
+  const navigate = useNavigate();
+
 
   return (
     <div className="w-full relative">
       <div className="py-3 bg-black  px-5 lg:px-9 flex sticky top-0 items-center justify-between w-full z-[9999]">
-          <div className="">
-            <h1 className="font-bold text-3xl font-mono text-white">
-              The<span className="text-[#ee6730]">CBL</span>
-            </h1>
+         
+          <div className="w-[18%] sm:w-[10%] md:w-[8%] xl:w-[6%] 2xl:w-[4%] ">
+          <img src='/CBL_Images/logo.png' alt="" className="cursor-pointer" onClick={()=>{navigate('/')}} />
           </div>
           <div className="hidden md:block">
             <ul className="items-center flex flex-col md:flex-row justify-start lg:justify-center md:space-x-5 lg:space-x-8">

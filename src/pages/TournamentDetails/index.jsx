@@ -230,7 +230,7 @@ const TournamentDetails = () => {
                   ?
                   Tournamentdetails.sponsor.map((item, index) => {
                     return (
-                      <div className="flex  flex-col sm:flex-row gap-5 shadow-xl hover:shadow-[#ea5a2e6d] hover:shadow-lg duration-150 text-[#ea592e] justify-center items-center  px-5 py-4 rounded-lg bg-white capitalize font-medium">
+                      <div className="flex  flex-col sm:flex-row gap-5 shadow-md shadow-[#ea5a2e29] duration-150 text-[#ea592e] justify-center items-center  px-5 py-4 rounded-lg bg-white capitalize font-medium">
                         <img src={item.sponsor_logo} alt="" className='w-20 shadow-2xl border border-[#ea592e] rounded-full' />
                         <p>
                           {item.sponsor_name == '' ? '--' : item.sponsor_name}
