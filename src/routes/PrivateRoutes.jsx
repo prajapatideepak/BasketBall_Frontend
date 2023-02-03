@@ -1,9 +1,7 @@
 import { lazy } from 'react'
 import { Route, Routes, Navigate } from 'react-router-dom'
 import PrivateLayout from '../layouts/PrivateLayout'
-import TeamAddEdit from '../pages/TeamAddEdit'
-import TeamProfile from '../pages/TeamProfile'
-import TeamProfileDetail from '../pages/TeamProfileDetail'
+import Team from '../pages/Team'
 import AboutUs from "../pages/AboutUs";
 import ContactUs from "../pages/ContactUs";
 import Dashboard from "../pages/Dashboard";
@@ -28,9 +26,7 @@ const PrivateRoutes = () => {
         <Route path="news/*" element={<News />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="player/*" element={<Player />} />
-        <Route path='/team-add-edit' element={<TeamAddEdit />}/>
-        <Route path='/team-profile' element={<TeamProfile />}/>
-        <Route path='/team-profile-detail/:team_id' element={<TeamProfileDetail />}/>
+        <Route path='team/*' element={<Team />}/>
         <Route path="/contact" element={<ContactUs />} />
         <Route index element={<Dashboard />} />
       </Route>

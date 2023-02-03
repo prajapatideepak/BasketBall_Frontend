@@ -3,8 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import PlayerCard from './PlayerCard'
 import './TeamProfileDetail.css'
 import { AxiosError } from 'axios';
-import Button from '../../Component/Button'
-import MatchCard from './MatchCard'
+import Button from '../../../Component/Button'
+import MatchCard from '../../../Component/MatchCard'
 
 function TeamProfileDetail() {
     const params = useParams();
@@ -70,7 +70,9 @@ function TeamProfileDetail() {
             team_2_score: 22,
             duration: 45,
             address: 'Amber tower, Sarkhej, Ahmedabad 380055',
-            isSuccessfull: 1,
+            is_successfull: 1,
+            time: '9:45 AM',
+            won_team: 'Jetha Ke Jabaaz',
             date: '12/12/2022'
         },
         {
@@ -84,7 +86,9 @@ function TeamProfileDetail() {
             team_2_score: 22,
             duration: 45,
             address: 'Amber tower, Sarkhej, Ahmedabad 380055',
-            isSuccessfull: 0,
+            is_successfull: 0,
+            time: '9:45 AM',
+            won_team: '',
             date: '12/12/2022'
         },
         {
@@ -98,7 +102,9 @@ function TeamProfileDetail() {
             team_2_score: 22,
             duration: 45,
             address: 'Amber tower, Sarkhej, Ahmedabad 380055',
-            isSuccessfull: 0,
+            is_successfull: 0,
+            time: '9:45 AM',
+            won_team: '',
             date: '12/12/2022'
         },
         {
@@ -112,7 +118,9 @@ function TeamProfileDetail() {
             team_2_score: 22,
             duration: 45,
             address: 'Amber tower, Sarkhej, Ahmedabad 380055',
-            isSuccessfull: 0,
+            is_successfull: 0,
+            time: '9:45 AM',
+            won_team: '',
             date: '12/12/2022'
         },
     ]
@@ -147,10 +155,10 @@ function TeamProfileDetail() {
         let past = []
         let upcoming = []
         allMatches.map((match)=>{
-            if(match.isSuccessfull == 1){
+            if(match.is_successfull == 1){
                 past.push(match)
             }
-            else if(match.isSuccessfull == 0){
+            else if(match.is_successfull == 0){
                 upcoming.push(match)
             }
         })
@@ -215,7 +223,7 @@ function TeamProfileDetail() {
                                     ?
                                         <div className='mt-2 w-full flex justify-center lg:justify-end items-center'>
                                             <div className="w-full sm:w-2/4 lg:w-full">
-                                                <Button text="Edit Team" onClick={()=>{navigate('/team-add-edit')}} />
+                                                <Button text="Edit Team" onClick={()=>{navigate('/team/add-edit')}} />
                                             </div>
                                         </div>
                                     :
