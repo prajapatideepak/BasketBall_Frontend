@@ -1,6 +1,6 @@
 import React from "react";
 import Heading from "../../../Component/Heading";
-import MatchCard from "../../TeamProfileDetail/MatchCard";
+import MatchCard from "../../../Component/MatchCard";
 
 export default function PlayerProfile() {
   const [currentTab, setCurrentTab] = React.useState(2);
