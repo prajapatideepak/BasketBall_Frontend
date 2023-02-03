@@ -13,6 +13,8 @@ import Tournamentregistration from '../pages/TournamentAddEdit'
 import VisitorProfile from "../pages/Profile";
 import Tournaments from '../pages/TournamentsList'
 import TournamentsOfOrganizer from '../pages/TournamentsOfOrganizer';
+import Registration from '../pages/Registration';
+import TournamentDetails from '../pages/TournamentDetails';
 
 const PrivateRoutes = () => {
   return (
@@ -20,6 +22,9 @@ const PrivateRoutes = () => {
       <Route element={<PrivateLayout />}>
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/tournament-registration" element={<Tournamentregistration />} />
+        <Route path="/tournament-add-edit" element={<Tournamentregistration />} />
+        <Route path="/Tournament-details/:tournament_id" element={<TournamentDetails />} />
+        <Route path="/registration" element={<Registration />} />
         <Route path="/tournaments-organizer" element={<TournamentsOfOrganizer />} />
         <Route path="/tournaments" element={<Tournaments />} />
         <Route path="/Visitor-profile" element={<VisitorProfile />} />
