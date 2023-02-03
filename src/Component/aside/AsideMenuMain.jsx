@@ -5,18 +5,24 @@ import { AiFillInstagram } from "react-icons/ai";
 import { FaFacebookSquare } from "react-icons/fa";
 import { AiOutlineTwitter } from "react-icons/ai";
 import DropDownmenu from "./DropDownmenu";
-import { NavLink, Link, Outlet } from "react-router-dom";
+import { NavLink, Link, Outlet, useNavigate } from "react-router-dom";
 
 function AsideMenuMain() {
   const [open, setOpen] = React.useState(false);
+  const navigate = useNavigate();
 
   return (
     <div className="w-full relative">
-      <div className="py-3 bg-black h-[70px] px-5 lg:px-9 flex sticky top-0 items-center justify-between w-full z-[9999]">
-        <div className="">
-          <h1 className="font-bold text-3xl font-mono text-white">
-            The<span className="text-[#ee6730]">CBL</span>
-          </h1>
+      <div className="py-3 bg-black  px-5 lg:px-9 flex sticky top-0 items-center justify-between w-full z-[9999]">
+        <div className="w-[18%] sm:w-[10%] md:w-[8%] xl:w-[6%] 2xl:w-[4%] ">
+          <img
+            src="/CBL_Images/logo.png"
+            alt=""
+            className="cursor-pointer"
+            onClick={() => {
+              navigate("/");
+            }}
+          />
         </div>
         <div className="hidden md:block">
           <ul className="items-center flex flex-col md:flex-row justify-start lg:justify-center md:space-x-5 lg:space-x-8">
@@ -28,7 +34,7 @@ function AsideMenuMain() {
               </Link>
             </li>
             <li className="nav-item">
-            <Link className="Link" to={"/team/list"}>
+              <Link className="Link" to={"/team/list"}>
                 <h1 className="relative text-white text-base md:text-base lg:text-base xl:text-lg  my-5 md:my-0">
                   Teams
                 </h1>
@@ -37,7 +43,7 @@ function AsideMenuMain() {
             <li className="nav-item">
               <Link className="Link" to={"/tournaments"}>
                 <h1 className="relative text-white text-base md:text-base lg:text-base xl:text-lg  my-5 md:my-0">
-                  Tournament
+                  Tournaments
                 </h1>
               </Link>
             </li>
@@ -56,7 +62,7 @@ function AsideMenuMain() {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="Link" to={"/Registration"}>
+              <Link className="Link" to={"/registration"}>
                 <h1 className="relative text-white text-base md:text-base lg:text-base xl:text-lg  my-4 md:my-0">
                   Registration
                 </h1>
@@ -141,7 +147,7 @@ function AsideMenuMain() {
               </Link>
             </li>
             <li className="nav-item md:hidden " onClick={() => setOpen(!open)}>
-              <Link className="Link" to={"/Registration"}>
+              <Link className="Link" to={"/role"}>
                 <h1 className="relative text-white text-base md:text-base lg:text-base xl:text-lg my-[16px] lg:my-0">
                   Registration
                 </h1>
@@ -149,9 +155,9 @@ function AsideMenuMain() {
             </li>
           </ul>
           <div className="flex justify-center space-x-7 pt-10">
-            <AiFillInstagram className="text-white text-[26px] cursor-pointer" />
-            <FaFacebookSquare className="text-white text-[26px] cursor-pointer" />
-            <AiOutlineTwitter className="text-white text-[26px] cursor-pointer" />
+            <AiFillInstagram className=" rounded-full hover:text-white hover:bg-[#ee6730] text-[26px] bg-white text-[#ee6730] h-10 w-10 p-2 duration-200 hover:scale-110 cursor-pointer" />
+            <FaFacebookSquare className=" rounded-full hover:text-white hover:bg-[#ee6730] text-[26px] bg-white text-[#ee6730] h-10 w-10 p-2 duration-200 hover:scale-110 cursor-pointer" />
+            <AiOutlineTwitter className=" rounded-full hover:text-white hover:bg-[#ee6730] text-[26px] bg-white text-[#ee6730] h-10 w-10 p-2 duration-200 hover:scale-110 cursor-pointer" />
           </div>
         </div>
 

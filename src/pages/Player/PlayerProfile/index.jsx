@@ -121,6 +121,7 @@ export default function PlayerProfile() {
               <Heading
                 text={"Player Information"}
                 className="text-2xl text-center  "
+                margin={true}
               />
             </div>
             {/*  */}
@@ -222,6 +223,7 @@ export default function PlayerProfile() {
             <Heading
               text={"Team"}
               className={"text-center py-1 px-3 text-3xl"}
+              margin={true}
             />
           </div>
           <div className="flex lg:w-2/3 mx-auto">

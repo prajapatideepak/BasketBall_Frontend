@@ -9,20 +9,29 @@ import Gallery from "../pages/Gallery";
 import News from "../pages/News";
 import Player from "../pages/Player";
 import Role from "../pages/Role";
-import Tournamentregistration from "../pages/Tournament";
+import Tournamentregistration from "../pages/TournamentAddEdit";
 import VisitorProfile from "../pages/Profile";
 import Tournaments from "../pages/TournamentsList";
 import AfterRole from "../pages/RegisterAfterLogin";
-import TournamentsOfOrganizer from '../pages/TournamentsOfOrganizer';
+import TournamentsOfOrganizer from "../pages/TournamentsOfOrganizer";
+import TournamentDetails from "../pages/TournamentDetails";
 
 const PrivateRoutes = () => {
   return (
     <Routes>
       <Route element={<PrivateLayout />}>
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/tournament-registration" element={<Tournamentregistration />} />
-        <Route path="/tournaments-organizer" element={<TournamentsOfOrganizer />} />
+        <Route
+          path="/tournament-registration"
+          element={<Tournamentregistration />}
+        />
+        <Route
+          path="/tournaments-organizer"
+          element={<TournamentsOfOrganizer />}
+        />
         <Route path="/tournaments" element={<Tournaments />} />
+        <Route path="/Tournament-details/:id" element={<TournamentDetails />} />
+
         <Route path="/Visitor-profile" element={<VisitorProfile />} />
         <Route path="/role" element={<Role />} />
         <Route path="/about" element={<AboutUs />} />

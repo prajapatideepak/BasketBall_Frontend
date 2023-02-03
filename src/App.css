@@ -1,17 +1,17 @@
 .nav-item h1:after {
-    content: "";
-    position: absolute;
-    background-color: #ffffff;
-    height: 3px;
-    width: 0;
-    left: 50%;
-    bottom: -5px;
-    transition: .5s ease-out;
+  content: "";
+  position: absolute;
+  background-color: #ffffff;
+  height: 3px;
+  width: 0;
+  left: 50%;
+  bottom: -5px;
+  transition: .5s ease-out;
 }
 
- .nav-item h1:hover:after {
-    left: 0%;
-    width: 100%;
+.nav-item h1:hover:after {
+  left: 0%;
+  width: 100%;
 }
 
 /* Scrollbar style for browser */
@@ -47,3 +47,19 @@
   border-radius: 5px;
 }
 
+
+
+/* Privat-Navbar Dropdown-Menu */
+.dropdown-menu.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: .4s ease-in-out;
+}
+
+.dropdown-menu.inactive {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-20px);
+  transition: .4s ease;
+}
