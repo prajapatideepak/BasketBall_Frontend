@@ -5,10 +5,12 @@ import { FaUserPlus } from "react-icons/fa"
 import { MdDelete } from "react-icons/md"
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2'
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import Heading from '../../Component/Heading'
+
 
 function Tournamentregistration() {
-
+    // const location = useLocation();
     const [refereelist, setRefereelist] = React.useState([{ Referee: "" }])
     const [sponsorlist, setsponsorlist] = React.useState([{ Sponsor: "" }])
     const [isDisabled, setIsDisabled] = React.useState(true);
@@ -39,29 +41,27 @@ function Tournamentregistration() {
 
     // ------------ Form Validation ------------ 
     const initialValues = {
-        tournament_name: '',
-        tournament_logo: '',
-        starting_date: '',
-        ending_date: '',
-        tournament_type: '',
-        tournament_category: '',
-        tournament_level: '',
-        city_name: '',
-        about_tournament: '',
-        referee_name: '',
-        referee_mobile: '',
-        sponsor_name: '',
-        sponsor_mobile: '',
-        age_restriction: 'no',
-        age_cutoff: 'Under 21'
+        tournament_name: location?.state?.isEdit ? location?.state?.tournament_name : '',
+        tournament_logo: location?.state?.isEdit ? location?.state?.tournament_logo : '',
+        starting_date: location?.state?.isEdit ? location?.state?.starting_date : '',
+        ending_date: location?.state?.isEdit ? location?.state?.ending_date : '',
+        tournament_type: location?.state?.isEdit ? location?.state?.tournament_type : '',
+        tournament_category: location?.state?.isEdit ? location?.state?.tournament_category : '',
+        tournament_level: location?.state?.isEdit ? location?.state?.tournament_level : '',
+        city_name: location?.state?.isEdit ? location?.state?.city_name : '',
+        about_tournament: location?.state?.isEdit ? location?.state?.about_tournament : '',
+        referee_name: location?.state?.isEdit ? location?.state?.referee_name : '',
+        referee_mobile: location?.state?.isEdit ? location?.state?.referee_mobile : '',
+        sponsor_name: location?.state?.isEdit ? location?.state?.sponsor_name : '',
+        sponsor_mobile: location?.state?.isEdit ? location?.state?.sponsor_mobile : '',
+        age_restriction: location?.state?.isEdit ? location?.state?.age_restriction : 'no',
+        age_cutoff: location?.state?.isEdit ? location?.state?.age_cutoff : 'Under 21'
 
     }
 
     const validationSchema = Yup.object({
         tournament_name: Yup.string().matches(/^[a-zA-Z]+$/, "Please enter only characters").min(2, "Team name must be at least 2 characters").max(25, "Team name should not be more than 25 characters").required("Name is required"),
         city_name: Yup.string().matches(/^[a-zA-Z]+$/, "Please enter only characters").required("City name is required"),
-        // starting_date: Yup.string().matches(new Date(), "Select correct date   ").required("Starting Date is required"),
-        // ending_date: Yup.string().matches(new Date(), "Select correct date   ").required("Ending Date is required"),
         tournament_type: Yup.string().required("Tournament Type is required"),
         tournament_category: Yup.string().required("Tournament Category is required"),
         tournament_level: Yup.string().required("Tournament Level is required"),
@@ -113,13 +113,13 @@ function Tournamentregistration() {
 
     return (
         <>
-            <section className="py-8">
-                <div className='heading-container  flex justify-center items-center h-24 sm:h-32 md:h-48 '>
-                    <span className='text-xl sm:text-2xl md:text-3xl lg:text-5xl font-semibold text-[#ee6730]'>
-                        Tournament Registration
-                    </span>
+            <section className="min-h-screen">
+                <div className='heading-container flex justify-center items-center h-24 sm:h-32 md:h-48'>
+                    <div className=''>
+                        <Heading text={location?.state?.isEdit ? 'Edit Tournament' : 'Tournament Registration'} />
+                    </div>
                 </div>
-                <div className='mx-auto px-10 py-12 sm:px-20 sm:py-12 md:px-20 md:py-16 2xl:py-0 lg:px-24 xl:px-28 2xl:px-32'>
+                <div className='mx-auto px-10 py-12 sm:px-20 sm:py-12 md:px-20 md:py-16 lg:px-24 xl:px-28 2xl:px-32'>
                     <form action="" onSubmit={handleSubmit}>
                         {/* -----------------------Tounament_Details---------------------------*/}
                         <div className=''>
@@ -503,22 +503,35 @@ function Tournamentregistration() {
 
 
                         {/* Clear_Button && Submit_Button */}
-                        <div className="w-full flex justify-center md:justify-end lg:justify-end py-5 lg:py-6">
-                            <button
-                                type="reset"
-                                className="bg-[#ee6730] relative inline-flex items-center justify-center px-8 py-2 overflow-hidden text-white rounded-lg cursor-pointer group mr-3"
-                                onClick={() => { resetForm() }}
-                            >
-                                <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-slate-900 rounded-lg group-hover:w-full group-hover:h-56"></span>
-                                <span className="relative">Clear</span>
-                            </button>
+                        <div className="w-full flex justify-end mt-5 sm:mt-10">
+                            {
+                                location?.state?.isEdit
+                                    ?
+                                    <button
+                                        type="button"
+                                        className="bg-[#ee6730] relative inline-flex items-center justify-center px-7 py-2 overflow-hidden text-white rounded-lg cursor-pointer group mr-3"
+                                        onClick={() => navigate(-1)}
+                                    >
+                                        <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-slate-900 rounded-lg group-hover:w-full group-hover:h-56"></span>
+                                        <span className="relative">Cancel</span>
+                                    </button>
+                                    :
+                                    <button
+                                        type="reset"
+                                        className="bg-[#ee6730] relative inline-flex items-center justify-center px-8 py-2 overflow-hidden text-white rounded-lg cursor-pointer group mr-3"
+                                        onClick={() => { resetForm(); setSelectedPlayers([]) }}
+                                    >
+                                        <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-slate-900 rounded-lg group-hover:w-full group-hover:h-56"></span>
+                                        <span className="relative">Clear</span>
+                                    </button>
+                            }
                             <button
                                 type="submit"
                                 className="bg-slate-900 relative inline-flex items-center justify-center px-6 py-2 overflow-hidden text-white rounded-lg cursor-pointer group"
                                 onClick={handleSubmit}
                             >
                                 <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#ee6730] rounded-lg group-hover:w-full group-hover:h-56"></span>
-                                <span className="relative">SUBMIT</span>
+                                <span className="relative">{location?.state?.isEdit ? "UPDATE" : "SUBMIT"}</span>
                             </button>
                         </div>
                     </form>

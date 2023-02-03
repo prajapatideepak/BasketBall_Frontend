@@ -11,10 +11,11 @@ import Gallery from "../pages/Gallery";
 import News from "../pages/News";
 import Player from "../pages/Player";
 import Role from "../pages/Role";
-import Tournamentregistration from '../pages/Tournament'
+import Tournamentregistration from '../pages/TournamentAddEdit'
 import VisitorProfile from "../pages/Profile";
 import Tournaments from '../pages/Tournaments'
 import Registration from '../pages/Registration'
+import TournamentDetails from '../pages/TournamentDetails'
 
 const PrivateRoutes = () => {
   return (
@@ -22,7 +23,8 @@ const PrivateRoutes = () => {
       <Route element={<PrivateLayout />}>
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/registration" element={<Registration />} />
-        <Route path="/tournament/register" element={<Tournamentregistration />} />
+        <Route path="/tournament-add-edit" element={<Tournamentregistration />} />
+        <Route path="/tournament-details/:tournament_id" element={<TournamentDetails />} />
         <Route path="/tournaments" element={<Tournaments />} />
         <Route path="/Visitor-profile" element={<VisitorProfile />} />
         <Route path="/role" element={<Role />} />

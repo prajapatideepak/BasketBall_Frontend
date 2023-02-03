@@ -159,14 +159,14 @@ function TeamProfileDetail() {
     }, []);
 
     return (
-        <section>
+        <section className='min-h-screen'>
             <div className='mx-auto px-10 py-12 sm:px-20 sm:py-12 md:px-20 md:py-16 lg:px-24 xl:px-28 2xl:px-32'>
                 <div>
                     <div className="team-logo-container flex justify-center items-center rounded-full">
-                        <img src={teamDetails.team_logo} className="rounded-full border-2 shadow-lg w-24 sm:w-32"/>
+                        <img src={teamDetails.team_logo} className="rounded-full border-2 shadow-lg w-20 xs:w-24 sm:w-32"/>
                     </div>
                     <div className="flex justify-center items-center">
-                        <h1 className="text-2xl sm:text-3xl text-gray-700 font-semibold px-2 py-4">{teamDetails.team_name}</h1>
+                        <h1 className="text-lg xs:text-2xl sm:text-3xl text-gray-700 font-semibold px-2 py-4">{teamDetails.team_name}</h1>
                     </div>
                     {/* <div className=''>
                         <h3 className='text-2xl font-semibold text-[#ee6730] mt-8'>Team Information:</h3>
@@ -174,7 +174,7 @@ function TeamProfileDetail() {
                     <div className="flex flex-col xl:flex-row gap-12 mt-8">
                         <div className="flex flex-col lg:flex-row flex-1 xl:border-r-2 xl:pr-14 gap-5 lg:gap-12 xl:gap-6">
                             <div className="left-container lg:order-1 order-2 flex flex-1 flex-col">
-                                <div className="flex flex-col">
+                                <div className="flex flex-col text-xs xs:text-sm sm:text-base">
                                     <label className="mb-2 text-gray-400">Coach Name</label>
                                     <div className="border-2 border-orange-100 px-2 py-2 rounded-lg bg-white capitalize font-medium">
                                         <p>
@@ -182,7 +182,7 @@ function TeamProfileDetail() {
                                         </p>
                                     </div>
                                 </div>
-                                <div className="flex flex-col mt-5">
+                                <div className="flex flex-col text-xs xs:text-sm sm:text-base mt-5">
                                     <label className="mb-2 text-gray-400">Assistant Coach Name</label>
                                     <div className="border-2 border-orange-100 px-2 py-2 rounded-lg bg-white capitalize font-medium">
                                         <p>
@@ -190,7 +190,7 @@ function TeamProfileDetail() {
                                         </p>
                                     </div>
                                 </div>
-                                <div className="flex flex-col sm:flex-row gap-4">
+                                <div className="flex flex-col text-xs xs:text-sm sm:text-base sm:flex-row gap-4">
                                     <div className="flex flex-1 flex-col mt-5">
                                         <label className="mb-2 text-gray-400">Coach Mobile</label>
                                         <div className="border-2 border-orange-100 px-2 py-2 rounded-lg bg-white font-medium">
@@ -199,7 +199,7 @@ function TeamProfileDetail() {
                                             </p>
                                         </div>
                                     </div>
-                                    <div className="flex flex-1 flex-col mt-5">
+                                    <div className="flex flex-1 flex-col text-xs xs:text-sm sm:text-base mt-5">
                                         <label className="mb-2 text-gray-400">Assistant Coach Mobile</label>
                                         <div className="border-2 border-orange-100 px-2 py-2 rounded-lg bg-white font-medium">
                                             <p>
@@ -215,7 +215,7 @@ function TeamProfileDetail() {
                                 </div>
                             </div>
                             <div className="right-container lg:order-2 order-1 flex flex-1 flex-col">
-                                <div className="flex flex-col">
+                                <div className="flex flex-col text-xs xs:text-sm sm:text-base">
                                     <label className="mb-2 text-gray-400">About Team</label>
                                     <div className="border-2 border-orange-100 px-2 py-2 rounded-lg bg-white h-32 lg:h-[328px] overflow-y-auto">
                                         {teamDetails.description}
@@ -231,8 +231,8 @@ function TeamProfileDetail() {
                                         boxShadow: "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset"
                                     }}
                                 >
-                                    <h3 className="text-4xl md:text-5xl text-black font-bold group-hover:text-white">{teamDetails.matches_played}</h3>
-                                    <p className="md:text-lg text-gray-700 font-semibold group-hover:text-white mt-2 xl:mt-0">Matches Played</p>
+                                    <h3 className="text-3xl sm:text-4xl md:text-5xl text-black font-bold group-hover:text-white">{teamDetails.matches_played}</h3>
+                                    <p className="md:text-lg sm:text-base text-sm text-gray-700 font-semibold group-hover:text-white mt-2 xl:mt-0">Matches Played</p>
                                 </div>
                                 <div 
                                     className='w-40 md:w-44 lg:w-48 flex flex-col justify-center items-center bg-white p-3 rounded-lg hover:bg-[#ee6730] group'
@@ -240,8 +240,8 @@ function TeamProfileDetail() {
                                         boxShadow: "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset"
                                     }}
                                 >
-                                    <h3 className="text-4xl md:text-5xl text-green-600 font-bold group-hover:text-white">{teamDetails.matches_won}</h3>
-                                    <p className="md:text-lg text-gray-700 font-semibold group-hover:text-white mt-2 xl:mt-0">Matches Won</p>
+                                    <h3 className="text-3xl sm:text-4xl md:text-5xl text-green-600 font-bold group-hover:text-white">{teamDetails.matches_won}</h3>
+                                    <p className="md:text-lg sm:text-base text-sm text-gray-700 font-semibold group-hover:text-white mt-2 xl:mt-0">Matches Won</p>
                                 </div>
                                 <div 
                                     className='w-40 md:w-44 lg:w-48 flex flex-col justify-center items-center bg-white p-3 rounded-lg hover:bg-[#ee6730] group'
@@ -249,15 +249,15 @@ function TeamProfileDetail() {
                                         boxShadow: "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset"
                                     }}
                                 >
-                                    <h3 className="text-4xl md:text-5xl text-red-500 font-bold group-hover:text-white">{teamDetails.matches_lost}</h3>
-                                    <p className="md:text-lg text-gray-700 font-semibold group-hover:text-white mt-2 xl:mt-0">Matches Lost</p>
+                                    <h3 className="text-3xl sm:text-4xl md:text-5xl text-red-500 font-bold group-hover:text-white">{teamDetails.matches_lost}</h3>
+                                    <p className="md:text-lg sm:text-base text-sm text-gray-700 font-semibold group-hover:text-white mt-2 xl:mt-0">Matches Lost</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div className="mx-auto px-10 py-12 sm:px-20 sm:py-12 md:px-20 md:py-16 lg:px-24 xl:px-28 2xl:px-32 mt-20 md:mt-20 w-full bg-black ">
+            <div className="mx-auto px-10 py-12 sm:px-20 sm:py-12 md:px-20 md:py-16 lg:px-24 xl:px-28 2xl:px-32 xs:mt-12 md:mt-20 w-full bg-black ">
                 <div className="">
                     <div className=''>
                         <h3 className='text-xl sm:text-2xl font-semibold text-[#ee6730]'>Players:</h3>
@@ -291,26 +291,26 @@ function TeamProfileDetail() {
                     <div>
                         <h3 className='text-xl sm:text-2xl font-semibold text-[#ee6730] mt-8'>Tournament Enrollment:</h3>
                     </div>
-                    <div className="w-full flex lg:justify-center overflow-x-auto mt-5 ">
-                        <table className="min-w-[750px] lg:w-full xl:w-3/4 mt-2 rounded-md overflow-x-auto sm:text-base text-sm">
+                    <div className="table-container w-full flex lg:justify-center overflow-x-auto mt-5 ">
+                        <table className="min-w-[750px] lg:w-full xl:w-3/4 mt-2 rounded-md overflow-hidden sm:text-base text-xs xs:text-sm">
                             <thead className='bg-gray-700'>
                                 <tr>
-                                    <th className="pl-5 border whitespace-nowrap pr-2 py-3 text-sm text-gray-300 uppercase border-gray-700 whitespace-nowrap font-semibold text-left">
+                                    <th className="pl-5 border whitespace-nowrap pr-2 py-3 text-sm text-gray-300 uppercase border-gray-700 whitespace-nowrap font-semibold text-left sm:text-base text-xs xs:text-sm">
                                         Sr.
                                     </th>
-                                    <th className="pl-5 border whitespace-nowrap pr-2 py-3 text-sm text-gray-300 uppercase border-gray-700 whitespace-nowrap font-semibold text-left">
+                                    <th className="pl-5 border whitespace-nowrap pr-2 py-3 text-sm text-gray-300 uppercase border-gray-700 whitespace-nowrap font-semibold text-left sm:text-base text-xs xs:text-sm">
                                         Tournament Name
                                     </th>
-                                    <th className="border whitespace-nowrap px-2 py-3 text-sm text-gray-300 uppercase border-gray-700 whitespace-nowrap font-semibold text-left">
+                                    <th className="border whitespace-nowrap px-2 py-3 text-sm text-gray-300 uppercase border-gray-700 whitespace-nowrap font-semibold text-left sm:text-base text-xs xs:text-sm">
                                         Start Date
                                     </th>
-                                    <th className="border whitespace-nowrap px-2 py-3 text-sm text-gray-300 uppercase border-gray-700 whitespace-nowrap font-semibold text-left">
+                                    <th className="border whitespace-nowrap px-2 py-3 text-sm text-gray-300 uppercase border-gray-700 whitespace-nowrap font-semibold text-left sm:text-base text-xs xs:text-sm">
                                         End Date
                                     </th>
-                                    <th className="border whitespace-nowrap px-2 py-3 text-sm text-gray-300 uppercase border-gray-700 whitespace-nowrap font-semibold text-left">
+                                    <th className="border whitespace-nowrap px-2 py-3 text-sm text-gray-300 uppercase border-gray-700 whitespace-nowrap font-semibold text-left sm:text-base text-xs xs:text-sm">
                                         City
                                     </th>
-                                    <th className="border whitespace-nowrap px-2 py-3 text-sm text-gray-300 uppercase border-gray-700 whitespace-nowrap font-semibold text-left">
+                                    <th className="border whitespace-nowrap px-2 py-3 text-sm text-gray-300 uppercase border-gray-700 whitespace-nowrap font-semibold text-left sm:text-base text-xs xs:text-sm">
                                         Action
                                     </th>
                                 </tr>
@@ -360,10 +360,10 @@ function TeamProfileDetail() {
                         <div className='flex justify-center items-center mt-8 md:mt-3'>
                             <div className="w-2/3 sm:w-2/4 lg:w-1/4 flex justify-around items-center bg-black p-1 rounded-full">
                                 <div className={`${currentTab == 1 ? 'bg-[#ee6730]' : ''} hover:bg-[#ee6730] group cursor-pointer w-full text-center p-1 rounded-full mr-1.5`} onClick={()=> setCurrentTab(1)}>
-                                    <h3 className={`${currentTab == 1 ? 'text-white' : 'text-gray-300'} group-hover:text-white font-semibold`}>Past</h3>
+                                    <h3 className={`${currentTab == 1 ? 'text-white' : 'text-gray-300'} group-hover:text-white text-xs xs:text-sm sm:text-base font-semibold`}>Past</h3>
                                 </div>
                                 <div className={`${currentTab == 2 ? 'bg-[#ee6730]' : ''} hover:bg-[#ee6730] group cursor-pointer w-full text-center p-1 rounded-full`} onClick={()=> setCurrentTab(2)}>
-                                    <h3 className={`${currentTab == 2 ? 'text-white' : 'text-gray-300'} group-hover:text-white font-semibold`}>Upcoming</h3>
+                                    <h3 className={`${currentTab == 2 ? 'text-white' : 'text-gray-300'} group-hover:text-white text-xs xs:text-sm sm:text-base font-semibold`}>Upcoming</h3>
                                 </div>
                             </div>
                         </div>
