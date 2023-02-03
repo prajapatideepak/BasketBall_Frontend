@@ -98,7 +98,7 @@ const NewsDetail = () => {
 
   return (
     <div className="flex justify-center min-h-screen ">
-      <div className=" lg:px-28 py-20 lg:w-5/4 ">
+      <div className=" lg:px-28 py-8 lg:w-5/4 ">
         <div className="flex justify-end">
           <button
             onClick={(e) => navigate(-1)}

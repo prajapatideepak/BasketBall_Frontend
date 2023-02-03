@@ -12,8 +12,8 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 
+export let currentUser = true;
 const AppRoutes = () => {
-  const currentUser = true;
   return (
     <>
       <BrowserRouter>
