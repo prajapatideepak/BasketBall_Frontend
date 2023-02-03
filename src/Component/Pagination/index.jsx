@@ -8,7 +8,7 @@ import './pagination.css'
 //  after creating it pass it as a props to Paginate component
 // 2) Pass your data variable (which stores your all data) to as a props to Paginate Component
 //      eg. const [carData, setCarData] = useSate([{...}])
-// 3) Pass items per page value
+// 3) Pass items per page value (optional)
 // 4) map paginationData to your component
 
 // ***How to call:
