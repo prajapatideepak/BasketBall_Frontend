@@ -10,7 +10,7 @@ const PublicLayout = () => {
 
     return (
         <div className='w-full'>
-            <div className="py-3 bg-black px-9 md:flex items-center justify-between sticky top-0 z-[9999] w-full">
+            <div className="py-3 h-[70px] bg-black px-9 md:flex items-center justify-between sticky top-0 z-[9999] w-full">
                 <div className='inline-block'>
                     <Link to={"/"}>
                         <h1 className='font-bold text-3xl font-mono text-white'>The<span className='text-[#ee6730]'>CBL</span></h1>

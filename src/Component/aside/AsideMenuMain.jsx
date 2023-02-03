@@ -12,7 +12,7 @@ function AsideMenuMain() {
 
   return (
     <div className="w-full relative">
-      <div className="py-3 bg-black  px-5 lg:px-9 flex sticky top-0 items-center justify-between w-full z-[9999]">
+      <div className="py-3 bg-black h-[70px] px-5 lg:px-9 flex sticky top-0 items-center justify-between w-full z-[9999]">
         <div className="">
           <h1 className="font-bold text-3xl font-mono text-white">
             The<span className="text-[#ee6730]">CBL</span>
@@ -28,7 +28,7 @@ function AsideMenuMain() {
               </Link>
             </li>
             <li className="nav-item">
-            <Link className="Link" to={"/team/profile"}>
+            <Link className="Link" to={"/team/list"}>
                 <h1 className="relative text-white text-base md:text-base lg:text-base xl:text-lg  my-5 md:my-0">
                   Teams
                 </h1>

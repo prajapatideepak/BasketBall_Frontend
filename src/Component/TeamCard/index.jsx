@@ -15,7 +15,13 @@ function TeamCard({teamDetails}) {
                 </div>
                 <div className="flex flex-col justify-center ml-5 w-full h-full">
                     <h3 className="text-gray-200 font-medium sm:text-lg md:text-xl xl:text-2xl">{team_name}</h3>
-                    <p className="text-xs sm:text-sm mt-1 xl:mt-2 text-gray-400 text-ellipsis line-clamp-2 overflow-hidden">{description != '' && description != ' ' ? description : '...'}</p>
+                    {
+                        description != '' && description != ' ' 
+                        ? 
+                            <p className="text-xs sm:text-sm mt-1 xl:mt-2 text-gray-400 text-ellipsis line-clamp-2 overflow-hidden">{description}</p>
+                        :
+                            <p className="text-xs sm:text-sm mt-1 xl:mt-2 text-gray-400 text-ellipsis line-clamp-2 overflow-hidden">.... <br></br>......</p>
+                    }
                 </div>
             </div>
             <div className="w-full sm:4/5 md:w-3/5 flex justify-center lg:justify-end items-center gap-2.5 sm:gap-6 lg:gap-10 mr-2 lg:mt-0 mt-8">
