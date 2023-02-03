@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import * as Yup from 'yup';
 import { useFormik } from 'formik'
 import Select from 'react-select';
-import Heading from '../../Component/Heading'
+import Heading from '../../../Component/Heading'
 
 function TeamAddEdit() {
   const navigate = useNavigate();

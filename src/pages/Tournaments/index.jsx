@@ -80,9 +80,9 @@ function Tournaments() {
                                 )
                             })
                         :
-                            <div className='flex justify-center items-center mt-6 sm:mt-16 md:mt-24'>
-                                <GiDiamondTrophy className="text-5xl text-gray-400 mr-2"/>
-                                <p className='text-lg font-medium text-gray-400'>No Tournament Found</p>
+                            <div className='flex justify-center items-center mt-16 md:mt-24'>
+                                <GiDiamondTrophy className="text-2xl xs:text-3xl sm:text-5xl text-gray-400 mr-2"/>
+                                <p className='text-xs xs:text-sm sm:text-lg font-medium text-gray-400'>No Tournament Found</p>
                             </div>
                     }
                 </div>
