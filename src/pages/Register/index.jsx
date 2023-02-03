@@ -56,12 +56,12 @@ function Register() {
 
     return (
         <>
-            <div className="min-h-screen  flex justify-center items-center px-10 sm:px-20  bg-white ">
+            <div className="  flex justify-center items-center px-10 sm:px-20  bg-white mt-5 lg:mt-8 ">
                 <div className="flex xl:flow-row justify-center items-center">
                     <div className=" 2xl:w-[50%]  xl:block hidden">
                         <img src={image} alt="" />
                     </div>
-                    <div className=" w-[100%] xl:px-10 py-10 xl:mx-10 2xl:w-[50%]">
+                    <div className=" w-[100%] xl:px-10 xl:mx-10 2xl:w-[50%]">
                         <div className={`${isOnSubmit ? "block" : "hidden"} space-y-5 `}>
                             <div className="flex justify-center items-center ">
                                 <BsFillPatchCheckFill className="text-5xl text-green-700" />
@@ -229,7 +229,7 @@ function Register() {
                                         </div>
                                     </div>
 
-                                    <button type="submit"  className="
+                                    <button type="submit" className="
                                     bg-slate-900   relative inline-flex items-center justify-center w-full px-4 py-1.5 
                                     sm:px-8 sm:py-[10px] overflow-hidden font-medium tracking-tighter text-white rounded-lg cursor-pointer group"
                                     >

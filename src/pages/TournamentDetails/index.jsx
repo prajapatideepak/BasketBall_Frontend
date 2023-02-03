@@ -38,10 +38,10 @@ const TournamentDetails = () => {
       <section className="min-h-screen">
         <div className='heading-container flex justify-center items-center h-24 sm:h-32 md:h-48'>
           <div className=''>
-            <Heading text={'Tournament Details'} />
+            <Heading margin={true} text={'Tournament Details'} />
           </div>
         </div>
-        <div className='mx-auto px-10 py-12 sm:px-20 sm:py-12 md:px-20 md:py-16 lg:px-24 xl:px-28 2xl:px-32'>
+        <div className='mx-auto px-10  sm:px-20 mb-10 md:px-20  lg:px-24 xl:px-28 2xl:px-32'>
           {/* -----------------------Tounament_Details---------------------------*/}
           {/* <div className=''>
               <h3 className='text-2xl font-semibold text-[#ee6730]'>Tournament Information:</h3>
