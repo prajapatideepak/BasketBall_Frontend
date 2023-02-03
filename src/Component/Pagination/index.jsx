@@ -34,12 +34,13 @@ function Paginate({data, setPaginationData, itemsPerPage = 10}) {
     }, [itemOffset, itemsPerPage, data]);
 
   return (
-    <div className="w-full flex justify-center">
+    <div className="w-full flex justify-center mt-12">
         <div className="w-full xs:w-4/5 md:w-2/4">
             <Pagination
                 total={pageCount}
                 current={currentPage}
                 onPageChange={(page)=> handlePageClick(page)}
+                // previousLabel="Previous" nextLabel="Next"
             />
         </div>
     </div>

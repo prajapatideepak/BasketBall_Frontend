@@ -12,7 +12,7 @@ function AsideMenuMain() {
 
   return (
     <div className="w-full relative">
-      <div className="py-3 bg-black  px-5 lg:px-9 flex sticky top-0 items-center justify-between w-full z-[9999]">
+      <div className="py-3 bg-black h-[70px] px-5 lg:px-9 flex sticky top-0 items-center justify-between w-full z-[9999]">
         <div className="">
           <h1 className="font-bold text-3xl font-mono text-white">
             The<span className="text-[#ee6730]">CBL</span>

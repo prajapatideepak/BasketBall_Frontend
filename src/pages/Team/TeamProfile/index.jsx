@@ -26,11 +26,9 @@ function TeamProfile() {
         }
     ]
   return (
-    <section className='min-h-screen'>
+    <section className='min-h-screen-fit'>
         <div className="mx-auto px-10 py-12 sm:px-20 sm:py-12 md:px-20 md:py-16 lg:px-24 xl:px-28 2xl:px-32">
-            <div className='team-profile-heading-container mb-16 w-full flex justify-center items-center mb-10'>
-                <Heading text="Your Teams" />
-            </div>
+            <Heading text="Your Teams" />
             {
                 teamDetails.length > 0
                 ?

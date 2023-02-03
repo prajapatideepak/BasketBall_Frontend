@@ -195,7 +195,7 @@ function TeamAddEdit() {
   },[])
 
   return (
-    <section className='min-h-screen'>
+    <section className='min-h-screen-fit'>
         <div className='heading-container flex justify-center items-center h-24 sm:h-32 md:h-48'>
             <div className=''>
               <Heading text={location?.state?.isEdit ? 'Edit Team' : 'Team Registration'} />
