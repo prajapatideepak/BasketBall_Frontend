@@ -16,6 +16,7 @@ import TournamentsOfOrganizer from '../pages/TournamentsOfOrganizer';
 import Registration from '../pages/Registration';
 import TournamentDetails from '../pages/TournamentDetails';
 import AfterRole from "../pages/RegisterAfterLogin";
+import TermsandConditions from "../pages/Term&Condistions";
 
 const PrivateRoutes = () => {
   return (
@@ -38,6 +39,7 @@ const PrivateRoutes = () => {
         <Route path="team/*" element={<Team />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/registration" element={<AfterRole />} />
+        <Route path="/term&condition" element={<TermsandConditions />} />
 
         <Route index element={<Dashboard />} />
       </Route>

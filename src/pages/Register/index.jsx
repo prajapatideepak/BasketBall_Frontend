@@ -201,7 +201,9 @@ function Register() {
                                                     onChange={handleChange}
                                                     onBlur={handleBlur}
                                                 />
-                                                <p className="text-base text-[#ee6730] cursor-pointer">Terms and Conditions</p>
+                                                <Link to={"/term&condition"}>
+                                                    <p className="text-base text-[#ee6730] cursor-pointer">Terms and Conditions</p>
+                                                </Link>
                                             </div>
                                             {errors.terms && touched.terms
                                                 ?

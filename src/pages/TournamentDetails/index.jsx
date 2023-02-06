@@ -41,7 +41,7 @@ const TournamentDetails = () => {
             <Heading margin={true} text={'Tournament Details'} />
           </div>
         </div>
-        <div className='mx-auto px-10  sm:px-20 mb-10 md:px-20  lg:px-24 xl:px-28 2xl:px-32'>
+        <div className='mx-auto px-10  sm:px-20 pb-10 md:px-20  lg:px-24 xl:px-28 2xl:px-32'>
           {/* -----------------------Tounament_Details---------------------------*/}
           {/* <div className=''>
               <h3 className='text-2xl font-semibold text-[#ee6730]'>Tournament Information:</h3>
