@@ -1,6 +1,7 @@
 import React from 'react'
 import TeamCard from '../../../Component/TeamCard'
 import Heading from '../../../Component/Heading'
+import { AiOutlineTeam } from 'react-icons/ai';
 
 function TeamProfile() {
     const teamDetails = [
@@ -38,7 +39,10 @@ function TeamProfile() {
                         )                        
                     })
                 :
-                    <h3>No team found</h3>
+                    <div className='flex justify-center items-center mt-16 md:mt-24'>
+                        <AiOutlineTeam className="text-2xl xs:text-3xl sm:text-5xl text-gray-400 mr-2"/>
+                        <p className='text-xs xs:text-sm sm:text-lg font-medium text-gray-400'>No Team Found</p>
+                    </div>
             }
         </div>
     </section>
