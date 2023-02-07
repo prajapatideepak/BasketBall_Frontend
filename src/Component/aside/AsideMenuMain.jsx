@@ -48,6 +48,13 @@ function AsideMenuMain() {
               </Link>
             </li>
             <li className="nav-item">
+              <Link className="Link" to={"/match"}>
+                <h1 className="relative text-white text-base md:text-base lg:text-base xl:text-lg  my-5 md:my-0">
+                  Matches
+                </h1>
+              </Link>
+            </li>
+            <li className="nav-item">
               <Link className="Link" to={"/news"}>
                 <h1 className="relative text-white text-base md:text-base lg:text-base xl:text-lg  my-5 md:my-0">
                   News
