@@ -25,7 +25,7 @@ function DropDownmenu() {
                 </div>
             </div>
 
-            <div className={`${isMenu ? "active" : " inactive"} dropdown-menu bg-black duration-500 ease-in  shadow-lg p-2 absolute lg:right-5 right-2 w-64 top-[70px]   rounded-md `}>
+            <div className={`${isMenu ? "active top-[80px] lg:top-[90px] 2xl:top-[78px] " : " inactive"} dropdown-menu bg-black duration-500 ease-in  shadow-lg p-2 absolute  right-3 w-64 top-[70px]   rounded-md `}>
                 <ul className='py-3 px-2'>
                     <p className='text-gray-400 py-2'>Profile settings</p>
                     <Link to={"/Visitor-profile"}>

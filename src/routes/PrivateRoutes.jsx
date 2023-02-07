@@ -11,27 +11,25 @@ import Player from "../pages/Player";
 import Role from "../pages/Role";
 import Tournamentregistration from "../pages/TournamentAddEdit";
 import VisitorProfile from "../pages/Profile";
-import Tournaments from "../pages/TournamentsList";
+import Tournaments from '../pages/TournamentsList'
+import TournamentsOfOrganizer from '../pages/TournamentsOfOrganizer';
+import Registration from '../pages/Registration';
+import TournamentDetails from '../pages/TournamentDetails';
 import AfterRole from "../pages/RegisterAfterLogin";
-import TournamentsOfOrganizer from "../pages/TournamentsOfOrganizer";
-import TournamentDetails from "../pages/TournamentDetails";
+import TermsandConditions from "../pages/Term&Condistions";
 
 const PrivateRoutes = () => {
   return (
     <Routes>
       <Route element={<PrivateLayout />}>
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route
-          path="/tournament-registration"
-          element={<Tournamentregistration />}
-        />
-        <Route
-          path="/tournaments-organizer"
-          element={<TournamentsOfOrganizer />}
-        />
+        <Route path="/tournament-registration" element={<Tournamentregistration />} />
+        <Route path="/tournament-add-edit" element={<Tournamentregistration />} />
+        <Route path="/Tournament-details/:tournament_id" element={<TournamentDetails />} />
+        {/* <Route path="/registration" element={<Registration />} /> */}
+        <Route path="/tournaments-organizer" element={<TournamentsOfOrganizer />} />
         <Route path="/tournaments" element={<Tournaments />} />
         <Route path="/Tournament-details/:id" element={<TournamentDetails />} />
-
         <Route path="/Visitor-profile" element={<VisitorProfile />} />
         <Route path="/role" element={<Role />} />
         <Route path="/about" element={<AboutUs />} />
@@ -41,6 +39,7 @@ const PrivateRoutes = () => {
         <Route path="team/*" element={<Team />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/registration" element={<AfterRole />} />
+        <Route path="/term&condition" element={<TermsandConditions />} />
 
         <Route index element={<Dashboard />} />
       </Route>

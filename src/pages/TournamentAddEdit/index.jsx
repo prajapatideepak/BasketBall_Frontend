@@ -113,10 +113,10 @@ function Tournamentregistration() {
             <section className="min-h-screen">
                 <div className='heading-container flex justify-center items-center h-24 sm:h-32 md:h-48'>
                     <div className=''>
-                        <Heading text={location?.state?.isEdit ? 'Edit Tournament' : 'Tournament Registration'} />
+                        <Heading margin={true} text={location?.state?.isEdit ? 'Edit Tournament' : 'Tournament Registration'} />
                     </div>
                 </div>
-                <div className='mx-auto px-10 py-12 sm:px-20 sm:py-12 md:px-20 md:py-16 lg:px-24 xl:px-28 2xl:px-32'>
+                <div className='mx-auto px-10 mb-10 sm:px-20  md:px-20 md:py-0 lg:px-24 xl:px-28 2xl:px-32'>
                     <form action="" onSubmit={handleSubmit}>
                         {/* -----------------------Tounament_Details---------------------------*/}
                         <div className=''>
