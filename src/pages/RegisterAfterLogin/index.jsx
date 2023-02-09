@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Button from "../../Component/Button";
 import Heading from "../../Component/Heading";
+
 export default function AfterRole() {
   const navigate = useNavigate();
 
@@ -58,16 +59,20 @@ export default function AfterRole() {
     }
   }
   return (
-    <div className="flex flex-col  justify-center px-8   lg:px-20  min-h-screen ">
-      <div className="space-y-1  text-center ">
-        <Heading text={"Select Your Role"} className="text-3xl" margin={true} />
+    <div className="flex flex-col  justify-center px-8   lg:px-20 py-12 lg:py-5 ">
+      <div className="space-y-1 mt-2   text-center ">
+        <Heading
+          text={"Select Your Role"}
+          className="text-2xl px-2"
+          margin={true}
+        />
         {/* <h1 className="text-4xl  "> Select Your Role</h1> */}
         <p className="italic text-gray-700 p-1">
           Rise to the Top: Choose Your Role as Visitor, Player, Tournament Host,
           or Team Manager and Dominate the Court
         </p>
       </div>
-      <div className="grid mt-20  lg:m-10 grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-10">
+      <div className="grid mt-10 bg-white shadow-2xl rounded-lg py-6 px-8 lg:mx-10 grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-10">
         {role.map((r, i) => {
           return (
             <motion.div
