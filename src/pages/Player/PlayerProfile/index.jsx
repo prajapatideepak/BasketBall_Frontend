@@ -3,6 +3,7 @@ import Heading from "../../../Component/Heading";
 import MatchCard from "../../../Component/MatchCard";
 import TeamCard from "../../../Component/TeamCard";
 import { motion } from "framer-motion";
+import PlayerAvtar from "../PlayerAvtar";
 export default function PlayerProfile() {
   const [tab, setTab] = React.useState(1);
   const [currentTab, setCurrentTab] = React.useState(2);
@@ -89,32 +90,10 @@ export default function PlayerProfile() {
     <div className="mx-auto px-10 py-10 sm:px-20 sm:py-12 md:px-20 md:py-12 lg:px-24 xl:px-28 2xl:px-32 min-h-screen  ">
       {/* <div className="w-1/3"></div> */}
       <div className="flex flex-col lg:flex-row space-y-5 ">
-        <div className="lg:w-1/2 flex flex-col items-center  mx-auto   ">
-          <img
-            className="mx-auto lg:w-2/3  shadow rounded-full"
-            src={player.basicinfo.img}
-          />
-
-          <div className="p-2 ">
-            <h1 className="text-3xl text-center text-gray-900">
-              {player.basicinfo.firstName} {player.basicinfo.lastName}
-            </h1>
-            <div className="flex items-center justify-center">
-              <span className="px-2    text-xs italic bg-orange-600 font-semibold text-white rounded-lg ">
-                {player.teamDetails.team_name}{" "}
-              </span>
-              <span>-</span>
-              <span className="px-2  text-xs italic bg-gray-800 font-semibold text-white rounded-lg ">
-                {player.gameinfo.playerPosition}
-              </span>
-            </div>
-            <p className="text-center text-gray-600 text-sm lg:w-1/2 mx-auto">
-              {player.gameinfo.Experience}
-            </p>
-          </div>
-        </div>
         {/* for up */}
-
+        <div className="lg:w-1/2 flex">
+          <PlayerAvtar player={player} />
+        </div>
         <div className="flex-1    ">
           <div className="mx-auto text-center">
             <div className="flex justify-center ">
@@ -195,7 +174,7 @@ export default function PlayerProfile() {
       </div>
       <div className="left-0 rounded-2xl right-0 bg-black mx-0 text-white">
         {/* <h1 className="py-1 text-center font-bold">Player statistics</h1> */}
-        <div className="grid grid-cols-2 lg:grid-cols-4  gap-3 lg:gap-5 p-2 mt-5 ">
+        <divs className="grid grid-cols-2 lg:grid-cols-4  gap-3 lg:gap-5 p-2 mt-5 ">
           <div className="text-center  p-2 ">
             <h1 className="text-2xl font-bold">{player.statics.totalMatch}</h1>
             <span className="text-lg text-gray-200">Total Match</span>
@@ -214,7 +193,7 @@ export default function PlayerProfile() {
             <h1 className="text-2xl  font-bold">{player.statics.totalScore}</h1>
             <span className="text-lg text-gray-200">Total Score</span>
           </div>
-        </div>
+        </divs>
       </div>
       {/* new sec */}
       <div className=":flex">
