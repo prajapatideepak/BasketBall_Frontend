@@ -4,6 +4,7 @@ import { AiOutlineSearch, AiFillEye } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { getPlayerList } from "../../../redux/actions/Player";
 import PlayerAvtar from "../PlayerAvtar";
+import { Link } from "react-router-dom";
 const PlayerList = () => {
   const { PlayerList } = useSelector((state) => state.playerReducer);
   const dispatch = useDispatch();
@@ -35,90 +36,96 @@ const PlayerList = () => {
         </div>
 
         <div className="">
-          {/* <select
-            type="text"
-            id="required-email"
-            className=" rounded-lg border-transparent flex-1  border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
-            name="email"
-          >
-            <option>All Player</option>
+          <div className="flex justify-between items-center px-8">
+            {/* <h1 className="text-2xl">Top Play</h1> */}
+            {/* <select
+              type="text"
+              id="required-email"
+              className="w-1/5 rounded-lg border-transparent   border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
+              name="email"
+            >
+              <option>All Player</option>
 
-            <option value="point guard">Point Guard</option>
-            <option value="shooting guard">Shooting Guard</option>
-            <option value="center">Center</option>
-            <option value="power forward">Power Forward</option>
-            <option value="shooting forward">Shooting Forward</option>
-          </select> */}
-          <div className="flex   mx-auto flex-col items-center px-4 lg:px-16 py-1 space-y-4">
+              <option value="point guard">Point Guard</option>
+              <option value="shooting guard">Shooting Guard</option>
+              <option value="center">Center</option>
+              <option value="power forward">Power Forward</option>
+              <option value="shooting forward">Shooting Forward</option>
+            </select> */}
+          </div>
+          <div className="flex   mx-auto flex-col items-center px-4 lg:px-8 py-1 space-y-6">
             {PlayerList.map((player) => {
               return (
-                <div className="lg:flex items-center justify-between bg-gray-800  text-white shadow-xl rounded-xl px-4 lg:px-8 py-2 lg:py-4 w-full ">
-                  {/* avtar start */}
-                  <div className="text-center justify-center   w-full space-x-2 lg:w-2/5 flex  ">
-                    <img
-                      src={player.basicinfo.img}
-                      className=" object-cover w-20  h-20 rounded-full "
-                    />
-                    <div className="px-2 text-left">
-                      <h1 className="text-xl font-semibold">
-                        {player.basicinfo.firstName} {player.basicinfo.lastName}
-                      </h1>
-                      <div className="flex flex-wrap space-y-1 lg:space-y-0 items-center space-x-2 pt-1">
-                        <span className="bg-orange-600 text-left text-xs font-semibold px-2 rounded-full shadow-xl">
-                          {player.gameinfo.playerPosition}
-                        </span>
-                        <span className="bg-orange-600 text-left text-xs font-semibold px-2 rounded-full shadow-xl">
-                          {player?.teamDetails.team_name}
+                <Link className="Link" to={`/player/${player.id}`}>
+                  <div className="lg:flex items-center justify-between bg-gray-800  text-white shadow-xl rounded-xl px-4 lg:px-8 py-2 lg:py-4 w-full ">
+                    {/* avtar start */}
+                    <div className="text-center justify-center   w-full space-x-2 lg:w-2/5 flex  ">
+                      <img
+                        src={player.basicinfo.img}
+                        className=" object-cover w-20  h-20 rounded-full "
+                      />
+                      <div className="px-2 text-left">
+                        <h1 className="text-xl font-semibold">
+                          {player.basicinfo.firstName}{" "}
+                          {player.basicinfo.lastName}
+                        </h1>
+                        <div className="flex flex-wrap space-y-1 lg:space-y-0 items-center space-x-2 pt-1">
+                          <span className="bg-orange-600 text-left text-xs font-semibold px-2 rounded-full shadow-xl">
+                            {player.gameinfo.playerPosition}
+                          </span>
+                          <span className="bg-orange-600 text-left text-xs font-semibold px-2 rounded-full shadow-xl">
+                            {player?.teamDetails.team_name}
+                          </span>
+                        </div>
+                        <p className="text-xs  lg:block text-justify mt-1 ">
+                          {player.gameinfo.Experience.slice(0, 50)}...
+                        </p>
+                      </div>
+                    </div>
+                    {/* avtar end */}
+                    {/* statiscs start */}
+                    <div className="grid grid-cols-4 pt-2  lg:gap-10   ">
+                      <div className="text-center    ">
+                        <h1 className="text-sm lg:text-2xl font-bold">
+                          {player.statics.totalMatch}
+                        </h1>
+                        <span className="text-xs lg:text-lg text-gray-200">
+                          Total Match
                         </span>
                       </div>
-                      <p className="text-xs  lg:block text-justify mt-1 ">
-                        {player.gameinfo.Experience.slice(0, 50)}...
-                      </p>
+                      <div className="text-center   ">
+                        <h1 className="text-sm lg:text-2xl text-green-600 font-bold">
+                          {player.statics.matchWon}
+                        </h1>
+                        <span className="text-xs lg:text-lg text-gray-200">
+                          Match Won
+                        </span>
+                      </div>
+                      <div className="text-center   text-red-600 ">
+                        <h1 className="text-sm lg:text-2xl  font-bold">
+                          {player.statics.matchLoss}
+                        </h1>
+                        <span className="text-xs lg:text-lg text-gray-200">
+                          Match loss
+                        </span>
+                      </div>
+                      <div className="text-center   text-green-600 ">
+                        <h1 className="text-sm lg:text-2xl  font-bold">
+                          {player.statics.totalScore}
+                        </h1>
+                        <span className="text-xs lg:text-lg text-gray-200">
+                          Total Score
+                        </span>
+                      </div>
                     </div>
+                    {/* statics end */}
                   </div>
-                  {/* avtar end */}
-                  {/* statiscs start */}
-                  <div className="grid grid-cols-4 pt-2  lg:gap-10   ">
-                    <div className="text-center    ">
-                      <h1 className="text-sm lg:text-2xl font-bold">
-                        {player.statics.totalMatch}
-                      </h1>
-                      <span className="text-xs lg:text-lg text-gray-200">
-                        Total Match
-                      </span>
-                    </div>
-                    <div className="text-center   ">
-                      <h1 className="text-sm lg:text-2xl text-green-600 font-bold">
-                        {player.statics.matchWon}
-                      </h1>
-                      <span className="text-xs lg:text-lg text-gray-200">
-                        Match Won
-                      </span>
-                    </div>
-                    <div className="text-center   text-red-600 ">
-                      <h1 className="text-sm lg:text-2xl  font-bold">
-                        {player.statics.matchLoss}
-                      </h1>
-                      <span className="text-xs lg:text-lg text-gray-200">
-                        Match loss
-                      </span>
-                    </div>
-                    <div className="text-center   text-green-600 ">
-                      <h1 className="text-sm lg:text-2xl  font-bold">
-                        {player.statics.totalScore}
-                      </h1>
-                      <span className="text-xs lg:text-lg text-gray-200">
-                        Total Score
-                      </span>
-                    </div>
-                  </div>
-                  {/* statics end */}
-                </div>
+                </Link>
               );
             })}
           </div>
 
-          <div className="table-container w-full flex lg:justify-center overflow-x-auto mt-5 ">
+          {/* <div className="table-container w-full flex lg:justify-center overflow-x-auto mt-5 ">
             <table className="whitespace-nowrap md:min-w-[750px] md:w-full xl:w-4/5 mt-2 rounded-md overflow-hidden sm:text-base text-xs xs:text-sm">
               <thead className="bg-gray-700  text-center">
                 <tr>
@@ -201,7 +208,7 @@ const PlayerList = () => {
                 )}
               </tbody>
             </table>
-          </div>
+          </div> */}
           {/*  */}
         </div>
       </div>
