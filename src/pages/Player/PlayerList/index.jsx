@@ -2,11 +2,12 @@ import React from "react";
 import Heading from "../../../Component/Heading";
 import { AiOutlineSearch, AiFillEye } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
-import { getPlayerList } from "../../../redux/actions/Player";
+import { getPlayerList, searchPlayers } from "../../../redux/actions/Player";
 import PlayerAvtar from "../PlayerAvtar";
 import { Link } from "react-router-dom";
 const PlayerList = () => {
   const { PlayerList } = useSelector((state) => state.playerReducer);
+  const [search, setSearch] = React.useState("");
   const dispatch = useDispatch();
 
   console.log(PlayerList);
@@ -14,6 +15,11 @@ const PlayerList = () => {
   React.useEffect(() => {
     dispatch(getPlayerList());
   }, []);
+
+  function handleSubmit() {
+    console.log("ho");
+    dispatch(searchPlayers(search));
+  }
 
   return (
     <div className="flex min-h-screen px-2 lg:px-16  py-8">
@@ -26,11 +32,19 @@ const PlayerList = () => {
         <div className="flex m-5  justify-center ">
           <input
             type="text"
+            onChange={(e) => {
+              setSearch(e.target.value);
+              handleSubmit();
+            }}
+            value={search}
             className=" rounded-lg w-full lg:w-2/3 rounded-r-none  appearance-none border border-gray-400 border-r-0 py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm focus:shadow-2xl duration-300 text-base focus:outline-none  "
             name="search"
             placeholder="Search Player"
           />
-          <button className="text-2xl rounded-lg border  rounded-l-none border-gray-400 border-l-0 bg-[#ee6730] hover:scale-105 hover:bg-gray-800 duration-300 text-white px-2 shadow-2xl ">
+          <button
+            onClick={handleSubmit}
+            className="text-2xl rounded-lg border  rounded-l-none border-gray-400 border-l-0 bg-[#ee6730] hover:scale-105 hover:bg-gray-800 duration-300 text-white px-2 shadow-2xl "
+          >
             <AiOutlineSearch />
           </button>
         </div>
@@ -53,11 +67,11 @@ const PlayerList = () => {
               <option value="shooting forward">Shooting Forward</option>
             </select> */}
           </div>
-          <div className="flex   mx-auto flex-col items-center px-4 lg:px-8 py-1 space-y-6">
-            {PlayerList.map((player) => {
+          <div className="flex w-full  mx-auto flex-col items-center px-4 lg:px-8 py-1 space-y-6">
+            {PlayerList?.map((player) => {
               return (
                 <Link className="Link" to={`/player/${player.id}`}>
-                  <div className="lg:flex items-center justify-between bg-gray-800  text-white shadow-xl rounded-xl px-4 lg:px-8 py-2 lg:py-4 w-full ">
+                  <div className="md:flex hover:bg-gray-600 duration-300 items-center justify-between bg-gray-800  text-white shadow-xl rounded-xl px-4 lg:px-8 py-2 lg:py-4 w-full ">
                     {/* avtar start */}
                     <div className="text-center justify-center   w-full space-x-2 lg:w-2/5 flex  ">
                       <img
@@ -69,15 +83,15 @@ const PlayerList = () => {
                           {player.basicinfo.firstName}{" "}
                           {player.basicinfo.lastName}
                         </h1>
-                        <div className="flex flex-wrap space-y-1 lg:space-y-0 items-center space-x-2 pt-1">
-                          <span className="bg-orange-600 text-left text-xs font-semibold px-2 rounded-full shadow-xl">
+                        <div className="xxs:hidden xs:flex  flex-wrap space-y-1 lg:space-y-0 items-center xs:space-x-2 pt-1">
+                          <span className="xxs:hidden sm:block bg-orange-600 text-left text-xs font-semibold px-2 rounded-full shadow-xl">
                             {player.gameinfo.playerPosition}
                           </span>
-                          <span className="bg-orange-600 text-left text-xs font-semibold px-2 rounded-full shadow-xl">
+                          <span className="bg-orange-600   text-left text-xs font-semibold px-2 rounded-full shadow-xl">
                             {player?.teamDetails.team_name}
                           </span>
                         </div>
-                        <p className="text-xs  lg:block text-justify mt-1 ">
+                        <p className="xxs:hidden xs:block   text-xs   text-justify mt-1 ">
                           {player.gameinfo.Experience.slice(0, 50)}...
                         </p>
                       </div>

@@ -12,11 +12,11 @@ const PlayerSlice = createSlice({
       console.log(action);
       state.PlayerList = action.payload;
     },
-    getPlayerDetail: (state, action) => {
+    setPlayerDetail: (state, action) => {
       state.PlayerDetail = action.payload;
     },
   },
 });
 
-export const { getPlayers, getPlayerDetail } = PlayerSlice.actions;
+export const { getPlayers, setPlayerDetail } = PlayerSlice.actions;
 export default PlayerSlice.reducer;

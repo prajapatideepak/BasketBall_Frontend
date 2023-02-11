@@ -54,7 +54,7 @@ const GameInfo = () => {
             </select>
           </div>
           {/*  */}
-          <div className="  ">
+          <div cllassName="  ">
             <label htmlFor="required-email" className="text-gray-700">
               Preferred Jersey Number
               <span className="text-red-500 required-dot">*</span>

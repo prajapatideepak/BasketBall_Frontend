@@ -4,7 +4,7 @@ export default function PlayerAvtar({ player }) {
   return (
     <div className=" flex flex-col items-center  mx-auto   ">
       <img
-        className="mx-auto lg:w-2/3  shadow rounded-full"
+        className="mx-auto w-32 h-32 md:w-44 md:h-44 lg:w-60   lg:h-60 object-cover shadow rounded-full"
         src={player.basicinfo.img}
       />
 
