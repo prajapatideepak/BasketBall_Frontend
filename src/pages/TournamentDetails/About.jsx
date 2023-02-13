@@ -4,35 +4,11 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Button from '../../Component/Button'
 
 
-const About = () => {
+const About = ({Tournamentdetails}) => {
   const isPublicView = false;
   const params = useParams();
   const navigate = useNavigate();
 
-  const Tournamentdetails = {
-    starting_date: '11-01-2023',
-    ending_date: '22-01-2023',
-    tournament_type: 'Knock out',
-    tournament_category: 'Only for Boys',
-    tournament_level: 'National',
-    city_name: 'Ahmedabad',
-    about_tournament: 'Hello',
-    referee: [
-      { id: 1, referee_name: 'Shad', referee_mobile: "1234567890" },
-      { id: 2, referee_name: 'Shad', referee_mobile: "1234567890" }
-    ],
-    sponsor: [
-      { id: 1, sponsor_name: 'Sadikali karadiya', sponsor_logo: '/CBL_Images/basketball_team_logo_2.webp' },
-      { id: 2, sponsor_name: 'Deepak Prajapati', sponsor_logo: '/CBL_Images/basketball_team_logo_2.webp' },
-      { id: 2, sponsor_name: 'Moin Don', sponsor_logo: '/CBL_Images/basketball_team_logo_2.webp' },
-
-    ],
-    sponsor_mobile: '1234567890',
-    age_restriction: 'no',
-    age_cutoff: 'Under 21',
-    price: "150 Dega"
-
-  }
   return (
     <>
       <section className="">
@@ -43,8 +19,8 @@ const About = () => {
             </div> */}
           {/* Starting Date && Ending Date && Tournament Type */}
           <div className="flex flex-col md:flex-row  gap-6 my-7 ">
-            <div className="flex space-x-5  w-full ">
-              <div className="w-full">
+            <div className="flex sm:space-x-5  w-full sm:flex-row flex-col">
+              <div className="w-full sm:mb-0 mb-5">
                 <label className="mb-2 text-gray-400">Start Date</label>
                 <div className="border-2 border-orange-100 px-2 py-2 my-2 rounded-lg bg-white capitalize font-medium">
                   <p>
@@ -63,11 +39,11 @@ const About = () => {
             </div>
             <div className="flex-col flex w-full">
               <label className="mb-2 text-gray-400">
-                Tournament Type
+                City
               </label>
               <div className="border-2 border-orange-100 px-2 py-2 rounded-lg bg-white capitalize font-medium">
                 <p>
-                  {Tournamentdetails.tournament_type == '' ? '--' : Tournamentdetails.tournament_type}
+                  {Tournamentdetails.city_name == '' ? '--' : Tournamentdetails.city_name}
                 </p>
               </div>
             </div>
@@ -76,7 +52,7 @@ const About = () => {
           <div className="flex flex-col md:flex-row  2 gap-6 my-7 ">
             <div className="flex flex-col w-full">
               <label className="mb-2 text-gray-400">
-                Tournament Category
+                Category
               </label>
               <div className="border-2 border-orange-100 px-2 py-2 rounded-lg bg-white capitalize font-medium">
                 <p>
@@ -86,7 +62,7 @@ const About = () => {
             </div>
             <div className="flex flex-col w-full">
               <label className="mb-2 text-gray-400">
-                Tournament level
+                Level
               </label>
               <div className="border-2 border-orange-100 px-2 py-2 rounded-lg bg-white capitalize font-medium">
                 <p>
@@ -97,71 +73,66 @@ const About = () => {
           </div>
           {/* City name && Price Money */}
           <div className="flex flex-col md:flex-row  2 gap-6 my-7 ">
-            <div className="flex flex-col w-full">
-              <label className="mb-2 text-gray-400">
-                Price 
-              </label>
-              <div className="border-2 border-orange-100 px-2 py-2 rounded-lg bg-white capitalize font-medium">
-                <p>
-                  {Tournamentdetails.price == '' ? '--' : Tournamentdetails.price}
-                </p>
-              </div>
-            </div>
-            <div className="flex flex-col w-full">
-              <label className="mb-2 text-gray-400">
-                Tournament level
-              </label>
-              <div className="border-2 border-orange-100 px-2 py-2 rounded-lg bg-white capitalize font-medium">
-                <p>
-                  {Tournamentdetails.city_name == '' ? '--' : Tournamentdetails.city_name}
-                </p>
-              </div>
-            </div>
-          </div>
-          {/*  age_restriction && age_cutoff */}
-          <div className="flex flex-col md:flex-row  gap-6 my-7 ">
-            <div className="flex flex-col md:flex-row  gap-6 lg:space-x-5 items-center  w-full ">
-              <div className="w-full flex-col">
-                <label className="">Age Restriction</label>
-                <div className="flex justify-center mt-2 items-center border-2 border-orange-100 px-2 rounded-lg bg-white py-[9px] space-x-20 ">
-                  <div className="flex items-center space-x-1">
-                    <input type="radio"
-                      className="cursor-pointer"
-                      name="age_restriction"
-                      id="no"
-                    />
-                    <label htmlFor="No">No</label>
-                  </div>
-                  <div className="flex items-center space-x-1">
-                    <input type="radio"
-                      className='cursor-pointer'
-                      name="age_restriction"
-                      id="yes"
-                      checked
-                      value="yes"
-                    />
-                    <label htmlFor="No">Yes</label>
-                  </div>
-                </div>
-              </div>
+            <div className="flex space-x-5  w-full ">
               <div className="flex flex-col w-full">
                 <label className="mb-2 text-gray-400">
-                  Tournament level
+                  Type
                 </label>
                 <div className="border-2 border-orange-100 px-2 py-2 rounded-lg bg-white capitalize font-medium">
                   <p>
-                    {Tournamentdetails.age_cutoff == '' ? '--' : Tournamentdetails.age_cutoff}
+                    {Tournamentdetails.tournament_type == '' ? '--' : Tournamentdetails.tournament_type}
                   </p>
                 </div>
               </div>
-
+            </div>
+            <div className="flex w-full sm:space-x-5 sm:flex-row flex-col ">
+              <div className="w-full flex-col sm:mb-0 mb-5">
+                <label className="mb-2 text-gray-400">Age Restriction</label>
+                <div className="flex justify-center mt-2 items-center border-2 border-orange-100 px-2 rounded-lg bg-white py-[9px] space-x-20 ">
+                  <div className="flex items-center space-x-1">
+                    <input type="radio"
+                      disabled={true}
+                      checked={Tournamentdetails.age_restriction == 1 ? true : false}
+                      name="age_restriction"
+                      id="yes"
+                      value="yes"
+                    />
+                    <label htmlFor="yes">Yes</label>
+                  </div>
+                  <div className="flex items-center space-x-1">
+                    <input type="radio"
+                      disabled={true}
+                      checked={Tournamentdetails.age_restriction == 0 ? true : false}
+                      name="age_restriction"
+                      id="no"
+                    />
+                    <label htmlFor="no">No</label>
+                  </div>
+                </div>
+              </div>
+              {
+                Tournamentdetails.age_restriction
+                ?
+                  <div className="flex flex-col w-full">
+                    <label className="mb-2 text-gray-400">
+                      Age Cut-off
+                    </label>
+                    <div className="border-2 border-orange-100 px-2 py-2 rounded-lg bg-white capitalize font-medium">
+                      <p>
+                        {Tournamentdetails.age_cutoff == '' ? '--' : Tournamentdetails.age_cutoff}
+                      </p>
+                    </div>
+                  </div>
+                :
+                  null
+              }
             </div>
           </div>
           {/* About Tournament */}
           <div className='flex flex-1'>
             <div className='w-full flex flex-col'>
               <label className="mb-2 text-gray-400">About Team</label>
-              <div className={`border-2 border-orange-100 px-2 py-2 capitalize font-medium rounded-lg bg-white ${isPublicView ? 'h-32 lg:h-[328px]' : 'h-32 lg:h-[328px]'} overflow-y-auto`}>
+              <div className={`border-2 border-orange-100 px-2 py-2 capitalize font-medium rounded-lg bg-white overflow-y-auto`}>
                 {Tournamentdetails.about_tournament}
               </div>
             </div>
@@ -179,7 +150,7 @@ const About = () => {
                   ?
                   Tournamentdetails.referee.map((item, index) => {
                     return (
-                      <div className="flex flex-col lg:flex-row items-center w-full gap-6 py-4 ">
+                      <div key={index} className="flex flex-col lg:flex-row items-center w-full gap-6 py-4 ">
                         <div className="flex flex-col w-full">
                           <label className="mb-2 text-gray-400">
                             Referee Name

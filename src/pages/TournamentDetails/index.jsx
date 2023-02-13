@@ -10,19 +10,46 @@ import './TournamentDetails.css'
 
 function TournamentDetails() {
   const [currentTab, setCurrentTab] = React.useState(0);
+  const Tournamentdetails = {
+    starting_date: '11-01-2023',
+    ending_date: '22-01-2023',
+    tournament_type: 'Knock out',
+    tournament_category: 'Only for Boys',
+    tournament_level: 'National',
+    city_name: 'Ahmedabad',
+    about_tournament: 'Hello',
+    referee: [
+      { id: 1, referee_name: 'Shad', referee_mobile: "1234567890" },
+      { id: 2, referee_name: 'Shad', referee_mobile: "1234567890" }
+    ],
+    sponsors: [
+      { 
+        sponsor_name: 'Wellbenix',
+        sponsor_logo: 'https://wellbenix.com/assets/img/wellbenix-logo.png', 
+      },
+      { 
+        sponsor_name: 'Lok Jagruti Kendra',
+        sponsor_logo: '/CBL_Images/tournament_logo_2.webp' 
+      },
+    ],
+    sponsor_mobile: '1234567890',
+    age_restriction: 1,
+    age_cutoff: 'Under 21',
+    prize: "Winner team will get Rs 1 Core"
 
-  const sponsors = [
-    {
-      sponsor_name: 'Wellbenix',
-      sponsor_logo: 'https://wellbenix.com/assets/img/wellbenix-logo.png',
-    },
-    {
-      sponsor_name: 'Lok Jagruti Kendra',
-      sponsor_logo: '/CBL_Images/tournament_logo_2.webp',
-    },
-  ];
+  }
 
-  const tabs = [<Matches />, <Teams/>, <Schedule/>, <Prize/>, <Sponsors sponsors={sponsors}/>, <Gallery/>, <About />]
+  const tabs = [
+    <Matches />, 
+    <Teams/>, 
+    <Schedule/>, 
+    <Prize prize={Tournamentdetails.prize}/>, 
+    <Sponsors sponsors={Tournamentdetails.sponsors}/>, 
+    <Gallery/>, 
+    <About Tournamentdetails={Tournamentdetails} />
+  ]
+
+  const handleTeamRegistration = () => {}
 
   return (
     <section className="min-h-screen-fit">
@@ -34,20 +61,28 @@ function TournamentDetails() {
               <source srcSet="/CBL_Images/tournament_logo_1.webp" type='image/webp' />
               <img src="/CBL_Images/tournament_logo_1.webp" className="rounded-full border-2 border-gray-500 shadow-lg w-16 xs:w-20 sm:w-28"/>
           </div>
-          <div className="flex justify-center items-center">
-              <h1 className="text-lg xs:text-2xl sm:text-3xl text-gray-200 font-semibold px-2 py-4">Champion League</h1>
+          <div className="flex flex-col justify-center items-cente ml-3">
+              <h1 className="text-lg xs:text-2xl sm:text-3xl text-gray-200 font-semibold py-4">Champion League</h1>
+              <div className="w-full flex justify-center">
+                <div className="w-40">
+                  <button onClick={handleTeamRegistration} type="submit" className={`bg-gray-200 relative inline-flex items-center justify-center w-full px-4 py-1 xs:py-1 sm:px-4 sm:py-1.5 overflow-hidden font-medium tracking-tighter text-white rounded-lg cursor-pointer group`}>
+                    <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#ee6730] rounded-lg group-hover:w-full group-hover:h-56"></span>
+                    <span className="relative text-gray-700 text-xs xs:text-sm sm:text-base group-hover:text-white transition-all duration-500 ease-in-out">Register Your Team</span>
+                  </button>
+                </div>
+              </div>
           </div>
         </div>
       </div>
-      <div className="tab-container flex justify-center items-center bg-[#ee6730] h-[45px] overflow-x-auto">
-        <div className='flex justify-center items-center px-5 whitespace-nowrap text-white h-full text-xs sm:text-sm lg:text-base'>
-          <span className={`w-28 flex justify-center items-center ${currentTab == 0 ? 'bg-[#F5F5F7] text-[#ee6730]' : ''} h-full cursor-pointer`} onClick={()=> setCurrentTab(0)}>Matches</span>
-          <span className={`w-28 flex justify-center items-center ${currentTab == 1 ? 'bg-[#F5F5F7] text-[#ee6730]' : ''} h-full cursor-pointer`} onClick={()=> setCurrentTab(1)}>Teams</span>
-          <span className={`w-28 flex justify-center items-center ${currentTab == 2 ? 'bg-[#F5F5F7] text-[#ee6730]' : ''} h-full cursor-pointer`} onClick={()=> setCurrentTab(2)}>Schedule</span>
-          <span className={`w-28 flex justify-center items-center ${currentTab == 3 ? 'bg-[#F5F5F7] text-[#ee6730]' : ''} h-full cursor-pointer`} onClick={()=> setCurrentTab(3)}>Prize</span>
-          <span className={`w-28 flex justify-center items-center ${currentTab == 4 ? 'bg-[#F5F5F7] text-[#ee6730]' : ''} h-full cursor-pointer`} onClick={()=> setCurrentTab(4)}>Sponsors</span>
-          <span className={`w-28 flex justify-center items-center ${currentTab == 5 ? 'bg-[#F5F5F7] text-[#ee6730]' : ''} h-full cursor-pointer`} onClick={()=> setCurrentTab(5)}>Gallery</span>
-          <span className={`w-28 flex justify-center items-center ${currentTab == 6 ? 'bg-[#F5F5F7] text-[#ee6730]' : ''} h-full cursor-pointer`} onClick={()=> setCurrentTab(6)}>About</span>
+      <div className="tab-container bg-[#ee6730] h-[45px] overflow-x-auto">
+        <div className='w-full h-full flex justify-center items-center px-5 space-x-5 text-white text-xs sm:text-sm lg:text-base'>
+          <span className={`w-28 flex justify-center items-center  ${currentTab == 0 ? 'bg-[#F5F5F7] text-[#ee6730]' : ''} h-full cursor-pointer`} onClick={()=> setCurrentTab(0)}>Matches</span>
+          <span className={`w-28 flex justify-center items-center  ${currentTab == 1 ? 'bg-[#F5F5F7] text-[#ee6730]' : ''} h-full cursor-pointer`} onClick={()=> setCurrentTab(1)}>Teams</span>
+          <span className={`w-28 flex justify-center items-center  ${currentTab == 2 ? 'bg-[#F5F5F7] text-[#ee6730]' : ''} h-full cursor-pointer`} onClick={()=> setCurrentTab(2)}>Schedule</span>
+          <span className={`w-28 flex justify-center items-center  ${currentTab == 3 ? 'bg-[#F5F5F7] text-[#ee6730]' : ''} h-full cursor-pointer`} onClick={()=> setCurrentTab(3)}>Prize</span>
+          <span className={`w-28 flex justify-center items-center  ${currentTab == 4 ? 'bg-[#F5F5F7] text-[#ee6730]' : ''} h-full cursor-pointer`} onClick={()=> setCurrentTab(4)}>Sponsors</span>
+          <span className={`w-28 flex justify-center items-center  ${currentTab == 5 ? 'bg-[#F5F5F7] text-[#ee6730]' : ''} h-full cursor-pointer`} onClick={()=> setCurrentTab(5)}>Gallery</span>
+          <span className={`w-28 flex justify-center items-center  ${currentTab == 6 ? 'bg-[#F5F5F7] text-[#ee6730]' : ''} h-full cursor-pointer`} onClick={()=> setCurrentTab(6)}>About</span>
         </div>
       </div>
       <div className='mx-auto px-10 py-12 sm:px-20 sm:py-12 md:px-20 md:py-16 lg:px-24 xl:px-28 2xl:px-32'>

@@ -9,7 +9,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@material-tailwind/react": "^1.2.5",
     "@reduxjs/toolkit": "^1.9.2",
     "@tailwindcss/line-clamp": "^0.4.2",
     "axios": "^1.3.1",
