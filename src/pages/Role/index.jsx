@@ -23,7 +23,7 @@ export default function Role() {
     {
       title: "Team Owner/Manager",
       isSelected: false,
-      path: "/team-registration",
+      path: "/team/add-edit",
       icon: "/icons/team_icon.png",
     },
     {

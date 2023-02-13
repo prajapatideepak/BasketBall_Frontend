@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
+import PlayerList from "./PlayerList";
 import PlayerProfile from "./PlayerProfile";
 import PlayerRegister from "./PlayerRegister/Register";
 
@@ -8,11 +9,11 @@ const Player = () => {
     <>
       <Routes>
         <Route>
-          {/* <Route path="/" element={<NewsPage />} /> */}
+          <Route path="/list" element={<PlayerList />} />
           <Route path="/register" element={<PlayerRegister />} />
           <Route path="/:id" element={<PlayerProfile />} />
 
-          {/* <Route index element={<NewsPage />} /> */}
+          <Route index element={<PlayerList />} />
         </Route>
       </Routes>
     </>
