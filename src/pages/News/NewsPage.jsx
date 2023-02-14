@@ -4,6 +4,7 @@ import { GiBasketballBall } from "react-icons/gi";
 import Loader from "../../Component/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { getNewsData } from "../../redux/actions/News";
+import Heading from "../../Component/Heading";
 
 const NewsPage = () => {
   const dispatch = useDispatch();
@@ -20,8 +21,13 @@ const NewsPage = () => {
       ) : (
         <>
           <div className="flex  justify-center items-center text-[#ee6730] p-2 space-x-3 text-3xl">
-            <h1 className="text-black text-4xl "> News</h1>
-            <GiBasketballBall className="animate-bounce	 text-[#ee6730] " />
+            {/* <h1 className="text-black text-4xl "> News</h1> */}
+            <Heading
+              text={"News"}
+              className={"text-2xl px-6 py-1"}
+              margin={true}
+            />
+            {/* <GiBasketballBall className="animate-bounce	 text-[#ee6730] " /> */}
           </div>
           <div className="mx-6 lg:mx-12 pt-5">
             <div className="lg:grid space-y-5 grid-cols-1 md:grid-cols-2  lg:grid-cols-4 gap-8     ">

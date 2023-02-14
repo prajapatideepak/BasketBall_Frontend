@@ -43,7 +43,7 @@ function AboutUs() {
               <span className="text-2xl text-black">"</span>
             </p>
           </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 mt-10">
+          <div className="flex flex-wrap justify-center lg:grid-cols-4 gap-5 mt-10">
             {features.map((feature) => {
               return <AboutusFeatureCard key={feature} feature={feature} />;
             })}
