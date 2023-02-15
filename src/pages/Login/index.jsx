@@ -6,7 +6,9 @@ import image from "../../../public/CBL_Images/7xm.xyz288133.jpg";
 import google from "../../../public/CBL_Images/google.png";
 import { Formik, useFormik } from "formik";
 import * as Yup from "yup";
-
+import { useDispatch } from "react-redux";
+import { authentication } from "../../redux/actions/User";
+import { useLocalStorage } from "../../hooks/localStorage";
 const signUpSchema = Yup.object({
   email: Yup.string().email().required("Please enter your email"),
   password: Yup.string().required("Please enter password"),
@@ -18,7 +20,8 @@ const initialValues = {
 };
 
 function Login() {
-  const notify = () => toast("Password reset Successfully!!");
+  const dispatch = useDispatch();
+  const notify = () => toast("Login SuccessFull!!");
   const navigate = useNavigate();
 
   const { values, errors, handleBlur, touched, handleChange, handleSubmit } =
@@ -27,12 +30,12 @@ function Login() {
       validationSchema: signUpSchema,
       onSubmit(res) {
         console.log(res, "Res");
+        dispatch(authentication(res));
+        useLocalStorage({ key: "user", value: "eas" });
         notify();
         navigate("/");
       },
     });
-
-  console.log(errors, "formik");
 
   return (
     <div className="flex justify-center items-center lg:space-x-32 xl:space-52 2xl:space-x-48 bg-gray-50 mt-5 lg:mt-8">

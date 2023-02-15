@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { useLocalStorage } from "../../hooks/localStorage";
 
 const UserSlice = createSlice({
   name: "user",
   initialState: {
     user: {},
-    token: "",
+    token: useLocalStorage({ key: "user" }),
   },
   reducers: {
     setToken: (state, action) => {
@@ -12,6 +13,8 @@ const UserSlice = createSlice({
     },
   },
 });
+
+
 
 export const { setToken } = UserSlice.actions;
 
