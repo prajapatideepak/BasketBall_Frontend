@@ -6,7 +6,6 @@ import image from "../../../public/CBL_Images/7xm.xyz288133.jpg";
 import google from "../../../public/CBL_Images/google.png";
 import { Formik, useFormik } from "formik";
 import * as Yup from "yup";
-import { currentUser } from "../../routes";
 
 const signUpSchema = Yup.object({
   email: Yup.string().email().required("Please enter your email"),

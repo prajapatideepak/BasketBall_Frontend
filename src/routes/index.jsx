@@ -11,14 +11,17 @@ import PrivateRoutes from "./PrivateRoutes";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 
-export let currentUser = true;
 const AppRoutes = () => {
+  const { token } = useSelector((state) => state.userReducer);
+
+  console.log(token);
   return (
     <>
       <BrowserRouter>
         <Routes>
-          {currentUser ? (
+          {token ? (
             <>
               <Route path="/*" element={<PrivateRoutes />} />
             </>
