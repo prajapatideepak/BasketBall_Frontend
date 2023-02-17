@@ -3,7 +3,7 @@ import Heading from "../../../Component/Heading";
 
 export default function PlayerInfo({ PlayerDetail }) {
   return (
-    <divsss className="mx-auto text-center">
+    <div className="mx-auto text-center">
       <div className="flex justify-center ">
         <Heading
           text={"Player Information"}
@@ -77,6 +77,6 @@ export default function PlayerInfo({ PlayerDetail }) {
           </div>
         </div>
       </div>
-    </divsss>
+    </div>
   );
 }

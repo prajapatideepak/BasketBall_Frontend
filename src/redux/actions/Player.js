@@ -240,3 +240,7 @@ export const findPlayer = (id) => {
     dispatch(setPlayerDetail(player));
   };
 };
+
+export const setBasicInfoForm = () => {
+  
+};
