@@ -3,23 +3,14 @@ import { useFormik } from "formik";
 import { motion } from "framer-motion";
 import Heading from "../../../Component/Heading";
 import * as Yup from "yup";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setBasicInfoForm } from "../../../redux/actions/Player";
 
 const BasicInfo = ({ index, setIndex }) => {
+  const dispatch = useDispatch();
   const fileRef = React.useRef(null);
   const { PlayerForm } = useSelector((state) => state.playerReducer);
   console.log(PlayerForm);
-
-  let initialValues = {
-    firstName: "",
-    middleName: "",
-    lastName: "",
-    mobileNo: "",
-    alternativeNo: "",
-    dob: "",
-    gender: "",
-    pincode: "",
-  };
 
   const basicInfoSchema = Yup.object({
     firstName: Yup.string()
@@ -62,6 +53,7 @@ const BasicInfo = ({ index, setIndex }) => {
       onSubmit: (values) => {
         console.log(values);
         setIndex(2);
+        dispatch(setBasicInfoForm(values));
       },
     });
 
@@ -71,28 +63,27 @@ const BasicInfo = ({ index, setIndex }) => {
       <form className="flex w-full  space-x-3">
         <div className="w-full  px-5  m-auto dark:bg-gray-800">
           <div className="grid text-lg lg:text-base grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-5   lg:gap-5">
-            <div className="md:col-span-2 flex justify-end flex-col">
-              <h1 className="py-2  px-3 text-2xl text-orange-600">
+            <div className="md:col-span-2 mt-5 flex items-center md:items-start md:justify-end flex-col">
+              <h1 className="py-2 underline underline-offset-4 px-3 text-xl text-orange-600">
                 Basic Information
               </h1>
             </div>
-            <div className="md:col-span-1 md:flex justify-center md:justify-end items-center ">
-              <div className="flex flex-col items-center mb-2 md:items-end md:justify-end px-8">
+            <div className="md:col-span-1   md:flex justify-center md:justify-center items-center ">
+              <div className="flex flex-col items-center mb-2 md:items-center md:justify-end px-8">
                 <img
-                  className="w-24 h-24 rounded-full object-cover"
+                  className="w-24 h-24 md:w-28 md:h-28 rounded-full shadow-xl object-cover"
                   src="/CBL_Images/player-default-profile.webp"
                 />
                 <input
-                  ref={fileRef}
                   type="file"
                   id="for-file-upload"
-                  className="hidden shadow-xl "
+                  className="hidden  "
                   placeholder=""
                 />
-                <div className="mt-2">
+                <div className="mt-2 ">
                   <label
                     htmlFor="for-file-upload"
-                    className="cursor-pointer text-sm font-semibold px-2 bg-orange-600 text-white py-1 rounded shadow-xl "
+                    className="cursor-pointer md:text-lg font-semibold px-4  bg-orange-600 text-white py-1 rounded shadow-xl "
                   >
                     {" "}
                     Upload Image
@@ -236,12 +227,13 @@ const BasicInfo = ({ index, setIndex }) => {
               </label>
               <div className="flex space-x-2 bg-white items-center text-gray-700 rounded-lg border border-gray-300 py-2 px-4">
                 <div className="flex justify-center  items-center space-x-2">
-                  <label className="cursor-pointer" htmlFor="male">
+                  <label className="cursor-pointer" c htmlFor="male">
                     Male
                   </label>
                   <input
                     className="w-4 h-4 cursor-pointer"
                     type="radio"
+                    checked={values.gender == "m"}
                     id="male"
                     name="gender"
                     value={"m"}
@@ -258,6 +250,7 @@ const BasicInfo = ({ index, setIndex }) => {
                     className="w-4 h-4 cursor-pointer"
                     type="radio"
                     id="female"
+                    checked={values.gender == "f"}
                     name="gender"
                     value={"f"}
                     onChange={handleChange}
@@ -275,6 +268,7 @@ const BasicInfo = ({ index, setIndex }) => {
                       type="radio"
                       id="other"
                       name="gender"
+                      checked={values.gender == "o"}
                       onChange={handleChange}
                       onBlur={handleBlur}
                       value={"o"}

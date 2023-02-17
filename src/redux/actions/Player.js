@@ -1,4 +1,8 @@
-import { getPlayers, setPlayerDetail } from "../slices/PlayerSlice";
+import {
+  getPlayers,
+  setBasicForm,
+  setPlayerDetail,
+} from "../slices/PlayerSlice";
 
 const PlayerList = [
   {
@@ -241,6 +245,8 @@ export const findPlayer = (id) => {
   };
 };
 
-export const setBasicInfoForm = () => {
-  
+export const setBasicInfoForm = (basicInfo) => {
+  return async (dispatch) => {
+    dispatch(setBasicForm(basicInfo));
+  };
 };
