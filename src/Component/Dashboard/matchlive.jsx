@@ -1,26 +1,12 @@
 import React, { useState } from 'react';
 import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs';
 import { RxDotFilled } from 'react-icons/rx';
+import { BsFillPlayFill } from 'react-icons/bs';
 
-function MatchLive() {
-  const slides = [
-    {
-      url: 'https://resources.prod.fiba.pulselive.com/photo-resources/2022/06/17/a349e782-c409-4516-b660-adc0a83dee84/Africa-WCQW3-Banner.jpg?height=1080&width=1920',
-    },
-    {
-      url: 'https://resources.prod.fiba.pulselive.com/photo-resources/2022/06/17/867faf69-cbb1-4e53-8cd6-2d68420f368f/Europe-WCQW3-Banner.jpg?height=1080&width=1920',
-    },
-    // {
-    //   url: 'https://images.unsplash.com/photo-1661961112951-f2bfd1f253ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2672&q=80',
-    // },
 
-    // {
-    //   url: 'https://images.unsplash.com/photo-1512756290469-ec264b7fbf87?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2253&q=80',
-    // },
-    // {
-    //   url: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2671&q=80',
-    // },
-  ];
+
+function MatchLive({slides}) {
+
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -41,13 +27,32 @@ function MatchLive() {
   };
 
   return (
-    <div className=' h-[500px] w-full  py-0 my-5 top-4 relative  group'>
-     <div className='bg-black/20 absolute h-full min-w-full rounded-2xl'>
-        jdf
-    </div>
+    <div className=' h-[500px] w-full   py-0 my-5 top-4 relative  group  shadow-xl'>
+      <div className='bg-gradient-to-t from-black/60 absolute h-full bottom-0 min-w-full rounded-b-2xl flex flex-col justify-end'>
+        <div className='bg-red-500 flex items-center absolute left-10 bottom-60 cursor-pointer pr-2 px-1 rounded-md text-white  '>
+          <RxDotFilled className='' />
+          <p className='font-bold'>Live</p>
+        </div>
+        <div className=''>
+          <div className='flex items-center text-white absolute bottom-48 left-10 gap-3'>
+            <h1 className='text-2xl font-bold uppercase'>MEHTA KE MAHAARATHI</h1>
+            <p className='text-4xl font-bold '>V<span className='text-white font-bold text-4xl'>S</span></p>
+            <h1 className='text-2xl font-bold uppercase'>JETHA KE JABAAZ</h1>
+          </div>
+          <div className='absolute bottom-40 left-10'>
+            <p className='text-gray-400'>Gokuldham Premier League</p>
+          </div>
+        </div>
+        <div>
+          <button className='bg-[#ff5000] text-white duration-300 absolute flex gap-1 items-center bottom-24 rounded-lg font-medium hover:bg-white hover:text-[#ee6730] px-14 py-[10px] left-10'>
+            <BsFillPlayFill className='text-xl' />
+            Watch Now
+          </button>
+        </div>
+      </div>
       <div
         style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
-        className='w-full h-full rounded-2xl bg-center bg-cover duration-500'
+        className='w-full h-full rounded-2xl bg-center bg-cover'
       ></div>
       {/* Left Arrow */}
       <div className='hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] left-4 text-2xl rounded-full p-2 bg-black/20 duration-300 hover:bg-black text-white cursor-pointer'>
@@ -57,7 +62,7 @@ function MatchLive() {
       <div className='hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-4 text-2xl rounded-full p-2 bg-black/20 duration-300 hover:bg-black text-white cursor-pointer'>
         <BsChevronCompactRight onClick={nextSlide} size={30} />
       </div>
-      <div className='flex top-4 justify-center py-2'>
+      <div className='flex top-4 justify-center py-2 '>
         {slides.map((slide, slideIndex) => (
           <div
             key={slideIndex}
