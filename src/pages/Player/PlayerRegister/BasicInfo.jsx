@@ -83,7 +83,7 @@ const BasicInfo = ({ index, setIndex }) => {
                 <div className="mt-2 ">
                   <label
                     htmlFor="for-file-upload"
-                    className="cursor-pointer md:text-lg font-semibold px-4  bg-orange-600 text-white py-1 rounded shadow-xl "
+                    className="cursor-pointer text-sm   font-semibold px-4  bg-orange-600 text-white py-1 rounded shadow-xl "
                   >
                     {" "}
                     Upload Image
@@ -226,7 +226,7 @@ const BasicInfo = ({ index, setIndex }) => {
                 <span className="text-red-500 required-dot">*</span>
               </label>
               <div className="flex space-x-2 bg-white items-center text-gray-700 rounded-lg border border-gray-300 py-2 px-4">
-                <div className="flex justify-center  items-center space-x-2">
+                <div className="flex  justify-center  items-center space-x-2">
                   <label className="cursor-pointer" c htmlFor="male">
                     Male
                   </label>
@@ -276,7 +276,11 @@ const BasicInfo = ({ index, setIndex }) => {
                   </div>
                 </div>
               </div>
-              <span className="text-sm font-semibold text-red-600 px-1">
+              <span
+                className={`text-sm font-semibold  text-red-600 px-1 ${
+                  errors.gender && touched.gender ? "" : "hidden  "
+                }`}
+              >
                 {errors.gender && touched.gender ? errors.gender : null}
               </span>
             </div>
