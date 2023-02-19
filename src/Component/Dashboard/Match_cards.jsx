@@ -3,7 +3,6 @@
 import React from 'react'
 import { IoLocationSharp } from 'react-icons/io5'
 import { RxDotFilled } from 'react-icons/rx';
-import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs';
 
 
 function Match_cards({ id, day, date, is_live, time, first_team, secound_team, F_logo, s_logo, tournament, location, tournament_logo }) {
@@ -49,14 +48,7 @@ function Match_cards({ id, day, date, is_live, time, first_team, secound_team, F
           </div>
         </div>
       </div>
-      {/* Left Arrow */}
-      <div className='hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] left-4 text-2xl rounded-full p-2 bg-black/20 duration-300 hover:bg-black text-white cursor-pointer'>
-        <BsChevronCompactLeft onClick={prevSlide} size={30} />
-      </div>
-      {/* Right Arrow */}
-      <div className='hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-4 text-2xl rounded-full p-2 bg-black/20 duration-300 hover:bg-black text-white cursor-pointer'>
-        <BsChevronCompactRight onClick={nextSlide} size={30} />
-      </div>
+  
     </div>
   )
 }

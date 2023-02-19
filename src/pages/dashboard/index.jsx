@@ -3,6 +3,8 @@ import MatchLive from "../../Component/Dashboard/matchlive";
 import Match_cards from "../../Component/Dashboard/Match_cards";
 import { BiChevronRight } from "react-icons/bi"
 import Hilights_Cards from "../../Component/Dashboard/Highlights_cards";
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+
 
 const Dashboard = () => {
   const slides = [
@@ -161,7 +163,7 @@ const Dashboard = () => {
         </div>
         <div className="bg-gray-700 h-[1px] w-full my-1 bg-gradient-to-l from-slate-50">
         </div>
-        <div className=" w-full flex justify-start items-center px-10  gap-8 sm:gap-16 md:gap-5 my-5 overflow-hidden py-10">
+        <div className=" w-full flex justify-start  items-center px-5 gap-8 sm:gap-16 md:gap-5 my-5 overflow-x-auto  player-container py-10">
           {
             matches.length > 0
               ?
@@ -190,11 +192,12 @@ const Dashboard = () => {
               </div>
           }
         </div>
+
       </div>
 
       {/* Highlights previus matches  */}
-      <div className="py-10  px-20 ">
-        <div className="flex justify-between items-center">
+      <div className=" my-5 px-20 ">
+        <div className="flex justify-between items-center ">
           <h1 className="font-bold text-3xl text-black">
             Highlights of The Week :
           </h1>
@@ -207,7 +210,7 @@ const Dashboard = () => {
         </div>
         <div className="bg-gray-700 h-[1px] w-full my-1 bg-gradient-to-l from-slate-50">
         </div>
-        <div className=" relative flex justify-start  px-10 items-center gap-8 sm:gap-16 md:gap-20 my-5  py-10 ">
+        <div className=" relative flex justify-start  px-5 items-center gap-8 sm:gap-16 md:gap-20 my-5  py-10 ">
           {
             Highlights.length > 0
               ?
