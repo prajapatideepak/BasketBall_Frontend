@@ -27,17 +27,17 @@ function MatchLive({slides}) {
   };
 
   return (
-    <div className=' h-[500px] w-full   py-0 my-5 top-4 relative  group  shadow-xl'>
-      <div className='bg-gradient-to-t from-black/60 absolute h-full bottom-0 min-w-full rounded-b-2xl flex flex-col justify-end'>
+    <div className=' h-[500px] w-full relative  group  shadow-xl'>
+      <div className='bg-gradient-to-t from-black/100 absolute h-full bottom-0 min-w-full rounded-b-2xl flex flex-col justify-end'>
         <div className='bg-red-500 flex items-center absolute left-10 bottom-60 cursor-pointer pr-2 px-1 rounded-md text-white  '>
           <RxDotFilled className='' />
           <p className='font-bold'>Live</p>
         </div>
         <div className=''>
           <div className='flex items-center text-white absolute bottom-48 left-10 gap-3'>
-            <h1 className='text-2xl font-bold uppercase'>MEHTA KE MAHAARATHI</h1>
-            <p className='text-4xl font-bold '>V<span className='text-white font-bold text-4xl'>S</span></p>
-            <h1 className='text-2xl font-bold uppercase'>JETHA KE JABAAZ</h1>
+            <h1 className='text-3xl font-bold uppercase'>MEHTA KE MAHAARATHI</h1>
+            <p className='text-2xl font-bold '>V<span className='text-[#ee6730] font-bold text-2xl'>S</span></p>
+            <h1 className='text-3xl font-bold uppercase'>JETHA KE JABAAZ</h1>
           </div>
           <div className='absolute bottom-40 left-10'>
             <p className='text-gray-400'>Gokuldham Premier League</p>
