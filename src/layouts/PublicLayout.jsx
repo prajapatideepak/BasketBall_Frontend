@@ -11,10 +11,15 @@ const PublicLayout = () => {
     return (
         <div className='w-full'>
             <div className="py-3 h-[70px] bg-black px-9 md:flex items-center justify-between sticky top-0 z-[9999] w-full">
-                <div className='inline-block'>
-                    <Link to={"/"}>
-                        <h1 className='font-bold text-3xl font-mono text-white'>The<span className='text-[#ee6730]'>CBL</span></h1>
-                    </Link>
+                <div className="w-[18%] sm:w-[10%] md:w-[8%] xl:w-[6%] 2xl:w-[4%] ">
+                    <img
+                        src="/CBL_Images/logo.png"
+                        alt=""
+                        className="cursor-pointer"
+                        onClick={() => {
+                            navigate("/");
+                        }}
+                    />
                 </div>
                 <div className='text-3xl text-white absolute right-8 top-4 cursor-pointer lg:hidden' onClick={() => setOpen(!open)}>
                     <ion-icon name={open ? "close" : "menu"} ></ion-icon>
