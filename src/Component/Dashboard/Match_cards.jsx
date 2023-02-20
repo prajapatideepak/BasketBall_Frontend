@@ -5,6 +5,7 @@ import { IoLocationSharp } from 'react-icons/io5'
 import { RxDotFilled } from 'react-icons/rx';
 
 
+
 function Match_cards({ id, day, date, is_live, time, first_team, secound_team, F_logo, s_logo, tournament, location, tournament_logo }) {
 
 
@@ -48,7 +49,7 @@ function Match_cards({ id, day, date, is_live, time, first_team, secound_team, F
           </div>
         </div>
       </div>
-  
+    
     </div>
   )
 }
