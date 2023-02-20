@@ -248,7 +248,7 @@ function TeamAddEdit() {
                 <input
                   className="w-full cursor-pointer rounded-lg bg-white border-2 border-gray-200 p-1 sm:p-2 text-sm"
                   type="file"
-                  name="team_logo"
+                  name="team_l"
                   id="team_logo"
                   accept=".png, .jpg, .jpeg"
                   value={values.team_logo}

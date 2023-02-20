@@ -1,4 +1,8 @@
-import { getPlayers, setPlayerDetail } from "../slices/PlayerSlice";
+import {
+  getPlayers,
+  setBasicForm,
+  setPlayerDetail,
+} from "../slices/PlayerSlice";
 
 const PlayerList = [
   {
@@ -92,7 +96,7 @@ const PlayerList = [
     status: true,
     basicinfo: {
       img: "/CBL_Images/7xm.xyz441074.jpg",
-      firstName: "Shad",
+      firstName: "Umang",
       email: "wellbenix@gmail.com",
       lastName: "Prajapati",
       dateofbirth: new Date(),
@@ -238,5 +242,11 @@ export const findPlayer = (id) => {
   const player = PlayerList.find((player) => player.id == id);
   return async (dispatch) => {
     dispatch(setPlayerDetail(player));
+  };
+};
+
+export const setBasicInfoForm = (basicInfo) => {
+  return async (dispatch) => {
+    dispatch(setBasicForm(basicInfo));
   };
 };

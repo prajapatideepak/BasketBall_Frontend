@@ -5,6 +5,18 @@ const PlayerSlice = createSlice({
   initialState: {
     PlayerList: [],
     PlayerDetail: {},
+    PlayerForm: {
+      basicInfo: {
+        firstName: "",
+        middleName: "",
+        lastName: "",
+        mobileNo: "",
+        alternativeNo: "",
+        dob: "",
+        gender: "",
+        pincode: "",
+      },
+    },
   },
   reducers: {
     getPlayers: (state, action) => {
@@ -15,8 +27,12 @@ const PlayerSlice = createSlice({
     setPlayerDetail: (state, action) => {
       state.PlayerDetail = action.payload;
     },
+    setBasicForm: (state, action) => {
+      state.PlayerForm.basicInfo = action.payload;
+    },
   },
 });
 
-export const { getPlayers, setPlayerDetail } = PlayerSlice.actions;
+export const { getPlayers, setPlayerDetail, setBasicForm } =
+  PlayerSlice.actions;
 export default PlayerSlice.reducer;

@@ -56,27 +56,11 @@ export default function PlayerRegister() {
             2
           </motion.div>
         </div>
-        {index <= 1 ? <BasicInfo /> : <GameInfo />}
-        <motion.div className="flex justify-between items-center p-4 ">
-          <div>
-            {index > 1 && (
-              <button
-                onClick={(e) => setIndex(index - 1)}
-                className="px-6 bg-gray-50 border-black py-1  border rounded text-gray-800 text-lg    "
-              >
-                Back
-              </button>
-            )}
-          </div>
-          <div>
-            <button
-              onClick={(e) => setIndex(2)}
-              className="px-6 font-semibold bg-orange-600 border-orange-800 py-1  border rounded text-white text-lg    "
-            >
-              {index > 1 ? "Submit" : "Next"}
-            </button>
-          </div>
-        </motion.div>
+        {index <= 1 ? (
+          <BasicInfo index={index} setIndex={setIndex} />
+        ) : (
+          <GameInfo index={index} setIndex={setIndex} />
+        )}
       </div>
     </div>
   );
