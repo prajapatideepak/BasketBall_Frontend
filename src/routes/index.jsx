@@ -13,7 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 
-export let currentUser = true;
+export let currentUser = false;
 const AppRoutes = () => {
   const { token } = useSelector((state) => state.userReducer);
 
