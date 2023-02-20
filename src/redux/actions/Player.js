@@ -96,7 +96,7 @@ const PlayerList = [
     status: true,
     basicinfo: {
       img: "/CBL_Images/7xm.xyz441074.jpg",
-      firstName: "Shad",
+      firstName: "Umang",
       email: "wellbenix@gmail.com",
       lastName: "Prajapati",
       dateofbirth: new Date(),

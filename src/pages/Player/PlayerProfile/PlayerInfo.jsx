@@ -9,7 +9,7 @@ export default function PlayerInfo({ PlayerDetail }) {
           text={"Player Information"}
           className="text-lg md:text-2xl text-center  "
           margin={true}
-        />
+        /> 
       </div>
       {/*  */}
       <div className="text-left pt-4 ">
