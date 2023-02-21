@@ -8,7 +8,7 @@ function LandingPage() {
     return (
         <>
             <div className="min-h-screen ">
-                <div className=" flex flex-col px-10 items-start justify-between ">
+                <div className=" flex flex-col px-10 lg:px-20 items-start justify-between ">
                     <div className="bg-[#F5F5F7] pb-24 sm:pb-5 md:pb-2 w-full flex  flex-col justify-between items-center  md:items-start   ">
                         <div className=" z-40 sm:space-y-0 2xl:space-y-4 text-white font-sans   || mt-2 md:mt-5 lg:mt-10 || 
                 flex flex-col justify-start items-center sm:items-start lg:justify-center ">
