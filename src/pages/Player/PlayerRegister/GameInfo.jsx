@@ -38,6 +38,7 @@ const GameInfo = ({ index, setIndex }) => {
       },
     });
 
+  console.log(values.playerPosition);
   console.log(errors);
   return (
     <>
@@ -46,7 +47,7 @@ const GameInfo = ({ index, setIndex }) => {
           <h1 className="py-2 text-xl text-center md:text-left my-5 text-orange-600">
             Game Information
           </h1>
-          <div className="grid text-lg lg:text-base grid-cols-1 md:grid-cols-2  gap-8   lg:gap-4">
+          <div className="grid text-lg lg:text-base grid-cols-1 md:grid-cols-2  gap-4   lg:gap-4">
             <div className="  ">
               <label htmlFor="required-email" className="text-gray-700">
                 Height (cm)
@@ -101,7 +102,7 @@ const GameInfo = ({ index, setIndex }) => {
                 className=" rounded-lg border-transparent flex-1  border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
                 name="playerPosition"
               >
-                <option value={null}>Select Position</option>
+                <option value={""}>Select Position</option>
 
                 <option value="point guard">Point Guard</option>
                 <option value="shooting guard">Shooting Guard</option>
@@ -153,6 +154,11 @@ const GameInfo = ({ index, setIndex }) => {
                 name="Experience"
                 placeholder="Write About Yourself and Your Achivement and Experience "
               />
+              <span className="text-sm font-semibold text-red-600 px-1">
+                {errors.Experience && touched.Experience
+                  ? errors.Experience
+                  : null}
+              </span>
             </div>
             {/* for last name */}
 
