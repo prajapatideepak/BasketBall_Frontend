@@ -1,6 +1,7 @@
 import {
   getPlayers,
   setBasicForm,
+  setGameForm,
   setPlayerDetail,
 } from "../slices/PlayerSlice";
 
@@ -248,5 +249,11 @@ export const findPlayer = (id) => {
 export const setBasicInfoForm = (basicInfo) => {
   return async (dispatch) => {
     dispatch(setBasicForm(basicInfo));
+  };
+};
+
+export const setGameInfoForm = (basicInfo) => {
+  return async (dispatch) => {
+    dispatch(setGameForm(basicInfo));
   };
 };
