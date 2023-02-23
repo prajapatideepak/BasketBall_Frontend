@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 function Button({text , dataModalTarget='', dataModalToggle='', margin=true, onClick}) {
     
@@ -10,4 +10,4 @@ function Button({text , dataModalTarget='', dataModalToggle='', margin=true, onC
     )
 }
 
-export default Button
+export default Button;

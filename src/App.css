@@ -61,5 +61,15 @@
   opacity: 0;
   visibility: hidden;
   transform: translateY(-20px);
-  transition: .4s ease;
+  transition: .4s ease-in-out;
+}
+
+/* Dashboard */
+
+.dot-active{
+  border: 2px solide #ee6730;
+}
+
+.dot{
+  border: none;
 }

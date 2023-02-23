@@ -13,7 +13,6 @@ import Tournamentregistration from "../pages/TournamentAddEdit";
 import VisitorProfile from "../pages/Profile";
 import Tournaments from "../pages/TournamentsList";
 import TournamentsOfOrganizer from "../pages/TournamentsOfOrganizer";
-import Registration from "../pages/Registration";
 import TournamentDetails from "../pages/TournamentDetails";
 import AfterRole from "../pages/RegisterAfterLogin";
 import TermsandConditions from "../pages/Term&Condistions";

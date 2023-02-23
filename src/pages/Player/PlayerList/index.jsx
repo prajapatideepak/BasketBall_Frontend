@@ -25,8 +25,8 @@ const PlayerList = () => {
     <div className="flex min-h-screen px-2 lg:px-16  py-8">
       <div className="mx-auto w-full">
         <Heading
-          className={"text-3xl px-4  "}
-          margin={true}
+          className={"text-xl md:text-3xl px-3 sm:px-7 py-1 font-mono  "}
+          margin={false}
           text={"Player List"}
         />
         <div className="flex m-5  justify-center ">
@@ -50,7 +50,7 @@ const PlayerList = () => {
         </div>
 
         <div className="">
-          <div className="flex justify-between items-center px-8">
+          <div className="flex  justify-between items-center px-8">
             {/* <h1 className="text-2xl">Top Play</h1> */}
             {/* <select
               type="text"
@@ -67,13 +67,14 @@ const PlayerList = () => {
               <option value="shooting forward">Shooting Forward</option>
             </select> */}
           </div>
-          <div className="flex w-full  mx-auto flex-col items-center px-4 lg:px-8 py-1 space-y-6">
+
+          <div className="flex w-full   mx-auto flex-col items-center px-4 lg:px-8 py-1 space-y-6">
             {PlayerList?.map((player) => {
               return (
                 <Link className="Link" to={`/player/${player.id}`}>
-                  <div className="md:flex hover:bg-gray-600 duration-300 items-center justify-between bg-gray-800  text-white shadow-xl rounded-xl px-4 lg:px-8 py-2 lg:py-4 w-full ">
+                  <div className="md:flex   duration-300  justify-between bg-white   text-black shadow-xl rounded-xl  w-full  ">
                     {/* avtar start */}
-                    <div className="text-center justify-center   w-full space-x-2 lg:w-2/5 flex  ">
+                    <div className="text-center   px-4 lg:px-8 py-2 lg:py-4 justify-center   w-full space-x-2 lg:w-2/5 flex  ">
                       <img
                         src={player.basicinfo.img}
                         className=" object-cover w-20  h-20 rounded-full "
@@ -98,38 +99,40 @@ const PlayerList = () => {
                     </div>
                     {/* avtar end */}
                     {/* statiscs start */}
-                    <div className="grid grid-cols-4 pt-2  lg:gap-10   ">
-                      <div className="text-center    ">
-                        <h1 className="text-sm lg:text-2xl font-bold">
-                          {player.statics.totalMatch}
-                        </h1>
-                        <span className="text-xs lg:text-lg text-gray-200">
-                          Total Match
-                        </span>
-                      </div>
-                      <div className="text-center   ">
-                        <h1 className="text-sm lg:text-2xl text-green-600 font-bold">
-                          {player.statics.matchWon}
-                        </h1>
-                        <span className="text-xs lg:text-lg text-gray-200">
-                          Match Won
-                        </span>
-                      </div>
-                      <div className="text-center   text-red-600 ">
-                        <h1 className="text-sm lg:text-2xl  font-bold">
-                          {player.statics.matchLoss}
-                        </h1>
-                        <span className="text-xs lg:text-lg text-gray-200">
-                          Match loss
-                        </span>
-                      </div>
-                      <div className="text-center   text-green-600 ">
-                        <h1 className="text-sm lg:text-2xl  font-bold">
-                          {player.statics.totalScore}
-                        </h1>
-                        <span className="text-xs lg:text-lg text-gray-200">
-                          Total Score
-                        </span>
+                    <div className="justify-center p-2 bg-gradient-to-tl from-orange-400 via-orange-700 to-orange-900 flex items-center px-4 rounded-b-xl md:rounded-bl-none md:rounded-br-xl md:rounded-r-lg  ">
+                      <div className="grid xxs:grid-cols-2 xs:grid-cols-4 text-white place-content-center  gap-2 lg:gap-10   ">
+                        <div className="text-center    ">
+                          <h1 className="text-sm lg:text-2xl font-bold">
+                            {player.statics.totalMatch}
+                          </h1>
+                          <span className="text-xs lg:text-lg text-gray-200">
+                            Total Match
+                          </span>
+                        </div>
+                        <div className="text-center   ">
+                          <h1 className="text-sm lg:text-2xl font-bold">
+                            {player.statics.matchWon}
+                          </h1>
+                          <span className="text-xs lg:text-lg text-gray-200">
+                            Match Won
+                          </span>
+                        </div>
+                        <div className="text-center   text-red-100 ">
+                          <h1 className="text-sm lg:text-2xl  font-bold">
+                            {player.statics.matchLoss}
+                          </h1>
+                          <span className="text-xs lg:text-lg text-gray-200">
+                            Match loss
+                          </span>
+                        </div>
+                        <div className="text-center   text-white">
+                          <h1 className="text-sm lg:text-2xl  font-bold">
+                            {player.statics.totalScore}
+                          </h1>
+                          <span className="text-xs lg:text-lg text-gray-200">
+                            Total Score
+                          </span>
+                        </div>
                       </div>
                     </div>
                     {/* statics end */}
