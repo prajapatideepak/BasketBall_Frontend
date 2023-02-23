@@ -131,7 +131,7 @@ const About = ({Tournamentdetails}) => {
           {/* About Tournament */}
           <div className='flex flex-1'>
             <div className='w-full flex flex-col'>
-              <label className="mb-2 text-gray-400">About Team</label>
+              <label className="mb-2 text-gray-400">About Tournament</label>
               <div className={`border-2 border-orange-100 px-2 py-2 capitalize font-medium rounded-lg bg-white overflow-y-auto`}>
                 {Tournamentdetails.about_tournament}
               </div>

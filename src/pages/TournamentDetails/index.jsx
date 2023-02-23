@@ -7,9 +7,13 @@ import Sponsors from './Sponsors'
 import Gallery from './Gallery'
 import About from './About'
 import './TournamentDetails.css'
+import TeamsModal from './TeamsModal'
 
 function TournamentDetails() {
   const [currentTab, setCurrentTab] = React.useState(0);
+   const [openTeamsModal, setOpenTeamsModal] = React.useState(false);
+  const handleOpenTeamsModal = ()=> setOpenTeamsModal(!openTeamsModal);
+
   const Tournamentdetails = {
     starting_date: '11-01-2023',
     ending_date: '22-01-2023',
@@ -49,8 +53,6 @@ function TournamentDetails() {
     <About Tournamentdetails={Tournamentdetails} />
   ]
 
-  const handleTeamRegistration = () => {}
-
   return (
     <section className="min-h-screen-fit">
       <div className='mx-auto px-10 py-4 sm:px-20 sm:py-6 md:px-20 md:py-8 lg:px-24 xl:px-28 2xl:px-32 bg-black'>
@@ -65,7 +67,7 @@ function TournamentDetails() {
               <h1 className="text-lg xs:text-2xl sm:text-3xl text-gray-200 font-semibold py-4">Champion League</h1>
               <div className="w-full flex justify-center">
                 <div className="w-40">
-                  <button onClick={handleTeamRegistration} type="submit" className={`bg-gray-200 relative inline-flex items-center justify-center w-full px-4 py-1 xs:py-1 sm:px-4 sm:py-1.5 overflow-hidden font-medium tracking-tighter text-white rounded-lg cursor-pointer group`}>
+                  <button onClick={()=>setOpenTeamsModal(true)} type="submit" className={`bg-gray-200 relative inline-flex items-center justify-center w-full px-4 py-1 xs:py-1 sm:px-4 sm:py-1.5 overflow-hidden font-medium tracking-tighter text-white rounded-lg cursor-pointer group`}>
                     <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#ee6730] rounded-lg group-hover:w-full group-hover:h-56"></span>
                     <span className="relative text-gray-700 text-xs xs:text-sm sm:text-base group-hover:text-white transition-all duration-500 ease-in-out">Register Your Team</span>
                   </button>
@@ -90,6 +92,7 @@ function TournamentDetails() {
           tabs[currentTab]
         }
       </div>
+      <TeamsModal openTeamsModal={openTeamsModal} handleOpenTeamsModal={handleOpenTeamsModal} />
     </section>
   )
 }

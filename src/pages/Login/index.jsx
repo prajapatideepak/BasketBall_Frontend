@@ -21,7 +21,7 @@ const initialValues = {
 
 function Login() {
   const dispatch = useDispatch();
-  const notify = () => toast("Login SuccessFull!!");
+  const notify = () => toast("Login Successfull!!");
   const navigate = useNavigate();
 
   const { values, errors, handleBlur, touched, handleChange, handleSubmit } =

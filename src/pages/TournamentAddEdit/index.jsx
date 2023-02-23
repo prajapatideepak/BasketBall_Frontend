@@ -485,13 +485,13 @@ function Tournamentregistration() {
                       onClick={handleaddsponsor}
                     >
                       <div
-                        className="bg-green-500 border-2 hover:border-green-500 hover:text-green-500 relative inline-flex items-center justify-center px-3 py-2 overflow-hidden text-white
+                        className="bg-green-600 border-2 hover:border-green-600 hover:text-green-600 relative inline-flex items-center justify-center px-3 py-2 overflow-hidden text-white
                                                      rounded-lg cursor-pointer group"
                       >
                         <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-white rounded-lg group-hover:w-full group-hover:h-56"></span>
                         <span className="relative flex items-center space-x-2 ">
                           <FaUserPlus className="text-xl" />
-                          <h1 className="text-sm">Add Sponsor</h1>
+                          <h1 className="text-sm">Add Referee</h1>
                         </span>
                       </div>
                     </div>
@@ -556,7 +556,7 @@ function Tournamentregistration() {
                       onClick={handleaddsponsor}
                     >
                       <div
-                        className="bg-green-500 border-2 hover:border-green-500 hover:text-green-500 relative inline-flex items-center justify-center px-3 py-2 overflow-hidden text-white
+                        className="bg-green-600 border-2 hover:border-green-600 hover:text-green-600 relative inline-flex items-center justify-center px-3 py-2 overflow-hidden text-white
                                                      rounded-lg cursor-pointer group"
                       >
                         <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-white rounded-lg group-hover:w-full group-hover:h-56"></span>

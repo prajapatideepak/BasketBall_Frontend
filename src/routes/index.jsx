@@ -17,7 +17,6 @@ export let currentUser = false;
 const AppRoutes = () => {
   const { token } = useSelector((state) => state.userReducer);
 
-  console.log(token);
   return (
     <>
       <BrowserRouter>

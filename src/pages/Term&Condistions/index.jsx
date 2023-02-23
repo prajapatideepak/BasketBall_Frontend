@@ -6,13 +6,13 @@ const TermsandCondition = () => {
     const Termsandcondition = [
         {
             id: 1,
-            heading: " 1. Agreements",
+            heading: " 1. Agrements",
             subheading: "Introduction",
             paragraph: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi sed facere ut ea eaque, nam, veniam sapiente qui vel obcaecati laudantium enim quis maxime magni labore cupiditate perferendis repellendus dolore?"
         },
         {
             id: 2,
-            heading: "2. Survices",
+            heading: "2. Services",
             subheading: "Introduction",
             paragraph: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi sed facere ut ea eaque, nam, veniam sapiente qui vel obcaecati laudantium enim quis maxime magni labore cupiditate perferendis repellendus dolore?"
         }
