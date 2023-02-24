@@ -192,9 +192,9 @@ function AsideMenuMain() {
             onClick={() => setOpen(!open)}
           >
             {open ? (
-              <RxCross1 className="text-slate-400 hover:text-white  cursor-pointer text-2xl" />
+              <RxCross1 className="text-slate-400 hover:text-white  cursor-pointer hover:rotate-90 duration-700 text-[22px]" />
             ) : (
-              <RxHamburgerMenu className="text-slate-400 hover:text-white  cursor-pointer text-2xl" />
+              <RxHamburgerMenu className="text-slate-400 hover:text-white hover:rotate-90 duration-700  cursor-pointer text-2xl" />
             )}
           </div>
         </div>

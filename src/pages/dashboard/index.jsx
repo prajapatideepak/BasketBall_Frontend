@@ -9,7 +9,7 @@ import Tournaments_cards from "../../Component/Dashboard/Tournaments_cards";
 
 
 const Dashboard = () => {
-  const slides = [
+  const SliderData = [
     {
       id: 1,
       url: '../../CBL_Images/background4.webp',
@@ -21,7 +21,7 @@ const Dashboard = () => {
     {
       id: 2,
       url: '../../CBL_Images/background3.webp',
-      Tournament: "Gokuldham Premier League",
+      Tournament: "CBL Legue",
       Fisrt_Team: "MEHTA KE MAHAARATHI",
       Secound_Team: "JETHA KE JABAAZ",
       is_live: 0,
@@ -43,6 +43,7 @@ const Dashboard = () => {
       is_live: 0,
     },
   ];
+
 
   const matches = [
     {
@@ -160,8 +161,7 @@ const Dashboard = () => {
     },
   ]
 
-
-  const News = [
+ const News = [
     {
       id: 1,
       photo: "../../CBL_Images/sd_11zon.webp",
@@ -228,8 +228,8 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen ">
       {/* Main Slider for live and upcoming matches */}
-      <div className="py-10 px-24">
-        <MatchLive slides={slides} />
+      <div className="bg-gray-600">
+        <MatchLive slides={SliderData} />
       </div>
 
       {/* Live and Upcoming match  */}
@@ -288,8 +288,8 @@ const Dashboard = () => {
               size={30} />
           </div>
         </div>
-
       </div>
+
 
 
       {/* Tournaments  */}
