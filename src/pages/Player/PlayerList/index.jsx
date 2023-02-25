@@ -3,21 +3,17 @@ import Heading from "../../../Component/Heading";
 import { AiOutlineSearch, AiFillEye } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { getPlayerList, searchPlayers } from "../../../redux/actions/Player";
-import PlayerAvtar from "../PlayerAvtar";
 import { Link } from "react-router-dom";
 const PlayerList = () => {
   const { PlayerList } = useSelector((state) => state.playerReducer);
   const [search, setSearch] = React.useState("");
   const dispatch = useDispatch();
 
-  console.log(PlayerList);
-
   React.useEffect(() => {
     dispatch(getPlayerList());
   }, []);
 
   function handleSubmit() {
-    console.log("ho");
     dispatch(searchPlayers(search));
   }
 
@@ -50,29 +46,15 @@ const PlayerList = () => {
         </div>
 
         <div className="">
-          <div className="flex  justify-between items-center px-8">
-            {/* <h1 className="text-2xl">Top Play</h1> */}
-            {/* <select
-              type="text"
-              id="required-email"
-              className="w-1/5 rounded-lg border-transparent   border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
-              name="email"
-            >
-              <option>All Player</option>
-
-              <option value="point guard">Point Guard</option>
-              <option value="shooting guard">Shooting Guard</option>
-              <option value="center">Center</option>
-              <option value="power forward">Power Forward</option>
-              <option value="shooting forward">Shooting Forward</option>
-            </select> */}
-          </div>
-
-          <div className="flex w-full   mx-auto flex-col items-center px-4 lg:px-8 py-1 space-y-6">
+          <div className="flex w-full   flex-col items-center px-4 lg:px-8 py-1 space-y-6">
             {PlayerList?.map((player) => {
               return (
-                <Link className="Link" to={`/player/${player.id}`}>
-                  <div className="md:flex   duration-300  justify-between bg-white   text-black shadow-xl rounded-xl  w-full  ">
+                <Link
+                  key={player.id}
+                  className="w-full  scale-105"
+                  to={`/player/${player.id}`}
+                >
+                  <div className="md:flex duration-300  justify-between bg-white text-black shadow-xl rounded-xl  w-full">
                     {/* avtar start */}
                     <div className="text-center   px-4 lg:px-8 py-2 lg:py-4 justify-center   w-full space-x-2 lg:w-2/5 flex  ">
                       <img

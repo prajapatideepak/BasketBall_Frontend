@@ -234,9 +234,8 @@ export const searchPlayers = (search) => {
     const Searchresult = PlayerList.filter((player) =>
       player.basicinfo.firstName.toLowerCase().includes(search.toLowerCase())
     );
-    console.log("s", Searchresult);
     dispatch(getPlayers(Searchresult));
-  };
+  };  
 };
 
 export const findPlayer = (id) => {

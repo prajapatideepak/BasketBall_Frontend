@@ -18,9 +18,7 @@ export default function PlayerProfile() {
     dispatch(findPlayer(params.id));
   }, []);
 
-  console.log(PlayerDetail);
   const [tab, setTab] = React.useState(1);
-  const [currentTab, setCurrentTab] = React.useState(2);
   const match = {
     match_id: 12,
     tournament_name: "Gokuldham Premier League",
@@ -52,7 +50,7 @@ export default function PlayerProfile() {
       </div>
       <div className="left-0 rounded-2xl right-0 bg-black mx-0 text-white">
         {/* <h1 className="py-1 text-center font-bold">Player statistics</h1> */}
-        <divs className="grid grid-cols-2 lg:grid-cols-4  gap-1 lg:gap-5 p-2 mt-5 ">
+        <div className="grid grid-cols-2 lg:grid-cols-4  gap-1 lg:gap-5 p-2 mt-5 ">
           <div className="text-center  p-2 ">
             <h1 className="text-xl md:text-2xl font-bold">
               {PlayerDetail?.statics.totalMatch}
@@ -81,7 +79,7 @@ export default function PlayerProfile() {
               Total Score
             </span>
           </div>
-        </divs>
+        </div>
       </div>
       {/* new sec */}
       <div className=":flex">
