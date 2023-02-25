@@ -16,6 +16,13 @@ const PlayerSlice = createSlice({
         gender: "",
         pincode: "",
       },
+      gameInfo: {
+        height: "",
+        weight: "",
+        playerPosition: "",
+        JerseyNumber: "",
+        Experience: "",
+      },
     },
   },
   reducers: {
@@ -30,9 +37,12 @@ const PlayerSlice = createSlice({
     setBasicForm: (state, action) => {
       state.PlayerForm.basicInfo = action.payload;
     },
+    setGameForm: (state, action) => {
+      state.PlayerForm.gameInfo = action.payload;
+    },
   },
 });
 
-export const { getPlayers, setPlayerDetail, setBasicForm } =
+export const { getPlayers, setPlayerDetail, setGameForm, setBasicForm } =
   PlayerSlice.actions;
 export default PlayerSlice.reducer;

@@ -1,52 +1,32 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useFormik } from "formik";
-import * as Yup from "yup";
+import { useDispatch, useSelector } from "react-redux";
+import { setGameInfoForm } from "../../../redux/actions/Player";
+import { GameInfoSchema } from "../../../models/GameInfoModel";
 
 const GameInfo = ({ index, setIndex }) => {
-  let initialValues = {
-    height: "",
-    weight: "",
-    playerPosition: "",
-    JerseyNumber: "",
-    Experience: "",
-  };
-
-  Yup.addMethod(Yup.string, "integer", function () {
-    return this.matches(/^\d+$/, "The field should have digits only");
-  });
-  const GameInfoSchema = Yup.object({
-    height: Yup.number().min(56).max(500),
-    weight: Yup.number().min(15).max(350),
-    playerPosition: Yup.string().required("Please Select Your Position"),
-    JerseyNumber: Yup.number()
-      .min(0)
-      .max(999)
-      .required("Please Enter Your Jersey Number ")
-      .integer(),
-    Experience: Yup.string().required(
-      "Please Write Something about Yourself and Your Experience "
-    ),
-  });
+  const dispatch = useDispatch();
+  const { PlayerForm } = useSelector((state) => state.playerReducer);
 
   const { values, errors, touched, handleSubmit, handleChange, handleBlur } =
     useFormik({
-      initialValues,
+      initialValues: PlayerForm.gameInfo,
       validationSchema: GameInfoSchema,
       onSubmit: (values) => {
         console.log(values);
+        dispatch(setGameInfoForm(values));
       },
     });
 
-  console.log(errors);
   return (
     <>
       <form className="flex w-full  space-x-3">
         <div className="w-full  px-5  m-auto dark:bg-gray-800">
-          <h1 className="py-2 text-xl text-center md:text-left my-5 text-orange-600">
+          <h1 className="py-2 text-xl text-center md:text-left my-2 text-orange-600">
             Game Information
           </h1>
-          <div className="grid text-lg lg:text-base grid-cols-1 md:grid-cols-2  gap-8   lg:gap-4">
+          <div className="grid text-lg lg:text-base grid-cols-1 md:grid-cols-2  gap-4   lg:gap-2">
             <div className="  ">
               <label htmlFor="required-email" className="text-gray-700">
                 Height (cm)
@@ -101,7 +81,7 @@ const GameInfo = ({ index, setIndex }) => {
                 className=" rounded-lg border-transparent flex-1  border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
                 name="playerPosition"
               >
-                <option value={null}>Select Position</option>
+                <option value={""}>Select Position</option>
 
                 <option value="point guard">Point Guard</option>
                 <option value="shooting guard">Shooting Guard</option>
@@ -153,6 +133,11 @@ const GameInfo = ({ index, setIndex }) => {
                 name="Experience"
                 placeholder="Write About Yourself and Your Achivement and Experience "
               />
+              <span className="text-sm font-semibold text-red-600 px-1">
+                {errors.Experience && touched.Experience
+                  ? errors.Experience
+                  : null}
+              </span>
             </div>
             {/* for last name */}
 

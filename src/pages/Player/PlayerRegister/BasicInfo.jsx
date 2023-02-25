@@ -2,49 +2,14 @@ import React from "react";
 import { useFormik } from "formik";
 import { motion } from "framer-motion";
 import Heading from "../../../Component/Heading";
-import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { setBasicInfoForm } from "../../../redux/actions/Player";
+import { basicInfoSchema } from "../../../models/BasicInfoModel";
 
 const BasicInfo = ({ index, setIndex }) => {
   const dispatch = useDispatch();
-  const fileRef = React.useRef(null);
   const { PlayerForm } = useSelector((state) => state.playerReducer);
   console.log(PlayerForm);
-
-  const basicInfoSchema = Yup.object({
-    firstName: Yup.string()
-      .min(2)
-      .required("Please Enter Your First Name")
-      .matches(
-        /[^\s*].*[^\s*]/g,
-        "* This field cannot contain only blankspaces"
-      ),
-    middleName: Yup.string()
-      .min(2)
-      .matches(
-        /[^\s*].*[^\s*]/g,
-        "* This field cannot contain only blankspaces"
-      ),
-    lastName: Yup.string()
-      .min(2)
-      .required("Please Enter Your Last Name")
-      .matches(
-        /[^\s*].*[^\s*]/g,
-        "* This field cannot contain only blankspaces"
-      ),
-    mobileNo: Yup.string()
-      .min(10)
-      .max(10)
-      .required("Please Enter Your Mobile number"),
-    alternativeNo: Yup.string().min(10).max(10),
-    dob: Yup.date()
-      .max(new Date())
-      .required("Please Enter Your BirthDate")
-      .nullable(),
-    gender: Yup.string().required("Please Select Gender"),
-    pincode: Yup.string().min(6).max(6).required("Please Enter Your Pincode"),
-  });
 
   const { values, touched, errors, handleChange, handleSubmit, handleBlur } =
     useFormik({
@@ -57,7 +22,6 @@ const BasicInfo = ({ index, setIndex }) => {
       },
     });
 
-  console.log(errors);
   return (
     <>
       <form className="flex w-full  space-x-3">
@@ -146,7 +110,7 @@ const BasicInfo = ({ index, setIndex }) => {
                 id="lastName"
                 className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
                 name="lastName"
-                placeholder="Enter Your Email"
+                placeholder="Enter Your Last Name"
                 value={values.lastName}
                 onChange={handleChange}
                 onBlur={handleBlur}
