@@ -12,19 +12,29 @@ const Dashboard = () => {
   const SliderData = [
     {
       id: 1,
+      is_live: 0,
       url: '../../CBL_Images/background4.webp',
-      Tournament: "Gokuldham Premier League",
-      Fisrt_Team: "MEHTA KE MAHAARATHI",
-      Secound_Team: "JETHA KE JABAAZ",
-      is_live: 1,
+      Tournament: "Basketball World Cup",
+      Fisrt_Team: "Orlando Magic",
+      Secound_Team: "Acapella With Capela",
+      Fisrt_Team_logo: "../../CBL_Images/logo1.png",
+      Secount_Team_logo: "../../CBL_Images/logo2.png",
+      time: "5:30PM",
+      date: "25Feb",
+      day: "Fri"
     },
     {
       id: 2,
       url: '../../CBL_Images/background3.webp',
       Tournament: "CBL Legue",
-      Fisrt_Team: "MEHTA KE MAHAARATHI",
-      Secound_Team: "JETHA KE JABAAZ",
-      is_live: 0,
+      Fisrt_Team: "The Stags",
+      Secound_Team: "Free Throw Fancies",
+      is_live: 1,
+      Fisrt_Team_logo: "../../CBL_Images/logo3.png",
+      Secount_Team_logo: "../../CBL_Images/logo4.png",
+      time: "5:30PM",
+      date: "01Feb",
+      day: "Mun"
     },
     {
       id: 3,
@@ -32,18 +42,14 @@ const Dashboard = () => {
       Tournament: "FIBA Americas Championship",
       Fisrt_Team: "Dallas Mavericks",
       Secound_Team: "Denver Nuggets",
-      is_live: 1,
-    },
-    {
-      id: 4,
-      url: '../../CBL_Images/background1.webp',
-      Tournament: "Gokuldham Premier League",
-      Fisrt_Team: "MEHTA KE MAHAARATHI",
-      Secound_Team: "JETHA KE JABAAZ",
-      is_live: 0,
+      is_live: 2,
+      Fisrt_Team_logo: "../../CBL_Images/logo5.png",
+      Secount_Team_logo: "../../CBL_Images/logo6.png",
+      time: "5:30PM",
+      date: "08Jan",
+      day: "Mun"
     },
   ];
-
 
   const matches = [
     {
@@ -161,7 +167,7 @@ const Dashboard = () => {
     },
   ]
 
- const News = [
+  const News = [
     {
       id: 1,
       photo: "../../CBL_Images/sd_11zon.webp",
@@ -228,26 +234,28 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen ">
       {/* Main Slider for live and upcoming matches */}
-      <div className="bg-gray-600">
+      <div className="bg-black">
         <MatchLive slides={SliderData} />
       </div>
 
       {/* Live and Upcoming match  */}
-      <div className="py-10 pl-8  ">
-        <div className="flex justify-between items-center pr-8">
-          <h1 className="font-bold text-3xl text-black">
-            Leagues on Courtside :
-          </h1>
-          <p className="flex items-center text-[13px] font-semibold cursor-pointer hover:underline">
-            Discover More
-            <BiChevronRight className="text-xl mt-1" />
-          </p>
+      <div className="py-10   ">
+        <div className="px-10">
+          <div className="flex justify-between items-center pr-8">
+            <h1 className="font-bold text-3xl text-black">
+              Leagues on Courtside :
+            </h1>
+            <p className="flex items-center text-[13px] font-semibold cursor-pointer hover:underline">
+              Discover More
+              <BiChevronRight className="text-xl mt-1" />
+            </p>
+          </div>
+          <div className="bg-black h-[5px] w-32 my-1 relative top-[7px] left-2">
+          </div>
+          <div className="bg-gray-700 h-[1px] w-full my-1 bg-gradient-to-l from-slate-50">
+          </div>
         </div>
-        <div className="bg-black h-[5px] w-32 my-1 relative top-[7px] left-2">
-        </div>
-        <div className="bg-gray-700 h-[1px] w-full my-1 bg-gradient-to-l from-slate-50">
-        </div>
-        <div className="player-container w-full flex justify-start  items-center gap-8 sm:gap-16 md:gap-5 my-5 overflow-x-scroll  py-10">
+        <div className=" w-full flex justify-start px-10 items-center gap-8 sm:gap-16 md:gap-5 my-5 overflow-hidden  py-10">
           {
             matches.length > 0
               ?
@@ -278,13 +286,13 @@ const Dashboard = () => {
           {/* Left Arrow */}
           <div className='hidden group-hover:block  absolute top-[50%] -translate-x-0 translate-y-[-50%] left-0 text-2xl h-1/2 mt-6  justify-center items-center p-2 bg-black/20 duration-300 hover:bg-black text-white cursor-pointer'>
             <FaChevronLeft
-              onClick={prevSlide} 
+              onClick={prevSlide}
               size={30} />
           </div>
           {/* Right Arrow */}
           <div className='hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-0 text-2xl h-1/2 mt-6  justify-center items-center p-2 bg-black/20 duration-300 hover:bg-black text-white cursor-pointer'>
             <FaChevronRight
-              onClick={nextSlide} 
+              onClick={nextSlide}
               size={30} />
           </div>
         </div>

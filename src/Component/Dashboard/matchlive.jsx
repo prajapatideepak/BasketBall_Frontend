@@ -7,13 +7,13 @@ import { useEffect } from 'react';
 
 
 function MatchLive({ slides }) {
-  console.log(slides)
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [count, setcount] = useState(0);
   const length = slides.length
   const autoScroll = true
   let slideInterval;
-  let intervalTime = 3500
+  let intervalTime = 3000
 
   const prevSlide = () => {
     const isFirstSlide = currentIndex === 0;
@@ -27,15 +27,16 @@ function MatchLive({ slides }) {
     setCurrentIndex(newIndex);
   };
 
-  function auto() {
-    slideInterval = setInterval(nextSlide , intervalTime)
-  }
-  useEffect(() => {
-    if(autoScroll) {
-      auto();
-    }
-    return () => clearInterval(slideInterval)
-  }, [currentIndex])
+  // function auto() {
+  //   slideInterval = setInterval(nextSlide, intervalTime)
+  // }
+  // useEffect(() => {
+  //   if (autoScroll) {
+  //     auto();
+  //   }
+  //   return () => clearInterval(slideInterval)
+  // }, [currentIndex])
+
 
   const goToSlide = (slideIndex) => {
     setCurrentIndex(slideIndex);
@@ -43,66 +44,110 @@ function MatchLive({ slides }) {
 
   return (
     <div className='h-full w-full '>
-      <div className='w-[100%] h-[100%] relative flex justify-start items-center overflow-hidden'>
+      <div className='w-[100%] h-[600px] relative flex justify-start items-center overflow-hidden'>
         {slides.map((item, index) => {
           return (
             <div className={index === currentIndex ? 'slide active ' : 'slide'}
-             key={index}>
+              key={index}>
               {index === currentIndex && (
-              <img src={item.url} alt="" className='w-[12000px] h-[500px] bg-cover bg-center' />
+                <img src={item.url} alt="" className='w-full h-full bg-cover bg-center' />
 
               )}
-              <div className='bg-gradient-to-t from-black absolute h-full bottom-0 min-w-full flex flex-col justify-end '>
-              {
-                item.is_live == 1 ? 
-                <div className='bg-red-500 flex items-center absolute left-10 mx-20  top-[30%] cursor-pointer pr-2 px-1 rounded-md text-white  '>
-                  <RxDotFilled className='' />
-                  <p className='font-bold'>Live</p>
-                </div>
-                : 
-                null
-              }
-                <div className='absolute bottom-[47%] left-10 space-y-3 px-20'>
-                  <div className='flex items-center text-white gap-3'>
-                    <h1 className='text-3xl font-bold uppercase'>{item.Fisrt_Team}</h1>
-                    <p className='text-2xl font-bold '>V<span className='text-[#ee6730] font-bold text-2xl'>S</span></p>
-                    <h1 className='text-3xl font-bold uppercase'>{item.Secound_Team}</h1>
+              <div className='bg-gradient-to-t from-black absolute h-[750px] top-0 min-w-full   '>
+                <div className='flex flex-col justify-center items-start h-full px-32  mt-16'>
+                  {
+                    item.is_live == 0
+                      ?
+                      <div className='bg-green-600 flex items-center pr-2 py-[3px] px-2 rounded-md text-white  '>
+                        <p className='font-semibold text-sm'>Scheduled</p>
+                      </div>
+                      :
+                      item.is_live == 1
+                        ?
+                        <div className='bg-red-600 flex items-center pr-2 py-[3px] px-2 rounded-md text-white mb-2 '>
+                          <RxDotFilled className='mt-1' />
+                          <p className='font-semibold text-sm'>LIVE</p>
+                        </div>
+                        :
+                        <div className='bg-black flex items-center pr-2 py-[3px] px-2 rounded-md text-white mb-2 '>
+                          <p className='font-semibold text-sm'>Finished</p>
+                        </div>
+                  }
+                  <div className='flex items-start flex-col py-3'>
+                    <div className='flex items-center space-x-2'>
+                      <p className='text-white text-[15px]'>{item.date} - <span>{item.day}</span> ,</p>
+                      <p className='text-gray-400 text-[15px]'>{item.time}  </p>
+                    </div>
+                    <p className='text-white font-bold text-lg'>{item.Tournament}</p>
                   </div>
-                  <div className=''>
-                    <p className='text-gray-400'>{item.Tournament}</p>
+                  <div className='flex flex-col items-center text-white gap-3 py-2'>
+                    <div className="t_1  flex  justify-start w-full items-center gap-2 ">
+                      <div className="w-20 h-20 md:w-[80px] md:h-[80px]">
+                        <img src={item.Fisrt_Team_logo} className="object-contain h-full w-full rounded-full " alt="" />
+                      </div>
+                      <h1 className='text-white font-extrabold text-4xl text-center uppercase'>{item.Fisrt_Team}</h1>
+                    </div>
+                    <div className="t_1  flex  justify-start w-full items-center gap-2 mb-6 ">
+                      <div className="w-20 h-20 md:w-[80px] md:h-[80px]">
+                        <img src={item.Secount_Team_logo} className="object-contain h-full w-full rounded-full " alt="" />
+                      </div>
+                      <h1 className='text-white font-extrabold text-4xl text-center uppercase'>{item.Secound_Team}</h1>
+                    </div>
+
                   </div>
-                </div>
-                <div className='absolute bottom-40 px-[120px]'>
-                  <button className='bg-[#ff5000] text-white duration-300  flex gap-1 items-center  rounded-lg font-medium hover:bg-white hover:text-[#ee6730] px-14 py-[10px] left-10'>
-                    <BsFillPlayFill className='text-xl' />
-                    Watch Now
-                  </button>
+                  {
+                    item.is_live == 0
+                      ?
+                      null
+                      :
+                      item.is_live == 1
+                        ?
+                        <button className='bg-[#ff5000] text-white duration-300  flex gap-1 items-center  rounded-lg font-medium hover:bg-white hover:text-[#ee6730] px-20 py-[10px]'>
+                          <BsFillPlayFill className='text-2xl' />
+                          <h1 className='text-sm'>Watch</h1>
+                        </button>
+                        :
+                        <button className='bg-[#ff5000] text-white duration-300  flex gap-1 items-center  rounded-lg font-medium hover:bg-white hover:text-[#ee6730] px-20 py-[10px]'>
+                          Highlights
+                        </button>
+                  }
                 </div>
               </div>
             </div>
           )
         })}
-        <div className='flex  absolute bottom-10 space-x-8 w-full justify-center items-center px-40 '>
-          {slides.map((slide, slideIndex) => (
-            <div
-              key={slideIndex}
-              onClick={() => goToSlide(slideIndex)}
-              className={slideIndex === currentIndex ? 'text-white border-2 w-12 h-12 border-[#ee663046] rounded-full flex cursor-pointer justify-center items-center hover:text-[#ee6730] duration-300 ' : ' text-gray-500 w-12 h-12 flex border-none justify-center items-center hover:text-[#ee6730] cursor-pointer duration-300 font-bold'}
-            >
-              1
-            </div>
-          ))}
-        </div>
+
+        {
+          slides.length > 0
+            ?
+            (
+              <div className='flex  absolute bottom-10 space-x-8 w-full justify-center items-center px-40 '>
+                {slides.map((slide, slideIndex) => (
+                  console.log(slide, "slide"),
+                  <div
+                    key={slideIndex}
+                    onClick={() => goToSlide(slideIndex)}
+                    className={slideIndex === currentIndex ? ' text-white border-4 w-12 h-12 border-[#ee6630] rounded-full flex cursor-pointer justify-center items-center hover:text-[#ee6730] duration-300 ' : ' text-gray-500 w-12 h-12 flex border-none justify-center items-center hover:text-[#ee6730] cursor-pointer duration-300 font-bold'}
+                  >
+                    {slideIndex + 1}
+                  </div>
+                ))}
+              </div>
+            )
+            :
+            null
+        }
+
       </div>
-
-
-
-
     </div>
   );
 }
 
 export default MatchLive;
+
+
+
+
 
 
 {/* Left Arrow */ }
