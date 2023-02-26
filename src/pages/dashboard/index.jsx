@@ -54,17 +54,18 @@ const Dashboard = () => {
   const matches = [
     {
       id: 1,
-      day: "Fri",
-      date: "1 Feb",
+      day: "Mun",
+      date: "27 Feb",
       is_live: 0,
-      time: "23:00PM GMT+5:30",
+      time: "11:30AM GMT+5:30",
       first_team: "Real Madrid",
       secound_team: "Rajasthan Royals",
       F_logo: "../../../CBL_Images/logo1.png",
       s_logo: "../../../CBL_Images/logo2.png",
+      team_1_score: 0,
+      team_2_score: 0,
+      won_team: '',
       tournament: "CBL Legue",
-      location: "Ahmedabad",
-      tournament_logo: "../../CBL_Images/logo5.png"
     },
     {
       id: 2,
@@ -77,43 +78,61 @@ const Dashboard = () => {
       F_logo: "../../../CBL_Images/logo3.png",
       s_logo: "../../../CBL_Images/logo4.png",
       tournament: "NBA National",
-      location: "Mumbai",
-      tournament_logo: "../../CBL_Images/logo5.png"
+      team_1_score: 0,
+      team_2_score: 0,
+      won_team: '',
     },
     {
       id: 3,
       day: "Fri",
-      date: "1 Feb",
-      is_live: 0,
+      date: "24 Feb",
+      is_live: 2,
       time: "23:00PM GMT+5:30",
       first_team: "Royal Chalengers",
       secound_team: "Chennai Superking",
       F_logo: "../../../CBL_Images/logo5.png",
       s_logo: "../../../CBL_Images/logo1.png",
+      team_1_score: 45,
+      team_2_score: 22,
+      won_team: 'Chennai Superking',
       tournament: "LJ Cup",
-      location: "Delhi",
-      tournament_logo: "../../CBL_Images/logo5.png"
     },
     {
       id: 4,
       day: "Fri",
-      date: "1 Feb",
-      is_live: 1,
+      date: "25 Feb",
+      is_live: 2,
       time: "23:00PM GMT+5:30",
       first_team: "Mumbai Indians",
       secound_team: "Delhi Daredevils",
       F_logo: "../../../CBL_Images/logo2.png",
       s_logo: "../../../CBL_Images/logo3.png",
       tournament: "Basketball legue",
-      location: "Kolkata",
-      tournament_logo: "./../CBL_Images/logo5.png"
+      team_1_score: 38,
+      team_2_score: 22,
+      won_team: 'Mumbai Indians',
+    },
+    {
+      id: 5,
+      day: "Tue",
+      date: "28 Feb",
+      is_live: 2,
+      time: "23:00PM GMT+5:30",
+      first_team: "Kolkata Indians",
+      secound_team: "Mumbai Daredevils",
+      F_logo: "../../../CBL_Images/indiana-pacers-logo.png",
+      s_logo: "../../../CBL_Images/logo3.png",
+      tournament: "Basketball legue",
+      team_1_score: 98,
+      team_2_score: 22,
+      won_team: 'Kolkata Indians',
     },
   ]
 
   const Highlights = [
     {
       id: 1,
-      photo: "../../CBL_Images/high6.webp",
+      photo: "../../CBL_Images/news1.webp",
       first_team: "Real Madrid",
       secound_team: "Rajasthan Royals",
       F_logo: "../../../CBL_Images/logo1.png",
@@ -122,7 +141,7 @@ const Dashboard = () => {
     },
     {
       id: 2,
-      photo: "../../CBL_Images/high4.webp",
+      photo: "../../CBL_Images/DSCF9679.webp",
       first_team: "Real Madrid",
       secound_team: "Rajasthan Royals",
       F_logo: "../../../CBL_Images/logo3.png",
@@ -131,7 +150,7 @@ const Dashboard = () => {
     },
     {
       id: 3,
-      photo: "../../CBL_Images/high3.jfif",
+      photo: "../../CBL_Images/FWCAQ_Luanda_358.webp",
       first_team: "Real Madrid",
       secound_team: "Rajasthan Royals",
       F_logo: "../../../CBL_Images/logo2.png",
@@ -140,7 +159,7 @@ const Dashboard = () => {
     },
     {
       id: 4,
-      photo: "../../CBL_Images/high1.webp",
+      photo: "../../CBL_Images/MHS_0071.webp",
       first_team: "Real Madrid",
       secound_team: "Rajasthan Royals",
       F_logo: "../../../CBL_Images/logo1.png",
@@ -149,7 +168,7 @@ const Dashboard = () => {
     },
     {
       id: 5,
-      photo: "../../CBL_Images/high5.webp",
+      photo: "../../CBL_Images/CV-Cond.webp",
       first_team: "Real Madrid",
       secound_team: "Rajasthan Royals",
       F_logo: "../../../CBL_Images/logo1.png",
@@ -158,7 +177,7 @@ const Dashboard = () => {
     },
     {
       id: 6,
-      photo: "../../CBL_Images/high4.webp",
+      photo: "../../CBL_Images/DYLANBURNS_20230226_0830.webp",
       first_team: "Real Madrid",
       secound_team: "Rajasthan Royals",
       F_logo: "../../../CBL_Images/logo1.png",
@@ -239,7 +258,7 @@ const Dashboard = () => {
       </div>
 
       {/* Live and Upcoming match  */}
-      <div className="py-10   ">
+      <div className="py-5">
         <div className="px-10">
           <div className="flex justify-between items-center pr-8">
             <h1 className="font-bold text-3xl text-black">
@@ -255,7 +274,7 @@ const Dashboard = () => {
           <div className="bg-gray-700 h-[1px] w-full my-1 bg-gradient-to-l from-slate-50">
           </div>
         </div>
-        <div className=" w-full flex justify-start px-10 items-center gap-8 sm:gap-16 md:gap-5 my-5 overflow-hidden  py-10">
+        <div className=" w-full flex justify-start px-10 items-center gap-8 sm:gap-16 md:gap-5 my-5 overflow-hidden  py-8">
           {
             matches.length > 0
               ?
@@ -275,6 +294,9 @@ const Dashboard = () => {
                     tournament={item.tournament}
                     location={item.location}
                     tournament_logo={item.tournament_logo}
+                    team_1_score={item.team_1_score}
+                    team_2_score={item.team_2_score}
+                    won_team={item.won_team}
                   />
                 )
               })
@@ -298,24 +320,24 @@ const Dashboard = () => {
         </div>
       </div>
 
-
-
       {/* Tournaments  */}
-      <div className="py-10 pl-8  relative">
-        <div className="flex justify-between items-center pr-8">
-          <h1 className="font-bold text-3xl text-black">
-            Key Tournaments :
-          </h1>
-          <p className="flex items-center text-[13px] font-semibold cursor-pointer hover:underline">
-            Discover More
-            <BiChevronRight className="text-xl mt-1" />
-          </p>
+      <div className="py-5">
+        <div className="px-10">
+          <div className="flex justify-between items-center pr-8">
+            <h1 className="font-bold text-3xl text-black">
+              Key Tournaments :
+            </h1>
+            <p className="flex items-center text-[13px] font-semibold cursor-pointer hover:underline">
+              Discover More
+              <BiChevronRight className="text-xl mt-1" />
+            </p>
+          </div>
+          <div className="bg-black h-[5px] w-32 my-1 relative top-[7px] left-2">
+          </div>
+          <div className="bg-gray-700 h-[1px] w-full my-1 bg-gradient-to-l from-slate-50">
+          </div>
         </div>
-        <div className="bg-black h-[5px] w-32 my-1 relative top-[7px] left-2">
-        </div>
-        <div className="bg-gray-700 h-[1px] w-full my-1 bg-gradient-to-l from-slate-50">
-        </div>
-        <div className=" w-full flex justify-start group items-center gap-8 sm:gap-16 md:gap-5 my-5 overflow-x-hidden py-10">
+        <div className=" w-full flex justify-start px-10 items-center gap-8 sm:gap-16 md:gap-5 my-5 overflow-x-hidden py-8">
           {
             Tournament.length > 0
               ?
@@ -330,41 +352,30 @@ const Dashboard = () => {
               })
               :
               <div className="bg-red-100 w-full mt-4 text-center">
-                <h4 className='text-red-700 font-medium p-2'>No Matches Found</h4>
+                <h4 className='text-red-700 font-medium p-2'>No Tournament Found</h4>
               </div>
           }
-          {/* Left Arrow */}
-          <div className='hidden group-hover:block  absolute top-[50%] -translate-x-0 translate-y-[-50%] py-20 mt-7 left-0 text-2xl   justify-center items-center p-2 bg-gradient-to-r hover:text-[#ee6730] duration-300 from-black text-white cursor-pointer'>
-            <FaChevronLeft
-              // onClick={prevSlide} 
-              size={30} />
-          </div>
-          {/* Right Arrow */}
-          <div className='hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] py-20 mt-7 right-0 text-2xl   justify-center items-center p-2 bg-gradient-to-l hover:text-[#ee6730] duration-300 from-black text-white cursor-pointer'>
-            <FaChevronRight
-              // onClick={nextSlide} 
-              size={30} />
-          </div>
         </div>
-
       </div>
 
       {/* Highlights previus matches  */}
-      <div className=" my-5 pl-8 ">
-        <div className="flex justify-between items-center pr-8 ">
-          <h1 className="font-bold text-3xl text-black">
-            Highlights of The Week :
-          </h1>
-          <p className="flex items-center text-[13px] font-semibold cursor-pointer hover:underline">
-            Discover More
-            <BiChevronRight className="text-xl mt-1" />
-          </p>
+      <div className="relative">
+        <div className="px-10">
+          <div className="flex justify-between items-center pr-8 ">
+            <h1 className="font-bold text-3xl text-black">
+              Highlights of The Week :
+            </h1>
+            <p className="flex items-center text-[13px] font-semibold cursor-pointer hover:underline">
+              Discover More
+              <BiChevronRight className="text-xl mt-1" />
+            </p>
+          </div>
+          <div className="bg-black h-[5px] w-32 my-1 relative top-[7px] left-2">
+          </div>
+          <div className="bg-gray-700 h-[.8px] w-full my-1 bg-gradient-to-l from-slate-50">
+          </div>
         </div>
-        <div className="bg-black h-[5px] w-32 my-1 relative top-[7px] left-2">
-        </div>
-        <div className="bg-gray-700 h-[.8px] w-full my-1 bg-gradient-to-l from-slate-50">
-        </div>
-        <div className=" relative flex justify-start  items-center gap-8 sm:gap-16 md:gap-2 my-5  py-10 ">
+        <div className=" w-full flex justify-start  px-10 items-center gap-8 sm:gap-16 md:gap-7 my-5 overflow-x-hidden py-8">
           {
             Highlights.length > 0
               ?
@@ -391,21 +402,23 @@ const Dashboard = () => {
       </div>
 
       {/* News previus matches  */}
-      <div className="py-10 pl-8 ">
-        <div className="flex justify-between items-center pr-8">
-          <h1 className="font-bold text-3xl text-black">
-            News :
-          </h1>
-          <p className="flex items-center text-[13px] font-semibold cursor-pointer hover:underline">
-            Discover More
-            <BiChevronRight className="text-xl mt-1" />
-          </p>
+      <div className=" pb-5 relative w-full  ">
+        <div className="px-10">
+          <div className="flex justify-between items-center pr-8">
+            <h1 className="font-bold text-3xl text-black">
+              News :
+            </h1>
+            <p className="flex items-center text-[13px] font-semibold cursor-pointer hover:underline">
+              Discover More
+              <BiChevronRight className="text-xl mt-1" />
+            </p>
+          </div>
+          <div className="bg-black h-[5px] w-32 my-1 relative top-[7px] left-2">
+          </div>
+          <div className="bg-gray-700 h-[1px] w-full my-1 bg-gradient-to-l from-slate-50">
+          </div>
         </div>
-        <div className="bg-black h-[5px] w-32 my-1 relative top-[7px] left-2">
-        </div>
-        <div className="bg-gray-700 h-[1px] w-full my-1 bg-gradient-to-l from-slate-50">
-        </div>
-        <div className=" w-full flex justify-start  items-center gap-8 sm:gap-16 md:gap-2 my-5 overflow-x-hidden  player-container py-10">
+        <div className=" w-full flex justify-start px-10 items-center gap-8 sm:gap-16 md:gap-2 my-5 overflow-x-hidden  py-8">
           {
             News.length > 0
               ?

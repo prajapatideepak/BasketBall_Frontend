@@ -76,12 +76,12 @@ function MatchList() {
             team_2_name: 'Jetha Ke Jabaaz',
             team_1_score: 24,
             team_2_score: 22,
+            won_team: '',
             duration: 45,
             address: 'Amber tower, Sarkhej, Ahmedabad 380055',
             is_successfull: 0,
             is_live: 1,
             time: '9:45 AM',
-            won_team: '',
             date: '12/12/2022'
         },
     ]
