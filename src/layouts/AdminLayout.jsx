@@ -6,10 +6,12 @@ const AdminLayout = () => {
   const [sidebarOpen, setSidebarOpen] = React.useState(false);
 
   return (
-    <div className="flex h-screen overflow-hidden">
+    <div className="flex h-screen  overflow-hidden">
       {/* Sidebar */}
-      <div className="bg-red-300 h-44">
-        <div></div>
+      <div className="bg-red-300 h-44"> 
+        <div className="">
+          <img></img>
+        </div>
       </div>
       {/* Content area */}
       <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">

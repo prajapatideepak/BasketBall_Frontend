@@ -10,7 +10,7 @@ const PlayerSlice = createSlice({
         firstName: "",
         middleName: "",
         lastName: "",
-        mobileNo: "",
+        mobileNo: "7259140210",
         alternativeNo: "",
         dob: "",
         gender: "",

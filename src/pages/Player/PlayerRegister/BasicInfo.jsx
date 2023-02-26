@@ -128,8 +128,9 @@ const BasicInfo = ({ index, setIndex }) => {
               </label>
               <input
                 type="text"
+                disabled={true}
                 id="mobileNo"
-                className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white     placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
+                className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-gray-200     placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
                 name="mobileNo"
                 value={values.mobileNo}
                 onChange={handleChange}
