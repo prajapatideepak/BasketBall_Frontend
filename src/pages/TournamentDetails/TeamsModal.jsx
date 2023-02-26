@@ -14,10 +14,11 @@ function TeamsModal({openTeamsModal, handleOpenTeamsModal}) {
             team_id: 2,
             team_name: 'Jetha Ke Jabaaz',
             checked: false
-        }
+        },
     ])
 
     const resetModal = () => {
+        setError('')
         setTeams(
             teams.map((team) =>{
                 return{
@@ -45,7 +46,19 @@ function TeamsModal({openTeamsModal, handleOpenTeamsModal}) {
     }
 
     const handleSubmit = () => {
-        console.log(teams)
+        let isTeamSelected = false;
+
+        teams.map((team) =>{
+            if(team.checked){
+                isTeamSelected = true;
+                return;
+            }
+        })
+
+        if(!isTeamSelected){
+            setError('Please select team')
+            return;
+        }
         resetModal()
         handleOpenTeamsModal()
         toast.success('Registration successfull')
@@ -60,12 +73,12 @@ function TeamsModal({openTeamsModal, handleOpenTeamsModal}) {
                         <span className="sr-only">Close modal</span>
                     </button>
                     <div className="px-6 py-6 lg:px-8">
-                        <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">Select Your Teams</h3>
+                        <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">Select Your Team</h3>
                         <div>
                             <table className="text-left mx-auto">
                                 <thead className="text-gray-400">
                                     <tr>
-                                       <th>Action</th> 
+                                       <th>#</th> 
                                        <th className="px-6">Team Name</th> 
                                     </tr>
                                 </thead>
@@ -85,8 +98,8 @@ function TeamsModal({openTeamsModal, handleOpenTeamsModal}) {
                                 </tbody>
                             </table>
                         </div>
-                        <div className='mt-5'>
-                            <button type="button" onClick={handleSubmit} className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+                        <div className='mt-5 text-right'>
+                            <button type="button" onClick={handleSubmit} className="w-28 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
                             { 
                                 error != '' 
                                 ?   

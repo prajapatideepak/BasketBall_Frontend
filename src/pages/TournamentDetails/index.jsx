@@ -87,7 +87,7 @@ function TournamentDetails() {
           <span className={`w-28 flex justify-center items-center  ${currentTab == 6 ? 'bg-[#F5F5F7] text-[#ee6730]' : ''} h-full cursor-pointer`} onClick={()=> setCurrentTab(6)}>About</span>
         </div>
       </div>
-      <div className='mx-auto px-10 py-12 sm:px-20 sm:py-12 md:px-20 md:py-16 lg:px-24 xl:px-28 2xl:px-32'>
+      <div className='mx-auto px-8 py-10 xs:px-10 xs:py-12 sm:px-20 sm:py-12 md:px-20 md:py-16 lg:px-24 xl:px-28 2xl:px-32'>
         {
           tabs[currentTab]
         }

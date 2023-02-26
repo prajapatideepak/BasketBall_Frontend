@@ -9,7 +9,7 @@ function Sponsors({sponsors}) {
             ?
             sponsors.map((item, index) => {
               return (
-                <div key={index} className="flex flex-col h-24 sm:flex-row gap-5 shadow-md shadow-[#ea5a2e29] duration-150 text-[#ea592e] justify-center items-center  px-5 py-4 rounded-lg bg-white capitalize font-medium">
+                <div key={index} className="flex flex-row w-72 h-24 gap-5 shadow-md shadow-[#ea5a2e29] duration-150 text-[#ea592e] justify-center items-center  px-5 py-4 rounded-lg bg-white capitalize font-medium">
                   <img src={item.sponsor_logo} alt="" className='w-20' />
                   <p>
                     {item.sponsor_name == '' ? '--' : item.sponsor_name}
