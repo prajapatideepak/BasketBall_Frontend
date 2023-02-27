@@ -40,7 +40,7 @@ function Hilights_Cards({ id, photo, first_team, secound_team, F_logo, s_logo, t
     //             </div>
     //         </div>
         </div> */}
-            <div className="relative  hover:scale-110 hover:z-[999] duration-300 min-w-[260px] xs:min-w-[320px] sm:min-w-[350px] md:min-w-[330px] max-w-[300px] h-[310px] sm:h-[280px] md:h-[270px] cursor-pointer  group ">
+            <div className="relative  hover:scale-110 hover:z-[999] duration-300 min-w-[260px] xs:min-w-[320px] sm:min-w-[350px] md:min-w-[330px] max-w-[300px] h-[250px] cursor-pointer  group ">
                 <div className='h-44 w-[100%] bg-gradient-to-t from-black/50 absolute'>
 
                 </div>

@@ -53,7 +53,7 @@ const Dashboard = () => {
 
   const matches = [
     {
-      id: 1,
+      match_id: 1,
       day: "Mun",
       date: "27 Feb",
       is_live: 0,
@@ -68,7 +68,7 @@ const Dashboard = () => {
       tournament: "CBL Legue",
     },
     {
-      id: 2,
+      match_id: 2,
       day: "Fri",
       date: "1 Feb",
       is_live: 1,
@@ -83,7 +83,7 @@ const Dashboard = () => {
       won_team: '',
     },
     {
-      id: 3,
+      match_id: 3,
       day: "Fri",
       date: "24 Feb",
       is_live: 2,
@@ -98,7 +98,7 @@ const Dashboard = () => {
       tournament: "LJ Cup",
     },
     {
-      id: 4,
+      match_id: 4,
       day: "Fri",
       date: "25 Feb",
       is_live: 2,
@@ -113,7 +113,7 @@ const Dashboard = () => {
       won_team: 'Mumbai Indians',
     },
     {
-      id: 5,
+      match_id: 5,
       day: "Tue",
       date: "28 Feb",
       is_live: 2,
@@ -249,7 +249,6 @@ const Dashboard = () => {
     setCurrentIndex(newIndex);
   };
 
-
   return (
     <div className="min-h-screen ">
       {/* Main Slider for live and upcoming matches */}
@@ -266,7 +265,7 @@ const Dashboard = () => {
             </h1>
             <div className="flex items-center text-[13px] font-semibold cursor-pointer hover:underline ">
               <p className="hidden sm:block sm:text-[10px] lg:text-[11px]">Discover More</p>
-              <BiChevronRight className="sm:text-base xl:text-xl lg:mt-1" />
+              <BiChevronRight className="text-base mt-1 sm:mt-0 lg:text-lg  xl:mt-1" />
             </div>
           </div>
           <div className="bg-black h-[5px] w-32 my-1 relative top-[7px] left-2">
@@ -282,7 +281,7 @@ const Dashboard = () => {
                 return (
                   <Match_cards
                     key={index}
-                    id={item.id}
+                    id={item.match_id}
                     day={item.day}
                     date={item.date}
                     is_live={item.is_live}
@@ -329,7 +328,8 @@ const Dashboard = () => {
             </h1>
             <div className="flex items-center text-[13px] font-semibold cursor-pointer hover:underline ">
               <p className="hidden sm:block sm:text-[10px] lg:text-[11px]">Discover More</p>
-              <BiChevronRight className="sm:text-base xl:text-xl lg:mt-1" />
+              <BiChevronRight className="text-base mt-1 sm:mt-0 lg:text-lg  xl:mt-1" />
+
             </div>
           </div>
           <div className="bg-black h-[5px] w-32 my-1 relative top-[7px] left-2">
@@ -367,7 +367,7 @@ const Dashboard = () => {
             </h1>
             <div className="flex items-center text-[13px] font-semibold cursor-pointer hover:underline ">
               <p className="hidden sm:block sm:text-[10px] lg:text-[11px]">Discover More</p>
-              <BiChevronRight className="sm:text-base xl:text-xl lg:mt-1" />
+              <BiChevronRight className="text-base mt-1 sm:mt-0 lg:text-lg  xl:mt-1" />
             </div>
           </div>
           <div className="bg-black h-[5px] w-32 my-1 relative top-[7px] left-2">
@@ -375,7 +375,7 @@ const Dashboard = () => {
           <div className="bg-gray-700 h-[1px] w-full my-1 bg-gradient-to-l from-slate-50">
           </div>
         </div>
-        <div className="w-full flex justify-start px-5 xl:px-10 items-center gap-5  overflow-hidden pt-10 lg:py-8">
+        <div className="w-full flex justify-start px-5 xl:px-10 items-center gap-5  overflow-hidden pt-10 pb-10 lg:py-8">
           {
             Highlights.length > 0
               ?
@@ -402,23 +402,23 @@ const Dashboard = () => {
       </div>
 
       {/* News previus matches  */}
-      <div className=" pb-5  ">
-        <div className="px-10">
-          <div className="flex justify-between items-center pr-8">
-            <h1 className="font-bold text-3xl text-black">
+      <div className=" pb-5 ">
+        <div className="px-7 md:px-10">
+          <div className="flex justify-between items-center xl:pr-8">
+            <h1 className="font-bold text-lg md:text-2xl  lg:text-3xl text-black">
               News :
             </h1>
-            <p className="flex items-center text-[13px] font-semibold cursor-pointer hover:underline">
-              Discover More
-              <BiChevronRight className="text-xl mt-1" />
-            </p>
+            <div className="flex items-center text-[13px] font-semibold cursor-pointer hover:underline ">
+              <p className="hidden sm:block sm:text-[10px] lg:text-[11px]">Discover More</p>
+              <BiChevronRight className="text-base mt-1 sm:mt-0 lg:text-lg  xl:mt-1" />
+            </div>
           </div>
           <div className="bg-black h-[5px] w-32 my-1 relative top-[7px] left-2">
           </div>
           <div className="bg-gray-700 h-[1px] w-full my-1 bg-gradient-to-l from-slate-50">
           </div>
         </div>
-        <div className=" w-full flex justify-start px-10 items-center gap-8 sm:gap-16 md:gap-2 my-5 overflow-x-hidden  py-8">
+        <div className=" w-full  flex justify-start px-5 xl:px-10 items-center gap-5  overflow-hidden py-8">
           {
             News.length > 0
               ?
