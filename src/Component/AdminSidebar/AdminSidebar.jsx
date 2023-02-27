@@ -23,7 +23,9 @@ function AdminSidebar() {
                   />
                   {show && (
                     <div className="pl-3" id="closed">
-                      <h1 className="text-2xl text-gray-400">Dashboard</h1>
+                      <h1 className="text-2xl text-gray-400 font-sans">
+                        Dashboard
+                      </h1>
                     </div>
                   )}
                 </div>
@@ -66,7 +68,7 @@ function AdminSidebar() {
                       </svg>
                     </div>
                   )}
-                  <div className="-mt-5" onClick={() => setShow(!show)}>
+                  <div className="-mt-5 z-20" onClick={() => setShow(!show)}>
                     {show ? (
                       <button
                         aria-label="minimize sidebar"

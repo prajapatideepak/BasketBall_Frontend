@@ -13,8 +13,14 @@ const AdminLayout = () => {
       {/* Content area */}
       <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
         {/*  Site header */}
-
-        <main>
+        <div
+          style={{ boxShadow: "rgba(0, 0, 0, 0.45) 0px 25px 20px -20px" }}
+          className="bg-white px-4  p-4"
+        >
+          {/* <h1 className="font-bold text-2xl ">Welcome, Deepak 🥳</h1> */}
+          <div></div>
+        </div>
+        <main className="bg-gray-200 flex-1 p-2">
           <Outlet />
         </main>
       </div>
