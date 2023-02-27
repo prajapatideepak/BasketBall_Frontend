@@ -12,6 +12,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
+import AdminRoutes from "./adminRoutes";
 
 export let currentUser = false;
 const AppRoutes = () => {
