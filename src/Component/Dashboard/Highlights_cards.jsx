@@ -40,11 +40,14 @@ function Hilights_Cards({ id, photo, first_team, secound_team, F_logo, s_logo, t
     //             </div>
     //         </div>
         </div> */}
-            <div className="relative min-w-[260px] hover:scale-110 hover:z-[999] duration-300  xs:min-w-[320px] sm:min-w-[350px] md:min-w-[330px] max-w-[300px] h-[310px] sm:h-[280px] md:h-[270px] cursor-pointer  group ">
-                <div className='h-[200px] w-full bg-gradient-to-t from-black/50 absolute'>
+            <div className="relative  hover:scale-110 hover:z-[999] duration-300 min-w-[260px] xs:min-w-[320px] sm:min-w-[350px] md:min-w-[330px] max-w-[300px] h-[310px] sm:h-[280px] md:h-[270px] cursor-pointer  group ">
+                <div className='h-44 w-[100%] bg-gradient-to-t from-black/50 absolute'>
 
                 </div>
-                <img src={photo} alt="" className='bg-cover bg-center w-[100%] h-[200px]' />
+                <div className='w-[100%] h-44'>
+
+                <img src={photo} alt="" className='bg-cover bg-center w-[100%] h-full' />
+                </div>
                 <div className='flex flex-col items-start  py-3 px-5'>
                     <div className='flex items-center gap-2'>
                         <h1 className='text-black font-bold'>Saudi Arabia</h1>

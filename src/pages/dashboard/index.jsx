@@ -257,24 +257,24 @@ const Dashboard = () => {
         <MatchLive slides={SliderData} />
       </div>
 
-      {/* Live and Upcoming match  */}
-      <div className="py-5">
-        <div className="px-10">
-          <div className="flex justify-between items-center pr-8">
-            <h1 className="font-bold text-3xl text-black">
+      {/* Live and Upcoming match   */}
+      <div className="mt-5 md:py-5">
+        <div className="px-7 md:px-10">
+          <div className="flex justify-between items-center xl:pr-8">
+            <h1 className="font-bold text-lg md:text-2xl  lg:text-3xl text-black">
               Leagues on Courtside :
             </h1>
-            <p className="flex items-center text-[13px] font-semibold cursor-pointer hover:underline">
-              Discover More
-              <BiChevronRight className="text-xl mt-1" />
-            </p>
+            <div className="flex items-center text-[13px] font-semibold cursor-pointer hover:underline ">
+              <p className="hidden sm:block sm:text-[10px] lg:text-[11px]">Discover More</p>
+              <BiChevronRight className="sm:text-base xl:text-xl lg:mt-1" />
+            </div>
           </div>
           <div className="bg-black h-[5px] w-32 my-1 relative top-[7px] left-2">
           </div>
           <div className="bg-gray-700 h-[1px] w-full my-1 bg-gradient-to-l from-slate-50">
           </div>
         </div>
-        <div className=" w-full flex justify-start px-10 items-center gap-8 sm:gap-16 md:gap-5 my-5 overflow-hidden  py-8">
+        <div className=" w-full flex justify-start px-6 xl:px-10 items-center gap-5  overflow-hidden pt-10 pb-10 lg:py-8">
           {
             matches.length > 0
               ?
@@ -305,13 +305,13 @@ const Dashboard = () => {
                 <h4 className='text-red-700 font-medium p-2'>No Matches Found</h4>
               </div>
           }
-          {/* Left Arrow */}
+          {/* Left Arrow  */}
           <div className='hidden group-hover:block  absolute top-[50%] -translate-x-0 translate-y-[-50%] left-0 text-2xl h-1/2 mt-6  justify-center items-center p-2 bg-black/20 duration-300 hover:bg-black text-white cursor-pointer'>
             <FaChevronLeft
               onClick={prevSlide}
               size={30} />
           </div>
-          {/* Right Arrow */}
+          {/* Right Arrow  */}
           <div className='hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-0 text-2xl h-1/2 mt-6  justify-center items-center p-2 bg-black/20 duration-300 hover:bg-black text-white cursor-pointer'>
             <FaChevronRight
               onClick={nextSlide}
@@ -322,22 +322,22 @@ const Dashboard = () => {
 
       {/* Tournaments  */}
       <div className="py-5">
-        <div className="px-10">
-          <div className="flex justify-between items-center pr-8">
-            <h1 className="font-bold text-3xl text-black">
-              Key Tournaments :
+        <div className="px-7 md:px-10">
+          <div className="flex justify-between items-center xl:pr-8">
+            <h1 className="font-bold text-lg md:text-2xl  lg:text-3xl text-black">
+              Tournament :
             </h1>
-            <p className="flex items-center text-[13px] font-semibold cursor-pointer hover:underline">
-              Discover More
-              <BiChevronRight className="text-xl mt-1" />
-            </p>
+            <div className="flex items-center text-[13px] font-semibold cursor-pointer hover:underline ">
+              <p className="hidden sm:block sm:text-[10px] lg:text-[11px]">Discover More</p>
+              <BiChevronRight className="sm:text-base xl:text-xl lg:mt-1" />
+            </div>
           </div>
           <div className="bg-black h-[5px] w-32 my-1 relative top-[7px] left-2">
           </div>
           <div className="bg-gray-700 h-[1px] w-full my-1 bg-gradient-to-l from-slate-50">
           </div>
         </div>
-        <div className=" w-full flex justify-start px-10 items-center gap-8 sm:gap-16 md:gap-5 my-5 overflow-x-hidden py-8">
+        <div className="w-full flex justify-start px-6 xl:px-10 items-center gap-5  overflow-hidden pt-10 pb-10 lg:py-8">
           {
             Tournament.length > 0
               ?
@@ -360,22 +360,22 @@ const Dashboard = () => {
 
       {/* Highlights previus matches  */}
       <div className="relative">
-        <div className="px-10">
-          <div className="flex justify-between items-center pr-8 ">
-            <h1 className="font-bold text-3xl text-black">
-              Highlights of The Week :
+        <div className="px-7 md:px-10">
+          <div className="flex justify-between items-center xl:pr-8">
+            <h1 className="font-bold text-lg md:text-2xl  lg:text-3xl text-black">
+              Highlights :
             </h1>
-            <p className="flex items-center text-[13px] font-semibold cursor-pointer hover:underline">
-              Discover More
-              <BiChevronRight className="text-xl mt-1" />
-            </p>
+            <div className="flex items-center text-[13px] font-semibold cursor-pointer hover:underline ">
+              <p className="hidden sm:block sm:text-[10px] lg:text-[11px]">Discover More</p>
+              <BiChevronRight className="sm:text-base xl:text-xl lg:mt-1" />
+            </div>
           </div>
           <div className="bg-black h-[5px] w-32 my-1 relative top-[7px] left-2">
           </div>
-          <div className="bg-gray-700 h-[.8px] w-full my-1 bg-gradient-to-l from-slate-50">
+          <div className="bg-gray-700 h-[1px] w-full my-1 bg-gradient-to-l from-slate-50">
           </div>
         </div>
-        <div className=" w-full flex justify-start  px-10 items-center gap-8 sm:gap-16 md:gap-7 my-5 overflow-x-hidden py-8">
+        <div className="w-full flex justify-start px-5 xl:px-10 items-center gap-5  overflow-hidden pt-10 lg:py-8">
           {
             Highlights.length > 0
               ?
@@ -402,7 +402,7 @@ const Dashboard = () => {
       </div>
 
       {/* News previus matches  */}
-      <div className=" pb-5 relative w-full  ">
+      <div className=" pb-5  ">
         <div className="px-10">
           <div className="flex justify-between items-center pr-8">
             <h1 className="font-bold text-3xl text-black">
