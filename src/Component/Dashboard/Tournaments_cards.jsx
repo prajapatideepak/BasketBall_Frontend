@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { IoLocationSharp } from 'react-icons/io5'
-import { RxDotFilled } from 'react-icons/rx';
+import { BsCalendar2Week } from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom'
 
 
@@ -16,11 +16,26 @@ function Tournaments_cards({ tournament }) {
 
     return (
         <>
-            <div className="flex justify-center items-center bg-black hover:bg-white cursor-pointer shadow-lg xs:min-w-[120px] sm:min-w-[130px]  lg:max-w-[150] xl:w-[155px]  2xl:min-w-[200px]  h-[120px] sm:h-[120px] xl:h-[155px] 2xl:h-[180px]
+            <div className="flex justify-center items-center hover:bg-white cursor-pointer bg-black shadow-lg xs:min-w-[145px] sm:min-w-[160px] md:min-w-[180px]  lg:max-w-[150] xl:w-[155px]  2xl:min-w-[350px]  h-[140px] sm:h-[150px] md:h-[160px] xl:h-[155px] 2xl:h-[190px]
    group rounded-lg" onClick={handleClick}>
-                <div className='flex flex-col justify-start items-center w-full h-full '>
-                    <img src={tournament.logo} alt="" className=' w-24 h-24 xl:w-32 xl:h-32 p-3' />
-                    <p className='text-gray-600'>NBA World cup</p>
+                <div className='flex flex-col justify-start items-center w-full h-full py-2 '>
+                    <div className='flex flex-col 2xl:flex-row items-center '>
+                    <img src={tournament.logo} alt="" className=' w-16 h-16 sm:w-20 sm:h-20 md:w-22 md:h-22 2xl:w-32 2xl:h-32 p-3' />
+                    <div className='px-3 2xl:space-y-1 '>
+                        <p className='group-hover:text-[#ee6630] text-white font-bold text-start  uppercase text-[12px] 2xl:text-base'>{tournament.name}</p>
+                        <p className='text-gray-500 font-medium text-[11px] 2xl:text-base  2xl:text-start text-center'>{tournament.location}</p>
+                    </div>
+                    </div>
+
+                    <div className='w-full flex-col 2xl:flex-row flex justify-center items-center  z-[2] xl:space-x-5 py-1'>
+                        <BsCalendar2Week className='hidden 2xl:block text-base text-white transition-all group-hover:text-black' />
+                        <div className='flex  justify-center items-center   '>
+                            <p className="text-gray-500 transition-all group-hover:text-black text-[10px] md:text-[12px] font-semibold xl:text-base">{tournament.start_date}</p>
+                            <p className='mx-2  font-medium transition-all hidden md:block text-[#ee6730]  text-[7px] md:text-base'>to</p>
+                            <p className='mx-2  font-medium transition-all md:hidden text-[#ee6730]  text-[7px] md:text-base'>/</p>
+                            <p className="text-gray-500 transition-all group-hover:text-black text-[10px] md:text-[12px] font-semibold xl:text-base">{tournament.end_datenews}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </>

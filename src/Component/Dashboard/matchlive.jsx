@@ -13,7 +13,7 @@ function MatchLive({ slides }) {
   const length = slides.length
   const autoScroll = true
   let slideInterval;
-  let intervalTime = 3000
+  let intervalTime = 4000
 
   const prevSlide = () => {
     const isFirstSlide = currentIndex === 0;

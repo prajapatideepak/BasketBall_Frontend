@@ -221,18 +221,34 @@ const Dashboard = () => {
   const tournament = [
     {
       tournament_id: 1,
+      name: "CBL Legue",
+      location: "Mumbai",
+      start_date: "10 Jan 2023",
+      end_date: "20 jan 2023",
       logo: "../../CBL_Images/logo3.png"
     },
     {
       tournament_id: 2,
+      name: "NBA National",
+      location: "Delhi",
+      start_date: "20 Feb 2023",
+      end_date: "30 Feb 2023",
       logo: "../../CBL_Images/logo5.png"
     },
     {
       tournament_id: 3,
+      name: "Lj Cup",
+      location: "Kolkata",
+      start_date: "1 Mar 2023",
+      end_date: "10 Mar 2023",
       logo: "../../CBL_Images/logo2.png"
     },
     {
       tournament_id: 4,
+      name: "Basketball legue",
+      location: "Ahmedabad",
+      start_date: "11 Mar 2023",
+      end_date: "20 Mar 2023",
       logo: "../../CBL_Images/logo.png"
     },
   ]
