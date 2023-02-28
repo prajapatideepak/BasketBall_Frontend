@@ -406,7 +406,7 @@ function TeamProfileDetail() {
                     </div>
                     <div>
                         <div className='flex justify-center items-center mt-8 md:mt-3'>
-                            <div className="w-2/3 sm:w-2/4 lg:w-1/4 flex justify-around items-center bg-black p-1 rounded-full">
+                            <div className="w-48 xs:w-52 md:w-64 flex justify-around items-center bg-black p-1 rounded-full">
                                 <div className={`${currentTab == 1 ? 'bg-[#ee6730]' : ''} hover:bg-[#ee6730] group cursor-pointer w-full text-center p-1 rounded-full mr-1.5`} onClick={()=> setCurrentTab(1)}>
                                     <h3 className={`${currentTab == 1 ? 'text-white' : 'text-gray-300'} group-hover:text-white text-xs xs:text-sm sm:text-base font-semibold`}>Past</h3>
                                 </div>
@@ -426,8 +426,8 @@ function TeamProfileDetail() {
                                             )
                                         })
                                     :
-                                        <div className="w-full text-center mt-12 bg-red-200">
-                                            <h4 className='text-lg font-medium text-red-700'>No matches found</h4>
+                                        <div className="w-full text-center mt-12">
+                                            <h4 className='text-lg font-medium text-gray-400'>No Match Found</h4>
                                         </div>
                                 }
                             </div>
