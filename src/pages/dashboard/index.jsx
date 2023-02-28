@@ -6,6 +6,8 @@ import Hilights_Cards from "../../Component/Dashboard/Highlights_cards";
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import News_cards from "../../Component/Dashboard/News_cards";
 import Tournaments_cards from "../../Component/Dashboard/Tournaments_cards";
+import { GiBasketballBall } from 'react-icons/gi';
+
 
 
 const Dashboard = () => {
@@ -51,7 +53,7 @@ const Dashboard = () => {
     },
   ];
 
-  const matches = [
+  const match = [
     {
       match_id: 1,
       day: "Mun",
@@ -216,21 +218,21 @@ const Dashboard = () => {
     },
   ]
 
-  const Tournament = [
+  const tournament = [
     {
-      id: 1,
+      tournament_id: 1,
       logo: "../../CBL_Images/logo3.png"
     },
     {
-      id: 2,
+      tournament_id: 2,
       logo: "../../CBL_Images/logo5.png"
     },
     {
-      id: 3,
+      tournament_id: 3,
       logo: "../../CBL_Images/logo2.png"
     },
     {
-      id: 4,
+      tournament_id: 4,
       logo: "../../CBL_Images/logo.png"
     },
   ]
@@ -275,33 +277,17 @@ const Dashboard = () => {
         </div>
         <div className=" w-full flex justify-start px-6 xl:px-10 items-center gap-5  overflow-hidden pt-10 pb-10 lg:py-8">
           {
-            matches.length > 0
+            match.length > 0
               ?
-              matches.map((item, index) => {
+              match.map((match, index) => {
                 return (
-                  <Match_cards
-                    key={index}
-                    id={item.match_id}
-                    day={item.day}
-                    date={item.date}
-                    is_live={item.is_live}
-                    time={item.time}
-                    first_team={item.first_team}
-                    secound_team={item.secound_team}
-                    F_logo={item.F_logo}
-                    s_logo={item.s_logo}
-                    tournament={item.tournament}
-                    location={item.location}
-                    tournament_logo={item.tournament_logo}
-                    team_1_score={item.team_1_score}
-                    team_2_score={item.team_2_score}
-                    won_team={item.won_team}
-                  />
+                  <Match_cards key={index} match={match} />
                 )
               })
               :
-              <div className="bg-red-100 w-full mt-4 text-center">
-                <h4 className='text-red-700 font-medium p-2'>No Matches Found</h4>
+              <div className='flex justify-center items-center mt-16 md:mt-24'>
+                <GiBasketballBall className="text-2xl xs:text-3xl sm:text-5xl text-gray-400 mr-2" />
+                <p className='text-xs xs:text-sm sm:text-lg font-medium text-gray-400'>No Matches Found</p>
               </div>
           }
           {/* Left Arrow  */}
@@ -339,14 +325,13 @@ const Dashboard = () => {
         </div>
         <div className="w-full flex justify-start px-6 xl:px-10 items-center gap-5  overflow-hidden pt-10 pb-10 lg:py-8">
           {
-            Tournament.length > 0
+            tournament.length > 0
               ?
-              Tournament.map((item, index) => {
+              tournament.map((tournament, index) => {
                 return (
                   <Tournaments_cards
                     key={index}
-                    id={item.id}
-                    logo={item.logo}
+                    tournament={tournament}
                   />
                 )
               })
