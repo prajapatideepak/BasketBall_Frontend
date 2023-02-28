@@ -43,9 +43,9 @@ const PlayerList = () => {
           />
           <button
             onClick={handleSubmit}
-            className="text-2xl rounded-lg border  rounded-l-none border-gray-400 border-l-0 bg-[#ee6730] hover:scale-105 hover:bg-gray-800 duration-300 text-white px-2 shadow-2xl "
+            className="text-2xl rounded-lg border  rounded-l-none border-[#ee6730] border-l-0 bg-[#ee6730] hover:bg-gray-800 group text-white px-2 shadow-2xl "
           >
-            <AiOutlineSearch />
+            <AiOutlineSearch className='group-hover:scale-110 duration-300' />
           </button>
         </div>
 

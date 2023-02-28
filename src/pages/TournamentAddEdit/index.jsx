@@ -76,7 +76,7 @@ function Tournamentregistration() {
     age_cutoff: location?.state?.isEdit
       ? location?.state?.age_cutoff
       : "Under 21",
-    price: location?.state?.isEdit ? location?.state?.price : "",
+    prize: location?.state?.isEdit ? location?.state?.prize : "",
   };
 
   const validationSchema = Yup.object({
@@ -313,23 +313,23 @@ function Tournamentregistration() {
                                 }
                             </div>
                         </div>
-                        {/* City name && Price Money */}
+                        {/* City name && Prize Money */}
                         <div className="flex flex-col md:flex-row  2 gap-6 my-7 ">
                             <div className="flex flex-col w-full">
-                                <label className="mb-2">Price Money</label>
+                                <label className="mb-2">Prize</label>
                                 <input
                                     className="w-full outline-blue-200 rounded-lg border-2 border-gray-200 py-3 px-3 text-sm"
-                                    placeholder="Enter Price Money"
+                                    placeholder="Enter Prize"
                                     type="text"
-                                    name="price"
-                                    id="price"
+                                    name="prize"
+                                    id="prize"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                 />
                                 {
-                                    errors.price && touched.price
+                                    errors.prize && touched.prize
                                         ?
-                                        <small className='text-red-600 mt-2'>{errors.price}</small>
+                                        <small className='text-red-600 mt-2'>{errors.prize}</small>
                                         :
                                         null
                                 }
@@ -401,13 +401,6 @@ function Tournamentregistration() {
                                         <option value="Under 14">Under 14</option>
                                     </select>
                                 </div>
-                                {
-                                    errors.tournament_level && touched.tournament_level
-                                        ?
-                                        <small className='text-red-600 mt-2'>{errors.tournament_level}</small>
-                                        :
-                                        null
-                                }
                             </div>
                         </div>
                         {/* About Tournament */}
