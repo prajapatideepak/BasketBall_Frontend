@@ -15,7 +15,7 @@ const AdminLayout = () => {
         {/*  Site header */}
         <div
           style={{ boxShadow: "rgba(0, 0, 0, 0.45) 0px 25px 20px -20px" }}
-          className="bg-white px-4  p-8"
+          className="bg-white px-4  p-4"
         >
           {/* <h1 className="font-bold text-2xl ">Welcome, Deepak 🥳</h1> */}
           <div></div>

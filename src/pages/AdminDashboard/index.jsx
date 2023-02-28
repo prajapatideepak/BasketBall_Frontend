@@ -2,30 +2,68 @@ import React from "react";
 
 export default function AdminDashboard() {
   return (
-    <div className="px-12 py-8 ">
-      <div className="flex">
-        {/* <div className="w-1/2 rounded-xl pt-5 bg-blue-100">
-          <img
-            className="rounded-xl shadow-lg"
-            src={"CBL_Images/dash.jpg"}
-          ></img>
-        </div> */}
-        <div className="px-4 py-2 flex-1 flex flex-wrap gap-5 ">
-          <div className="py-2 px-10 w-1/4 text-center bg-blue-400 flex justify-center flex-col text-white rounded shadow-xl">
-            <h1 className="text-2xl font-bold">300</h1>
-            <span className="text-lg"> Total Users</span>
-          </div>
+    <div className="px-12 py-4 ">
+      {/* <div className="flex">
+        <div className="w-1/2 rounded-xl pt-5 bg-blue-100">
+          <img className="rounded-xl" src={"CBL_Images/dash.jpg"}></img>
+        </div>
+      </div> */}
+      <div className="py-4">
+        <h1 className="text-3xl  font-semibold">Hello 👋, Deepak</h1>
+        <p className="py-1 px-2 text-base text-gray-700">
+          {" "}
+          Here's What's happening in Your Web portal{" "}
+        </p>
+      </div>
 
-          <div className="py-2 px-10 w-1/4 text-center bg-blue-600 flex justify-center flex-col text-white rounded shadow-xl">
-            <h1 className="text-2xl font-bold">300</h1>
-            <span className="text-lg"> Total Users</span>
+      <div className="  gap-5 grid grid-cols-2 px-5 py-2">
+        {/* start  */}
+        <div className=" flex  relative justify-center items-center rounded-lg shadow-xl text-center bg-graddient-to-l from-orange-200 via-orange-400  to-orange-500 bg-white  ">
+          <div className="flex-1 ">
+            <img className="rounded-xl" src={"CBL_Images/dash.jpg"}></img>
           </div>
-
-          <div className="py-2 px-10 w-1/4 text-center bg-blue-800 flex justify-center flex-col text-white rounded shadow-xl">
-            <h1 className="text-2xl font-bold">300</h1>
-            <span className="text-lg"> Total Users</span>
+          <div className="p-2 w-1/2">
+            <h1 className="text-4xl font-bold">99K</h1>
+            <span className="text-base font-semibold">Total User</span>
           </div>
         </div>
+
+        {/* end */}
+
+        <div className=" flex relative justify-center items-center rounded-lg shadow-xl text-center bg-graddient-to-l from-orange-200 via-orange-400  to-orange-500 bg-white  ">
+          <div className="bg-green-300 animate-pulse  w-5 h-5 rounded-full absolute right-0 translate-x-1 -translate-y-1 top-0"></div>
+          <div className="flex-1 ">
+            <img className="rounded-xl" src={"CBL_Images/dash.jpg"}></img>
+          </div>
+          <div className="p-2 w-1/2">
+            <h1 className="text-4xl font-bold">12</h1>
+            <span className="text-base font-semibold">Ongoing Tournament</span>
+          </div>
+        </div>
+        {/* start  */}
+        <div className=" flex relative justify-center items-center rounded-lg shadow-xl text-center bg-graddient-to-l from-orange-200 via-orange-400  to-orange-500 bg-white  ">
+          <div className="flex-1 ">
+            <img className="rounded-xl" src={"CBL_Images/dash.jpg"}></img>
+          </div>
+          <div className="p-2 w-1/2">
+            <h1 className="text-4xl font-bold">730</h1>
+            <span className="text-base font-semibold">Total Teams</span>
+          </div>
+        </div>
+        {/* end */}
+
+        {/* start  */}
+
+        <div className=" flex relative justify-center items-center rounded-lg shadow-xl text-center bg-graddient-to-l from-orange-200 via-orange-400  to-orange-500 bg-white  ">
+          <div className="flex-1 ">
+            <img className="rounded-xl" src={"CBL_Images/dash.jpg"}></img>
+          </div>
+          <div className="p-2 w-1/2">
+            <h1 className="text-4xl font-bold">62K</h1>
+            <span className="text-base font-semibold">Total Player</span>
+          </div>
+        </div>
+        {/* end */}
       </div>
     </div>
   );
