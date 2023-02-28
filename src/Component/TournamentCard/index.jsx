@@ -16,7 +16,7 @@ function TournamentCard({tournament}) {
   endDate = `${endDate.getDate()} ${months[endDate.getMonth()]} ${endDate.getFullYear()}`
 
   const handleClick = () =>{
-    navigate(`/Tournament-details/${tournament.tournament_id}`)
+    navigate(`/tournament-details/${tournament.tournament_id}`)
   }
   
   return (

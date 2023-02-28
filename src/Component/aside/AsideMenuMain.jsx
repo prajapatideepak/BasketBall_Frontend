@@ -18,7 +18,7 @@ function AsideMenuMain() {
           <img
             src="/CBL_Images/logo.png"
             alt=""
-            className="cursor-pointer"
+            className="cursor-pointer w-14"
             onClick={() => {
               navigate("/");
             }}
@@ -90,8 +90,8 @@ function AsideMenuMain() {
                      z-50  pl-9 md:pl-0 right-0 w-full md:w-72 md:h-screen bg-black lg:pr-0  flex flex-col justify-start items-start lg:justify-start md:items-center
                      duration-500 ease-in ${
                        open
-                         ? "top-[68px] lg:top-[82px] xl:top-[80px] 2xl:top-[68px] opacity-100"
-                         : " top-[68px] lg:top-[82px] xl:top-[80px] 2xl:top-[68px]  right-[-500px] lg:opacity-100 opacity-0"
+                         ? "top-[66px] lg:top-[82px] xl:top-[80px] 2xl:top-[66px] opacity-100"
+                         : " top-[68px] lg:top-[82px] xl:top-[80px] 2xl:top-[68px]  right-[-800px] lg:opacity-100 opacity-0"
                      }`}
         >
           <ul className="items-start flex flex-col justify-start lg:justify-center md:items-center lg:space-y-10 md:pt-5 ">
@@ -192,9 +192,9 @@ function AsideMenuMain() {
             onClick={() => setOpen(!open)}
           >
             {open ? (
-              <RxCross1 className="text-slate-400 hover:text-white  cursor-pointer text-2xl" />
+              <RxCross1 className="text-slate-400 hover:text-white  cursor-pointer hover:rotate-90 duration-700 text-[22px]" />
             ) : (
-              <RxHamburgerMenu className="text-slate-400 hover:text-white  cursor-pointer text-2xl" />
+              <RxHamburgerMenu className="text-slate-400 hover:text-white hover:rotate-90 duration-700  cursor-pointer text-2xl" />
             )}
           </div>
         </div>

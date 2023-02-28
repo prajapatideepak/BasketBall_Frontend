@@ -9,7 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@material-tailwind/react": "^1.2.5",
+    "@headlessui/react": "^1.7.12",
+    "@material-tailwind/react": "^1.4.2",
     "@react-three/drei": "^9.56.25",
     "@react-three/fiber": "^8.11.2",
     "@reduxjs/toolkit": "^1.9.2",
