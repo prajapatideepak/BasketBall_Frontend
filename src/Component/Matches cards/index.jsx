@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { RxDotFilled } from "react-icons/rx"
 
-function MatchesCrad({match}) {
+function MatchesCrad({ match }) {
   const navigate = useNavigate();
   const handleClick = () => {
     navigate(`/match-details/${match.match_id}`)
@@ -45,11 +45,27 @@ function MatchesCrad({match}) {
                 <p className="text-[#ee6730] font-medium text-xs xs:text-sm text-ellipsis overflow-hidden line-clamp-1 ">{match.team_1_name}</p>
               </div>
             </div>
-            <div className='flex justify-center items-center'>
-              <h3 className="text:xl xs:text-2xl sm:text-3xl md:text-4xl font-bold">{match.team_1_score}</h3>
-              <span className="text-2xl sm:text-3xl text-4xl font-bold px-1">-</span>
-              <h3 className="text:xl xs:text-2xl sm:text-3xl md:text-4xl font-bold">{match.team_2_score}</h3>
-            </div>
+            {
+              match.is_live == 1
+                ?
+                <div className='flex justify-center items-center'>
+                  <h3 className="text:xl xs:text-2xl sm:text-3xl md:text-4xl font-bold">{match.team_1_score}</h3>
+                  <span className="text-2xl sm:text-3xl text-4xl font-bold px-1">-</span>
+                  <h3 className="text:xl xs:text-2xl sm:text-3xl md:text-4xl font-bold">{match.team_2_score}</h3>
+                </div>
+                :
+                match.is_live == 2
+                  ?
+                <div className='flex justify-center items-center'>
+                  <h3 className="text:xl xs:text-2xl sm:text-3xl md:text-4xl font-bold">{match.team_1_score}</h3>
+                  <span className="text-2xl sm:text-3xl text-4xl font-bold px-1">-</span>
+                  <h3 className="text:xl xs:text-2xl sm:text-3xl md:text-4xl font-bold">{match.team_2_score}</h3>
+                </div>
+                :
+                <div className='flex justify-center items-center'>
+                  <h3 className="text:xl xs:text-2xl sm:text-3xl md:text-4xl font-bold">VS</h3>
+                </div>
+            }
             <div className='flex flex-col justify-center items-center'>
               <div className="w-14 h-14 xs:w-20 xs:h-20 md:w-24 md:h-24 flex justify-center items-center rounded-full border-2">
                 <img src={match.team_2_logo} className="object-contain rounded-full" alt="" />

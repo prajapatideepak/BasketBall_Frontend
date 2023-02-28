@@ -66,10 +66,14 @@
 
 /* Dashboard */
 
-.dot-active{
-  border: 2px solide #ee6730;
+.slide {
+  opacity: 0;
+  transition-duration: 1s ease;
 }
 
-.dot{
-  border: none;
+.slide.active {
+  opacity: 1;
+  transition-duration: 1s;
+  transform: scale(1.08);
 }
+
