@@ -24,7 +24,7 @@ const NewsPage = () => {
             {/* <h1 className="text-black text-4xl "> News</h1> */}
             <Heading
               text={"News"}
-              className={"text-3xl md:text-4xl px-6 py-1"}
+              className={"text-3xl  md:text-4xl px-8 py-1"}
               margin={true}
             />
             {/* <GiBasketballBall className="animate-bounce	 text-[#ee6730] " /> */}

@@ -9,7 +9,7 @@ export default function PlayerInfo({ PlayerDetail }) {
           text={"Player Information"}
           className="text-lg md:text-2xl text-center  "
           margin={true}
-        /> 
+        />
       </div>
       {/*  */}
       <div className="text-left pt-4 ">
@@ -46,7 +46,7 @@ export default function PlayerInfo({ PlayerDetail }) {
       </div>
 
       {/* contat */}
-      <divss className="text-left ">
+      <div className="text-left ">
         <h2 className="text-xl py-2">Game Information</h2>
 
         <div className="flex flex-wrap p-2  gap-3">
@@ -63,7 +63,7 @@ export default function PlayerInfo({ PlayerDetail }) {
             </span>
           </div>
         </div>
-      </divss>
+      </div>
       {/* for contact infor */}
       <div className="text-left ">
         <h2 className="text-xl py-2">Contact Information</h2>

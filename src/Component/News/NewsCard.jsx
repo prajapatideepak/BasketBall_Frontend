@@ -6,14 +6,14 @@ export default function NewsCard(news) {
   let tags = news?.news?.tags?.split(",");
   console.log("tags ", tags);
   return (
-    <div className="w-full cursor-pointer relative shadow-2xl  rounded-2xl ">
+    <div className="w-full cursor-pointer relative shadow-2xl rounded  ">
       <Link
         className="Link"
         to={`/news/${news?.news?.id}/${news.news.title.split(" ").join("-")}`}
       >
         <div className="w-full ">
           <LazyLoad placeholder={<Deepak />} once>
-            <img className=" rounded-2xl" src={news?.news?.image} />
+            <img className=" rounded" src={news?.news?.image} />
           </LazyLoad>
         </div>
         <div
@@ -47,7 +47,7 @@ export default function NewsCard(news) {
 }
 const Deepak = () => {
   return (
-    <div className="bg-gray-700 rounded-2xl animate-pulse  h-72 ">
+    <div className="bg-gray-700 rounded-2xl animate-pulse  h-60 ">
       {/* <img src="/CBL_Images/cbl.webp" className="w-full h-full" /> */}
       <h1 className="opacity-0 ">
         qui saepe odio tempore magnam incidunt? Voluptatum placeat quas dolorem?
