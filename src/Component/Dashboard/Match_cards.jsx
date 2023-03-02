@@ -72,7 +72,7 @@ function Match_cards({ match }) {
             <div className='flex flex-col items-center text-white gap-2 py-1 w-full '>
               <div className='flex justify-start items-center w-full'>
                 <div className='flex  justify-between items-center w-[95%]'>
-                  <div className="t_1  flex  justify-start w-full items-center gap-2  ">
+                  <div className="t_1  flex  justify-start w-full items-center gap-2">
                     <div className="w-10 sm:w-12 h-10 sm:h-12 md:w-[40px] md:h-[40px] xl:w-10 xl:h-10">
                       <img src={match.F_logo} className="object-contain h-full w-full rounded-full " alt="" />
                     </div>

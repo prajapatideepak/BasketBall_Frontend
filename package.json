@@ -21,6 +21,7 @@
     "navigate": "^0.3.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-elastic-carousel": "^0.11.5",
     "react-icons": "^4.7.1",
     "react-lazy": "^1.1.0",
     "react-lazyload": "^3.2.0",

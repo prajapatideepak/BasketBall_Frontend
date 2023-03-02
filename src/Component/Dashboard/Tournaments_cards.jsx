@@ -9,7 +9,6 @@ import { useNavigate } from 'react-router-dom'
 
 function Tournaments_cards({ tournament }) {
     const navigate = useNavigate();
-    console.log(tournament)
     const handleClick = () => {
         navigate(`/Tournament-details/${tournament.tournament_id}`)
     }

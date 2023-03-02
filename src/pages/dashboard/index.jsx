@@ -8,8 +8,7 @@ import News_cards from "../../Component/Dashboard/News_cards";
 import Tournaments_cards from "../../Component/Dashboard/Tournaments_cards";
 import { GiBasketballBall } from 'react-icons/gi';
 import { RxDotFilled } from 'react-icons/rx';
-
-
+import Carousel from 'react-elastic-carousel';
 
 
 const Dashboard = () => {
@@ -100,6 +99,36 @@ const Dashboard = () => {
       team_2_score: 22,
       won_team: 'Chennai Superking',
       tournament: "LJ Cup",
+    },
+    {
+      match_id: 4,
+      day: "Fri",
+      date: "25 Feb",
+      is_live: 2,
+      time: "23:00PM GMT+5:30",
+      first_team: "Mumbai Indians",
+      secound_team: "Delhi Daredevils",
+      F_logo: "../../../CBL_Images/logo2.png",
+      s_logo: "../../../CBL_Images/logo3.png",
+      tournament: "Basketball legue",
+      team_1_score: 38,
+      team_2_score: 22,
+      won_team: 'Mumbai Indians',
+    },
+    {
+      match_id: 5,
+      day: "Tue",
+      date: "28 Feb",
+      is_live: 2,
+      time: "23:00PM GMT+5:30",
+      first_team: "Kolkata Indians",
+      secound_team: "Mumbai Daredevils",
+      F_logo: "../../../CBL_Images/indiana-pacers-logo.png",
+      s_logo: "../../../CBL_Images/logo3.png",
+      tournament: "Basketball legue",
+      team_1_score: 98,
+      team_2_score: 22,
+      won_team: 'Kolkata Indians',
     },
     {
       match_id: 4,
@@ -259,20 +288,18 @@ const Dashboard = () => {
     },
   ]
 
-  const [currentIndex, setCurrentIndex] = React.useState(0);
+  const [currentIndex, setCurrentIndex] = React.useState(4);
 
   const prevSlide = () => {
-    // const isFirstSlide = currentIndex === 0;
-    // const newIndex = isFirstSlide ? match.length - 1 : currentIndex - 1;
-    // setCurrentIndex(newIndex);
-
-
+    const isFirstSlide = currentIndex === 0;
+    const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1;
+    setCurrentIndex(newIndex);
   };
 
   const nextSlide = () => {
-    // const isLastSlide = currentIndex === match.length - 1;
-    // const newIndex = isLastSlide ? 0 : currentIndex + 8;
-    // setCurrentIndex(newIndex);
+    const isLastSlide = currentIndex === slides.length - 1;
+    const newIndex = isLastSlide ? 0 : currentIndex + 1;
+    setCurrentIndex(newIndex);
   };
 
   const goToSlide = (slideIndex) => {
@@ -280,6 +307,7 @@ const Dashboard = () => {
   };
 
   return (
+
     <div className="min-h-screen ">
       {/* Main Slider for live and upcoming matches */}
       <div className="bg-black">
@@ -303,13 +331,16 @@ const Dashboard = () => {
           <div className="bg-gray-700 h-[1px] w-full my-1 bg-gradient-to-l from-slate-50">
           </div>
         </div>
-        <div className=" w-full flex justify-start px-6 xl:px-14 items-center gap-5 xl:gap-3   overflow-x-auto scrollbar-hide pt-10 pb-10 lg:py-8">
+        <div id="match" className=" w-full flex justify-start px-6 xl:px-[48px] items-center gap-5 overflow-x-auto scrollbar-hide scroll-smooth pt-10 pb-10 lg:py-8">
           {
             match.length > 0
               ?
               match.map((match, slideIndex) => {
                 return (
-                  <Match_cards key={slideIndex} match={match} />
+                  <div key={slideIndex}>
+                  <Match_cards match={match} />
+
+                  </div>
                 )
               })
               :
@@ -319,39 +350,26 @@ const Dashboard = () => {
               </div>
           }
         </div>
-        {/* <div className="absolute bottom-0 flex justify-between w-full items-center px-2">
-          {/* Left Arrow  */}
-          <div onClick={() => goToSlide(currentIndex - 1)}
-            className="justify-center hover:bg-black duration-300 group items-center p-2 bg-white  text-black shadow-xl  rounded-full cursor-pointer">
-            <FaChevronLeft
-              className="text-lg group-hover:text-white" />
-          </div>
-          {
-            match.length > 0
-              ?
-              (
-                <div className='flex  absolute bottom-3 sm:bottom-4 2xl:bottom-10 lg:space-x-8 space-x-7 left-[33%] sm:left-[37%] lg:left-[25%] xl:left-[26%] 2xl:left-[30%]  lg:px-40 '>
-                  {match.map((match, slideIndex) => (
-                    <div
-                      key={slideIndex}
-                      onClick={() => goToSlide(slideIndex)}
-                      className={slideIndex === currentIndex ? ' text-white lg:border-4 border-2   h-8 w-8  lg:w-12  lg:h-12 border-[#ee6630] rounded-full flex cursor-pointer justify-center items-center hover:text-[#ee6730] duration-300 ' : ' text-gray-500 h-8 w-8  lg:w-12 lg:h-12 flex border-none justify-center items-center hover:text-[#ee6730] cursor-pointer duration-300 font-bold'}
-                    >
-                      {slideIndex + 1}
-                    </div>
-                  ))}
+        {
+          match.length > 5 &&
+            (
+              <div className=" flex bg-yellow-500 justify-between w-full items-center ">
+                {/* Left Arrow  */}
+                <div onClick={prevSlide}
+                  className=" absolute left-2 bottom-[40%]   justify-center active:scale-90 hover:bg-black hover:shadow-lg duration-300 group items-center p-2   text-black  rounded-full cursor-pointer">
+                  <FaChevronLeft
+                    className="text-lg group-hover:text-white" />
                 </div>
-              )
-              :
-              null
-          }
-          {/* Right Arrow  */}
-          <div onClick={() => goToSlide(currentIndex + 1)}
-            className="justify-center hover:bg-black duration-300 group items-center p-2 bg-white  text-black shadow-xl  rounded-full cursor-pointer">
-            <FaChevronRight
-              className="text-lg group-hover:text-white" />
-          </div>
-        </div> */}
+                {/* Right Arrow  */}
+                <div onClick={nextSlide}
+                  className=" absolute right-2 bottom-[40%]   justify-center active:scale-90 hover:bg-black hover:shadow-lg duration-300 group items-center p-2   text-black  rounded-full cursor-pointer">
+                  <FaChevronRight
+                    className="text-lg group-hover:text-white" />
+                </div>
+              </div>
+
+            )
+        }
       </div>
 
       {/* Tournaments  */}
