@@ -11,7 +11,7 @@ function Match_cards({ match }) {
   }
   return (
     <>
-      <div className="relative min-w-[260px] xs:min-w-[320px] sm:min-w-[350px] md:min-w-[350px] max-w-[440px] h-[190px] sm:h-[200px] md:h-[185px] border-0 hover:border-2 hover:border-gray-400 hover:border-dashed group rounded-lg"  onClick={handleClick}>
+      <div className="relative min-w-[260px] xs:min-w-[320px] sm:min-w-[350px] md:min-w-[350px] max-w-[440px] h-[190px] sm:h-[200px] md:h-[185px] border-0 hover:border-2 hover:border-gray-400 hover:border-dashed group rounded-lg"  onClick={handleClick} key={match.match_id}>
         <div className="absolute flex transition-all duration-300 ease-in-out cursor-pointer top-[-2px] left-[-2px] w-full h-full group-hover:left-[-10px] group-hover:top-[-10px] hover:left-[-10px] hover:top-[-10px] bg-white shadow-xl rounded-lg">
           {
             match.is_live == 1
@@ -27,7 +27,7 @@ function Match_cards({ match }) {
             {
               match.is_live == 0
                 ?
-                <div className='flex items-center space-x-2 ml-3'>
+                <div className='flex items-start space-x-2 ml-3'>
                   <p className='text-slate-500 text-[15px] font-medium'>{match.day}, <span>{match.date}</span></p>
                   <p className='text-black font-bold text-[15px]'>{match.time}  </p>
                 </div>

@@ -7,6 +7,8 @@ import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import News_cards from "../../Component/Dashboard/News_cards";
 import Tournaments_cards from "../../Component/Dashboard/Tournaments_cards";
 import { GiBasketballBall } from 'react-icons/gi';
+import { RxDotFilled } from 'react-icons/rx';
+
 
 
 
@@ -225,7 +227,8 @@ const Dashboard = () => {
       location: "Mumbai",
       start_date: "10 Jan 2023",
       end_date: "20 jan 2023",
-      logo: "../../CBL_Images/logo3.png"
+      logo: "../../CBL_Images/logo3.png",
+      is_live: "1"
     },
     {
       tournament_id: 2,
@@ -233,7 +236,8 @@ const Dashboard = () => {
       location: "Delhi",
       start_date: "20 Feb 2023",
       end_date: "30 Feb 2023",
-      logo: "../../CBL_Images/logo5.png"
+      logo: "../../CBL_Images/logo5.png",
+      is_live: "1"
     },
     {
       tournament_id: 3,
@@ -241,7 +245,8 @@ const Dashboard = () => {
       location: "Kolkata",
       start_date: "1 Mar 2023",
       end_date: "10 Mar 2023",
-      logo: "../../CBL_Images/logo2.png"
+      logo: "../../CBL_Images/logo2.png",
+      is_live: "0"
     },
     {
       tournament_id: 4,
@@ -249,22 +254,29 @@ const Dashboard = () => {
       location: "Ahmedabad",
       start_date: "11 Mar 2023",
       end_date: "20 Mar 2023",
-      logo: "../../CBL_Images/logo.png"
+      logo: "../../CBL_Images/logo.png",
+      is_live: "0"
     },
   ]
 
   const [currentIndex, setCurrentIndex] = React.useState(0);
 
   const prevSlide = () => {
-    const isFirstSlide = currentIndex === 0;
-    const newIndex = isFirstSlide ? Tournament.length - 1 : currentIndex - 1;
-    setCurrentIndex(newIndex);
+    // const isFirstSlide = currentIndex === 0;
+    // const newIndex = isFirstSlide ? match.length - 1 : currentIndex - 1;
+    // setCurrentIndex(newIndex);
+
+
   };
 
   const nextSlide = () => {
-    const isLastSlide = currentIndex === Tournament.length - 1;
-    const newIndex = isLastSlide ? 0 : currentIndex + 8;
-    setCurrentIndex(newIndex);
+    // const isLastSlide = currentIndex === match.length - 1;
+    // const newIndex = isLastSlide ? 0 : currentIndex + 8;
+    // setCurrentIndex(newIndex);
+  };
+
+  const goToSlide = (slideIndex) => {
+    setCurrentIndex(slideIndex);
   };
 
   return (
@@ -275,7 +287,7 @@ const Dashboard = () => {
       </div>
 
       {/* Live and Upcoming match   */}
-      <div className="mt-5 md:py-5">
+      <div className="mt-5 md:py-5 relative">
         <div className="px-7 md:px-10">
           <div className="flex justify-between items-center xl:pr-8">
             <h1 className="font-bold text-lg md:text-2xl  lg:text-3xl text-black">
@@ -291,13 +303,13 @@ const Dashboard = () => {
           <div className="bg-gray-700 h-[1px] w-full my-1 bg-gradient-to-l from-slate-50">
           </div>
         </div>
-        <div className=" w-full flex justify-start px-6 xl:px-10 items-center gap-5  overflow-hidden pt-10 pb-10 lg:py-8">
+        <div className=" w-full flex justify-start px-6 xl:px-14 items-center gap-5 xl:gap-3   overflow-x-auto scrollbar-hide pt-10 pb-10 lg:py-8">
           {
             match.length > 0
               ?
-              match.map((match, index) => {
+              match.map((match, slideIndex) => {
                 return (
-                  <Match_cards key={index} match={match} />
+                  <Match_cards key={slideIndex} match={match} />
                 )
               })
               :
@@ -306,19 +318,40 @@ const Dashboard = () => {
                 <p className='text-xs xs:text-sm sm:text-lg font-medium text-gray-400'>No Matches Found</p>
               </div>
           }
-          {/* Left Arrow  */}
-          <div className='hidden group-hover:block  absolute top-[50%] -translate-x-0 translate-y-[-50%] left-0 text-2xl h-1/2 mt-6  justify-center items-center p-2 bg-black/20 duration-300 hover:bg-black text-white cursor-pointer'>
-            <FaChevronLeft
-              onClick={prevSlide}
-              size={30} />
-          </div>
-          {/* Right Arrow  */}
-          <div className='hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-0 text-2xl h-1/2 mt-6  justify-center items-center p-2 bg-black/20 duration-300 hover:bg-black text-white cursor-pointer'>
-            <FaChevronRight
-              onClick={nextSlide}
-              size={30} />
-          </div>
         </div>
+        {/* <div className="absolute bottom-0 flex justify-between w-full items-center px-2">
+          {/* Left Arrow  */}
+          <div onClick={() => goToSlide(currentIndex - 1)}
+            className="justify-center hover:bg-black duration-300 group items-center p-2 bg-white  text-black shadow-xl  rounded-full cursor-pointer">
+            <FaChevronLeft
+              className="text-lg group-hover:text-white" />
+          </div>
+          {
+            match.length > 0
+              ?
+              (
+                <div className='flex  absolute bottom-3 sm:bottom-4 2xl:bottom-10 lg:space-x-8 space-x-7 left-[33%] sm:left-[37%] lg:left-[25%] xl:left-[26%] 2xl:left-[30%]  lg:px-40 '>
+                  {match.map((match, slideIndex) => (
+                    <div
+                      key={slideIndex}
+                      onClick={() => goToSlide(slideIndex)}
+                      className={slideIndex === currentIndex ? ' text-white lg:border-4 border-2   h-8 w-8  lg:w-12  lg:h-12 border-[#ee6630] rounded-full flex cursor-pointer justify-center items-center hover:text-[#ee6730] duration-300 ' : ' text-gray-500 h-8 w-8  lg:w-12 lg:h-12 flex border-none justify-center items-center hover:text-[#ee6730] cursor-pointer duration-300 font-bold'}
+                    >
+                      {slideIndex + 1}
+                    </div>
+                  ))}
+                </div>
+              )
+              :
+              null
+          }
+          {/* Right Arrow  */}
+          <div onClick={() => goToSlide(currentIndex + 1)}
+            className="justify-center hover:bg-black duration-300 group items-center p-2 bg-white  text-black shadow-xl  rounded-full cursor-pointer">
+            <FaChevronRight
+              className="text-lg group-hover:text-white" />
+          </div>
+        </div> */}
       </div>
 
       {/* Tournaments  */}
