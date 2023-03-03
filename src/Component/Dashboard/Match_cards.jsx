@@ -2,6 +2,8 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { RxDotFilled } from 'react-icons/rx';
 import { AiFillCaretLeft } from 'react-icons/ai';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+
 
 
 function Match_cards({ match }) {
@@ -9,9 +11,18 @@ function Match_cards({ match }) {
   const handleClick = () => {
     navigate(`/match-details/${match.match_id}`)
   }
+  const prevSlide = () => {
+    var match = document.getElementById("match")
+    match.scrollLeft = match.scrollLeft - 340;
+  };
+
+  const nextSlide = () => {
+    var match = document.getElementById("match")
+    match.scrollLeft = match.scrollLeft + 340;
+  };
   return (
     <>
-      <div className="relative min-w-[260px] xs:min-w-[320px] sm:min-w-[350px] md:min-w-[350px] max-w-[440px] h-[190px] sm:h-[200px] md:h-[185px] border-0 hover:border-2 hover:border-gray-400 hover:border-dashed group rounded-lg"  onClick={handleClick} key={match.match_id}>
+      <div className="relative min-w-[260px] xs:min-w-[320px] sm:min-w-[350px] md:min-w-[350px] max-w-[440px] h-[190px] sm:h-[200px] md:h-[185px] border-0 hover:border-2 hover:border-gray-400 hover:border-dashed group rounded-lg" onClick={handleClick} key={match.match_id}>
         <div className="absolute flex transition-all duration-300 ease-in-out cursor-pointer top-[-2px] left-[-2px] w-full h-full group-hover:left-[-10px] group-hover:top-[-10px] hover:left-[-10px] hover:top-[-10px] bg-white shadow-xl rounded-lg">
           {
             match.is_live == 1
@@ -142,6 +153,18 @@ function Match_cards({ match }) {
             </div>
           </div>
         </div>
+      </div>
+      {/* Left Arrow  */}
+      <div onClick={prevSlide}
+        className="justify-center absolute left-0 bottom-[40%] active:scale-90 hover:bg-black duration-300 group items-center p-2 bg-white  text-black shadow-xl  rounded-full cursor-pointer">
+        <FaChevronLeft
+          className="text-lg group-hover:text-white" />
+      </div>
+      {/* Right Arrow  */}
+      <div onClick={nextSlide}
+        className="justify-center absolute bottom-[40%] right-0 active:scale-90 hover:bg-black duration-300 group items-center p-2 bg-white  text-black shadow-xl  rounded-full cursor-pointer">
+        <FaChevronRight
+          className="text-lg group-hover:text-white" />
       </div>
     </>
   )
