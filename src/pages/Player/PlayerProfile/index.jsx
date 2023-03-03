@@ -91,7 +91,7 @@ export default function PlayerProfile() {
               margin={true}
             />
           </div>
-          <div className="flex lg:w-2/3 mx-auto">
+          <div className="flex  mx-auto">
             <TeamCard teamDetails={PlayerDetail?.teamDetails} />
           </div>
         </div>
