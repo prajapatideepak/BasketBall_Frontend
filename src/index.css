@@ -6,3 +6,6 @@
   min-height: calc(100vh - 70px);
 }
 
+::-webkit-scrollbar {
+  display: none;
+}

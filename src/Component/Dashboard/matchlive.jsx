@@ -13,7 +13,7 @@ function MatchLive({ slides }) {
   const length = slides.length
   const autoScroll = true
   let slideInterval;
-  let intervalTime = 3000
+  let intervalTime = 4000
 
   const prevSlide = () => {
     const isFirstSlide = currentIndex === 0;
@@ -26,16 +26,17 @@ function MatchLive({ slides }) {
     const newIndex = isLastSlide ? 0 : currentIndex + 1;
     setCurrentIndex(newIndex);
   };
+  
 
-  function auto() {
-    slideInterval = setInterval(nextSlide, intervalTime)
-  }
-  useEffect(() => {
-    if (autoScroll) {
-      auto();
-    }
-    return () => clearInterval(slideInterval)
-  }, [currentIndex])
+  // function auto() {
+  //   slideInterval = setInterval(nextSlide, intervalTime)
+  // }
+  // useEffect(() => {
+  //   if (autoScroll) {
+  //     auto();
+  //   }
+  //   return () => clearInterval(slideInterval)
+  // }, [currentIndex])
 
 
   const goToSlide = (slideIndex) => {
@@ -125,7 +126,6 @@ function MatchLive({ slides }) {
             (
               <div className='flex  absolute bottom-3 sm:bottom-4 2xl:bottom-10 lg:space-x-8 space-x-7 left-[33%] sm:left-[37%] lg:left-[25%] xl:left-[26%] 2xl:left-[30%]  lg:px-40 '>
                 {slides.map((slide, slideIndex) => (
-                  console.log(slide, "slide"),
                   <div
                     key={slideIndex}
                     onClick={() => goToSlide(slideIndex)}

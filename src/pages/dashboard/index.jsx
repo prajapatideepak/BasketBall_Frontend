@@ -3,10 +3,10 @@ import MatchLive from "../../Component/Dashboard/matchlive";
 import Match_cards from "../../Component/Dashboard/Match_cards";
 import { BiChevronRight } from "react-icons/bi"
 import Hilights_Cards from "../../Component/Dashboard/Highlights_cards";
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import News_cards from "../../Component/Dashboard/News_cards";
 import Tournaments_cards from "../../Component/Dashboard/Tournaments_cards";
 import { GiBasketballBall } from 'react-icons/gi';
+
 
 
 
@@ -221,35 +221,43 @@ const Dashboard = () => {
   const tournament = [
     {
       tournament_id: 1,
-      logo: "../../CBL_Images/logo3.png"
+      name: "CBL Legue",
+      location: "Mumbai",
+      start_date: "10 Jan 2023",
+      end_date: "20 jan 2023",
+      logo: "../../CBL_Images/logo3.png",
+      is_live: "1"
     },
     {
       tournament_id: 2,
-      logo: "../../CBL_Images/logo5.png"
+      name: "NBA National",
+      location: "Delhi",
+      start_date: "20 Feb 2023",
+      end_date: "30 Feb 2023",
+      logo: "../../CBL_Images/logo5.png",
+      is_live: "1"
     },
     {
       tournament_id: 3,
-      logo: "../../CBL_Images/logo2.png"
+      name: "Lj Cup",
+      location: "Kolkata",
+      start_date: "1 Mar 2023",
+      end_date: "10 Mar 2023",
+      logo: "../../CBL_Images/logo2.png",
+      is_live: "0"
     },
     {
       tournament_id: 4,
-      logo: "../../CBL_Images/logo.png"
+      name: "Basketball legue",
+      location: "Ahmedabad",
+      start_date: "11 Mar 2023",
+      end_date: "20 Mar 2023",
+      logo: "../../CBL_Images/logo.png",
+      is_live: "0"
     },
   ]
 
-  const [currentIndex, setCurrentIndex] = React.useState(0);
 
-  const prevSlide = () => {
-    const isFirstSlide = currentIndex === 0;
-    const newIndex = isFirstSlide ? Tournament.length - 1 : currentIndex - 1;
-    setCurrentIndex(newIndex);
-  };
-
-  const nextSlide = () => {
-    const isLastSlide = currentIndex === Tournament.length - 1;
-    const newIndex = isLastSlide ? 0 : currentIndex + 8;
-    setCurrentIndex(newIndex);
-  };
 
   return (
     <div className="min-h-screen ">
@@ -259,7 +267,7 @@ const Dashboard = () => {
       </div>
 
       {/* Live and Upcoming match   */}
-      <div className="mt-5 md:py-5">
+      <div className="mt-5 md:py-5 relative">
         <div className="px-7 md:px-10">
           <div className="flex justify-between items-center xl:pr-8">
             <h1 className="font-bold text-lg md:text-2xl  lg:text-3xl text-black">
@@ -275,13 +283,13 @@ const Dashboard = () => {
           <div className="bg-gray-700 h-[1px] w-full my-1 bg-gradient-to-l from-slate-50">
           </div>
         </div>
-        <div className=" w-full flex justify-start px-6 xl:px-10 items-center gap-5  overflow-hidden pt-10 pb-10 lg:py-8">
+        <div id="match" className=" w-full flex justify-start px-6 xl:px-14 items-center gap-5 xl:gap-3 scroll-smooth  overflow-x-auto scrollbar-hide pt-10 pb-10 lg:py-8">
           {
             match.length > 0
               ?
-              match.map((match, index) => {
+              match.map((match, slideIndex) => {
                 return (
-                  <Match_cards key={index} match={match} />
+                  <Match_cards key={slideIndex} match={match} />
                 )
               })
               :
@@ -290,18 +298,6 @@ const Dashboard = () => {
                 <p className='text-xs xs:text-sm sm:text-lg font-medium text-gray-400'>No Matches Found</p>
               </div>
           }
-          {/* Left Arrow  */}
-          <div className='hidden group-hover:block  absolute top-[50%] -translate-x-0 translate-y-[-50%] left-0 text-2xl h-1/2 mt-6  justify-center items-center p-2 bg-black/20 duration-300 hover:bg-black text-white cursor-pointer'>
-            <FaChevronLeft
-              onClick={prevSlide}
-              size={30} />
-          </div>
-          {/* Right Arrow  */}
-          <div className='hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-0 text-2xl h-1/2 mt-6  justify-center items-center p-2 bg-black/20 duration-300 hover:bg-black text-white cursor-pointer'>
-            <FaChevronRight
-              onClick={nextSlide}
-              size={30} />
-          </div>
         </div>
       </div>
 
