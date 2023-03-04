@@ -2,15 +2,26 @@ import React from "react";
 import MatchLive from "../../Component/Dashboard/matchlive";
 import Match_cards from "../../Component/Dashboard/Match_cards";
 import { BiChevronRight } from "react-icons/bi"
+import { FaPhotoVideo } from "react-icons/fa"
+import { GiDiamondTrophy } from "react-icons/gi"
+import { BsFillCameraReelsFill } from "react-icons/bs"
 import Hilights_Cards from "../../Component/Dashboard/Highlights_cards";
 import News_cards from "../../Component/Dashboard/News_cards";
 import Tournaments_cards from "../../Component/Dashboard/Tournaments_cards";
 import { GiBasketballBall } from 'react-icons/gi';
-
-
-
+import { useNavigate } from 'react-router-dom'
 
 const Dashboard = () => {
+  const navigate = useNavigate();
+  const matchlist = () => {
+    navigate(`/match`)
+  }
+  const tournamentlist = () => {
+    navigate(`/tournaments`)
+  }
+  const newslist = () => {
+    navigate(`/news`)
+  }
   const SliderData = [
     {
       id: 1,
@@ -131,7 +142,7 @@ const Dashboard = () => {
     },
   ]
 
-  const Highlights = [
+  const highlights = [
     {
       id: 1,
       photo: "../../CBL_Images/news1.webp",
@@ -139,82 +150,60 @@ const Dashboard = () => {
       secound_team: "Rajasthan Royals",
       F_logo: "../../../CBL_Images/logo1.png",
       s_logo: "../../../CBL_Images/logo2.png",
-      tournament_logo: "../../CBL_Images/logo2.png"
+      tournament: "CBL legue"
     },
     {
       id: 2,
-      photo: "../../CBL_Images/DSCF9679.webp",
-      first_team: "Real Madrid",
-      secound_team: "Rajasthan Royals",
-      F_logo: "../../../CBL_Images/logo3.png",
-      s_logo: "../../../CBL_Images/logo4.png",
-      tournament_logo: "../../CBL_Images/logo2.png"
-    },
-    {
-      id: 3,
-      photo: "../../CBL_Images/FWCAQ_Luanda_358.webp",
-      first_team: "Real Madrid",
-      secound_team: "Rajasthan Royals",
-      F_logo: "../../../CBL_Images/logo2.png",
-      s_logo: "../../../CBL_Images/logo1.png",
-      tournament_logo: "../../CBL_Images/logo2.png"
-    },
-    {
-      id: 4,
-      photo: "../../CBL_Images/MHS_0071.webp",
-      first_team: "Real Madrid",
-      secound_team: "Rajasthan Royals",
+      photo: "../../CBL_Images/news1.webp",
+      first_team: "Kolkata Fighters",
+      secound_team: "Chennai super ",
       F_logo: "../../../CBL_Images/logo1.png",
       s_logo: "../../../CBL_Images/logo2.png",
-      tournament_logo: "../../CBL_Images/logo2.png"
+      tournament: "NBA National legue"
     },
-    {
-      id: 5,
-      photo: "../../CBL_Images/CV-Cond.webp",
-      first_team: "Real Madrid",
-      secound_team: "Rajasthan Royals",
-      F_logo: "../../../CBL_Images/logo1.png",
-      s_logo: "../../../CBL_Images/logo2.png",
-      tournament_logo: "../../CBL_Images/logo2.png"
-    },
-    {
-      id: 6,
-      photo: "../../CBL_Images/DYLANBURNS_20230226_0830.webp",
-      first_team: "Real Madrid",
-      secound_team: "Rajasthan Royals",
-      F_logo: "../../../CBL_Images/logo1.png",
-      s_logo: "../../../CBL_Images/logo2.png",
-      tournament_logo: "../../CBL_Images/logo2.png"
-    },
+
   ]
 
   const News = [
     {
       id: 1,
-      photo: "../../CBL_Images/sd_11zon.webp",
-      heading: "Wellbenix created web for basketball",
-      title1: "CBL",
-      title2: "CVL",
-      title3: "Ayursattva",
-      date: "10/MARCH/2023"
+      title: "Wellbenix created amazing web application for basketball",
+      priority: 2,
+      tags: "CBL, wellebnix , work",
+      date: "22/3/21",
+      image: "/CBL_Images/7xm.xyz928823.webp",
+      description:
+        " Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione porro dolor aspernatur esse assumenda, nisi dolorum labore eos repellendus, alias tenetur. Iure placeat eveniet necessitatibus similique ducimus cumque veritatis. Vero.",
     },
     {
       id: 2,
-      photo: "../../CBL_Images/high4.jfif",
-      heading: "Wellbenix created web for basketball",
-      title1: "CBL",
-      title2: "CVL",
-      title3: "Ayursattva",
-      date: "10/FEB/2023"
+      title: "Wellbenix created amazing web application for basketball",
+      priority: 2,
+      tags: "CBL, wellebnix , work",
+      date: "22/3/21",
+      image: "/CBL_Images/7xm.xyz641706.jpg",
+      description:
+        " Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione porro dolor aspernatur esse assumenda, nisi dolorum labore eos repellendus, alias tenetur. Iure placeat eveniet necessitatibus similique ducimus cumque veritatis. Vero.",
     },
     {
       id: 3,
-      photo: "../../CBL_Images/news1.jpg",
-      heading: "Wellbenix created web for basketball",
-      title1: "CBL",
-      title2: "CVL",
-      title3: "Ayursattva",
-      date: "10/APRIL/2023"
+      title: "Wellbenix created amazing web application for basketball",
+      priority: 2,
+      tags: "CBL, wellebnix , work",
+      date: "22/3/21",
+      image: "/CBL_Images/7xm.xyz928823.webp",
+      description:
+        " Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione porro dolor aspernatur esse assumenda, nisi dolorum labore eos repellendus, alias tenetur. Iure placeat eveniet necessitatibus similique ducimus cumque veritatis. Vero.",
+    },
+    {
+      id: 4,
+      title: "Wellbenix created amazing web application for basketball",
+      priority: 2,
+      tags: "CBL, wellebnix , work",
+      date: "22/3/21",
+      image: "/CBL_Images/7xm.xyz928823.webp",
+      description:
+        " Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione porro dolor aspernatur esse assumenda, nisi dolorum labore eos repellendus, alias tenetur. Iure placeat eveniet necessitatibus similique ducimus cumque veritatis. Vero.",
     },
   ]
 
@@ -255,6 +244,15 @@ const Dashboard = () => {
       logo: "../../CBL_Images/logo.png",
       is_live: "0"
     },
+    {
+      tournament_id: 1,
+      name: "CBL Legue",
+      location: "Mumbai",
+      start_date: "10 Jan 2023",
+      end_date: "20 jan 2023",
+      logo: "../../CBL_Images/logo3.png",
+      is_live: "1"
+    },
   ]
 
 
@@ -273,7 +271,7 @@ const Dashboard = () => {
             <h1 className="font-bold text-lg md:text-2xl  lg:text-3xl text-black">
               Leagues on Courtside :
             </h1>
-            <div className="flex items-center text-[13px] font-semibold cursor-pointer hover:underline ">
+            <div className="flex items-center text-[13px] font-semibold cursor-pointer hover:underline " onClick={matchlist}>
               <p className="hidden sm:block sm:text-[10px] lg:text-[11px]">Discover More</p>
               <BiChevronRight className="text-base mt-1 sm:mt-0 lg:text-lg  xl:mt-1" />
             </div>
@@ -293,8 +291,8 @@ const Dashboard = () => {
                 )
               })
               :
-              <div className='flex justify-center items-center mt-16 md:mt-24'>
-                <GiBasketballBall className="text-2xl xs:text-3xl sm:text-5xl text-gray-400 mr-2" />
+              <div className='flex justify-center items-center w-full py-5'>
+                <GiBasketballBall className=" text-2xl sm:text-3xl md:text-4xl text-gray-400 mr-2" />
                 <p className='text-xs xs:text-sm sm:text-lg font-medium text-gray-400'>No Matches Found</p>
               </div>
           }
@@ -302,13 +300,13 @@ const Dashboard = () => {
       </div>
 
       {/* Tournaments  */}
-      <div className="py-5">
+      <div className="py-5 relative">
         <div className="px-7 md:px-10">
           <div className="flex justify-between items-center xl:pr-8">
             <h1 className="font-bold text-lg md:text-2xl  lg:text-3xl text-black">
               Tournament :
             </h1>
-            <div className="flex items-center text-[13px] font-semibold cursor-pointer hover:underline ">
+            <div className="flex items-center text-[13px] font-semibold cursor-pointer hover:underline " onClick={tournamentlist}>
               <p className="hidden sm:block sm:text-[10px] lg:text-[11px]">Discover More</p>
               <BiChevronRight className="text-base mt-1 sm:mt-0 lg:text-lg  xl:mt-1" />
 
@@ -319,7 +317,7 @@ const Dashboard = () => {
           <div className="bg-gray-700 h-[1px] w-full my-1 bg-gradient-to-l from-slate-50">
           </div>
         </div>
-        <div className="w-full flex justify-start px-6 xl:px-10 items-center gap-5  overflow-hidden pt-10 pb-10 lg:py-8">
+        <div id="tournament" className="w-full flex justify-start px-6 xl:px-14 items-center gap-5 xl:gap-3  scroll-smooth  overflow-x-auto scrollbar-hide pt-10 pb-10 lg:py-8">
           {
             tournament.length > 0
               ?
@@ -332,8 +330,9 @@ const Dashboard = () => {
                 )
               })
               :
-              <div className="bg-red-100 w-full mt-4 text-center">
-                <h4 className='text-red-700 font-medium p-2'>No Tournament Found</h4>
+              <div className='flex justify-center items-center w-full py-5'>
+                <GiDiamondTrophy className=" text-2xl sm:text-3xl md:text-4xl text-gray-400 mr-2" />
+                <p className='text-xs xs:text-sm sm:text-lg font-medium text-gray-400'>No Tournament Found</p>
               </div>
           }
         </div>
@@ -356,40 +355,35 @@ const Dashboard = () => {
           <div className="bg-gray-700 h-[1px] w-full my-1 bg-gradient-to-l from-slate-50">
           </div>
         </div>
-        <div className="w-full flex justify-start px-5 xl:px-10 items-center gap-5  overflow-hidden pt-10 pb-10 lg:py-8">
+        <div id="highlights" className="w-full flex justify-start px-6 xl:px-14 items-center gap-5   scroll-smooth  overflow-x-auto scrollbar-hide pt-10 pb-10 lg:py-8">
           {
-            Highlights.length > 0
+            highlights.length > 0
               ?
-              Highlights.map((item, index) => {
+              highlights.map((highlights, index) => {
                 return (
                   <Hilights_Cards
                     key={index}
-                    id={item.id}
-                    photo={item.photo}
-                    first_team={item.first_team}
-                    secound_team={item.secound_team}
-                    F_logo={item.F_logo}
-                    s_logo={item.s_logo}
-                    tournament_logo={item.tournament_logo}
+                    highlights={highlights}
                   />
                 )
               })
               :
-              <div className="bg-red-100 w-full mt-4 text-center">
-                <h4 className='text-red-700 font-medium p-2'>No Highlights Found</h4>
+              <div className='flex justify-center items-center w-full py-5'>
+                <FaPhotoVideo className=" text-2xl sm:text-3xl md:text-4xl text-gray-400 mr-2" />
+                <p className='text-xs xs:text-sm sm:text-lg font-medium text-gray-400'>No Highlights Found</p>
               </div>
           }
         </div>
       </div>
 
       {/* News previus matches  */}
-      <div className=" pb-5 ">
+      <div className=" pb-5 relative ">
         <div className="px-7 md:px-10">
           <div className="flex justify-between items-center xl:pr-8">
             <h1 className="font-bold text-lg md:text-2xl  lg:text-3xl text-black">
               News :
             </h1>
-            <div className="flex items-center text-[13px] font-semibold cursor-pointer hover:underline ">
+            <div className="flex items-center text-[13px] font-semibold cursor-pointer hover:underline " onClick={newslist}>
               <p className="hidden sm:block sm:text-[10px] lg:text-[11px]">Discover More</p>
               <BiChevronRight className="text-base mt-1 sm:mt-0 lg:text-lg  xl:mt-1" />
             </div>
@@ -399,27 +393,22 @@ const Dashboard = () => {
           <div className="bg-gray-700 h-[1px] w-full my-1 bg-gradient-to-l from-slate-50">
           </div>
         </div>
-        <div className=" w-full  flex justify-start px-5 xl:px-10 items-center gap-5  overflow-hidden py-8">
+        <div id="news" className=" w-full  flex justify-start px-6 xl:px-14 items-center gap-5   scroll-smooth  overflow-x-auto scrollbar-hide py-8">
           {
             News.length > 0
               ?
-              News.map((item, index) => {
+              News.map((news, index) => {
                 return (
                   <News_cards
                     key={index}
-                    id={item.id}
-                    photo={item.photo}
-                    heading={item.heading}
-                    title1={item.title1}
-                    title2={item.title2}
-                    title3={item.title3}
-                    date={item.date}
+                    news={news}
                   />
                 )
               })
               :
-              <div className="bg-red-100 w-full mt-4 text-center">
-                <h4 className='text-red-700 font-medium p-2'>No Matches Found</h4>
+              <div className='flex justify-center items-center w-full py-5'>
+                <BsFillCameraReelsFill className=" text-2xl sm:text-3xl md:text-4xl text-gray-400 mr-2" />
+                <p className='text-xs xs:text-sm sm:text-lg font-medium text-gray-400'>No News Found</p>
               </div>
           }
         </div>

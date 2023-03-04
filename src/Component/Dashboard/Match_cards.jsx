@@ -13,12 +13,12 @@ function Match_cards({ match }) {
   }
   const prevSlide = () => {
     var match = document.getElementById("match")
-    match.scrollLeft = match.scrollLeft - 340;
+    match.scrollLeft = match.scrollLeft - 380;
   };
 
   const nextSlide = () => {
     var match = document.getElementById("match")
-    match.scrollLeft = match.scrollLeft + 340;
+    match.scrollLeft = match.scrollLeft + 380;
   };
   return (
     <>
@@ -156,13 +156,13 @@ function Match_cards({ match }) {
       </div>
       {/* Left Arrow  */}
       <div onClick={prevSlide}
-        className="justify-center absolute left-0 bottom-[40%] active:scale-90 hover:bg-black duration-300 group items-center p-2 bg-white  text-black shadow-xl  rounded-full cursor-pointer">
+        className="justify-center hidden lg:block absolute left-2 bottom-[40%] active:scale-90 hover:bg-black duration-300 group items-center p-2 bg-white  text-black shadow-xl  rounded-full cursor-pointer">
         <FaChevronLeft
           className="text-lg group-hover:text-white" />
       </div>
       {/* Right Arrow  */}
       <div onClick={nextSlide}
-        className="justify-center absolute bottom-[40%] right-0 active:scale-90 hover:bg-black duration-300 group items-center p-2 bg-white  text-black shadow-xl  rounded-full cursor-pointer">
+        className="justify-center hidden lg:block absolute bottom-[40%] right-2 active:scale-90 hover:bg-black duration-300 group items-center p-2 bg-white  text-black shadow-xl  rounded-full cursor-pointer">
         <FaChevronRight
           className="text-lg group-hover:text-white" />
       </div>
