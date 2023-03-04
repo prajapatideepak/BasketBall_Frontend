@@ -28,15 +28,15 @@ function MatchLive({ slides }) {
   };
   
 
-  // function auto() {
-  //   slideInterval = setInterval(nextSlide, intervalTime)
-  // }
-  // useEffect(() => {
-  //   if (autoScroll) {
-  //     auto();
-  //   }
-  //   return () => clearInterval(slideInterval)
-  // }, [currentIndex])
+  function auto() {
+    slideInterval = setInterval(nextSlide, intervalTime)
+  }
+  useEffect(() => {
+    if (autoScroll) {
+      auto();
+    }
+    return () => clearInterval(slideInterval)
+  }, [currentIndex])
 
 
   const goToSlide = (slideIndex) => {
