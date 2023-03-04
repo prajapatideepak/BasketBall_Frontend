@@ -81,7 +81,7 @@ const PlayerList = () => {
                     </div>
                     {/* avtar end */}
                     {/* statiscs start */}
-                    <div className="justify-center p-2 bg-gradients-to-tl text-black from-orange-400 via-orange-700 to-orange-900 flex items-center px-4 rounded-b-xl md:rounded-bl-none md:rounded-br-xl md:rounded-r-lg  ">
+                    <div className="justify-center p-2 bg-gradients-to-tl text-black from-orange-400 via-orange-700 to-orange-900 bg-[#ee6730] flex items-center px-4 rounded-b-xl md:rounded-bl-none md:rounded-br-xl md:rounded-r-lg  ">
                       <div className="grid xxs:grid-cols-2 xs:grid-cols-4 text-black place-content-center  gap-2 lg:gap-10   ">
                         <div className="text-center    ">
                           <h1 className="text-sm lg:text-2xl font-bold">
