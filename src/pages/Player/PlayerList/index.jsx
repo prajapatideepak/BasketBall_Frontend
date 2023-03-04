@@ -41,7 +41,7 @@ const PlayerList = () => {
             onClick={handleSubmit}
             className="text-2xl rounded-lg border  rounded-l-none border-[#ee6730] border-l-0 bg-[#ee6730] hover:bg-gray-800 group text-white px-2 shadow-2xl "
           >
-            <AiOutlineSearch className='group-hover:scale-110 duration-300' />
+            <AiOutlineSearch className="group-hover:scale-110 duration-300" />
           </button>
         </div>
 
@@ -81,13 +81,13 @@ const PlayerList = () => {
                     </div>
                     {/* avtar end */}
                     {/* statiscs start */}
-                    <div className="justify-center p-2 bg-gradient-to-tl from-orange-400 via-orange-700 to-orange-900 flex items-center px-4 rounded-b-xl md:rounded-bl-none md:rounded-br-xl md:rounded-r-lg  ">
-                      <div className="grid xxs:grid-cols-2 xs:grid-cols-4 text-white place-content-center  gap-2 lg:gap-10   ">
+                    <div className="justify-center p-2 bg-gradients-to-tl text-black from-orange-400 via-orange-700 to-orange-900 flex items-center px-4 rounded-b-xl md:rounded-bl-none md:rounded-br-xl md:rounded-r-lg  ">
+                      <div className="grid xxs:grid-cols-2 xs:grid-cols-4 text-black place-content-center  gap-2 lg:gap-10   ">
                         <div className="text-center    ">
                           <h1 className="text-sm lg:text-2xl font-bold">
                             {player.statics.totalMatch}
                           </h1>
-                          <span className="text-xs lg:text-lg text-gray-200">
+                          <span className="text-xs lg:text-lg text-black">
                             Total Match
                           </span>
                         </div>
@@ -95,7 +95,7 @@ const PlayerList = () => {
                           <h1 className="text-sm lg:text-2xl font-bold">
                             {player.statics.matchWon}
                           </h1>
-                          <span className="text-xs lg:text-lg text-gray-200">
+                          <span className="text-xs lg:text-lg text-black">
                             Match Won
                           </span>
                         </div>
@@ -103,7 +103,7 @@ const PlayerList = () => {
                           <h1 className="text-sm lg:text-2xl  font-bold">
                             {player.statics.matchLoss}
                           </h1>
-                          <span className="text-xs lg:text-lg text-gray-200">
+                          <span className="text-xs lg:text-lg text-black">
                             Match loss
                           </span>
                         </div>
@@ -111,7 +111,7 @@ const PlayerList = () => {
                           <h1 className="text-sm lg:text-2xl  font-bold">
                             {player.statics.totalScore}
                           </h1>
-                          <span className="text-xs lg:text-lg text-gray-200">
+                          <span className="text-xs lg:text-lg text-black">
                             Total Score
                           </span>
                         </div>

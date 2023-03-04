@@ -17,9 +17,9 @@ import TournamentDetails from "../pages/TournamentDetails";
 import AfterRole from "../pages/RegisterAfterLogin";
 import TermsandConditions from "../pages/Term&Condistions";
 import MatchsList from "../pages/Matches";
-import MatchDetails from "../pages/MatchDetails";
 import TeamProfileDetail from "../pages/Team/TeamProfileDetail";
 import PageNotFound from "../pages/Error";
+import MatchDetails from "../pages/Matches/MatchDetails";
 
 const PrivateRoutes = () => {
   return (
@@ -48,7 +48,10 @@ const PrivateRoutes = () => {
         <Route path="/Tournament-details/:id" element={<TournamentDetails />} />
         <Route path="/match" element={<MatchsList />} />
         <Route path="/match-details/:id" element={<MatchDetails />} />
-        <Route path='/profile-detail/:team_id' element={<TeamProfileDetail />}/>
+        <Route
+          path="/profile-detail/:team_id"
+          element={<TeamProfileDetail />}
+        />
         <Route path="/Visitor-profile" element={<VisitorProfile />} />
         <Route path="/role" element={<Role />} />
         <Route path="/about" element={<AboutUs />} />
