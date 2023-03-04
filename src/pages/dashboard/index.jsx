@@ -324,14 +324,8 @@ const Dashboard = () => {
               tournament.map((tournament, index) => {
                 return (
                   <Tournaments_cards
-                    key={tournament.index}
-                    tournament_id={tournament.tournament_id}
-                    name={tournament.name}
-                    logo={tournament.logo}
-                    location={tournament.location}
-                    start_date={tournament.start_date}
-                    end_date={tournament.end_date}
-                    is_live={tournament.is_live}
+                    key={index}
+                    tournament={tournament}
                   />
                 )
               })
