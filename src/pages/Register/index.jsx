@@ -11,7 +11,7 @@ import { BsFillPatchCheckFill } from "react-icons/bs"
 
 
 const signUpSchema = Yup.object({
-    firstname: Yup.string().min(2).max(25).matches(/^[a-zA-Z]+$/, "Please enter only characters").required("Please enter your first name"),
+    fullname: Yup.string().min(2).max(25).matches(/^[a-zA-Z]+$/, "Please enter only characters").required("Please enter your full name"),
     lastname: Yup.string().min(2).max(25).matches(/^[a-zA-Z]+$/, "Please enter only characters").required("Please enter your last name"),
     email: Yup.string().email().required("Please enter your email"),
     phone: Yup.string().min(10).max(10).matches(/^[0-9]+$/, "Please enter only numbers").phone(null, true, "Invalid phone number").required("Please enter your phone number"),
@@ -23,7 +23,7 @@ const signUpSchema = Yup.object({
 
 
 const initialValues = {
-    firstname: "",
+    fullname: "",
     lastname: "",
     email: "",
     phone: "",
@@ -90,34 +90,18 @@ function Register() {
                                 <form action="" className="space-y-5" onSubmit={handleSubmit}>
                                     <div className="flex flex-col md:flex-row justify-center items-center w-full md:space-y-0 md:space-x-5 space-y-5 lg:space-x-7">
                                         <div className="firstname flex flex-col space-y-2 w-full ">
-                                            <label htmlFor="Firstname">First Name</label>
+                                            <label htmlFor="Firstname">Full Name</label>
                                             <input type="text"
-                                                name="firstname"
-                                                value={values.firstname}
-                                                id="firstname"
+                                                name="fullname"
+                                                value={values.fullname}
+                                                id="fullname"
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
                                                 className="rounded-md py-2 px-3 outline-non border border-slate-300 outline-blue-200"
-                                                placeholder="Enter your fist name " />
-                                            {errors.firstname && touched.firstname
+                                                placeholder="Enter your full name " />
+                                            {errors.fullname && touched.fullname
                                                 ?
-                                                <p className='form-error text-red-600 text-sm font-semibold'>{errors.firstname}</p>
-                                                :
-                                                null}
-                                        </div>
-                                        <div className="lastname flex flex-col space-y-2 w-full ">
-                                            <label htmlFor="lastname">Last Name</label>
-                                            <input type="text"
-                                                name="lastname"
-                                                id="lastname"
-                                                value={values.lastname}
-                                                onChange={handleChange}
-                                                onBlur={handleBlur}
-                                                className="rounded-md py-2 px-3 outline-non border border-slate-300 outline-blue-200"
-                                                placeholder="Enter your last name " />
-                                            {errors.lastname && touched.lastname
-                                                ?
-                                                <p className='form-error text-red-600 text-sm font-semibold'>{errors.lastname}</p>
+                                                <p className='form-error text-red-600 text-sm font-semibold'>{errors.fullname}</p>
                                                 :
                                                 null}
                                         </div>
@@ -207,25 +191,7 @@ function Register() {
                                             </div>
                                             {errors.terms && touched.terms
                                                 ?
-                                                <p className='form-error text-red-600 text-sm font-semibold'>{errors.terms}</p>
-                                                :
-                                                null}
-                                        </div>
-                                        <div className="flex flex-col ">
-                                            <div className="flex space-x-2">
-                                                <input type="checkbox"
-                                                    className="border border-slate-500 cursor-pointer"
-                                                    name="policy"
-                                                    id="policy"
-                                                    value={values.policy}
-                                                    onChange={handleChange}
-                                                    onBlur={handleBlur}
-                                                />
-                                                <p className="text-base text-[#ee6730] cursor-pointer">Privacy and Policy</p>
-                                            </div>
-                                            {errors.policy && touched.policy
-                                                ?
-                                                <p className='form-error text-red-600 text-sm font-semibold'>{errors.policy}</p>
+                                                <p className='form-error text-red-600 text-[12px] font-semibold'>{errors.terms}</p>
                                                 :
                                                 null}
                                         </div>
