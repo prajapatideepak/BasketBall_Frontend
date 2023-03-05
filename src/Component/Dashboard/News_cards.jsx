@@ -29,8 +29,8 @@ function News_cards({ news }) {
                     <div className='bg-gradient-to-b from-black/60 group-hover:from-black/40 duration-300  h-full w-full absolute'>
                         <div className='bg-gradient-to-r from-black absolute bottom-0 w-full py-3 space-y-1 '>
                             <div className='flex justify-start items-center gap-4 px-4 '>
-                                {tags.map((tag) => (
-                                    <span className="bg-orange-600 px-3 font-semibold text-white text-sm rounded ">{tag} </span>
+                                {tags.map((tag, index) => (
+                                    <span key={index} className="bg-orange-600 px-3 font-semibold text-white text-sm rounded ">{tag} </span>
                                 ))}
                             </div>
                             <div className='px-4 space-y-2'>
