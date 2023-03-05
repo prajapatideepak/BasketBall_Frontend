@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-function PlayerCard({ id, photo, name, position, jersey_no }) {
+function PlayerCard({ id, photo, name, position, age, jersey_no }) {
   const navigate = useNavigate();
   return (
     <div
@@ -24,7 +24,7 @@ function PlayerCard({ id, photo, name, position, jersey_no }) {
         <div className="px-3 py-1">
           <h4 className="text-gray-200 capitalize">{name}</h4>
           <p className="text-orange-400 text-xs tracking-wide capitalize">
-            {position}
+            {position} <span className="text-gray-400 font-medium">(Age: {age})</span>
           </p>
         </div>
         <div className="flex flex-1 justify-end">
