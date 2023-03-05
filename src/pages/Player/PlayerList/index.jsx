@@ -4,6 +4,8 @@ import { AiOutlineSearch, AiFillEye } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { getPlayerList, searchPlayers } from "../../../redux/actions/Player";
 import { Link } from "react-router-dom";
+import image from "../../../../public/CBL_Images/7xm.xyz481259.jpg"
+import logo from "../../../../public/CBL_Images/logo4.png"
 const PlayerList = () => {
   const { PlayerList } = useSelector((state) => state.playerReducer);
   const [search, setSearch] = React.useState("");
@@ -18,7 +20,7 @@ const PlayerList = () => {
   }
 
   return (
-    <div className="flex min-h-screen px-2 lg:px-16  py-8">
+    <div className="flex min-h-screen px-2 lg:px-32  py-8">
       <div className="mx-auto w-full">
         <Heading
           className={"text-xl md:text-3xl px-3 sm:px-7 py-1 font-mono  "}
@@ -46,78 +48,80 @@ const PlayerList = () => {
         </div>
 
         <div className="">
-          <div className="flex w-full   flex-col items-center px-4 lg:px-8 py-1 space-y-6">
+          <div className="flex w-full   flex-col items-center px-4  lg:px-8 py-10 space-y-6 ">
             {PlayerList?.map((player) => {
+              console.log(player)
               return (
                 <Link
                   key={player.id}
                   className="w-full  scale-105"
                   to={`/player/${player.id}`}
                 >
-                  <div className="md:flex duration-300  justify-between bg-white text-black shadow-xl rounded-xl  w-full">
-                    {/* avtar start */}
-                    <div className="text-center   px-4 lg:px-8 py-2 lg:py-4 justify-center   w-full space-x-2 lg:w-2/5 flex  ">
-                      <img
-                        src={player.basicinfo.img}
-                        className=" object-cover w-20  h-20 rounded-full "
-                      />
-                      <div className="px-2 text-left">
-                        <h1 className="text-xl font-semibold">
-                          {player.basicinfo.firstName}{" "}
-                          {player.basicinfo.lastName}
-                        </h1>
-                        <div className="xxs:hidden xs:flex  flex-wrap space-y-1 lg:space-y-0 items-center xs:space-x-2 pt-1">
-                          <span className="xxs:hidden sm:block bg-orange-600 text-left text-xs font-semibold px-2 rounded-full shadow-xl">
-                            {player.gameinfo.playerPosition}
-                          </span>
-                          <span className="bg-orange-600   text-left text-xs font-semibold px-2 rounded-full shadow-xl">
-                            {player?.teamDetails.team_name}
-                          </span>
-                        </div>
-                        <p className="xxs:hidden xs:block   text-xs   text-justify mt-1 ">
-                          {player.gameinfo.Experience.slice(0, 50)}...
-                        </p>
-                      </div>
+                  <div className="duration-300 relative justify-end bg-black/90 text-white overflow-hidden shadow-xl cursor-pointer hover:scale-105  w-full h-1/2">
+                    <div className=" flex justify-end items-center ">
+                      <img src={logo} alt="" className="w-40 h-40  opacity-20" />
                     </div>
-                    {/* avtar end */}
-                    {/* statiscs start */}
-                    <div className="justify-center p-2 bg-gradients-to-tl text-black from-orange-400 via-orange-700 to-orange-900 bg-[#ee6730] flex items-center px-4 rounded-b-xl md:rounded-bl-none md:rounded-br-xl md:rounded-r-lg  ">
-                      <div className="grid xxs:grid-cols-2 xs:grid-cols-4 text-black place-content-center  gap-2 lg:gap-10   ">
-                        <div className="text-center    ">
-                          <h1 className="text-sm lg:text-2xl font-bold">
-                            {player.statics.totalMatch}
-                          </h1>
-                          <span className="text-xs lg:text-lg text-black">
-                            Total Match
-                          </span>
+                    <div className=" flex w-full h-full absolute top-0 content-start  ">
+                      <div className="bg-gradient-to-b from-[#e64100]  absolute top-[-32px] left-[-20px]  h-20 w-14 content-start rotate-[45deg] flex justify-center items-center">
+                        <h1 className="rotate-[315deg]  font-bold text-lg mt-1 ml-6">{player.id}</h1>
+                      </div>
+                      {/* avtar start */}
+                      <div className="text-center w-1/2 items-center space-x-16  px-10 lg:px-20 py-2 lg:py-6 justify-start  flex  ">
+                        <img
+                          src={image}
+                          className=" object-cover w-24  h-24 rounded-full border-4 border-slate-700 "
+                        />
+                        <div className="flex justify-start items-center ">
+                          <h1 className="text-gray-600 font-bold text-3xl uppercase">SF</h1>
                         </div>
-                        <div className="text-center   ">
-                          <h1 className="text-sm lg:text-2xl font-bold">
-                            {player.statics.matchWon}
-                          </h1>
-                          <span className="text-xs lg:text-lg text-black">
-                            Match Won
-                          </span>
-                        </div>
-                        <div className="text-center   text-red-100 ">
-                          <h1 className="text-sm lg:text-2xl  font-bold">
-                            {player.statics.matchLoss}
-                          </h1>
-                          <span className="text-xs lg:text-lg text-black">
-                            Match loss
-                          </span>
-                        </div>
-                        <div className="text-center   text-white">
-                          <h1 className="text-sm lg:text-2xl  font-bold">
-                            {player.statics.totalScore}
-                          </h1>
-                          <span className="text-xs lg:text-lg text-black">
-                            Total Score
-                          </span>
+                        <div className="flex flex-col justify-start items-start ">
+                          <h1 className="text-white font-bold text-[25px] text-start ">Jordern Jems</h1>
+                          <h1 className="text-gray-600 font-bold  text-start ">Los Angeles Lakers</h1>
+
                         </div>
                       </div>
+                      {/* avtar end */}
+                      {/* statiscs start */}
+                      <div className="justify-start p-2  w-1/2 flex items-center pl-10   ">
+                        <div className="grid xxs:grid-cols-2 xs:grid-cols-4 text-black place-content-center  gap-2 lg:gap-20   ">
+                          <div className="text-center    ">
+                            <h1 className="text-sm lg:text-4xl font-bold text-[#ee6730]">
+                              50
+                            </h1>
+                            <span className="text-xs text-white font-semibold">
+                              Total Match
+                            </span>
+                          </div>
+                          <div className="text-center    ">
+                            <h1 className="text-sm lg:text-4xl font-bold text-[#ee6730]">
+                              40
+                            </h1>
+                            <span className="text-xs text-white font-semibold">
+                              Total Won
+                            </span>
+                          </div>
+                          <div className="text-center    ">
+                            <h1 className="text-sm lg:text-4xl font-bold text-[#ee6730]">
+                              10
+                            </h1>
+                            <span className="text-xs text-white font-semibold">
+                              Total loss
+                            </span>
+                          </div>
+                          <div className="text-center    ">
+                            <h1 className="text-sm lg:text-4xl font-bold text-[#ee6730]">
+                              250
+                            </h1>
+                            <span className="text-xs text-white font-semibold">
+                              Total Score
+                            </span>
+                          </div>
+
+                        </div>
+                      </div>
+                      {/* statics end */}
                     </div>
-                    {/* statics end */}
+
                   </div>
                 </Link>
               );
