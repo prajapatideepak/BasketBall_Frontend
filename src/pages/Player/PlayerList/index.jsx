@@ -20,14 +20,14 @@ const PlayerList = () => {
   }
 
   return (
-    <div className="flex min-h-screen px-2 lg:px-32  py-8">
+    <div className="flex min-h-screen px-10 2xl:px-32 lg:px-14 py-8">
       <div className="mx-auto w-full">
         <Heading
           className={"text-xl md:text-3xl px-3 sm:px-7 py-1 font-mono  "}
-          margin={false}
+          margin={true}
           text={"Player List"}
         />
-        <div className="flex m-5  justify-center ">
+        <div className="flex m-10 justify-center ">
           <input
             type="text"
             onChange={(e) => {
@@ -48,7 +48,7 @@ const PlayerList = () => {
         </div>
 
         <div className="">
-          <div className="flex w-full   flex-col items-center px-4  lg:px-8 py-10 space-y-6 ">
+          <div className="flex w-full flex-col items-center px-5 lg:px-8 py-5 space-y-6  h-full ">
             {PlayerList?.map((player) => {
               console.log(player)
               return (
@@ -57,62 +57,62 @@ const PlayerList = () => {
                   className="w-full  scale-105"
                   to={`/player/${player.id}`}
                 >
-                  <div className="duration-300 relative justify-end bg-black/90 text-white overflow-hidden shadow-xl cursor-pointer hover:scale-105  w-full h-1/2">
+                  <div className="duration-300 relative justify-end bg-black text-white overflow-hidden shadow-xl cursor-pointer hover:scale-105 w-6/7  md:w-full h-full ">
                     <div className=" flex justify-end items-center ">
-                      <img src={logo} alt="" className="w-40 h-40  opacity-20" />
+                      <img src={logo} alt="" className="w-28 h-28 2xl:w-32 2xl:h-32  opacity-20" />
                     </div>
-                    <div className=" flex w-full h-full absolute top-0 content-start  ">
-                      <div className="bg-gradient-to-b from-[#e64100]  absolute top-[-32px] left-[-20px]  h-20 w-14 content-start rotate-[45deg] flex justify-center items-center">
-                        <h1 className="rotate-[315deg]  font-bold text-lg mt-1 ml-6">{player.id}</h1>
+                    <div className=" flex flex-col sm:flex-row w-full h-full absolute top-0 content-start py-2 ">
+                      <div className="bg-gradient-to-b  from-[#e64100]  absolute  md:top-[-32px] md:left-[-20px] w-10 h-10 rotate-[30deg] top-[-15px] left-[-15px] md:h-20 md:w-14 content-start md:rotate-[45deg] flex justify-center items-center">
+                        <h1 className="rotate-[-30deg] md:rotate-[315deg] text-xs font-bold md:text-lg mt-1 ml-5 md:ml-6">{player.id}</h1>
                       </div>
                       {/* avtar start */}
-                      <div className="text-center w-1/2 items-center space-x-16  px-10 lg:px-20 py-2 lg:py-6 justify-start  flex  ">
+                      <div className="text-center sm:w-1/2 items-center justify-center space-x-5 lg:space-x-10 xl:space-x-16 sm:space-x-6 lg:py-6 flex  ">
                         <img
                           src={image}
-                          className=" object-cover w-24  h-24 rounded-full border-4 border-slate-700 "
+                          className=" object-cover w-12 h-12 sm:w-14 sm:h-14 lg:w-[70px] lg:h-[70px] xl:w-20 xl:h-20 2xl:w-24  2xl:h-24 rounded-full border-2 sm:border-4 border-slate-700 "
                         />
                         <div className="flex justify-start items-center ">
-                          <h1 className="text-gray-600 font-bold text-3xl uppercase">SF</h1>
+                          <h1 className="text-gray-600 font-bold text-sm sm:text-base md:text-xl lg:text-2xl xl:text-3xl uppercase">SF</h1>
                         </div>
                         <div className="flex flex-col justify-start items-start ">
-                          <h1 className="text-white font-bold text-[25px] text-start ">Jordern Jems</h1>
-                          <h1 className="text-gray-600 font-bold  text-start ">Los Angeles Lakers</h1>
+                          <h1 className="text-white font-bold text-base sm:text-lg md:text-xl lg:text-[25px] text-start ">Jordern Jems</h1>
+                          <h1 className="text-gray-600 font-bold text-[8px] sm:text-[10px] lg:text-xs xl:text-sm text-start ">Los Angeles Lakers</h1>
 
                         </div>
                       </div>
                       {/* avtar end */}
                       {/* statiscs start */}
-                      <div className="justify-start p-2  w-1/2 flex items-center pl-10   ">
-                        <div className="grid xxs:grid-cols-2 xs:grid-cols-4 text-black place-content-center  gap-2 lg:gap-20   ">
+                      <div className="2xl:justify-start py-1 lg:p-2 w-full sm:w-1/2 flex items-center justify-center xl:pl-10   ">
+                        <div className="grid xxs:grid-cols-2 xs:grid-cols-4 text-black place-content-center  gap-5 lg:gap-8 xl:gap-12 2xl:gap-20   ">
                           <div className="text-center    ">
-                            <h1 className="text-sm lg:text-4xl font-bold text-[#ee6730]">
+                            <h1 className="text-sm sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-[#ee6730]">
                               50
                             </h1>
-                            <span className="text-xs text-white font-semibold">
+                            <span className="text-[8px] sm:text-[10px] md:text-[11px] lg:text-xs text-white font-semibold">
                               Total Match
                             </span>
                           </div>
                           <div className="text-center    ">
-                            <h1 className="text-sm lg:text-4xl font-bold text-[#ee6730]">
+                            <h1 className="text-sm sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-[#ee6730]">
                               40
                             </h1>
-                            <span className="text-xs text-white font-semibold">
+                            <span className="text-[8px] sm:text-[10px] md:text-[11px] lg:text-xs text-white font-semibold">
                               Total Won
                             </span>
                           </div>
                           <div className="text-center    ">
-                            <h1 className="text-sm lg:text-4xl font-bold text-[#ee6730]">
+                            <h1 className="text-sm sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-[#ee6730]">
                               10
                             </h1>
-                            <span className="text-xs text-white font-semibold">
+                            <span className="text-[8px] sm:text-[10px] md:text-[11px] lg:text-xs text-white font-semibold">
                               Total loss
                             </span>
                           </div>
                           <div className="text-center    ">
-                            <h1 className="text-sm lg:text-4xl font-bold text-[#ee6730]">
+                            <h1 className="text-sm sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-[#ee6730]">
                               250
                             </h1>
-                            <span className="text-xs text-white font-semibold">
+                            <span className="text-[8px] sm:text-[10px] md:text-[11px] lg:text-xs text-white font-semibold">
                               Total Score
                             </span>
                           </div>
@@ -121,7 +121,6 @@ const PlayerList = () => {
                       </div>
                       {/* statics end */}
                     </div>
-
                   </div>
                 </Link>
               );

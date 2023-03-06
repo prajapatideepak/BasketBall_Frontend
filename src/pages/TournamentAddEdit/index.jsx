@@ -150,273 +150,227 @@ function Tournamentregistration() {
     console.log(gettodatevalue, "gettodatevalue");
   };
 
-    return (
-        <>
-            <section className="min-h-screen">
-                <div className='heading-container flex justify-center items-center h-24 sm:h-32 md:h-48'>
-                    <div className=''>
-                        <Heading margin={true} text={location?.state?.isEdit ? 'Edit Tournament' : 'Tournament Registration'} />
-                    </div>
+  return (
+    <>
+      <section className="min-h-screen">
+        <div className='heading-container flex justify-center items-center h-24 sm:h-32 md:h-48'>
+          <div className=''>
+            <Heading margin={true} text={location?.state?.isEdit ? 'Edit Tournament' : 'Tournament Registration'} />
+          </div>
+        </div>
+        <div className='mx-auto px-10 mb-10 sm:px-20  md:px-20 md:py-0 lg:px-24 xl:px-28 2xl:px-32'>
+          <form action="" onSubmit={handleSubmit}>
+            {/* -----------------------Tounament_Details---------------------------*/}
+            <div className=''>
+              <h3 className='text-2xl font-semibold text-[#ee6730]'>Tournament Information:</h3>
+            </div>
+            {/* Team Name && Choose Logo */}
+            <div className="flex flex-col md:flex-row  gap-6 my-7 ">
+              <div className="flex flex-col w-full">
+                <label className="mb-2">Tournament Name *</label>
+                <input
+                  className="w-full outline-blue-200 rounded-lg border-2 border-gray-200 py-3 px-3 text-sm"
+                  placeholder="Enter Tournament Name"
+                  type="text"
+                  name="tournament_name"
+                  id="tournament_name"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                {
+                  errors.tournament_name && touched.tournament_name
+                    ?
+                    <small className='text-red-600 mt-2'>{errors.tournament_name}</small>
+                    :
+                    null
+                }
+              </div>
+              <div className="flex flex-col w-full">
+                <label className="mb-2">Choose Logo ( PNG, JPG, JPEG )</label>
+                <input
+                  className="w-full cursor-pointer rounded-lg bg-white border-2 border-gray-200 px-3 py-[9px] text-sm"
+                  type="file"
+                  name="tournament_logo"
+                  id="tournament_logo"
+                  accept='.png, .jpg, .jpeg'
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+            {/* Starting Date && Ending Date && Tournament Type */}
+            <div className="flex flex-col md:flex-row  gap-6 my-7 ">
+              <div className="flex space-x-5  w-full ">
+                <div className="w-full">
+                  <label className="">Starting Date *</label>
+                  <input
+                    className="w-full outline-blue-200 rounded-lg border-2 border-gray-200 py-3 px-2 my-2 text-gray-400 text-sm"
+                    type="date"
+                    name="starting_date"
+                    id="starting_date"
+                    onChange={handledate}
+                    onBlur={handleBlur}
+                  />
+                  {
+                    errors.starting_date && touched.starting_date
+                      ?
+                      <small className='text-red-600 mt-2'>{errors.starting_date}</small>
+                      :
+                      null
+                  }
                 </div>
-                <div className='mx-auto px-10 mb-10 sm:px-20  md:px-20 md:py-0 lg:px-24 xl:px-28 2xl:px-32'>
-                    <form action="" onSubmit={handleSubmit}>
-                        {/* -----------------------Tounament_Details---------------------------*/}
-                        <div className=''>
-                            <h3 className='text-2xl font-semibold text-[#ee6730]'>Tournament Information:</h3>
-                        </div>
-                        {/* Team Name && Choose Logo */}
-                        <div className="flex flex-col md:flex-row  gap-6 my-7 ">
-                            <div className="flex flex-col w-full">
-                                <label className="mb-2">Tournament Name *</label>
-                                <input
-                                    className="w-full outline-blue-200 rounded-lg border-2 border-gray-200 py-3 px-3 text-sm"
-                                    placeholder="Enter Tournament Name"
-                                    type="text"
-                                    name="tournament_name"
-                                    id="tournament_name"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                />
-                                {
-                                    errors.tournament_name && touched.tournament_name
-                                        ?
-                                        <small className='text-red-600 mt-2'>{errors.tournament_name}</small>
-                                        :
-                                        null
-                                }
-                            </div>
-                            <div className="flex flex-col w-full">
-                                <label className="mb-2">Choose Logo ( PNG, JPG, JPEG )</label>
-                                <input
-                                    className="w-full cursor-pointer rounded-lg bg-white border-2 border-gray-200 px-3 py-[9px] text-sm"
-                                    type="file"
-                                    name="tournament_logo"
-                                    id="tournament_logo"
-                                    accept='.png, .jpg, .jpeg'
-                                    onChange={handleChange}
-                                />
-                            </div>
-                        </div>
-                        {/* Starting Date && Ending Date && Tournament Type */}
-                        <div className="flex flex-col md:flex-row  gap-6 my-7 ">
-                            <div className="flex space-x-5  w-full ">
-                                <div className="w-full">
-                                    <label className="">Starting Date *</label>
-                                    <input
-                                        className="w-full outline-blue-200 rounded-lg border-2 border-gray-200 py-3 px-2 my-2 text-gray-400 text-sm"
-                                        type="date"
-                                        name="starting_date"
-                                        id="starting_date"
-                                        onChange={handledate}
-                                        onBlur={handleBlur}
-                                    />
-                                    {
-                                        errors.starting_date && touched.starting_date
-                                            ?
-                                            <small className='text-red-600 mt-2'>{errors.starting_date}</small>
-                                            :
-                                            null
-                                    }
-                                </div>
-                                <div className="w-full">
-                                    <label className="">Ending Date *</label>
-                                    <input
-                                        className="w-full outline-blue-200 rounded-lg border-2 border-gray-200 py-3 my-2 text-gray-400 px-3 text-sm"
-                                        placeholder="Enter Tournament name"
-                                        type="date"
-                                        disabled={isDisabled}
-                                        name="ending_date"
-                                        id="ending_date"
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                    />
-                                    {
-                                        errors.ending_date && touched.ending_date
-                                            ?
-                                            <small className='text-red-600 mt-2'>{errors.ending_date}</small>
-                                            :
-                                            null
-                                    }
-                                </div>
-                            </div>
-                            <div className="flex-col flex w-full">
-                                <div className="flex flex-col w-full">
-                                    <label className="mb-2">Tournament Type *</label>
-                                    <select name=""
-                                        className="w-full cursor-pointer rounded-lg bg-white focus:outline-blue-200 border-2 border-gray-200  px-2 py-3 text-sm"
-                                        id="tournament_type"
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                    >
-                                        <option value="">--Tournament Type--</option>
-                                        <option value="League">League</option>
-                                        <option value="Knock out">Knock out</option>
-                                        <option value="League / Knock out">League / Knock out</option>
-                                    </select>
-                                </div>
-                                {
-                                    errors.tournament_type && touched.tournament_type
-                                        ?
-                                        <small className='text-red-600 mt-2'>{errors.tournament_type}</small>
-                                        :
-                                        null
-                                }
-                            </div>
-                        </div>
-                        {/* Tournament Category && Tournament Level */}
-                        <div className="flex flex-col md:flex-row  2 gap-6 my-7 ">
-                            <div className="flex flex-col w-full">
-                                <div className="flex flex-col w-full">
-                                    <label className="mb-2">Tournament Category *</label>
-                                    <select name=""
-                                        className="w-full cursor-pointer px-2 rounded-lg bg-white border-2 outline-blue-200 border-gray-200 py-3 text-sm"
-                                        id="tournament_category"
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                    >
-                                        <option value="">--Tournament Category--</option>
-                                        <option value="Only For Girls">Only For Girls</option>
-                                        <option value="Only For Boys">Only For Boys</option>
-                                        <option value="For Both (Girls and Boys)">For Both (Girls and Boys)</option>
-                                    </select>
-                                </div>
-                                {
-                                    errors.tournament_category && touched.tournament_category
-                                        ?
-                                        <small className='text-red-600 mt-2'>{errors.tournament_category}</small>
-                                        :
-                                        null
-                                }
-                            </div>
-                            <div className="flex flex-col w-full">
-                                <label className="mb-2">Tournament Level *</label>
-                                <select name=""
-                                    className="w-full cursor-pointer px-2 rounded-lg bg-white border-2 outline-blue-200 border-gray-200 py-3 text-sm"
-                                    id="tournament_level"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                >
-                                    <option value="">--Tournament Level--</option>
-                                    <option value="International">International</option>
-                                    <option value="National">National</option>
-                                    <option value="State">State</option>
-                                    <option value="City">City</option>
-                                    <option value="Local">Local</option>
-                                    <option value="Friendly">Friendly</option>
-                                </select>
-                                {
-                                    errors.tournament_level && touched.tournament_level
-                                        ?
-                                        <small className='text-red-600 mt-2'>{errors.tournament_level}</small>
-                                        :
-                                        null
-                                }
-                            </div>
-                        </div>
-                        {/* City name && Prize Money */}
-                        <div className="flex flex-col md:flex-row  2 gap-6 my-7 ">
-                            <div className="flex flex-col w-full">
-                                <label className="mb-2">Prize</label>
-                                <input
-                                    className="w-full outline-blue-200 rounded-lg border-2 border-gray-200 py-3 px-3 text-sm"
-                                    placeholder="Enter Prize"
-                                    type="text"
-                                    name="prize"
-                                    id="prize"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                />
-                                {
-                                    errors.prize && touched.prize
-                                        ?
-                                        <small className='text-red-600 mt-2'>{errors.prize}</small>
-                                        :
-                                        null
-                                }
-                            </div>
-                            <div className="flex flex-col w-full">
-                                <label className="mb-2">City Name *</label>
-                                <input
-                                    className="w-full outline-blue-200 rounded-lg border-2 border-gray-200 py-3 px-3 text-sm"
-                                    placeholder="Enter City Name"
-                                    type="text"
-                                    name="city_name"
-                                    id="city_name"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                />
-                                {
-                                    errors.city_name && touched.city_name
-                                        ?
-                                        <small className='text-red-600 mt-2'>{errors.city_name}</small>
-                                        :
-                                        null
-                                }
-                            </div>
-                        </div>
-                        {/*  age_restriction && age_cutoff */}
-                        <div className="flex flex-col md:flex-row  gap-6 my-7 ">
-                            <div className="flex space-x-5 items-center  w-full ">
-                                <div className="w-full flex-col">
-                                    <label className="">Age Restriction</label>
-                                    <div className="flex justify-center mt-2 items-center bg-white border-2 rounded-lg px-3 w-auto outline-blue-200 border-gray-200 focus: py-[10px] space-x-20 ">
-                                        <div className="flex items-center space-x-1">
-                                            <input type="radio"
-                                                className="cursor-pointer"
-                                                name="age_restriction"
-                                                id="no"
-                                                value="no"
-                                                checked={true}
-                                                onChange={handleChange}
-                                                onBlur={handleBlur}
+                <div className="w-full">
+                  <label className="">Ending Date *</label>
+                  <input
+                    className="w-full outline-blue-200 rounded-lg border-2 border-gray-200 py-3 my-2 text-gray-400 px-3 text-sm"
+                    placeholder="Enter Tournament name"
+                    type="date"
+                    disabled={isDisabled}
+                    name="ending_date"
+                    id="ending_date"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                  {
+                    errors.ending_date && touched.ending_date
+                      ?
+                      <small className='text-red-600 mt-2'>{errors.ending_date}</small>
+                      :
+                      null
+                  }
+                </div>
+              </div>
+              <div className="flex flex-col w-full">
+                <div className="flex flex-col w-full">
+                  <label className="mb-2">Tournament Category *</label>
+                  <select name=""
+                    className="w-full cursor-pointer px-2 rounded-lg bg-white border-2 outline-blue-200 border-gray-200 py-3 text-sm"
+                    id="tournament_category"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  >
+                    <option value="">--Tournament Category--</option>
+                    <option value="Only For Girls">Only For Girls</option>
+                    <option value="Only For Boys">Only For Boys</option>
+                    <option value="Only For Men">Only For Men</option>
+                    <option value="Only For Women">Only For Women</option>
+                    <option value="Mixed">Mixed</option>
+                    
+                  </select>
+                </div>
+                {
+                  errors.tournament_category && touched.tournament_category
+                    ?
+                    <small className='text-red-600 mt-2'>{errors.tournament_category}</small>
+                    :
+                    null
+                }
+              </div>
+            </div>
+            {/* Tournament Category && Tournament Level */}
+            <div className="flex flex-col md:flex-row  2 gap-6 my-7 ">
+              <div className="flex flex-col w-full">
+                <label className="mb-2">Tournament Level *</label>
+                <select name=""
+                  className="w-full cursor-pointer px-2 rounded-lg bg-white border-2 outline-blue-200 border-gray-200 py-3 text-sm"
+                  id="tournament_level"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                >
+                  <option value="">--Tournament Level--</option>
+                  <option value="International">International</option>
+                  <option value="National">National</option>
+                  <option value="State">State</option>
+                  <option value="City">City</option>
+                  <option value="Local">Local</option>
+                  <option value="Friendly">Friendly</option>
+                </select>
+                {
+                  errors.tournament_level && touched.tournament_level
+                    ?
+                    <small className='text-red-600 mt-2'>{errors.tournament_level}</small>
+                    :
+                    null
+                }
+              </div>
+              <div className="flex space-x-5 items-center  w-full ">
+                <div className="flex flex-col w-full">
+                  <label className="mb-2">Age cutoff</label>
+                  <select name=""
+                    className="w-full cursor-pointer  px-2 rounded-lg bg-white border-2 outline-blue-200 border-gray-200 py-3 text-sm"
+                    id="age_cutoff"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  >
+                    <option value="Under 14">Under 14</option>
+                    <option value="Under 16">Under 16</option>
+                    <option value="Under 17">Under 17</option>
+                    <option value="Under 19">Under 19</option>
+                    <option value="Under 21">Under 21</option>
+                    <option value="Under 25">Under 25</option>
+                    <option value="Under 27">Under 27</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            {/* City name && Prize Money */}
+            <div className="flex flex-col md:flex-row  2 gap-6 my-7 ">
+              <div className="flex flex-col w-full">
+                <label className="mb-2">Prize</label>
+                <input
+                  className="w-full outline-blue-200 rounded-lg border-2 border-gray-200 py-3 px-3 text-sm"
+                  placeholder="Enter Prize"
+                  type="text"
+                  name="prize"
+                  id="prize"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                {
+                  errors.prize && touched.prize
+                    ?
+                    <small className='text-red-600 mt-2'>{errors.prize}</small>
+                    :
+                    null
+                }
+              </div>
+              <div className="flex flex-col w-full">
+                <label className="mb-2">City Name *</label>
+                <input
+                  className="w-full outline-blue-200 rounded-lg border-2 border-gray-200 py-3 px-3 text-sm"
+                  placeholder="Enter City Name"
+                  type="text"
+                  name="city_name"
+                  id="city_name"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                {
+                  errors.city_name && touched.city_name
+                    ?
+                    <small className='text-red-600 mt-2'>{errors.city_name}</small>
+                    :
+                    null
+                }
+              </div>
+            </div>
+            {/*  age_restriction && age_cutoff */}
+            <div className="flex flex-col md:flex-row  gap-6 my-7 ">
 
-                                            />
-                                            <label htmlFor="No">No</label>
-                                        </div>
-                                        <div className="flex items-center space-x-1">
-                                            <input type="radio"
-                                                className='cursor-pointer'
-                                                name="age_restriction"
-                                                id="yes"
-                                                value="yes"
-                                                onChange={handleChange}
-                                                onBlur={handleBlur}
-                                            />
-                                            <label htmlFor="No">Yes</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="flex flex-col w-full">
-                                    <label className="mb-2">Age cutoff</label>
-                                    <select name=""
-                                        disabled={isDisabled}
-                                        className="w-full cursor-pointer  px-2 rounded-lg bg-white border-2 outline-blue-200 border-gray-200 py-3 text-sm"
-                                        id="age_cutoff"
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                    >
-                                        <option value="Under 21">Under 21</option>
-                                        <option value="Under 18">Under 18</option>
-                                        <option value="Under 16">Under 16</option>
-                                        <option value="Under 14">Under 14</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        {/* About Tournament */}
-                        <div className='flex flex-1'>
-                            <div className='w-full flex flex-col'>
-                                <label className="mb-2">About Tournament</label>
-                                <textarea
-                                    className="w-full outline-blue-200 text-sm rounded-lg px-4 py-3 border-2 border-gray-200"
-                                    name="about_tournament"
-                                    placeholder='Write something about tournament'
-                                    rows="6"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                />
-                            </div>
-                        </div>
+            </div>
+            {/* About Tournament */}
+            <div className='flex flex-1'>
+              <div className='w-full flex flex-col'>
+                <label className="mb-2">About Tournament</label>
+                <textarea
+                  className="w-full outline-blue-200 text-sm rounded-lg px-4 py-3 border-2 border-gray-200"
+                  name="about_tournament"
+                  placeholder='Write something about tournament'
+                  rows="6"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+              </div>
+            </div>
 
 
             {/* -----------------------Refree_Details---------------------------*/}
