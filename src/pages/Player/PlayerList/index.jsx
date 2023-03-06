@@ -27,7 +27,7 @@ const PlayerList = () => {
           margin={true}
           text={"Player List"}
         />
-        <div className="flex m-10 justify-center ">
+        <div className="flex m-20 justify-center ">
           <input
             type="text"
             onChange={(e) => {
@@ -48,7 +48,7 @@ const PlayerList = () => {
         </div>
 
         <div className="">
-          <div className="flex w-full flex-col items-center px-5 lg:px-8 py-5 space-y-6  h-full ">
+          <div className="flex w-full flex-col items-center px-5 lg:px-8  space-y-6  h-full ">
             {PlayerList?.map((player) => {
               console.log(player)
               return (
@@ -85,7 +85,8 @@ const PlayerList = () => {
                       <div className="2xl:justify-start py-1 lg:p-2 w-full sm:w-1/2 flex items-center justify-center xl:pl-10   ">
                         <div className="grid xxs:grid-cols-2 xs:grid-cols-4 text-black place-content-center  gap-5 lg:gap-8 xl:gap-12 2xl:gap-20   ">
                           <div className="text-center    ">
-                            <h1 className="text-sm sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-[#ee6730]">
+                            <h1 className="text-sm sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl
+                             font-bold text-[#ee6730]">
                               50
                             </h1>
                             <span className="text-[8px] sm:text-[10px] md:text-[11px] lg:text-xs text-white font-semibold">
@@ -93,7 +94,8 @@ const PlayerList = () => {
                             </span>
                           </div>
                           <div className="text-center    ">
-                            <h1 className="text-sm sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-[#ee6730]">
+                            <h1 className="text-sm sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl
+                             font-bold text-[#ee6730]">
                               40
                             </h1>
                             <span className="text-[8px] sm:text-[10px] md:text-[11px] lg:text-xs text-white font-semibold">
@@ -101,7 +103,8 @@ const PlayerList = () => {
                             </span>
                           </div>
                           <div className="text-center    ">
-                            <h1 className="text-sm sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-[#ee6730]">
+                            <h1 className="text-sm sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl
+                             font-bold text-[#ee6730]">
                               10
                             </h1>
                             <span className="text-[8px] sm:text-[10px] md:text-[11px] lg:text-xs text-white font-semibold">
@@ -109,7 +112,8 @@ const PlayerList = () => {
                             </span>
                           </div>
                           <div className="text-center    ">
-                            <h1 className="text-sm sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-[#ee6730]">
+                            <h1 className="text-sm sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl
+                             font-bold text-[#ee6730]">
                               250
                             </h1>
                             <span className="text-[8px] sm:text-[10px] md:text-[11px] lg:text-xs text-white font-semibold">
