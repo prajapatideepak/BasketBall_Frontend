@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { findPlayer } from "../../../redux/actions/Player";
 import PlayerInfo from "./PlayerInfo";
+import { MdCancel } from "react-icons/md";
 export default function PlayerProfile() {
   const params = useParams();
   const { PlayerDetail } = useSelector((state) => state.playerReducer);
@@ -39,6 +40,36 @@ export default function PlayerProfile() {
   ) : (
     <div className="mx-auto px-6 py-10 sm:px-20 sm:py-12 md:px-20 md:py-12 lg:px-24 xl:px-28 2xl:px-32 min-h-screen  ">
       {/* <div className="w-1/3"></div> */}
+      <div>
+        <div className="px-3 pb-8">
+          <h1 className="text-red-700 text-xl font-bold text-center">
+            Notification{" "}
+          </h1>
+          <div className="p-4 flex space-y-3 flex-col items-center">
+            <div
+              className="py-2 px-8  font-semibold w-3/4 flex items-center justify-between bg-white rounded shadow-2xl text-gray-700 text-sm
+            "
+            >
+              <div>
+                Deepak Your match is shecudule with Jetha ke Jabaz on 24/06/23
+                6PM
+              </div>
+              <MdCancel className="text-lg text-red-600 cursor-pointer" />
+            </div>
+
+            <div
+              className="py-2 px-8  font-semibold w-3/4 flex items-center justify-between bg-white rounded shadow-2xl text-gray-700 text-sm
+            "
+            >
+              <div>
+                Deepak Your match is shecudule with Jetha ke Jabaz on 24/06/23
+                6PM
+              </div>
+              <MdCancel className="text-lg text-red-600 cursor-pointer" />
+            </div>
+          </div>
+        </div>
+      </div>
       <div className="flex flex-col lg:flex-row space-y-5 ">
         {/* for up */}
         <div className="lg:w-1/2 flex">
