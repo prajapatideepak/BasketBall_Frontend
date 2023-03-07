@@ -10,7 +10,7 @@ function TeamProfileDetail() {
     const params = useParams();
     const navigate = useNavigate();
 
-    const isPublicView = false;
+    const isPublicView = true;
 
     const [enrolledTournaments, setEntrolledtournaments] = React.useState([
         {
@@ -45,12 +45,12 @@ function TeamProfileDetail() {
         assistant_coach_mobile: '9989999999',
         total_players: 7,
         players: [
-            {id: 1, name:'Sadikali karadiya', position:'point guard', jersey_no: 10},
-            {id: 2, name:'Deepak Prajapati', position:'center', jersey_no: 11},
-            {id: 1, name:'Sadikali karadiya', position:'point guard', jersey_no: 12},
-            {id: 2, name:'Deepak Prajapati', position:'center', jersey_no: 13},
-            {id: 1, name:'Sadikali karadiya', position:'point guard', jersey_no: 14},
-            {id: 2, name:'Deepak Prajapati', position:'center', jersey_no: 15},
+            {id: 1, name:'Sadikali karadiya', position:'point guard', age:24, jersey_no: 10},
+            {id: 2, name:'Deepak Prajapati', position:'center', age:26, jersey_no: 11},
+            {id: 1, name:'Sadikali karadiya', position:'point guard', age:25, jersey_no: 12},
+            {id: 2, name:'Deepak Prajapati', position:'center', age:22, jersey_no: 13},
+            {id: 1, name:'Sadikali karadiya', position:'point guard', age:22, jersey_no: 14},
+            {id: 2, name:'Deepak Prajapati', position:'center', age:23, jersey_no: 15},
         ],
         captain: 1,
         matches_played: 22,
@@ -225,7 +225,17 @@ function TeamProfileDetail() {
                                         <label className="mb-2 text-gray-400">Coach Mobile</label>
                                         <div className="border-2 border-orange-100 px-2 py-2 rounded-lg bg-white font-medium">
                                             <p>
-                                                {teamDetails.coach_mobile == '' ? '--' : teamDetails.coach_mobile}
+                                                {
+                                                    teamDetails.coach_mobile == '' 
+                                                    ? 
+                                                        '--' 
+                                                    : 
+                                                        isPublicView 
+                                                        ?
+                                                            `XXXXXX${teamDetails.coach_mobile.slice(5,9)}`
+                                                        :
+                                                            teamDetails.coach_mobile
+                                                }
                                             </p>
                                         </div>
                                     </div>
@@ -233,7 +243,17 @@ function TeamProfileDetail() {
                                         <label className="mb-2 text-gray-400">Assistant Coach Mobile</label>
                                         <div className="border-2 border-orange-100 px-2 py-2 rounded-lg bg-white font-medium">
                                             <p>
-                                                {teamDetails.assistant_coach_mobile == '' ? '--' : teamDetails.assistant_coach_mobile}
+                                                {
+                                                    teamDetails.assistant_coach_mobile == '' 
+                                                    ? 
+                                                        '--' 
+                                                    : 
+                                                        isPublicView 
+                                                        ?
+                                                            `XXXXXX${teamDetails.assistant_coach_mobile.slice(5,9)}`
+                                                        :
+                                                            teamDetails.assistant_coach_mobile
+                                                    }
                                             </p>
                                         </div>
                                     </div>
@@ -310,6 +330,7 @@ function TeamProfileDetail() {
                                             photo="/CBL_Images/player-default-profile.webp"
                                             name={item.name}
                                             position={item.position}
+                                            age={item.age}
                                             jersey_no={item.jersey_no}
                                         />
                                     )
