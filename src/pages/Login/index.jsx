@@ -40,7 +40,7 @@ function Login() {
   return (
     <div className="flex justify-center items-center lg:space-x-32 xl:space-52 2xl:space-x-48 bg-gray-50 mt-5 lg:mt-8">
       <div className="img lg:w-[450px]  lg:h-[350px] xl:w-[500px] xl:h-[400px] 2xl:h-[600px] 2xl:w-[600px] hidden lg:block">
-        <img src={image} alt="landing" className="bg-green-500" />
+        <img src={image} alt="landing" className="" />
       </div>
 
       <div className=" 2xl:w-[27%] px-5 mt-4 sm lg:mt-0 ">
