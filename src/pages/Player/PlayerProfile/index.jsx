@@ -4,11 +4,15 @@ import MatchCard from "../../../Component/MatchCard";
 import TeamCard from "../../../Component/TeamCard";
 import { motion } from "framer-motion";
 import PlayerAvtar from "../PlayerAvtar";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { findPlayer } from "../../../redux/actions/Player";
 import PlayerInfo from "./PlayerInfo";
-import { MdCancel } from "react-icons/md";
+import PlayerStatics from "./PlayerStatics";
+import Notification from "../../../Component/Notification/Notification";
+import { AiFillEye } from "react-icons/ai";
+import { GiExitDoor } from "react-icons/gi";
+import { ImExit } from "react-icons/im";
 export default function PlayerProfile() {
   const params = useParams();
   const { PlayerDetail } = useSelector((state) => state.playerReducer);
@@ -39,39 +43,8 @@ export default function PlayerProfile() {
     <div></div>
   ) : (
     <div className="mx-auto px-6 py-10 sm:px-20 sm:py-12 md:px-20 md:py-12 lg:px-24 xl:px-28 2xl:px-32 min-h-screen  ">
-      {/* <div className="w-1/3"></div> */}
-      <div>
-        <div className="px-3 pb-8">
-          <h1 className="text-red-700 text-xl font-bold text-center">
-            Notification{" "}
-          </h1>
-          <div className="p-4 flex space-y-3 flex-col items-center">
-            <div
-              className="py-2 px-8  font-semibold w-3/4 flex items-center justify-between bg-white rounded shadow-2xl text-gray-700 text-sm
-            "
-            >
-              <div>
-                Deepak Your match is shecudule with Jetha ke Jabaz on 24/06/23
-                6PM
-              </div>
-              <MdCancel className="text-lg text-red-600 cursor-pointer" />
-            </div>
-
-            <div
-              className="py-2 px-8  font-semibold w-3/4 flex items-center justify-between bg-white rounded shadow-2xl text-gray-700 text-sm
-            "
-            >
-              <div>
-                Deepak Your match is shecudule with Jetha ke Jabaz on 24/06/23
-                6PM
-              </div>
-              <MdCancel className="text-lg text-red-600 cursor-pointer" />
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* Player Detail Section */}
       <div className="flex flex-col lg:flex-row space-y-5 ">
-        {/* for up */}
         <div className="lg:w-1/2 flex">
           <PlayerAvtar player={PlayerDetail} />
         </div>
@@ -79,39 +52,16 @@ export default function PlayerProfile() {
           <PlayerInfo PlayerDetail={PlayerDetail} />
         </div>
       </div>
-      <div className="left-0 rounded-2xl right-0 bg-black mx-0 text-white">
-        {/* <h1 className="py-1 text-center font-bold">Player statistics</h1> */}
-        <div className="grid grid-cols-2 lg:grid-cols-4  gap-1 lg:gap-5 p-2 mt-5 ">
-          <div className="text-center  p-2 ">
-            <h1 className="text-xl md:text-2xl font-bold">
-              {PlayerDetail?.statics.totalMatch}
-            </h1>
-            <span className="text-sm md:text-lg text-gray-200">
-              Total Match
-            </span>
-          </div>
-          <div className="text-center  p-2 ">
-            <h1 className="text-xl md:text-2xl   text-green-600 font-bold">
-              {PlayerDetail?.statics.matchWon}
-            </h1>
-            <span className="text-sm md:text-lg text-gray-200">Match Won</span>
-          </div>
-          <div className="text-center  p-2 text-red-600 ">
-            <h1 className="text-xl md:text-2xl  font-bold">
-              {PlayerDetail?.statics.matchLoss}
-            </h1>
-            <span className="text-sm md:text-lg text-gray-200">Match loss</span>
-          </div>
-          <div className="text-center  p-2 text-green-600 ">
-            <h1 className="text-xl md:text-2xl  font-bold">
-              {PlayerDetail?.statics.totalScore}
-            </h1>
-            <span className="text-sm md:text-lg text-gray-200">
-              Total Score
-            </span>
-          </div>
-        </div>
-      </div>
+      {/* Player Detail Section End */}
+
+      {/* Player Staticstc start */}
+      <PlayerStatics PlayerDetail={PlayerDetail} />
+      {/* Player Statics End */}
+
+      {/* ------------------notification Section -------------*/}
+      <Notification />
+      {/*--------- notification seciton end--------------- */}
+
       {/* new sec */}
       <div className=":flex">
         <div className=" p-4 space-y-8  mt-4">
@@ -123,7 +73,64 @@ export default function PlayerProfile() {
             />
           </div>
           <div className="flex  mx-auto">
-            <TeamCard teamDetails={PlayerDetail?.teamDetails} />
+            {PlayerDetail?.teamDetails.map((team) => {
+              return <TeamCard key={team.team_id} teamDetails={team} />;
+            })}
+          </div>
+
+          <div className="overflow-x-scroll">
+            <table className="items-center bg-transparent w-full border-collapse ">
+              <thead>
+                <tr>
+                  <th className="px-6 bg-gray-50 text-gray-500 align-middle border border-solid border-gray-100 py-3  text-sm md:text-base uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                    Team Name
+                  </th>
+                  <th className="px-6 bg-gray-50 text-gray-500 align-middle border border-solid border-gray-100 py-3  text-sm md:text-base uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                    Total Players
+                  </th>
+                  <th className="px-6 bg-gray-50 text-gray-500 align-middle border border-solid border-gray-100 py-3  text-sm md:text-base uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                    Action
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {PlayerDetail?.teamDetails.map((team) => {
+                  return (
+                    <tr className="cursor-pointer border-b">
+                      <th className="border-t-0 px-6 align-middle border-l-0 border-r-0  text-sm md:text-base whitespace-nowrap p-4 text-left text-gray-700 capitalize">
+                        {team?.team_name}
+                      </th>
+                      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0  text-sm md:text-base whitespace-nowrap p-4 capitalize">
+                        {team?.total_players}
+                      </td>
+                      <td className=" flex space-x-3  border-t-0 px-6 align-middle border-l-0 border-r-0 text-lg whitespace-nowrap p-4 capitalize">
+                        <div title={`View ${team.team_name}`}>
+                          <Link to={`/team/profile-detail/${team.team_id}`}>
+                            <AiFillEye className="hover:text-green-900" />
+                          </Link>
+                        </div>
+                        <div
+                          title={`Leave ${team.team_name}`}
+                          className="hover:text-red-600"
+                        >
+                          <ImExit />
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })}
+                {PlayerDetail?.teamDetails.length < 1 && (
+                  <tr className="cursor-pointer border-b">
+                    <td
+                      className="border-t-0  px-6 text-center bg-red-100 text-red-800 font-bold align-middle border-l-0 border-r-0 text-base whitespace-nowrap p-4 capitalize"
+                      colSpan={3}
+                    >
+                      You are not in any Team
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
           </div>
         </div>
         <div className=" py-4">
