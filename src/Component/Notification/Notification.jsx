@@ -30,7 +30,7 @@ export default function Notification() {
       <h1 className="text-red-700 text-xl font-bold text-center">
         Notification{" "}
       </h1>
-      <div className="px-4 mt-8 max-h-60 overflow-y-scroll flex space-y-3 flex-col items-center">
+      <div className="sm:px-4 mt-8 max-h-60 overflow-y-scroll flex space-y-3 flex-col items-center">
         {Notification?.data?.length < 1 ? (
           <div className="font-semibold text-gray-600 w-full text-center">
             No Notifications Available
@@ -39,22 +39,23 @@ export default function Notification() {
           Notification?.data?.map((n) => {
             if (!n.isSeen) {
               return (
-                <motion.div
+                <motion.li
+                  initial={{
+                    opacity: 0,
+                  }}
                   animate={{
-                    x: n.isSeen ? 50 : 0,
+                    opacity: 1,
                   }}
-                  transition={{
-                    duration: 1,
-                  }}
+                  transition={{ duration: 1 }}
                   key={n?.id}
-                  className="py-2 px-8  font-semibold w-3/4 flex items-center justify-between bg-white rounded shadow-2xl text-gray-700 text-sm
+                  className="py-2 px-2 sm:px-8  font-semibold sm:w-3/4 flex items-center justify-between bg-white rounded shadow-2xl text-gray-700 text-sm
             "
                 >
                   <div>{n?.msg}</div>
                   <div onClick={(e) => RemoveNotification(n.id)}>
                     <MdCancel className="text-lg text-red-600 cursor-pointer" />
                   </div>
-                </motion.div>
+                </motion.li>
               );
             }
           })

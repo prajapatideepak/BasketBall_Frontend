@@ -1,7 +1,42 @@
+import { tab } from "@material-tailwind/react";
 import React from "react";
-
+import { motion } from "framer-motion";
 import { CgMediaLive } from "react-icons/cg";
 const MatchDetails = () => {
+  const [menu, setMenu] = React.useState([
+    {
+      name: "Score Table",
+      active: true,
+    },
+    {
+      name: "Players",
+      active: false,
+    },
+    {
+      name: "Referee",
+      active: false,
+    },
+    {
+      name: "MVP",
+      active: false,
+    },
+    {
+      name: "About",
+      active: false,
+    },
+  ]);
+
+  function HandleChange(id) {
+    setMenu(
+      menu.map((m, index) => {
+        if (index == id) {
+          return { ...m, active: true };
+        } else {
+          return { ...m, active: false };
+        }
+      })
+    );
+  }
   return (
     <section className="min-h-screen">
       <div className="relative bg-gradient-to-r  py-5 bg-clip-border   mx-auto  from-orange-700 via-current to-blue-600">
@@ -31,7 +66,7 @@ const MatchDetails = () => {
           {/* team 1 Detail */}
           <div className="text-center  space-y-2">
             <img
-              className=" xxs:w-8 xxs:h-8 xs:w-16 xs:h-16 md:w-32 md:h-32 mx-auto bg-white object-cover p-1 shadow-lg border border-gray-300 rounded-full  "
+              className=" xxs:w-14 xxs:h-14 xs:w-20 xs:h-20 md:w-32 md:h-32 mx-auto bg-white object-cover p-1 shadow-lg border border-gray-300 rounded-full  "
               src="/CBL_Images/logo5.png"
             />
             <h2 className="xss:text-xs xs:text-lg md:text-xl text-orange-100 font-semibold">
@@ -45,13 +80,13 @@ const MatchDetails = () => {
               4
             </h1>
           </div>
-          <div className="space-y-4 mt-3 mx-4  order-4 sm:order-2">
+          <div className="space-y-8 xs:space-x-4 mt-3 mx-4  order-4 sm:order-2">
             <div className="hidden  text-center md:flex justify-center">
               <h1 className="bg-white flex justify-center items-center  font-semibold text-2xl text-black w-10 h-10   rounded-full ">
                 4
               </h1>
             </div>
-            <div className="grid grid-cols-3 font-bold  text-xl md:text-3xl text-white">
+            <div className="grid  grid-cols-3 font-bold  text-xl md:text-3xl text-white">
               <div className=" bg-orange-600 shadow-xl  rounded-l-xl rounded-bl-none px-10 md:px-12 py-2 ">
                 {12}
               </div>
@@ -73,7 +108,7 @@ const MatchDetails = () => {
           {/* Team 2 Detail */}
           <div className="text-center order-3  space-y-2">
             <img
-              className="xxs:w-8 xxs:h-8 xs:w-16 xs:h-16 md:w-32 md:h-32 mx-auto  bg-white  object-cover p-1  shadow-lg border border-gray-300 rounded-full  "
+              className="xxs:w-14 xxs:h-14 xs:w-20 xs:h-20 md:w-32 md:h-32 mx-auto  bg-white  object-cover p-1  shadow-lg border border-gray-300 rounded-full  "
               src="/CBL_Images/logo3.png"
             />
             <h2 className="text-lg md:text-xl text-white font-semibold">
@@ -86,13 +121,28 @@ const MatchDetails = () => {
       </div>
       <div className="bg-black p-6 ">
         <div className="sm:flex  space-x-6 text-center   sm:text-lg overflow-x-auto whitespace-nowrap p-2 font-semibold  justify-evenly gap-2 sm:gap-5 text-gray-400">
-          <div className="inline-block bg-orange-600 rounded-full text-white px-4 py-1 shadow-xl cursor-pointer">
-            Score Table
-          </div>
-          <div className="inline-block">Players</div>
-          <div className="inline-block">Referee</div>
-          <div className="inline-block">MVP</div>
-          <div className="inline-block">About</div>
+          {menu.map((tab, index) => {
+            return (
+              <motion.div
+                initial={{
+                  opacity: 0,
+                }}
+                animate={{
+                  backgroundColor: tab.active ? "#ee6730" : "",
+                  color: tab.active ? "white" : "",
+                  opacity: 1,
+                }}
+                transition={{
+                  duration: 1.3,
+                }}
+                key={index}
+                className="inline-block transition-all px-4 py-1 cursor-pointer rounded-full shadow-xl"
+                onClick={(e) => HandleChange(index)}
+              >
+                {tab.name}
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
