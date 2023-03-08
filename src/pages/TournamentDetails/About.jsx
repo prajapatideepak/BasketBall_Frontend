@@ -5,7 +5,7 @@ import Button from '../../Component/Button'
 
 
 const About = ({Tournamentdetails}) => {
-  const isPublicView = false;
+  const isPublicView = true;
   const params = useParams();
   const navigate = useNavigate();
 
@@ -85,48 +85,22 @@ const About = ({Tournamentdetails}) => {
                 </div>
               </div>
             </div>
-            <div className="flex w-full sm:space-x-5 sm:flex-row flex-col ">
-              <div className="w-full flex-col sm:mb-0 mb-5">
-                <label className="mb-2 text-gray-400 text-xs xs:text-sm md:text-base">Age Restriction</label>
-                <div className="flex justify-center mt-1 md:mt-2 items-center border-2 border-orange-100 px-2 rounded-lg bg-white py-[8px] sm:py-[8px] md:py-[9px] space-x-20 ">
-                  <div className="flex items-center space-x-1">
-                    <input type="radio"
-                      disabled={true}
-                      checked={Tournamentdetails.age_restriction == 1 ? true : false}
-                      name="age_restriction"
-                      id="yes"
-                      value="yes"
-                    />
-                    <label htmlFor="yes" className="text-xs xs:text-sm md:text-base">Yes</label>
-                  </div>
-                  <div className="flex items-center space-x-1">
-                    <input type="radio"
-                      disabled={true}
-                      checked={Tournamentdetails.age_restriction == 0 ? true : false}
-                      name="age_restriction"
-                      id="no"
-                    />
-                    <label htmlFor="no" className="text-xs xs:text-sm md:text-base">No</label>
+            {
+              Tournamentdetails.age_restriction
+              ?
+                <div className="flex flex-col w-full">
+                  <label className="mb-2 text-gray-400 text-xs xs:text-sm md:text-base">
+                    Age Cut-off
+                  </label>
+                  <div className="border-2 border-orange-100 px-2 py-2 rounded-lg bg-white capitalize font-medium text-xs xs:text-sm md:text-base">
+                    <p>
+                      {Tournamentdetails.age_cutoff == '' ? '--' : Tournamentdetails.age_cutoff}
+                    </p>
                   </div>
                 </div>
-              </div>
-              {
-                Tournamentdetails.age_restriction
-                ?
-                  <div className="flex flex-col w-full">
-                    <label className="mb-2 text-gray-400 text-xs xs:text-sm md:text-base">
-                      Age Cut-off
-                    </label>
-                    <div className="border-2 border-orange-100 px-2 py-2 rounded-lg bg-white capitalize font-medium text-xs xs:text-sm md:text-base">
-                      <p>
-                        {Tournamentdetails.age_cutoff == '' ? '--' : Tournamentdetails.age_cutoff}
-                      </p>
-                    </div>
-                  </div>
-                :
-                  null
-              }
-            </div>
+              :
+                null
+            }
           </div>
           {/* About Tournament */}
           <div className='flex flex-1'>
@@ -167,7 +141,17 @@ const About = ({Tournamentdetails}) => {
                           </label>
                           <div className="border-2 border-orange-100 px-2 py-2 rounded-lg bg-white capitalize font-medium text-xs xs:text-sm md:text-base">
                             <p>
-                              {item.referee_mobile == '' ? '--' : item.referee_mobile}
+                              {
+                                item.referee_mobile == '' 
+                                ? 
+                                  '--' 
+                                : 
+                                  isPublicView 
+                                  ?
+                                      `XXXXXX${item.referee_mobile.slice(5,9)}`
+                                  :
+                                      item.referee_mobile
+                                }
                             </p>
                           </div>
                         </div>

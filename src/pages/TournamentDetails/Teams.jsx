@@ -12,7 +12,8 @@ function Teams() {
       total_players: 7,
       matches_played: 22,
       matches_won: 18,
-      matches_lost: 4
+      matches_lost: 4,
+      is_disqualified: 0
     },
     {
       team_id: 1002,
@@ -22,7 +23,8 @@ function Teams() {
       total_players: 8,
       matches_played: 12,
       matches_won: 8,
-      matches_lost: 4
+      matches_lost: 4,
+      is_disqualified: 1
     }
   ];
   return (

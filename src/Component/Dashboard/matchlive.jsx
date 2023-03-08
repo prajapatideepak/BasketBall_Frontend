@@ -11,6 +11,8 @@ function MatchLive({ slides }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [count, setcount] = useState(0);
   const length = slides.length
+  const [progressBar, setProgressBar] = useState(0);
+  
   const autoScroll = true
   let slideInterval;
   let intervalTime = 4000
@@ -24,6 +26,7 @@ function MatchLive({ slides }) {
   const nextSlide = () => {
     const isLastSlide = currentIndex === slides.length - 1;
     const newIndex = isLastSlide ? 0 : currentIndex + 1;
+    setProgressBar(0)
     setCurrentIndex(newIndex);
   };
   
@@ -38,8 +41,12 @@ function MatchLive({ slides }) {
     return () => clearInterval(slideInterval)
   }, [currentIndex])
 
+  useEffect(() => {
+    setInterval(()=>{setProgressBar((value)=> (value+1)%67)}, 125)
+  }, [])
 
   const goToSlide = (slideIndex) => {
+    setProgressBar(0)
     setCurrentIndex(slideIndex);
   };
 
@@ -124,17 +131,54 @@ function MatchLive({ slides }) {
           slides.length > 0
             ?
             (
-              <div className='flex  absolute bottom-3 sm:bottom-4 2xl:bottom-10 lg:space-x-8 space-x-7 left-[33%] sm:left-[37%] lg:left-[25%] xl:left-[26%] 2xl:left-[30%]  lg:px-40 '>
-                {slides.map((slide, slideIndex) => (
-                  <div
-                    key={slideIndex}
-                    onClick={() => goToSlide(slideIndex)}
-                    className={slideIndex === currentIndex ? ' text-white lg:border-4 border-2   h-8 w-8  lg:w-12  lg:h-12 border-[#ee6630] rounded-full flex cursor-pointer justify-center items-center hover:text-[#ee6730] duration-300 ' : ' text-gray-500 h-8 w-8  lg:w-12 lg:h-12 flex border-none justify-center items-center hover:text-[#ee6730] cursor-pointer duration-300 font-bold'}
-                  >
-                    {slideIndex + 1}
-                  </div>
-                ))}
+              // <div className='flex  absolute bottom-3 sm:bottom-4 2xl:bottom-10 lg:space-x-8 space-x-7 left-[33%] sm:left-[37%] lg:left-[25%] xl:left-[26%] 2xl:left-[30%]  lg:px-40 '>
+              //   {slides.map((slide, slideIndex) => (
+              //     <div
+              //       key={slideIndex}
+              //       onClick={() => goToSlide(slideIndex)}
+              //       className={slideIndex === currentIndex ? ' text-white lg:border-4 border-2  h-8 w-8 lg:w-12 lg:h-12 border-[#ee6630] rounded-full flex cursor-pointer justify-center items-center hover:text-[#ee6730] duration-300 ' : ' text-gray-500 h-8 w-8  lg:w-12 lg:h-12 flex border-none justify-center items-center hover:text-[#ee6730] cursor-pointer duration-300 font-bold'}
+              //     >
+              //       {slideIndex + 1}
+              //     </div>
+              //   ))}
+              // </div>
+              <div
+                className="flex absolute bottom-3 sm:bottom-4 2xl:bottom-10 lg:space-x-6 space-x-5 left-[33%] sm:left-[37%] lg:left-[25%] xl:left-[26%] 2xl:left-[30%]  lg:px-40 "
+              >
+                {
+                  slides.map((slide, slideIndex) => {
+                    return (
+                      <div key={slideIndex} className="relative" onClick={() => goToSlide(slideIndex)}>
+                        <svg className="w-12 h-12 relative rotate-[-90deg]">
+                          <circle
+                            className="text-gray-300"
+                            strokeWidth="3"
+                            stroke="currentColor"
+                            fill="transparent"
+                            r="18"
+                            cx="25"
+                            cy="25"
+                          />
+                          <circle
+                            className={`${slideIndex === currentIndex ? 'text-[#ee6730]' : 'text-gray-300'} transition-all`}
+                            strokeWidth="3"
+                            strokeDasharray={30 * 2 * Math.PI}
+                            strokeDashoffset={(30 * 2 * Math.PI) - progressBar / 100 * (30 * 2 * Math.PI)}
+                            strokeLinecap="round"
+                            stroke="currentColor"
+                            fill="transparent"
+                            r="18"
+                            cx="25"
+                            cy="25"
+                          />
+                        </svg>
+                        <span className="w-10 absolute text-lg text-white top-2 left-1.5 text-center">{slideIndex + 1}</span>
+                      </div>
+                    )
+                  })
+                }
               </div>
+
             )
             :
             null
