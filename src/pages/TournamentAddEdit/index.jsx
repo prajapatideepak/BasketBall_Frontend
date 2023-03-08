@@ -16,7 +16,7 @@ function Tournamentregistration() {
   const navigate = useNavigate();
 
   // ------------ Refree  ------------
-  const handleadd = () => {
+  const handleaddreferee = () => {
     setRefereelist([...refereelist, { Referee: "" }]);
   };
 
@@ -254,7 +254,7 @@ function Tournamentregistration() {
                     <option value="Only For Men">Only For Men</option>
                     <option value="Only For Women">Only For Women</option>
                     <option value="Mixed">Mixed</option>
-                    
+
                   </select>
                 </div>
                 {
@@ -429,133 +429,132 @@ function Tournamentregistration() {
                   {refereelist.length - 1 === index && (
                     <div
                       className="flex justify-center items-center lg:justify-end lg:items-end w-full"
-                      onClick={handleaddsponsor}
-                    >
-                      <div
-                        className="bg-green-600 border-2 hover:border-green-600 hover:text-green-600 relative inline-flex items-center justify-center px-3 py-2 overflow-hidden text-white
+                      onClick={handleaddreferee}>
+                        <div
+                          className="bg-green-600 border-2 hover:border-green-600 hover:text-green-600 relative inline-flex items-center justify-center px-3 py-2 overflow-hidden text-white
                                                      rounded-lg cursor-pointer group"
-                      >
-                        <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-white rounded-lg group-hover:w-full group-hover:h-56"></span>
-                        <span className="relative flex items-center space-x-2 ">
-                          <FaUserPlus className="text-xl" />
-                          <h1 className="text-sm">Add Referee</h1>
-                        </span>
-                      </div>
+                        >
+                          <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-white rounded-lg group-hover:w-full group-hover:h-56"></span>
+                          <span className="relative flex items-center space-x-2 ">
+                            <FaUserPlus className="text-xl" />
+                            <h1 className="text-sm">Add Referee</h1>
+                          </span>
+                        </div>
                     </div>
-                  )}
-                </div>
-              ))}
-            </div>
-
-            {/* -----------------------Sponsor_Details---------------------------*/}
-            <div className="my-5">
-              <div className="py-5">
-                <h3 className="text-2xl font-semibold text-[#ee6730]">
-                  Sponsor Information:
-                </h3>
-              </div>
-              {sponsorlist.map((singlesponsor, index) => (
-                <div className="flex flex-col  items-center">
-                  <div className="flex flex-col lg:flex-row items-center w-full gap-7 py-4">
-                    {/* Sponsor_Name && Sponsor_Logo */}
-                    <div className="flex flex-col w-full">
-                      <label className="mb-2">Sponsor Name *</label>
-                      <input
-                        className="w-full outline-blue-200 rounded-lg border-2 border-gray-200 py-3 px-3 text-sm"
-                        placeholder="Enter Tournament Name"
-                        type="text"
-                        name="sponsor_name"
-                        id="sponsor_name"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                      />
-                      {errors.sponsor_name && touched.sponsor_name ? (
-                        <small className="text-red-600 mt-2">
-                          {errors.sponsor_name}
-                        </small>
-                      ) : null}
-                    </div>
-                    <div className="flex flex-col w-full">
-                      <label className="mb-2">
-                        Choose Logo ( PNG, JPG, JPEG )
-                      </label>
-                      <input
-                        className="w-full cursor-pointer rounded-lg bg-white border-2 border-gray-200 py-[9px] px-3 text-sm"
-                        type="file"
-                        name="sponsor_logo"
-                        id="sponsor_logo"
-                        accept=".png, .jpg, .jpeg"
-                        onChange={handleChange}
-                      />
-                    </div>
-                    {sponsorlist.length > 1 && (
-                      <div
-                        onClick={() => handleremovesponsor(index)}
-                        className=" lg:mt-8  bg-red-500 hover:bg-red-600 text-xs  cursor-pointer rounded-lg px-2 py-2 text-white"
-                      >
-                        <MdDelete className="text-xl text-white" />
-                      </div>
-                    )}
-                  </div>
-                  {sponsorlist.length - 1 === index && (
-                    <div
-                      className="flex justify-center items-center lg:justify-end lg:items-end w-full"
-                      onClick={handleaddsponsor}
-                    >
-                      <div
-                        className="bg-green-600 border-2 hover:border-green-600 hover:text-green-600 relative inline-flex items-center justify-center px-3 py-2 overflow-hidden text-white
-                                                     rounded-lg cursor-pointer group"
-                      >
-                        <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-white rounded-lg group-hover:w-full group-hover:h-56"></span>
-                        <span className="relative flex items-center space-x-2 ">
-                          <FaUserPlus className="text-xl" />
-                          <h1 className="text-sm">Add Sponsor</h1>
-                        </span>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-
-            {/* Clear_Button && Submit_Button */}
-            <div className="w-full flex justify-end mt-5 sm:mt-10">
-              {location?.state?.isEdit ? (
-                <button
-                  type="button"
-                  className="bg-[#ee6730] relative inline-flex items-center justify-center px-7 py-2 overflow-hidden text-white rounded-lg cursor-pointer group mr-3"
-                  onClick={() => navigate(-1)}
-                >
-                  <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-slate-900 rounded-lg group-hover:w-full group-hover:h-56"></span>
-                  <span className="relative">Cancel</span>
-                </button>
-              ) : (
-                <button
-                  type="reset"
-                  className="bg-[#ee6730] relative inline-flex items-center justify-center px-8 py-2 overflow-hidden text-white rounded-lg cursor-pointer group mr-3"
-                  onClick={() => {
-                    resetForm();
-                    setSelectedPlayers([]);
-                  }}
-                >
-                  <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-slate-900 rounded-lg group-hover:w-full group-hover:h-56"></span>
-                  <span className="relative">Clear</span>
-                </button>
               )}
-              <button
-                type="submit"
-                className="bg-slate-900 relative inline-flex items-center justify-center px-6 py-2 overflow-hidden text-white rounded-lg cursor-pointer group"
-                onClick={handleSubmit}
-              >
-                <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#ee6730] rounded-lg group-hover:w-full group-hover:h-56"></span>
-                <span className="relative">
-                  {location?.state?.isEdit ? "UPDATE" : "SUBMIT"}
-                </span>
-              </button>
             </div>
-          </form>
+              ))}
         </div>
-      </section>
+
+        {/* -----------------------Sponsor_Details---------------------------*/}
+        <div className="my-5">
+          <div className="py-5">
+            <h3 className="text-2xl font-semibold text-[#ee6730]">
+              Sponsor Information:
+            </h3>
+          </div>
+          {sponsorlist.map((singlesponsor, index) => (
+            <div className="flex flex-col  items-center">
+              <div className="flex flex-col lg:flex-row items-center w-full gap-7 py-4">
+                {/* Sponsor_Name && Sponsor_Logo */}
+                <div className="flex flex-col w-full">
+                  <label className="mb-2">Sponsor Name *</label>
+                  <input
+                    className="w-full outline-blue-200 rounded-lg border-2 border-gray-200 py-3 px-3 text-sm"
+                    placeholder="Enter Tournament Name"
+                    type="text"
+                    name="sponsor_name"
+                    id="sponsor_name"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                  {errors.sponsor_name && touched.sponsor_name ? (
+                    <small className="text-red-600 mt-2">
+                      {errors.sponsor_name}
+                    </small>
+                  ) : null}
+                </div>
+                <div className="flex flex-col w-full">
+                  <label className="mb-2">
+                    Choose Logo ( PNG, JPG, JPEG )
+                  </label>
+                  <input
+                    className="w-full cursor-pointer rounded-lg bg-white border-2 border-gray-200 py-[9px] px-3 text-sm"
+                    type="file"
+                    name="sponsor_logo"
+                    id="sponsor_logo"
+                    accept=".png, .jpg, .jpeg"
+                    onChange={handleChange}
+                  />
+                </div>
+                {sponsorlist.length > 1 && (
+                  <div
+                    onClick={() => handleremovesponsor(index)}
+                    className=" lg:mt-8  bg-red-500 hover:bg-red-600 text-xs  cursor-pointer rounded-lg px-2 py-2 text-white"
+                  >
+                    <MdDelete className="text-xl text-white" />
+                  </div>
+                )}
+              </div>
+              {sponsorlist.length - 1 === index && (
+                <div
+                  className="flex justify-center items-center lg:justify-end lg:items-end w-full"
+                  onClick={handleaddsponsor}
+                >
+                  <div
+                    className="bg-green-600 border-2 hover:border-green-600 hover:text-green-600 relative inline-flex items-center justify-center px-3 py-2 overflow-hidden text-white
+                                                     rounded-lg cursor-pointer group"
+                  >
+                    <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-white rounded-lg group-hover:w-full group-hover:h-56"></span>
+                    <span className="relative flex items-center space-x-2 ">
+                      <FaUserPlus className="text-xl" />
+                      <h1 className="text-sm">Add Sponsor</h1>
+                    </span>
+                  </div>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* Clear_Button && Submit_Button */}
+        <div className="w-full flex justify-end mt-5 sm:mt-10">
+          {location?.state?.isEdit ? (
+            <button
+              type="button"
+              className="bg-[#ee6730] relative inline-flex items-center justify-center px-7 py-2 overflow-hidden text-white rounded-lg cursor-pointer group mr-3"
+              onClick={() => navigate(-1)}
+            >
+              <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-slate-900 rounded-lg group-hover:w-full group-hover:h-56"></span>
+              <span className="relative">Cancel</span>
+            </button>
+          ) : (
+            <button
+              type="reset"
+              className="bg-[#ee6730] relative inline-flex items-center justify-center px-8 py-2 overflow-hidden text-white rounded-lg cursor-pointer group mr-3"
+              onClick={() => {
+                resetForm();
+                setSelectedPlayers([]);
+              }}
+            >
+              <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-slate-900 rounded-lg group-hover:w-full group-hover:h-56"></span>
+              <span className="relative">Clear</span>
+            </button>
+          )}
+          <button
+            type="submit"
+            className="bg-slate-900 relative inline-flex items-center justify-center px-6 py-2 overflow-hidden text-white rounded-lg cursor-pointer group"
+            onClick={handleSubmit}
+          >
+            <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#ee6730] rounded-lg group-hover:w-full group-hover:h-56"></span>
+            <span className="relative">
+              {location?.state?.isEdit ? "UPDATE" : "SUBMIT"}
+            </span>
+          </button>
+        </div>
+      </form>
+    </div>
+      </section >
     </>
   );
 }
