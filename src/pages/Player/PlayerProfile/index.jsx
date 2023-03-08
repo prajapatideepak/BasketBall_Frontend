@@ -18,7 +18,7 @@ export default function PlayerProfile() {
   const { PlayerDetail } = useSelector((state) => state.playerReducer);
 
   const dispatch = useDispatch();
-
+  const PlayerID = 1;
   useEffect(() => {
     dispatch(findPlayer(params.id));
   }, []);
@@ -59,7 +59,7 @@ export default function PlayerProfile() {
       {/* Player Statics End */}
 
       {/* ------------------notification Section -------------*/}
-      <Notification />
+      {PlayerID == params.id && <Notification />}
       {/*--------- notification seciton end--------------- */}
 
       {/* new sec */}
@@ -72,66 +72,69 @@ export default function PlayerProfile() {
               margin={true}
             />
           </div>
-          <div className="flex  mx-auto">
-            {PlayerDetail?.teamDetails.map((team) => {
-              return <TeamCard key={team.team_id} teamDetails={team} />;
-            })}
-          </div>
-
-          <div className="overflow-x-scroll">
-            <table className="items-center bg-transparent w-full border-collapse ">
-              <thead>
-                <tr>
-                  <th className="px-6 bg-gray-50 text-gray-500 align-middle border border-solid border-gray-100 py-3  text-sm md:text-base uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                    Team Name
-                  </th>
-                  <th className="px-6 bg-gray-50 text-gray-500 align-middle border border-solid border-gray-100 py-3  text-sm md:text-base uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                    Total Players
-                  </th>
-                  <th className="px-6 bg-gray-50 text-gray-500 align-middle border border-solid border-gray-100 py-3  text-sm md:text-base uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                    Action
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {PlayerDetail?.teamDetails.map((team) => {
-                  return (
+          {PlayerID != params.id && (
+            <div className="flex  mx-auto">
+              {PlayerDetail?.teamDetails.map((team) => {
+                return <TeamCard key={team.team_id} teamDetails={team} />;
+              })}
+            </div>
+          )}
+          {PlayerID == params.id && (
+            <div className="overflow-x-scroll">
+              <table className="items-center bg-transparent w-full border-collapse ">
+                <thead>
+                  <tr>
+                    <th className="px-6 bg-gray-50 text-gray-500 align-middle border border-solid border-gray-100 py-3  text-sm md:text-base uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                      Team Name
+                    </th>
+                    <th className="px-6 bg-gray-50 text-gray-500 align-middle border border-solid border-gray-100 py-3  text-sm md:text-base uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                      Total Players
+                    </th>
+                    <th className="px-6 bg-gray-50 text-gray-500 align-middle border border-solid border-gray-100 py-3  text-sm md:text-base uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                      Action
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {PlayerDetail?.teamDetails.map((team) => {
+                    return (
+                      <tr className="cursor-pointer border-b">
+                        <th className="border-t-0 px-6 align-middle border-l-0 border-r-0  text-sm md:text-base whitespace-nowrap p-4 text-left text-gray-700 capitalize">
+                          {team?.team_name}
+                        </th>
+                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0  text-sm md:text-base whitespace-nowrap p-4 capitalize">
+                          {team?.total_players}
+                        </td>
+                        <td className=" flex space-x-3  border-t-0 px-6 align-middle border-l-0 border-r-0 text-lg whitespace-nowrap p-4 capitalize">
+                          <div title={`View ${team.team_name}`}>
+                            <Link to={`/team/profile-detail/${team.team_id}`}>
+                              <AiFillEye className="hover:text-green-900" />
+                            </Link>
+                          </div>
+                          <div
+                            title={`Leave ${team.team_name}`}
+                            className="hover:text-red-600"
+                          >
+                            <ImExit />
+                          </div>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                  {PlayerDetail?.teamDetails.length < 1 && (
                     <tr className="cursor-pointer border-b">
-                      <th className="border-t-0 px-6 align-middle border-l-0 border-r-0  text-sm md:text-base whitespace-nowrap p-4 text-left text-gray-700 capitalize">
-                        {team?.team_name}
-                      </th>
-                      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0  text-sm md:text-base whitespace-nowrap p-4 capitalize">
-                        {team?.total_players}
-                      </td>
-                      <td className=" flex space-x-3  border-t-0 px-6 align-middle border-l-0 border-r-0 text-lg whitespace-nowrap p-4 capitalize">
-                        <div title={`View ${team.team_name}`}>
-                          <Link to={`/team/profile-detail/${team.team_id}`}>
-                            <AiFillEye className="hover:text-green-900" />
-                          </Link>
-                        </div>
-                        <div
-                          title={`Leave ${team.team_name}`}
-                          className="hover:text-red-600"
-                        >
-                          <ImExit />
-                        </div>
+                      <td
+                        className="border-t-0  px-6 text-center bg-red-100 text-red-800 font-bold align-middle border-l-0 border-r-0 text-base whitespace-nowrap p-4 capitalize"
+                        colSpan={3}
+                      >
+                        You are not in any Team
                       </td>
                     </tr>
-                  );
-                })}
-                {PlayerDetail?.teamDetails.length < 1 && (
-                  <tr className="cursor-pointer border-b">
-                    <td
-                      className="border-t-0  px-6 text-center bg-red-100 text-red-800 font-bold align-middle border-l-0 border-r-0 text-base whitespace-nowrap p-4 capitalize"
-                      colSpan={3}
-                    >
-                      You are not in any Team
-                    </td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          )}
         </div>
         <div className=" py-4">
           <div className="px-1 text-lg lg:w-1/3 mx-auto  py-1 text-white  flex  text-center justify-center items-center mt-2 rounded-full space-x-2 bg-black">

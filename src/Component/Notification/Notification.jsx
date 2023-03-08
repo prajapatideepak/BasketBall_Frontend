@@ -2,7 +2,8 @@ import React from "react";
 import { MdCancel } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { getNotification } from "../../redux/actions/Player";
-
+import { setNotfication } from "../../redux/slices/PlayerSlice";
+import { motion } from "framer-motion";
 export default function Notification() {
   const { Notification } = useSelector((state) => state.playerReducer);
 
@@ -14,17 +15,16 @@ export default function Notification() {
 
   function RemoveNotification(id) {
     let NewNot = Notification?.data.map((n) => {
-      console.log(n);
       if (n.id == id) {
-        n.isSeen = true;
-        return n;
+        return { ...n, isSeen: true };
       } else {
         return n;
       }
     });
+    dispatch(setNotfication({ ok: true, data: NewNot }));
   }
 
-  console.log(Notification);
+  // console.log(Notification);
   return (
     <div className="px-3 py-8 ">
       <h1 className="text-red-700 text-xl font-bold text-center">
@@ -39,7 +39,13 @@ export default function Notification() {
           Notification?.data?.map((n) => {
             if (!n.isSeen) {
               return (
-                <div
+                <motion.div
+                  animate={{
+                    x: n.isSeen ? 50 : 0,
+                  }}
+                  transition={{
+                    duration: 1,
+                  }}
                   key={n?.id}
                   className="py-2 px-8  font-semibold w-3/4 flex items-center justify-between bg-white rounded shadow-2xl text-gray-700 text-sm
             "
@@ -48,7 +54,7 @@ export default function Notification() {
                   <div onClick={(e) => RemoveNotification(n.id)}>
                     <MdCancel className="text-lg text-red-600 cursor-pointer" />
                   </div>
-                </div>
+                </motion.div>
               );
             }
           })
