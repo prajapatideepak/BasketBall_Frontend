@@ -1,6 +1,7 @@
 import { lazy, react, useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup"
+import Swal from "sweetalert2";
 import { useFormik } from 'formik'
 import { toast } from 'react-toastify';
 
@@ -24,16 +25,32 @@ const NewsAddEdit = () => {
     Description: "",
   };
 
-  const notify = () => toast("News add successfully!!");
   const [isOnSubmit, setIsOnSubmit] = useState(false);
 
   const { values, errors, handleBlur, touched, handleChange, handleSubmit } = useFormik({
     initialValues: initialValues,
     validationSchema: signUpSchema,
-    onSubmit(res) {
-      setIsOnSubmit(true)
-      notify()
-      navigate('/news')
+    onSubmit(data) {
+      // ---------------- Confirmation for update -----------------------
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be Add News!!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Add it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const response = "Create";
+          if (response) {
+            navigate('/news')
+            toast.success("News Add Successfully!");
+          } else {
+            toast.error("Something went wrong");
+          }
+        }
+      });
     }
   })
   return (
@@ -105,7 +122,7 @@ const NewsAddEdit = () => {
                     onChange={handleChange}
                     onBlur={handleBlur}
                     className="rounded-md py-[10px] px-3 outline-non border border-slate-300 outline-blue-200"
-                     />
+                  />
                   {errors.Date && touched.Date
                     ?
                     <p className='form-error text-red-600 text-sm font-semibold'>{errors.Date}</p>
@@ -130,13 +147,13 @@ const NewsAddEdit = () => {
                   null}
               </div>
               <div className='flex justify-center items-center w-full pt-5 space-x-5'>
-                <button type="submit" onClick={() => { navigate(-1); }} className="
+                <div type="submit" onClick={() => { navigate(-1); }} className="
                 bg-[#ee6730]   relative inline-flex items-center justify-center  px-4 py-1.5 
               sm:px-8 sm:py-[10px] overflow-hidden font-medium tracking-tighter text-white rounded-lg cursor-pointer group"
                 >
                   <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-slate-900 rounded-lg group-hover:w-full group-hover:h-56"></span>
                   <span className="relative">Back</span>
-                </button>
+                </div>
                 <button type="submit" className="
                bg-slate-900   relative inline-flex items-center justify-center  px-4 py-1.5 
               sm:px-8 sm:py-[10px] overflow-hidden font-medium tracking-tighter text-white rounded-lg cursor-pointer group"

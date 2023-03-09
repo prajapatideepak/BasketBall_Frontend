@@ -554,7 +554,7 @@ function Tournamentregistration() {
         </div>
       </form>
     </div>
-      </section >
+      </section>
     </>
   );
 }

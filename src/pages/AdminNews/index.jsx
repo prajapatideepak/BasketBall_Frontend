@@ -8,7 +8,7 @@ const AdminNews = () => {
     return (
         <Routes>
             <Route>
-                <Route path='/add-edit' element={<NewsAddEdit />} />
+                <Route path='add-edit/:News_id' element={<NewsAddEdit />} />
                 <Route index element={<NewsList />} />
             </Route>
         </Routes>
