@@ -24,6 +24,7 @@ const PlayerSlice = createSlice({
         Experience: "",
       },
     },
+    Notification: [],
   },
   reducers: {
     getPlayers: (state, action) => {
@@ -40,9 +41,17 @@ const PlayerSlice = createSlice({
     setGameForm: (state, action) => {
       state.PlayerForm.gameInfo = action.payload;
     },
+    setNotfication: (state, action) => {
+      state.Notification = action.payload;
+    },
   },
 });
 
-export const { getPlayers, setPlayerDetail, setGameForm, setBasicForm } =
-  PlayerSlice.actions;
+export const {
+  getPlayers,
+  setPlayerDetail,
+  setNotfication,
+  setGameForm,
+  setBasicForm,
+} = PlayerSlice.actions;
 export default PlayerSlice.reducer;
