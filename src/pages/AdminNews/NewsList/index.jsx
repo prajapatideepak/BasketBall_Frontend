@@ -106,7 +106,7 @@ const NewsList = () => {
         {model && (
           <div className='w-full h-full bg-black  '>
             <div className='flex justify-center shadow-2xl  '>
-              <div className='absolute mx-10 sm:mx-0 w-full sm:w-[55%]  md:w-[60%] opacity-100 shadow-2xl rounded top-5 sm:top-2 md:top-4 xl:top-10 bg-white  z-50'>
+              <div className='absolute mx-10 sm:mx-0 xl:w-full w-[70%] opacity-100 shadow-2xl rounded top-5 sm:top-2 md:top-4 lg:top-10 xl:top-10 bg-white  z-50'>
                 <div className=''>
                   <div className='flex justify-end '>
                     <button onClick={() => { setModel(false) }} className='absolute translate-x-4 -translate-y-4 font-bold text-2xl p-2 text-[#571217] '>
@@ -118,7 +118,7 @@ const NewsList = () => {
                       Add News
                     </h1>
                     <form action="" className=" space-y-5 xl:space-y-10" onSubmit={handleSubmit}>
-                      <div className='flex flex-col items-center space-y-5 md:space-y-4 xl:space-x-10'>
+                      <div className='flex flex-col lg:flex-row items-center space-y-5 md:space-y-4 lg:space-y-0 lg:space-x-5 xl:space-x-10'>
                         <div className="firstname flex flex-col space-y-2 w-full ">
                           <label htmlFor="Firstname">Photo</label>
                           <input type="file"
@@ -126,7 +126,7 @@ const NewsList = () => {
                             value={values.Image}
                             onChange={handleChange}
                             onBlur={handleBlur}
-                            className="rounded-md py-[3px] md:py-[3px] xl:py-2 px-3 outline-non border border-slate-300 outline-blue-200"
+                            className="rounded-md py-[3px] md:py-[3px] w-full xl:py-2 px-3 outline-non border border-slate-300 outline-blue-200"
 
                           />
                           {errors.Image && touched.Image
@@ -152,7 +152,7 @@ const NewsList = () => {
                             null}
                         </div>
                       </div>
-                      <div className='flex flex-col items-center space-y-5 xl:space-x-10'>
+                      <div className='flex flex-col lg:flex-row items-center space-y-5 lg:space-y-0 lg:space-x-5 xl:space-x-10'>
                         <div className="phone flex flex-col space-y-2 w-full ">
                           <label htmlFor="phone">Tags</label>
                           <input type="text"
@@ -220,7 +220,7 @@ const NewsList = () => {
           </div>
         )}
         <div className={`bg-slate-100 ${model && "opacity-10"}`}>
-          <div className=' md:px-10 h-full'>
+          <div className=' xl:px-10 h-full'>
             <div className='flex justify-between py-5 md:py-10 px-5'>
               <h1 className=' font-semibold md:text-2xl'>
                 News List
@@ -238,7 +238,7 @@ const NewsList = () => {
                 </div>
               </button>
             </div>
-            <div className='  py-3'>
+            <div className='md:px-5 py-3'>
               <ul className='flex md:px-2 2xl:px-10 justify-between bg-gray-300 md:rounded-lg py-[10px] shadow-sm text-black font-medium px-2 '>
                 <li className='w-20 text-center text-[8px] sm:text-[9.5px] md:text-[12px] 2xl:text-base '>Sr No</li>
                 <li className='w-20 text-center text-[8px] sm:text-[9.5px] md:text-[12px] 2xl:text-base '>Photo</li>
@@ -262,7 +262,7 @@ const NewsList = () => {
                         <li className='w-52 text-center text-[6px] sm:text-[8.5px] md:text-[12px] 2xl:text-sm overflow-hidden'>{News.Description}</li>
                         <li className='w-20 text-center text-[6px] sm:text-[8.5px] md:text-[12px] 2xl:text-sm'>{News.Date}</li>
                         <li className='w-20 text-center flex flex-col md:flex-row items-center justify-center space-y-2 md:space-y-0 md:space-x-3'>
-                          <FiEdit className='text-[11px] md:text-sm lg:text-[19px] ' onClick={() => navigate(`add-edit/${News.News_id}`)} />
+                          <FiEdit className='text-[11px] md:text-sm lg:text-[19px] '  />
                           <MdDelete className='text-[11px] md:text-sm lg:text-[21px] text-red-500' onClick={() => handleDelete(News.News_id)} />
                         </li>
                       </ul>
