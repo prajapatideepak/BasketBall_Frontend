@@ -10,18 +10,22 @@ import { useDispatch } from "react-redux";
 import { authentication } from "../../redux/actions/User";
 import { useLocalStorage } from "../../hooks/localStorage";
 const signUpSchema = Yup.object({
-  email: Yup.string().email().required("Please enter your email"),
+  mobile: Yup.string()
+      .required("Please enter your mobile no.")
+      .matches(/^[0-9]+$/, "Please enter only numbers")
+      .min(10, "Mobile number should be at least 10 digits")
+      .max(10, "Mobile number should be at least 10 digits"),
   password: Yup.string().required("Please enter password"),
 });
 
 const initialValues = {
-  email: "",
+  mobile: "",
   password: "",
 };
 
 function Login() {
   const dispatch = useDispatch();
-  const notify = () => toast("Login Successfull!!");
+  const notify = () => toast.success("Login Successfull!!");
   const navigate = useNavigate();
 
   const { values, errors, handleBlur, touched, handleChange, handleSubmit } =
@@ -63,22 +67,22 @@ function Login() {
           <div className="space-y-5 py-4 ">
             <div className="space-y-2">
               <label htmlFor="Email" className="font-semibold text-base">
-                Email
+                Mobile
               </label>
               <input
-                type="Email"
-                value={values.email}
-                placeholder="Enter Your Email"
+                type="text"
+                value={values.mobile}
+                placeholder="Enter Your Mobile No."
                 autoComplete="off"
-                name="email"
-                id="email"
+                name="mobile"
+                id="mobile"
                 onChange={handleChange}
                 onBlur={handleBlur}
                 className="w-full rounded-md py-2 px-3 outline-non border border-slate-300 outline-blue-200"
               />
-              {errors.email && touched.email ? (
+              {errors.mobile && touched.mobile ? (
                 <p className="form-error text-red-600 text-sm font-semibold">
-                  {errors.email}
+                  {errors.mobile}
                 </p>
               ) : null}
             </div>
