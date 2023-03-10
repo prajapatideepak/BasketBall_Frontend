@@ -148,7 +148,7 @@ function MatchLive({ slides }) {
                 {
                   slides.map((slide, slideIndex) => {
                     return (
-                      <div key={slideIndex} className="relative" onClick={() => goToSlide(slideIndex)}>
+                      <div key={slideIndex} className="relative cursor-pointer" onClick={() => goToSlide(slideIndex)}>
                         <svg className="w-12 h-12 relative rotate-[-90deg]">
                           <circle
                             className="text-gray-300"
