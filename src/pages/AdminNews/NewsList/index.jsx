@@ -23,7 +23,6 @@ const signUpSchema = Yup.object({
 
 const NewsList = () => {
   const navigate = useNavigate();
-  const notify = () => toast("Login Successfull!!")
   const [model, setModel] = React.useState(false);
   const NewsList = [
     {
@@ -60,7 +59,6 @@ const NewsList = () => {
     }
   ]
   const [NewsLists, setNewsList] = React.useState(NewsList)
-  const [isOnSubmit, setIsOnSubmit] = React.useState(false);
   const initialValues = {
     Image: "",
     Title: "",
@@ -68,6 +66,7 @@ const NewsList = () => {
     Date: "",
     Description: "",
   };
+
   const { values, errors, handleBlur, touched, handleChange, handleSubmit } = useFormik({
     initialValues: initialValues,
     validationSchema: signUpSchema,
@@ -106,7 +105,7 @@ const NewsList = () => {
         {model && (
           <div className='w-full h-full bg-black  '>
             <div className='flex justify-center shadow-2xl  '>
-              <div className='absolute mx-10 sm:mx-0 xl:w-full w-[70%] opacity-100 shadow-2xl rounded top-5 sm:top-2 md:top-4 lg:top-10 xl:top-10 bg-white  z-50'>
+              <div className='absolute sm:mx-0  w-[90%] xl:w-[75%] opacity-100 shadow-2xl rounded top-5 sm:top-2 md:top-4 lg:top-10 xl:top-10 bg-white z-50'>
                 <div className=''>
                   <div className='flex justify-end '>
                     <button onClick={() => { setModel(false) }} className='absolute translate-x-4 -translate-y-4 font-bold text-2xl p-2 text-[#571217] '>
@@ -114,7 +113,7 @@ const NewsList = () => {
                     </button>
                   </div>
                   <div className='  rounded-md  my-5 xl:py-10  px-5 xl:px-10'>
-                    <h1 className=' font-semibold text-2xl pb-5 xl:pb-10'>
+                    <h1 className='font-semibold text-lg lg:text-2xl pb-5 xl:pb-10'>
                       Add News
                     </h1>
                     <form action="" className=" space-y-5 xl:space-y-10" onSubmit={handleSubmit}>
@@ -202,10 +201,10 @@ const NewsList = () => {
                           :
                           null}
                       </div>
-                      <div className='flex justify-center items-center w-full pt-5 space-x-5'>
+                      <div className='flex justify-center items-center w-full space-x-5'>
                         <button type="submit" className="
                bg-slate-900   relative inline-flex items-center justify-center  px-4 py-1.5 
-              sm:px-8 sm:py-[6px] overflow-hidden font-medium tracking-tighter text-white rounded-lg cursor-pointer group"
+              sm:px-8 sm:py-[6px] xl:px-32 xl:py-2 overflow-hidden font-medium tracking-tighter text-white rounded-lg cursor-pointer group"
                         >
                           <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#ee6730] rounded-lg group-hover:w-full group-hover:h-56"></span>
                           <span className="relative">Submit</span>
@@ -228,12 +227,12 @@ const NewsList = () => {
               <button
                 onClick={() => { setModel(true) }}
                 type="submit"
-                className="bg-slate-900  relative inline-flex items-center justify-center px-2  sm:px-4  py-1.5  overflow-hidden font-medium tracking-tighter text-white rounded-lg cursor-pointer group"
+                className="bg-slate-900  relative inline-flex items-center justify-center px-2  sm:px-4  py-1 sm:py-1.5  overflow-hidden font-medium tracking-tighter text-white rounded-lg cursor-pointer group"
               >
                 <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#ee6730] rounded-lg group-hover:w-full group-hover:h-56"></span>
                 <div className='flex items-center space-x-2'>
 
-                  <span className="relative text-[10px] sm:text-xs xl:text-base">Add News</span>
+                  <span className="relative text-[10px] sm:text-xs md:text-sm xl:text-base">Add News</span>
                   <TbFilePlus className='relative text-xs md:text-xl' />
                 </div>
               </button>
@@ -262,7 +261,7 @@ const NewsList = () => {
                         <li className='w-52 text-center text-[6px] sm:text-[8.5px] md:text-[12px] 2xl:text-sm overflow-hidden'>{News.Description}</li>
                         <li className='w-20 text-center text-[6px] sm:text-[8.5px] md:text-[12px] 2xl:text-sm'>{News.Date}</li>
                         <li className='w-20 text-center flex flex-col md:flex-row items-center justify-center space-y-2 md:space-y-0 md:space-x-3'>
-                          <FiEdit className='text-[11px] md:text-sm lg:text-[19px] '  />
+                          <FiEdit className='text-[11px] md:text-sm lg:text-[19px] ' onClick={() => setModel(true)}  />
                           <MdDelete className='text-[11px] md:text-sm lg:text-[21px] text-red-500' onClick={() => handleDelete(News.News_id)} />
                         </li>
                       </ul>
