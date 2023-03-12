@@ -9,6 +9,8 @@ import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 import { authentication } from "../../redux/actions/User";
 import { useLocalStorage } from "../../hooks/localStorage";
+import { useGoogleLogin } from '@react-oauth/google';
+
 const signUpSchema = Yup.object({
   mobile: Yup.string()
       .required("Please enter your mobile no.")
@@ -27,6 +29,10 @@ function Login() {
   const dispatch = useDispatch();
   const notify = () => toast.success("Login Successfull!!");
   const navigate = useNavigate();
+
+  const login = useGoogleLogin({
+    onSuccess: tokenResponse => console.log(tokenResponse),
+  });
 
   const { values, errors, handleBlur, touched, handleChange, handleSubmit } =
     useFormik({
@@ -56,7 +62,7 @@ function Login() {
             Wellcome back! Please enter your details.
           </p>
         </div>
-        <div className="border py-2 my-7 flex justify-center items-center px-5 rounded-md space-x-2 cursor-pointer hover:border-[#ee6730] duration-200">
+        <div className="border py-2 my-7 flex justify-center items-center px-5 rounded-md space-x-2 cursor-pointer hover:border-[#ee6730] duration-200" onClick={()=>login()}>
           <img src={google} alt="" className="w-7" />
           <p>Log in with Google</p>
         </div>

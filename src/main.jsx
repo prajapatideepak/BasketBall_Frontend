@@ -4,7 +4,8 @@ import App from './App';
 import './index.css'
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import {GOOGLE_CLIENT_ID} from '../constant'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -21,6 +22,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       pauseOnHover
       className='z-[9999999]'
     />
-    <App />
+      <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+        <App />
+      </GoogleOAuthProvider>
   </React.StrictMode>,
 );
