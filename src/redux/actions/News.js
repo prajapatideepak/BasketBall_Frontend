@@ -2,7 +2,7 @@ import { setNews, getNewsDetail } from "../slices/newsSlice";
 
 export const getNewsData = () => {
   return async (dispatch) => {
-    console.log("andar nahi ho raha he");
+
     const newsDetail = [
       {
         id: 1,
@@ -14,7 +14,6 @@ export const getNewsData = () => {
         description:
           " Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione porro dolor aspernatur esse assumenda, nisi dolorum labore eos repellendus, alias tenetur. Iure placeat eveniet necessitatibus similique ducimus cumque veritatis. Vero.",
       },
-
       {
         id: 4,
         title: "Monu created amazing web application for basketball",
