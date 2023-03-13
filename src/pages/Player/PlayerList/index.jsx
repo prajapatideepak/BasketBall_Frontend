@@ -83,41 +83,41 @@ const PlayerList = () => {
                       {/* avtar end */}
                       {/* statiscs start */}
                       <div className="2xl:justify-start py-1 lg:p-2 w-full sm:w-1/2 flex items-center justify-center xl:pl-10   ">
-                        <div className="grid xxs:grid-cols-2 xs:grid-cols-4 text-black place-content-center  gap-5 lg:gap-8 xl:gap-12 2xl:gap-20   ">
+                        <div className="grid xxs:grid-cols-2 xs:grid-cols-4 text-black place-content-center md:gap-1 lg:gap-5 xl:gap-12 2xl:gap-16   ">
                           <div className="text-center    ">
-                            <h1 className="text-sm sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl
+                            <h1 className="text-sm sm:text-lg md:text-2xl lg:text-3xl 
                              font-bold text-[#ee6730]">
-                              50
+                              100
                             </h1>
-                            <span className="text-[8px] sm:text-[10px] md:text-[11px] lg:text-xs text-white font-semibold">
-                              Total Match
+                            <span className="text-[8px] sm:text-[9px] md:text-[11px] lg:text-xs text-white font-semibold">
+                              Matches Played
                             </span>
                           </div>
                           <div className="text-center    ">
-                            <h1 className="text-sm sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl
+                            <h1 className="text-sm sm:text-lg md:text-2xl lg:text-3xl 
                              font-bold text-[#ee6730]">
-                              40
+                              100
                             </h1>
-                            <span className="text-[8px] sm:text-[10px] md:text-[11px] lg:text-xs text-white font-semibold">
-                              Total Won
+                            <span className="text-[8px] sm:text-[9px] md:text-[11px] lg:text-xs text-white font-semibold">
+                              Won
                             </span>
                           </div>
                           <div className="text-center    ">
-                            <h1 className="text-sm sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl
+                            <h1 className="text-sm sm:text-lg md:text-2xl lg:text-3xl 
                              font-bold text-[#ee6730]">
-                              10
+                              100
                             </h1>
-                            <span className="text-[8px] sm:text-[10px] md:text-[11px] lg:text-xs text-white font-semibold">
-                              Total loss
+                            <span className="text-[8px] sm:text-[9px] md:text-[11px] lg:text-xs text-white font-semibold">
+                              lost
                             </span>
                           </div>
                           <div className="text-center    ">
-                            <h1 className="text-sm sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl
+                            <h1 className="text-sm sm:text-lg md:text-2xl lg:text-3xl
                              font-bold text-[#ee6730]">
-                              250
+                              25000
                             </h1>
-                            <span className="text-[8px] sm:text-[10px] md:text-[11px] lg:text-xs text-white font-semibold">
-                              Total Score
+                            <span className="text-[8px] sm:text-[9px] md:text-[11px] lg:text-xs text-white font-semibold">
+                              Total Points
                             </span>
                           </div>
 
