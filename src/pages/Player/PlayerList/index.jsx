@@ -23,7 +23,7 @@ const PlayerList = () => {
     <div className="flex min-h-screen px-10 2xl:px-32 lg:px-14 py-8">
       <div className="mx-auto w-full">
         <Heading
-          className={"text-xl md:text-3xl px-3 sm:px-7 py-1 font-mono  "}
+          className={"text-xl md:text-3xl px-3 sm:px-7 py-1"}
           margin={true}
           text={"Player List"}
         />
