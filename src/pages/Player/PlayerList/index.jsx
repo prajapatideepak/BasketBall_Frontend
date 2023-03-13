@@ -57,7 +57,7 @@ const PlayerList = () => {
                   className="w-full  scale-105"
                   to={`/player/${player.id}`}
                 >
-                  <div className="duration-300 relative justify-end bg-black text-white overflow-hidden shadow-xl cursor-pointer hover:scale-105 w-6/7  md:w-full h-full ">
+                  <div className="duration-300 relative justify-end bg-black text-white overflow-hidden shadow-xl cursor-pointer hover:scale-[1.03] w-6/7  md:w-full h-full ">
                     <div className=" flex justify-end items-center ">
                       <img src={logo} alt="" className="w-28 h-28 2xl:w-32 2xl:h-32  opacity-20" />
                     </div>
