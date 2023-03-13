@@ -6,15 +6,21 @@ import Prize from "./Prize";
 import Sponsors from "./Sponsors";
 import Gallery from "./Gallery";
 import About from "./About";
+import Admin from './Admin';
 import "./TournamentDetails.css";
 import TeamsModal from "./TeamsModal";
+import { toast } from "react-toastify";
 
 function TournamentDetails() {
   const [currentTab, setCurrentTab] = React.useState(0);
   const [openTeamsModal, setOpenTeamsModal] = React.useState(false);
   const handleOpenTeamsModal = () => setOpenTeamsModal(!openTeamsModal);
 
-  const Tournamentdetails = {
+  const is_organizer = true;
+  
+  const tournamentdetails = {
+    is_registration_open: false,
+    status: 1,
     starting_date: "11-01-2023",
     ending_date: "22-01-2023",
     tournament_type: "Knock out",
@@ -24,7 +30,7 @@ function TournamentDetails() {
     about_tournament: "Hello",
     referee: [
       { id: 1, referee_name: "Shad", referee_mobile: "1234567890" },
-      { id: 2, referee_name: "Shad", referee_mobile: "1234567890" },
+      { id: 2, referee_name: "Asd", referee_mobile: "1234567890" },
     ],
     sponsors: [
       {
@@ -46,11 +52,19 @@ function TournamentDetails() {
     <Matches />,
     <Teams />,
     <Schedule />,
-    <Prize prize={Tournamentdetails.prize} />,
-    <Sponsors sponsors={Tournamentdetails.sponsors} />,
+    <Prize prize={tournamentdetails.prize} />,
+    <Sponsors sponsors={tournamentdetails.sponsors} />,
     <Gallery />,
-    <About Tournamentdetails={Tournamentdetails} />,
+    <About tournamentdetails={tournamentdetails} />,
+    <Admin/>
   ];
+
+  const handleRegisterInTournament = () =>{
+    if(!tournamentdetails.is_registration_open){
+      return toast.error('Registration closed');
+    }
+    setOpenTeamsModal(true)
+  }
 
   return (
     <section className="min-h-screen-fit">
@@ -71,20 +85,26 @@ function TournamentDetails() {
             <h1 className="text-lg xs:text-2xl sm:text-3xl text-gray-200 font-semibold py-4">
               Champion League
             </h1>
-            <div className="w-full flex justify-center">
-              <div className="w-40">
-                <button
-                  onClick={() => setOpenTeamsModal(true)}
-                  type="submit"
-                  className={`bg-gray-200 relative inline-flex items-center justify-center w-full px-4 py-1 xs:py-1 sm:px-4 sm:py-1.5 overflow-hidden font-medium tracking-tighter text-white rounded-lg cursor-pointer group`}
-                >
-                  <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#ee6730] rounded-lg group-hover:w-full group-hover:h-56"></span>
-                  <span className="relative text-gray-700 text-xs xs:text-sm sm:text-base group-hover:text-white transition-all duration-500 ease-in-out">
-                    Register Your Team
-                  </span>
-                </button>
-              </div>
-            </div>
+            {
+              tournamentdetails.status == 1
+              ?
+                <div className="w-full flex justify-center">
+                  <div className="w-40">
+                    <button
+                      onClick={handleRegisterInTournament}
+                      type="submit"
+                      className={`bg-gray-200 relative inline-flex items-center justify-center w-full px-4 py-1 xs:py-1 sm:px-4 sm:py-1.5 overflow-hidden font-medium tracking-tighter text-white rounded-lg cursor-pointer group`}
+                    >
+                      <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#ee6730] rounded-lg group-hover:w-full group-hover:h-56"></span>
+                      <span className="relative text-gray-700 text-xs xs:text-sm sm:text-base group-hover:text-white transition-all duration-500 ease-in-out">
+                        Register Your Team
+                      </span>
+                    </button>
+                  </div>
+                </div>
+              :
+                null
+            }
           </div>
         </div>
       </div>
@@ -146,6 +166,20 @@ function TournamentDetails() {
           >
             About
           </h1>
+          {
+            is_organizer
+            ?
+              <h1
+                className={`w-28 flex justify-center items-center font-semibold ${
+                  currentTab == 7 ? "bg-[#F5F5F7] text-[#ee6730]" : ""
+                } h-full cursor-pointer`}
+                onClick={() => setCurrentTab(7)}
+              >
+                Admin*
+              </h1>
+            :
+              null
+          }
         </div>
       </div>
       <div className="mx-auto px-8 py-10 xs:px-10 xs:py-12 sm:px-20 sm:py-12 md:px-20 md:py-16 lg:px-24 xl:px-28 2xl:px-32">
