@@ -32,6 +32,7 @@ function Login() {
 
   const login = useGoogleLogin({
     onSuccess: tokenResponse => console.log(tokenResponse),
+    onError: error => {toast.error(error)}
   });
 
   const { values, errors, handleBlur, touched, handleChange, handleSubmit } =
