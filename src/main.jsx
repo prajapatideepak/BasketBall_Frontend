@@ -4,6 +4,7 @@ import App from './App';
 import './index.css'
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import 'react-tooltip/dist/react-tooltip.css'
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import {GOOGLE_CLIENT_ID} from '../constant'
 

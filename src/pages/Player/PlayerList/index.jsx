@@ -25,9 +25,9 @@ const PlayerList = () => {
         <Heading
           className={"text-xl md:text-3xl px-3 sm:px-7 py-1"}
           margin={true}
-          text={"Player List"}
+          text={"All Players"}
         />
-        <div className="flex m-20 justify-center ">
+        <div className="flex m-16 justify-center ">
           <input
             type="text"
             onChange={(e) => {
