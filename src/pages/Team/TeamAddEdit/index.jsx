@@ -101,12 +101,13 @@ function TeamAddEdit() {
       // }
 
       //Can't select more than 12 players
-      if (selectedPlayers.length < 5) {
-        toast.error("Please select atleast 5 players");
-        return;
-      }
+      // if (selectedPlayers.length < 5) {
+      //   toast.error("Please select atleast 5 players");
+      //   return;
+      // }
 
       try {
+        console.log({ teamDetail: data, Players: searchedPlayers });
       } catch (err) {
         console.log(err);
       }
