@@ -35,7 +35,7 @@ const AppRoutes = () => {
         </Routes>
         <Outlet />
       </BrowserRouter>
-      <ToastContainer autoClose={3000} theme="colored" />
+      <ToastContainer autoClose={100} theme="colored" />
     </>
   );
 };
