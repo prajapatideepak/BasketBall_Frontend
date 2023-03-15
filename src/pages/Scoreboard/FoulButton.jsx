@@ -2,7 +2,7 @@ import React from 'react'
 
 function FoulButton({text}) {
   return (
-    <button className='w-28 bg-red-600 px-2 py-2 rounded-md hover:opacity-70 text-white'>{text}</button>
+    <button className='lg:w-28 sm:w-24 w-20 lg:text-base sm:text-sm text-xs bg-red-600 px-2 py-2 rounded-md hover:opacity-70 text-white'>{text}</button>
   )
 }
 
