@@ -2,7 +2,7 @@ import { Fragment, useState } from "react";
 
 import { Dialog, Transition } from "@headlessui/react";
 
-export const Modal = ({ open, onClose, children }) => {
+export const Modal = ({ open, onClose, size, children }) => {
   const [modalOpen, setModalOpen] = useState(open);
 
   return (
@@ -59,4 +59,4 @@ export const Modal = ({ open, onClose, children }) => {
 };
 
 Modal.Title = Dialog.Title;
-Modal.Description = Dialog.Description;
+Modal.Description = Dialog.Panel;

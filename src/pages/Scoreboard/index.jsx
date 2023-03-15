@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { toast } from 'react-toastify';
@@ -7,10 +7,12 @@ import { Tooltip } from 'react-tooltip'
 import PointButton from './PointButton';
 import FoulButton from './FoulButton';
 import TeamPlayersTable from './TeamPlayersTable';
+import PlayersListModal from './PlayersListModal'
 
 function index() {
     const {match_id, token} = useParams()
-    const isMatchStarted = true
+    const [playersModal, setPlayersModal] = useState(false)
+    const isMatchStarted = false
 
     const handleMatchStart = () =>{
         Swal.fire({
@@ -40,6 +42,50 @@ function index() {
         }).then((result) => {
             if (result.isConfirmed) {
                 toast.success('Match ended successfully')
+            }
+        })
+    }
+
+    const handleQuarterChange = () =>{
+        Swal.fire({
+            title: 'Are you sure to change the quarter?',
+            text: "",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Change'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                toast.success('New quarter started')
+            }
+        })
+    }
+
+    const handleTeamPoint = () =>{
+        setPlayersModal(true)
+    }
+
+    const handleTeamFoul = () =>{
+
+    }
+
+    const handlePlayerFoul = () =>{
+
+    }
+
+    const handleUndoPoint = () =>{
+        Swal.fire({
+            title: 'Are you sure to undo last point?',
+            text: "",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, undo'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                toast.success('Last point reverted')
             }
         })
     }
@@ -100,15 +146,15 @@ function index() {
                             </div>
                         </div>
                         <div className="flex justify-center items-center space-x-2 pt-8">
-                            <button className={`flex justify-center items-center lg:w-12 lg:h-12 md:w-11 md:h-11 sm:w-10 sm:h-10 w-9 h-9 lg:text-base sm:text-sm text-xs ${isMatchStarted ? 'bg-[#ee6730]' : 'bg-gray-600'} text-white p-3 rounded-full`} disabled={isMatchStarted ? false : true}>Q1</button>
-                            <button className={`flex justify-center items-center lg:w-12 lg:h-12 md:w-11 md:h-11 sm:w-10 sm:h-10 w-9 h-9 lg:text-base sm:text-sm text-xs ${isMatchStarted ? 'bg-[#ee6730]' : 'bg-gray-600'} text-white p-3 rounded-full`} disabled={isMatchStarted ? false : true}>Q2</button>
-                            <button className={`flex justify-center items-center lg:w-12 lg:h-12 md:w-11 md:h-11 sm:w-10 sm:h-10 w-9 h-9 lg:text-base sm:text-sm text-xs ${isMatchStarted ? 'bg-[#ee6730]' : 'bg-gray-600'} text-white p-3 rounded-full`} disabled={isMatchStarted ? false : true}>Q3</button>
-                            <button className={`flex justify-center items-center lg:w-12 lg:h-12 md:w-11 md:h-11 sm:w-10 sm:h-10 w-9 h-9 lg:text-base sm:text-sm text-xs ${isMatchStarted ? 'bg-[#ee6730]' : 'bg-gray-600'} text-white p-3 rounded-full`} disabled={isMatchStarted ? false : true}>Q4</button>
-                            <button className={`flex justify-center items-center lg:w-12 lg:h-12 md:w-11 md:h-11 sm:w-10 sm:h-10 w-9 h-9 lg:text-base sm:text-sm text-xs ${isMatchStarted ? 'bg-[#ee6730]' : 'bg-gray-600'} text-white p-3 rounded-full`} disabled={isMatchStarted ? false : true}>Ext</button>
+                            <div className={`flex justify-center items-center lg:w-12 lg:h-12 md:w-11 md:h-11 sm:w-10 sm:h-10 w-9 h-9 lg:text-base sm:text-sm text-xs ${isMatchStarted ? 'bg-[#ee6730]' : 'bg-gray-600'} text-white p-3 rounded-full`}>Q1</div>
+                            <div className={`flex justify-center items-center lg:w-12 lg:h-12 md:w-11 md:h-11 sm:w-10 sm:h-10 w-9 h-9 lg:text-base sm:text-sm text-xs ${isMatchStarted ? 'bg-[#ee6730]' : 'bg-gray-600'} text-white p-3 rounded-full border-2 border-green-500`}>Q2</div>
+                            <div className={`flex justify-center items-center lg:w-12 lg:h-12 md:w-11 md:h-11 sm:w-10 sm:h-10 w-9 h-9 lg:text-base sm:text-sm text-xs ${isMatchStarted ? 'bg-blue-600' : 'bg-gray-600'} text-white p-3 rounded-full`}>Q3</div>
+                            <div className={`flex justify-center items-center lg:w-12 lg:h-12 md:w-11 md:h-11 sm:w-10 sm:h-10 w-9 h-9 lg:text-base sm:text-sm text-xs ${isMatchStarted ? 'bg-[#ee6730]' : 'bg-gray-600'} text-white p-3 rounded-full`}>Q4</div>
+                            <div className={`flex justify-center items-center lg:w-12 lg:h-12 md:w-11 md:h-11 sm:w-10 sm:h-10 w-9 h-9 lg:text-base sm:text-sm text-xs ${isMatchStarted ? 'bg-[#ee6730]' : 'bg-gray-600'} text-white p-3 rounded-full`}>Ext</div>
                         </div>
                     </div>
                     <div className='text-center p-6'>
-                        <button className='bg-blue-600 px-2 py-2 rounded-md hover:opacity-70 text-white lg:text-base sm:text-sm text-xs'>Change Quarter</button>
+                        <button className='bg-blue-600 px-2 py-2 rounded-md hover:opacity-70 text-white lg:text-base sm:text-sm text-xs' onClick={handleQuarterChange}>Change Quarter</button>
                     </div>
                     <div className='flex lg:flex-row flex-col lg:justify-between justify-center items-center lg:space-y-0 space-y-4 pt-2 pb-6 px-10'>
                         <div className="flex flex-2 flex-col">
@@ -118,9 +164,9 @@ function index() {
                             </div>
                             <div className='flex lg:flex-col md:flex-row flex-col lg:space-x-0 space-x-5'>
                                 <div className="flex space-x-2 lg:mt-0 sm:mt-3 mt-1">
-                                    <PointButton text="Free Shot"/>
-                                    <PointButton text="In 3-point"/>
-                                    <PointButton text="Out 3-point"/>
+                                    <PointButton text="Free Shot" handleShowModal={setPlayersModal}/>
+                                    <PointButton text="In 3-point" handleShowModal={setPlayersModal}/>
+                                    <PointButton text="Out 3-point" handleShowModal={setPlayersModal}/>
                                 </div>
                                 <div className="flex flex-col mt-3 ">
                                     <div className='pb-1 lg:block hidden'>
@@ -128,13 +174,16 @@ function index() {
                                     </div>
                                     <div className="flex space-x-2 lg:justify-start justify-center">
                                         <FoulButton text="Team Foul"/>
-                                        <FoulButton text="Player Foul"/>
+                                        <FoulButton text="Player Foul" handleShowModal={setPlayersModal}/>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div className="flex flex-1 justify-center mx-2">
-                            <button className="lg:w-10 lg:h-10 sm:w-9 sm:h-9 w-8 h-8 flex justify-center items-center rounded-full bg-blue-900 hover:opacity-70 group text-white"  data-tooltip-id="undo_btn" >
+                            <button 
+                                className="lg:w-10 lg:h-10 sm:w-9 sm:h-9 w-8 h-8 flex justify-center items-center rounded-full bg-blue-900 hover:opacity-70 group text-white"  data-tooltip-id="undo_btn" 
+                                onClick={handleUndoPoint}
+                            >
                                 <AiOutlineUndo className='text-3xl group-hover:rotate-[360deg] transition-all duration-500'/>
                             </button>
                             <Tooltip id="undo_btn" variant="dark" content="Undo last point" place='bottom' delayShow={500} />
@@ -146,9 +195,9 @@ function index() {
                             </div>
                             <div className='flex lg:flex-col md:flex-row flex-col lg:space-x-0 space-x-5'>
                                 <div className="flex space-x-2 lg:mt-0 sm:mt-3 mt-1">
-                                    <PointButton text="Free Shot"/>
-                                    <PointButton text="In 3-point"/>
-                                    <PointButton text="Out 3-point"/>
+                                    <PointButton text="Free Shot" handleShowModal={setPlayersModal}/>
+                                    <PointButton text="In 3-point" handleShowModal={setPlayersModal}/>
+                                    <PointButton text="Out 3-point" handleShowModal={setPlayersModal}/>
                                 </div>
                                 <div className="flex flex-col mt-3 ">
                                     <div className='pb-1 lg:block hidden'>
@@ -156,7 +205,7 @@ function index() {
                                     </div>
                                     <div className="flex space-x-2 lg:justify-end justify-center">
                                         <FoulButton text="Team Foul"/>
-                                        <FoulButton text="Player Foul"/>
+                                        <FoulButton text="Player Foul" handleShowModal={setPlayersModal}/>
                                     </div>
                                 </div>
                             </div>
@@ -255,6 +304,7 @@ function index() {
                     </div>
                 </div>
             </div>
+            <PlayersListModal showModal={playersModal} handleShowModal={setPlayersModal} />
         </section>
     )
 }
