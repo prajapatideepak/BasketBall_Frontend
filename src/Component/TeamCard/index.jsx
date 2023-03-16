@@ -26,11 +26,11 @@ function TeamCard({teamDetails}) {
             </div>
             <div className="w-full sm:4/5 md:w-3/5 flex justify-center lg:justify-end items-center gap-2.5 sm:gap-6 lg:gap-10 mr-2 lg:mt-0 mt-8">
                 <div className='flex flex-col justify-center items-center'>
-                    <h4 className='font-medium text-white text-gray-200 lg:text-base sm:text-sm text-xs'>Total Players</h4>
+                    <h4 className='font-medium text-gray-200 lg:text-base sm:text-sm text-xs'>Total Players</h4>
                     <p className='text-gray-200'>{total_players < 10 ? '0' + total_players : total_players}</p>
                 </div>
                 <div className='flex flex-col justify-center items-center '>
-                    <h4 className='font-medium text-white text-blue-200 lg:text-base sm:text-sm text-xs'>Matches Played</h4>
+                    <h4 className='font-medium text-blue-200 lg:text-base sm:text-sm text-xs'>Matches Played</h4>
                     <p className='text-gray-200'>{matches_played < 10 ? '0' + matches_played : matches_played}</p>
                 </div>
                 <div className='flex flex-col justify-center items-center '>
