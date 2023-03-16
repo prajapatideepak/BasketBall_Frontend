@@ -1,9 +1,9 @@
 import React from 'react'
-import {Modal} from '../../Component/Modal'
-import { Dialog } from '@headlessui/react'
+import { toast } from 'react-toastify'
+import { Modal } from '../../Component/Modal'
 
 function PlayersListModal({showModal, handleShowModal}) {
-    const [selectedPlayerId, setSelectedPlayerId] = React.useState('Round Robin')
+    const [selectedPlayerId, setSelectedPlayerId] = React.useState(-1)
 
     const players = [
         {
@@ -41,22 +41,27 @@ function PlayersListModal({showModal, handleShowModal}) {
     ]
     const handleModalClose = () => {
         handleShowModal(false)
+        setSelectedPlayerId(-1)
     }
 
-    const handlePlayerSelect = (e) => {
-        setSelectedPlayerId(e.target.value)
+    const handlePlayerSelect = (player_id) => {
+        setSelectedPlayerId(player_id)
     }
 
     const handleSubmit = () =>{
-        alert(selectedPlayerId)
+
+        if(selectedPlayerId == -1){
+            return toast.error('Please select player')
+        }
+        setSelectedPlayerId(-1)
         handleShowModal(false)
     }
   return (
         <Modal
           open={showModal}
-          onClose={handleShowModal}
+          onClose={()=> {handleShowModal(false); setSelectedPlayerId(-1)}}
         >
-            <div className="inline-block w-full max-w-2xl p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-gray-700 shadow-xl rounded-lg ">
+            <Modal.Description className="inline-block w-full max-w-2xl p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-gray-700 shadow-xl rounded-lg ">
                 <Modal.Title
                 as="h3"
                 className="mb-4 sm:text-xl text-lg font-medium text-gray-900 dark:text-white"
@@ -84,13 +89,16 @@ function PlayersListModal({showModal, handleShowModal}) {
                                     {
                                         players.map((item, index) => {
                                             return(
-                                                <tr key={index} className={`${(index+1)%2 == 0 ? 'bg-gray-600' : ''} cursor-pointer group`} onClick={()=> setSelectedPlayerId(item.id)}>
+                                                <tr key={index} 
+                                                className={`${(index+1)%2 == 0 ? 'bg-gray-600' : ''} cursor-pointer group`} 
+                                                onClick={()=>handlePlayerSelect(item.id)}
+                                                >
                                                     <td className='sm:px-6 px-4 py-2 whitespace-nowrap'>
-                                                        <input type="radio" name=""
+                                                        <input type="radio" name="player"
                                                         value={item.id}
                                                         checked={selectedPlayerId == item.id}
                                                         className="cursor-pointer"
-                                                        onChange={handlePlayerSelect}
+                                                        onChange={()=>handlePlayerSelect(item.id)}
                                                             />
                                                     </td>
                                                     <td className='sm:px-6 px-2 py-2 whitespace-nowrap'>
@@ -113,12 +121,12 @@ function PlayersListModal({showModal, handleShowModal}) {
                         </div>
                     </div>
                 </Modal.Description>
-                <Modal.Description>
+                <div>
                     <div className='mt-8 text-right'>
                         <button type="button" onClick={handleSubmit} className="sm:w-28 w-20 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 sm:py-2 py-1.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
                     </div>
-                </Modal.Description>
-            </div>
+                </div>
+            </Modal.Description>
         </Modal>
     )
 }
