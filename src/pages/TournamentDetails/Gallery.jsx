@@ -3,8 +3,6 @@ import Masonry from 'react-masonry-css'
 import LazyLoad from 'react-lazyload';
 import '../Gallery/Gallery.css';
 import { AiFillCloseCircle } from 'react-icons/ai';
-import Button from '../../Component/Button';
-import UploadImageModal from './UploadImageModal';
 
 function Gallery() {
   const breakpointColumnsObj = {
@@ -14,8 +12,6 @@ function Gallery() {
         500: 1
     };
   const [previewImage, setPreviewImage] = React.useState('')
-  const [open, setOpen] = useState(false);
-  const handleOpen = ()=> setOpen(!open)
   
   const tournamentImages = [
         {
@@ -55,17 +51,8 @@ function Gallery() {
         },
     ]
 
-  const handleImageUpload = () => {
-    setOpen(true);
-  }
-
   return (
     <div>
-      <div className='flex justify-end mb-5 -mt-16'>
-        <div className='w-40'>
-          <Button text='Upload Image' dataModalTarget="authentication-modal" dataModalToggle="authentication-modal" onClick={handleImageUpload} />
-        </div>
-      </div>
       <Masonry
       breakpointCols={breakpointColumnsObj}
       className="my-masonry-grid"
@@ -84,13 +71,12 @@ function Gallery() {
               })
           }
       </Masonry>
-            
         {
             previewImage != ''
             ?
                 <div tabIndex="-1" aria-hidden="true" className="fixed bg-black top-0 left-0 right-0 w-full min-h-screen p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full z-[9999]">
                 <div className='flex justify-end items-center px-5 py-3'>
-                    <AiFillCloseCircle className='cursor-pointer text-2xl text-white text-[#ee6730]' onClick={() => setPreviewImage('')}>close</AiFillCloseCircle>
+                    <AiFillCloseCircle className='cursor-pointer text-2xl text-[#ee6730]' onClick={() => setPreviewImage('')}>close</AiFillCloseCircle>
                 </div>
                 <div className="w-full flex justify-center items-center">
                     <div className='flex justify-center items-center w-full mt-20'>
@@ -101,8 +87,6 @@ function Gallery() {
             : 
                 null
         }
-
-        <UploadImageModal open={open} handleOpen={handleOpen} />
     </div>
   )
 }

@@ -20,6 +20,7 @@ import MatchsList from "../pages/Matches";
 import TeamProfileDetail from "../pages/Team/TeamProfileDetail";
 import PageNotFound from "../pages/Error";
 import MatchDetails from "../pages/Matches/MatchDetails";
+import Scoreboard from "../pages/Scoreboard";
 
 const PrivateRoutes = () => {
   return (
@@ -64,9 +65,10 @@ const PrivateRoutes = () => {
         <Route path="/term&condition" element={<TermsandConditions />} />
         <Route path="/*" element={<PageNotFound />} />
         <Route path="/" element={<Dashboard />} />
-
+        
         <Route index element={<Dashboard />} />
       </Route>
+      <Route path="/scoreboard/:match_id/:token" element={<Scoreboard />} />
     </Routes>
   );
 };

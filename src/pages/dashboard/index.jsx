@@ -255,8 +255,6 @@ const Dashboard = () => {
     },
   ]
 
-
-
   return (
     <div className="min-h-screen ">
       {/* Main Slider for live and upcoming matches */}

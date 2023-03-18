@@ -1,17 +1,11 @@
 import React from 'react'
-import Button from '../../Component/Button'
-import MatchFormModal from './MatchFormModal'
+import {useNavigate} from 'react-router-dom'
 
 function Schedule() {
-    const [showModal, handleShowModal] = React.useState(false)
+    const navigate = useNavigate();
 
     return (
         <div>
-            <div className='flex justify-end -mt-16'>
-                <div className='w-40'>
-                <Button text='Form Matches' onClick={()=> handleShowModal(true)} />
-                </div>
-            </div>
             <div>
                 <div className="table-container relative overflow-x-auto shadow-md sm:rounded-lg">
                     <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -41,18 +35,18 @@ function Schedule() {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                 <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap">
                                     1
                                 </th>
                                 <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    Mehta Ke Mahaarathi
+                                    <span className="cursor-pointer hover:text-gray-300" onClick={()=> navigate(`/team/profile-detail/1`)}>Mehta Ke Mahaarathi </span>
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap">
                                     VS
                                 </td>
                                 <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    Jetha Ke Jabaaz
+                                    <span className="cursor-pointer hover:text-gray-300" onClick={()=> navigate(`/team/profile-detail/1`)}>Jetha Ke Jabaaz </span>
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap">
                                     02/03/2023
@@ -70,7 +64,6 @@ function Schedule() {
                     </table>
                 </div>
             </div>
-            <MatchFormModal showModal={showModal} handleShowModal={handleShowModal} />
         </div>
     )
 }

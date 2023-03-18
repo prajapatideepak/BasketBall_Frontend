@@ -151,7 +151,7 @@ function MatchLive({ slides }) {
                       <div key={slideIndex} className="relative cursor-pointer" onClick={() => goToSlide(slideIndex)}>
                         <svg className="w-12 h-12 relative rotate-[-90deg]">
                           <circle
-                            className="text-gray-300"
+                            className="text-gray-500"
                             strokeWidth="3"
                             stroke="currentColor"
                             fill="transparent"
@@ -160,7 +160,7 @@ function MatchLive({ slides }) {
                             cy="25"
                           />
                           <circle
-                            className={`${slideIndex === currentIndex ? 'text-[#ee6730]' : 'text-gray-300'} transition-all`}
+                            className={`${slideIndex === currentIndex ? 'text-[#ee6730]' : 'text-gray-500'} transition-all`}
                             strokeWidth="3"
                             strokeDasharray={30 * 2 * Math.PI}
                             strokeDashoffset={(30 * 2 * Math.PI) - progressBar / 100 * (30 * 2 * Math.PI)}
