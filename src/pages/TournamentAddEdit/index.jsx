@@ -156,7 +156,7 @@ function Tournamentregistration() {
             <Heading margin={true} text={location?.state?.isEdit ? 'Edit Tournament' : 'Tournament Registration'} />
           </div>
         </div>
-        <div className='mx-auto px-10 mb-10 sm:px-20  md:px-20 md:py-0 lg:px-24 xl:px-28 2xl:px-32'>
+        <div className='mx-auto px-5 mb-10 sm:px-10 md:py-0 lg:px-14 xl:px-28 2xl:px-32'>
           <form action="" onSubmit={handleSubmit}>
             {/* -----------------------Tounament_Details---------------------------*/}
             <div className=''>
@@ -263,38 +263,38 @@ function Tournamentregistration() {
               <div className="flex flex-col w-full">
                 <label className="mb-2">Tournament Category *</label>
                 <div className=" border-2 border-gray-200 rounded-md px-6 py-3 bg-white">
-                  <div className="space-y-6">
-                    <div className="flex items-center justify-start space-x-12">
-                      <div className="flex items-center space-x-3">
+                  <div className="space-y-2 sm:space-y-6 md:space-y-2 lg:space-y-8">
+                    <div className="flex flex-col sm:flex-row md:flex-col lg:flex-row xl:items-center justify-start space-y-2 md:space-x-0 sm:space-x-12 lg:space-y-0 lg:space-x-7 xl:space-x-10">
+                      <div className="flex  lg:flex-col xl:flex-row  items-center space-x-3">
                         <input type="checkbox"
                           name="tournament_category"
                           id="tournament_category"
                           onChange={handleChange}
                           onBlur={handleBlur}
                           className="cursor-pointer" />
-                        <label htmlFor="Only for girls" className="text-xs ">Only For Girls</label>
+                        <label htmlFor="Only for girls" className="text-sm ">Only For Girls</label>
                       </div>
-                      <div className="flex items-center space-x-3">
+                      <div className="flex  lg:flex-col xl:flex-row items-center space-x-3">
                         <input type="checkbox"
                           name="tournament_category"
                           id="tournament_category"
                           onChange={handleChange}
                           onBlur={handleBlur}
                           className="cursor-pointer " />
-                        <label htmlFor="Only for boys" className="text-xs ">Only For Boys</label>
+                        <label htmlFor="Only for boys" className="text-sm ">Only For Boys</label>
                       </div>
-                      <div className="flex items-center space-x-3">
+                      <div className="flex lg:flex-col xl:flex-row  items-center space-x-3">
                         <input type="checkbox"
                           name="tournament_category"
                           id="tournament_category"
                           onChange={handleChange}
                           onBlur={handleBlur}
                           className="cursor-pointer" />
-                        <label htmlFor="" className="text-xs ">Only For Boys</label>
+                        <label htmlFor="" className="text-sm ">Only For Mens</label>
                       </div>
                     </div>
-                    <div className="flex items-center justify-start space-x-7">
-                      <div className="flex items-center space-x-3">
+                    <div className="flex flex-col sm:flex-row md:flex-col lg:flex-row xl:items-center justify-start space-y-2 md:space-x-0 sm:space-x-7 lg:space-x-5 lg:space-y-0 xl:space-x-[1.2rem]">
+                      <div className="flex lg:flex-col xl:flex-row  items-center space-x-3">
                         <input type="checkbox"
                           name="tournament_category"
                           id="tournament_category"
@@ -303,7 +303,7 @@ function Tournamentregistration() {
                           className="cursor-pointer " />
                         <label htmlFor="" className="text-sm ">Only For Women</label>
                       </div>
-                      <div className="flex items-center space-x-3">
+                      <div className="flex lg:flex-col xl:flex-row  items-center space-x-3">
                         <input type="checkbox"
                           name="tournament_category"
                           id="tournament_category"
@@ -325,46 +325,48 @@ function Tournamentregistration() {
               </div>
               <div className="flex flex-col w-full ">
                 <label className="mb-2">Age Cutoff *</label>
-                <div className="flex flex-col w-full border-2 rounded-md py-3 px-6 bg-white">
-                  <div className="space-y-6">
-                    <div className="flex items-center space-x-10">
-                      <div className="flex items-center space-x-3">
-                        <input type="checkbox" 
+                <div className="flex flex-col w-full border-2 rounded-md py-3 px-6 md:px-5 bg-white">
+                  <div className="space-y-2 sm:space-y-6">
+                    <div className="flex flex-col sm:flex-row md:items-center space-y-2 sm:space-x-10">
+                      <div className="flex md:flex-col xl:flex-row items-center space-x-3">
+                        <input type="checkbox"
                           name="age_cutoff"
                           id="age_cutoff"
                           onChange={handleChange}
                           onBlur={handleBlur}
-                        className="cursor-pointer" />
+                          className="cursor-pointer" />
                         <label htmlFor="Under 14" className="text-sm">Under 14</label>
                       </div>
-                      <div className="flex items-center space-x-3">
-                        <input type="checkbox" 
+                      <div className="flex md:flex-col xl:flex-row items-center space-x-3">
+                        <input type="checkbox"
                           name="age_cutoff"
                           id="age_cutoff"
                           onChange={handleChange}
                           onBlur={handleBlur}
-                        className="cursor-pointer " />
+                          className="cursor-pointer " />
                         <label htmlFor="Under 16" className="text-sm">under 16</label>
                       </div>
-                      <div className="flex items-center space-x-3">
-                        <input type="checkbox" 
+                      <div className="flex md:flex-col xl:flex-row items-center space-x-3">
+                        <input type="checkbox"
                           name="age_cutoff"
                           id="age_cutoff"
                           onChange={handleChange}
                           onBlur={handleBlur}
-                        className="cursor-pointer" />
+                          className="cursor-pointer" />
                         <label htmlFor="Under 17" className="text-sm">Under 17</label>
                       </div>
-                      <div className="flex items-center space-x-3">
-                        <input type="checkbox" 
+                      <div className="flex md:flex-col xl:flex-row items-center space-x-3">
+                        <input type="checkbox"
                           name="age_cutoff"
                           id="age_cutoff"
                           onChange={handleChange}
                           onBlur={handleBlur}
-                        className="cursor-pointer " />
+                          className="cursor-pointer " />
                         <label htmlFor="Under 19" className="text-sm">Under 19</label>
                       </div>
-                      <div className="flex items-center space-x-3">
+                    </div>
+                    <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 md:items-center sm:space-x-[2.45rem]">
+                      <div className="flex md:flex-col xl:flex-row items-center space-x-3">
                         <input type="checkbox" 
                           name="age_cutoff"
                           id="age_cutoff"
@@ -374,24 +376,22 @@ function Tournamentregistration() {
                         className="cursor-pointer" />
                         <label htmlFor="Under 21" className="text-sm">Under 21</label>
                       </div>
-                    </div>
-                    <div className="flex items-center space-x-10">
-                      <div className="flex items-center space-x-3">
-                        <input type="checkbox" 
+                      <div className="flex md:flex-col xl:flex-row items-center space-x-3">
+                        <input type="checkbox"
                           name="age_cutoff"
                           id="age_cutoff"
                           onChange={handleChange}
                           onBlur={handleBlur}
-                        className="cursor-pointer" />
+                          className="cursor-pointer" />
                         <label htmlFor="Under 25" className="text-sm">Under 25</label>
                       </div>
-                      <div className="flex items-center space-x-3">
-                        <input type="checkbox" 
+                      <div className="flex md:flex-col xl:flex-row items-center space-x-3">
+                        <input type="checkbox"
                           name="age_cutoff"
                           id="age_cutoff"
                           onChange={handleChange}
                           onBlur={handleBlur}
-                        className="cursor-pointer" />
+                          className="cursor-pointer" />
                         <label htmlFor="Under 27" className="text-sm">Under 27</label>
                       </div>
                     </div>
