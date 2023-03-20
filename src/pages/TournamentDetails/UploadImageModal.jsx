@@ -82,7 +82,7 @@ export default function UploadImageModal({open, handleOpen}) {
           open={open}
           onClose={handleOpen}
         >
-          <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-gray-700 shadow-xl rounded-lg ">
+          <Modal.Description className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-gray-700 shadow-xl rounded-lg ">
             <Modal.Title
               as="h3"
               className="mb-4 text-xl font-medium text-gray-900 dark:text-white"
@@ -134,7 +134,7 @@ export default function UploadImageModal({open, handleOpen}) {
                     </form>
                 </div>
             </Modal.Description>
-          </div>
+          </Modal.Description>
         </Modal>
     );
 }

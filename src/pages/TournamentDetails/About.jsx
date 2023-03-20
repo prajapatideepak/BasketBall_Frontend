@@ -4,7 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Button from '../../Component/Button'
 
 
-const About = ({Tournamentdetails}) => {
+const About = ({tournamentdetails}) => {
   const isPublicView = true;
   const params = useParams();
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ const About = ({Tournamentdetails}) => {
                 <label className="mb-2 text-xs xs:text-sm md:text-base text-gray-400">Start Date</label>
                 <div className="border-2 border-orange-100 px-2 py-2 my-2 rounded-lg bg-white capitalize font-medium text-xs xs:text-sm md:text-base">
                   <p>
-                    {Tournamentdetails.starting_date == '' ? '--' : Tournamentdetails.starting_date}
+                    {tournamentdetails.starting_date == '' ? '--' : tournamentdetails.starting_date}
                   </p>
                 </div>
               </div>
@@ -32,7 +32,7 @@ const About = ({Tournamentdetails}) => {
                 <label className="mb-2 text-gray-400 text-xs xs:text-sm md:text-base">End Date</label>
                 <div className="border-2 border-orange-100 px-2 py-2 my-2 rounded-lg bg-white capitalize font-medium text-xs xs:text-sm md:text-base">
                   <p>
-                    {Tournamentdetails.ending_date == '' ? '--' : Tournamentdetails.ending_date}
+                    {tournamentdetails.ending_date == '' ? '--' : tournamentdetails.ending_date}
                   </p>
                 </div>
               </div>
@@ -43,7 +43,7 @@ const About = ({Tournamentdetails}) => {
               </label>
               <div className="border-2 border-orange-100 px-2 py-2 rounded-lg bg-white capitalize font-medium text-xs xs:text-sm md:text-base">
                 <p>
-                  {Tournamentdetails.city_name == '' ? '--' : Tournamentdetails.city_name}
+                  {tournamentdetails.city_name == '' ? '--' : tournamentdetails.city_name}
                 </p>
               </div>
             </div>
@@ -56,7 +56,7 @@ const About = ({Tournamentdetails}) => {
               </label>
               <div className="border-2 border-orange-100 px-2 py-2 rounded-lg bg-white capitalize font-medium text-xs xs:text-sm md:text-base">
                 <p>
-                  {Tournamentdetails.tournament_category == '' ? '--' : Tournamentdetails.tournament_category}
+                  {tournamentdetails.tournament_category == '' ? '--' : tournamentdetails.tournament_category}
                 </p>
               </div>
             </div>
@@ -66,7 +66,7 @@ const About = ({Tournamentdetails}) => {
               </label>
               <div className="border-2 border-orange-100 px-2 py-2 rounded-lg bg-white capitalize font-medium text-xs xs:text-sm md:text-base">
                 <p>
-                  {Tournamentdetails.tournament_level == '' ? '--' : Tournamentdetails.tournament_level}
+                  {tournamentdetails.tournament_level == '' ? '--' : tournamentdetails.tournament_level}
                 </p>
               </div>
             </div>
@@ -80,13 +80,13 @@ const About = ({Tournamentdetails}) => {
                 </label>
                 <div className="border-2 border-orange-100 px-2 py-2 rounded-lg bg-white capitalize font-medium text-xs xs:text-sm md:text-base">
                   <p>
-                    {Tournamentdetails.tournament_type == '' ? '--' : Tournamentdetails.tournament_type}
+                    {tournamentdetails.tournament_type == '' ? '--' : tournamentdetails.tournament_type}
                   </p>
                 </div>
               </div>
             </div>
             {
-              Tournamentdetails.age_restriction
+              tournamentdetails.age_restriction
               ?
                 <div className="flex flex-col w-full">
                   <label className="mb-2 text-gray-400 text-xs xs:text-sm md:text-base">
@@ -94,7 +94,7 @@ const About = ({Tournamentdetails}) => {
                   </label>
                   <div className="border-2 border-orange-100 px-2 py-2 rounded-lg bg-white capitalize font-medium text-xs xs:text-sm md:text-base">
                     <p>
-                      {Tournamentdetails.age_cutoff == '' ? '--' : Tournamentdetails.age_cutoff}
+                      {tournamentdetails.age_cutoff == '' ? '--' : tournamentdetails.age_cutoff}
                     </p>
                   </div>
                 </div>
@@ -107,7 +107,7 @@ const About = ({Tournamentdetails}) => {
             <div className='w-full flex flex-col'>
               <label className="mb-2 text-gray-400 text-xs xs:text-sm md:text-base">About Tournament</label>
               <div className={`border-2 border-orange-100 px-2 py-2 capitalize font-medium rounded-lg bg-white overflow-y-auto text-xs xs:text-sm md:text-base`}>
-                {Tournamentdetails.about_tournament}
+                {tournamentdetails.about_tournament}
               </div>
             </div>
           </div>
@@ -120,9 +120,9 @@ const About = ({Tournamentdetails}) => {
             </div>
             <div className="flex flex-col  items-center " >
               {
-                Tournamentdetails.referee.length > 0
+                tournamentdetails.referee.length > 0
                   ?
-                  Tournamentdetails.referee.map((item, index) => {
+                  tournamentdetails.referee.map((item, index) => {
                     return (
                       <div key={index} className="flex flex-col lg:flex-row items-center w-full gap-6 py-4 ">
                         <div className="flex flex-col w-full">
