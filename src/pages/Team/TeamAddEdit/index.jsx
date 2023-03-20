@@ -84,7 +84,7 @@ function TeamAddEdit() {
         fb.append("team_logo", logo);
         RegisterTeam.mutate(fb);
       } catch (err) {
-        console.log(err); 
+        console.log(err);
       }
     },
   });
@@ -185,6 +185,7 @@ function TeamAddEdit() {
     setSelectedPlayers(location?.state?.isEdit ? location?.state?.players : []);
   }, []);
 
+  console.log(logo);
   return (
     <section className="min-h-screen-fit">
       <div className="heading-container flex justify-center items-center h-24 sm:h-32 md:h-48">
@@ -232,7 +233,6 @@ function TeamAddEdit() {
                   name="team_l"
                   id="team_logo"
                   accept=".png, .jpg, .jpeg"
-                  value={values.team_logo}
                   onChange={(e) => handleImageUpload(e)}
                 />
               </div>
