@@ -70,9 +70,6 @@ function Tournamentregistration() {
     sponsor_mobile: location?.state?.isEdit
       ? location?.state?.sponsor_mobile
       : "",
-    age_restriction: location?.state?.isEdit
-      ? location?.state?.age_restriction
-      : "no",
     age_cutoff: location?.state?.isEdit
       ? location?.state?.age_cutoff
       : "Under 21",
@@ -92,6 +89,7 @@ function Tournamentregistration() {
     tournament_category: Yup.string().required(
       "Tournament Category is required"
     ),
+    age_cutoff: Yup.string().required("Age_Cutoff is required"),
     tournament_level: Yup.string().required("Tournament Level is required"),
     referee_name: Yup.string()
       .matches(/^[a-zA-Z]+$/, "Please enter only characters")
@@ -158,7 +156,7 @@ function Tournamentregistration() {
             <Heading margin={true} text={location?.state?.isEdit ? 'Edit Tournament' : 'Tournament Registration'} />
           </div>
         </div>
-        <div className='mx-auto px-10 mb-10 sm:px-20  md:px-20 md:py-0 lg:px-24 xl:px-28 2xl:px-32'>
+        <div className='mx-auto px-5 mb-10 sm:px-10 md:py-0 lg:px-14 xl:px-28 2xl:px-32'>
           <form action="" onSubmit={handleSubmit}>
             {/* -----------------------Tounament_Details---------------------------*/}
             <div className=''>
@@ -197,7 +195,7 @@ function Tournamentregistration() {
                 />
               </div>
             </div>
-            {/* Starting Date && Ending Date && Tournament Type */}
+            {/* Starting Date && Ending Date && City Name */}
             <div className="flex flex-col md:flex-row  gap-6 my-7 ">
               <div className="flex space-x-5  w-full ">
                 <div className="w-full">
@@ -240,100 +238,6 @@ function Tournamentregistration() {
                 </div>
               </div>
               <div className="flex flex-col w-full">
-                <div className="flex flex-col w-full">
-                  <label className="mb-2">Tournament Category *</label>
-                  <select name=""
-                    className="w-full cursor-pointer px-2 rounded-lg bg-white border-2 outline-blue-200 border-gray-200 py-3 text-sm"
-                    id="tournament_category"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                  >
-                    <option value="">--Tournament Category--</option>
-                    <option value="Only For Girls">Only For Girls</option>
-                    <option value="Only For Boys">Only For Boys</option>
-                    <option value="Only For Men">Only For Men</option>
-                    <option value="Only For Women">Only For Women</option>
-                    <option value="Mixed">Mixed</option>
-
-                  </select>
-                </div>
-                {
-                  errors.tournament_category && touched.tournament_category
-                    ?
-                    <small className='text-red-600 mt-2'>{errors.tournament_category}</small>
-                    :
-                    null
-                }
-              </div>
-            </div>
-            {/* Tournament Category && Tournament Level */}
-            <div className="flex flex-col md:flex-row  2 gap-6 my-7 ">
-              <div className="flex flex-col w-full">
-                <label className="mb-2">Tournament Level *</label>
-                <select name=""
-                  className="w-full cursor-pointer px-2 rounded-lg bg-white border-2 outline-blue-200 border-gray-200 py-3 text-sm"
-                  id="tournament_level"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                >
-                  <option value="">--Tournament Level--</option>
-                  <option value="International">International</option>
-                  <option value="National">National</option>
-                  <option value="State">State</option>
-                  <option value="City">City</option>
-                  <option value="Local">Local</option>
-                  <option value="Friendly">Friendly</option>
-                </select>
-                {
-                  errors.tournament_level && touched.tournament_level
-                    ?
-                    <small className='text-red-600 mt-2'>{errors.tournament_level}</small>
-                    :
-                    null
-                }
-              </div>
-              <div className="flex space-x-5 items-center  w-full ">
-                <div className="flex flex-col w-full">
-                  <label className="mb-2">Age cutoff</label>
-                  <select name=""
-                    className="w-full cursor-pointer  px-2 rounded-lg bg-white border-2 outline-blue-200 border-gray-200 py-3 text-sm"
-                    id="age_cutoff"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                  >
-                    <option value="Under 14">Under 14</option>
-                    <option value="Under 16">Under 16</option>
-                    <option value="Under 17">Under 17</option>
-                    <option value="Under 19">Under 19</option>
-                    <option value="Under 21">Under 21</option>
-                    <option value="Under 25">Under 25</option>
-                    <option value="Under 27">Under 27</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            {/* City name && Prize Money */}
-            <div className="flex flex-col md:flex-row  2 gap-6 my-7 ">
-              <div className="flex flex-col w-full">
-                <label className="mb-2">Prize</label>
-                <input
-                  className="w-full outline-blue-200 rounded-lg border-2 border-gray-200 py-3 px-3 text-sm"
-                  placeholder="Enter Prize"
-                  type="text"
-                  name="prize"
-                  id="prize"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-                {
-                  errors.prize && touched.prize
-                    ?
-                    <small className='text-red-600 mt-2'>{errors.prize}</small>
-                    :
-                    null
-                }
-              </div>
-              <div className="flex flex-col w-full">
                 <label className="mb-2">City Name *</label>
                 <input
                   className="w-full outline-blue-200 rounded-lg border-2 border-gray-200 py-3 px-3 text-sm"
@@ -352,13 +256,203 @@ function Tournamentregistration() {
                     null
                 }
               </div>
-            </div>
-            {/*  age_restriction && age_cutoff */}
-            <div className="flex flex-col md:flex-row  gap-6 my-7 ">
 
             </div>
+            {/* Tournament Category && Age Cutoff */}
+            <div className="flex flex-col md:flex-row  2 gap-6 my-7 ">
+              <div className="flex flex-col w-full">
+                <label className="mb-2">Tournament Category *</label>
+                <div className=" border-2 border-gray-200 rounded-md px-6 py-3 bg-white">
+                  <div className="space-y-2 sm:space-y-6 md:space-y-2 lg:space-y-8">
+                    <div className="flex flex-col sm:flex-row md:flex-col lg:flex-row xl:items-center justify-start space-y-2 md:space-x-0 sm:space-x-12 lg:space-y-0 lg:space-x-7 xl:space-x-10">
+                      <div className="flex  lg:flex-col xl:flex-row  items-center space-x-3">
+                        <input type="checkbox"
+                          name="tournament_category"
+                          id="tournament_category"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          className="cursor-pointer" />
+                        <label htmlFor="Only for girls" className="text-sm ">Only For Girls</label>
+                      </div>
+                      <div className="flex  lg:flex-col xl:flex-row items-center space-x-3">
+                        <input type="checkbox"
+                          name="tournament_category"
+                          id="tournament_category"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          className="cursor-pointer " />
+                        <label htmlFor="Only for boys" className="text-sm ">Only For Boys</label>
+                      </div>
+                      <div className="flex lg:flex-col xl:flex-row  items-center space-x-3">
+                        <input type="checkbox"
+                          name="tournament_category"
+                          id="tournament_category"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          className="cursor-pointer" />
+                        <label htmlFor="" className="text-sm ">Only For Mens</label>
+                      </div>
+                    </div>
+                    <div className="flex flex-col sm:flex-row md:flex-col lg:flex-row xl:items-center justify-start space-y-2 md:space-x-0 sm:space-x-7 lg:space-x-5 lg:space-y-0 xl:space-x-[1.2rem]">
+                      <div className="flex lg:flex-col xl:flex-row  items-center space-x-3">
+                        <input type="checkbox"
+                          name="tournament_category"
+                          id="tournament_category"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          className="cursor-pointer " />
+                        <label htmlFor="" className="text-sm ">Only For Women</label>
+                      </div>
+                      <div className="flex lg:flex-col xl:flex-row  items-center space-x-3">
+                        <input type="checkbox"
+                          name="tournament_category"
+                          id="tournament_category"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          className="cursor-pointer" />
+                        <label htmlFor="" className="text-sm ">Mixed</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {
+                  errors.tournament_category && touched.tournament_category
+                    ?
+                    <small className='text-red-600 mt-2'>{errors.tournament_category}</small>
+                    :
+                    null
+                }
+              </div>
+              <div className="flex flex-col w-full ">
+                <label className="mb-2">Age Cutoff *</label>
+                <div className="flex flex-col w-full border-2 rounded-md py-3 px-6 md:px-5 bg-white">
+                  <div className="space-y-2 sm:space-y-6">
+                    <div className="flex flex-col sm:flex-row md:items-center space-y-2 sm:space-x-10">
+                      <div className="flex md:flex-col xl:flex-row items-center space-x-3">
+                        <input type="checkbox"
+                          name="age_cutoff"
+                          id="age_cutoff"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          className="cursor-pointer" />
+                        <label htmlFor="Under 14" className="text-sm">Under 14</label>
+                      </div>
+                      <div className="flex md:flex-col xl:flex-row items-center space-x-3">
+                        <input type="checkbox"
+                          name="age_cutoff"
+                          id="age_cutoff"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          className="cursor-pointer " />
+                        <label htmlFor="Under 16" className="text-sm">under 16</label>
+                      </div>
+                      <div className="flex md:flex-col xl:flex-row items-center space-x-3">
+                        <input type="checkbox"
+                          name="age_cutoff"
+                          id="age_cutoff"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          className="cursor-pointer" />
+                        <label htmlFor="Under 17" className="text-sm">Under 17</label>
+                      </div>
+                      <div className="flex md:flex-col xl:flex-row items-center space-x-3">
+                        <input type="checkbox"
+                          name="age_cutoff"
+                          id="age_cutoff"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          className="cursor-pointer " />
+                        <label htmlFor="Under 19" className="text-sm">Under 19</label>
+                      </div>
+                    </div>
+                    <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 md:items-center sm:space-x-[2.45rem]">
+                      <div className="flex md:flex-col xl:flex-row items-center space-x-3">
+                        <input type="checkbox" 
+                          name="age_cutoff"
+                          id="age_cutoff"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          checked={true}
+                        className="cursor-pointer" />
+                        <label htmlFor="Under 21" className="text-sm">Under 21</label>
+                      </div>
+                      <div className="flex md:flex-col xl:flex-row items-center space-x-3">
+                        <input type="checkbox"
+                          name="age_cutoff"
+                          id="age_cutoff"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          className="cursor-pointer" />
+                        <label htmlFor="Under 25" className="text-sm">Under 25</label>
+                      </div>
+                      <div className="flex md:flex-col xl:flex-row items-center space-x-3">
+                        <input type="checkbox"
+                          name="age_cutoff"
+                          id="age_cutoff"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          className="cursor-pointer" />
+                        <label htmlFor="Under 27" className="text-sm">Under 27</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {
+                  errors.age_cutoff && touched.age_cutoff
+                    ?
+                    <small className='text-red-600 mt-2'>{errors.age_cutoff}</small>
+                    :
+                    null
+                }
+              </div>
+            </div>
+            {/* Tournament Lavel && Age Prize */}
+            <div className="flex flex-col md:flex-row  gap-6 my-7 ">
+              <div className="flex space-x-5  w-full ">
+                <div className="flex flex-col w-full">
+                  <label className="mb-2">Tournament_level *</label>
+                  <input
+                    className="w-full outline-blue-200 rounded-lg border-2 border-gray-200 py-3 px-3 text-sm"
+                    placeholder="Enter City Name"
+                    type="text"
+                    name="tournament_level"
+                    id="tournament_level"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                  {
+                    errors.tournament_level && touched.tournament_level
+                      ?
+                      <small className='text-red-600 mt-2'>{errors.tournament_level}</small>
+                      :
+                      null
+                  }
+                </div>
+                <div className="flex flex-col w-full">
+                  <label className="mb-2">Prize</label>
+                  <input
+                    className="w-full outline-blue-200 rounded-lg border-2 border-gray-200 py-3 px-3 text-sm"
+                    placeholder="Enter Prize"
+                    type="text"
+                    name="prize"
+                    id="prize"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                  {
+                    errors.prize && touched.prize
+                      ?
+                      <small className='text-red-600 mt-2'>{errors.prize}</small>
+                      :
+                      null
+                  }
+                </div>
+
+
+              </div>
+            </div>
             {/* About Tournament */}
-            <div className='flex flex-1'>
+            <div className='flex w-full'>
               <div className='w-full flex flex-col'>
                 <label className="mb-2">About Tournament</label>
                 <textarea
@@ -430,130 +524,130 @@ function Tournamentregistration() {
                     <div
                       className="flex justify-center items-center lg:justify-end lg:items-end w-full"
                       onClick={handleaddreferee}>
-                        <div
-                          className="bg-green-600 border-2 hover:border-green-600 hover:text-green-600 relative inline-flex items-center justify-center px-3 py-2 overflow-hidden text-white
+                      <div
+                        className="bg-green-600 border-2 hover:border-green-600 hover:text-green-600 relative inline-flex items-center justify-center px-3 py-2 overflow-hidden text-white
                                                      rounded-lg cursor-pointer group"
-                        >
-                          <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-white rounded-lg group-hover:w-full group-hover:h-56"></span>
-                          <span className="relative flex items-center space-x-2 ">
-                            <FaUserPlus className="text-xl" />
-                            <h1 className="text-sm">Add Referee</h1>
-                          </span>
-                        </div>
+                      >
+                        <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-white rounded-lg group-hover:w-full group-hover:h-56"></span>
+                        <span className="relative flex items-center space-x-2 ">
+                          <FaUserPlus className="text-xl" />
+                          <h1 className="text-sm">Add Referee</h1>
+                        </span>
+                      </div>
                     </div>
-              )}
-            </div>
+                  )}
+                </div>
               ))}
-        </div>
-
-        {/* -----------------------Sponsor_Details---------------------------*/}
-        <div className="my-5">
-          <div className="py-5">
-            <h3 className="text-2xl font-semibold text-[#ee6730]">
-              Sponsor Information:
-            </h3>
-          </div>
-          {sponsorlist.map((singlesponsor, index) => (
-            <div className="flex flex-col  items-center">
-              <div className="flex flex-col lg:flex-row items-center w-full gap-7 py-4">
-                {/* Sponsor_Name && Sponsor_Logo */}
-                <div className="flex flex-col w-full">
-                  <label className="mb-2">Sponsor Name *</label>
-                  <input
-                    className="w-full outline-blue-200 rounded-lg border-2 border-gray-200 py-3 px-3 text-sm"
-                    placeholder="Enter Tournament Name"
-                    type="text"
-                    name="sponsor_name"
-                    id="sponsor_name"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                  />
-                  {errors.sponsor_name && touched.sponsor_name ? (
-                    <small className="text-red-600 mt-2">
-                      {errors.sponsor_name}
-                    </small>
-                  ) : null}
-                </div>
-                <div className="flex flex-col w-full">
-                  <label className="mb-2">
-                    Choose Logo ( PNG, JPG, JPEG )
-                  </label>
-                  <input
-                    className="w-full cursor-pointer rounded-lg bg-white border-2 border-gray-200 py-[9px] px-3 text-sm"
-                    type="file"
-                    name="sponsor_logo"
-                    id="sponsor_logo"
-                    accept=".png, .jpg, .jpeg"
-                    onChange={handleChange}
-                  />
-                </div>
-                {sponsorlist.length > 1 && (
-                  <div
-                    onClick={() => handleremovesponsor(index)}
-                    className=" lg:mt-8  bg-red-500 hover:bg-red-600 text-xs  cursor-pointer rounded-lg px-2 py-2 text-white"
-                  >
-                    <MdDelete className="text-xl text-white" />
-                  </div>
-                )}
-              </div>
-              {sponsorlist.length - 1 === index && (
-                <div
-                  className="flex justify-center items-center lg:justify-end lg:items-end w-full"
-                  onClick={handleaddsponsor}
-                >
-                  <div
-                    className="bg-green-600 border-2 hover:border-green-600 hover:text-green-600 relative inline-flex items-center justify-center px-3 py-2 overflow-hidden text-white
-                                                     rounded-lg cursor-pointer group"
-                  >
-                    <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-white rounded-lg group-hover:w-full group-hover:h-56"></span>
-                    <span className="relative flex items-center space-x-2 ">
-                      <FaUserPlus className="text-xl" />
-                      <h1 className="text-sm">Add Sponsor</h1>
-                    </span>
-                  </div>
-                </div>
-              )}
             </div>
-          ))}
-        </div>
 
-        {/* Clear_Button && Submit_Button */}
-        <div className="w-full flex justify-end mt-5 sm:mt-10">
-          {location?.state?.isEdit ? (
-            <button
-              type="button"
-              className="bg-[#ee6730] relative inline-flex items-center justify-center px-7 py-2 overflow-hidden text-white rounded-lg cursor-pointer group mr-3"
-              onClick={() => navigate(-1)}
-            >
-              <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-slate-900 rounded-lg group-hover:w-full group-hover:h-56"></span>
-              <span className="relative">Cancel</span>
-            </button>
-          ) : (
-            <button
-              type="reset"
-              className="bg-[#ee6730] relative inline-flex items-center justify-center px-8 py-2 overflow-hidden text-white rounded-lg cursor-pointer group mr-3"
-              onClick={() => {
-                resetForm();
-                setSelectedPlayers([]);
-              }}
-            >
-              <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-slate-900 rounded-lg group-hover:w-full group-hover:h-56"></span>
-              <span className="relative">Clear</span>
-            </button>
-          )}
-          <button
-            type="submit"
-            className="bg-slate-900 relative inline-flex items-center justify-center px-6 py-2 overflow-hidden text-white rounded-lg cursor-pointer group"
-            onClick={handleSubmit}
-          >
-            <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#ee6730] rounded-lg group-hover:w-full group-hover:h-56"></span>
-            <span className="relative">
-              {location?.state?.isEdit ? "UPDATE" : "SUBMIT"}
-            </span>
-          </button>
+            {/* -----------------------Sponsor_Details---------------------------*/}
+            <div className="my-5">
+              <div className="py-5">
+                <h3 className="text-2xl font-semibold text-[#ee6730]">
+                  Sponsor Information:
+                </h3>
+              </div>
+              {sponsorlist.map((singlesponsor, index) => (
+                <div className="flex flex-col  items-center">
+                  <div className="flex flex-col lg:flex-row items-center w-full gap-7 py-4">
+                    {/* Sponsor_Name && Sponsor_Logo */}
+                    <div className="flex flex-col w-full">
+                      <label className="mb-2">Sponsor Name *</label>
+                      <input
+                        className="w-full outline-blue-200 rounded-lg border-2 border-gray-200 py-3 px-3 text-sm"
+                        placeholder="Enter Tournament Name"
+                        type="text"
+                        name="sponsor_name"
+                        id="sponsor_name"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                      />
+                      {errors.sponsor_name && touched.sponsor_name ? (
+                        <small className="text-red-600 mt-2">
+                          {errors.sponsor_name}
+                        </small>
+                      ) : null}
+                    </div>
+                    <div className="flex flex-col w-full">
+                      <label className="mb-2">
+                        Choose Logo ( PNG, JPG, JPEG )
+                      </label>
+                      <input
+                        className="w-full cursor-pointer rounded-lg bg-white border-2 border-gray-200 py-[9px] px-3 text-sm"
+                        type="file"
+                        name="sponsor_logo"
+                        id="sponsor_logo"
+                        accept=".png, .jpg, .jpeg"
+                        onChange={handleChange}
+                      />
+                    </div>
+                    {sponsorlist.length > 1 && (
+                      <div
+                        onClick={() => handleremovesponsor(index)}
+                        className=" lg:mt-8  bg-red-500 hover:bg-red-600 text-xs  cursor-pointer rounded-lg px-2 py-2 text-white"
+                      >
+                        <MdDelete className="text-xl text-white" />
+                      </div>
+                    )}
+                  </div>
+                  {sponsorlist.length - 1 === index && (
+                    <div
+                      className="flex justify-center items-center lg:justify-end lg:items-end w-full"
+                      onClick={handleaddsponsor}
+                    >
+                      <div
+                        className="bg-green-600 border-2 hover:border-green-600 hover:text-green-600 relative inline-flex items-center justify-center px-3 py-2 overflow-hidden text-white
+                                                     rounded-lg cursor-pointer group"
+                      >
+                        <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-white rounded-lg group-hover:w-full group-hover:h-56"></span>
+                        <span className="relative flex items-center space-x-2 ">
+                          <FaUserPlus className="text-xl" />
+                          <h1 className="text-sm">Add Sponsor</h1>
+                        </span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            {/* Clear_Button && Submit_Button */}
+            <div className="w-full flex justify-end mt-5 sm:mt-10">
+              {location?.state?.isEdit ? (
+                <button
+                  type="button"
+                  className="bg-[#ee6730] relative inline-flex items-center justify-center px-7 py-2 overflow-hidden text-white rounded-lg cursor-pointer group mr-3"
+                  onClick={() => navigate(-1)}
+                >
+                  <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-slate-900 rounded-lg group-hover:w-full group-hover:h-56"></span>
+                  <span className="relative">Cancel</span>
+                </button>
+              ) : (
+                <button
+                  type="reset"
+                  className="bg-[#ee6730] relative inline-flex items-center justify-center px-8 py-2 overflow-hidden text-white rounded-lg cursor-pointer group mr-3"
+                  onClick={() => {
+                    resetForm();
+                    setSelectedPlayers([]);
+                  }}
+                >
+                  <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-slate-900 rounded-lg group-hover:w-full group-hover:h-56"></span>
+                  <span className="relative">Clear</span>
+                </button>
+              )}
+              <button
+                type="submit"
+                className="bg-slate-900 relative inline-flex items-center justify-center px-6 py-2 overflow-hidden text-white rounded-lg cursor-pointer group"
+                onClick={handleSubmit}
+              >
+                <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#ee6730] rounded-lg group-hover:w-full group-hover:h-56"></span>
+                <span className="relative">
+                  {location?.state?.isEdit ? "UPDATE" : "SUBMIT"}
+                </span>
+              </button>
+            </div>
+          </form>
         </div>
-      </form>
-    </div>
       </section>
     </>
   );
