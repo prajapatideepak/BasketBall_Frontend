@@ -21,6 +21,7 @@ import TeamProfileDetail from "../pages/Team/TeamProfileDetail";
 import PageNotFound from "../pages/Error";
 import MatchDetails from "../pages/Matches/MatchDetails";
 import Scoreboard from "../pages/Scoreboard";
+import TeamRegister from "../pages/TournamentDetails/TeamRegister";
 
 const PrivateRoutes = () => {
   return (
@@ -47,6 +48,7 @@ const PrivateRoutes = () => {
         />
         <Route path="/tournaments" element={<Tournaments />} />
         <Route path="/Tournament-details/:id" element={<TournamentDetails />} />
+        <Route path="/team-register" element={<TeamRegister />} />
         <Route path="/match" element={<MatchsList />} />
         <Route path="/match-details/:id" element={<MatchDetails />} />
         <Route
