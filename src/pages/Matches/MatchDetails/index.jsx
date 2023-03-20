@@ -42,7 +42,7 @@ const MatchDetails = () => {
       <div className="relative bg-gradient-to-r  py-5 bg-clip-border   mx-auto  from-orange-700 via-current to-blue-600">
         {/* heading start here */}
         <div className=" text-center py-2 px-12 ">
-          <h1 className="text-xl sm:text-2xl md:text-3xl mt-10 md:mt-5 lg:text-5xl uppercase leading-tight tracking-widest flex font-bold justify-center items-center  text-white opacity-40 w-fit mx-auto  ">
+          <h1 className="text-lg xs:text-3xl md:text-3xl mt-10 md:mt-5 lg:text-5xl uppercase leading-tight tracking-widest flex font-bold justify-center items-center  text-white opacity-40  mx-auto  ">
             corporate Basketball league{" "}
           </h1>
         </div>
@@ -111,7 +111,7 @@ const MatchDetails = () => {
               className="xxs:w-14 xxs:h-14 xs:w-20 xs:h-20 md:w-32 md:h-32 mx-auto  bg-white  object-cover p-1  shadow-lg border border-gray-300 rounded-full  "
               src="/CBL_Images/logo3.png"
             />
-            <h2 className="text-lg md:text-xl text-white font-semibold">
+            <h2 className="xss:text-xs xs:text-lg md:text-xl text-white font-semibold">
               Champak ki Sonu
             </h2>
           </div>
@@ -133,7 +133,7 @@ const MatchDetails = () => {
                   opacity: 1,
                 }}
                 transition={{
-                  duration: 1.3,
+                  duration: 0.4,
                 }}
                 key={index}
                 className="inline-block transition-all px-4 py-1 cursor-pointer rounded-full shadow-xl"

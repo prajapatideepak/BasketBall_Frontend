@@ -8,50 +8,18 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 import Select from "react-select";
 import Heading from "../../../Component/Heading";
+import { useDispatch, useSelector } from "react-redux";
+import { TeamInfoSchema } from "../../../models/TeamInfoModel";
+import { useRegisterTeam } from "../../../hooks/usePost";
 
 function TeamAddEdit() {
+  const RegisterTeam = useRegisterTeam();
+
   const navigate = useNavigate();
   const location = useLocation();
-
-  const initialValues = {
-    team_name: location?.state?.isEdit ? location?.state?.team_name : "",
-    team_logo: location?.state?.isEdit ? location?.state?.team_logo : "",
-    about_team: location?.state?.isEdit ? location?.state?.about_team : "",
-    coach_name: location?.state?.isEdit ? location?.state?.coach_name : "",
-    coach_mobile: location?.state?.isEdit ? location?.state?.coach_mobile : "",
-    assistant_coach_name: location?.state?.isEdit
-      ? location?.state?.assistant_coach_name
-      : "",
-    assistant_coach_mobile: location?.state?.isEdit
-      ? location?.state?.assistant_coach_mobile
-      : "",
-    captain: location?.state?.isEdit ? location?.state?.captain : "",
-  };
-
-  const validationSchema = Yup.object({
-    team_name: Yup.string()
-      .matches(/^[a-zA-Z ]+$/, "Please enter only characters")
-      .min(2, "Team name must be at least 2 characters")
-      .max(25, "Team name should not be more than 25 characters")
-      .required("Name is required"),
-    coach_name: Yup.string()
-      .matches(/^[a-zA-Z ]+$/, "Please enter only characters")
-      .min(2, "Coach name must be at least 2 characters")
-      .max(25, "Coach name should not be more than 25 characters"),
-    coach_mobile: Yup.string()
-      .matches(/^[0-9]+$/, "Please enter only numbers")
-      .min(10, "Mobile number should be at least 10 digits")
-      .max(10, "Mobile number should be at least 10 digits"),
-    assistant_coach_name: Yup.string()
-      .matches(/^[a-zA-Z ]+$/, "Please enter only characters")
-      .min(2, "Asst. Coach name must be at least 2 characters")
-      .max(25, "Asst. Coach name should not be more than 25 characters"),
-    assistant_coach_mobile: Yup.string()
-      .matches(/^[0-9]+$/, "Please enter only numbers")
-      .min(10, "Mobile number should be at least 10 digits")
-      .max(10, "Mobile number should be at least 10 digits"),
-  });
-
+  const dispatch = useDispatch();
+  const { TeamForm } = useSelector((state) => state.teamReducer);
+  const [logo, setLogo] = React.useState("");
   const customStyles = {
     control: (provided, state) => ({
       ...provided,
@@ -91,8 +59,8 @@ function TeamAddEdit() {
     handleChange,
     handleSubmit,
   } = useFormik({
-    validationSchema,
-    initialValues,
+    validationSchema: TeamInfoSchema,
+    initialValues: TeamForm.TeamInfo,
     onSubmit: (data) => {
       // //If captain not selected
       // if(data.captain.value == ''){
@@ -101,18 +69,27 @@ function TeamAddEdit() {
       // }
 
       //Can't select more than 12 players
-      if (selectedPlayers.length < 5) {
-        toast.error("Please select atleast 5 players");
-        return;
-      }
+      // if (selectedPlayers.length < 5) {
+      //   toast.error("Please select atleast 5 players");
+      //   return;
+      // }
 
       try {
+        const fb = new FormData();
+        let ok = JSON.stringify({
+          TeamInfo: data,
+          PlayerList: searchedPlayers,
+        });
+        fb.append("data", ok);
+        fb.append("team_logo", logo);
+        RegisterTeam.mutate(fb);
       } catch (err) {
-        console.log(err);
+        console.log(err); 
       }
     },
   });
 
+  console.log(RegisterTeam);
   const [searchedPlayers, setSearchedPlayers] = React.useState([
     {
       id: 1,
@@ -200,6 +177,10 @@ function TeamAddEdit() {
     );
   };
 
+  function handleImageUpload(e) {
+    setLogo(e.target.files[0]);
+  }
+
   React.useEffect(() => {
     setSelectedPlayers(location?.state?.isEdit ? location?.state?.players : []);
   }, []);
@@ -252,7 +233,7 @@ function TeamAddEdit() {
                   id="team_logo"
                   accept=".png, .jpg, .jpeg"
                   value={values.team_logo}
-                  onChange={handleChange}
+                  onChange={(e) => handleImageUpload(e)}
                 />
               </div>
             </div>
