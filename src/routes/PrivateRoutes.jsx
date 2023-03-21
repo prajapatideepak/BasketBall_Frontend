@@ -48,7 +48,7 @@ const PrivateRoutes = () => {
         />
         <Route path="/tournaments" element={<Tournaments />} />
         <Route path="/Tournament-details/:id" element={<TournamentDetails />} />
-        <Route path="/team-register" element={<TeamRegister />} />
+        {/* <Route path="/id : team-register" element={<TeamRegister />} /> */}
         <Route path="/match" element={<MatchsList />} />
         <Route path="/match-details/:id" element={<MatchDetails />} />
         <Route
