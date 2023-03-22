@@ -57,9 +57,9 @@ function TeamRegister() {
   }, []);
 
   const handleSelectTeam = (e) => {
-    const value = e.target.value
+    const id = e.target.id
     const checked = e.target.checked
-    let AllTeams = Teams.map(team => team.team_id == value ? { ...team, isChecked: checked } : team);
+    let AllTeams = Teams.map(team => team.team_id == id ? { ...team, isChecked: checked } : team);
     let SelectedTeam = AllTeams.filter(AllTeams => {
       return AllTeams.isChecked == true
     })
@@ -147,7 +147,7 @@ function TeamRegister() {
           <div className="flex flex-col sm:flex-row md:flex-col xl:flex-row items-center  sm:space-y-5 xl:space-y-0 py-5 xl:mt-10">
             <div className="flex flex-col justify-start sm:justify-center md:items-start px-2 items-start sm:items-center  rounded-md w-full">
               <label className="mb-2 text-lg md:text-xl lg:text-2xl text-start font-semibold">Category *</label>
-              <div className="grid grid-rows md:grid-flow-row lg:grid-flow-col gap-5 py-2 ">
+              <div className="grid grid-rows md:grid-flow-row lg:grid-cols-3 gap-5 py-2 ">
                 {
                   Teams.map((team, index) => {
                     return (
@@ -175,7 +175,7 @@ function TeamRegister() {
             <div className="flex flex-col justify-start sm:justify-center px-2 items-start sm:items-center md:items-start rounded-md w-full">
               <label className="mb-2 text-lg md:text-xl lg:text-2xl text-start font-semibold">Age_Cutoff *</label>
               <div className=" rounded-md ">
-                <div className="grid grid-rows md:grid-flow-row lg:grid-flow-col gap-5 py-2  ">
+                <div className="grid grid-rows md:grid-flow-row lg:grid-cols-3 gap-5 py-2 ">
                   {
                     Teams.map((team, index) => {
                       return (
@@ -214,14 +214,15 @@ function TeamRegister() {
                     Teams.map((team, index) => {
                       return (
                         <div key={index}
-                          className='flex items-center space-x-5 justify-start font-normal px-5 w-full py-5 lg:py-6 rounded-lg cursor-pointer bg-white hover:scale-105 duration-300 shadow-md my-3'>
-                          <div className='text-center text-[8px] sm:text-[9.5px] md:text-[12px] 2xl:text-base '>
-                            <input type="checkbox"
-                              onChange={handleSelectTeam}
+                          id={team.team_id}
+                          onClick={handleSelectTeam}
+                          className='flex items-center space-x-5 xl:space-x-2 justify-start font-normal px-5  w-full py-5 lg:py-6 rounded-lg cursor-pointer bg-white hover:scale-105 duration-300 shadow-md my-3'>
+                          {/* <div className='text-center text-[8px] sm:text-[9.5px] md:text-[12px] 2xl:text-base '>
+                            <input type="radio"
                               checked={team.isChecked || false}
                               value={team.team_id}
                               className='cursor-pointer' />
-                          </div>
+                          </div> */}
                           <div className='w-16 lg:w-20 flex justify-center items-center'>
                             <img src={team.team_logo} alt="" className='rounded-full border-[3px] border-gray-500 shadow-sm md:w-14' />
                           </div>
@@ -242,8 +243,8 @@ function TeamRegister() {
             <h1 className=' font-semibold text-lg md:text-2xl'>
               Player List
             </h1>
-            <div className='md:px-5 py-2 rounded-md bg-white shadow-md my-5 px-2 '>
-              <ul className='flex md:px-2 2xl:px-10 justify-between py-[10px]  rounded-md text-black font-medium '>
+            <div className='md:px-5 py-2 rounded-md my-5 px-2 '>
+              <ul className='flex md:px-2 2xl:px-10 justify-between bg-gray-300 py-[10px]  rounded-md text-black font-medium '>
                 {
                   TeamPlayers.length > 0 ?
                     <li className='w-20 text-center flex justify-center items-center space-x-2  '>
@@ -253,17 +254,17 @@ function TeamRegister() {
                     :
                     null
                 }
-                <li className='w-10 text-center text-xs  sm:text-[9.5px] md:text-[12px] lg:text-base xl:text-lg '>Sr.No</li>
-                <li className='w-32 text-center text-xs  sm:text-[9.5px] md:text-[12px] lg:text-base xl:text-lg '>Name</li>
-                <li className='w-10 text-center text-xs  sm:text-[9.5px] md:text-[12px] lg:text-base xl:text-lg '>Age</li>
-                <li className='w-32 text-center text-xs  sm:text-[9.5px] md:text-[12px] lg:text-base xl:text-lg '>Captain</li>
+                <li className='w-10 text-center text-xs  sm:text-[9.5px] md:text-[12px] lg:text-base 2xl:text-lg '>Sr.No</li>
+                <li className='w-32 text-center text-xs  sm:text-[9.5px] md:text-[12px] lg:text-base 2xl:text-lg '>Name</li>
+                <li className='w-10 text-center text-xs  sm:text-[9.5px] md:text-[12px] lg:text-base 2xl:text-lg '>Age</li>
+                <li className='w-32 text-center text-xs  sm:text-[9.5px] md:text-[12px] lg:text-base 2xl:text-lg '>Captain</li>
               </ul>
               <div className='overflow-y-auto  overflow-hidden'>
                 {
                   TeamPlayers.length > 0 ?
                     TeamPlayers.map((player, i) => {
                       return (
-                        <ul key={i} className='flex px-1 items-center space-x-2 justify-between font-normal md:px-2 2xl:px-10 py-2 md:py-5 bg-gray-200 rounded-lg cursor-pointer hover:bg-gray-100 my-3'>
+                        <ul key={i} className='flex px-1 items-center space-x-2 justify-between font-normal md:px-2 2xl:px-10 py-2 md:py-5 bg-white shadow-md rounded-lg cursor-pointer hover:bg-gray-100 my-3'>
                           <li className='w-20 text-center flex justify-center items-center  text-[8px] sm:text-[9.5px] md:text-[12px] 2xl:text-base '>
                             <input type="checkbox"
                               checked={player.isChecked == true ? true : false}
