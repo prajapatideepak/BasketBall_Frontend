@@ -64,7 +64,8 @@ function TournamentDetails() {
     // if(!tournamentdetails.is_registration_open){
     //   return toast.error('Registration closed');
     // }
-    navigate(`/${tournament.tournament_id}/team-register`)
+    // navigate(`/${tournament.tournament_id}/team-register`)
+    navigate(`/team-register`)
   }
 
   return (
