@@ -8,7 +8,6 @@ import {
 } from "react-router-dom";
 import PublicRoutes from "./PublicRoutes";
 import PrivateRoutes from "./PrivateRoutes";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
@@ -39,7 +38,6 @@ const AppRoutes = () => {
           </Routes>
           <Outlet />
         </BrowserRouter>
-        <ToastContainer autoClose={100} theme="colored" />
       </QueryClientProvider>
     </>
   );

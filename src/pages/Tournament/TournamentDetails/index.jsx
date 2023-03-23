@@ -10,6 +10,7 @@ import Admin from './Admin';
 import "./TournamentDetails.css";
 import TeamsModal from "./TeamsModal";
 import { toast } from "react-toastify";
+import navigate from "navigate";
 
 function TournamentDetails() {
   const [currentTab, setCurrentTab] = React.useState(0);
@@ -60,10 +61,11 @@ function TournamentDetails() {
   ];
 
   const handleRegisterInTournament = () =>{
-    if(!tournamentdetails.is_registration_open){
-      return toast.error('Registration closed');
-    }
-    setOpenTeamsModal(true)
+    // if(!tournamentdetails.is_registration_open){
+    //   return toast.error('Registration closed');
+    // }
+    // navigate(`/${tournament.tournament_id}/team-register`)
+    navigate(`/tournament/team-register`)
   }
 
   return (
@@ -185,10 +187,7 @@ function TournamentDetails() {
       <div className="mx-auto px-8 py-10 xs:px-10 xs:py-12 sm:px-20 sm:py-12 md:px-20 md:py-16 lg:px-24 xl:px-28 2xl:px-32">
         {tabs[currentTab]}
       </div>
-      <TeamsModal
-        openTeamsModal={openTeamsModal}
-        handleOpenTeamsModal={handleOpenTeamsModal}
-      />
+
     </section>
   );
 }
