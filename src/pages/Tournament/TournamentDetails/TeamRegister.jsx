@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import Heading from '../../Component/Heading'
+import Heading from '../../../Component/Heading'
 import { useFormik } from "formik";
 import { AiOutlineTeam, AiOutlineSearch } from 'react-icons/ai';
 import * as Yup from "yup";
-import navigate from 'navigate';
-
+import { useNavigate } from 'react-router-dom';
 
 function TeamRegister() {
-
+  const navigate = useNavigate()
   const [Teams, setTeam] = React.useState([])
   const [TeamPlayers, setTeamPlayers] = React.useState([])
   const allteams = [
