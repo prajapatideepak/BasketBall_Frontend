@@ -232,7 +232,7 @@ function TeamAddEdit() {
                   type="file"
                   name="team_l"
                   id="team_logo"
-                  accept=".png, .jpg, .jpeg"
+                    accept=".png, .jpg, .jpeg"
                   onChange={(e) => handleImageUpload(e)}
                 />
               </div>
