@@ -25,7 +25,7 @@ export default function AfterRole() {
     {
       title: "Tournament Host",
       isSelected: false,
-      path: "/tournament-registration",
+      path: "/tournament/add-edit",
       icon: "/icons/tournament_icon.png",
     },
   ]);

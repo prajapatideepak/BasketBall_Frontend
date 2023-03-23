@@ -1,11 +1,11 @@
 import { lazy } from 'react'
-import Heading from '../../Component/Heading'
+import Heading from '../../../Component/Heading'
 import { useParams, useNavigate } from 'react-router-dom';
-import Button from '../../Component/Button'
+import Button from '../../../Component/Button'
 
 
 const About = ({tournamentdetails}) => {
-  const isPublicView = true;
+  const isPublicView = false;
   const params = useParams();
   const navigate = useNavigate();
 
@@ -177,7 +177,7 @@ const About = ({tournamentdetails}) => {
                 {/* <Button text="Edit Team"  /> */}
                 <button
                   type="button"
-                  onClick={() => { navigate('/tournament-add-edit') }}
+                  onClick={() => { navigate('/tournament/add-edit') }}
                   className="bg-[#ee6730] relative inline-flex items-center justify-center px-3  xs:px-6 sm:px-10 py-2 overflow-hidden text-white rounded-lg cursor-pointer group mr-3"
                 >
                   <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-slate-900 rounded-lg group-hover:w-full group-hover:h-56"></span>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Select from "react-select";
-import {Modal} from '../../Component/Modal'
+import {Modal} from '../../../Component/Modal'
 
 export default function UploadImageModal({open, handleOpen}) {
     const [image, setImage] = useState('');

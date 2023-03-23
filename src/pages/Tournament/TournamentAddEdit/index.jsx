@@ -6,9 +6,9 @@ import { MdDelete } from "react-icons/md";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import { useNavigate, useLocation } from "react-router-dom";
-import Heading from "../../Component/Heading";
+import Heading from "../../../Component/Heading";
 
-function Tournamentregistration() {
+function TournamentAddEdit() {
   // const location = useLocation();
   const [refereelist, setRefereelist] = React.useState([{ Referee: "" }]);
   const [sponsorlist, setsponsorlist] = React.useState([{ Sponsor: "" }]);
@@ -653,4 +653,4 @@ function Tournamentregistration() {
   );
 }
 
-export default Tournamentregistration;
+export default TournamentAddEdit;
