@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Heading from '../../Component/Heading'
+import Heading from '../../../Component/Heading'
 import { useFormik } from "formik";
 import { AiOutlineTeam, AiOutlineSearch } from 'react-icons/ai';
 import * as Yup from "yup";
