@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import Masonry from 'react-masonry-css'
 import LazyLoad from 'react-lazyload';
-import '../Gallery/Gallery.css';
+import '../../Gallery/Gallery.css';
 import { AiFillCloseCircle } from 'react-icons/ai';
 
 function Gallery() {

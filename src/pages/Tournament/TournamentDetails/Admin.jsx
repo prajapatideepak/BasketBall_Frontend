@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import UploadImageModal from './UploadImageModal';
-import Button from '../../Component/Button';
+import Button from '../../../Component/Button';
 import MatchFormModal from './MatchFormModal'
 
 function Admin() {

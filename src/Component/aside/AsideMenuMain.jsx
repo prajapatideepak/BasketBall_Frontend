@@ -48,7 +48,7 @@ function AsideMenuMain() {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="Link" to={"/tournaments"}>
+              <Link className="Link" to={"/tournament"}>
                 <h1 className="relative text-white text-base md:text-base lg:text-base xl:text-lg  my-5 md:my-0">
                   Tournaments
                 </h1>

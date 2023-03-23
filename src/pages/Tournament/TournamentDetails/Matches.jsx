@@ -1,5 +1,5 @@
 import React from 'react'
-import MatchCard from '../../Component/MatchCard'
+import MatchCard from '../../../Component/MatchCard'
 
 function Matches() {
     const [currentTab, setCurrentTab] = React.useState(2);

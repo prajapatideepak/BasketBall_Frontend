@@ -1,6 +1,6 @@
 import React from 'react'
 import { toast } from "react-toastify";
-import {Modal} from '../../Component/Modal'
+import {Modal} from '../../../Component/Modal'
 
 function MatchFormModal({showModal, handleShowModal}) {
     const [formationType, setFormationType] = React.useState('Round Robin')

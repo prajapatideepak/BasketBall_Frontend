@@ -1,7 +1,7 @@
 import React from 'react'
-import TournamentCard from '../../Component/TournamentCard';
+import TournamentCard from '../../../Component/TournamentCard';
 import { GiDiamondTrophy } from 'react-icons/gi';
-import Heading from '../../Component/Heading';
+import Heading from '../../../Component/Heading';
 
 function TournamentsList() {
     const [currentTab, setCurrentTab] = React.useState(1);
