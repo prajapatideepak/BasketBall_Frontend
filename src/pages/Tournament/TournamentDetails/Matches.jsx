@@ -117,7 +117,6 @@ function Matches() {
     
     return (
         <div>
-            {/* <Heading text="Tournaments"/> */}
             <div className='flex justify-center items-center'>
                 <div className="w-48 xxs:w-80 xs:w-72 sm:w-72 md:w-80 lg:w-96 p-1 rounded-full flex justify-around items-center bg-black">
                     <div className={`${currentTab == 1 ? 'bg-[#ee6730]' : ''} hover:bg-[#ee6730] group cursor-pointer w-full text-center p-1 rounded-full`} onClick={()=> setCurrentTab(1)}>
