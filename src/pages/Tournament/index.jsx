@@ -12,7 +12,6 @@ const Tournament = () => {
         <Route>
           <Route path="/add-edit" element={<TournamentAddEdit />} />
           <Route path="/:tournament_id" element={<TournamentDetails />} />
-          {/* <Route path="/registration" element={<Registration />} /> */}
           <Route path="/organizer" element={<TournamentsOfOrganizer />} />
           <Route path="/" element={<TournamentsList />} />
         </Route>
