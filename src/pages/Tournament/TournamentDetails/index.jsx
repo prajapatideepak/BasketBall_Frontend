@@ -93,7 +93,7 @@ function TournamentDetails() {
                   <button
                     onClick={handleRegisterInTournament}
                     type="submit"
-                    className={`bg-gray-200 relative inline-flex items-center justify-center w-full px-4 py-1 xs:py-1 sm:px-4 sm:py-1.5 overflow-hidden font-medium tracking-tighter text-white rounded-lg cursor-pointer group`}
+                    className={`bg-gray-200 relative inline-flex items-center justify-center  px-2 py-1 xs:py-1 sm:px-4 sm:py-1.5 overflow-hidden font-medium tracking-tighter text-white md:rounded-lg sm:rounded-md rounded-sm cursor-pointer group`}
                   >
                     <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#ee6730] rounded-lg group-hover:w-full group-hover:h-56"></span>
                     <span className="relative text-gray-700 text-xs xs:text-sm sm:text-base group-hover:text-white transition-all duration-500 ease-in-out">
