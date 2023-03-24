@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from 'react'
-import Heading from '../../../Component/Heading'
 import { useFormik } from "formik";
-import { AiOutlineTeam, AiOutlineSearch } from 'react-icons/ai';
+import { AiOutlineTeam} from 'react-icons/ai';
 import * as Yup from "yup";
 import { useNavigate } from 'react-router-dom';
 import { GiTrophyCup } from 'react-icons/gi';
+import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 
+
+
+  // ------------ Form Validation ------------
+  const initialValues = {
+    tournament_category: "",
+    age_cutoff: "",
+  };
 
 function TeamRegister() {
   const navigate = useNavigate()
@@ -75,25 +83,17 @@ function TeamRegister() {
     } else {
       let SelectPlayer = TeamPlayers.map((player) => 
       player.id == value? {...player,isChecked:checked} : player)
-      console.log(SelectPlayer)
       setTeamPlayers(SelectPlayer)
     }
   }
 
-  // ------------ Form Validation ------------
-  const initialValues = {
-    tournament_category: location?.state?.isEdit
-      ? location?.state?.tournament_category
-      : "",
-    age_cutoff: location?.state?.isEdit
-      ? location?.state?.age_cutoff
-      : "",
-  };
+
 
   const validationSchema = Yup.object({
     tournament_category: Yup.string().required("Categoryy is required"),
     age_cutoff: Yup.string().required("Age_Cutoff is required"),
   });
+
 
   const {
     values,
@@ -109,27 +109,28 @@ function TeamRegister() {
     initialValues,
     onSubmit: (data) => {
       // ---------------- Confirmation for update -----------------------
-      // Swal.fire({
-      //   title: "Are you sure?",
-      //   text: "You won't be create Tournament!!",
-      //   icon: "warning",
-      //   showCancelButton: true,
-      //   confirmButtonColor: "#3085d6",
-      //   cancelButtonColor: "#d33",
-      //   confirmButtonText: "Yes, Create it!",
-      // }).then((result) => {
-      //   if (result.isConfirmed) {
-      //     const response = "Create";
-      //     if (response) {
-      //       navigate("/tournaments");
-      //       toast.success("Tournament Create Successfully!");
-      //     } else {
-      //       toast.error("Something went wrong");
-      //     }
-      //   }
-      // });
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be register team in this tournament!!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Register it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const response = "Register";
+          if (response) {
+            navigate('/tournament')
+            toast.success("Team Register Successfully!");
+          } else {
+            toast.error("Something went wrong");
+          }
+        }
+      });
     },
   });
+
 
 
   return (
@@ -153,6 +154,7 @@ function TeamRegister() {
                           id="tournament_category"
                           onChange={handleChange}
                           onBlur={handleBlur}
+                          value={values.tournament_category}
                           className="cursor-pointer" />
                         <label htmlFor="Only for girls" className="text-sm xl:text-base ">Only For Girls</label>
                       </div>
@@ -181,6 +183,7 @@ function TeamRegister() {
                             id="age_cutoff"
                             onChange={handleChange}
                             onBlur={handleBlur}
+                            value={values.age_cutoff}
                             className="cursor-pointer" />
                           <label htmlFor="Only for girls" className="text-sm xl:text-base ">Under 14</label>
                         </div>
@@ -293,7 +296,6 @@ function TeamRegister() {
             TeamPlayers.length > 0 ?
               <div className='flex justify-center md:justify-end md:items-end w-full space-x-5 py-3 md:py-3 '>
                 <button
-                  type="submit"
                   className="bg-slate-900 relative inline-flex items-center justify-center md:px-6 py-2 px-4  overflow-hidden text-white rounded-lg cursor-pointer group"
                   onClick={() => navigate(-1)}
                 >
