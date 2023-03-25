@@ -1,19 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { useFormik } from "formik";
-import { AiOutlineTeam} from 'react-icons/ai';
+import { AiOutlineTeam } from 'react-icons/ai';
 import * as Yup from "yup";
 import { useNavigate } from 'react-router-dom';
 import { GiTrophyCup } from 'react-icons/gi';
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 
-
-
-  // ------------ Form Validation ------------
-  const initialValues = {
-    tournament_category: "",
-    age_cutoff: "",
-  };
 
 function TeamRegister() {
   const navigate = useNavigate()
@@ -81,17 +74,25 @@ function TeamRegister() {
       });
       setTeamPlayers(AllPlayers)
     } else {
-      let SelectPlayer = TeamPlayers.map((player) => 
-      player.id == value? {...player,isChecked:checked} : player)
-      setTeamPlayers(SelectPlayer)
+      let AllPlayers = TeamPlayers.map((player) =>
+        player.id == value ? { ...player, isChecked: checked } : player)
+      setTeamPlayers(AllPlayers)
+      let SelectedPlayer = AllPlayers.filter(AllPlayers => {
+        return AllPlayers.isChecked == true
+      })
     }
   }
 
-
-
+  // ------------ Form Validation ------------
+  const initialValues = {
+    tournament_category: "",
+    age_cutoff: "",
+    players: TeamPlayers
+  };
   const validationSchema = Yup.object({
     tournament_category: Yup.string().required("Categoryy is required"),
     age_cutoff: Yup.string().required("Age_Cutoff is required"),
+    players: Yup.string().required("Select Players"),
   });
 
 
@@ -262,8 +263,12 @@ function TeamRegister() {
                           <li className='w-20 text-center flex justify-center items-center  text-[8px] sm:text-[9.5px] md:text-[12px] 2xl:text-base '>
                             <input type="checkbox"
                               checked={player?.isChecked || false}
-                              onChange={handleSelectPlayer}
+                              onChange={handleChange}
+                              onClick={handleSelectPlayer}
+                              onBlur={handleBlur}
                               value={player.id}
+                              name="player"
+                              id='player'
                               className='cursor-pointer' />
                           </li>
                           <li className='w-10 text-center flex items-center justify-center text-xs lg:text-sm xl:text-base'>
@@ -288,6 +293,13 @@ function TeamRegister() {
                 }
 
               </div>
+              {
+                errors.players && touched.players
+                  ?
+                  <small className='text-red-600 flex justify-end items-end mt-2'>{errors.players}</small>
+                  :
+                  null
+              }
             </div>
           </div>
 
