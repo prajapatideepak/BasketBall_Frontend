@@ -2,10 +2,12 @@ import React from 'react'
 import TournamentCard from '../../../Component/TournamentCard';
 import { GiDiamondTrophy } from 'react-icons/gi';
 import Heading from '../../../Component/Heading';
+import { useGetAllTournamentsQuery } from '../../../services/tournament';
 
 function TournamentsList() {
     const [currentTab, setCurrentTab] = React.useState(1);
     const [currentTabTournaments, setCurrentTabTournaments] = React.useState([])
+    const {data, isLoading, error} = useGetAllTournamentsQuery();
 
     const upcomingTournaments =  [
         {

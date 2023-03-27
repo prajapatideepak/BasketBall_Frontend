@@ -43,12 +43,12 @@ function TournamentTeamCard({teamDetails}) {
                             {
                                 is_team_organizer && is_disqualified
                                 ?
-                                    <h3 className='text-red-400 text-sm my-auto rounded-md tracking-wide'>( Disqualified )</h3>
+                                    <h3 className='text-red-400 text-sm my-auto rounded-md tracking-tight sm:tracking-wide'>( Disqualified )</h3>
                                 :
                                     is_team_organizer && !is_disqualified
                                     ?
                                         <div className='flex flex-1 justify-end'>
-                                            <button className='px-2 bg-[#ee6730] text-white rounded-md hover:bg-orange-400 text-sm tracking-wide' onClick={handleDisqualify}>Disqualify</button>
+                                            <button className='px-2 max-h-8 bg-[#ee6730] text-white rounded-md hover:bg-orange-400 text-sm tracking-wide' onClick={handleDisqualify}>Disqualify</button>
                                         </div>
                                     :
                                         null
