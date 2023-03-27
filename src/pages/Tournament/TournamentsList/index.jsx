@@ -13,18 +13,6 @@ function TournamentsList() {
   const [currentTabTournaments, setCurrentTabTournaments] = React.useState([]);
   const { data, isLoading, isError, error } = useGetAllTournamentsQuery();
 
-  // const ongoingTournaments =  [
-  //     {
-  //         tournament_id: 1,
-  //         logo: '/CBL_Images/tournament_logo_1.webp',
-  //         tournament_name: 'LJ Cup',
-  //         start_date: '01/11/2023',
-  //         end_date: '01/22/2023',
-  //         level: 'National',
-  //         city: 'Ahmedabad'
-  //     },
-  // ]
-
   React.useEffect(() => {
     const upcoming = [];
     const ongoing = [];
