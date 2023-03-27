@@ -67,8 +67,8 @@ function TournamentAddEdit() {
       ? location?.state?.referee_mobile
       : "",
     sponsor_name: location?.state?.isEdit ? location?.state?.sponsor_name : "",
-    sponsor_mobile: location?.state?.isEdit
-      ? location?.state?.sponsor_mobile
+    sponsor_logo: location?.state?.isEdit
+      ? location?.state?.sponsor_logo
       : "",
     age_cutoff: location?.state?.isEdit
       ? location?.state?.age_cutoff
@@ -172,6 +172,7 @@ function TournamentAddEdit() {
                   type="text"
                   name="tournament_name"
                   id="tournament_name"
+                  value={values.tournament_name}
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
@@ -191,6 +192,7 @@ function TournamentAddEdit() {
                   name="tournament_logo"
                   id="tournament_logo"
                   accept='.png, .jpg, .jpeg'
+                  value={values.tournament_logo}
                   onChange={handleChange}
                 />
               </div>
@@ -205,6 +207,7 @@ function TournamentAddEdit() {
                     type="date"
                     name="starting_date"
                     id="starting_date"
+                    value={values.starting_date}
                     onChange={handledate}
                     onBlur={handleBlur}
                   />
@@ -225,6 +228,7 @@ function TournamentAddEdit() {
                     disabled={isDisabled}
                     name="ending_date"
                     id="ending_date"
+                    value={values.ending_date}
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
@@ -245,6 +249,7 @@ function TournamentAddEdit() {
                   type="text"
                   name="city_name"
                   id="city_name"
+                  value={values.city_name}
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
@@ -271,6 +276,7 @@ function TournamentAddEdit() {
                           id="tournament_category"
                           onChange={handleChange}
                           onBlur={handleBlur}
+                          value={values.tournament_category}
                           className="cursor-pointer" />
                         <label htmlFor="Only for girls" className="text-sm ">Only For Girls</label>
                       </div>
@@ -280,6 +286,7 @@ function TournamentAddEdit() {
                           id="tournament_category"
                           onChange={handleChange}
                           onBlur={handleBlur}
+                          value={values.tournament_category}
                           className="cursor-pointer " />
                         <label htmlFor="Only for boys" className="text-sm ">Only For Boys</label>
                       </div>
@@ -289,6 +296,7 @@ function TournamentAddEdit() {
                           id="tournament_category"
                           onChange={handleChange}
                           onBlur={handleBlur}
+                          value={values.tournament_category}
                           className="cursor-pointer" />
                         <label htmlFor="" className="text-sm ">Only For Mens</label>
                       </div>
@@ -300,6 +308,7 @@ function TournamentAddEdit() {
                           id="tournament_category"
                           onChange={handleChange}
                           onBlur={handleBlur}
+                          value={values.tournament_category}
                           className="cursor-pointer " />
                         <label htmlFor="" className="text-sm ">Only For Women</label>
                       </div>
@@ -309,6 +318,7 @@ function TournamentAddEdit() {
                           id="tournament_category"
                           onChange={handleChange}
                           onBlur={handleBlur}
+                          value={values.tournament_category}
                           className="cursor-pointer" />
                         <label htmlFor="" className="text-sm ">Mixed</label>
                       </div>
@@ -334,6 +344,7 @@ function TournamentAddEdit() {
                           id="age_cutoff"
                           onChange={handleChange}
                           onBlur={handleBlur}
+                          value={values.age_cutoff}
                           className="cursor-pointer" />
                         <label htmlFor="Under 14" className="text-sm">Under 14</label>
                       </div>
@@ -343,6 +354,7 @@ function TournamentAddEdit() {
                           id="age_cutoff"
                           onChange={handleChange}
                           onBlur={handleBlur}
+                          value={values.age_cutoff}
                           className="cursor-pointer " />
                         <label htmlFor="Under 16" className="text-sm">under 16</label>
                       </div>
@@ -352,6 +364,7 @@ function TournamentAddEdit() {
                           id="age_cutoff"
                           onChange={handleChange}
                           onBlur={handleBlur}
+                          value={values.age_cutoff}
                           className="cursor-pointer" />
                         <label htmlFor="Under 17" className="text-sm">Under 17</label>
                       </div>
@@ -361,6 +374,7 @@ function TournamentAddEdit() {
                           id="age_cutoff"
                           onChange={handleChange}
                           onBlur={handleBlur}
+                          value={values.age_cutoff}
                           className="cursor-pointer " />
                         <label htmlFor="Under 19" className="text-sm">Under 19</label>
                       </div>
@@ -372,6 +386,7 @@ function TournamentAddEdit() {
                           id="age_cutoff"
                           onChange={handleChange}
                           onBlur={handleBlur}
+                          value={values.age_cutoff}
                           checked={true}
                         className="cursor-pointer" />
                         <label htmlFor="Under 21" className="text-sm">Under 21</label>
@@ -382,6 +397,7 @@ function TournamentAddEdit() {
                           id="age_cutoff"
                           onChange={handleChange}
                           onBlur={handleBlur}
+                          value={values.age_cutoff}
                           className="cursor-pointer" />
                         <label htmlFor="Under 25" className="text-sm">Under 25</label>
                       </div>
@@ -391,6 +407,7 @@ function TournamentAddEdit() {
                           id="age_cutoff"
                           onChange={handleChange}
                           onBlur={handleBlur}
+                          value={values.age_cutoff}
                           className="cursor-pointer" />
                         <label htmlFor="Under 27" className="text-sm">Under 27</label>
                       </div>
@@ -419,6 +436,7 @@ function TournamentAddEdit() {
                     id="tournament_level"
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    value={values.tournament_level}
                   />
                   {
                     errors.tournament_level && touched.tournament_level
@@ -438,6 +456,7 @@ function TournamentAddEdit() {
                     id="prize"
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    value={values.prize}
                   />
                   {
                     errors.prize && touched.prize
@@ -462,6 +481,7 @@ function TournamentAddEdit() {
                   rows="6"
                   onChange={handleChange}
                   onBlur={handleBlur}
+                  value={values.about_tournament}
                 />
               </div>
             </div>
@@ -487,6 +507,7 @@ function TournamentAddEdit() {
                         id="referee_name"
                         onChange={handleChange}
                         onBlur={handleBlur}
+                        value={values.referee_name}
                       />
                       {errors.referee_name && touched.referee_name ? (
                         <small className="text-red-600 mt-2">
@@ -504,6 +525,7 @@ function TournamentAddEdit() {
                         id="referee_mobile"
                         onChange={handleChange}
                         onBlur={handleBlur}
+                        value={values.referee_mobile}
                       />
                       {errors.referee_mobile && touched.referee_mobile ? (
                         <small className="text-red-600 mt-2">
@@ -526,7 +548,7 @@ function TournamentAddEdit() {
                       onClick={handleaddreferee}>
                       <div
                         className="bg-green-600 border-2 hover:border-green-600 hover:text-green-600 relative inline-flex items-center justify-center px-3 py-2 overflow-hidden text-white
-                                                     rounded-lg cursor-pointer group"
+                        rounded-lg cursor-pointer group"
                       >
                         <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-white rounded-lg group-hover:w-full group-hover:h-56"></span>
                         <span className="relative flex items-center space-x-2 ">
@@ -561,6 +583,7 @@ function TournamentAddEdit() {
                         id="sponsor_name"
                         onChange={handleChange}
                         onBlur={handleBlur}
+                        value={values.sponsor_name}
                       />
                       {errors.sponsor_name && touched.sponsor_name ? (
                         <small className="text-red-600 mt-2">
@@ -579,6 +602,7 @@ function TournamentAddEdit() {
                         id="sponsor_logo"
                         accept=".png, .jpg, .jpeg"
                         onChange={handleChange}
+                        value={values.sponsor_logo}
                       />
                     </div>
                     {sponsorlist.length > 1 && (
