@@ -4,11 +4,10 @@ import { AiOutlineSearch, AiFillEye } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { getPlayerList, searchPlayers } from "../../../redux/actions/Player";
 import { Link } from "react-router-dom";
-import image from "../../../../public/CBL_Images/7xm.xyz481259.jpg"
-// import logo from "../../../../public/CBL_Images/logo4.png"
 const PlayerList = () => {
-  const { PlayerList } = useSelector((state) => state.playerReducer);
-  const [search, setSearch] = React.useState("");
+  // const { PlayerList } = useSelector((state) => state.playerReducer);
+  const data = useSelector((state) => state);
+  console.log("data", data);
   const dispatch = useDispatch();
 
   React.useEffect(() => {
@@ -50,7 +49,7 @@ const PlayerList = () => {
         <div className="">
           <div className="flex w-full flex-col items-center px-5 lg:px-8  space-y-6  h-full ">
             {PlayerList?.map((player, index) => {
-              console.log(player)
+              console.log(player);
               return (
                 <Link
                   key={player.id}
@@ -59,11 +58,17 @@ const PlayerList = () => {
                 >
                   <div className="duration-300 relative justify-end bg-black rounded-lg text-white overflow-hidden shadow-xl cursor-pointer hover:scale-[1.03] w-6/7  md:w-full h-full ">
                     <div className=" flex justify-end items-center ">
-                      <img src={player.teamDetails[0].team_logo} alt="" className="w-28 h-28 2xl:w-32 2xl:h-32  opacity-20" />
+                      <img
+                        src={player.teamDetails[0].team_logo}
+                        alt=""
+                        className="w-28 h-28 2xl:w-32 2xl:h-32  opacity-20"
+                      />
                     </div>
                     <div className=" flex flex-col sm:flex-row w-full h-full absolute top-0 content-start py-2 ">
                       <div className="bg-gradient-to-b  from-[#e64100]  absolute  md:top-[-32px] md:left-[-20px] w-10 h-10 rotate-[30deg] top-[-15px] left-[-15px] md:h-20 md:w-14 content-start md:rotate-[45deg] flex justify-center items-center">
-                        <h1 className="rotate-[-30deg] md:rotate-[315deg] text-xs font-bold md:text-lg mt-1 ml-5 md:ml-6">{index + 1}</h1>
+                        <h1 className="rotate-[-30deg] md:rotate-[315deg] text-xs font-bold md:text-lg mt-1 ml-5 md:ml-6">
+                          {index + 1}
+                        </h1>
                       </div>
                       {/* avtar start */}
                       <div className="text-center sm:w-1/2 items-center justify-center space-x-5 lg:space-x-10 xl:space-x-16 sm:space-x-6 lg:py-6 flex  ">
@@ -72,12 +77,17 @@ const PlayerList = () => {
                           className=" object-cover w-12 h-12 sm:w-14 sm:h-14 lg:w-[70px] lg:h-[70px] xl:w-20 xl:h-20 2xl:w-24  2xl:h-24 rounded-full border-2 sm:border-4 border-slate-700 "
                         />
                         <div className="flex justify-start items-center ">
-                          <h1 className="text-gray-600 font-bold text-sm sm:text-base  lg:text-lg xl:text-xl uppercase">{player.gameinfo.playerPosition}</h1>
+                          <h1 className="text-gray-600 font-bold text-sm sm:text-base  lg:text-lg xl:text-xl uppercase">
+                            {player.gameinfo.playerPosition}
+                          </h1>
                         </div>
                         <div className="flex flex-col justify-start items-start ">
-                          <h1 className="text-white font-bold text-base sm:text-lg md:text-xl lg:text-[25px] text-start ">{player.basicinfo.firstName}</h1>
-                          <h1 className="text-gray-600 font-bold text-[8px] sm:text-[10px] lg:text-xs xl:text-sm text-start ">{player.teamDetails[0].team_name}</h1>
-
+                          <h1 className="text-white font-bold text-base sm:text-lg md:text-xl lg:text-[25px] text-start ">
+                            {player.basicinfo.firstName}
+                          </h1>
+                          <h1 className="text-gray-600 font-bold text-[8px] sm:text-[10px] lg:text-xs xl:text-sm text-start ">
+                            {player.teamDetails[0].team_name}
+                          </h1>
                         </div>
                       </div>
                       {/* avtar end */}
@@ -85,8 +95,10 @@ const PlayerList = () => {
                       <div className="2xl:justify-start py-1 lg:p-2 w-full sm:w-1/2 flex items-center justify-center xl:pl-10   ">
                         <div className="grid xxs:grid-cols-2 xs:grid-cols-4 text-black place-content-center md:gap-1 lg:gap-5 xl:gap-12 2xl:gap-16   ">
                           <div className="text-center    ">
-                            <h1 className="text-sm sm:text-lg md:text-2xl lg:text-3xl 
-                             font-bold text-[#ee6730]">
+                            <h1
+                              className="text-sm sm:text-lg md:text-2xl lg:text-3xl 
+                             font-bold text-[#ee6730]"
+                            >
                               {player.statics.totalMatch}
                             </h1>
                             <span className="text-[8px] sm:text-[9px] md:text-[11px] lg:text-xs xl:text-base text-white font-semibold">
@@ -94,8 +106,10 @@ const PlayerList = () => {
                             </span>
                           </div>
                           <div className="text-center    ">
-                            <h1 className="text-sm sm:text-lg md:text-2xl lg:text-3xl 
-                             font-bold text-[#ee6730]">
+                            <h1
+                              className="text-sm sm:text-lg md:text-2xl lg:text-3xl 
+                             font-bold text-[#ee6730]"
+                            >
                               {player.statics.matchWon}
                             </h1>
                             <span className="text-[8px] sm:text-[9px] md:text-[11px] lg:text-xs xl:text-base text-white font-semibold">
@@ -103,8 +117,10 @@ const PlayerList = () => {
                             </span>
                           </div>
                           <div className="text-center    ">
-                            <h1 className="text-sm sm:text-lg md:text-2xl lg:text-3xl 
-                             font-bold text-[#ee6730]">
+                            <h1
+                              className="text-sm sm:text-lg md:text-2xl lg:text-3xl 
+                             font-bold text-[#ee6730]"
+                            >
                               {player.statics.matchLoss}
                             </h1>
                             <span className="text-[8px] sm:text-[9px] md:text-[11px] lg:text-xs xl:text-base text-white font-semibold">
@@ -112,15 +128,16 @@ const PlayerList = () => {
                             </span>
                           </div>
                           <div className="text-center    ">
-                            <h1 className="text-sm sm:text-lg md:text-2xl lg:text-3xl
-                             font-bold text-[#ee6730]">
+                            <h1
+                              className="text-sm sm:text-lg md:text-2xl lg:text-3xl
+                             font-bold text-[#ee6730]"
+                            >
                               {player.statics.totalScore}
                             </h1>
                             <span className="text-[8px] sm:text-[9px] md:text-[11px] lg:text-xs xl:text-base text-white font-semibold">
                               Total Points
                             </span>
                           </div>
-
                         </div>
                       </div>
                       {/* statics end */}

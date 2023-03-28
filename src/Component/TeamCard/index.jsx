@@ -14,12 +14,13 @@ function TeamCard({ teamDetails }) {
     matches_won,
     team_players,
     matches_lost,
+    id,
   } = teamDetails;
 
   return (
     <div
       className="w-full bg-gray-800 mt-2 mb-5 rounded-lg cursor-pointer hover:opacity-80"
-      onClick={() => navigate(`/team/profile-detail/${team_id}`)}
+      onClick={() => navigate(`/team/profile-detail/${id}`)}
     >
       <div className="flex lg:flex-row flex-col lg:justify-start justify-center items-center p-5 h-full">
         <div className="flex w-full sm:w-4/5 md:w-2/4 lg:w-2/5">

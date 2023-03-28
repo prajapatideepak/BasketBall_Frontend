@@ -2,14 +2,18 @@ import React, { useState, useEffect } from "react";
 import TeamCard from "../../../Component/TeamCard";
 import Heading from "../../../Component/Heading";
 import Paginate from "../../../Component/Pagination";
-import { AiOutlineTeam, AiOutlineSearch } from "react-icons/ai";
+import {
+  AiOutlineTeam,
+  AiOutlineSearch,
+  AiOutlineBackward,
+} from "react-icons/ai";
 import { useGetTeamListQuery } from "../../../services/team";
+import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 
 function TeamsList() {
-  const [paginationData, setPaginationData] = React.useState([]);
   const [search, setSearch] = React.useState("");
-
-  const rojki = useGetTeamListQuery({ pageNo: 0, search });
+  const [pageNo, setPageNo] = React.useState(1);
+  const rojki = useGetTeamListQuery({ pageNo: pageNo - 1, search });
   const { isLoading, data } = rojki;
   console.log(data);
 
@@ -48,7 +52,31 @@ function TeamsList() {
           </div>
         )}
 
-        <Paginate data={data?.data} setPaginationData={setPaginationData} />
+        <div className="flex  justify-center items-center text-gray-400 p-2 space-x-2 mt-5 text-sm">
+          <button
+            onClick={(e) => {
+              setPageNo(() => pageNo - 1);
+            }}
+            disabled={pageNo == 1}
+            className="cursor-pointer disabled:cursor-default disabled:opacity-30 p-2 border rounded border-gray-400"
+          >
+            <IoIosArrowBack />
+          </button>
+          <div className="cursor-pointer px-4 py-1  border rounded bg-[#ee6730] text-base text-white shadow-xl">
+            {" "}
+            {pageNo}
+          </div>
+          <button
+            onClick={(e) => {
+              setPageNo(() => pageNo + 1);
+            }}
+            disabled={data?.data.length < 5}
+            className="cursor-pointer disabled:opacity-30 disabled:cursor-default p-2 border rounded border-gray-400"
+          >
+            {" "}
+            <IoIosArrowForward />
+          </button>
+        </div>
       </div>
     </section>
   );

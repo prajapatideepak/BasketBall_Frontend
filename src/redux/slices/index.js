@@ -3,11 +3,11 @@ import playerReducer from "./PlayerSlice";
 import userReducer from "./UserSlice";
 import teamReducer from "./TeamSlice";
 //yaha ham sare reducer ko combine karege
-const Reducers = {
+const reducers = {
   newsReducer,
   playerReducer,
   userReducer,
   teamReducer,
 };
 
-export default Reducers;
+export default reducers;

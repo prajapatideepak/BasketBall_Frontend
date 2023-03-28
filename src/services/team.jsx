@@ -8,7 +8,10 @@ export const teamApi = api.injectEndpoints({
           search == " " || search == "" ? "search" : search
         }`,
     }),
+    getTeamDetail: build.query({
+      query: ({ teamId }) => `team/detail/${teamId}`,
+    }),
   }),
 });
 
-export const { useGetTeamListQuery } = teamApi;
+export const { useGetTeamListQuery, useGetTeamDetailQuery } = teamApi;
