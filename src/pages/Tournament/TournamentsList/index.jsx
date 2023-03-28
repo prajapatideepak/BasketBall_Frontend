@@ -3,10 +3,12 @@ import TournamentCard from "../../../Component/TournamentCard";
 import SmallLoader from "../../../Component/SmallLoader";
 import { GiDiamondTrophy } from "react-icons/gi";
 import Heading from "../../../Component/Heading";
+import Paginate from "../../../Component/Pagination";
 import { useGetAllTournamentsQuery } from "../../../services/tournament";
 
 function TournamentsList() {
   const [currentTab, setCurrentTab] = React.useState(1);
+  const [paginationData, setPaginationData] = React.useState([]);
   const [upcomingTournaments, setUpcomingTournaments] = React.useState([]);
   const [ongoingTournaments, setOngoingTournaments] = React.useState([]);
   const [pastTournaments, setPastTournaments] = React.useState([]);
@@ -18,20 +20,18 @@ function TournamentsList() {
     const ongoing = [];
     const past = [];
     data?.all_tournaments.map((tournament) => {
-        if(tournament.status == 1){
-            upcoming.push(tournament)
-        }
-        else if(tournament.status == 2){
-            ongoing.push(tournament)
-        }
-        else{
-            past.push(tournament)
-        }
+      if (tournament.status == 1) {
+        upcoming.push(tournament);
+      } else if (tournament.status == 2) {
+        ongoing.push(tournament);
+      } else {
+        past.push(tournament);
+      }
     });
 
-    setUpcomingTournaments(upcoming)
-    setOngoingTournaments(ongoing)
-    setPastTournaments(past)
+    setUpcomingTournaments(upcoming);
+    setOngoingTournaments(ongoing);
+    setPastTournaments(past);
   }, [data]);
 
   React.useEffect(() => {
@@ -95,21 +95,38 @@ function TournamentsList() {
           </div>
         </div>
         <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-8 md:gap-12 mt-10 sm:mt-12 md:mt-16">
-          {isLoading ? (
-            <SmallLoader />
-          ) : currentTabTournaments.length > 0 ? (
-            currentTabTournaments.map((tournament, index) => {
-              return <TournamentCard key={index} tournament={tournament} />;
-            })
-          ) : (
-            <div className="flex justify-center items-center mt-16 md:mt-24">
-              <GiDiamondTrophy className="text-2xl xs:text-3xl sm:text-5xl text-gray-400 mr-2" />
-              <p className="text-xs xs:text-sm sm:text-lg font-medium text-gray-400">
-                No Tournament Found
-              </p>
-            </div>
-          )}
+          {
+            isLoading 
+            ? 
+                <SmallLoader />
+            : 
+                currentTab == 3 && paginationData.length > 0
+                ?
+                    paginationData.map((tournament, index) => {
+                    return <TournamentCard key={index} tournament={tournament} />;
+                    })
+                :
+                    currentTabTournaments.length == 0 
+                    ? 
+                        <div className="flex justify-center items-center mt-16 md:mt-24">
+                        <GiDiamondTrophy className="text-2xl xs:text-3xl sm:text-5xl text-gray-400 mr-2" />
+                        <p className="text-xs xs:text-sm sm:text-lg font-medium text-gray-400">
+                            No Tournament Found
+                        </p>
+                        </div>
+                    : 
+                        currentTabTournaments.map((tournament, index) => {
+                            return <TournamentCard key={index} tournament={tournament} />;
+                        }) 
+          }
         </div>
+        {currentTab == 3 && pastTournaments.length != 0 ? (
+          <Paginate
+            data={pastTournaments}
+            setPaginationData={setPaginationData}
+            itemsPerPage={1}
+          />
+        ) : null}
       </div>
     </section>
   );
