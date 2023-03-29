@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getPlayerList, searchPlayers } from "../../../redux/actions/Player";
 import { Link } from "react-router-dom";
 const PlayerList = () => {
-  // const { PlayerList } = useSelector((state) => state.playerReducer);
+  const { PlayerList } = useSelector((state) => state.player);
   const data = useSelector((state) => state);
   console.log("data", data);
   const dispatch = useDispatch();
@@ -15,7 +15,7 @@ const PlayerList = () => {
   }, []);
 
   function handleSubmit() {
-    dispatch(searchPlayers(search));
+    // dispatch(searchPlayers(search));
   }
 
   return (
@@ -33,7 +33,6 @@ const PlayerList = () => {
               setSearch(e.target.value);
               handleSubmit();
             }}
-            value={search}
             className=" rounded-lg w-full lg:w-2/3 rounded-r-none  appearance-none border border-gray-400 border-r-0 py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm focus:shadow-2xl duration-300 text-base focus:outline-none  "
             name="search"
             placeholder="Search Player"

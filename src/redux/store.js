@@ -4,8 +4,7 @@ import reducers from "./slices";
 
 export const store = configureStore({
   reducer: {
-    reducers,
-    [api.reducerPath]: api.reducer,
+    ...reducers,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
