@@ -1,17 +1,246 @@
 import React from "react";
 import Heading from "../../../Component/Heading";
-import { AiOutlineSearch, AiFillEye } from "react-icons/ai";
+import { AiOutlineSearch} from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { getPlayerList, searchPlayers } from "../../../redux/actions/Player";
 import { Link } from "react-router-dom";
-import image from "../../../../public/CBL_Images/7xm.xyz481259.jpg"
-// import logo from "../../../../public/CBL_Images/logo4.png"
+import { useGetAllPlayersQuery } from '../../../services/player';
+
+
 const PlayerList = () => {
-  const { PlayerList } = useSelector((state) => state.playerReducer);
+  // const { PlayerList } = useSelector((state) => state.playerReducer);
+   const PlayerList = [
+    {
+      id: 1,
+      status: true,
+      basicinfo: {
+        img: "/CBL_Images/player-default-profile.webp",
+        firstName: "Deepak",
+        email: "wellbenix@gmail.com",
+        lastName: "Prajapati",
+        dateofbirth: new Date(),
+        gender: "m",
+        pincode: "382340",
+      },
+      gameinfo: {
+        height: "168",
+        weight: "200",
+        playerPosition: "Center",
+        JerseyNumber: "69",
+        Experience:
+          "Lorem ipsum dolor, sit amet consectetur adipisicing elit. ur amet. Tempora aspernatur accusantium ipsam adipisci voluptatibus.",
+      },
+      statics: {
+        totalMatch: 100,
+        matchWon: 100,
+        matchLoss: 0,
+        totalScore: 320,
+      },
+      teamDetails: [
+        {
+          team_id: 1001,
+          team_logo: "/CBL_Images/basketball_team_logo_2.webp",
+          team_name: "Mehta Ke Mahaarathi",
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adip, Lorem ipsum dolor sit amet, consectetur adip",
+          coach_name: "Mohammadshad Mohammadsajid Rajput",
+          coach_mobile: "9000000000",
+          assistant_coach_name: "coach abc",
+          assistant_coach_mobile: "9989999999",
+          total_players: 7,
+          captain: 1,
+          matches_played: 22,
+          matches_won: 18,
+          matches_lost: 4,
+        },
+      ],
+    },
+    {
+      id: 2,
+      status: true,
+      basicinfo: {
+        img: "/CBL_Images/7xm.xyz481259.jpg",
+        firstName: "Sadik",
+        email: "wellbenix@gmail.com",
+        lastName: "Prajapati",
+        dateofbirth: new Date(),
+        gender: "m",
+        pincode: "382340",
+      },
+      gameinfo: {
+        height: "168",
+        weight: "200",
+        playerPosition: "Center",
+        JerseyNumber: "69",
+        Experience:
+          "Lorem ipsum dolor, sit amet consectetur adipisicing elit. ur amet. Tempora aspernatur accusantium ipsam adipisci voluptatibus.",
+      },
+      statics: {
+        totalMatch: 100,
+        matchWon: 100,
+        matchLoss: 0,
+        totalScore: 320,
+      },
+      teamDetails: [
+        {
+          team_id: 1001,
+          team_logo: "/CBL_Images/basketball_team_logo_2.webp",
+          team_name: "Mehta Ke Mahaarathi",
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adip, Lorem ipsum dolor sit amet, consectetur adip",
+          coach_name: "Mohammadshad Mohammadsajid Rajput",
+          coach_mobile: "9000000000",
+          assistant_coach_name: "coach abc",
+          assistant_coach_mobile: "9989999999",
+          total_players: 7,
+          captain: 1,
+          matches_played: 22,
+          matches_won: 18,
+          matches_lost: 4,
+        },
+      ],
+    },
+    {
+      id: 3,
+      status: true,
+      basicinfo: {
+        img: "/CBL_Images/7xm.xyz441074.jpg",
+        firstName: "Umang",
+        email: "wellbenix@gmail.com",
+        lastName: "Prajapati",
+        dateofbirth: new Date(),
+        gender: "m",
+        pincode: "382340",
+      },
+      gameinfo: {
+        height: "168",
+        weight: "200",
+        playerPosition: "Center",
+        JerseyNumber: "69",
+        Experience:
+          "Lorem ipsum dolor, sit amet consectetur adipisicing elit. ur amet. Tempora aspernatur accusantium ipsam adipisci voluptatibus.",
+      },
+      statics: {
+        totalMatch: 100,
+        matchWon: 100,
+        matchLoss: 0,
+        totalScore: 320,
+      },
+      teamDetails: [
+        {
+          team_id: 1001,
+          team_logo: "/CBL_Images/basketball_team_logo_2.webp",
+          team_name: "Mehta Ke Mahaarathi",
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adip, Lorem ipsum dolor sit amet, consectetur adip",
+          coach_name: "Mohammadshad Mohammadsajid Rajput",
+          coach_mobile: "9000000000",
+          assistant_coach_name: "coach abc",
+          assistant_coach_mobile: "9989999999",
+          total_players: 7,
+          captain: 1,
+          matches_played: 22,
+          matches_won: 18,
+          matches_lost: 4,
+        },
+      ],
+    },
+    {
+      id: 4,
+      status: true,
+      basicinfo: {
+        img: "/CBL_Images/player-default-profile.webp",
+        firstName: "Monu",
+        email: "wellbenix@gmail.com",
+        lastName: "Prajapati",
+        dateofbirth: new Date(),
+        gender: "m",
+        pincode: "382340",
+      },
+      gameinfo: {
+        height: "168",
+        weight: "200",
+        playerPosition: "Center",
+        JerseyNumber: "69",
+        Experience:
+          "Lorem ipsum dolor, sit amet consectetur adipisicing elit. ur amet. Tempora aspernatur accusantium ipsam adipisci voluptatibus.",
+      },
+      statics: {
+        totalMatch: 100,
+        matchWon: 100,
+        matchLoss: 0,
+        totalScore: 320,
+      },
+      teamDetails: [
+        {
+          team_id: 1001,
+          team_logo: "/CBL_Images/basketball_team_logo_2.webp",
+          team_name: "Mehta Ke Mahaarathi",
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adip, Lorem ipsum dolor sit amet, consectetur adip",
+          coach_name: "Mohammadshad Mohammadsajid Rajput",
+          coach_mobile: "9000000000",
+          assistant_coach_name: "coach abc",
+          assistant_coach_mobile: "9989999999",
+          total_players: 7,
+          captain: 1,
+          matches_played: 22,
+          matches_won: 18,
+          matches_lost: 4,
+        },
+      ],
+    },
+    {
+      id: 5,
+      status: true,
+      basicinfo: {
+        img: "/CBL_Images/player-default-profile.webp",
+        firstName: "po",
+        email: "wellbenix@gmail.com",
+        lastName: "Prajapati",
+        dateofbirth: new Date(),
+        gender: "m",
+        pincode: "382340",
+      },
+      gameinfo: {
+        height: "168",
+        weight: "200",
+        playerPosition: "Center",
+        JerseyNumber: "69",
+        Experience:
+          "Lorem ipsum dolor, sit amet consectetur adipisicing elit. ur amet. Tempora aspernatur accusantium ipsam adipisci voluptatibus.",
+      },
+      statics: {
+        totalMatch: 100,
+        matchWon: 100,
+        matchLoss: 0,
+        totalScore: 320,
+      },
+      teamDetails: [
+        {
+          team_id: 1001,
+          team_logo: "/CBL_Images/basketball_team_logo_2.webp",
+          team_name: "Mehta Ke Mahaarathi",
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adip, Lorem ipsum dolor sit amet, consectetur adip",
+          coach_name: "Mohammadshad Mohammadsajid Rajput",
+          coach_mobile: "9000000000",
+          assistant_coach_name: "coach abc",
+          assistant_coach_mobile: "9989999999",
+          total_players: 7,
+          captain: 1,
+          matches_played: 22,
+          matches_won: 18,
+          matches_lost: 4,
+        },
+      ],
+    },
+  ];
   const [search, setSearch] = React.useState("");
   const dispatch = useDispatch();
+  const {data, isLoading, error} = useGetAllPlayersQuery();
 
-  React.useEffect(() => {
+ React.useEffect(() => {
     dispatch(getPlayerList());
   }, []);
 
@@ -50,7 +279,6 @@ const PlayerList = () => {
         <div className="">
           <div className="flex w-full flex-col items-center px-5 lg:px-8  space-y-6  h-full ">
             {PlayerList?.map((player, index) => {
-              console.log(player)
               return (
                 <Link
                   key={player.id}
