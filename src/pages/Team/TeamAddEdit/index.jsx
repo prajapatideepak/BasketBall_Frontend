@@ -18,7 +18,7 @@ function TeamAddEdit() {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
-  const { TeamForm } = useSelector((state) => state.teamReducer);
+  const { TeamForm } = useSelector((state) => state.team);
   const [logo, setLogo] = React.useState("");
   const customStyles = {
     control: (provided, state) => ({
@@ -232,7 +232,7 @@ function TeamAddEdit() {
                   type="file"
                   name="team_l"
                   id="team_logo"
-                    accept=".png, .jpg, .jpeg"
+                  accept=".png, .jpg, .jpeg"
                   onChange={(e) => handleImageUpload(e)}
                 />
               </div>

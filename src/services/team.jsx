@@ -6,7 +6,7 @@ export const teamApi = api.injectEndpoints({
       query: ({ pageNo, search }) =>
         `team/list/${pageNo}&${
           search == " " || search == "" ? "search" : search
-        }`,
+        }`,   
     }),
     getTeamDetail: build.query({
       query: ({ teamId }) => `team/detail/${teamId}`,

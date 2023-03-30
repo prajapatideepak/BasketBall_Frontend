@@ -52,7 +52,7 @@ function TeamsList() {
           </div>
         )}
 
-        <div className="flex  justify-center items-center text-gray-400 p-2 space-x-2 mt-5 text-sm">
+        <div className="flex  justify-center items-center text-gray-400 py-5 space-x-2 mt-5 text-sm">
           <button
             onClick={(e) => {
               setPageNo(() => pageNo - 1);
