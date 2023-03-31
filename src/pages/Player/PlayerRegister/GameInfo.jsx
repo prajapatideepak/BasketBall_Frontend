@@ -7,7 +7,7 @@ import { GameInfoSchema } from "../../../models/GameInfoModel";
 
 const GameInfo = ({ index, setIndex }) => {
   const dispatch = useDispatch();
-  const { PlayerForm } = useSelector((state) => state.playerReducer);
+  const { PlayerForm } = useSelector((state) => state.player);
 
   const { values, errors, touched, handleSubmit, handleChange, handleBlur } =
     useFormik({
@@ -151,7 +151,10 @@ const GameInfo = ({ index, setIndex }) => {
         <div>
           {index > 1 && (
             <button
-              onClick={(e) => setIndex(index - 1)}
+              onClick={(e) => {
+                dispatch(setGameInfoForm(values));
+                setIndex(index - 1);
+              }}
               className="px-6 bg-gray-50 border-black py-1  border rounded text-gray-800 text-lg    "
             >
               Back
