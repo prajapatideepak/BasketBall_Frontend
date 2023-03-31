@@ -15,12 +15,11 @@ export const playerApi = api.injectEndpoints({
           ]
           : [{ type: "Players", id: "LIST" }],
     }),
+
     getPlayerDetails: build.query({
-      query: ( player_id ) => `details/${player_id}`,
-      providesTags: (result, error, player_id) => [
-        { type: "Players", id: player_id },
-      ],
+      query: ( player_id ) => `players/details/${player_id}`,
     }),
+
     registerPlayer: build.mutation({
       query(formData) {
         return {

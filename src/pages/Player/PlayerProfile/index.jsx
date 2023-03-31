@@ -20,7 +20,6 @@ import { useGetPlayerDetailsQuery } from '../../../services/player';
 export default function PlayerProfile() {
   const params = useParams();
   const { data, isLoading, error } = useGetPlayerDetailsQuery(params.id);
-  console.log(data , "data")
   const PlayerDetail = [
     {
       id: 1,
@@ -68,6 +67,7 @@ export default function PlayerProfile() {
       ],
     },
   ];
+
   useEffect(() => {
     // dispatch(findPlayer(params.id));
   }, []);
@@ -93,24 +93,24 @@ export default function PlayerProfile() {
       {/* Player Detail Section */}
       <div className="flex flex-col lg:flex-row space-y-5 ">
         <div className="lg:w-1/2 flex">
-          <PlayerAvtar player={PlayerDetail} />
+          <PlayerAvtar player={data} />
         </div>
         <div className="flex-1    ">
-          <PlayerInfo PlayerDetail={PlayerDetail} />
+          <PlayerInfo PlayerDetail={data} />
         </div>
       </div>
       {/* Player Detail Section End */}
 
       {/* Player Staticstc start */}
-      <PlayerStatics PlayerDetail={PlayerDetail} />
+      <PlayerStatics PlayerDetail={data} />
       {/* Player Statics End */}
 
       {/* ------------------notification Section -------------*/}
-      {/* {PlayerID == params.id && <Notification />} */}
+      {data?.SinglePlayerDetails?.id == params.id && <Notification />}
       {/*--------- notification seciton end--------------- */}
 
       {/* new sec */}
-      {/* <div className=":flex">
+      <div className="flex">
         <div className=" p-4 space-y-8  mt-4">
           <div className=" flex justify-center">
             <Heading
@@ -119,14 +119,14 @@ export default function PlayerProfile() {
               margin={true}
             />
           </div>
-          {PlayerID != params.id && (
+          {data?.SinglePlayerDetails?.id != params.id && (
             <div className="flex  mx-auto">
-              {PlayerDetail?.teamDetails.map((team) => {
-                return <TeamCard key={team.team_id} teamDetails={team} />;
+              {data?.SinglePlayerDetails?.team_players.map((team) => {
+                return <TeamCard  teamDetails={team.teams} />;
               })}
             </div>
           )}
-          {PlayerID == params.id && (
+          {data?.SinglePlayerDetails?.id == params.id && (
             <div className="overflow-x-scroll">
               <table className="items-center bg-transparent w-full border-collapse ">
                 <thead>
@@ -143,23 +143,24 @@ export default function PlayerProfile() {
                   </tr>
                 </thead>
                 <tbody>
-                  {PlayerDetail?.teamDetails.map((team) => {
+                  {data?.SinglePlayerDetails?.team_players.map((team) => {
+                    console.log(team)
                     return (
                       <tr className="cursor-pointer border-b">
                         <th className="border-t-0 px-6 align-middle border-l-0 border-r-0  text-sm md:text-base whitespace-nowrap p-4 text-left text-gray-700 capitalize">
-                          {team?.team_name}
+                          {team?.teams?.team_name}
                         </th>
                         <td className="border-t-0 px-6 align-middle border-l-0 border-r-0  text-sm md:text-base whitespace-nowrap p-4 capitalize">
-                          {team?.total_players}
+                          {team?.teams?.matches_played}
                         </td>
                         <td className=" flex space-x-3  border-t-0 px-6 align-middle border-l-0 border-r-0 text-lg whitespace-nowrap p-4 capitalize">
-                          <div title={`View ${team.team_name}`}>
-                            <Link to={`/team/profile-detail/${team.team_id}`}>
+                          <div title={`View ${team?.teams?.team_name}`}>
+                            <Link to={`/team/profile-detail/${team?.teams?.id}`}>
                               <AiFillEye className="hover:text-green-900" />
                             </Link>
                           </div>
                           <div
-                            title={`Leave ${team.team_name}`}
+                            title={`Leave ${team?.teams?.team_name}`}
                             className="hover:text-red-600"
                           >
                             <ImExit />
@@ -168,7 +169,7 @@ export default function PlayerProfile() {
                       </tr>
                     );
                   })}
-                  {PlayerDetail?.teamDetails.length < 1 && (
+                  {data?.SinglePlayerDetails?.team_players < 1 && (
                     <tr className="cursor-pointer border-b">
                       <td
                         className="border-t-0  px-6 text-center bg-red-100 text-red-800 font-bold align-middle border-l-0 border-r-0 text-base whitespace-nowrap p-4 capitalize"
@@ -183,7 +184,7 @@ export default function PlayerProfile() {
             </div>
           )}
         </div>
-        <div className=" py-4">
+        {/* <div className=" py-4">
           <div className="px-1 text-lg lg:w-1/3 mx-auto  py-1 text-white  flex  text-center justify-center items-center mt-2 rounded-full space-x-2 bg-black">
             <motion.span
               animate={{
@@ -212,8 +213,8 @@ export default function PlayerProfile() {
             <MatchCard match={match} />
             <MatchCard match={match} />
           </div>
-        </div>
-      </div> */}
+        </div> */}
+      </div>
     </div>
   );
 }
