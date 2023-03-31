@@ -3,7 +3,7 @@ import { api } from "./api";
 export const playerApi = api.injectEndpoints({
   endpoints: (build) => ({
     getAllPlayers: build.query({
-      query: () => "player",
+      query: () => "players",
       providesTags: (result) =>
         result.all_players.length > 0
           ? [
@@ -16,7 +16,7 @@ export const playerApi = api.injectEndpoints({
           : [{ type: "Players", id: "LIST" }],
     }),
     getPlayerDetails: build.query({
-      query: ({ player_id }) => `details/${player_id}`,
+      query: ( player_id ) => `details/${player_id}`,
       providesTags: (result, error, player_id) => [
         { type: "Players", id: player_id },
       ],

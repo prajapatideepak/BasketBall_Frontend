@@ -8,6 +8,7 @@ function TournamentsList() {
     const [currentTab, setCurrentTab] = React.useState(1);
     const [currentTabTournaments, setCurrentTabTournaments] = React.useState([])
     const {data, isLoading, error} = useGetAllTournamentsQuery();
+    console.log(data , "tournamentlist")
     const upcomingTournaments =  [
         {
             tournament_id: 1,

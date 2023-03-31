@@ -13,14 +13,63 @@ import Notification from "../../../Component/Notification/Notification";
 import { AiFillEye } from "react-icons/ai";
 import { GiExitDoor } from "react-icons/gi";
 import { ImExit } from "react-icons/im";
+import { useGetPlayerDetailsQuery } from '../../../services/player';
+
+
+
 export default function PlayerProfile() {
   const params = useParams();
-  const { PlayerDetail } = useSelector((state) => state.playerReducer);
-
-  const dispatch = useDispatch();
-  const PlayerID = 1;
+  const { data, isLoading, error } = useGetPlayerDetailsQuery(params.id);
+  console.log(data , "data")
+  const PlayerDetail = [
+    {
+      id: 1,
+      status: true,
+      basicinfo: {
+        img: "/CBL_Images/player-default-profile.webp",
+        firstName: "Deepak",
+        email: "wellbenix@gmail.com",
+        lastName: "Prajapati",
+        dateofbirth: new Date(),
+        gender: "m",
+        pincode: "382340",
+      },
+      gameinfo: {
+        height: "168",
+        weight: "200",
+        playerPosition: "Center",
+        JerseyNumber: "69",
+        Experience:
+          "Lorem ipsum dolor, sit amet consectetur adipisicing elit. ur amet. Tempora aspernatur accusantium ipsam adipisci voluptatibus.",
+      },
+      statics: {
+        totalMatch: 100,
+        matchWon: 100,
+        matchLoss: 0,
+        totalScore: 320,
+      },
+      teamDetails: [
+        {
+          team_id: 1001,
+          team_logo: "/CBL_Images/basketball_team_logo_2.webp",
+          team_name: "Mehta Ke Mahaarathi",
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adip, Lorem ipsum dolor sit amet, consectetur adip",
+          coach_name: "Mohammadshad Mohammadsajid Rajput",
+          coach_mobile: "9000000000",
+          assistant_coach_name: "coach abc",
+          assistant_coach_mobile: "9989999999",
+          total_players: 7,
+          captain: 1,
+          matches_played: 22,
+          matches_won: 18,
+          matches_lost: 4,
+        },
+      ],
+    },
+  ];
   useEffect(() => {
-    dispatch(findPlayer(params.id));
+    // dispatch(findPlayer(params.id));
   }, []);
 
   const [tab, setTab] = React.useState(1);
@@ -39,9 +88,7 @@ export default function PlayerProfile() {
     date: "12/12/2022",
   };
 
-  return !PlayerDetail?.status ? (
-    <div></div>
-  ) : (
+  return (
     <div className="mx-auto px-6 py-10 sm:px-20 sm:py-12 md:px-20 md:py-12 lg:px-24 xl:px-28 2xl:px-32 min-h-screen  ">
       {/* Player Detail Section */}
       <div className="flex flex-col lg:flex-row space-y-5 ">
@@ -59,11 +106,11 @@ export default function PlayerProfile() {
       {/* Player Statics End */}
 
       {/* ------------------notification Section -------------*/}
-      {PlayerID == params.id && <Notification />}
+      {/* {PlayerID == params.id && <Notification />} */}
       {/*--------- notification seciton end--------------- */}
 
       {/* new sec */}
-      <div className=":flex">
+      {/* <div className=":flex">
         <div className=" p-4 space-y-8  mt-4">
           <div className=" flex justify-center">
             <Heading
@@ -166,7 +213,7 @@ export default function PlayerProfile() {
             <MatchCard match={match} />
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
