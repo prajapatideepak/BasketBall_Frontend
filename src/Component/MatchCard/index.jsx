@@ -1,3 +1,4 @@
+import moment from "moment/moment";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -8,6 +9,7 @@ function MatchCard({ match }) {
   const handleClick = () => {
     navigate(`/match-details/${match.match_id}`);
   };
+
   const months = [
     "Jan",
     "Feb",
@@ -60,7 +62,7 @@ function MatchCard({ match }) {
                 </p>
               </div>
             </div>
-            {match.status == 2 ? (
+            {match.status == 1 ? (
               <div className="flex justify-center items-center mx-auto">
                 <span className="text-2xl font-medium">VS</span>
               </div>
@@ -98,7 +100,7 @@ function MatchCard({ match }) {
               </div>
             </div>
           </div>
-          {match.status == 2 ? (
+          {match.status == 3 ? (
             <div className="w-full text-center">
               <p className="pt-3 text-gray-500 text-xs xs:text-sm sm:text-base">
                 <span className="text-green-600 font-medium">
@@ -110,8 +112,10 @@ function MatchCard({ match }) {
           ) : (
             <div className="w-full text-center">
               <p className="pt-3 text-gray-500 text-xs xs:text-sm sm:text-base">
-                {match_date}
-                <span className="ml-2 font-medium">{match.time}</span>
+                {moment(match.start_date_time).format("MM/DD/YYYY")}
+                <span className="ml-2 font-medium">
+                  {moment(match.start_date_time).format("h:mm a")}
+                </span>
               </p>
             </div>
           )}

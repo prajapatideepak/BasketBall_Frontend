@@ -18,7 +18,7 @@ function TeamProfileDetail() {
 
   const isPublicView = true;
 
-  const [currentTab, setCurrentTab] = React.useState(1);
+  const [currentTab, setCurrentTab] = React.useState(3);
   const [currentTabMatches, setCurrentTabMatches] = React.useState([]);
 
   let allMatches =
@@ -350,13 +350,13 @@ function TeamProfileDetail() {
                     <div className="w-48 xs:w-52 md:w-64 flex justify-around items-center bg-black p-1 rounded-full">
                       <div
                         className={`${
-                          currentTab == 1 ? "bg-[#ee6730]" : ""
+                          currentTab == 3 ? "bg-[#ee6730]" : ""
                         } hover:bg-[#ee6730] group cursor-pointer w-full text-center p-1 rounded-full mr-1.5`}
-                        onClick={() => setCurrentTab(1)}
+                        onClick={() => setCurrentTab(3)}
                       >
                         <h3
                           className={`${
-                            currentTab == 1 ? "text-white" : "text-gray-300"
+                            currentTab == 3 ? "text-white" : "text-gray-300"
                           } group-hover:text-white text-xs xs:text-sm sm:text-base font-semibold`}
                         >
                           Past
@@ -364,13 +364,13 @@ function TeamProfileDetail() {
                       </div>
                       <div
                         className={`${
-                          currentTab == 2 ? "bg-[#ee6730]" : ""
+                          currentTab == 1 ? "bg-[#ee6730]" : ""
                         } hover:bg-[#ee6730] group cursor-pointer w-full text-center p-1 rounded-full`}
-                        onClick={() => setCurrentTab(2)}
+                        onClick={() => setCurrentTab(1)}
                       >
                         <h3
                           className={`${
-                            currentTab == 2 ? "text-white" : "text-gray-300"
+                            currentTab == 1 ? "text-white" : "text-gray-300"
                           } group-hover:text-white text-xs xs:text-sm sm:text-base font-semibold`}
                         >
                           Upcoming
