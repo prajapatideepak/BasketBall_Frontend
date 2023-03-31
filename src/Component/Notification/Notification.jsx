@@ -5,7 +5,7 @@ import { getNotification } from "../../redux/actions/Player";
 import { setNotfication } from "../../redux/slices/PlayerSlice";
 import { motion } from "framer-motion";
 export default function Notification() {
-  const { Notification } = useSelector((state) => state.playerReducer);
+  const { Notification } = useSelector((state) => state.player);
 
   const dispatch = useDispatch();
 
