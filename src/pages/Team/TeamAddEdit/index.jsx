@@ -1,20 +1,23 @@
 import React from "react";
+
 import { useNavigate, useLocation } from "react-router-dom";
 import { ImSearch } from "react-icons/im";
 import { BiEdit } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
 import { toast } from "react-toastify";
-import * as Yup from "yup";
+
 import { useFormik } from "formik";
 import Select from "react-select";
 import Heading from "../../../Component/Heading";
 import { useDispatch, useSelector } from "react-redux";
 import { TeamInfoSchema } from "../../../models/TeamInfoModel";
 import { useRegisterTeam } from "../../../hooks/usePost";
+import { teamApi, useTeamRegistrationMutation } from "../../../services/team";
 
 function TeamAddEdit() {
   const RegisterTeam = useRegisterTeam();
-
+  const [teamRegistration, { ...thing }] = useTeamRegistrationMutation();
+  console.log(thing);
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -82,14 +85,14 @@ function TeamAddEdit() {
         });
         fb.append("data", ok);
         fb.append("team_logo", logo);
-        RegisterTeam.mutate(fb);
+        // RegisterTeam.mutate(fb);
+        teamRegistration(fb).then(console.log("ho gaya"));
       } catch (err) {
         console.log(err);
       }
     },
   });
 
-  console.log(RegisterTeam);
   const [searchedPlayers, setSearchedPlayers] = React.useState([
     {
       id: 1,
@@ -144,6 +147,18 @@ function TeamAddEdit() {
       })
     );
   };
+
+  React.useEffect(() => {
+    if (thing.isError) {
+      toast.error(thing?.error?.data?.message);
+    }
+    if (thing.isSuccess) {
+      if (thing?.data?.success) {
+        toast.success("Team Registration Successfull ");
+        navigate(`/team/profile-detail/${thing?.data?.team?.id}`);
+      }
+    }
+  }, [thing.isError, thing.isSuccess]);
 
   const handleSave = (player_id) => {
     setSelectedPlayers(
@@ -573,7 +588,11 @@ function TeamAddEdit() {
             >
               <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#ee6730] rounded-lg group-hover:w-full group-hover:h-56"></span>
               <span className="relative">
-                {location?.state?.isEdit ? "UPDATE" : "SUBMIT"}
+                {thing.isLoading
+                  ? "SUBMIT..."
+                  : location?.state?.isEdit
+                  ? "UPDATE"
+                  : "SUBMIT"}
               </span>
             </button>
           </div>
