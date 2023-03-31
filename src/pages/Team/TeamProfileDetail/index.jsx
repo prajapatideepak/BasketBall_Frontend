@@ -16,158 +16,15 @@ function TeamProfileDetail() {
     teamId: team_id,
   });
 
-  console.log("team data ", data);
   const isPublicView = true;
 
-  const [enrolledTournaments, setEntrolledtournaments] = React.useState([
-    {
-      id: 1234,
-      tournament_name: "Gokuldham Premier League",
-      start_date: "12/5/2023",
-      end_date: "12/6/2023",
-      city: "Ahmedabad",
-    },
-    {
-      id: 1234,
-      tournament_name: "LJ Cup",
-      start_date: "12/5/2023",
-      end_date: "12/6/2023",
-      city: "Ahmedabad",
-    },
-  ]);
-
-  const [currentTab, setCurrentTab] = React.useState(2);
+  const [currentTab, setCurrentTab] = React.useState(1);
   const [currentTabMatches, setCurrentTabMatches] = React.useState([]);
-  const [pastMatches, setPastMatches] = React.useState([]);
-  const [upcomingMatches, setUpcomingMatches] = React.useState([]);
 
-  const teamDetails = {
-    team_id: 1001,
-    team_logo: "/CBL_Images/basketball_team_logo_2.webp",
-    team_name: "Mehta Ke Mahaarathi",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adip, Lorem ipsum dolor sit amet, consectetur adip",
-    coach_name: "Mohammadshad Mohammadsajid Rajput",
-    coach_mobile: "9000000000",
-    assistant_coach_name: "coach abc",
-    assistant_coach_mobile: "9989999999",
-    total_players: 7,
-    players: [
-      {
-        id: 1,
-        name: "Sadikali karadiya",
-        position: "point guard",
-        age: 24,
-        jersey_no: 10,
-      },
-      {
-        id: 2,
-        name: "Deepak Prajapati",
-        position: "center",
-        age: 26,
-        jersey_no: 11,
-      },
-      {
-        id: 1,
-        name: "Sadikali karadiya",
-        position: "point guard",
-        age: 25,
-        jersey_no: 12,
-      },
-      {
-        id: 2,
-        name: "Deepak Prajapati",
-        position: "center",
-        age: 22,
-        jersey_no: 13,
-      },
-      {
-        id: 1,
-        name: "Sadikali karadiya",
-        position: "point guard",
-        age: 22,
-        jersey_no: 14,
-      },
-      {
-        id: 2,
-        name: "Deepak Prajapati",
-        position: "center",
-        age: 23,
-        jersey_no: 15,
-      },
-    ],
-    captain: 1,
-    matches_played: 22,
-    matches_won: 18,
-    matches_lost: 4,
-  };
-
-  const allMatches = [
-    {
-      match_id: 12,
-      tournament_name: "Gokuldham Premier League",
-      team_1_logo: "/CBL_Images/basketball_team_logo_2.webp",
-      team_2_logo: "/CBL_Images/basketball_team_logo_1.webp",
-      team_1_name: "Mehta Ke Maharathi",
-      team_2_name: "Jetha Ke Jabaaz",
-      team_1_score: 24,
-      team_2_score: 22,
-      duration: 45,
-      address: "Amber tower, Sarkhej, Ahmedabad 380055",
-      is_successfull: 1,
-      time: "9:45 AM",
-      won_team: "Jetha Ke Jabaaz",
-      date: "12/12/2022",
-    },
-    {
-      match_id: 13,
-      tournament_name: "Gokuldham Premier League",
-      team_1_logo: "/CBL_Images/basketball_team_logo_2.webp",
-      team_2_logo: "/CBL_Images/basketball_team_logo_1.webp",
-      team_1_name: "Mehta Ke Maharathi",
-      team_2_name: "Jetha Ke Jabaaz",
-      team_1_score: 24,
-      team_2_score: 22,
-      duration: 45,
-      address: "Amber tower, Sarkhej, Ahmedabad 380055",
-      is_successfull: 0,
-      time: "9:45 AM",
-      won_team: "",
-      date: "12/12/2022",
-    },
-    {
-      match_id: 14,
-      tournament_name: "Gokuldham Premier League",
-      team_1_logo: "/CBL_Images/basketball_team_logo_2.webp",
-      team_2_logo: "/CBL_Images/basketball_team_logo_1.webp",
-      team_1_name: "Mehta Ke Maharathi",
-      team_2_name: "Jetha Ke Jabaaz",
-      team_1_score: 24,
-      team_2_score: 22,
-      duration: 45,
-      address: "Amber tower, Sarkhej, Ahmedabad 380055",
-      is_successfull: 0,
-      time: "9:45 AM",
-      won_team: "",
-      date: "12/12/2022",
-    },
-    {
-      match_id: 15,
-      tournament_name: "Gokuldham Premier League",
-      team_1_logo: "/CBL_Images/basketball_team_logo_2.webp",
-      team_2_logo: "/CBL_Images/basketball_team_logo_1.webp",
-      team_1_name: "Mehta Ke Maharathi",
-      team_2_name: "Jetha Ke Jabaaz",
-      team_1_score: 24,
-      team_2_score: 22,
-      duration: 45,
-      address: "Amber tower, Sarkhej, Ahmedabad 380055",
-      is_successfull: 0,
-      time: "9:45 AM",
-      won_team: "",
-      date: "12/12/2022",
-    },
-  ];
+  let allMatches =
+    data?.data && data?.data.team_1_matches && data?.data.team_2_matches
+      ? [...data?.data.team_1_matches, ...data?.data.team_2_matches]
+      : [];
 
   const handleUnenrollTournament = (tournament_id) => {
     try {
@@ -180,58 +37,23 @@ function TeamProfileDetail() {
     }
   };
 
-  const handleEdit = () => {
-    navigate("/team/add-edit", {
-      state: {
-        isEdit: true,
-        players: [
-          {
-            id: 1,
-            name: "Sadikali karadiya",
-            position: "point guard",
-            isEditable: false,
-          },
-          { id: 2, name: "Moin", position: "center", isEditable: false },
-        ],
-        team_name: teamDetails.team_name,
-        team_id: teamDetails.team_id,
-        about_team: teamDetails.description,
-        coach_name: teamDetails.coach_name,
-        coach_mobile: teamDetails.coach_mobile,
-        assistant_coach_name: teamDetails.assistant_coach_name,
-        assistant_coach_mobile: teamDetails.assistant_coach_mobile,
-        captain: 1,
-      },
-    });
-  };
+  console.log(allMatches);
 
   const navigateToTournamentProfile = (tournament_id) => {
     navigate(`/tournament-profile/${tournament_id}`);
   };
 
   React.useEffect(() => {
-    if (currentTab == 1) {
-      setCurrentTabMatches(pastMatches);
-    } else {
-      setCurrentTabMatches(upcomingMatches);
-    }
-  }, [currentTab]);
+    handleTabChange();
+  }, [currentTab, data]);
 
-  React.useEffect(() => {
-    let past = [];
-    let upcoming = [];
-    allMatches.map((match) => {
-      if (match.is_successfull == 1) {
-        past.push(match);
-      } else if (match.is_successfull == 0) {
-        upcoming.push(match);
-      }
+  function handleTabChange() {
+    setCurrentTabMatches((e) => {
+      return allMatches.filter((match) => {
+        return match?.status == currentTab;
+      });
     });
-
-    setCurrentTabMatches(upcoming);
-    setPastMatches(past);
-    setUpcomingMatches(upcoming);
-  }, []);
+  }
 
   return (
     <section className="min-h-screen-fit">
