@@ -110,7 +110,7 @@ export default function PlayerProfile() {
       {/*--------- notification seciton end--------------- */}
 
       {/* new sec */}
-      <div className="flex">
+      <div className="flex flex-col ">
         <div className=" p-4 space-y-8  mt-4">
           <div className=" flex justify-center">
             <Heading
@@ -119,15 +119,15 @@ export default function PlayerProfile() {
               margin={true}
             />
           </div>
-          {data?.SinglePlayerDetails?.id != params.id && (
+          {/* {data?.SinglePlayerDetails?.id != params.id && ( */}
             <div className="flex  mx-auto">
               {data?.SinglePlayerDetails?.team_players.map((team) => {
                 return <TeamCard  teamDetails={team.teams} />;
               })}
             </div>
-          )}
+          {/* )} */}
           {data?.SinglePlayerDetails?.id == params.id && (
-            <div className="overflow-x-scroll">
+            <div className="overflow-x-scroll ">
               <table className="items-center bg-transparent w-full border-collapse ">
                 <thead>
                   <tr>
@@ -144,7 +144,6 @@ export default function PlayerProfile() {
                 </thead>
                 <tbody>
                   {data?.SinglePlayerDetails?.team_players.map((team) => {
-                    console.log(team)
                     return (
                       <tr className="cursor-pointer border-b">
                         <th className="border-t-0 px-6 align-middle border-l-0 border-r-0  text-sm md:text-base whitespace-nowrap p-4 text-left text-gray-700 capitalize">
@@ -184,7 +183,7 @@ export default function PlayerProfile() {
             </div>
           )}
         </div>
-        {/* <div className=" py-4">
+        <div className=" py-4">
           <div className="px-1 text-lg lg:w-1/3 mx-auto  py-1 text-white  flex  text-center justify-center items-center mt-2 rounded-full space-x-2 bg-black">
             <motion.span
               animate={{
@@ -213,7 +212,7 @@ export default function PlayerProfile() {
             <MatchCard match={match} />
             <MatchCard match={match} />
           </div>
-        </div> */}
+        </div>
       </div>
     </div>
   );

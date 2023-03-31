@@ -10,7 +10,7 @@ export default function PlayerAvtar({ player }) {
 
       <div className="p-2 space-y-1">
         <h1 className="text-3xl text-center text-gray-900">
-          {player?.SinglePlayerDetails.middle_name} {player?.SinglePlayerDetails.last_name}
+          {player?.SinglePlayerDetails?.middle_name} {player?.SinglePlayerDetails?.last_name}
         </h1>
         <div className="flex items-center justify-center">
           <span className="px-2    text-xs italic bg-orange-600 font-semibold text-white rounded-lg ">
@@ -19,7 +19,7 @@ export default function PlayerAvtar({ player }) {
           </span>
           <span>-</span>
           <span className="px-2  text-xs italic bg-gray-800 font-semibold text-white rounded-lg ">
-            {player?.SinglePlayerDetails.playing_position}
+            {player?.SinglePlayerDetails?.playing_position}
           </span>
         </div>
         <p className="text-center text-gray-600 text-sm lg:w-1/2 mx-auto">

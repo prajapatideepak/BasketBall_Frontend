@@ -2,6 +2,8 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 function TeamCard({ teamDetails }) {
+
+  console.log(teamDetails , "teamdetails")
   const navigate = useNavigate();
 
   const {
