@@ -1,53 +1,30 @@
 import React from "react";
+
 import { useNavigate, useLocation } from "react-router-dom";
 import { ImSearch } from "react-icons/im";
 import { BiEdit } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
 import { toast } from "react-toastify";
-import * as Yup from "yup";
 import { useFormik } from "formik";
-import Select from "react-select";
 import Heading from "../../../Component/Heading";
 import { useDispatch, useSelector } from "react-redux";
 import { TeamInfoSchema } from "../../../models/TeamInfoModel";
 import { useRegisterTeam } from "../../../hooks/usePost";
+import {
+  useTeamRegistrationMutation,
+  useTeamUpdateMutation,
+} from "../../../services/team";
 
 function TeamAddEdit() {
-  const RegisterTeam = useRegisterTeam();
-
-  const navigate = useNavigate();
   const location = useLocation();
+  const [teamRegistration, { ...thing }] = useTeamRegistrationMutation();
+  const [teamUpdate, { ...updateData }] = useTeamUpdateMutation();
+
+  console.log(updateData);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { TeamForm } = useSelector((state) => state.teamReducer);
+  const { TeamForm } = useSelector((state) => state.team);
   const [logo, setLogo] = React.useState("");
-  const customStyles = {
-    control: (provided, state) => ({
-      ...provided,
-      background: "#fff",
-      borderColor: "rgb(229 231 235)",
-      minHeight: "35px",
-      height: "35px",
-      boxShadow: state.isFocused ? null : null,
-    }),
-
-    valueContainer: (provided, state) => ({
-      ...provided,
-      height: "35px",
-      padding: "0 6px",
-    }),
-
-    input: (provided, state) => ({
-      ...provided,
-      margin: "0px",
-    }),
-    indicatorSeparator: (state) => ({
-      display: "none",
-    }),
-    indicatorsContainer: (provided, state) => ({
-      ...provided,
-      height: "35px",
-    }),
-  };
 
   const {
     values,
@@ -60,7 +37,9 @@ function TeamAddEdit() {
     handleSubmit,
   } = useFormik({
     validationSchema: TeamInfoSchema,
-    initialValues: TeamForm.TeamInfo,
+    initialValues: location?.state?.isEdit
+      ? location.state.teamDetail
+      : TeamForm.TeamInfo,
     onSubmit: (data) => {
       // //If captain not selected
       // if(data.captain.value == ''){
@@ -78,18 +57,24 @@ function TeamAddEdit() {
         const fb = new FormData();
         let ok = JSON.stringify({
           TeamInfo: data,
-          PlayerList: searchedPlayers,
+          PlayerList: [],
         });
         fb.append("data", ok);
         fb.append("team_logo", logo);
-        RegisterTeam.mutate(fb);
+
+        console.log(location.state?.isEdit);
+        if (location?.state?.isEdit) {
+          fb.append("id", location.state.teamDetail.id);
+          teamUpdate(fb).then(console.log("update ho gai"));
+        } else {
+          teamRegistration(fb).then(console.log("ho gaya"));
+        }
       } catch (err) {
-        console.log(err); 
+        console.log(err);
       }
     },
   });
 
-  console.log(RegisterTeam);
   const [searchedPlayers, setSearchedPlayers] = React.useState([
     {
       id: 1,
@@ -108,14 +93,14 @@ function TeamAddEdit() {
 
   const handleSearchPlayerClick = (player_id) => {
     //Cant select more than 12 players
-    if (selectedPlayers.length == 2) {
+    if (selectedPlayers?.length == 2) {
       toast.error("Can't select more than 12 players");
       return;
     }
 
     //If player already selected
     let isFound = false;
-    selectedPlayers.map((item) => {
+    selectedPlayers?.map((item) => {
       if (item.id == player_id) isFound = true;
     });
 
@@ -145,6 +130,32 @@ function TeamAddEdit() {
     );
   };
 
+  React.useEffect(() => {
+    if (thing.isError) {
+      toast.error(thing?.error?.data?.message);
+    }
+    if (thing.isSuccess) {
+      if (thing?.data?.success) {
+        toast.success("Team Registration Successfull ");
+
+        navigate(`/team/profile-detail/${thing?.data?.team?.id}`);
+      }
+    }
+  }, [thing.isError, thing.isSuccess]);
+
+  React.useEffect(() => {
+    if (updateData.isError) {
+      toast.error(updateData?.error?.data?.message);
+    }
+    if (updateData.isSuccess) {
+      if (updateData?.data?.success) {
+        toast.success("Team Update   Successfull ");
+        navigate(`/team/profile-detail/${updateData?.data?.team?.id}`);
+      }
+    }
+  }, [updateData.isError, updateData.isSuccess]);
+
+  console.log(updateData);
   const handleSave = (player_id) => {
     setSelectedPlayers(
       selectedPlayers.map((item) => {
@@ -185,6 +196,7 @@ function TeamAddEdit() {
     setSelectedPlayers(location?.state?.isEdit ? location?.state?.players : []);
   }, []);
 
+  console.log(logo);
   return (
     <section className="min-h-screen-fit">
       <div className="heading-container flex justify-center items-center h-24 sm:h-32 md:h-48">
@@ -232,7 +244,6 @@ function TeamAddEdit() {
                   name="team_l"
                   id="team_logo"
                   accept=".png, .jpg, .jpeg"
-                  value={values.team_logo}
                   onChange={(e) => handleImageUpload(e)}
                 />
               </div>
@@ -303,15 +314,15 @@ function TeamAddEdit() {
                   className="w-full outline-blue-200 rounded-lg border-2 border-gray-200 p-2 sm:p-3 text-sm"
                   placeholder="Enter asst. coach name"
                   type="text"
-                  name="assistant_coach_name"
-                  id="assistant_coach_name"
-                  value={values.assistant_coach_name}
+                  name="asst_coach_name"
+                  id="asst_coach_name"
+                  value={values.asst_coach_name}
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
-                {errors.assistant_coach_name && touched.assistant_coach_name ? (
+                {errors.asst_coach_name && touched.asst_coach_name ? (
                   <small className="text-red-600 mt-2">
-                    {errors.assistant_coach_name}
+                    {errors.asst_coach_name}
                   </small>
                 ) : null}
               </div>
@@ -321,16 +332,15 @@ function TeamAddEdit() {
                   className="w-full outline-blue-200 rounded-lg border-2 border-gray-200 p-2 sm:p-3 text-sm"
                   placeholder="Enter asst. coach mobile no."
                   type="text"
-                  name="assistant_coach_mobile"
-                  id="assistant_coach_mobile"
-                  value={values.assistant_coach_mobile}
+                  name="asst_coach_mobile"
+                  id="asst_coach_mobile"
+                  value={values.asst_coach_mobile}
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
-                {errors.assistant_coach_mobile &&
-                touched.assistant_coach_mobile ? (
+                {errors.asst_coach_mobile && touched.asst_coach_mobile ? (
                   <small className="text-red-600 mt-2">
-                    {errors.assistant_coach_mobile}
+                    {errors.asst_coach_mobile}
                   </small>
                 ) : null}
               </div>
@@ -436,7 +446,7 @@ function TeamAddEdit() {
                     </tr>
                   </thead>
                   <tbody className="bg-white">
-                    {selectedPlayers.length > 0 ? (
+                    {selectedPlayers?.length > 0 ? (
                       selectedPlayers.map((player, index) => {
                         return (
                           <tr key={index} className="border-t-2">
@@ -573,7 +583,13 @@ function TeamAddEdit() {
             >
               <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#ee6730] rounded-lg group-hover:w-full group-hover:h-56"></span>
               <span className="relative">
-                {location?.state?.isEdit ? "UPDATE" : "SUBMIT"}
+                {thing.isLoading
+                  ? "SUBMIT..."
+                  : updateData.isLoading
+                  ? "Updating..."
+                  : location?.state?.isEdit
+                  ? "UPDATE"
+                  : "SUBMIT"}
               </span>
             </button>
           </div>
