@@ -8,21 +8,21 @@ import { useRegisterPlayer } from "../../../hooks/usePost";
 
 
 const GameInfo = ({ index, setIndex }) => {
+  const dispatch = useDispatch();
   const RegisterTeam = useRegisterPlayer();
   const { PlayerForm } = useSelector((state) => state.player);
-  console.log(PlayerForm)
   const { values, errors, touched, handleSubmit, handleChange, handleBlur } =
     useFormik({
       initialValues: PlayerForm.gameInfo,
       validationSchema: GameInfoSchema,
       onSubmit: (values) => {
-        const data = {PlayerForm}
+        dispatch(setGameInfoForm(values));
         try {
           const fb = new FormData();
           let ok = JSON.stringify({
-            PlayerInfo: data,
+            PlayerInfo: PlayerForm,
           });
-          RegisterTeam.mutate(fb);
+          // RegisterTeam.mutate(ok);
         } catch (err) {
           console.log(err);
         }
@@ -31,7 +31,7 @@ const GameInfo = ({ index, setIndex }) => {
 
   return (
     <>
-      <form className="flex w-full  space-x-3">
+      <form action="" className="flex w-full  space-x-3">
         <div className="w-full  px-5  m-auto dark:bg-gray-800">
           <h1 className="py-2 text-xl text-center md:text-left my-2 text-orange-600">
             Game Information

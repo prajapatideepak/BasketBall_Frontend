@@ -37,7 +37,6 @@ function TeamsList() {
         </div>
         {data?.data && data?.data.length > 0 ? (
           data?.data.map((team) => {
-            console.log(team , "team");
             return <TeamCard key={team?.id} teamDetails={team} />;
           })
         ) : (

@@ -5,15 +5,24 @@ import Heading from "../../../Component/Heading";
 import { useDispatch, useSelector } from "react-redux";
 import { setBasicInfoForm } from "../../../redux/actions/Player";
 import { basicInfoSchema } from "../../../models/BasicInfoModel";
+import "../../../Component/Style/PlayerProfile.css"
 
 const BasicInfo = ({ index, setIndex }) => {
+  const dispatch = useDispatch();
+  const defaultImage = "/CBL_Images/player-default-profile.webp"
+  const [img, setImg] = React.useState(defaultImage);
+  const onImageChange = (e) => {
+    const [photo] = e.target.files;
+    console.log(photo)
+    setImg(URL.createObjectURL(photo));
+  };
   const { PlayerForm } = useSelector((state) => state.player);
-
   const { values, touched, errors, handleChange, handleSubmit, handleBlur } =
     useFormik({
       initialValues: PlayerForm.basicInfo,
       validationSchema: basicInfoSchema,
       onSubmit: (values) => {
+        console.log(values);
         setIndex(2);
         dispatch(setBasicInfoForm(values));
       },
@@ -30,7 +39,31 @@ const BasicInfo = ({ index, setIndex }) => {
               </h1>
             </div>
             <div className="md:col-span-1   md:flex justify-center md:justify-center items-center ">
-              <div className="flex flex-col items-center mb-2 md:items-center md:justify-end px-8">
+              <div className='profile_img_div flex justify-center rounded-full items-center border-2 border-gray-500 shadow-lg'>
+                <img src={img} width="100%" height="100%" alt="student profile" />
+                <div className='profile_img_overlay absolute flex flex-col justify-center items-center'>
+                  <input type='file' id="photo" className="rounded-md w-16" accept=".png, .jpg, .jpeg" name="photo"
+                    value={values.photo}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    onInput={onImageChange} />
+                  {
+                    img != defaultImage
+                      ?
+                      <button
+                        className='bg-red-600 px-1 rounded text-white hover:bg-red-400 mt-5 flex items-center justify-center gap-3' onClick={() => {
+                          setImg(defaultImage);
+                          // document.getElementById('file').value = ''
+                        }}>
+                        <span> Remove</span>
+                      </button>
+                      :
+                      null
+                  }
+
+                </div>
+              </div>
+              {/* <div className="flex flex-col items-center mb-2 md:items-center md:justify-end px-8">
                 <img
                   className="w-24 h-24 md:w-28 md:h-28 rounded-full shadow-xl object-cover"
                   src="/CBL_Images/player-default-profile.webp"
@@ -39,11 +72,7 @@ const BasicInfo = ({ index, setIndex }) => {
                   type="file"
                   id="for-file-upload"
                   className="hidden  "
-                  name="photo"
                   placeholder=""
-                  value={values.photo}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
                 />
                 <div className="mt-2 ">
                   <label
@@ -54,8 +83,9 @@ const BasicInfo = ({ index, setIndex }) => {
                     Upload Image
                   </label>
                 </div>
-              </div>
+              </div> */}
             </div>
+
             <div className="  ">
               <label htmlFor="firstName" className="text-gray-700">
                 First Name

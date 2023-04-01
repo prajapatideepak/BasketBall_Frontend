@@ -28,8 +28,6 @@ const PlayerSlice = createSlice({
   },
   reducers: {
     getPlayers: (state, action) => {
-      console.log("hmm");
-      console.log(action);
       state.PlayerList = action.payload;
     },
     setPlayerDetail: (state, action) => {
