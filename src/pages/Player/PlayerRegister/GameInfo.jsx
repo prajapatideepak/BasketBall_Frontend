@@ -4,18 +4,28 @@ import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { setGameInfoForm } from "../../../redux/actions/Player";
 import { GameInfoSchema } from "../../../models/GameInfoModel";
+import { useRegisterPlayer } from "../../../hooks/usePost";
+
 
 const GameInfo = ({ index, setIndex }) => {
-  const dispatch = useDispatch();
+  const RegisterTeam = useRegisterPlayer();
   const { PlayerForm } = useSelector((state) => state.player);
-
+  console.log(PlayerForm)
   const { values, errors, touched, handleSubmit, handleChange, handleBlur } =
     useFormik({
       initialValues: PlayerForm.gameInfo,
       validationSchema: GameInfoSchema,
       onSubmit: (values) => {
-        console.log(values);
-        dispatch(setGameInfoForm(values));
+        const data = {PlayerForm}
+        try {
+          const fb = new FormData();
+          let ok = JSON.stringify({
+            PlayerInfo: data,
+          });
+          RegisterTeam.mutate(fb);
+        } catch (err) {
+          console.log(err);
+        }
       },
     });
 

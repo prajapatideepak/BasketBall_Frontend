@@ -7,16 +7,13 @@ import { setBasicInfoForm } from "../../../redux/actions/Player";
 import { basicInfoSchema } from "../../../models/BasicInfoModel";
 
 const BasicInfo = ({ index, setIndex }) => {
-  const dispatch = useDispatch();
   const { PlayerForm } = useSelector((state) => state.player);
-  console.log(PlayerForm);
 
   const { values, touched, errors, handleChange, handleSubmit, handleBlur } =
     useFormik({
       initialValues: PlayerForm.basicInfo,
       validationSchema: basicInfoSchema,
       onSubmit: (values) => {
-        console.log(values);
         setIndex(2);
         dispatch(setBasicInfoForm(values));
       },
@@ -42,7 +39,11 @@ const BasicInfo = ({ index, setIndex }) => {
                   type="file"
                   id="for-file-upload"
                   className="hidden  "
+                  name="photo"
                   placeholder=""
+                  value={values.photo}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                 />
                 <div className="mt-2 ">
                   <label
@@ -242,9 +243,8 @@ const BasicInfo = ({ index, setIndex }) => {
                 </div>
               </div>
               <span
-                className={`text-sm font-semibold  text-red-600 px-1 ${
-                  errors.gender && touched.gender ? "" : "hidden  "
-                }`}
+                className={`text-sm font-semibold  text-red-600 px-1 ${errors.gender && touched.gender ? "" : "hidden  "
+                  }`}
               >
                 {errors.gender && touched.gender ? errors.gender : null}
               </span>

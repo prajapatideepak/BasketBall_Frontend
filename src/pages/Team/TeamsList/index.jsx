@@ -15,7 +15,6 @@ function TeamsList() {
   const [pageNo, setPageNo] = React.useState(1);
   const rojki = useGetTeamListQuery({ pageNo: pageNo - 1, search });
   const { isLoading, data } = rojki;
-  console.log(data , "data");
 
   return (
     <section className="min-h-screen">

@@ -8,3 +8,9 @@ export function useRegisterTeam() {
     axios.post(`${SERVER}/team/registration`, values).then((res) => res.data)
   );
 }
+
+export function useRegisterPlayer() {
+  return useMutation((values) =>
+    axios.post(`${SERVER}/players/registration`, values).then((res) => res.data)
+  );
+}

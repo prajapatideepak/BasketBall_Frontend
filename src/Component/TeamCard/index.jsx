@@ -2,22 +2,8 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 function TeamCard({ teamDetails }) {
-
-  console.log(teamDetails , "teamdetails")
+  console.log(teamDetails) 
   const navigate = useNavigate();
-
-  const {
-    team_id,
-    logo,
-    about_team,
-    team_name,
-    total_players,
-    matches_played,
-    matches_won,
-    team_players,
-    matches_lost,
-    id,
-  } = teamDetails;
 
   return (
     <div
@@ -28,18 +14,18 @@ function TeamCard({ teamDetails }) {
         <div className="flex w-full sm:w-4/5 md:w-2/4 lg:w-2/5">
           <div className="team_logo w-1/3 lg:w-24">
             <img
-              src={logo}
+              src={teamDetails?.logo}
               className="w-20 h-20 rounded-full object-cover "
               alt="team logo"
             />
           </div>
           <div className="flex flex-col justify-center ml-5 w-full h-full">
             <h3 className="text-gray-200 font-medium sm:text-lg md:text-xl xl:text-2xl">
-              {team_name}
+              {teamDetails?.team_name}
             </h3>
-            {about_team != "" && about_team != " " ? (
+            {teamDetails?.about_team != "" && teamDetails?.about_team != "" ? (
               <p className="text-xs sm:text-sm mt-1 xl:mt-2 text-gray-400 text-ellipsis line-clamp-2 overflow-hidden">
-                {about_team}
+                {teamDetails?.about_team}
               </p>
             ) : (
               <p className="text-xs sm:text-sm mt-1 xl:mt-2 text-gray-400 text-ellipsis line-clamp-2 overflow-hidden">
@@ -54,9 +40,9 @@ function TeamCard({ teamDetails }) {
               Total Players
             </h4>
             <p className="text-gray-200">
-              {team_players?.length < 10
-                ? "0" + team_players?.length
-                : total_players?.length}
+              {teamDetails?.team_players?.length < 10
+                ? "0" + teamDetails?.team_players?.length
+                : teamDetails?.total_players?.length}
             </p>
           </div>
           <div className="flex flex-col justify-center items-center ">
@@ -64,7 +50,7 @@ function TeamCard({ teamDetails }) {
               Matches Played
             </h4>
             <p className="text-gray-200">
-              {matches_played < 10 ? "0" + matches_played : matches_played}
+              {teamDetails?.matches_played < 10 ? "0" + teamDetails?.matches_played : teamDetails?.matches_played}
             </p>
           </div>
           <div className="flex flex-col justify-center items-center ">
@@ -72,7 +58,7 @@ function TeamCard({ teamDetails }) {
               Won
             </h4>
             <p className="text-gray-200">
-              {matches_won < 10 ? "0" + matches_won : matches_won}
+              {teamDetails?.matches_won < 10 ? "0" + teamDetails?.matches_won : teamDetails?.matches_won}
             </p>
           </div>
           <div className="flex flex-col justify-center items-center ">
@@ -80,7 +66,7 @@ function TeamCard({ teamDetails }) {
               Lost
             </h4>
             <p className="text-gray-200">
-              {matches_lost < 10 ? "0" + matches_lost : matches_lost}
+              {teamDetails?.matches_lost < 10 ? "0" + teamDetails?.matches_lost : teamDetails?.matches_lost}
             </p>
           </div>
         </div>

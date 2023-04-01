@@ -20,58 +20,8 @@ import { useGetPlayerDetailsQuery } from '../../../services/player';
 export default function PlayerProfile() {
   const params = useParams();
   const { data, isLoading, error } = useGetPlayerDetailsQuery(params.id);
-  const PlayerDetail = [
-    {
-      id: 1,
-      status: true,
-      basicinfo: {
-        img: "/CBL_Images/player-default-profile.webp",
-        firstName: "Deepak",
-        email: "wellbenix@gmail.com",
-        lastName: "Prajapati",
-        dateofbirth: new Date(),
-        gender: "m",
-        pincode: "382340",
-      },
-      gameinfo: {
-        height: "168",
-        weight: "200",
-        playerPosition: "Center",
-        JerseyNumber: "69",
-        Experience:
-          "Lorem ipsum dolor, sit amet consectetur adipisicing elit. ur amet. Tempora aspernatur accusantium ipsam adipisci voluptatibus.",
-      },
-      statics: {
-        totalMatch: 100,
-        matchWon: 100,
-        matchLoss: 0,
-        totalScore: 320,
-      },
-      teamDetails: [
-        {
-          team_id: 1001,
-          team_logo: "/CBL_Images/basketball_team_logo_2.webp",
-          team_name: "Mehta Ke Mahaarathi",
-          description:
-            "Lorem ipsum dolor sit amet, consectetur adip, Lorem ipsum dolor sit amet, consectetur adip",
-          coach_name: "Mohammadshad Mohammadsajid Rajput",
-          coach_mobile: "9000000000",
-          assistant_coach_name: "coach abc",
-          assistant_coach_mobile: "9989999999",
-          total_players: 7,
-          captain: 1,
-          matches_played: 22,
-          matches_won: 18,
-          matches_lost: 4,
-        },
-      ],
-    },
-  ];
-
-  useEffect(() => {
-    // dispatch(findPlayer(params.id));
-  }, []);
-
+  console.log(data)
+  const [currentTabMatches, setCurrentTabMatches] = React.useState([])
   const [tab, setTab] = React.useState(1);
   const match = {
     match_id: 12,
@@ -119,13 +69,13 @@ export default function PlayerProfile() {
               margin={true}
             />
           </div>
-          {/* {data?.SinglePlayerDetails?.id != params.id && ( */}
+          {data?.SinglePlayerDetails?.id != params.id && (
             <div className="flex  mx-auto">
               {data?.SinglePlayerDetails?.team_players.map((team) => {
                 return <TeamCard  teamDetails={team.teams} />;
               })}
             </div>
-          {/* )} */}
+          )}
           {data?.SinglePlayerDetails?.id == params.id && (
             <div className="overflow-x-scroll ">
               <table className="items-center bg-transparent w-full border-collapse ">
@@ -183,7 +133,7 @@ export default function PlayerProfile() {
             </div>
           )}
         </div>
-        <div className=" py-4">
+        {/* <div className=" py-4">
           <div className="px-1 text-lg lg:w-1/3 mx-auto  py-1 text-white  flex  text-center justify-center items-center mt-2 rounded-full space-x-2 bg-black">
             <motion.span
               animate={{
@@ -205,14 +155,9 @@ export default function PlayerProfile() {
             </motion.span>
           </div>
           <div className="   px-2 py-2 player-container w-full flex flex-nowrap gap-8 sm:gap-16 md:gap-20 mt-10 overflow-x-auto ">
-            {/* <MatchCard match={match} />
             <MatchCard match={match} />
-            <MatchCard match={match} />
-            <MatchCard match={match} />
-            <MatchCard match={match} />
-            <MatchCard match={match} /> */}
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
