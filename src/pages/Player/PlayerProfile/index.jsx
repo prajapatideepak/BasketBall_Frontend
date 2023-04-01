@@ -205,12 +205,12 @@ export default function PlayerProfile() {
             </motion.span>
           </div>
           <div className="   px-2 py-2 player-container w-full flex flex-nowrap gap-8 sm:gap-16 md:gap-20 mt-10 overflow-x-auto ">
+            {/* <MatchCard match={match} />
             <MatchCard match={match} />
             <MatchCard match={match} />
             <MatchCard match={match} />
             <MatchCard match={match} />
-            <MatchCard match={match} />
-            <MatchCard match={match} />
+            <MatchCard match={match} /> */}
           </div>
         </div>
       </div>
