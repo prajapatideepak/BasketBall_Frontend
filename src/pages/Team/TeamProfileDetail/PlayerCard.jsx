@@ -5,7 +5,7 @@ function PlayerCard({ id, photo, name, position, age, jersey_no }) {
   const navigate = useNavigate();
   return (
     <div
-      className="group overflow-hidden cursor-pointer"
+      className="group overflow-hidden  cursor-pointer"
       style={{
         minWidth: "240px",
         boxShadow:
@@ -16,7 +16,7 @@ function PlayerCard({ id, photo, name, position, age, jersey_no }) {
       <div className="overflow-hidden w-60 h-52 bg-white">
         <img
           src={photo}
-          className="object-contain group-hover:scale-105 transition-all duration-500"
+          className="object-cover h-full   group-hover:scale-105 transition-all duration-500"
           alt=""
         />
       </div>
@@ -24,7 +24,8 @@ function PlayerCard({ id, photo, name, position, age, jersey_no }) {
         <div className="px-3 py-1">
           <h4 className="text-gray-200 capitalize">{name}</h4>
           <p className="text-orange-400 text-xs tracking-wide capitalize">
-            {position} <span className="text-gray-400 font-medium">(Age: {age})</span>
+            {position}{" "}
+            <span className="text-gray-400 font-medium">(Age: {age})</span>
           </p>
         </div>
         <div className="flex flex-1 justify-end">
