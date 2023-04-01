@@ -6,20 +6,16 @@ import { BiEdit } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
 import { toast } from "react-toastify";
 import { useFormik } from "formik";
-import Select from "react-select";
 import Heading from "../../../Component/Heading";
 import { useDispatch, useSelector } from "react-redux";
 import { TeamInfoSchema } from "../../../models/TeamInfoModel";
 import { useRegisterTeam } from "../../../hooks/usePost";
 import {
-  teamApi,
-  useGetTeamDetailQuery,
   useTeamRegistrationMutation,
   useTeamUpdateMutation,
 } from "../../../services/team";
 
 function TeamAddEdit() {
-  const RegisterTeam = useRegisterTeam();
   const location = useLocation();
   const [teamRegistration, { ...thing }] = useTeamRegistrationMutation();
   const [teamUpdate, { ...updateData }] = useTeamUpdateMutation();
@@ -41,7 +37,7 @@ function TeamAddEdit() {
     handleSubmit,
   } = useFormik({
     validationSchema: TeamInfoSchema,
-    initialValues: location.state.isEdit
+    initialValues: location?.state?.isEdit
       ? location.state.teamDetail
       : TeamForm.TeamInfo,
     onSubmit: (data) => {
@@ -61,13 +57,13 @@ function TeamAddEdit() {
         const fb = new FormData();
         let ok = JSON.stringify({
           TeamInfo: data,
-          PlayerList: searchedPlayers,
+          PlayerList: [],
         });
         fb.append("data", ok);
         fb.append("team_logo", logo);
 
-        console.log(location.state.isEdit);
-        if (location.state.isEdit) {
+        console.log(location.state?.isEdit);
+        if (location?.state?.isEdit) {
           fb.append("id", location.state.teamDetail.id);
           teamUpdate(fb).then(console.log("update ho gai"));
         } else {
