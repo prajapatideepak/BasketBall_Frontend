@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import UploadImageModal from "./UploadImageModal";
@@ -7,13 +7,17 @@ import Button from "../../../Component/Button";
 import MatchFormModal from "./MatchFormModal";
 import CreatePoolModal from "./CreatePoolModal";
 import RejectReasonModal from "./RejectReasonModal";
+import { useTeamsRequestQuery } from "../../../services/organizer";
 
 function Admin() {
   const navigate = useNavigate();
+  const {tournament_id} = useParams();
   const [imageUploadModal, setImageUploadModal] = useState(false);
   const [matchFormModal, setMatchFormModal] = React.useState(false);
   const [createPoolModal, setCreatePoolModal] = React.useState(false);
   const [rejectReasonModal, setRejectReasonModal] = React.useState(false);
+
+  const teamsRequest = useTeamsRequestQuery(tournament_id)
 
   const handleImageUpload = () => {
     setImageUploadModal(true);
@@ -201,39 +205,43 @@ function Admin() {
               </tr>
             </thead>
             <tbody>
-              <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th
-                  scope="row"
-                  className="px-6 py-4 font-medium whitespace-nowrap"
-                >
-                  1
-                </th>
-                <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                  <span
-                    className="cursor-pointer hover:text-gray-300"
-                    onClick={() => navigate(`/team/profile-detail/1`)}
-                  >
-                    Mehta Ke Mahaarathi{" "}
-                  </span>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">02/03/2023</td>
-                <td className="px-6 py-4 whitespace-nowrap">Under 19</td>
-                <td className="px-6 py-4 whitespace-nowrap">Boys</td>
-                <td className="flex items-center px-6 py-4 whitespace-nowrap space-x-3">
-                  <span
-                    className="font-medium text-blue-600 dark:text-blue-500 cursor-pointer"
-                    onClick={handleApproveRequest}
-                  >
-                    Approve
-                  </span>
-                  <span
-                    className="font-medium text-red-600 dark:text-red-500 cursor-pointer"
-                    onClick={handleRejectRequest}
-                  >
-                    Reject
-                  </span>
-                </td>
-              </tr>
+              {
+                teamsRequest.data?.teams.map((item, index)=>{
+                  return<tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <th
+                      scope="row"
+                      className="px-6 py-4 font-medium whitespace-nowrap"
+                    >
+                      1
+                    </th>
+                    <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                      <span
+                        className="cursor-pointer hover:text-gray-300"
+                        onClick={() => navigate(`/team/profile-detail/1`)}
+                      >
+                        Mehta Ke Mahaarathi{" "}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">02/03/2023</td>
+                    <td className="px-6 py-4 whitespace-nowrap">Under 19</td>
+                    <td className="px-6 py-4 whitespace-nowrap">Boys</td>
+                    <td className="flex items-center px-6 py-4 whitespace-nowrap space-x-3">
+                      <span
+                        className="font-medium text-blue-600 dark:text-blue-500 cursor-pointer"
+                        onClick={handleApproveRequest}
+                      >
+                        Approve
+                      </span>
+                      <span
+                        className="font-medium text-red-600 dark:text-red-500 cursor-pointer"
+                        onClick={handleRejectRequest}
+                      >
+                        Reject
+                      </span>
+                    </td>
+                  </tr>
+                })
+              }
             </tbody>
           </table>
         </div>

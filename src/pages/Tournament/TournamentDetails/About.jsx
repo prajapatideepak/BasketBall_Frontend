@@ -2,12 +2,15 @@ import { lazy } from 'react'
 import Heading from '../../../Component/Heading'
 import { useParams, useNavigate } from 'react-router-dom';
 import Button from '../../../Component/Button'
+import moment from 'moment'
 
 
 const About = ({tournamentdetails}) => {
   const isPublicView = false;
   const params = useParams();
   const navigate = useNavigate();
+
+  console.log(tournamentdetails)
 
   return (
     <>
@@ -24,7 +27,7 @@ const About = ({tournamentdetails}) => {
                 <label className="mb-2 text-xs xs:text-sm md:text-base text-gray-400">Start Date</label>
                 <div className="border-2 border-orange-100 px-2 py-2 my-2 rounded-lg bg-white capitalize font-medium text-xs xs:text-sm md:text-base">
                   <p>
-                    {tournamentdetails.starting_date == '' ? '--' : tournamentdetails.starting_date}
+                    { tournamentdetails.start_date == '' ? '--' :  moment(tournamentdetails.start_date).format("D MMM YYYY")}
                   </p>
                 </div>
               </div>
@@ -32,7 +35,7 @@ const About = ({tournamentdetails}) => {
                 <label className="mb-2 text-gray-400 text-xs xs:text-sm md:text-base">End Date</label>
                 <div className="border-2 border-orange-100 px-2 py-2 my-2 rounded-lg bg-white capitalize font-medium text-xs xs:text-sm md:text-base">
                   <p>
-                    {tournamentdetails.ending_date == '' ? '--' : tournamentdetails.ending_date}
+                    {tournamentdetails.end_date == '' ? '--' : moment(tournamentdetails.end_date).format("D MMM YYYY")}
                   </p>
                 </div>
               </div>
@@ -43,7 +46,7 @@ const About = ({tournamentdetails}) => {
               </label>
               <div className="border-2 border-orange-100 px-2 py-2 rounded-lg bg-white capitalize font-medium text-xs xs:text-sm md:text-base">
                 <p>
-                  {tournamentdetails.city_name == '' ? '--' : tournamentdetails.city_name}
+                  {tournamentdetails.address == '' ? '--' : tournamentdetails.address}
                 </p>
               </div>
             </div>
@@ -55,9 +58,11 @@ const About = ({tournamentdetails}) => {
                 Category
               </label>
               <div className="border-2 border-orange-100 px-2 py-2 rounded-lg bg-white capitalize font-medium text-xs xs:text-sm md:text-base">
-                <p>
-                  {tournamentdetails.tournament_category == '' ? '--' : tournamentdetails.tournament_category}
-                </p>
+                {
+                  tournamentdetails.gender_types.map((item, index)=>{
+                    return <span className="mr-1">{item}{index != tournamentdetails.gender_types.length-1 ? ',' : ''}</span>;
+                  })
+                }
               </div>
             </div>
             <div className="flex flex-col w-full">
@@ -66,48 +71,33 @@ const About = ({tournamentdetails}) => {
               </label>
               <div className="border-2 border-orange-100 px-2 py-2 rounded-lg bg-white capitalize font-medium text-xs xs:text-sm md:text-base">
                 <p>
-                  {tournamentdetails.tournament_level == '' ? '--' : tournamentdetails.tournament_level}
+                  {tournamentdetails.level == '' ? '--' : tournamentdetails.level}
                 </p>
               </div>
             </div>
           </div>
-          {/* City name && Price Money */}
           <div className="flex flex-col md:flex-row  2 gap-6 my-7 ">
             <div className="flex space-x-5  w-full ">
               <div className="flex flex-col w-full">
                 <label className="mb-2 text-gray-400 text-xs xs:text-sm md:text-base">
-                  Type
+                  Age Cut-off
                 </label>
                 <div className="border-2 border-orange-100 px-2 py-2 rounded-lg bg-white capitalize font-medium text-xs xs:text-sm md:text-base">
-                  <p>
-                    {tournamentdetails.tournament_type == '' ? '--' : tournamentdetails.tournament_type}
-                  </p>
+                  {
+                    tournamentdetails.age_categories.map((item, index)=>{
+                      return <span className="mr-1">{item}{index != tournamentdetails.age_categories.length-1 ? ',' : ''}</span>;
+                    })
+                  }
                 </div>
               </div>
             </div>
-            {
-              tournamentdetails.age_restriction
-              ?
-                <div className="flex flex-col w-full">
-                  <label className="mb-2 text-gray-400 text-xs xs:text-sm md:text-base">
-                    Age Cut-off
-                  </label>
-                  <div className="border-2 border-orange-100 px-2 py-2 rounded-lg bg-white capitalize font-medium text-xs xs:text-sm md:text-base">
-                    <p>
-                      {tournamentdetails.age_cutoff == '' ? '--' : tournamentdetails.age_cutoff}
-                    </p>
-                  </div>
-                </div>
-              :
-                null
-            }
           </div>
           {/* About Tournament */}
           <div className='flex flex-1'>
             <div className='w-full flex flex-col'>
               <label className="mb-2 text-gray-400 text-xs xs:text-sm md:text-base">About Tournament</label>
               <div className={`border-2 border-orange-100 px-2 py-2 capitalize font-medium rounded-lg bg-white overflow-y-auto text-xs xs:text-sm md:text-base`}>
-                {tournamentdetails.about_tournament}
+                {tournamentdetails.about}
               </div>
             </div>
           </div>
@@ -120,9 +110,9 @@ const About = ({tournamentdetails}) => {
             </div>
             <div className="flex flex-col  items-center " >
               {
-                tournamentdetails.referee.length > 0
+                tournamentdetails.tournament_referees.length > 0
                   ?
-                  tournamentdetails.referee.map((item, index) => {
+                  tournamentdetails.tournament_referees.map((item, index) => {
                     return (
                       <div key={index} className="flex flex-col lg:flex-row items-center w-full gap-6 py-4 ">
                         <div className="flex flex-col w-full">
@@ -131,7 +121,7 @@ const About = ({tournamentdetails}) => {
                           </label>
                           <div className="border-2 border-orange-100 px-2 py-2 rounded-lg bg-white capitalize font-medium text-xs xs:text-sm md:text-base">
                             <p>
-                              {item.referee_name == '' ? '--' : item.referee_name}
+                              {item.name == '' ? '--' : item.name}
                             </p>
                           </div>
                         </div>
@@ -142,15 +132,15 @@ const About = ({tournamentdetails}) => {
                           <div className="border-2 border-orange-100 px-2 py-2 rounded-lg bg-white capitalize font-medium text-xs xs:text-sm md:text-base">
                             <p>
                               {
-                                item.referee_mobile == '' 
+                                item.mobile == '' 
                                 ? 
                                   '--' 
                                 : 
                                   isPublicView 
                                   ?
-                                      `XXXXXX${item.referee_mobile.slice(5,9)}`
+                                      `XXXXXX${item.mobile.slice(5,9)}`
                                   :
-                                      item.referee_mobile
+                                      item.mobile
                                 }
                             </p>
                           </div>

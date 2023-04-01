@@ -32,7 +32,7 @@ function TournamentCard({ tournament }) {
   } ${endDate.getFullYear()}`;
 
   const handleClick = () => {
-    navigate(`/tournament/${tournament.tournament_id}`);
+    navigate(`/tournament/${tournament.id}`);
   };
 
   return (

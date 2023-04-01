@@ -4,7 +4,6 @@ import { useFormik } from "formik";
 import { FaUserPlus } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { toast } from "react-toastify";
-import Swal from "sweetalert2";
 import Select from "react-select";
 import { useNavigate, useLocation } from "react-router-dom";
 import Heading from "../../../Component/Heading";
@@ -183,7 +182,13 @@ function TournamentAddEdit() {
         formdata.append(`sponsors_logo${i}`, data.sponsors[i].logo)
       }
       const res = await registerTournament(formdata)
-      console.log(res)
+      if(res.data.success){
+        toast.success(res.data.message)
+      }
+      if(res.error){
+        toast.error(res.error.message);
+      }
+      //navigate to page where tournaments of organizers are shown
     },
   });
 

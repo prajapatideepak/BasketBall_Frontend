@@ -1,84 +1,12 @@
 import React from 'react'
 import MatchCard from '../../../Component/MatchCard'
 
-function Matches() {
+function Matches({matches}) {
     const [currentTab, setCurrentTab] = React.useState(2);
     const [currentTabMatches, setCurrentTabMatches] = React.useState([])
     const [pastMatches, setPastMatches] = React.useState([])
     const [upcomingMatches, setUpcomingMatches] = React.useState([])
     const [ongoingMatches, setOngoingMatches] = React.useState([])
-
-
-    const allMatches = [
-        {
-            match_id: 12,
-            tournament_name: 'Gokuldham Premier League',
-            team_1_logo: '/CBL_Images/basketball_team_logo_2.webp',
-            team_2_logo: '/CBL_Images/basketball_team_logo_1.webp',
-            team_1_name: 'Mehta Ke Maharathi',
-            team_2_name: 'Jetha Ke Jabaaz',
-            team_1_score: 24,
-            team_2_score: 22,
-            duration: 45,
-            address: 'Amber tower, Sarkhej, Ahmedabad 380055',
-            is_successfull: 1,
-            is_live: 0,
-            time: '9:45 AM',
-            won_team: 'Jetha Ke Jabaaz',
-            date: '12/12/2022'
-        },
-        {
-            match_id: 13,
-            tournament_name: 'Gokuldham Premier League',
-            team_1_logo: '/CBL_Images/basketball_team_logo_2.webp',
-            team_2_logo: '/CBL_Images/basketball_team_logo_1.webp',
-            team_1_name: 'Mehta Ke Maharathi',
-            team_2_name: 'Jetha Ke Jabaaz',
-            team_1_score: 24,
-            team_2_score: 22,
-            duration: 45,
-            address: 'Amber tower, Sarkhej, Ahmedabad 380055',
-            is_successfull: 0,
-            is_live: 0,
-            time: '9:45 AM',
-            won_team: '',
-            date: '12/12/2022'
-        },
-        {
-            match_id: 14,
-            tournament_name: 'Gokuldham Premier League',
-            team_1_logo: '/CBL_Images/basketball_team_logo_2.webp',
-            team_2_logo: '/CBL_Images/basketball_team_logo_1.webp',
-            team_1_name: 'Mehta Ke Maharathi',
-            team_2_name: 'Jetha Ke Jabaaz',
-            team_1_score: 24,
-            team_2_score: 22,
-            duration: 45,
-            address: 'Amber tower, Sarkhej, Ahmedabad 380055',
-            is_successfull: 0,
-            is_live: 0,
-            time: '9:45 AM',
-            won_team: '',
-            date: '12/12/2022'
-        },
-        {
-            match_id: 15,
-            tournament_name: 'Gokuldham Premier League',
-            team_1_logo: '/CBL_Images/basketball_team_logo_2.webp',
-            team_2_logo: '/CBL_Images/basketball_team_logo_1.webp',
-            team_1_name: 'Mehta Ke Maharathi',
-            team_2_name: 'Jetha Ke Jabaaz',
-            team_1_score: 24,
-            team_2_score: 22,
-            duration: 45,
-            address: 'Amber tower, Sarkhej, Ahmedabad 380055',
-            is_successfull: 0,
-            is_live: 0,
-            time: '9:45 AM',
-            won_team: '',
-            date: '12/12/2022'
-        },
-    ]
 
     React.useEffect(() => {
         if(currentTab == 1){
@@ -97,7 +25,7 @@ function Matches() {
         let upcoming = []
         let onGoing = []
 
-        allMatches.map((match)=>{
+        matches.map((match)=>{
             if(match.is_live){
                 onGoing.push(match)
             }
