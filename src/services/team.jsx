@@ -18,6 +18,13 @@ export const teamApi = api.injectEndpoints({
         body,
       }),
     }),
+    teamUpdate: build.mutation({
+      query: (body) => ({
+        url: "team/update",
+        method: "PUT",
+        body,
+      }),
+    }),
   }),
 });
 
@@ -25,4 +32,5 @@ export const {
   useGetTeamListQuery,
   useGetTeamDetailQuery,
   useTeamRegistrationMutation,
+  useTeamUpdateMutation,  
 } = teamApi;

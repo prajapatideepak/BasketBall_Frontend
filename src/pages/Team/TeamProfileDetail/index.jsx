@@ -16,7 +16,17 @@ function TeamProfileDetail() {
     teamId: team_id,
   });
 
-  const isPublicView = true;
+  const isPublicView = false;
+
+  console.log(data?.data);
+  const handleEdit = () => {
+    navigate("/team/add-edit", {
+      state: {
+        isEdit: true,
+        teamDetail: data?.data,
+      },
+    });
+  };
 
   const [currentTab, setCurrentTab] = React.useState(3);
   const [currentTabMatches, setCurrentTabMatches] = React.useState([]);

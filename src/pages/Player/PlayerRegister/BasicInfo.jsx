@@ -9,7 +9,7 @@ import { basicInfoSchema } from "../../../models/BasicInfoModel";
 const BasicInfo = ({ index, setIndex }) => {
   const dispatch = useDispatch();
   const { PlayerForm } = useSelector((state) => state.player);
-  console.log(PlayerForm);
+  console.log(PlayerForm.basicInfo);
 
   const { values, touched, errors, handleChange, handleSubmit, handleBlur } =
     useFormik({
