@@ -11,14 +11,11 @@ export const playerApi = api.injectEndpoints({
     }),
 
     registerPlayer: build.mutation({
-      query(formData) {
+      query: (body) => {
         return {
           url: "players/registration",
           method: "POST",
-          body: formData,
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
+          body: body,
         };
       },
     }),

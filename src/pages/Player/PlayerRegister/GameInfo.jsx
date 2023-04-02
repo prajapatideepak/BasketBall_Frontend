@@ -7,8 +7,9 @@ import { setGameInfoForm } from "../../../redux/actions/Player";
 import { GameInfoSchema } from "../../../models/GameInfoModel";
 import {
   useRegisterPlayerMutation,
-  useUpdatePlayerDetailsMutation
+  useUpdatePlayerDetailsMutation,
 } from "../../../services/player";
+import BasicInfo from "./BasicInfo";
 
 const GameInfo = ({ index, setIndex }) => {
   const dispatch = useDispatch();
@@ -24,9 +25,12 @@ const GameInfo = ({ index, setIndex }) => {
         dispatch(setGameInfoForm(values));
         try {
           const fb = new FormData();
+
+          fb.append("photo", PlayerForm.basicInfo?.photo);
           let ok = JSON.stringify({
             PlayerInfo: PlayerForm,
           });
+          fb.append("data", ok);
           playerRegistration(fb).then(console.log("ho gaya"));
         } catch (err) {
           console.log(err);
@@ -34,6 +38,8 @@ const GameInfo = ({ index, setIndex }) => {
       },
     });
 
+  console.log(thing);
+  console.log(PlayerForm.basicInfo.photo);
   return (
     <>
       <form action="" className="flex w-full  space-x-3">
@@ -176,11 +182,10 @@ const GameInfo = ({ index, setIndex }) => {
           <button
             type="button"
             className="bg-[#ee6730] relative inline-flex items-center justify-center px-8 py-2 overflow-hidden text-white rounded-lg cursor-pointer group mr-3"
-         
             onClick={(e) => {
-                dispatch(setGameInfoForm(values));
-                setIndex(index - 1);
-              }}
+              dispatch(setGameInfoForm(values));
+              setIndex(index - 1);
+            }}
           >
             <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-slate-900 rounded-lg group-hover:w-full group-hover:h-56"></span>
             <span className="relative">Back</span>
@@ -196,10 +201,10 @@ const GameInfo = ({ index, setIndex }) => {
             {thing.isLoading
               ? "SUBMIT..."
               : updateData.isLoading
-                ? "Updating..."
-                : location?.state?.isEdit
-                  ? "UPDATE"
-                  : "SUBMIT"}
+              ? "Updating..."
+              : location?.state?.isEdit
+              ? "UPDATE"
+              : "SUBMIT"}
           </span>
         </button>
       </div>
