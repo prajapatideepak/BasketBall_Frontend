@@ -19,20 +19,20 @@ export default function PlayerInfo({ PlayerDetail }) {
           <div className="bg-white px-2 py-1 rounded-lg border-2 border-orange-100 shadow-xl">
             <span className="text-xs md:text-base">Height -</span>
             <span className="text-xs md:text-sm font-semibold ">
-              {PlayerDetail?.gameinfo?.height}cm
+              {PlayerDetail?.SinglePlayerDetails?.height}cm
             </span>
           </div>
           <div className="bg-white px-2 py-1 rounded-lg border-2 border-orange-100 shadow-xl">
             <span className="text-xs md:text-base">Weight -</span>
             <span className="text-xs md:text-sm font-semibold ">
-              {PlayerDetail?.gameinfo?.weight}KG
+              {PlayerDetail?.SinglePlayerDetails?.weight}KG
             </span>
           </div>
 
           <div className="bg-white px-2 py-1 rounded-lg border-2 border-orange-100 shadow-xl">
             <span className="text-xs md:text-base">Date of birth - </span>
             <span className="text-xs md:text-sm font-semibold ">
-              {PlayerDetail?.basicinfo?.dateofbirth.inString()}
+              {PlayerDetail?.SinglePlayerDetails?.date_of_birth}
             </span>
           </div>
 
@@ -53,13 +53,13 @@ export default function PlayerInfo({ PlayerDetail }) {
           <div className="bg-white px-2 py-1 rounded-lg border-2 border-orange-100 shadow-xl">
             <span className="text-xs md:text-base">Jersey Number -</span>
             <span className="text-xs md:text-sm font-semibold    px-4">
-              {PlayerDetail?.gameinfo.JerseyNumber}
+              {PlayerDetail?.SinglePlayerDetails?.jersey_no}
             </span>
           </div>
           <div className="bg-white px-2 py-1 rounded-lg border-2 border-orange-100 shadow-xl">
             <span className="text-xs md:text-base">Game Position - </span>
             <span className="text-xs md:text-sm font-semibold ">
-              {PlayerDetail?.gameinfo.playerPosition}
+              {PlayerDetail?.SinglePlayerDetails?.playing_position}
             </span>
           </div>
         </div>
@@ -72,7 +72,7 @@ export default function PlayerInfo({ PlayerDetail }) {
           <div className="bg-white   px-2 py-1 rounded-lg border-2 border-orange-100 shadow-xl">
             <span className="text-xs md:text-base">Email - </span>
             <span className="text-xs md:text-sm font-semibold ">
-              {PlayerDetail?.basicinfo.email}
+              {PlayerDetail?.SinglePlayerDetails?.users?.email}
             </span>
           </div>
         </div>

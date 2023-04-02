@@ -1,11 +1,13 @@
 import React from "react";
 import Button from "../../../Component/Button";
+import { useNavigate, useLocation } from "react-router-dom";
 import BasicInfo from "./BasicInfo";
 import GameInfo from "./GameInfo";
 import { MdDone } from "react-icons/md";
 import { motion } from "framer-motion";
 export default function PlayerRegister() {
   const [index, setIndex] = React.useState(1);
+  const location = useLocation();
 
   React.useEffect(() => {
     window.scrollTo(0, 0);
@@ -15,7 +17,7 @@ export default function PlayerRegister() {
       <div className=" flex justify-center items-center">
         <div>
           <h1 className=" items-end  text-center text-2xl lg:text-3xl">
-            Player Registration
+          {location?.state?.isEdit ? "Edit Team" : "Team Registration"}
           </h1>
         </div>
         <img src={"/icons/playing_icon.png"} className="w-20" />
