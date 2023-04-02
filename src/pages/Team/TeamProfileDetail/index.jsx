@@ -65,6 +65,7 @@ function TeamProfileDetail() {
     });
   }
 
+  console.log("length", data?.data);
   return (
     <section className="min-h-screen-fit">
       <div>
@@ -94,7 +95,8 @@ function TeamProfileDetail() {
                         <label className="mb-2 text-gray-400">Coach Name</label>
                         <div className="border-2 border-orange-100 px-2 py-2 rounded-lg bg-white capitalize font-medium">
                           <p>
-                            {data?.data.coach_name == ""
+                            {data?.data.coach_name == "" ||
+                            !data?.data.coach_name
                               ? "--"
                               : data?.data.coach_name}
                           </p>
@@ -106,7 +108,8 @@ function TeamProfileDetail() {
                         </label>
                         <div className="border-2 border-orange-100 px-2 py-2 rounded-lg bg-white capitalize font-medium">
                           <p>
-                            {data?.data.asst_coach_name == ""
+                            {data?.data.asst_coach_name?.length > 2 ||
+                            !data?.data.asst_coach_name
                               ? "--"
                               : data?.data.asst_coach_name}
                           </p>
@@ -125,7 +128,8 @@ function TeamProfileDetail() {
                           </label>
                           <div className="border-2 border-orange-100 px-2 py-2 rounded-lg bg-white font-medium">
                             <p>
-                              {data?.data.coach_mobile == ""
+                              {data?.data.coach_mobile == "" ||
+                              !data?.data.coach_mobile
                                 ? "--"
                                 : isPublicView
                                 ? `XXXXXX${data?.data.coach_mobile.slice(5, 9)}`
@@ -139,7 +143,8 @@ function TeamProfileDetail() {
                           </label>
                           <div className="border-2 border-orange-100 px-2 py-2 rounded-lg bg-white font-medium">
                             <p>
-                              {data?.data.asst_coach_mobile == ""
+                              {data?.data.asst_coach_mobile?.length < 2 ||
+                              !data?.data.asst_coach_mobile
                                 ? "--"
                                 : isPublicView
                                 ? `XXXXXX${data?.data.asst_coach_mobile.slice(
