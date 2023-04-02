@@ -11,11 +11,8 @@ const BasicInfo = ({ index, setIndex }) => {
   const dispatch = useDispatch();
   const defaultImage = "/CBL_Images/player-default-profile.webp"
   const [img, setImg] = React.useState(defaultImage);
-  const onImageChange = (e) => {
-    const [photo] = e.target.files;
-    console.log(photo)
-    setImg(URL.createObjectURL(photo));
-  };
+
+  const [photo , setPhoto ] = React.useState("")
   const { PlayerForm } = useSelector((state) => state.player);
   const { values, touched, errors, handleChange, handleSubmit, handleBlur } =
     useFormik({
@@ -27,6 +24,13 @@ const BasicInfo = ({ index, setIndex }) => {
         dispatch(setBasicInfoForm(values));
       },
     });
+
+
+    function handleImageUpload(e) {
+      setPhoto(()=>e.target.files[0]);
+      setImg(photo)
+      dispatch(setBasicInfoForm({...values , photo:"adasklfasmasf"}))
+    }
 
   return (
     <>
@@ -44,9 +48,9 @@ const BasicInfo = ({ index, setIndex }) => {
                 <div className='profile_img_overlay absolute flex flex-col justify-center items-center'>
                   <input type='file' id="photo" className="rounded-md w-16" accept=".png, .jpg, .jpeg" name="photo"
                     value={values.photo}
-                    onChange={handleChange}
+                    onChange={e=> handleImageUpload(e)}
                     onBlur={handleBlur}
-                    onInput={onImageChange} />
+                    onInput={e=> handleImageUpload(e)} /> 
                   {
                     img != defaultImage
                       ?
@@ -62,6 +66,11 @@ const BasicInfo = ({ index, setIndex }) => {
                   }
 
                 </div>
+                {/* <input type="file" name="photo"
+                  value={values.photo}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                /> */}
               </div>
               {/* <div className="flex flex-col items-center mb-2 md:items-center md:justify-end px-8">
                 <img

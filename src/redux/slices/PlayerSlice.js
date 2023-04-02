@@ -7,6 +7,7 @@ const PlayerSlice = createSlice({
     PlayerDetail: {},
     PlayerForm: {
       basicInfo: {
+        photo : "",
         firstName: "",
         middleName: "",
         lastName: "",

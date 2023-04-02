@@ -1,15 +1,20 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { setGameInfoForm } from "../../../redux/actions/Player";
 import { GameInfoSchema } from "../../../models/GameInfoModel";
-import { useRegisterPlayer } from "../../../hooks/usePost";
-
+import {
+  useRegisterPlayerMutation,
+  useUpdatePlayerDetailsMutation
+} from "../../../services/player";
 
 const GameInfo = ({ index, setIndex }) => {
   const dispatch = useDispatch();
-  const RegisterTeam = useRegisterPlayer();
+  const location = useLocation();
+  const [playerRegistration, { ...thing }] = useRegisterPlayerMutation();
+  const [playerUpdate, { ...updateData }] = useUpdatePlayerDetailsMutation();
   const { PlayerForm } = useSelector((state) => state.player);
   const { values, errors, touched, handleSubmit, handleChange, handleBlur } =
     useFormik({
@@ -22,7 +27,7 @@ const GameInfo = ({ index, setIndex }) => {
           let ok = JSON.stringify({
             PlayerInfo: PlayerForm,
           });
-          // RegisterTeam.mutate(ok);
+          playerRegistration(fb).then(console.log("ho gaya"));
         } catch (err) {
           console.log(err);
         }
@@ -157,30 +162,47 @@ const GameInfo = ({ index, setIndex }) => {
           </div>
         </div>
       </form>
-      <motion.div className="flex justify-between items-center p-4 ">
-        <div>
-          {index > 1 && (
-            <button
-              onClick={(e) => {
+      <div className="w-full flex justify-end mt-5 sm:mt-10">
+        {location?.state?.isEdit ? (
+          <button
+            type="button"
+            className="bg-[#ee6730] relative inline-flex items-center justify-center px-7 py-2 overflow-hidden text-white rounded-lg cursor-pointer group mr-3"
+            onClick={() => navigate(-1)}
+          >
+            <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-slate-900 rounded-lg group-hover:w-full group-hover:h-56"></span>
+            <span className="relative">Cancel</span>
+          </button>
+        ) : (
+          <button
+            type="button"
+            className="bg-[#ee6730] relative inline-flex items-center justify-center px-8 py-2 overflow-hidden text-white rounded-lg cursor-pointer group mr-3"
+         
+            onClick={(e) => {
                 dispatch(setGameInfoForm(values));
                 setIndex(index - 1);
               }}
-              className="px-6 bg-gray-50 border-black py-1  border rounded text-gray-800 text-lg    "
-            >
-              Back
-            </button>
-          )}
-        </div>
-        <div>
-          <button
-            onClick={handleSubmit}
-            type={"submit"}
-            className="px-6 font-semibold bg-orange-600 border-orange-800 py-1  border rounded text-white text-lg    "
           >
-            {index > 1 ? "Submit" : "Next"}
+            <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-slate-900 rounded-lg group-hover:w-full group-hover:h-56"></span>
+            <span className="relative">Back</span>
           </button>
-        </div>
-      </motion.div>
+        )}
+        <button
+          type="submit"
+          className="bg-slate-900 relative inline-flex items-center justify-center px-6 py-2 overflow-hidden text-white rounded-lg cursor-pointer group"
+          onClick={handleSubmit}
+        >
+          <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#ee6730] rounded-lg group-hover:w-full group-hover:h-56"></span>
+          <span className="relative">
+            {thing.isLoading
+              ? "SUBMIT..."
+              : updateData.isLoading
+                ? "Updating..."
+                : location?.state?.isEdit
+                  ? "UPDATE"
+                  : "SUBMIT"}
+          </span>
+        </button>
+      </div>
     </>
   );
 };

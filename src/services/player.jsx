@@ -17,13 +17,13 @@ export const playerApi = api.injectEndpoints({
     }),
 
     getPlayerDetails: build.query({
-      query: ( player_id ) => `players/details/${player_id}`,
+      query: (player_id) => `players/details/${player_id}`,
     }),
 
     registerPlayer: build.mutation({
       query(formData) {
         return {
-          url: "player/registration",
+          url: "players/registration",
           method: "POST",
           body: formData,
           headers: {
@@ -31,26 +31,15 @@ export const playerApi = api.injectEndpoints({
           },
         };
       },
-      invalidatesTags: [{ type: "Players", id: "LIST" }],
     }),
     updatePlayerDetails: build.mutation({
-      query(player_id, formData) {
+      query(body) {
         return {
           url: `player/update/${player_id}`,
           method: "PUT",
-          body: formData,
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
+          body: body,
         };
       },
-      invalidatesTags: (result, error, { player_id }) =>
-        result
-          ? [
-            { type: "Players", id: player_id },
-            { type: "Players", id: "LIST" },
-          ]
-          : [{ type: "Players", id: "LIST" }],
     }),
   }),
 });

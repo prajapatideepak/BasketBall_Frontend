@@ -14,6 +14,7 @@ const PlayerList = () => {
   const [pageNo, setPageNo] = React.useState(1);
   const rojki = useGetAllPlayersQuery({ pageNo: pageNo - 1, search });
   const { isLoading, data } = rojki;
+  console.log(data.all_players)
   const PlayerList = [
     {
       id: 1,
@@ -134,9 +135,9 @@ const PlayerList = () => {
                     <AiOutlineSearch className="group-hover:scale-110 duration-300" />
                   </button>
                 </div>
-                <div className="flex w-full flex-col items-center px-5 lg:px-8  space-y-6 h-full py-3 sm:py-5 xl:py-10 ">
+                <div className="flex w-full flex-col items-center px-5 lg:px-8  space-y-6 py-3 sm:py-5 xl:py-10 ">
                   {data?.all_players && data?.all_players.length > 0 ? (
-                    PlayerList.map((player, index) => {
+                    data.all_players.map((player, index) => {
                       return (
                         <Link
                           key={player.id}
