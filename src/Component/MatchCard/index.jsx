@@ -3,7 +3,6 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 function MatchCard({ match }) {
-  console.log(match);
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -31,10 +30,10 @@ function MatchCard({ match }) {
   } ${match_date.getFullYear()}`;
 
   // const match_time
-  console.log(
-    "match",
-    match?.match_quarters?.[match.match_quarters.length - 1]?.team_1_points
-  );
+  // console.log(
+  //   "match",
+  //   match?.match_quarters?.[match.match_quarters.length - 1]?.team_1_points
+  // );
   return (
     <>
       <div className="relative min-w-[260px] xs:min-w-[320px] sm:min-w-[350px] md:min-w-[380px] max-w-[440px] h-[190px] sm:h-[200px] md:h-[230px] border-0 hover:border-2 hover:border-gray-400 hover:border-dashed group rounded-lg">

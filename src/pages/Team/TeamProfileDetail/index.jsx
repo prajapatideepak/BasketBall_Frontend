@@ -113,11 +113,10 @@ function TeamProfileDetail() {
                         </div>
                       </div>
                       <div
-                        className={`flex ${
-                          isPublicView
+                        className={`flex ${isPublicView
                             ? "flex-col sm:max-lg:flex-row sm:max-lg:gap-4"
                             : "flex-col sm:flex-row gap-4"
-                        } text-xs xs:text-sm sm:text-base`}
+                          } text-xs xs:text-sm sm:text-base`}
                       >
                         <div className="flex flex-1 flex-col mt-5">
                           <label className="mb-2 text-gray-400">
@@ -128,8 +127,8 @@ function TeamProfileDetail() {
                               {data?.data.coach_mobile == ""
                                 ? "--"
                                 : isPublicView
-                                ? `XXXXXX${data?.data.coach_mobile.slice(5, 9)}`
-                                : data?.data.coach_mobile}
+                                  ? `XXXXXX${data?.data.coach_mobile.slice(5, 9)}`
+                                  : data?.data.coach_mobile}
                             </p>
                           </div>
                         </div>
@@ -142,11 +141,11 @@ function TeamProfileDetail() {
                               {data?.data.asst_coach_mobile == ""
                                 ? "--"
                                 : isPublicView
-                                ? `XXXXXX${data?.data.asst_coach_mobile.slice(
+                                  ? `XXXXXX${data?.data.asst_coach_mobile.slice(
                                     5,
                                     9
                                   )}`
-                                : data?.data.asst_coach_mobile}
+                                  : data?.data.asst_coach_mobile}
                             </p>
                           </div>
                         </div>
@@ -163,11 +162,10 @@ function TeamProfileDetail() {
                       <div className="flex flex-col text-xs xs:text-sm sm:text-base">
                         <label className="mb-2 text-gray-400">About Team</label>
                         <div
-                          className={`border-2 border-orange-100 px-2 py-2 rounded-lg bg-white ${
-                            isPublicView
+                          className={`border-2 border-orange-100 px-2 py-2 rounded-lg bg-white ${isPublicView
                               ? "h-32 lg:h-[328px]"
                               : "h-32 lg:h-[328px]"
-                          } overflow-y-auto`}
+                            } overflow-y-auto`}
                         >
                           {data?.data.about_team}
                         </div>
@@ -359,29 +357,25 @@ function TeamProfileDetail() {
                   <div className="flex justify-center items-center mt-8 md:mt-3">
                     <div className="w-48 xs:w-52 md:w-64 flex justify-around items-center bg-black p-1 rounded-full">
                       <div
-                        className={`${
-                          currentTab == 3 ? "bg-[#ee6730]" : ""
-                        } hover:bg-[#ee6730] group cursor-pointer w-full text-center p-1 rounded-full mr-1.5`}
+                        className={`${currentTab == 3 ? "bg-[#ee6730]" : ""
+                          } hover:bg-[#ee6730] group cursor-pointer w-full text-center p-1 rounded-full mr-1.5`}
                         onClick={() => setCurrentTab(3)}
                       >
                         <h3
-                          className={`${
-                            currentTab == 3 ? "text-white" : "text-gray-300"
-                          } group-hover:text-white text-xs xs:text-sm sm:text-base font-semibold`}
+                          className={`${currentTab == 3 ? "text-white" : "text-gray-300"
+                            } group-hover:text-white text-xs xs:text-sm sm:text-base font-semibold`}
                         >
                           Past
                         </h3>
                       </div>
                       <div
-                        className={`${
-                          currentTab == 1 ? "bg-[#ee6730]" : ""
-                        } hover:bg-[#ee6730] group cursor-pointer w-full text-center p-1 rounded-full`}
+                        className={`${currentTab == 1 ? "bg-[#ee6730]" : ""
+                          } hover:bg-[#ee6730] group cursor-pointer w-full text-center p-1 rounded-full`}
                         onClick={() => setCurrentTab(1)}
                       >
                         <h3
-                          className={`${
-                            currentTab == 1 ? "text-white" : "text-gray-300"
-                          } group-hover:text-white text-xs xs:text-sm sm:text-base font-semibold`}
+                          className={`${currentTab == 1 ? "text-white" : "text-gray-300"
+                            } group-hover:text-white text-xs xs:text-sm sm:text-base font-semibold`}
                         >
                           Upcoming
                         </h3>
