@@ -5,14 +5,14 @@ import Heading from "../../../Component/Heading";
 import { useDispatch, useSelector } from "react-redux";
 import { setBasicInfoForm } from "../../../redux/actions/Player";
 import { basicInfoSchema } from "../../../models/BasicInfoModel";
-import "../../../Component/Style/PlayerProfile.css"
+import "../../../Component/Style/PlayerProfile.css";
 
 const BasicInfo = ({ index, setIndex }) => {
   const dispatch = useDispatch();
-  const defaultImage = "/CBL_Images/player-default-profile.webp"
+  const defaultImage = "/CBL_Images/player-default-profile.webp";
   const [img, setImg] = React.useState(defaultImage);
 
-  const [photo , setPhoto ] = React.useState("")
+  const [photo, setPhoto] = React.useState("");
   const { PlayerForm } = useSelector((state) => state.player);
   const { values, touched, errors, handleChange, handleSubmit, handleBlur } =
     useFormik({
@@ -21,16 +21,14 @@ const BasicInfo = ({ index, setIndex }) => {
       onSubmit: (values) => {
         console.log(values);
         setIndex(2);
-        dispatch(setBasicInfoForm(values));
+        dispatch(setBasicInfoForm({ ...values, photo: photo }));
       },
     });
 
-
-    function handleImageUpload(e) {
-      setPhoto(()=>e.target.files[0]);
-      setImg(photo)
-      dispatch(setBasicInfoForm({...values , photo:"adasklfasmasf"}))
-    }
+  function handleImageUpload(e) {
+    setPhoto(() => e.target.files[0]);
+    setImg(URL.createObjectURL(photo));
+  }
 
   return (
     <>
@@ -43,28 +41,37 @@ const BasicInfo = ({ index, setIndex }) => {
               </h1>
             </div>
             <div className="md:col-span-1   md:flex justify-center md:justify-center items-center ">
-              <div className='profile_img_div flex justify-center rounded-full items-center border-2 border-gray-500 shadow-lg'>
-                <img src={img} width="100%" height="100%" alt="student profile" />
-                <div className='profile_img_overlay absolute flex flex-col justify-center items-center'>
-                  <input type='file' id="photo" className="rounded-md w-16" accept=".png, .jpg, .jpeg" name="photo"
-                    value={values.photo}
-                    onChange={e=> handleImageUpload(e)}
+              <div className="profile_img_div flex justify-center rounded-full items-center border-2 border-gray-500 shadow-lg">
+                <img
+                  src={img}
+                  width="100%"
+                  height="100%"
+                  className="object-contain "
+                  alt="student profile"
+                />
+                <div className="profile_img_overlay absolute flex flex-col justify-center items-center">
+                  <input
+                    type="file"
+                    id="photo"
+                    className="rounded-md w-16"
+                    accept=".png, .jpg, .jpeg"
+                    name="photo"
+                    value={values.img}
+                    onChange={(e) => handleImageUpload(e)}
                     onBlur={handleBlur}
-                    onInput={e=> handleImageUpload(e)} /> 
-                  {
-                    img != defaultImage
-                      ?
-                      <button
-                        className='bg-red-600 px-1 rounded text-white hover:bg-red-400 mt-5 flex items-center justify-center gap-3' onClick={() => {
-                          setImg(defaultImage);
-                          // document.getElementById('file').value = ''
-                        }}>
-                        <span> Remove</span>
-                      </button>
-                      :
-                      null
-                  }
-
+                    onInput={(e) => handleImageUpload(e)}
+                  />
+                  {img != defaultImage ? (
+                    <button
+                      className="bg-red-600 px-1 rounded text-white hover:bg-red-400 mt-5 flex items-center justify-center gap-3"
+                      onClick={() => {
+                        setImg(defaultImage);
+                        // document.getElementById('file').value = ''
+                      }}
+                    >
+                      <span> Remove</span>
+                    </button>
+                  ) : null}
                 </div>
                 {/* <input type="file" name="photo"
                   value={values.photo}
@@ -282,8 +289,9 @@ const BasicInfo = ({ index, setIndex }) => {
                 </div>
               </div>
               <span
-                className={`text-sm font-semibold  text-red-600 px-1 ${errors.gender && touched.gender ? "" : "hidden  "
-                  }`}
+                className={`text-sm font-semibold  text-red-600 px-1 ${
+                  errors.gender && touched.gender ? "" : "hidden  "
+                }`}
               >
                 {errors.gender && touched.gender ? errors.gender : null}
               </span>

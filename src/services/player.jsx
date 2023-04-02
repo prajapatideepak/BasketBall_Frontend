@@ -7,12 +7,12 @@ export const playerApi = api.injectEndpoints({
       providesTags: (result) =>
         result.all_players.length > 0
           ? [
-            ...result.all_players.map(({ player_id }) => ({
-              type: "Players",
-              id: player_id,
-            })),
-            { type: "Players", id: "LIST" },
-          ]
+              ...result.all_players.map(({ player_id }) => ({
+                type: "Players",
+                id: player_id,
+              })),
+              { type: "Players", id: "LIST" },
+            ]
           : [{ type: "Players", id: "LIST" }],
     }),
 
@@ -21,14 +21,11 @@ export const playerApi = api.injectEndpoints({
     }),
 
     registerPlayer: build.mutation({
-      query(formData) {
+      query: (body) => {
         return {
           url: "players/registration",
           method: "POST",
-          body: formData,
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
+          body: body,
         };
       },
     }),
