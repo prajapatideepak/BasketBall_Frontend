@@ -18,13 +18,11 @@ function Admin({tournamentDetails, refetchData}) {
   const [matchFormModal, setMatchFormModal] = React.useState(false);
   const [createPoolModal, setCreatePoolModal] = React.useState(false);
   const [rejectReasonModal, setRejectReasonModal] = React.useState(false);
-  const [startTournamentLoading, setStartTournamentLoading] = React.useState(false);
-  const [startRegistrationLoading, setStartRegistrationLoading] = React.useState(false);
   const teamsRequest = useTeamsRequestQuery(tournament_id)
-  const [startTournament] = useStartTournamentMutation();
-  const [endTournament] = useEndTournamentMutation();
-  const [startRegistration] = useStartRegistrationMutation();
-  const [endRegistration] = useEndRegistrationMutation();
+  const [startTournament, {...startTourLoading}] = useStartTournamentMutation();
+  const [endTournament, {...endTourLoading}] = useEndTournamentMutation();
+  const [startRegistration, {...startRegLoading}] = useStartRegistrationMutation();
+  const [endRegistration, {...endRegLoading}] = useEndRegistrationMutation();
 
   //Disable while loading is pending
 
@@ -44,9 +42,7 @@ function Admin({tournamentDetails, refetchData}) {
       confirmButtonText: "Yes",
     }).then(async(result) => {
       if (result.isConfirmed) {
-        setStartTournamentLoading(true)
         const response = await startTournament(tournament_id)
-        setStartTournamentLoading(false)
 
         if(response.error){
           toast.error(response.error.data.message)
@@ -69,9 +65,7 @@ function Admin({tournamentDetails, refetchData}) {
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes",
     }).then(async(result) => {
-       setStartTournamentLoading(true)
         const response = await endTournament(tournament_id)
-        setStartTournamentLoading(false)
 
         if(response.error){
           toast.error(response.error.data.message)
@@ -93,9 +87,7 @@ function Admin({tournamentDetails, refetchData}) {
       confirmButtonText: "Yes",
     }).then(async(result) => {
       if (result.isConfirmed) {
-        setStartRegistrationLoading(true)
         const response = await startRegistration(tournament_id)
-        setStartRegistrationLoading(false)
 
         if(response.error){
           toast.error(response.error.data.message)
@@ -119,9 +111,7 @@ function Admin({tournamentDetails, refetchData}) {
     }).then(async(result) => {
       if (result.isConfirmed) {
         if (result.isConfirmed) {
-          setStartRegistrationLoading(true)
           const response = await endRegistration(tournament_id)
-          setStartRegistrationLoading(false)
 
           if(response.error){
             toast.error(response.error.data.message)
@@ -171,8 +161,8 @@ function Admin({tournamentDetails, refetchData}) {
                       <div className="md:w-48">
                         <Button
                           margin={false}
-                          isDisabled={startTournamentLoading}
-                          text={`${startTournamentLoading ? 'Loading...' : 'Start Tournament'}`}
+                          isDisabled={startTourLoading.isLoading}
+                          text={`${startTourLoading.isLoading ? 'Loading...' : 'Start Tournament'}`}
                           onClick={handleStartTournament}
                         />
                       </div>
@@ -182,8 +172,8 @@ function Admin({tournamentDetails, refetchData}) {
                       <div className="md:w-48">
                         <Button
                           margin={false}
-                          isDisabled={startTournamentLoading}
-                          text={`${startTournamentLoading ? 'Loading...' : 'End Tournament'}`}
+                          isDisabled={endTourLoading.isLoading}
+                          text={`${endTourLoading.isLoading ? 'Loading...' : 'End Tournament'}`}
                           onClick={handleEndTournament}
                         />
                       </div>
@@ -198,8 +188,8 @@ function Admin({tournamentDetails, refetchData}) {
                         <div className="md:w-48">
                           <Button
                             margin={false}
-                            isDisabled={startRegistrationLoading}
-                            text={`${startRegistrationLoading ? 'Loading...' : 'Close Registration'}`}
+                            isDisabled={endRegLoading.isLoading}
+                            text={`${endRegLoading.isLoading ? 'Loading...' : 'Close Registration'}`}
                             onClick={handleCloseRegistration}
                           />
                         </div>
@@ -209,8 +199,8 @@ function Admin({tournamentDetails, refetchData}) {
                         <div className="md:w-48">
                           <Button
                             margin={false}
-                            isDisabled={startRegistrationLoading}
-                            text={`${startRegistrationLoading ? 'Loading...' : 'Start Registration'}`}
+                            isDisabled={startRegLoading.isLoading}
+                            text={`${startRegLoading.isLoading ? 'Loading...' : 'Start Registration'}`}
                             onClick={handleStartRegistration}
                           />
                         </div>
