@@ -18,7 +18,7 @@ const GameInfo = ({ index, setIndex }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const [playerRegistration, { ...thing }] = useRegisterPlayerMutation();
-  console.log(thing, "thing ")
+  console.log(thing, "thing ");
   const [playerUpdate, { ...updateData }] = useUpdatePlayerDetailsMutation();
   const { PlayerForm } = useSelector((state) => state.player);
   const { values, errors, touched, handleSubmit, handleChange, handleBlur } =
@@ -26,14 +26,14 @@ const GameInfo = ({ index, setIndex }) => {
       initialValues: PlayerForm.gameInfo,
       validationSchema: GameInfoSchema,
       onSubmit: async (values) => {
+        await dispatch(setGameInfoForm(values));
         try {
-          await dispatch(setGameInfoForm(values));
           const fb = new FormData();
           fb.append("photo", PlayerForm.basicInfo?.photo);
           let ok = JSON.stringify({
             PlayerInfo: PlayerForm,
           });
-          fb.append("data",ok)
+          fb.append("data", ok);
           playerRegistration(fb).then(console.log("ho gaya"));
         } catch (err) {
           console.log(err);
@@ -41,22 +41,30 @@ const GameInfo = ({ index, setIndex }) => {
       },
     });
 
-    React.useEffect(() => {
-      if (thing.isError) {
-        toast.error(thing?.error?.data?.message);
+  function setValues() {
+    dispatch(setGameInfoForm(values));
+  }
+
+  React.useEffect(() => {
+    if (thing.isError) {
+      toast.error(thing?.error?.data?.message);
+    }
+    if (thing.isSuccess) {
+      if (thing?.data?.success) {
+        toast.success("Player Registration Successfull ");
+        navigate(`/player/${thing?.data?.data?.id}`);
       }
-      if (thing.isSuccess) {
-        if (thing?.data?.success) {
-          toast.success("Player Registration Successfull ");
-          navigate(`/player/${thing?.data?.data?.id}`);
-        }
-      }
-  
-    }, [thing.isError, thing.isSuccess]);
+    }
+  }, [thing.isError, thing.isSuccess]);
 
   return (
     <>
-      <form action="" className="flex w-full  space-x-3">
+      <form
+        action=""
+        className="flex w-full  space-x-3"
+        onBlur={setValues}
+        onChange={setValues}
+      >
         <div className="w-full  px-5  m-auto dark:bg-gray-800">
           <h1 className="py-2 text-xl text-center md:text-left my-2 text-orange-600">
             Game Information
@@ -215,10 +223,10 @@ const GameInfo = ({ index, setIndex }) => {
             {thing.isLoading
               ? "SUBMIT..."
               : updateData.isLoading
-                ? "Updating..."
-                : location?.state?.isEdit
-                  ? "UPDATE"
-                  : "SUBMIT"}
+              ? "Updating..."
+              : location?.state?.isEdit
+              ? "UPDATE"
+              : "SUBMIT"}
           </span>
         </button>
       </div>
