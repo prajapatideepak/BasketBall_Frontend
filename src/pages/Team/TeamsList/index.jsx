@@ -13,7 +13,6 @@ import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 function TeamsList() {
   const [search, setSearch] = React.useState("");
   const [pageNo, setPageNo] = React.useState(1);
-
   const { isLoading, data } = useGetTeamListQuery({
     pageNo: pageNo - 1,
     search,

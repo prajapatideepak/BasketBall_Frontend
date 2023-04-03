@@ -11,104 +11,14 @@ import Loader from "../../../Component/Loader";
 
 const PlayerList = () => {
   const defaultImage = "/CBL_Images/60111-removebg-preview.png";
-
   const [search, setSearch] = React.useState("");
   const [pageNo, setPageNo] = React.useState(1);
-  const rojki = useGetAllPlayersQuery({ pageNo: pageNo - 1, search });
-  const { isLoading, data } = rojki;
-  const PlayerList = [
-    {
-      id: 1,
-      status: true,
-      basicinfo: {
-        img: "/CBL_Images/player-default-profile.webp",
-        firstName: "Deepak",
-        email: "wellbenix@gmail.com",
-        lastName: "Prajapati",
-        dateofbirth: new Date(),
-        gender: "m",
-        pincode: "382340",
-      },
-      gameinfo: {
-        height: "168",
-        weight: "200",
-        playerPosition: "Center",
-        JerseyNumber: "69",
-        Experience:
-          "Lorem ipsum dolor, sit amet consectetur adipisicing elit. ur amet. Tempora aspernatur accusantium ipsam adipisci voluptatibus.",
-      },
-      statics: {
-        totalMatch: 100,
-        matchWon: 100,
-        matchLoss: 0,
-        totalScore: 320,
-      },
-      teamDetails: [
-        {
-          team_id: 1001,
-          team_logo: "/CBL_Images/basketball_team_logo_2.webp",
-          team_name: "Mehta Ke Mahaarathi",
-          description:
-            "Lorem ipsum dolor sit amet, consectetur adip, Lorem ipsum dolor sit amet, consectetur adip",
-          coach_name: "Mohammadshad Mohammadsajid Rajput",
-          coach_mobile: "9000000000",
-          assistant_coach_name: "coach abc",
-          assistant_coach_mobile: "9989999999",
-          total_players: 7,
-          captain: 1,
-          matches_played: 22,
-          matches_won: 18,
-          matches_lost: 4,
-        },
-      ],
-    },
-    {
-      id: 2,
-      status: true,
-      basicinfo: {
-        img: "/CBL_Images/player-default-profile.webp",
-        firstName: "Deepak",
-        email: "wellbenix@gmail.com",
-        lastName: "Prajapati",
-        dateofbirth: new Date(),
-        gender: "m",
-        pincode: "382340",
-      },
-      gameinfo: {
-        height: "168",
-        weight: "200",
-        playerPosition: "Center",
-        JerseyNumber: "69",
-        Experience:
-          "Lorem ipsum dolor, sit amet consectetur adipisicing elit. ur amet. Tempora aspernatur accusantium ipsam adipisci voluptatibus.",
-      },
-      statics: {
-        totalMatch: 100,
-        matchWon: 100,
-        matchLoss: 0,
-        totalScore: 320,
-      },
-      teamDetails: [
-        {
-          team_id: 1001,
-          team_logo: "/CBL_Images/basketball_team_logo_2.webp",
-          team_name: "Mehta Ke Mahaarathi",
-          description:
-            "Lorem ipsum dolor sit amet, consectetur adip, Lorem ipsum dolor sit amet, consectetur adip",
-          coach_name: "Mohammadshad Mohammadsajid Rajput",
-          coach_mobile: "9000000000",
-          assistant_coach_name: "coach abc",
-          assistant_coach_mobile: "9989999999",
-          total_players: 7,
-          captain: 1,
-          matches_played: 22,
-          matches_won: 18,
-          matches_lost: 4,
-        },
-      ],
-    },
-  ];
-console.log(data)
+  // const rojki = useGetAllPlayersQuery({ pageNo: pageNo - 1, search });
+  // const { isLoading, data } = rojki;
+  const { isLoading, data } = useGetAllPlayersQuery({
+    pageNo: pageNo - 1,
+    search,
+  });
   return (
     <section className="min-h-screen-fit">
       <div>
@@ -136,10 +46,9 @@ console.log(data)
                     <AiOutlineSearch className="group-hover:scale-110 duration-300" />
                   </button>
                 </div>
-                <div className="flex w-full flex-col items-center px-5 lg:px-8  space-y-6 py-3 sm:py-5 xl:py-10 ">
+                <div className="flex w-full flex-col items-center lg:px-8  space-y-6 py-3 sm:py-5 xl:py-10 ">
                   {data?.data && data?.data?.length > 0 ? (
                     data?.data.map((player, index) => {
-                      console.log(player)
                       return (
                         <Link
                           key={player.id}
@@ -161,17 +70,17 @@ console.log(data)
                                 </h1>
                               </div>
                               {/* avtar start */}
-                              <div className="text-center sm:w-1/2 items-center justify-center space-x-5 lg:space-x-10 xl:space-x-16 sm:space-x-6 lg:py-6 flex  ">
+                              <div className="text-center sm:w-1/2 items-center  justify-center space-x-5 lg:space-x-10 xl:space-x-10 sm:space-x-6 lg:py-6 flex  ">
                                 <img
                                   src={player?.photo ? player?.photo : defaultImage}
                                   className=" object-cover w-12 h-12 sm:w-14 sm:h-14 lg:w-[70px] lg:h-[70px] xl:w-20 xl:h-20 2xl:w-[85px]  2xl:h-[85px] rounded-full border-2 sm:border-4 border-slate-700 "
                                 />
-                                <div className="flex justify-start items-center ">
-                                  <h1 className="text-gray-600 font-bold text-sm sm:text-base  lg:text-lg xl:text-xl uppercase">
+                                <div className="flex justify-center items-center w-1/4  ">
+                                  <h1 className="text-gray-600 font-bold xs:text-xs sm:text-xs lg:text-base uppercase">
                                     {player?.playing_position ? player?.playing_position : "...."}
                                   </h1>
                                 </div>
-                                <div className="flex flex-col justify-start items-start ">
+                                <div className="flex flex-col justify-start items-start w-1/5 ">
                                   <h1 className="text-white font-bold text-base sm:text-lg md:text-xl lg:text-[25px] text-start ">
                                     {player?.first_name}
                                   </h1>
@@ -182,14 +91,14 @@ console.log(data)
                               </div>
                               {/* avtar end */}
                               {/* statiscs start */}
-                              <div className="2xl:justify-start py-1 lg:p-2 w-full sm:w-1/2 flex items-center justify-center xl:pl-10   ">
-                                <div className="grid xxs:grid-cols-2 xs:grid-cols-4 text-black place-content-center md:gap-1 lg:gap-5 xl:gap-12 2xl:gap-16   ">
+                              <div className="2xl:justify-start py-1  g:p-2 w-full sm:w-1/2 flex items-center justify-center xl:pl-10   ">
+                                <div className="grid xxs:grid-cols-2 xs:grid-cols-4 text-black place-content-center gap-3 lg:gap-5 xl:gap-12 2xl:gap-16   ">
                                   <div className="text-center    ">
                                     <h1
                                       className="text-sm sm:text-lg md:text-2xl lg:text-3xl 
                              font-bold text-white"
                                     >
-                                      {player?.player_statistics?.matches_played ? player?.player_statistics?.matches_played : "0" }
+                                      {player?.player_statistics?.matches_played ? player?.player_statistics?.matches_played : "0"}
                                     </h1>
                                     <span className="text-[8px] sm:text-[9px] md:text-[11px] lg:text-xs xl:text-base text-white font-semibold">
                                       Total Match
@@ -200,7 +109,7 @@ console.log(data)
                                       className="text-sm sm:text-lg md:text-2xl lg:text-3xl 
                              font-bold text-green-600"
                                     >
-                                      {player?.player_statistics?.matches_won ? player?.player_statistics?.matches_won : "0" }
+                                      {player?.player_statistics?.matches_won ? player?.player_statistics?.matches_won : "0"}
                                     </h1>
                                     <span className="text-[8px] sm:text-[9px] md:text-[11px] lg:text-xs xl:text-base text-white font-semibold">
                                       Match Won
@@ -266,7 +175,7 @@ console.log(data)
                     onClick={(e) => {
                       setPageNo(() => pageNo + 1);
                     }}
-                    disabled={data?.all_players?.length < 10}
+                    disabled={data?.data?.length < 5}
                     className="cursor-pointer disabled:opacity-30 disabled:cursor-default p-2 border rounded border-gray-400"
                   >
                     {" "}

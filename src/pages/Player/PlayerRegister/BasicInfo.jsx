@@ -13,13 +13,12 @@ const BasicInfo = ({ index, setIndex }) => {
   const location = useLocation();
   const defaultImage = "/CBL_Images/player-default-profile.webp";
   const [img, setImg] = React.useState(defaultImage);
-
   const [photo, setPhoto] = React.useState("");
   const { PlayerForm } = useSelector((state) => state.player);
-  console.log(PlayerForm)
+  console.log(PlayerForm.gameInfo)
   const { values, touched, errors, handleChange, handleSubmit, handleBlur } =
     useFormik({
-      initialValues:PlayerForm.basicInfo,
+      initialValues: PlayerForm.basicInfo,
       validationSchema: basicInfoSchema,
       onSubmit: (values) => {
         console.log(values);
@@ -79,24 +78,24 @@ const BasicInfo = ({ index, setIndex }) => {
               </div>
             </div>
 
-            <div className="  ">
+            <div className="">
               <label htmlFor="firstName" className="text-gray-700">
                 First Name
                 <span className="text-red-500 required-dot">*</span>
               </label>
               <input
                 type="text"
-                id="firstName"
+                id="first_Name"
                 className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
-                name="firstName"
-                value={values.firstName}
+                name="first_Name"
+                value={values.first_name}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 placeholder="Enter Your First Name"
               />
               <span className="text-sm font-semibold text-red-600 px-1">
-                {errors.firstName && touched.firstName
-                  ? errors.firstName
+                {errors.first_name && touched.first_name
+                  ? errors.first_name
                   : null}
               </span>
             </div>
@@ -108,17 +107,17 @@ const BasicInfo = ({ index, setIndex }) => {
               </label>
               <input
                 type="text"
-                id="middleName"
+                id="middle_name"
                 className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
-                name="middleName"
-                value={values.middleName}
+                name="middle_name"
+                value={values.middle_name}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 placeholder="Enter Your Middle Name"
               />
               <span className="text-sm font-semibold text-red-600 px-1">
-                {errors.middleName && touched.middleName
-                  ? errors.middleName
+                {errors.middle_name && touched.middle_name
+                  ? errors.middle_name
                   : null}
               </span>
             </div>
@@ -131,16 +130,16 @@ const BasicInfo = ({ index, setIndex }) => {
               </label>
               <input
                 type="text"
-                id="lastName"
+                id="last_name"
                 className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
-                name="lastName"
+                name="last_name"
                 placeholder="Enter Your Last Name"
-                value={values.lastName}
+                value={values.last_name}
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
               <span className="text-sm font-semibold text-red-600 px-1">
-                {errors.lastName && touched.lastName ? errors.lastName : null}
+                {errors.last_name && touched.last_name ? errors.last_name : null}
               </span>
             </div>
 
@@ -152,16 +151,16 @@ const BasicInfo = ({ index, setIndex }) => {
               </label>
               <input
                 type="text"
-                id="mobileNo"
+                id="mobile"
                 className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
-                name="mobileNo"
-                value={values.mobileNo}
+                name="mobile"
+                value={values.mobile}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 placeholder="Enter Your Mobile Number"
               />
               <span className="text-sm font-semibold text-red-600 px-1">
-                {errors.mobileNo && touched.mobileNo ? errors.mobileNo : null}
+                {errors.mobile && touched.mobile ? errors.mobile : null}
               </span>
             </div>
             {/* for last name */}
@@ -172,17 +171,17 @@ const BasicInfo = ({ index, setIndex }) => {
               </label>
               <input
                 type="text"
-                id="alternativeNo"
+                id="alternate_mobile"
                 className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
-                name="alternativeNo"
-                value={values.alternativeNo}
+                name="alternate_mobile"
+                value={values.alternate_mobile}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 placeholder="Enter Your alternative Number"
               />
               <span className="text-sm font-semibold text-red-600 px-1">
-                {errors.alternativeNo && touched.alternativeNo
-                  ? errors.alternativeNo
+                {errors.alternate_mobile && touched.alternate_mobile
+                  ? errors.alternate_mobile
                   : null}
               </span>
             </div>
@@ -196,15 +195,15 @@ const BasicInfo = ({ index, setIndex }) => {
               </label>
               <input
                 type="date"
-                id="dob"
+                id="date_of_birth"
                 className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
-                name="dob"
-                value={values.dob}
+                name="date_of_birth"
+                value={values.date_of_birth}
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
               <span className="text-sm font-semibold text-red-600 px-1">
-                {errors.dob && touched.dob ? errors.dob : null}
+                {errors.date_of_birth && touched.date_of_birth ? errors.date_of_birth : null}
               </span>
             </div>
             {/* for last name */}
@@ -307,7 +306,7 @@ const BasicInfo = ({ index, setIndex }) => {
           >
             <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#ee6730]  rounded-lg group-hover:w-full group-hover:h-56"></span>
             <span className="relative">
-            Next
+              Next
             </span>
           </button>
         </div>

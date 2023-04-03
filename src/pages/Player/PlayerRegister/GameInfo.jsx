@@ -18,7 +18,6 @@ const GameInfo = ({ index, setIndex }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const [playerRegistration, { ...thing }] = useRegisterPlayerMutation();
-  console.log(thing, "thing ");
   const [playerUpdate, { ...updateData }] = useUpdatePlayerDetailsMutation();
   const { PlayerForm } = useSelector((state) => state.player);
   const { values, errors, touched, handleSubmit, handleChange, handleBlur } =

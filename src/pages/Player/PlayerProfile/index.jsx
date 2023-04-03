@@ -4,7 +4,7 @@ import MatchCard from "../../../Component/MatchCard";
 import TeamCard from "../../../Component/TeamCard";
 import { motion } from "framer-motion";
 import PlayerAvtar from "../PlayerAvtar";
-import { Link, useParams , useNavigate } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { findPlayer } from "../../../redux/actions/Player";
 import { setBasicInfoForm } from "../../../redux/actions/Player";
@@ -26,7 +26,6 @@ export default function PlayerProfile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { data, isLoading, error } = useGetPlayerDetailsQuery(params.id);
-  console.log(data)
   const [currentTab, setCurrentTab] = React.useState(2);
   const [currentTabMatches, setCurrentTabMatches] = React.useState([]);
 

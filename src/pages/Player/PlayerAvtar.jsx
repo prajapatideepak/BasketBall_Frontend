@@ -16,14 +16,14 @@ export default function PlayerAvtar({ player }) {
         </h1>
         <div className="flex items-center justify-center">
           <span className="px-2    text-xs italic bg-orange-600 font-semibold text-white rounded-lg ">
-            {player?.SinglePlayerDetails?.team_players[0]?.teams?.team_name ? player?.SinglePlayerDetails?.team_players[0]?.teams?.team_name : ""}
+            {player?.SinglePlayerDetails?.team_players[0]?.teams?.team_name ? player?.SinglePlayerDetails?.team_players[0]?.teams?.team_name : "--"}
           </span>
           <span>-</span>
           <span className="px-2  text-xs italic bg-gray-800 font-semibold text-white rounded-lg ">
             {player?.SinglePlayerDetails?.playing_position}
           </span>
         </div>
-        <p className="text-center text-gray-600 text-sm lg:w-1/2 mx-auto line-clamp-4">
+        <p className={`${player?.SinglePlayerDetails?.about?.length > 30 ? "line-clamp-3" : ""} text-center text-gray-600 text-sm lg:w-1/2 mx-auto`}>
           {player?.SinglePlayerDetails?.about}
         </p>
       </div>
