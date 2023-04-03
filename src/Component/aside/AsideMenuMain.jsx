@@ -27,61 +27,61 @@ function AsideMenuMain() {
         <div className="hidden md:block">
           <ul className="items-center flex flex-col md:flex-row justify-start lg:justify-center md:space-x-5 lg:space-x-8">
             <li className="nav-item">
-              <Link className="Link" to={"/"}>
+              <NavLink className={({isActive}) => (isActive ? "active" : 'none')} to={"/"} >
                 <h1 className="relative text-white text-base md:text-base lg:text-base xl:text-lg  my-5 md:my-0">
                   Home
                 </h1>
-              </Link>
+              </NavLink>
             </li>
             <li className="nav-item">
-              <Link className="Link" to={"/player/list"}>
+              <NavLink className={({isActive}) => (isActive ? "active" : 'none')} to={"/player/list"}  >
                 <h1 className="relative text-white text-base md:text-base lg:text-base xl:text-lg  my-5 md:my-0">
                   Players
                 </h1>
-              </Link>
+              </NavLink>
             </li>
             <li className="nav-item">
-              <Link className="Link" to={"/team/list"}>
+              <NavLink className={({isActive}) => (isActive ? "active" : 'none')} to={"/team/list"} >
                 <h1 className="relative text-white text-base md:text-base lg:text-base xl:text-lg  my-5 md:my-0">
                   Teams
                 </h1>
-              </Link>
+              </NavLink>
             </li>
             <li className="nav-item">
-              <Link className="Link" to={"/tournament"}>
+              <NavLink className={({isActive}) => (isActive ? "active" : 'none')} to={"/tournament"} >
                 <h1 className="relative text-white text-base md:text-base lg:text-base xl:text-lg  my-5 md:my-0">
                   Tournaments
                 </h1>
-              </Link>
+              </NavLink>
             </li>
             <li className="nav-item">
-              <Link className="Link" to={"/match"}>
+              <NavLink className={({isActive}) => (isActive ? "active" : 'none')} to={"/match"} >
                 <h1 className="relative text-white text-base md:text-base lg:text-base xl:text-lg  my-5 md:my-0">
                   Matches
                 </h1>
-              </Link>
+              </NavLink>
             </li>
 
             <li className="nav-item">
-              <Link className="Link" to={"/news"}>
+              <NavLink className={({isActive}) => (isActive ? "active" : 'none')} to={"/news"} >
                 <h1 className="relative text-white text-base md:text-base lg:text-base xl:text-lg  my-5 md:my-0">
                   News
                 </h1>
-              </Link>
+              </NavLink>
             </li>
             <li className="nav-item">
-              <Link className="Link" to={"/gallery"}>
+              <NavLink className={({isActive}) => (isActive ? "active" : 'none')} to={"/gallery"} >
                 <h1 className="relative text-white text-base md:text-base lg:text-base xl:text-lg  my-4 md:my-0">
                   Gallery
                 </h1>
-              </Link>
+              </NavLink>
             </li>
             <li className="nav-item">
-              <Link className="Link" to={"/registration"}>
+              <NavLink className={({isActive}) => (isActive ? "active" : 'none')} to={"/registration"} >
                 <h1 className="relative text-white text-base md:text-base lg:text-base xl:text-lg  my-4 md:my-0">
                   Registration
                 </h1>
-              </Link>
+              </NavLink>
             </li>
           </ul>
         </div>
@@ -95,91 +95,91 @@ function AsideMenuMain() {
         >
           <ul className="items-start flex flex-col justify-start lg:justify-center md:items-center lg:space-y-10 md:pt-5 ">
             <li className="nav-item md:hidden" onClick={() => setOpen(!open)}>
-              <Link className="Link" to={"/"}>
+              <NavLink className={({isActive}) => (isActive ? "active" : 'none')} to={"/"} >
                 <h1 className="relative text-white text-base md:text-base lg:text-base xl:text-lg my-[16px] md:my-6 lg:my-0">
                   Home
                 </h1>
-              </Link>
+              </NavLink>
             </li>
             <li className="nav-item" onClick={() => setOpen(!open)}>
-              <Link className="Link" to={"/player/list"}>
+              <NavLink className={({isActive}) => (isActive ? "active" : 'none')} to={"/player/list"} >
                 <h1 className="relative text-white text-base md:text-base lg:text-base xl:text-lg  my-5 md:my-0">
                   Players
                 </h1>
-              </Link>
+              </NavLink>
             </li>
             <li className="nav-item md:hidden" onClick={() => setOpen(!open)}>
-              <Link className="Link" to={"/team/profile"}>
+              <NavLink className={({isActive}) => (isActive ? "active" : 'none')} to={"/team/profile"} >
                 <h1 className="relative text-white text-base md:text-base lg:text-base xl:text-lg my-[16px] lg:my-0">
                   Teams
                 </h1>
-              </Link>
+              </NavLink>
             </li>
             <li
               className="nav-item hidden md:block"
               onClick={() => setOpen(!open)}
             >
-              <Link className="Link" to={"/About"}>
+              <NavLink className={({isActive}) => (isActive ? "active" : 'none')} to={"/About"} >
                 <h1 className="relative text-white text-base md:text-base lg:text-base xl:text-lg my-[16px] lg:my-0">
                   About
                 </h1>
-              </Link>
+              </NavLink>
             </li>
             <li className="nav-item md:hidden" onClick={() => setOpen(!open)}>
-              <Link className="Link" to={"/tournaments"}>
+              <NavLink className={({isActive}) => (isActive ? "active" : 'none')} to={"/tournaments"} >
                 <h1 className="relative text-white text-base md:text-base lg:text-base xl:text-lg my-[16px] lg:my-0">
                   Tournament
                 </h1>
-              </Link>
+              </NavLink>
             </li>
             <li className="nav-item md:hidden" onClick={() => setOpen(!open)}>
-              <Link className="Link" to={"/news"}>
+              <NavLink className={({isActive}) => (isActive ? "active" : 'none')} to={"/news"} >
                 <h1 className="relative text-white text-base md:text-base lg:text-base xl:text-lg my-[16px] lg:my-0">
                   News
                 </h1>
-              </Link>
+              </NavLink>
             </li>
             <li className="nav-item " onClick={() => setOpen(!open)}>
-              <Link className="Link" to={""}>
+              <NavLink className={({isActive}) => (isActive ? "active" : 'none')} to={""} >
                 <h1 className="relative text-white text-base md:text-base lg:text-base xl:text-lg my-[16px] lg:my-0">
                   Highlight
                 </h1>
-              </Link>
+              </NavLink>
             </li>
             <li className="nav-item md:hidden" onClick={() => setOpen(!open)}>
-              <Link className="Link" to={"/gallery"}>
+              <NavLink className={({isActive}) => (isActive ? "active" : 'none')} to={"/gallery"} >
                 <h1 className="relative text-white text-base md:text-base lg:text-base xl:text-lg my-[16px] lg:my-0">
                   Gallery
                 </h1>
-              </Link>
+              </NavLink>
             </li>
             <li className="nav-item" onClick={() => setOpen(!open)}>
-              <Link className="Link" to={"/contact"}>
+              <NavLink className={({isActive}) => (isActive ? "active" : 'none')} to={"/contact"} >
                 <h1 className="relative text-white text-base md:text-base lg:text-base xl:text-lg my-[16px] lg:my-0">
                   Contact
                 </h1>
-              </Link>
+              </NavLink>
             </li>
             <li className="nav-item md:hidden" onClick={() => setOpen(!open)}>
-              <Link className="Link" to={"/About"}>
+              <NavLink className={({isActive}) => (isActive ? "active" : 'none')} to={"/About"} >
                 <h1 className="relative text-white text-base md:text-base lg:text-base xl:text-lg my-[16px] lg:my-0">
                   About
                 </h1>
-              </Link>
+              </NavLink>
             </li>
             <li className="nav-item md:hidden " onClick={() => setOpen(!open)}>
-              <Link className="Link" to={"/role"}>
+              <NavLink className={({isActive}) => (isActive ? "active" : 'none')} to={"/role"} >
                 <h1 className="relative text-white text-base md:text-base lg:text-base xl:text-lg my-[16px] lg:my-0">
                   Registration
                 </h1>
-              </Link>
+              </NavLink>
             </li>
             <li className="nav-item " onClick={() => setOpen(!open)}>
-              <Link className="Link" to={"/term&condition"}>
+              <NavLink className={({isActive}) => (isActive ? "active" : 'none')} to={"/term&condition"} >
                 <h1 className="relative text-white text-base md:text-base lg:text-base xl:text-lg my-[16px] lg:my-0">
-                  Term & Conditions
+                  Terms & Conditions
                 </h1>
-              </Link>
+              </NavLink>
             </li>
           </ul>
           <div className="flex justify-center space-x-7 pt-10">

@@ -351,7 +351,7 @@ function TeamAddEdit() {
           </div>
           <div className="player-selection w-full flex flex-col xl:flex-row gap-6">
             <div className="relative player-search-input-container flex flex-1 flex-col mt-4">
-              <div className="player-input border-2 flex w-full mt-5 rounded-lg border-2 border-gray-200 bg-white flex justify-center items-center outline-blue-200">
+              <div className="player-input flex w-full mt-5 rounded-lg border-2 border-gray-200 bg-white justify-center items-center outline-blue-200">
                 <span className="text-xl ml-4 text-gray-500">
                   <ImSearch />
                 </span>

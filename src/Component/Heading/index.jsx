@@ -4,12 +4,12 @@ import "./Heading.css";
 function Heading({ text, className, margin }) {
   const class_name =
     className == "" || className == undefined
-      ? "text-xl xs:text-2xl md:text-3xl lg:text-5xl "
+      ? "text-lg xs:text-xl sm:text-2xl lg:text-3xl"
       : className;
   return (
     <div
       className={`team-profile-heading-container   w-full flex justify-center items-center ${
-        margin ? "mb-1" : "mb-20"
+        margin ? "mb-1" : "mb-16"
       }`}
     >
       <h2

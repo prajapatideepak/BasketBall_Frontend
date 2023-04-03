@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Matches from "./Matches";
 import Teams from "./Teams";
 import Schedule from "./Schedule";
@@ -10,54 +10,37 @@ import Admin from './Admin';
 import "./TournamentDetails.css";
 import TeamsModal from "./TeamsModal";
 import { toast } from "react-toastify";
-import navigate from "navigate";
+import { useNavigate, useParams } from "react-router-dom";
+import Loader from '../../../component/Loader'
+import { useGetTournamentDetailsQuery } from "../../../services/tournament";
 
 function TournamentDetails() {
+  const navigate = useNavigate()
+  const {tournament_id} = useParams();
   const [currentTab, setCurrentTab] = React.useState(0);
   const [openTeamsModal, setOpenTeamsModal] = React.useState(false);
+  const [tournamentDetails, setTournamentDetails] = React.useState({});
   const handleOpenTeamsModal = () => setOpenTeamsModal(!openTeamsModal);
 
+  const { data, isLoading, error, refetch } = useGetTournamentDetailsQuery(tournament_id)
+ 
   const is_organizer = true;
   
-  const tournamentdetails = {
-    is_registration_open: false,
-    status: 1,
-    starting_date: "11-01-2023",
-    ending_date: "22-01-2023",
-    tournament_type: "Knock out",
-    tournament_category: "Only for Boys",
-    tournament_level: "National",
-    city_name: "Ahmedabad",
-    about_tournament: "Hello",
-    referee: [
-      { id: 1, referee_name: "Shad", referee_mobile: "1234567890" },
-      { id: 2, referee_name: "Asd", referee_mobile: "1234567890" },
-    ],
-    sponsors: [
-      {
-        sponsor_name: "Wellbenix",
-        sponsor_logo: "https://wellbenix.com/assets/img/wellbenix-logo.png",
-      },
-      {
-        sponsor_name: "Lok Jagruti Kendra",
-        sponsor_logo: "/CBL_Images/tournament_logo_2.webp",
-      },
-    ],
-    sponsor_mobile: "1234567890",
-    age_restriction: 1,
-    age_cutoff: "Under 21",
-    prize: "Winner team will get Rs 1 Core",
-  };
+  useEffect(() => {
+    if (data) {
+      setTournamentDetails(data);
+    }
+  }, [data]);
 
   const tabs = [
-    <Matches />,
-    <Teams />,
+    <Matches matches={tournamentDetails?.tournamentDetails?.matches} />,
+    <Teams teams={tournamentDetails?.tournamentDetails?.tournament_teams} />,
     <Schedule />,
-    <Prize prize={tournamentdetails.prize} />,
-    <Sponsors sponsors={tournamentdetails.sponsors} />,
-    <Gallery />,
-    <About tournamentdetails={tournamentdetails} />,
-    <Admin/>
+    <Prize prize={tournamentDetails?.tournamentDetails?.prize} />,
+    <Sponsors sponsors={tournamentDetails?.tournamentDetails?.tournament_sponsors} />,
+    <Gallery galleryDetails={tournamentDetails?.tournamentDetails?.gallery} />,
+    <About tournamentDetails={tournamentDetails?.tournamentDetails} />,
+    <Admin tournamentDetails={tournamentDetails?.tournamentDetails} refetchData={refetch} />
   ];
 
   const handleRegisterInTournament = () =>{
@@ -68,6 +51,10 @@ function TournamentDetails() {
     navigate(`/tournament/team-register`)
   }
 
+  if(isLoading){
+    return <Loader />
+  }
+
   return (
     <section className="min-h-screen-fit">
       <div className="mx-auto px-10 py-4 sm:px-20 sm:py-6 md:px-20 md:py-8 lg:px-24 xl:px-28 2xl:px-32 bg-black">
@@ -75,19 +62,19 @@ function TournamentDetails() {
           <div className="team-logo-container flex justify-center items-center rounded-full">
             <picture></picture>
             <source
-              srcSet="/CBL_Images/tournament_logo_1.webp"
+              srcSet={tournamentDetails?.tournamentDetails?.logo}
               type="image/webp"
             />
             <img
-              src="/CBL_Images/tournament_logo_1.webp"
-              className="rounded-full border-2 border-gray-500 shadow-lg w-16 xs:w-20 sm:w-28"
+              src={tournamentDetails?.tournamentDetails?.logo}
+              className="rounded-full border-2 border-gray-500 shadow-lg w-16 h-16 xs:w-20 xs:h-20 sm:w-28 sm:h-28"
             />
           </div>
           <div className="flex flex-col justify-center items-cente ml-3">
             <h1 className="text-lg xs:text-2xl sm:text-3xl text-gray-200 font-semibold py-4">
-              Champion League
+              {tournamentDetails?.tournamentDetails?.tournament_name}
             </h1>
-            {tournamentdetails.status == 1 ? (
+            {tournamentDetails?.tournamentDetails?.status == 1 ? (
               <div className="w-full flex justify-center">
                 <div className="w-40">
                   <button
@@ -179,7 +166,9 @@ function TournamentDetails() {
         </div>
       </div>
       <div className="mx-auto px-8 py-10 xs:px-10 xs:py-12 sm:px-20 sm:py-12 md:px-20 md:py-16 lg:px-24 xl:px-28 2xl:px-32">
-        {tabs[currentTab]}
+        {
+          tabs[currentTab]
+        }
       </div>
     </section>
   );

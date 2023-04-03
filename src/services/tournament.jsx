@@ -16,10 +16,12 @@ export const tournamentApi = api.injectEndpoints({
           : [{ type: "Tournaments", id: "LIST" }],
     }),
     getTournamentDetails: build.query({
-      query: ({ tournament_id }) => `details/${tournament_id}`,
-      providesTags: (result, error, tournament_id) => [
-        { type: "Tournaments", id: tournament_id },
-      ],
+      query: (tournament_id) => `tournament/details/${tournament_id}`,
+      providesTags: (result, error) => {
+        return [
+          { type: "Tournaments", id: result.tournamentDetails.id },
+        ]
+      },
     }),
     registerTournament: build.mutation({
       query(formData) {
@@ -27,9 +29,6 @@ export const tournamentApi = api.injectEndpoints({
           url: "tournament/registration",
           method: "POST",
           body: formData,
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
         };
       },
       invalidatesTags: [{ type: "Tournaments", id: "LIST" }],
