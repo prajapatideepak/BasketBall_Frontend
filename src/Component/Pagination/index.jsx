@@ -28,7 +28,6 @@ function Paginate({data, setPaginationData, itemsPerPage = 10}) {
 
     useEffect(() => {
         const endOffset = itemOffset + itemsPerPage;
-        console.log(itemOffset, endOffset);
         setPaginationData(data.slice(itemOffset, endOffset));
         setPageCount(Math.ceil(data.length / itemsPerPage));
     }, [itemOffset, itemsPerPage, data]);

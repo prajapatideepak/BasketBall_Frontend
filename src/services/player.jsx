@@ -4,16 +4,6 @@ export const playerApi = api.injectEndpoints({
   endpoints: (build) => ({
     getAllPlayers: build.query({
       query: () => "players",
-      providesTags: (result) =>
-        result.all_players.length > 0
-          ? [
-              ...result.all_players.map(({ player_id }) => ({
-                type: "Players",
-                id: player_id,
-              })),
-              { type: "Players", id: "LIST" },
-            ]
-          : [{ type: "Players", id: "LIST" }],
     }),
 
     getPlayerDetails: build.query({
@@ -29,6 +19,7 @@ export const playerApi = api.injectEndpoints({
         };
       },
     }),
+
     updatePlayerDetails: build.mutation({
       query(body) {
         return {

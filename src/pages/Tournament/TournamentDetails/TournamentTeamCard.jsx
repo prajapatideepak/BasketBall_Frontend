@@ -8,7 +8,7 @@ function TournamentTeamCard({teamDetails}) {
 
     const is_team_organizer = true;
 
-    const {team_id, team_logo, team_name, description, is_disqualified} = teamDetails
+    const {team_id, teams, is_disqualified} = teamDetails
 
     const handleNavigateToTeamProfile = () =>{
         navigate(`/team/profile-detail/${team_id}`)
@@ -35,11 +35,11 @@ function TournamentTeamCard({teamDetails}) {
             <div className='flex lg:flex-row flex-col lg:justify-start justify-center items-center p-3 h-full'>
                 <div className='flex w-full'>
                     <div className="team_logo overflow-hidden flex justify-center items-center">
-                        <img src={team_logo} className="w-20 xl:w-24 rounded-full cursor-pointer hover:opacity-80" alt="team logo" onClick={handleNavigateToTeamProfile} />
+                        <img src={teams.logo} className="w-20 xl:w-24 rounded-full cursor-pointer hover:opacity-80" alt="team logo" onClick={handleNavigateToTeamProfile} />
                     </div>
                     <div className="flex flex-col justify-center ml-5 w-full h-full">
                         <div className='flex space-x-4'>
-                            <h3 className="text-gray-200 font-medium sm:text-lg md:text-xl xl:text-2xl cursor-pointer hover:opacity-80" onClick={handleNavigateToTeamProfile}>{team_name}</h3>
+                            <h3 className="text-gray-200 font-medium sm:text-lg md:text-xl xl:text-2xl cursor-pointer hover:opacity-80" onClick={handleNavigateToTeamProfile}>{teams.team_name}</h3>
                             {
                                 is_team_organizer && is_disqualified
                                 ?
@@ -58,7 +58,7 @@ function TournamentTeamCard({teamDetails}) {
                         {
                             description != '' && description != ' ' 
                             ? 
-                                <p className="text-xs sm:text-sm mt-1 xl:mt-2 text-gray-400 text-ellipsis line-clamp-2 overflow-hidden">{description}</p>
+                                <p className="text-xs sm:text-sm mt-1 xl:mt-2 text-gray-400 text-ellipsis line-clamp-2 overflow-hidden">{teams.description}</p>
                             :
                                 <p className="text-xs sm:text-sm mt-1 xl:mt-2 text-gray-400 text-ellipsis line-clamp-2 overflow-hidden">.... <br></br>......</p>
                         }

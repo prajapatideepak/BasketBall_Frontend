@@ -3,7 +3,7 @@ import { AiOutlineTeam } from "react-icons/ai";
 import { FaFilter } from "react-icons/fa";
 import TournamentTeamCard from "./TournamentTeamCard";
 
-function Teams() {
+function Teams({teams}) {
   const teamDetails = [
     {
       team_id: 1001,
@@ -72,9 +72,9 @@ function Teams() {
           </div>
         </div>
       </div>
-      {teamDetails.length > 0 ? (
+      {teams.length > 0 ? (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 mt-10">
-          {teamDetails.map((team, i) => {
+          {teams.map((team, i) => {
             return <TournamentTeamCard key={i} teamDetails={team} />;
           })}
         </div>

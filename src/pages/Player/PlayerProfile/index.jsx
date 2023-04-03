@@ -21,23 +21,9 @@ import Loader from "../../../Component/Loader";
 export default function PlayerProfile() {
   const params = useParams();
   const { data, isLoading, error } = useGetPlayerDetailsQuery(params.id);
+  console.log(data)
   const [currentTab, setCurrentTab] = React.useState(2);
   const [currentTabMatches, setCurrentTabMatches] = React.useState([]);
-  // const [tab, setTab] = React.useState(1);
-  const match = {
-    match_id: 12,
-    tournament_name: "Gokuldham Premier League",
-    team_1_logo: "/CBL_Images/basketball_team_logo_2.webp",
-    team_2_logo: "/CBL_Images/basketball_team_logo_1.webp",
-    team_1_name: "Mehta Ke Maharathi",
-    team_2_name: "Jetha Ke Jabaaz",
-    team_1_score: 24,
-    team_2_score: 22,
-    duration: 45,
-    address: "Amber tower, Sarkhej, Ahmedabad 380055",
-    isSuccessfull: 1,
-    date: "12/12/2022",
-  };
 
   let allMatches =
     data?.data && data?.data.team_1_matches && data?.data.team_2_matches
