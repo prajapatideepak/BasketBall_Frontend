@@ -84,7 +84,7 @@ const newsDetail = [
   },
 ];
 
-const NewsDetail = () => {
+const   NewsDetail = () => {
   const navigate = useNavigate();
   console.log(newsDetail);
   const params = useParams();

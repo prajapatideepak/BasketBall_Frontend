@@ -25,9 +25,9 @@ const GameInfo = ({ index, setIndex }) => {
     useFormik({
       initialValues: PlayerForm.gameInfo,
       validationSchema: GameInfoSchema,
-      onSubmit: (values) => {
-        dispatch(setGameInfoForm(values));
+      onSubmit: async (values) => {
         try {
+          await dispatch(setGameInfoForm(values));
           const fb = new FormData();
           fb.append("photo", PlayerForm.basicInfo?.photo);
           let ok = JSON.stringify({

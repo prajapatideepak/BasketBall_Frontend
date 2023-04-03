@@ -8,7 +8,7 @@ import Heading from "../../Component/Heading";
 
 const NewsPage = () => {
   const dispatch = useDispatch();
-  const { NewsList } = useSelector((state) => state.newsReducer);
+  const { NewsList } = useSelector((state) => state.news);
 
   React.useEffect(() => {
     dispatch(getNewsData());

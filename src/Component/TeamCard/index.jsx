@@ -2,7 +2,6 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 function TeamCard({ teamDetails }) {
-  console.log(teamDetails.id) 
   const navigate = useNavigate();
 
   return (
@@ -50,7 +49,9 @@ function TeamCard({ teamDetails }) {
               Matches Played
             </h4>
             <p className="text-gray-200">
-              {teamDetails?.matches_played < 10 ? "0" + teamDetails?.matches_played : teamDetails?.matches_played}
+              {teamDetails?.matches_played < 10
+                ? "0" + teamDetails?.matches_played
+                : teamDetails?.matches_played}
             </p>
           </div>
           <div className="flex flex-col justify-center items-center ">
@@ -58,7 +59,9 @@ function TeamCard({ teamDetails }) {
               Won
             </h4>
             <p className="text-gray-200">
-              {teamDetails?.matches_won < 10 ? "0" + teamDetails?.matches_won : teamDetails?.matches_won}
+              {teamDetails?.matches_won < 10
+                ? "0" + teamDetails?.matches_won
+                : teamDetails?.matches_won}
             </p>
           </div>
           <div className="flex flex-col justify-center items-center ">
@@ -66,7 +69,9 @@ function TeamCard({ teamDetails }) {
               Lost
             </h4>
             <p className="text-gray-200">
-              {teamDetails?.matches_lost < 10 ? "0" + teamDetails?.matches_lost : teamDetails?.matches_lost}
+              {teamDetails?.matches_lost < 10
+                ? "0" + teamDetails?.matches_lost
+                : teamDetails?.matches_lost}
             </p>
           </div>
         </div>
