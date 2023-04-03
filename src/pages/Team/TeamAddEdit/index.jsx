@@ -19,8 +19,6 @@ function TeamAddEdit() {
   const location = useLocation();
   const [teamRegistration, { ...thing }] = useTeamRegistrationMutation();
   const [teamUpdate, { ...updateData }] = useTeamUpdateMutation();
-
-  console.log(updateData);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { TeamForm } = useSelector((state) => state.team);
