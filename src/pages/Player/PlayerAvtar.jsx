@@ -14,8 +14,7 @@ export default function PlayerAvtar({ player }) {
         </h1>
         <div className="flex items-center justify-center">
           <span className="px-2    text-xs italic bg-orange-600 font-semibold text-white rounded-lg ">
-            {/* {player[0].teamDetails.team_name}{" "} */}
-            Mumbai Indians
+           {player?.SinglePlayerDetails?.team_players[0]?.teams?.team_name ? player?.SinglePlayerDetails?.team_players[0]?.teams?.team_name : ""}
           </span>
           <span>-</span>
           <span className="px-2  text-xs italic bg-gray-800 font-semibold text-white rounded-lg ">

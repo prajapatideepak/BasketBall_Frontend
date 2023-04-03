@@ -5,7 +5,7 @@ import { FaUserPlus } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Heading from "../../../Component/Heading";
 
 function TournamentAddEdit() {

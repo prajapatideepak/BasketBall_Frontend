@@ -34,13 +34,13 @@ const BasicInfo = ({ index, setIndex }) => {
     <>
       <form className="flex w-full  space-x-3">
         <div className="w-full  px-5  m-auto dark:bg-gray-800">
-          <div className="grid text-lg lg:text-base grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-5   lg:gap-5">
+          <div className="grid text-lg lg:text-base grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-5  lg:gap-5">
             <div className="md:col-span-2 mt-5 flex items-center md:items-start md:justify-end flex-col">
               <h1 className="py-2 underline underline-offset-4 px-3 text-xl text-orange-600">
                 Basic Information
               </h1>
             </div>
-            <div className="md:col-span-1   md:flex justify-center md:justify-center items-center ">
+            <div className="md:col-span-1  md:flex justify-center md:justify-center items-center ">
               <div className="profile_img_div flex justify-center rounded-full items-center border-2 border-gray-500 shadow-lg">
                 <img
                   src={img}
@@ -73,33 +73,7 @@ const BasicInfo = ({ index, setIndex }) => {
                     </button>
                   ) : null}
                 </div>
-                {/* <input type="file" name="photo"
-                  value={values.photo}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                /> */}
               </div>
-              {/* <div className="flex flex-col items-center mb-2 md:items-center md:justify-end px-8">
-                <img
-                  className="w-24 h-24 md:w-28 md:h-28 rounded-full shadow-xl object-cover"
-                  src="/CBL_Images/player-default-profile.webp"
-                />
-                <input
-                  type="file"
-                  id="for-file-upload"
-                  className="hidden  "
-                  placeholder=""
-                />
-                <div className="mt-2 ">
-                  <label
-                    htmlFor="for-file-upload"
-                    className="cursor-pointer text-sm   font-semibold px-4  bg-orange-600 text-white py-1 rounded shadow-xl "
-                  >
-                    {" "}
-                    Upload Image
-                  </label>
-                </div>
-              </div> */}
             </div>
 
             <div className="  ">
@@ -289,9 +263,8 @@ const BasicInfo = ({ index, setIndex }) => {
                 </div>
               </div>
               <span
-                className={`text-sm font-semibold  text-red-600 px-1 ${
-                  errors.gender && touched.gender ? "" : "hidden  "
-                }`}
+                className={`text-sm font-semibold  text-red-600 px-1 ${errors.gender && touched.gender ? "" : "hidden  "
+                  }`}
               >
                 {errors.gender && touched.gender ? errors.gender : null}
               </span>
@@ -334,14 +307,17 @@ const BasicInfo = ({ index, setIndex }) => {
         </div>
         <div>
           <button
+            type="button"
+            className="bg-[#ee6730] relative inline-flex items-center justify-center px-8 py-2 overflow-hidden text-white rounded-lg cursor-pointer group mr-3"
             onClick={(e) => {
               handleSubmit();
               // setIndex(2);
             }}
-            type="submit"
-            className="px-6 font-semibold bg-orange-600 border-orange-800 py-1  border rounded text-white text-lg    "
           >
+            <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-slate-900 rounded-lg group-hover:w-full group-hover:h-56"></span>
+            <span className="relative">
             {index > 1 ? "Submit" : "Next"}
+            </span>
           </button>
         </div>
       </motion.div>
