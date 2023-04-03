@@ -1,5 +1,6 @@
 import React from "react";
 import { useFormik } from "formik";
+import { useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import Heading from "../../../Component/Heading";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,6 +10,7 @@ import "../../../Component/Style/PlayerProfile.css";
 
 const BasicInfo = ({ index, setIndex }) => {
   const dispatch = useDispatch();
+  const location = useLocation();
   const defaultImage = "/CBL_Images/player-default-profile.webp";
   const [img, setImg] = React.useState(defaultImage);
 
@@ -16,7 +18,7 @@ const BasicInfo = ({ index, setIndex }) => {
   const { PlayerForm } = useSelector((state) => state.player);
   const { values, touched, errors, handleChange, handleSubmit, handleBlur } =
     useFormik({
-      initialValues: PlayerForm.basicInfo,
+      initialValues:PlayerForm.basicInfo,
       validationSchema: basicInfoSchema,
       onSubmit: (values) => {
         console.log(values);

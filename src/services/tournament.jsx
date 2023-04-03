@@ -5,9 +5,9 @@ export const tournamentApi = api.injectEndpoints({
     getAllTournaments: build.query({
       query: () => "tournament",
       providesTags: (result) =>
-        result.all_tournaments.length > 0
+        result?.all_tournaments.length > 0
           ? [
-            ...result.all_tournaments.map(({ tournament_id }) => ({
+            ...result?.all_tournaments.map(({ tournament_id }) => ({
               type: "Tournaments",
               id: tournament_id,
             })),
@@ -19,7 +19,7 @@ export const tournamentApi = api.injectEndpoints({
       query: (tournament_id) => `tournament/details/${tournament_id}`,
       providesTags: (result, error) => {
         return [
-          { type: "Tournaments", id: result.tournamentDetails.id },
+          { type: "Tournaments", id: result?.tournamentDetails.id },
         ]
       },
     }),
