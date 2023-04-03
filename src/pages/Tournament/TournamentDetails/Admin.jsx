@@ -24,8 +24,6 @@ function Admin({tournamentDetails, refetchData}) {
   const [startRegistration, {...startRegLoading}] = useStartRegistrationMutation();
   const [endRegistration, {...endRegLoading}] = useEndRegistrationMutation();
 
-  //Disable while loading is pending
-
   const handleImageUpload = () => {
     setImageUploadModal(true);
   };
