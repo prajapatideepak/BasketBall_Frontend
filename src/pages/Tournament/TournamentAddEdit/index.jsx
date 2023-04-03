@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import Select from "react-select";
 import { useNavigate, useLocation } from "react-router-dom";
 import Heading from "../../../Component/Heading";
-import { TournamentInfoSchema } from "../../../models/TournamentInfoModel"; 
+import { TournamentInfoSchema } from "../../../models/TournamentInfoModel";
 import { useRegisterTournamentMutation } from "../../../services/tournament";
 
 function TournamentAddEdit() {
@@ -31,7 +31,7 @@ function TournamentAddEdit() {
       cursor: 'pointer',
       boxShadow: state.isFocused ? null : null,
       '&:hover': {
-        borderColor: '#bfdbfe', 
+        borderColor: '#bfdbfe',
       },
     }),
 
@@ -62,7 +62,7 @@ function TournamentAddEdit() {
   // ------------ Refree  ------------
   const handleaddreferee = () => {
     setRefereelist([...refereelist, { Referee: "" }]);
-    values.referees.push({name: '', mobile: ''})
+    values.referees.push({ name: '', mobile: '' })
   };
 
   const handleremove = (index) => {
@@ -74,7 +74,7 @@ function TournamentAddEdit() {
   // ------------ Sponsor -------------------
   const handleaddsponsor = (index) => {
     setsponsorlist([...sponsorlist, { Sponsor: "" }]);
-    values.sponsors.push({name: '', logo: ''})
+    values.sponsors.push({ name: '', logo: '' })
   };
 
   const handleremovesponsor = (index) => {
@@ -119,13 +119,13 @@ function TournamentAddEdit() {
       ? location?.state?.about_tournament
       : "",
     referees: [
-      { 
+      {
         name: location?.state?.isEdit ? location?.state?.referee_name : "",
         mobile: location?.state?.isEdit ? location?.state?.referee_mobile : ""
       },
     ],
     sponsors: [
-      { 
+      {
         name: location?.state?.isEdit ? location?.state?.sponsor_name : "",
         logo: location?.state?.isEdit ? location?.state?.sponsor_logo : ""
       }
@@ -146,11 +146,10 @@ function TournamentAddEdit() {
     validationSchema: TournamentInfoSchema,
     initialValues,
     onSubmit: async (data) => {
-
       //tournament_category
       const gender_types = [];
       for (const key in data.tournament_category) {
-        if(data.tournament_category[key] == true){
+        if (data.tournament_category[key] == true) {
           gender_types.push(key);
         }
       }
@@ -158,17 +157,16 @@ function TournamentAddEdit() {
       //age cut-off
       const age_categories = [];
       for (const key in data.age_cutoff) {
-        if(data.age_cutoff[key] == true){
+        if (data.age_cutoff[key] == true) {
           age_categories.push(key);
         }
       }
 
-      const formdata  = new FormData();
-
+      const formdata = new FormData();
       formdata.append('logo', data.tournament_logo)
       formdata.append('tournament_name', data.tournament_name)
       formdata.append('start_date', data.starting_date)
-      formdata.append('end_date',data.ending_date)
+      formdata.append('end_date', data.ending_date)
       formdata.append('address', data.city_name)
       formdata.append('gender_types', JSON.stringify(gender_types))
       formdata.append('age_categories', JSON.stringify(age_categories))
@@ -177,17 +175,17 @@ function TournamentAddEdit() {
       formdata.append('about', data.about_tournament)
       formdata.append('referees', JSON.stringify(data.referees))
       formdata.append('sponsors', JSON.stringify(data.sponsors))
-      for(let i = 0; i < data.sponsors.length; i++){
+      for (let i = 0; i < data.sponsors.length; i++) {
         formdata.append(`sponsors_logo${i}`, data.sponsors[i].logo)
       }
-      
+
       setIsSubmitting(true);
       const register = await registerTournament(formdata)
       setIsSubmitting(false);
-      if(register.error){
+      if (register.error) {
         toast.error(register.error.data.message);
       }
-      else if(register.data.success){
+      else if (register.data.success) {
         toast.success(register.data.message)
       }
       //navigate to page where tournaments of organizers are shown
@@ -220,7 +218,7 @@ function TournamentAddEdit() {
                   id="tournament_name"
                   value={values.tournament_name}
                   onChange={handleChange}
-                  onBlur={handleBlur}  
+                  onBlur={handleBlur}
                 />
                 {
                   errors.tournament_name && touched.tournament_name
@@ -239,7 +237,7 @@ function TournamentAddEdit() {
                   id="tournament_logo"
                   accept='.png, .jpg, .jpeg'
                   onChange={(e) => {
-                    setFieldValue("tournament_logo", e.target.files[0]); 
+                    setFieldValue("tournament_logo", e.target.files[0]);
                   }}
                   onBlur={handleBlur}
                 />
@@ -339,8 +337,8 @@ function TournamentAddEdit() {
                         <input type="checkbox"
                           name="tournament_category.men"
                           onChange={handleChange}
-                          onBlur={handleBlur} 
-                          checked={values.tournament_category.men}                         className="cursor-pointer" />
+                          onBlur={handleBlur}
+                          checked={values.tournament_category.men} className="cursor-pointer" />
                         <label htmlFor="" className="text-sm ">Men</label>
                       </div>
                     </div>
@@ -422,13 +420,13 @@ function TournamentAddEdit() {
                     </div>
                     <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 md:items-center sm:space-x-[2.45rem]">
                       <div className="flex md:flex-col xl:flex-row items-center space-x-3">
-                        <input type="checkbox" 
+                        <input type="checkbox"
                           name="age_cutoff.under_21"
                           id="age_cutoff"
                           onChange={handleChange}
                           onBlur={handleBlur}
                           checked={values.age_cutoff.under_21}
-                        className="cursor-pointer" />
+                          className="cursor-pointer" />
                         <label htmlFor="Under 21" className="text-sm">Under 21</label>
                       </div>
                       <div className="flex md:flex-col xl:flex-row items-center space-x-3">
@@ -468,22 +466,22 @@ function TournamentAddEdit() {
               <div className="flex space-x-5  w-full ">
                 <div className="flex flex-col w-full">
                   <label className="mb-2">Tournament Level *</label>
-                   <Select
-                      className="w-full outline-blue-200"
-                      name="tournament_level"
-                      id="tournament_level"
-                      onChange={(e)=> setFieldValue('tournament_level', e.value)}
-                      onBlur={handleBlur}
-                      isSearchable={false}
-                      styles={customStyles}
-                      options={[
-                        { value: "international", label: "International" },
-                        { value: "national", label: "National" },
-                        { value: "state", label: "State" },
-                        { value: "Local", label: "Local" },
-                        { value: "friendly", label: "Friendly" },
-                      ]}
-                    />
+                  <Select
+                    className="w-full outline-blue-200"
+                    name="tournament_level"
+                    id="tournament_level"
+                    onChange={(e) => setFieldValue('tournament_level', e.value)}
+                    onBlur={handleBlur}
+                    isSearchable={false}
+                    styles={customStyles}
+                    options={[
+                      { value: "international", label: "International" },
+                      { value: "national", label: "National" },
+                      { value: "state", label: "State" },
+                      { value: "Local", label: "Local" },
+                      { value: "friendly", label: "Friendly" },
+                    ]}
+                  />
                   {
                     errors.tournament_level && touched.tournament_level
                       ?
@@ -589,7 +587,7 @@ function TournamentAddEdit() {
                   {refereelist.length - 1 === index && (
                     <div
                       className="flex justify-center items-center lg:justify-end lg:items-end w-full"
-                      >
+                    >
                       <div
                         className="bg-green-600 border-2 hover:border-green-600 hover:text-green-600 relative inline-flex items-center justify-center px-3 py-2 overflow-hidden text-white
                         rounded-lg cursor-pointer group"
@@ -646,19 +644,19 @@ function TournamentAddEdit() {
                           name={`sponsors.${index}.logo`}
                           accept=".png, .jpg, .jpeg"
                           onChange={(e) => {
-                            setFieldValue(`sponsors.${index}.logo`, e.target.files[0]); 
+                            setFieldValue(`sponsors.${index}.logo`, e.target.files[0]);
                           }}
                           onBlur={handleBlur}
                         />
                         {
                           values.sponsors[index].logo != ''
-                          ?
+                            ?
                             <img src={URL.createObjectURL(values.sponsors[index].logo)} className="w-12 h-12 rounded-full mx-3" alt="" />
-                          :
+                            :
                             <div className="w-[55px] h-12 rounded-full border mx-3">
 
                             </div>
-                        }  
+                        }
                         {sponsorlist.length > 1 && (
                           <div
                             onClick={() => handleremovesponsor(index)}
@@ -674,7 +672,7 @@ function TournamentAddEdit() {
                         </small>
                       ) : null}
                     </div>
-                    
+
                   </div>
                   {sponsorlist.length - 1 === index && (
                     <div
@@ -682,7 +680,7 @@ function TournamentAddEdit() {
                     >
                       <div
                         className="bg-green-600 border-2 hover:border-green-600 hover:text-green-600 relative inline-flex items-center justify-center px-3 py-2 overflow-hidden text-white rounded-lg cursor-pointer group"
-                        onClick={()=> handleaddsponsor(index)}
+                        onClick={() => handleaddsponsor(index)}
                       >
                         <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-white rounded-lg group-hover:w-full group-hover:h-56"></span>
                         <span className="relative flex items-center space-x-2 ">
@@ -699,7 +697,7 @@ function TournamentAddEdit() {
             {/* Clear_Button && Submit_Button */}
             <div className="w-full flex justify-end mt-5 sm:mt-10">
               {
-                location?.state?.isEdit ? 
+                location?.state?.isEdit ?
                   <button
                     type="button"
                     className="bg-[#ee6730] relative inline-flex items-center justify-center px-7 py-2 overflow-hidden text-white rounded-lg cursor-pointer group mr-3"
@@ -708,42 +706,42 @@ function TournamentAddEdit() {
                     <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-slate-900 rounded-lg group-hover:w-full group-hover:h-56"></span>
                     <span className="relative">Cancel</span>
                   </button>
-                : 
-               
+                  :
+
                   !isSubmitting
                     ?
-                      <button
-                        type="reset"
-                        className="bg-[#ee6730] relative inline-flex items-center justify-center px-8 py-2 overflow-hidden text-white rounded-lg cursor-pointer group mr-3"
-                        onClick={() => {
-                          resetForm();
-                          setSelectedPlayers([]);
-                        }}
-                      >
-                        <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-slate-900 rounded-lg group-hover:w-full group-hover:h-56"></span>
-                        <span className="relative">Clear</span>
-                      </button>
+                    <button
+                      type="reset"
+                      className="bg-[#ee6730] relative inline-flex items-center justify-center px-8 py-2 overflow-hidden text-white rounded-lg cursor-pointer group mr-3"
+                      onClick={() => {
+                        resetForm();
+                        setSelectedPlayers([]);
+                      }}
+                    >
+                      <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-slate-900 rounded-lg group-hover:w-full group-hover:h-56"></span>
+                      <span className="relative">Clear</span>
+                    </button>
                     :
-                      null
-               
+                    null
+
               }
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`bg-slate-900 ${isSubmitting? 'opacity-60' : ''} relative inline-flex items-center justify-center px-6 py-2 overflow-hidden text-white rounded-lg cursor-pointer group`}
+                className={`bg-slate-900 ${isSubmitting ? 'opacity-60' : ''} relative inline-flex items-center justify-center px-6 py-2 overflow-hidden text-white rounded-lg cursor-pointer group`}
                 onClick={handleSubmit}
               >
                 <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#ee6730] rounded-lg group-hover:w-full group-hover:h-56"></span>
                 <span className="relative">
                   {
-                    location?.state?.isEdit 
-                    ? 
-                      "UPDATE" 
-                    : 
-                      isSubmitting
+                    location?.state?.isEdit
                       ?
-                        'Loading...'
+                      "UPDATE"
                       :
+                      isSubmitting
+                        ?
+                        'Loading...'
+                        :
                         "SUBMIT"
                   }
                 </span>

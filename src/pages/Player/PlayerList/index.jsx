@@ -10,6 +10,8 @@ import Loader from "../../../Component/Loader";
 
 
 const PlayerList = () => {
+  const defaultImage = "/CBL_Images/60111-removebg-preview.png";
+
   const [search, setSearch] = React.useState("");
   const [pageNo, setPageNo] = React.useState(1);
   const rojki = useGetAllPlayersQuery({ pageNo: pageNo - 1, search });
@@ -161,7 +163,7 @@ console.log(data)
                               {/* avtar start */}
                               <div className="text-center sm:w-1/2 items-center justify-center space-x-5 lg:space-x-10 xl:space-x-16 sm:space-x-6 lg:py-6 flex  ">
                                 <img
-                                  src={player?.photo}
+                                  src={player?.photo ? player?.photo : defaultImage}
                                   className=" object-cover w-12 h-12 sm:w-14 sm:h-14 lg:w-[70px] lg:h-[70px] xl:w-20 xl:h-20 2xl:w-[85px]  2xl:h-[85px] rounded-full border-2 sm:border-4 border-slate-700 "
                                 />
                                 <div className="flex justify-start items-center ">

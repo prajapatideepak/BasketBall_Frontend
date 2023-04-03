@@ -16,6 +16,7 @@ const BasicInfo = ({ index, setIndex }) => {
 
   const [photo, setPhoto] = React.useState("");
   const { PlayerForm } = useSelector((state) => state.player);
+  console.log(PlayerForm)
   const { values, touched, errors, handleChange, handleSubmit, handleBlur } =
     useFormik({
       initialValues:PlayerForm.basicInfo,
@@ -151,9 +152,8 @@ const BasicInfo = ({ index, setIndex }) => {
               </label>
               <input
                 type="text"
-                disabled={true}
                 id="mobileNo"
-                className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-gray-200     placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
+                className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
                 name="mobileNo"
                 value={values.mobileNo}
                 onChange={handleChange}
@@ -295,30 +295,19 @@ const BasicInfo = ({ index, setIndex }) => {
           </div>
         </div>
       </form>
-      <motion.div className="flex justify-between items-center p-4 ">
-        <div>
-          {index > 1 && (
-            <button
-              onClick={(e) => setIndex(index - 1)}
-              type={"button"}
-              className="px-6 bg-gray-50 border-black py-1  border rounded text-gray-800 text-lg    "
-            >
-              Back
-            </button>
-          )}
-        </div>
+      <motion.div className="flex justify-end items-center p-4 ">
         <div>
           <button
             type="button"
-            className="bg-[#ee6730] relative inline-flex items-center justify-center px-8 py-2 overflow-hidden text-white rounded-lg cursor-pointer group mr-3"
+            className="bg-slate-900 relative inline-flex items-center justify-center px-8 py-2 overflow-hidden text-white rounded-lg cursor-pointer group mr-3"
             onClick={(e) => {
               handleSubmit();
               // setIndex(2);
             }}
           >
-            <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-slate-900 rounded-lg group-hover:w-full group-hover:h-56"></span>
+            <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#ee6730]  rounded-lg group-hover:w-full group-hover:h-56"></span>
             <span className="relative">
-            {index > 1 ? "Submit" : "Next"}
+            Next
             </span>
           </button>
         </div>
