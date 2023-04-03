@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import Button from "../../Component/Button";
 import Heading from "../../Component/Heading";
 
+
 export default function AfterRole() {
   const navigate = useNavigate();
 
@@ -14,19 +15,19 @@ export default function AfterRole() {
       title: "Player",
       isSelected: false,
       path: "/player/register",
-      icon: "/icons/player_icon.png",
+      icon: "/icons/player.png",
     },
     {
       title: "Team Owner/Manager",
       isSelected: false,
       path: "/team/add-edit",
-      icon: "/icons/team_icon.png",
+      icon: "/icons/Team.png",
     },
     {
       title: "Tournament Host",
       isSelected: false,
       path: "/tournament/add-edit",
-      icon: "/icons/tournament_icon.png",
+      icon: "/icons/tournament.png",
     },
   ]);
 
@@ -59,37 +60,37 @@ export default function AfterRole() {
     }
   }
   return (
-    <div className="flex flex-col  justify-start px-8 items-center h-screen  lg:px-20 py-12 lg:py-5 ">
-      <div className="my-5 text-center  w-full px-20 ">
+    <div className="flex flex-col  justify-center px-8 items-center lg:px-20 py-12 lg:py-5 ">
+      <div className="mt-5 text-center flex flex-col justify-center w-full px-20 space-y-3 ">
         {/* <Heading
           text={"Select Your Role"}
           className="text-2xl px-2"
           margin={true}
         /> */}
-        <h1 className="text-5xl font-bold text-start text-[#ee6730] ">Select Your Role</h1>
-        <div className="bg-[#ee6730] w-10">h</div>
-        {/* <p className=" text-gray-700 p-1 text-start">
+        <h1 className="heading text-[30px] font-bold text-center text-[#ee6730] uppercase ">Select your role</h1>
+        
+        <p className=" text-gray-500 p-1 text-center">
           Rise to the Top: Choose Your Role as Visitor, Player, Tournament Host,
           or Team Manager and Dominate the Court
-        </p> */}
+        </p>
       </div>
-      <div className="grid mt-12 mb-12 rounded-lg  px-8 lg:mx-10 grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-10 ">
+      <div className="grid my-8 rounded-lg  px-8 lg:mx-10 grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-10 ">
         {role.map((r, i) => {
           return (
             <motion.div
               animate={{
-                borderColor: r.isSelected ? "#ee6730" : "white",
+                borderColor: r.isSelected ? "#ee6730" : "#f3f4f6",
                 // backgroundColor: r.isSelected ? '#FFFFFF' : "#F3F4F6",
                 boxShadow: r.isSelected
                   ? "rgba(0, 0, 0, 0.35) 0px 5px 15px"
                   : "",
               }}
               transition={{
-                duration: 1.5,
+                duration: .5,
               }}
               onClick={(e) => handleClick(i)}
               key={i}
-              className="cursor-pointer relative  bg-gray-100 rounded-lg shadow-lg shadow-black/20  border   "
+              className="cursor-pointer relative pb-5  rounded-lg shadow-lg shadow-black/20  border-4   "
             >
               <motion.div
                 key={i}
@@ -105,18 +106,21 @@ export default function AfterRole() {
                   duration: 0.5,
                 }}
                 className={`${r?.isSelected ? "" : "hidden"
-                  } w-8 h-8 flex justify-center items-center  rounded-full absolute top-0 right-0  -translate-x-2 translate-y-1`}
+                  } w-8 h-8 flex justify-center items-center  rounded-full absolute top-[-23px] left-[46%]  -translate-x-2 translate-y-1`}
               >
-                <MdDone className="text-center text-white font-bold " />
+                <MdDone className="text-center text-white font-bold text-xl " />
               </motion.div>
-              <img className="lg:w-2/3 mx-auto" src={r.icon} />
+              <div className="flex justify-center items-center  h-[90%] w-full">
+              <img className="lg:w-2/3  mx-auto" src={r.icon} />
+
+              </div>
               <motion.div
                 animate={{
                   color: r.isSelected ? "#ee6730" : "black",
                 }}
-                className="text-center m-2 text-sm lg:text-lg font-semibold"
+                className="text-center m-2 rounded-md mx-10 text-sm lg:text-lg font-semibold"
               >
-                <h1 className="overflow-hidden text-2xl">{r.title} </h1>
+                <h1 className="overflow-hidden text-xl">{r.title} </h1>
               </motion.div>
             </motion.div>
           );
