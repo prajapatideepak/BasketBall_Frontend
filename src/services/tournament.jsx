@@ -7,12 +7,12 @@ export const tournamentApi = api.injectEndpoints({
       providesTags: (result) =>
         result.all_tournaments.length > 0
           ? [
-              ...result.all_tournaments.map(({ tournament_id }) => ({
-                type: "Tournaments",
-                id: tournament_id,
-              })),
-              { type: "Tournaments", id: "LIST" },
-            ]
+            ...result.all_tournaments.map(({ tournament_id }) => ({
+              type: "Tournaments",
+              id: tournament_id,
+            })),
+            { type: "Tournaments", id: "LIST" },
+          ]
           : [{ type: "Tournaments", id: "LIST" }],
     }),
     getTournamentDetails: build.query({
@@ -23,7 +23,6 @@ export const tournamentApi = api.injectEndpoints({
         ]
       },
     }),
-
     registerTournament: build.mutation({
       query(formData) {
         return {
@@ -34,7 +33,6 @@ export const tournamentApi = api.injectEndpoints({
       },
       invalidatesTags: [{ type: "Tournaments", id: "LIST" }],
     }),
-
     updateTournamentDetails: build.mutation({
       query(tournament_id, formData) {
         return {
@@ -49,9 +47,9 @@ export const tournamentApi = api.injectEndpoints({
       invalidatesTags: (result, error, { tournament_id }) =>
         result
           ? [
-              { type: "Tournaments", id: tournament_id },
-              { type: "Tournaments", id: "LIST" },
-            ]
+            { type: "Tournaments", id: tournament_id },
+            { type: "Tournaments", id: "LIST" },
+          ]
           : [{ type: "Tournaments", id: "LIST" }],
     }),
   }),

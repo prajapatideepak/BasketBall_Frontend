@@ -87,7 +87,6 @@ function TeamRegister() {
   const initialValues = {
     tournament_category: "",
     age_cutoff: "",
-    players: TeamPlayers
   };
   const validationSchema = Yup.object({
     tournament_category: Yup.string().required("Categoryy is required"),

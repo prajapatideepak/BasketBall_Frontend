@@ -7,6 +7,7 @@ const PlayerSlice = createSlice({
     PlayerDetail: {},
     PlayerForm: {
       basicInfo: {
+        photo : "",
         firstName: "",
         middleName: "",
         lastName: "",
@@ -28,8 +29,6 @@ const PlayerSlice = createSlice({
   },
   reducers: {
     getPlayers: (state, action) => {
-      console.log("hmm");
-      console.log(action);
       state.PlayerList = action.payload;
     },
     setPlayerDetail: (state, action) => {

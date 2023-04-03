@@ -1,27 +1,48 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { setGameInfoForm } from "../../../redux/actions/Player";
 import { GameInfoSchema } from "../../../models/GameInfoModel";
+import {
+  useRegisterPlayerMutation,
+  useUpdatePlayerDetailsMutation,
+} from "../../../services/player";
+import BasicInfo from "./BasicInfo";
 
 const GameInfo = ({ index, setIndex }) => {
   const dispatch = useDispatch();
+  const location = useLocation();
+  const [playerRegistration, { ...thing }] = useRegisterPlayerMutation();
+  const [playerUpdate, { ...updateData }] = useUpdatePlayerDetailsMutation();
   const { PlayerForm } = useSelector((state) => state.player);
-
   const { values, errors, touched, handleSubmit, handleChange, handleBlur } =
     useFormik({
       initialValues: PlayerForm.gameInfo,
       validationSchema: GameInfoSchema,
       onSubmit: (values) => {
-        console.log(values);
         dispatch(setGameInfoForm(values));
+        try {
+          const fb = new FormData();
+
+          fb.append("photo", PlayerForm.basicInfo?.photo);
+          let ok = JSON.stringify({
+            PlayerInfo: PlayerForm,
+          });
+          fb.append("data", ok);
+          playerRegistration(fb).then(console.log("ho gaya"));
+        } catch (err) {
+          console.log(err);
+        }
       },
     });
 
+  console.log(thing);
+  console.log(PlayerForm.basicInfo.photo);
   return (
     <>
-      <form className="flex w-full  space-x-3">
+      <form action="" className="flex w-full  space-x-3">
         <div className="w-full  px-5  m-auto dark:bg-gray-800">
           <h1 className="py-2 text-xl text-center md:text-left my-2 text-orange-600">
             Game Information
@@ -147,30 +168,46 @@ const GameInfo = ({ index, setIndex }) => {
           </div>
         </div>
       </form>
-      <motion.div className="flex justify-between items-center p-4 ">
-        <div>
-          {index > 1 && (
-            <button
-              onClick={(e) => {
-                dispatch(setGameInfoForm(values));
-                setIndex(index - 1);
-              }}
-              className="px-6 bg-gray-50 border-black py-1  border rounded text-gray-800 text-lg    "
-            >
-              Back
-            </button>
-          )}
-        </div>
-        <div>
+      <div className="w-full flex justify-end mt-5 sm:mt-10">
+        {location?.state?.isEdit ? (
           <button
-            onClick={handleSubmit}
-            type={"submit"}
-            className="px-6 font-semibold bg-orange-600 border-orange-800 py-1  border rounded text-white text-lg    "
+            type="button"
+            className="bg-[#ee6730] relative inline-flex items-center justify-center px-7 py-2 overflow-hidden text-white rounded-lg cursor-pointer group mr-3"
+            onClick={() => navigate(-1)}
           >
-            {index > 1 ? "Submit" : "Next"}
+            <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-slate-900 rounded-lg group-hover:w-full group-hover:h-56"></span>
+            <span className="relative">Cancel</span>
           </button>
-        </div>
-      </motion.div>
+        ) : (
+          <button
+            type="button"
+            className="bg-[#ee6730] relative inline-flex items-center justify-center px-8 py-2 overflow-hidden text-white rounded-lg cursor-pointer group mr-3"
+            onClick={(e) => {
+              dispatch(setGameInfoForm(values));
+              setIndex(index - 1);
+            }}
+          >
+            <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-slate-900 rounded-lg group-hover:w-full group-hover:h-56"></span>
+            <span className="relative">Back</span>
+          </button>
+        )}
+        <button
+          type="submit"
+          className="bg-slate-900 relative inline-flex items-center justify-center px-6 py-2 overflow-hidden text-white rounded-lg cursor-pointer group"
+          onClick={handleSubmit}
+        >
+          <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#ee6730] rounded-lg group-hover:w-full group-hover:h-56"></span>
+          <span className="relative">
+            {thing.isLoading
+              ? "SUBMIT..."
+              : updateData.isLoading
+              ? "Updating..."
+              : location?.state?.isEdit
+              ? "UPDATE"
+              : "SUBMIT"}
+          </span>
+        </button>
+      </div>
     </>
   );
 };
