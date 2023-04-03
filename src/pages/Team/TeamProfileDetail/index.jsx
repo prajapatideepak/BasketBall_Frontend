@@ -29,6 +29,7 @@ function TeamProfileDetail() {
             ...team,
             first_name: team.players.first_name,
             id: team.players.id,
+         
           };
         }),
       },

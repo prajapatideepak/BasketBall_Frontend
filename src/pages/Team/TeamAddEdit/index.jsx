@@ -28,8 +28,7 @@ function TeamAddEdit() {
   const { TeamForm } = useSelector((state) => state.team);
   const [logo, setLogo] = React.useState("");
   const [captain, setCaptain] = React.useState(0);
-  console.log(captain);
-  console.log(location);
+
   const {
     values,
     errors,
@@ -192,8 +191,12 @@ function TeamAddEdit() {
 
   React.useEffect(() => {
     setSelectedPlayers(location?.state?.isEdit ? location?.state?.players : []);
+    setCaptain(() =>
+      location?.state?.isEdit ? location?.state?.teamDetail?.captain_id : 0
+    );
   }, []);
 
+  console.log("captain", captain);
   React.useEffect(() => {
     console.log(data?.data);
     if (data?.data) {
