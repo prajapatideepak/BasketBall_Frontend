@@ -14,6 +14,7 @@ function TournamentAddEdit() {
   // const location = useLocation();
   const [refereelist, setRefereelist] = React.useState([{ Referee: "" }]);
   const [sponsorlist, setsponsorlist] = React.useState([{ Sponsor: "" }]);
+  const [isSubmitting, setIsSubmitting] = React.useState(false)
   const navigate = useNavigate();
 
   const [registerTournament] = useRegisterTournamentMutation();
@@ -136,7 +137,6 @@ function TournamentAddEdit() {
     values,
     errors,
     touched,
-    isSubmitting,
     setFieldValue,
     resetForm,
     handleBlur,
@@ -146,7 +146,6 @@ function TournamentAddEdit() {
     validationSchema: TournamentInfoSchema,
     initialValues,
     onSubmit: async (data) => {
-      console.log(data)
 
       //tournament_category
       const gender_types = [];
@@ -181,29 +180,19 @@ function TournamentAddEdit() {
       for(let i = 0; i < data.sponsors.length; i++){
         formdata.append(`sponsors_logo${i}`, data.sponsors[i].logo)
       }
-      const res = await registerTournament(formdata)
-      if(res.data.success){
-        toast.success(res.data.message)
+      
+      setIsSubmitting(true);
+      const register = await registerTournament(formdata)
+      setIsSubmitting(false);
+      if(register.error){
+        toast.error(register.error.data.message);
       }
-      if(res.error){
-        toast.error(res.error.message);
+      else if(register.data.success){
+        toast.success(register.data.message)
       }
       //navigate to page where tournaments of organizers are shown
     },
   });
-
-
-
-  // function dateDiffInDays(startDate, endDate) {
-  //   startDate = new Date(startDate)
-  //   endDate = new Date(endDate)
-  //   const _MS_PER_DAY = 1000 * 60 * 60 * 24;
-
-  //   const utc1 = Date.UTC(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
-  //   const utc2 = Date.UTC(endDate.getFullYear(), endDate.getMonth(), endDate.getDate());
-
-  //   return Math.floor((utc2 - utc1) / _MS_PER_DAY);
-  // }
 
   return (
     <>
@@ -709,36 +698,54 @@ function TournamentAddEdit() {
 
             {/* Clear_Button && Submit_Button */}
             <div className="w-full flex justify-end mt-5 sm:mt-10">
-              {location?.state?.isEdit ? (
-                <button
-                  type="button"
-                  className="bg-[#ee6730] relative inline-flex items-center justify-center px-7 py-2 overflow-hidden text-white rounded-lg cursor-pointer group mr-3"
-                  onClick={() => navigate(-1)}
-                >
-                  <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-slate-900 rounded-lg group-hover:w-full group-hover:h-56"></span>
-                  <span className="relative">Cancel</span>
-                </button>
-              ) : (
-                <button
-                  type="reset"
-                  className="bg-[#ee6730] relative inline-flex items-center justify-center px-8 py-2 overflow-hidden text-white rounded-lg cursor-pointer group mr-3"
-                  onClick={() => {
-                    resetForm();
-                    setSelectedPlayers([]);
-                  }}
-                >
-                  <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-slate-900 rounded-lg group-hover:w-full group-hover:h-56"></span>
-                  <span className="relative">Clear</span>
-                </button>
-              )}
+              {
+                location?.state?.isEdit ? 
+                  <button
+                    type="button"
+                    className="bg-[#ee6730] relative inline-flex items-center justify-center px-7 py-2 overflow-hidden text-white rounded-lg cursor-pointer group mr-3"
+                    onClick={() => navigate(-1)}
+                  >
+                    <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-slate-900 rounded-lg group-hover:w-full group-hover:h-56"></span>
+                    <span className="relative">Cancel</span>
+                  </button>
+                : 
+               
+                  !isSubmitting
+                    ?
+                      <button
+                        type="reset"
+                        className="bg-[#ee6730] relative inline-flex items-center justify-center px-8 py-2 overflow-hidden text-white rounded-lg cursor-pointer group mr-3"
+                        onClick={() => {
+                          resetForm();
+                          setSelectedPlayers([]);
+                        }}
+                      >
+                        <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-slate-900 rounded-lg group-hover:w-full group-hover:h-56"></span>
+                        <span className="relative">Clear</span>
+                      </button>
+                    :
+                      null
+               
+              }
               <button
                 type="submit"
-                className="bg-slate-900 relative inline-flex items-center justify-center px-6 py-2 overflow-hidden text-white rounded-lg cursor-pointer group"
+                disabled={isSubmitting}
+                className={`bg-slate-900 ${isSubmitting? 'opacity-60' : ''} relative inline-flex items-center justify-center px-6 py-2 overflow-hidden text-white rounded-lg cursor-pointer group`}
                 onClick={handleSubmit}
               >
                 <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#ee6730] rounded-lg group-hover:w-full group-hover:h-56"></span>
                 <span className="relative">
-                  {location?.state?.isEdit ? "UPDATE" : "SUBMIT"}
+                  {
+                    location?.state?.isEdit 
+                    ? 
+                      "UPDATE" 
+                    : 
+                      isSubmitting
+                      ?
+                        'Loading...'
+                      :
+                        "SUBMIT"
+                  }
                 </span>
               </button>
             </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Matches from "./Matches";
 import Teams from "./Teams";
 import Schedule from "./Schedule";
@@ -19,22 +19,28 @@ function TournamentDetails() {
   const {tournament_id} = useParams();
   const [currentTab, setCurrentTab] = React.useState(0);
   const [openTeamsModal, setOpenTeamsModal] = React.useState(false);
+  const [tournamentDetails, setTournamentDetails] = React.useState({});
   const handleOpenTeamsModal = () => setOpenTeamsModal(!openTeamsModal);
 
-  const { data, isLoading, error } = useGetTournamentDetailsQuery(tournament_id)
+  const { data, isLoading, error, refetch } = useGetTournamentDetailsQuery(tournament_id)
  
   const is_organizer = true;
   
+  useEffect(() => {
+    if (data) {
+      setTournamentDetails(data);
+    }
+  }, [data]);
 
   const tabs = [
-    <Matches matches={data?.tournamentDetails.matches} />,
-    <Teams teams={data?.tournamentDetails.tournament_teams} />,
+    <Matches matches={tournamentDetails?.tournamentDetails?.matches} />,
+    <Teams teams={tournamentDetails?.tournamentDetails?.tournament_teams} />,
     <Schedule />,
-    <Prize prize={data?.tournamentDetails.prize} />,
-    <Sponsors sponsors={data?.tournamentDetails.tournament_sponsors} />,
-    <Gallery galleryDetails={data?.tournamentDetails.gallery} />,
-    <About tournamentdetails={data?.tournamentDetails} />,
-    <Admin/>
+    <Prize prize={tournamentDetails?.tournamentDetails?.prize} />,
+    <Sponsors sponsors={tournamentDetails?.tournamentDetails?.tournament_sponsors} />,
+    <Gallery galleryDetails={tournamentDetails?.tournamentDetails?.gallery} />,
+    <About tournamentDetails={tournamentDetails?.tournamentDetails} />,
+    <Admin tournamentDetails={tournamentDetails?.tournamentDetails} refetchData={refetch} />
   ];
 
   const handleRegisterInTournament = () =>{
@@ -56,19 +62,19 @@ function TournamentDetails() {
           <div className="team-logo-container flex justify-center items-center rounded-full">
             <picture></picture>
             <source
-              srcSet={data?.tournamentDetails.logo}
+              srcSet={tournamentDetails?.tournamentDetails?.logo}
               type="image/webp"
             />
             <img
-              src={data?.tournamentDetails.logo}
+              src={tournamentDetails?.tournamentDetails?.logo}
               className="rounded-full border-2 border-gray-500 shadow-lg w-16 h-16 xs:w-20 xs:h-20 sm:w-28 sm:h-28"
             />
           </div>
           <div className="flex flex-col justify-center items-cente ml-3">
             <h1 className="text-lg xs:text-2xl sm:text-3xl text-gray-200 font-semibold py-4">
-              {data?.tournamentDetails.tournament_name}
+              {tournamentDetails?.tournamentDetails?.tournament_name}
             </h1>
-            {data?.tournamentDetails.status == 1 ? (
+            {tournamentDetails?.tournamentDetails?.status == 1 ? (
               <div className="w-full flex justify-center">
                 <div className="w-40">
                   <button

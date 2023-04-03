@@ -26,7 +26,6 @@ export const tournamentApi = api.injectEndpoints({
 
     registerTournament: build.mutation({
       query(formData) {
-        console.log(formData)
         return {
           url: "tournament/registration",
           method: "POST",

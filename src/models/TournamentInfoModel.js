@@ -16,9 +16,17 @@ export const TournamentInfoSchema = Yup.object({
     tournament_logo: Yup.mixed()
       .test("is-valid-type", "Logo should be in jpg, jpeg or png format",
         value => {
+          if (!value) {
+            return true; // skip validation if value is empty
+          }
           return isValidFileType(value && value.name.toLowerCase(), "image")
         })
-      .test("is-valid-size", "Max allowed size is 2MB", value => value && value.size <= 2097152),
+      .test("is-valid-size", "Max allowed size is 2MB", value => {
+        if (!value) {
+          return true; 
+        }
+        return value && value.size <= 2097152
+      }),
 
     city_name: Yup.string()
       .matches(/^[a-zA-Z]+$/, "Please enter only characters")

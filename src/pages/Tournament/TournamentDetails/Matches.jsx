@@ -25,7 +25,7 @@ function Matches({matches}) {
         let upcoming = []
         let onGoing = []
 
-        matches.map((match)=>{
+        matches?.map((match)=>{
             if(match.is_live){
                 onGoing.push(match)
             }

@@ -149,7 +149,7 @@ function TeamRegister() {
                 {
                   Teams.map((team, index) => {
                     return (
-                      <div className="flex bg-gray-200 hover:shadow-md px-5  py-3 rounded-md shadow-sm w-full flex-row  items-center space-x-3">
+                      <div key={index} className="flex bg-gray-200 hover:shadow-md px-5  py-3 rounded-md shadow-sm w-full flex-row  items-center space-x-3">
                         <input type="checkbox"
                           name="tournament_category"
                           id="tournament_category"
@@ -178,7 +178,7 @@ function TeamRegister() {
                   {
                     Teams.map((team, index) => {
                       return (
-                        <div className="flex bg-gray-200 hover:shadow-md px-5 py-3 rounded-md shadow-sm w-full items-center space-x-3">
+                        <div key={index} className="flex bg-gray-200 hover:shadow-md px-5 py-3 rounded-md shadow-sm w-full items-center space-x-3">
                           <input type="checkbox"
                             name="age_cutoff"
                             id="age_cutoff"
