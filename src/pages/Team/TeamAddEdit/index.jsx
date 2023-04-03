@@ -14,18 +14,22 @@ import {
   useTeamRegistrationMutation,
   useTeamUpdateMutation,
 } from "../../../services/team";
+import { useSearchPlayerByNumbmerQuery } from "../../../services/player";
+import { useState } from "react";
 
 function TeamAddEdit() {
   const location = useLocation();
+  const [number, setNumber] = useState("");
   const [teamRegistration, { ...thing }] = useTeamRegistrationMutation();
   const [teamUpdate, { ...updateData }] = useTeamUpdateMutation();
-
-  console.log(updateData);
+  const data = useSearchPlayerByNumbmerQuery({ number });
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { TeamForm } = useSelector((state) => state.team);
   const [logo, setLogo] = React.useState("");
-
+  const [captain, setCaptain] = React.useState(0);
+  console.log(captain);
+  console.log(location);
   const {
     values,
     errors,
@@ -41,28 +45,28 @@ function TeamAddEdit() {
       ? location.state.teamDetail
       : TeamForm.TeamInfo,
     onSubmit: (data) => {
-      // //If captain not selected
-      // if(data.captain.value == ''){
-      //   toast.error("Please select team captain")
-      //   return;
-      // }
+      // //If captain not se  lected
+      if (captain === 0) {
+        console.log("andar gaya");
+        toast.error("Please select team captain");
+        return;
+      }
 
-      //Can't select more than 12 players
-      // if (selectedPlayers.length < 5) {
-      //   toast.error("Please select atleast 5 players");
-      //   return;
-      // }
+      if (selectedPlayers.length < 1) {
+        toast.error("Please select atleast 5 players");
+        return;
+      }
 
       try {
         const fb = new FormData();
         let ok = JSON.stringify({
           TeamInfo: data,
-          PlayerList: [],
+          PlayerList: selectedPlayers,
+          captain: captain,
         });
         fb.append("data", ok);
         fb.append("team_logo", logo);
 
-        console.log(location.state?.isEdit);
         if (location?.state?.isEdit) {
           fb.append("id", location.state.teamDetail.id);
           teamUpdate(fb).then(console.log("update ho gai"));
@@ -75,25 +79,20 @@ function TeamAddEdit() {
     },
   });
 
-  const [searchedPlayers, setSearchedPlayers] = React.useState([
-    {
-      id: 1,
-      name: "Sadikali karadiya",
-      position: "point guard",
-      isEditable: false,
-    },
-    { id: 2, name: "Moin", position: "center", isEditable: false },
-  ]);
+  const [searchedPlayers, setSearchedPlayers] = React.useState([]);
   const [searchValue, setSearchValue] = React.useState("");
   const [selectedPlayers, setSelectedPlayers] = React.useState([]);
 
   const handlePlayerSearch = (e) => {
-    setSearchValue(e.target.value);
+    setSearchValue(() => {
+      e.target.value;
+    });
+    if (e.target.value.length == 10) setNumber(e.target.value);
   };
 
   const handleSearchPlayerClick = (player_id) => {
     //Cant select more than 12 players
-    if (selectedPlayers?.length == 2) {
+    if (selectedPlayers?.length == 12) {
       toast.error("Can't select more than 12 players");
       return;
     }
@@ -110,6 +109,7 @@ function TeamAddEdit() {
     }
 
     setSearchValue("");
+    setSearchedPlayers([]);
     const selected = searchedPlayers.filter((item) => {
       return item.id == player_id;
     });
@@ -155,7 +155,6 @@ function TeamAddEdit() {
     }
   }, [updateData.isError, updateData.isSuccess]);
 
-  console.log(updateData);
   const handleSave = (player_id) => {
     setSelectedPlayers(
       selectedPlayers.map((item) => {
@@ -177,7 +176,6 @@ function TeamAddEdit() {
   };
 
   const handlePositionChange = (e, player_id) => {
-    console.log(e.target.value);
     setSelectedPlayers(
       selectedPlayers.map((item) => {
         return {
@@ -196,7 +194,14 @@ function TeamAddEdit() {
     setSelectedPlayers(location?.state?.isEdit ? location?.state?.players : []);
   }, []);
 
-  console.log(logo);
+  React.useEffect(() => {
+    console.log(data?.data);
+    if (data?.data) {
+      setSearchedPlayers((e) => [{ ...data?.data?.data }]);
+    }
+  }, [data.isSuccess, data]);
+
+  console.log("search", searchedPlayers);
   return (
     <section className="min-h-screen-fit">
       <div className="heading-container flex justify-center items-center h-24 sm:h-32 md:h-48">
@@ -362,7 +367,7 @@ function TeamAddEdit() {
                   className="w-full p-2 sm:p-3 rounded-lg text-sm outline-none"
                   placeholder="Search player by mobile no."
                   value={searchValue}
-                  onChange={handlePlayerSearch}
+                  onChange={(e) => handlePlayerSearch(e)}
                   onFocus={() =>
                     document
                       .querySelector(".player-input")
@@ -400,10 +405,10 @@ function TeamAddEdit() {
                               onClick={() => handleSearchPlayerClick(player.id)}
                             >
                               <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-gray-700 capitalize">
-                                {player.name}
+                                {player.first_name}
                               </th>
                               <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 capitalize">
-                                {player.position}
+                                {player.playing_position}
                               </td>
                             </tr>
                           );
@@ -441,6 +446,9 @@ function TeamAddEdit() {
                         Position
                       </th>
                       <th className="border py-3 text-sm text-gray-300 uppercase border-gray-700 whitespace-nowrap font-semibold text-left">
+                        Captain
+                      </th>
+                      <th className="border py-3 text-sm text-gray-300 uppercase border-gray-700 whitespace-nowrap font-semibold text-left">
                         Action
                       </th>
                     </tr>
@@ -449,12 +457,12 @@ function TeamAddEdit() {
                     {selectedPlayers?.length > 0 ? (
                       selectedPlayers.map((player, index) => {
                         return (
-                          <tr key={index} className="border-t-2">
+                          <tr key={index} className="border-t-2 ">
                             <th className="border-t-0 px-6 border-l-0 border-r-0 text-sm whitespace-nowrap pl-6 py-4 text-left text-gray-700 capitalize">
                               {index + 1}
                             </th>
                             <th className="text-left text-gray-700 capitalize">
-                              {player.name}
+                              {player.first_name}
                             </th>
                             <td>
                               <select
@@ -479,6 +487,19 @@ function TeamAddEdit() {
                                   Shooting Forward
                                 </option>
                               </select>
+                            </td>
+                            <td>
+                              <input
+                                className="w-4 h-4 cursor-pointer"
+                                type="radio"
+                                checked={player.id == captain}
+                                id="male"
+                                disabled={!player.isEditable}
+                                name="gender"
+                                value={player.id}
+                                onChange={(e) => setCaptain(e.target.value)}
+                                onBlur={(e) => setCaptain(e.target.value)}
+                              />
                             </td>
                             <td>
                               {player.isEditable ? (
@@ -512,8 +533,8 @@ function TeamAddEdit() {
                     ) : (
                       <tr>
                         <td
-                          className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4 font-semibold text-red-500"
-                          colSpan="4"
+                          className="border-t-0 px-6 text-center align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4 font-semibold text-red-500"
+                          colSpan="5"
                         >
                           No players selected
                         </td>

@@ -38,6 +38,9 @@ export const playerApi = api.injectEndpoints({
         };
       },
     }),
+    searchPlayerByNumbmer: build.query({
+      query: ({ number }) => `players/search/${number}`,
+    }),
   }),
 });
 
@@ -46,4 +49,5 @@ export const {
   useGetPlayerDetailsQuery,
   useRegisterPlayerMutation,
   useUpdatePlayerDetailsMutation,
+  useSearchPlayerByNumbmerQuery,
 } = playerApi;
