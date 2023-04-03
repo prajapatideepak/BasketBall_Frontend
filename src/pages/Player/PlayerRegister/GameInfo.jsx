@@ -5,6 +5,8 @@ import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { setGameInfoForm } from "../../../redux/actions/Player";
 import { GameInfoSchema } from "../../../models/GameInfoModel";
+import { toast } from "react-toastify";
+
 import {
   useRegisterPlayerMutation,
   useUpdatePlayerDetailsMutation,
@@ -14,7 +16,9 @@ import BasicInfo from "./BasicInfo";
 const GameInfo = ({ index, setIndex }) => {
   const dispatch = useDispatch();
   const location = useLocation();
+  const navigate = useNavigate();
   const [playerRegistration, { ...thing }] = useRegisterPlayerMutation();
+  console.log(thing, "thing ")
   const [playerUpdate, { ...updateData }] = useUpdatePlayerDetailsMutation();
   const { PlayerForm } = useSelector((state) => state.player);
   const { values, errors, touched, handleSubmit, handleChange, handleBlur } =
@@ -25,12 +29,11 @@ const GameInfo = ({ index, setIndex }) => {
         dispatch(setGameInfoForm(values));
         try {
           const fb = new FormData();
-
           fb.append("photo", PlayerForm.basicInfo?.photo);
           let ok = JSON.stringify({
             PlayerInfo: PlayerForm,
           });
-          fb.append("data", ok);
+          fb.append("data",ok)
           playerRegistration(fb).then(console.log("ho gaya"));
         } catch (err) {
           console.log(err);
@@ -38,8 +41,19 @@ const GameInfo = ({ index, setIndex }) => {
       },
     });
 
-  console.log(thing);
-  console.log(PlayerForm.basicInfo.photo);
+    React.useEffect(() => {
+      if (thing.isError) {
+        toast.error(thing?.error?.data?.message);
+      }
+      if (thing.isSuccess) {
+        if (thing?.data?.success) {
+          toast.success("Player Registration Successfull ");
+          navigate(`/player/${thing?.data?.data?.id}`);
+        }
+      }
+  
+    }, [thing.isError, thing.isSuccess]);
+
   return (
     <>
       <form action="" className="flex w-full  space-x-3">
@@ -47,7 +61,7 @@ const GameInfo = ({ index, setIndex }) => {
           <h1 className="py-2 text-xl text-center md:text-left my-2 text-orange-600">
             Game Information
           </h1>
-          <div className="grid text-lg lg:text-base grid-cols-1 md:grid-cols-2  gap-4   lg:gap-2">
+          <div className="grid text-lg lg:text-base grid-cols-1 md:grid-cols-2 gap-4 lg:gap-2">
             <div className="  ">
               <label htmlFor="required-email" className="text-gray-700">
                 Height (cm)
@@ -142,7 +156,7 @@ const GameInfo = ({ index, setIndex }) => {
             <div className=" md:col-span-2   ">
               <label htmlFor="Experience" className="text-gray-700">
                 Experience(Achievement)
-                <span className="text-red-500 required-dot"></span>
+                <span className="text-red-500 required-dot">*</span>
               </label>
               <textarea
                 type="text"
@@ -168,7 +182,7 @@ const GameInfo = ({ index, setIndex }) => {
           </div>
         </div>
       </form>
-      <div className="w-full flex justify-end mt-5 sm:mt-10">
+      <div className="w-full flex justify-end mt-5 sm:mt-10 py-5 px-5 ">
         {location?.state?.isEdit ? (
           <button
             type="button"
@@ -201,10 +215,10 @@ const GameInfo = ({ index, setIndex }) => {
             {thing.isLoading
               ? "SUBMIT..."
               : updateData.isLoading
-              ? "Updating..."
-              : location?.state?.isEdit
-              ? "UPDATE"
-              : "SUBMIT"}
+                ? "Updating..."
+                : location?.state?.isEdit
+                  ? "UPDATE"
+                  : "SUBMIT"}
           </span>
         </button>
       </div>

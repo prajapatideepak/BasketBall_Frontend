@@ -25,7 +25,7 @@ export default function PlayerRegister() {
       <p className="text-center text-gray-700 text-sm md:text-base italic pb-5">
         Be the player that raises the bar, be relentless, be a game changer.
       </p>
-      <div className="  rounded-lg shadow-xl  py-2  ">
+      <div className="  rounded-lg shadow-xl py-2 px-5  ">
         <div className="flex justify-center space-x-8  ">
           <motion.div
             animate={{

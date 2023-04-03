@@ -14,7 +14,6 @@ const PlayerList = () => {
   const [pageNo, setPageNo] = React.useState(1);
   const rojki = useGetAllPlayersQuery({ pageNo: pageNo - 1, search });
   const { isLoading, data } = rojki;
-  console.log(data.all_players)
   const PlayerList = [
     {
       id: 1,
@@ -107,7 +106,7 @@ const PlayerList = () => {
       ],
     },
   ];
-
+console.log(data)
   return (
     <section className="min-h-screen-fit">
       <div>
@@ -136,8 +135,9 @@ const PlayerList = () => {
                   </button>
                 </div>
                 <div className="flex w-full flex-col items-center px-5 lg:px-8  space-y-6 py-3 sm:py-5 xl:py-10 ">
-                  {data?.all_players && data?.all_players.length > 0 ? (
-                    data.all_players.map((player, index) => {
+                  {data?.data && data?.data?.length > 0 ? (
+                    data?.data.map((player, index) => {
+                      console.log(player)
                       return (
                         <Link
                           key={player.id}
@@ -147,7 +147,7 @@ const PlayerList = () => {
                           <div className="duration-300 relative justify-end bg-black rounded-lg text-white overflow-hidden shadow-xl cursor-pointer hover:scale-[1.03] w-6/7  md:w-full h-full ">
                             <div className=" flex justify-end items-center ">
                               <img
-                                src={player.teamDetails[0].team_logo}
+                                src={player.team_players[0]?.teams?.logo}
                                 alt=""
                                 className="w-28 h-28 opacity-20"
                               />
@@ -161,20 +161,20 @@ const PlayerList = () => {
                               {/* avtar start */}
                               <div className="text-center sm:w-1/2 items-center justify-center space-x-5 lg:space-x-10 xl:space-x-16 sm:space-x-6 lg:py-6 flex  ">
                                 <img
-                                  src={player.basicinfo.img}
+                                  src={player?.photo}
                                   className=" object-cover w-12 h-12 sm:w-14 sm:h-14 lg:w-[70px] lg:h-[70px] xl:w-20 xl:h-20 2xl:w-[85px]  2xl:h-[85px] rounded-full border-2 sm:border-4 border-slate-700 "
                                 />
                                 <div className="flex justify-start items-center ">
                                   <h1 className="text-gray-600 font-bold text-sm sm:text-base  lg:text-lg xl:text-xl uppercase">
-                                    {player.gameinfo.playerPosition}
+                                    {player?.playing_position ? player?.playing_position : "...."}
                                   </h1>
                                 </div>
                                 <div className="flex flex-col justify-start items-start ">
                                   <h1 className="text-white font-bold text-base sm:text-lg md:text-xl lg:text-[25px] text-start ">
-                                    {player.basicinfo.firstName}
+                                    {player?.first_name}
                                   </h1>
                                   <h1 className="text-gray-600 font-bold text-[8px] sm:text-[10px] lg:text-xs xl:text-sm text-start ">
-                                    {player.teamDetails[0].team_name}
+                                    {player?.team_players[0]?.teams?.team_name ? player?.team_players[0]?.teams?.team_name : "...."}
                                   </h1>
                                 </div>
                               </div>
@@ -185,42 +185,42 @@ const PlayerList = () => {
                                   <div className="text-center    ">
                                     <h1
                                       className="text-sm sm:text-lg md:text-2xl lg:text-3xl 
-                             font-bold text-[#ee6730]"
+                             font-bold text-white"
                                     >
-                                      {player.statics.totalMatch}
+                                      {player?.player_statistics?.matches_played ? player?.player_statistics?.matches_played : "0" }
                                     </h1>
                                     <span className="text-[8px] sm:text-[9px] md:text-[11px] lg:text-xs xl:text-base text-white font-semibold">
-                                      Matches Played
+                                      Total Match
                                     </span>
                                   </div>
                                   <div className="text-center    ">
                                     <h1
                                       className="text-sm sm:text-lg md:text-2xl lg:text-3xl 
-                             font-bold text-[#ee6730]"
+                             font-bold text-green-600"
                                     >
-                                      {player.statics.matchWon}
+                                      {player?.player_statistics?.matches_won ? player?.player_statistics?.matches_won : "0" }
                                     </h1>
                                     <span className="text-[8px] sm:text-[9px] md:text-[11px] lg:text-xs xl:text-base text-white font-semibold">
-                                      Won
+                                      Match Won
                                     </span>
                                   </div>
                                   <div className="text-center    ">
                                     <h1
                                       className="text-sm sm:text-lg md:text-2xl lg:text-3xl 
-                             font-bold text-[#ee6730]"
+                             font-bold text-red-600"
                                     >
-                                      {player.statics.matchLoss}
+                                      {player?.player_statistics?.matches_lost ? player?.player_statistics?.matches_lost : "0"}
                                     </h1>
                                     <span className="text-[8px] sm:text-[9px] md:text-[11px] lg:text-xs xl:text-base text-white font-semibold">
-                                      lost
+                                      Match lost
                                     </span>
                                   </div>
                                   <div className="text-center    ">
                                     <h1
                                       className="text-sm sm:text-lg md:text-2xl lg:text-3xl
-                             font-bold text-[#ee6730]"
+                             font-bold text-green-600"
                                     >
-                                      {player.statics.totalScore}
+                                      {player?.player_statistics?.points ? player?.player_statistics?.points : "0"}
                                     </h1>
                                     <span className="text-[8px] sm:text-[9px] md:text-[11px] lg:text-xs xl:text-base text-white font-semibold">
                                       Total Points
