@@ -10,7 +10,7 @@ const Player = () => {
       <Routes>
         <Route>
           <Route path="/list" element={<PlayerList />} />
-          <Route path="/register" element={<PlayerRegister />} />
+          <Route path="/add-edit" element={<PlayerRegister />} />
           <Route path="/:id" element={<PlayerProfile />} />
 
           <Route index element={<PlayerList />} />
