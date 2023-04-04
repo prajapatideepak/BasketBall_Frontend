@@ -15,13 +15,12 @@ const BasicInfo = ({ index, setIndex }) => {
   const [img, setImg] = React.useState(defaultImage);
   const [photo, setPhoto] = React.useState("");
   const { PlayerForm } = useSelector((state) => state.player);
-  console.log(PlayerForm)
+  console.log(PlayerForm.basicInfo)
   const { values, touched, errors, handleChange, handleSubmit, handleBlur } =
     useFormik({
       initialValues: PlayerForm.basicInfo,
       validationSchema: basicInfoSchema,
       onSubmit: (values) => {
-        console.log(values);
         setIndex(2);
         dispatch(setBasicInfoForm({ ...values, photo: photo }));
       },
@@ -32,23 +31,9 @@ const BasicInfo = ({ index, setIndex }) => {
     setImg(URL.createObjectURL(photo));
   }
 
-    function handleImageUpload(e) {
-    setPhoto(() => e.target.files[0]);
-    setImg(URL.createObjectURL(photo));
+  function handleRemoveImage() {
+    setImg(URL.createObjectURL(defaultImage));
   }
-  // React.useEffect(() => {
-  //   if (thing.isError) {
-  //     toast.error(thing?.error?.data?.message);
-  //   }
-  //   if (thing.isSuccess) {
-  //     if (thing?.data?.success) {
-  //       toast.success("Team Registration Successfull ");
-
-  //       navigate(`/team/profile-detail/${thing?.data?.team?.id}`);
-  //     }
-  //   }
-  // }, [thing.isError, thing.isSuccess]);
-
 
   return (
     <>
@@ -84,10 +69,7 @@ const BasicInfo = ({ index, setIndex }) => {
                   {img != defaultImage ? (
                     <button
                       className="bg-red-600 px-1 rounded text-white hover:bg-red-400 mt-5 flex items-center justify-center gap-3"
-                      onClick={() => {
-                        setImg(defaultImage);
-                        // document.getElementById('file').value = ''
-                      }}
+                      onClick={handleRemoveImage}
                     >
                       <span> Remove</span>
                     </button>
@@ -95,7 +77,6 @@ const BasicInfo = ({ index, setIndex }) => {
                 </div>
               </div>
             </div>
-
             <div className="">
               <label htmlFor="firstName" className="text-gray-700">
                 First Name
@@ -103,12 +84,12 @@ const BasicInfo = ({ index, setIndex }) => {
               </label>
               <input
                 type="text"
-                id="first_Name"
+                id="first_name"
                 className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
-                name="first_Name"
-                value={values.first_name}
+                name="first_name"
                 onChange={handleChange}
                 onBlur={handleBlur}
+                value={values.first_name}
                 placeholder="Enter Your First Name"
               />
               <span className="text-sm font-semibold text-red-600 px-1">

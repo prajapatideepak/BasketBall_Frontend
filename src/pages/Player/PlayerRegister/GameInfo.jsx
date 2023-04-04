@@ -20,6 +20,7 @@ const GameInfo = ({ index, setIndex }) => {
   const [playerRegistration, { ...thing }] = useRegisterPlayerMutation();
   const [playerUpdate, { ...updateData }] = useUpdatePlayerDetailsMutation();
   const { PlayerForm } = useSelector((state) => state.player);
+  console.log(PlayerForm.basicInfo)
   const { values, errors, touched, handleSubmit, handleChange, handleBlur } =
     useFormik({
       initialValues: PlayerForm.gameInfo,

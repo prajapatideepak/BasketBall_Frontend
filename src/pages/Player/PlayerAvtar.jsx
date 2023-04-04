@@ -1,4 +1,5 @@
 import React from "react";
+import ReadMoreReact from 'read-more-react';
 
 export default function PlayerAvtar({ player }) {
 
@@ -23,9 +24,16 @@ export default function PlayerAvtar({ player }) {
             {player?.SinglePlayerDetails?.playing_position}
           </span>
         </div>
-        <p className={`${player?.SinglePlayerDetails?.about?.length > 30 ? "line-clamp-3" : ""} text-center text-gray-600 text-sm lg:w-1/2 mx-auto`}>
-          {player?.SinglePlayerDetails?.about}
+
+        {/* <p className={`${player?.SinglePlayerDetails?.about?.length > 40 ? "flex-wrap" : ""} text-center text-gray-600 text-sm lg:w-1/2 mx-auto`}>
+          
         </p>
+        {
+          player?.SinglePlayerDetails?.about?.length > 70 ?
+            <h1 className="text-center text-sm cursor-pointer font-semibold">Read More</h1>
+            :
+            ""
+        } */}
       </div>
     </div>
   );
