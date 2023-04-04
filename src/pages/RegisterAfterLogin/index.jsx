@@ -12,13 +12,19 @@ export default function AfterRole() {
 
   const [role, setRole] = React.useState([
     {
+      title: "Visitor",
+      isSelected: false,
+      path: "/player/add-edit",
+      icon: "/icons/847.jpg",
+    },
+    {
       title: "Player",
       isSelected: false,
-      path: "/player/register",
+      path: "/player/add-edit",
       icon: "/icons/player.png",
     },
     {
-      title: "Team Owner/Manager",
+      title: "Team Owner",
       isSelected: false,
       path: "/team/add-edit",
       icon: "/icons/Team.png",
@@ -60,8 +66,8 @@ export default function AfterRole() {
     }
   }
   return (
-    <div className="flex flex-col  justify-center px-8 items-center lg:px-20 py-12 lg:py-5 ">
-      <div className="mt-5 text-center flex flex-col justify-center w-full px-20 space-y-3 ">
+    <div className="flex flex-col  justify-center px-8 items-center lg:px-20 lg:py-5 ">
+      <div className="mt-5 text-center flex flex-col justify-center w-full lg:px-20 space-y-3 ">
         {/* <Heading
           text={"Select Your Role"}
           className="text-2xl px-2"
@@ -74,12 +80,12 @@ export default function AfterRole() {
           or Team Manager and Dominate the Court
         </p>
       </div>
-      <div className="grid my-8 rounded-lg  px-8 lg:mx-10 grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-10 ">
+      <div className="grid my-14 rounded-lg  xl:px-8 xl:mx-10 xs:grid-cols-1 w-full justify-center sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-10 ">
         {role.map((r, i) => {
           return (
             <motion.div
               animate={{
-                borderColor: r.isSelected ? "#ee6730" : "#f3f4f6",
+                borderColor: r.isSelected ? "#ee6730" : "white",
                 // backgroundColor: r.isSelected ? '#FFFFFF' : "#F3F4F6",
                 boxShadow: r.isSelected
                   ? "rgba(0, 0, 0, 0.35) 0px 5px 15px"
@@ -90,7 +96,7 @@ export default function AfterRole() {
               }}
               onClick={(e) => handleClick(i)}
               key={i}
-              className="cursor-pointer relative pb-5  rounded-lg shadow-lg shadow-black/20  border-4   "
+              className="cursor-pointer relative w-full bg-white lg:pt-3 xl:pb-8 hover:scale-110 duration-500  rounded-lg shadow-lg shadow-black/20  border-4   "
             >
               <motion.div
                 key={i}
@@ -110,8 +116,8 @@ export default function AfterRole() {
               >
                 <MdDone className="text-center text-white font-bold text-xl " />
               </motion.div>
-              <div className="flex justify-center items-center  h-[90%] w-full">
-              <img className="lg:w-2/3  mx-auto" src={r.icon} />
+              <div className="flex justify-center items-center   xl:h-[90%] w-full">
+              <img className="w-[60%] lg:w-[70%] xl:w-[60%]  mx-auto" src={r.icon} />
 
               </div>
               <motion.div

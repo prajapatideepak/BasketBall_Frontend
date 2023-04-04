@@ -18,7 +18,6 @@ const GameInfo = ({ index, setIndex }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const [playerRegistration, { ...thing }] = useRegisterPlayerMutation();
-  console.log(thing, "thing ");
   const [playerUpdate, { ...updateData }] = useUpdatePlayerDetailsMutation();
   const { PlayerForm } = useSelector((state) => state.player);
   const { values, errors, touched, handleSubmit, handleChange, handleBlur } =
@@ -117,12 +116,12 @@ const GameInfo = ({ index, setIndex }) => {
               </label>
               <select
                 type="text"
-                id="playerPosition"
+                id="playing_position"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={values.playerPosition}
+                value={values.playing_position}
                 className=" rounded-lg border-transparent flex-1  border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
-                name="playerPosition"
+                name="playing_position"
               >
                 <option value={""}>Select Position</option>
 
@@ -133,8 +132,8 @@ const GameInfo = ({ index, setIndex }) => {
                 <option value="shooting forward">Shooting Forward</option>
               </select>
               <span className="text-sm font-semibold text-red-600 px-1">
-                {errors.playerPosition && touched.playerPosition
-                  ? errors.playerPosition
+                {errors.playing_position && touched.playing_position
+                  ? errors.playing_position
                   : null}
               </span>
             </div>
@@ -146,17 +145,17 @@ const GameInfo = ({ index, setIndex }) => {
               </label>
               <input
                 type="number"
-                id="JerseyNumber"
+                id="jersey_no"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={values.JerseyNumber}
+                value={values.jersey_no}
                 className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white     placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
-                name="JerseyNumber"
+                name="jersey_no"
                 placeholder="Enter Your Jersey Number or Preferred Jersey Number "
               />
               <span className="text-sm font-semibold text-red-600 px-1">
-                {errors.JerseyNumber && touched.JerseyNumber
-                  ? errors.JerseyNumber
+                {errors.jersey_no && touched.jersey_no
+                  ? errors.jersey_no
                   : null}
               </span>
             </div>
@@ -168,17 +167,17 @@ const GameInfo = ({ index, setIndex }) => {
               </label>
               <textarea
                 type="text"
-                id="Experience"
+                id="about"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={values.Experience}
+                value={values.about}
                 className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
-                name="Experience"
+                name="about"
                 placeholder="Write About Yourself and Your Achivement and Experience "
               />
               <span className="text-sm font-semibold text-red-600 px-1">
-                {errors.Experience && touched.Experience
-                  ? errors.Experience
+                {errors.about && touched.about
+                  ? errors.about
                   : null}
               </span>
             </div>

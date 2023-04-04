@@ -206,19 +206,22 @@ function TeamAddEdit() {
 
   console.log("search", searchedPlayers);
   return (
-    <section className="min-h-screen-fit">
-      <div className="heading-container flex justify-center items-center h-24 sm:h-32 md:h-48">
-        <div className="">
-          <Heading
-            margin={true}
-            text={location?.state?.isEdit ? "Edit Team" : "Team Registration"}
-          />
+    <section className="min-h-screen-fit py-5 px-8">
+      <div className=" flex justify-center items-center">
+        <div>
+          <h1 className=" items-end  text-center font-semibold text-2xl lg:text-3xl">
+            {location?.state?.isEdit ? "Team Edit" : "Team Registration"}
+          </h1>
         </div>
+        <img src={"/icons/team_icon.png"} className="w-20" />
       </div>
-      <div className="mx-auto px-10 py-12 sm:px-20 sm:py-12 md:px-20 md:py-16 lg:px-24 xl:px-28 2xl:px-32">
-        <form action="" onSubmit={handleSubmit}>
+      <p className="text-center text-gray-700 text-sm md:text-base italic pb-5">
+        Be the player that raises the bar, be relentless, be a game changer.
+      </p>
+      <div className="mx-auto lg:px-10 ">
+        <form action="" onSubmit={handleSubmit} className=" rounded-lg shadow-xl px-5 py-5 md:px-10 md:py-8">
           <div className="">
-            <h3 className="text-2xl font-semibold text-[#ee6730]">
+            <h3 className=" text-xl sm:text-2xl font-semibold text-[#ee6730]">
               Team Information:
             </h3>
           </div>
@@ -227,7 +230,7 @@ function TeamAddEdit() {
               <div className="flex flex-col">
                 <label className="mb-2">Team Name *</label>
                 <input
-                  className="w-full outline-blue-200 rounded-lg border-2 border-gray-200 p-2 sm:p-3 text-sm"
+                  className="w rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
                   placeholder="Enter team name"
                   type="text"
                   name="team_name"
@@ -237,7 +240,7 @@ function TeamAddEdit() {
                   onBlur={handleBlur}
                 />
                 {errors.team_name && touched.team_name ? (
-                  <small className="text-red-600 mt-2">
+                  <small className="text-sm font-semibold text-red-600 px-1">
                     {errors.team_name}
                   </small>
                 ) : null}
@@ -247,7 +250,7 @@ function TeamAddEdit() {
                   Choose Logo ( PNG, JPG, JPEG ) (size &lt; 1MB)
                 </label>
                 <input
-                  className="w-full cursor-pointer rounded-lg bg-white border-2 border-gray-200 p-1 sm:p-2 text-sm"
+                  className="w-full  rounded-lg border-transparent flex-1 appearance-none border border-gray-300  py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
                   type="file"
                   name="team_l"
                   id="team_logo"
@@ -260,7 +263,7 @@ function TeamAddEdit() {
               <div className="w-full flex flex-col">
                 <label className="mb-2">About Team</label>
                 <textarea
-                  className="w-full outline-blue-200 text-sm rounded-lg px-4 py-3 border-2 border-gray-200"
+                  className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
                   name="about_team"
                   placeholder="Write something about your team"
                   rows="6"
@@ -272,7 +275,7 @@ function TeamAddEdit() {
             </div>
           </div>
           <div className="mt-10 sm:mt-20">
-            <h3 className="text-2xl font-semibold text-[#ee6730]">
+            <h3 className=" text-xl sm:text-2xl font-semibold text-[#ee6730]">
               Coach Information:
             </h3>
           </div>
@@ -281,7 +284,7 @@ function TeamAddEdit() {
               <div className="coach-1-name flex flex-1 flex-col">
                 <label className="mb-2">Coach Name</label>
                 <input
-                  className="w-full outline-blue-200 rounded-lg border-2 border-gray-200 p-2 sm:p-3 text-sm"
+                  className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
                   placeholder="Enter coach name"
                   type="text"
                   name="coach_name"
@@ -299,7 +302,7 @@ function TeamAddEdit() {
               <div className="coach-1-mobile flex flex-1 flex-col">
                 <label className="mb-2">Coach Mobile</label>
                 <input
-                  className="w-full outline-blue-200 rounded-lg border-2 border-gray-200 p-2 sm:p-3 text-sm"
+                  className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
                   placeholder="Enter coach mobile no."
                   type="text"
                   name="coach_mobile"
@@ -319,7 +322,7 @@ function TeamAddEdit() {
               <div className="coach-2-name flex flex-1 flex-col">
                 <label className="mb-2">Assistant Coach Name</label>
                 <input
-                  className="w-full outline-blue-200 rounded-lg border-2 border-gray-200 p-2 sm:p-3 text-sm"
+                  className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
                   placeholder="Enter asst. coach name"
                   type="text"
                   name="asst_coach_name"
@@ -337,7 +340,7 @@ function TeamAddEdit() {
               <div className="coach-2-mobile flex flex-1 flex-col">
                 <label className="mb-2">Assistant Coach Mobile</label>
                 <input
-                  className="w-full outline-blue-200 rounded-lg border-2 border-gray-200 p-2 sm:p-3 text-sm"
+                  className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
                   placeholder="Enter asst. coach mobile no."
                   type="text"
                   name="asst_coach_mobile"
@@ -355,13 +358,13 @@ function TeamAddEdit() {
             </div>
           </div>
           <div className="mt-10 sm:mt-20">
-            <h3 className="text-2xl font-semibold text-[#ee6730]">
+            <h3 className=" text-xl sm:text-2xl font-semibold text-[#ee6730]">
               Player Selection:
             </h3>
           </div>
           <div className="player-selection w-full flex flex-col xl:flex-row gap-6">
-            <div className="relative player-search-input-container flex flex-1 flex-col mt-4">
-              <div className="player-input flex w-full mt-5 rounded-lg border-2 border-gray-200 bg-white justify-center items-center outline-blue-200">
+            <div className="relative player-search-input-container flex flex-1 flex-col mt-9">
+              <div className="rounded-lg border-transparent flex items-center appearance-none border border-gray-300 w-full py-1 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent">
                 <span className="text-xl ml-4 text-gray-500">
                   <ImSearch />
                 </span>
@@ -610,10 +613,10 @@ function TeamAddEdit() {
                 {thing.isLoading
                   ? "SUBMIT..."
                   : updateData.isLoading
-                  ? "Updating..."
-                  : location?.state?.isEdit
-                  ? "UPDATE"
-                  : "SUBMIT"}
+                    ? "Updating..."
+                    : location?.state?.isEdit
+                      ? "UPDATE"
+                      : "SUBMIT"}
               </span>
             </button>
           </div>
