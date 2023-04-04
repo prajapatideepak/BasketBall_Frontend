@@ -11,7 +11,7 @@ export const TournamentInfoSchema = Yup.object({
       .matches(/^[a-zA-Z ]+$/, "Please enter only characters")
       .min(2, "Team name must be at least 2 characters")
       .max(25, "Team name should not be more than 25 characters")
-      .required("Tournament name is required"),
+      .required("Please Enter Tournament Name "),
 
     tournament_logo: Yup.mixed()
       .test("is-valid-type", "Logo should be in jpg, jpeg or png format",
@@ -29,8 +29,8 @@ export const TournamentInfoSchema = Yup.object({
       }),
 
     city_name: Yup.string()
-      .matches(/^[a-zA-Z]+$/, "Please enter only characters")
-      .required("City name is required"),
+      .matches(/^[a-zA-Z]+$/, "Please Enter Only Characters")
+      .required("Please Enter City Name"),
 
     tournament_category: Yup.object().shape({
       boys: Yup.boolean(),
@@ -38,13 +38,13 @@ export const TournamentInfoSchema = Yup.object({
       men: Yup.boolean(),
       women: Yup.boolean(),
       mixed: Yup.boolean(),
-    }).test('has-category', 'Tournament category is required', (value) =>
+    }).test('has-category', 'Please Select Tournament Category', (value) =>
       Object.values(value).some(Boolean)
     ),
 
-    starting_date: Yup.date().max(Yup.ref('ending_date'), "End date can't be before Start date").required("Start date is required"),
+    starting_date: Yup.date().max(Yup.ref('ending_date'), "End date Can't be before Start date").required("Please Select Start Date"),
 
-    ending_date: Yup.date().min(Yup.ref('starting_date'), "End date can't be before Start date").required('End date is required'),
+    ending_date: Yup.date().min(Yup.ref('starting_date'), "End date can't be before Start date").required('Please Select End Date'),
 
     age_cutoff: Yup.object().shape({
       under_14: Yup.boolean(),
@@ -54,20 +54,20 @@ export const TournamentInfoSchema = Yup.object({
       under_21: Yup.boolean(),
       under_25: Yup.boolean(),
       under_27: Yup.boolean(),
-    }).test('has-category', 'Age cut-off is required', (value) =>
+    }).test('has-category', 'Please Select Age CutOff', (value) =>
       Object.values(value).some(Boolean)
     ),
 
-    tournament_level: Yup.string().required("Tournament level is required"),
+    tournament_level: Yup.string().required("Please Enter Tournament Lavel"),
 
     referees: Yup.array().of(
       Yup.object().shape({
-        name: Yup.string().required('Referee name is required') 
+        name: Yup.string().required('Please Enter Referee Name') 
             .matches(/^[a-zA-Z ]+$/, "Please enter only characters")
             .min(2, "Referee name must be at least 2 characters")
             .max(25, "Referee name should not be more than 25 characters"),
-        mobile: Yup.string().required('Referee mobile is required')
-            .matches(/^[0-9]+$/, "Please enter only numbers")
+        mobile: Yup.string().required('Please Enter Referee Number')
+            .matches(/^[0-9]+$/, "Please Enter Only Numbers")
             .min(10, "Mobile number should be at least 10 digits")
             .max(10, "Mobile number should be at least 10 digits"),
       })
@@ -75,13 +75,13 @@ export const TournamentInfoSchema = Yup.object({
 
     sponsors: Yup.array().of(
       Yup.object().shape({
-        name: Yup.string().required('Sponsor name is required') 
-            .matches(/^[a-zA-Z ]+$/, "Please enter only characters")
+        name: Yup.string().required('Please Enter Sponsor Name') 
+            .matches(/^[a-zA-Z ]+$/, "Please Enter Only Characters")
             .min(2, "Sponsor name must be at least 2 characters")
             .max(25, "Sponsor name should not be more than 25 characters"),
         logo: Yup
           .mixed()
-          .required("Sponsor logo is required")
+          .required("Please Select Sponsor logo")
           .test("is-valid-type", "Logo should be in jpg, jpeg or png format",
             value =>  isValidFileType(value && value.name.toLowerCase(), "image")
           )

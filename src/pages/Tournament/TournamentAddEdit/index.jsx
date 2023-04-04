@@ -475,7 +475,7 @@ function TournamentAddEdit() {
                 <div className="flex flex-col w-full">
                   <label className="mb-2">Level *</label>
                   <Select
-                    className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full outline-none bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
+                    className="rounded-lg border-transparent appearance-none border border-gray-300 w-full outline-none bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
                     name="tournament_level"
                     id="tournament_level"
                     onChange={(e) => setFieldValue('tournament_level', e.value)}
@@ -501,7 +501,7 @@ function TournamentAddEdit() {
                 <div className="flex flex-col w-full">
                   <label className="mb-2">Prize</label>
                   <input
-                    className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
+                    className="rounded-lg border-transparent appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
                     placeholder="Enter Prize Money"
                     type="text"
                     name="prize"
@@ -527,7 +527,7 @@ function TournamentAddEdit() {
               <div className='w-full flex flex-col'>
                 <label className="mb-2">About Tournament</label>
                 <textarea
-                  className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
+                  className="rounded-lg border-transparent flex-1  appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
                   name="about_tournament"
                   placeholder='Write something about tournament'
                   rows="6"
