@@ -39,6 +39,6 @@ export const {
   useGetAllPlayersQuery,
   useGetPlayerDetailsQuery,
   useRegisterPlayerMutation,
-  useUpdatePlayerDetailsMutation,
+  useUpdatePlayerDetailsMutation, 
   useSearchPlayerByNumbmerQuery,
 } = playerApi;

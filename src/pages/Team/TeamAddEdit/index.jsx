@@ -179,7 +179,8 @@ function TeamAddEdit() {
       selectedPlayers.map((item) => {
         return {
           ...item,
-          position: item.id == player_id ? e.target.value : item.position,
+          playing_position:
+            item.id == player_id ? e.target.value : item.playing_position,
         };
       })
     );
@@ -399,7 +400,8 @@ function TeamAddEdit() {
                       </tr>
                     </thead>
                     <tbody>
-                      {searchedPlayers.length > 0 ? (
+                      {searchedPlayers.length > 0 &&
+                      searchedPlayers[0]?.id > 0 ? (
                         searchedPlayers.map((player, index) => {
                           return (
                             <tr
@@ -473,7 +475,7 @@ function TeamAddEdit() {
                                 id=""
                                 className="sm:px-1 py-1 rounded-md outline-blue-200 text-sm bg-white border border-gray-200"
                                 disabled={!player.isEditable}
-                                value={player.position}
+                                value={player.playing_position}
                                 onChange={(e) =>
                                   handlePositionChange(e, player.id)
                                 }

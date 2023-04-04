@@ -149,7 +149,6 @@ const BasicInfo = ({ index, setIndex }) => {
               </label>
               <input
                 type="text"
-                disabled={true}
                 id="mobileNo"
                 className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-gray-200     placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
                 name="mobileNo"
@@ -263,8 +262,9 @@ const BasicInfo = ({ index, setIndex }) => {
                 </div>
               </div>
               <span
-                className={`text-sm font-semibold  text-red-600 px-1 ${errors.gender && touched.gender ? "" : "hidden  "
-                  }`}
+                className={`text-sm font-semibold  text-red-600 px-1 ${
+                  errors.gender && touched.gender ? "" : "hidden  "
+                }`}
               >
                 {errors.gender && touched.gender ? errors.gender : null}
               </span>
@@ -315,9 +315,7 @@ const BasicInfo = ({ index, setIndex }) => {
             }}
           >
             <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-slate-900 rounded-lg group-hover:w-full group-hover:h-56"></span>
-            <span className="relative">
-            {index > 1 ? "Submit" : "Next"}
-            </span>
+            <span className="relative">{index > 1 ? "Submit" : "Next"}</span>
           </button>
         </div>
       </motion.div>
