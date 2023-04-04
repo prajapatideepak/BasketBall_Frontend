@@ -194,24 +194,32 @@ function TournamentAddEdit() {
 
   return (
     <>
-      <section className="min-h-screen">
-        <div className='heading-container flex justify-center items-center h-24 sm:h-32 md:h-36'>
-          <div className=''>
-            <Heading margin={true} text={location?.state?.isEdit ? 'Edit Tournament' : 'Tournament Registration'} />
+      <section className="px-10 lg:px-16 py-5 min-h-screen">
+        <div className='heading-container flex  flex-col justify-center items-center h-24 sm:h-32 md:h-36'>
+          <div className=" flex justify-center items-center">
+            <div>
+              <h1 className=" items-end  text-center text-lg font-semibold sm:text-2xl lg:text-3xl">
+                {location?.state?.isEdit ? "Tornament Edit" : "Tournament Registration"}
+              </h1>
+            </div>
+            <img src={"/icons/tournament_icon.png"} className="w-20" />
           </div>
+          <p className="text-center text-gray-700 text-sm md:text-base italic pb-5">
+            Be the player that raises the bar, be relentless, be a game changer.
+          </p>
         </div>
-        <div className='mx-auto px-5 sm:px-10 py-10 lg:px-14 xl:px-28 2xl:px-32'>
+        <div className='mx-auto px-5 sm:px-10 py-10 lg:px-10 shadow-xl rounded-md'>
           <form action="" onSubmit={handleSubmit} encType="multipart/form-data">
             {/* -----------------------Tounament_Details---------------------------*/}
             <div className=''>
-              <h3 className='text-2xl font-semibold text-[#ee6730]'>Tournament Information:</h3>
+              <h3 className='text-xl sm:text-2xl font-semibold text-[#ee6730]'>Tournament Information:</h3>
             </div>
             {/* Tournament Name && Choose Logo */}
             <div className="flex flex-col md:flex-row  gap-6 my-7 ">
               <div className="flex flex-col w-full">
                 <label className="mb-2">Tournament Name *</label>
                 <input
-                  className="w-full outline-blue-200 rounded-lg border-2 border-gray-200 py-3 px-3 text-sm"
+                  className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
                   placeholder="Enter Tournament Name"
                   type="text"
                   name="tournament_name"
@@ -223,7 +231,7 @@ function TournamentAddEdit() {
                 {
                   errors.tournament_name && touched.tournament_name
                     ?
-                    <small className='text-red-600 mt-2'>{errors.tournament_name}</small>
+                    <small className='text-sm font-semibold text-red-600 px-1'>{errors.tournament_name}</small>
                     :
                     null
                 }
@@ -231,7 +239,7 @@ function TournamentAddEdit() {
               <div className="flex flex-col w-full">
                 <label className="mb-2">Choose Logo ( PNG, JPG, JPEG )</label>
                 <input
-                  className="w-full cursor-pointer rounded-lg bg-white border-2 border-gray-200 px-3 py-[9px] text-sm"
+                  className="rounded-lg border-transparent appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
                   type="file"
                   name="tournament_logo"
                   id="tournament_logo"
@@ -245,11 +253,11 @@ function TournamentAddEdit() {
             </div>
             {/* Starting Date && Ending Date && City Name */}
             <div className="flex flex-col md:flex-row  gap-6 my-7 ">
-              <div className="flex space-x-5  w-full ">
+              <div className="flex flex-col sm:flex-row sm:space-x-5 w-full ">
                 <div className="w-full">
                   <label className="">Start Date *</label>
                   <input
-                    className="w-full outline-blue-200 rounded-lg border-2 border-gray-200 py-3 px-2 my-2 text-gray-400 text-sm"
+                    className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 mt-2 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
                     type="date"
                     name="starting_date"
                     id="starting_date"
@@ -260,7 +268,7 @@ function TournamentAddEdit() {
                   {
                     errors.starting_date && touched.starting_date
                       ?
-                      <small className='text-red-600 mt-2'>{errors.starting_date}</small>
+                      <small className='text-sm font-semibold text-red-600 px-1'>{errors.starting_date}</small>
                       :
                       null
                   }
@@ -268,7 +276,7 @@ function TournamentAddEdit() {
                 <div className="w-full">
                   <label className="">End Date *</label>
                   <input
-                    className="w-full outline-blue-200 rounded-lg border-2 border-gray-200 py-3 my-2 text-gray-400 px-3 text-sm"
+                    className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 mt-2 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
                     placeholder="Enter Tournament name"
                     type="date"
                     name="ending_date"
@@ -280,7 +288,7 @@ function TournamentAddEdit() {
                   {
                     errors.ending_date && touched.ending_date
                       ?
-                      <small className='text-red-600 mt-2'>{errors.ending_date}</small>
+                      <small className='text-sm font-semibold text-red-600 px-1'>{errors.ending_date}</small>
                       :
                       null
                   }
@@ -289,7 +297,7 @@ function TournamentAddEdit() {
               <div className="flex flex-col w-full">
                 <label className="mb-2">City Name *</label>
                 <input
-                  className="w-full outline-blue-200 rounded-lg border-2 border-gray-200 py-3 px-3 text-sm"
+                  className="rounded-lg border-transparent appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
                   placeholder="Enter City Name"
                   type="text"
                   name="city_name"
@@ -301,7 +309,7 @@ function TournamentAddEdit() {
                 {
                   errors.city_name && touched.city_name
                     ?
-                    <small className='text-red-600 mt-2'>{errors.city_name}</small>
+                    <small className='text-sm font-semibold text-red-600 px-1'>{errors.city_name}</small>
                     :
                     null
                 }
@@ -312,7 +320,7 @@ function TournamentAddEdit() {
             <div className="flex flex-col md:flex-row  2 gap-6 my-7 ">
               <div className="flex flex-col w-full">
                 <label className="mb-2">Tournament Category *</label>
-                <div className=" border-2 border-gray-200 rounded-md px-6 py-3 bg-white">
+                <div className="shadow-sm rounded-md px-6 py-3 bg-white">
                   <div className="space-y-2 sm:space-y-6 md:space-y-2 lg:space-y-8">
                     <div className="flex flex-col sm:flex-row md:flex-col lg:flex-row xl:items-center justify-start space-y-2 md:space-x-0 sm:space-x-12 lg:space-y-0 lg:space-x-7 xl:space-x-10">
                       <div className="flex  lg:flex-col xl:flex-row  items-center space-x-3">
@@ -367,14 +375,14 @@ function TournamentAddEdit() {
                 {
                   errors.tournament_category && touched.tournament_category
                     ?
-                    <small className='text-red-600 mt-2'>{errors.tournament_category}</small>
+                    <small className='text-sm font-semibold text-red-600 px-1'>{errors.tournament_category}</small>
                     :
                     null
                 }
               </div>
               <div className="flex flex-col w-full ">
                 <label className="mb-2">Age Cut-Off *</label>
-                <div className="flex flex-col w-full border-2 rounded-md py-3 px-6 md:px-5 bg-white">
+                <div className="flex flex-col w-full shadow-sm rounded-md py-3 px-6 md:px-5 bg-white">
                   <div className="space-y-2 sm:space-y-6">
                     <div className="flex flex-col sm:flex-row md:items-center space-y-2 sm:space-x-10">
                       <div className="flex md:flex-col xl:flex-row items-center space-x-3">
@@ -455,7 +463,7 @@ function TournamentAddEdit() {
                 {
                   errors.age_cutoff && touched.age_cutoff
                     ?
-                    <small className='text-red-600 mt-2'>{errors.age_cutoff}</small>
+                    <small className='text-sm font-semibold text-red-600 px-1'>{errors.age_cutoff}</small>
                     :
                     null
                 }
@@ -465,9 +473,9 @@ function TournamentAddEdit() {
             <div className="flex flex-col md:flex-row  gap-6 my-7 ">
               <div className="flex space-x-5  w-full ">
                 <div className="flex flex-col w-full">
-                  <label className="mb-2">Tournament Level *</label>
+                  <label className="mb-2">Level *</label>
                   <Select
-                    className="w-full outline-blue-200"
+                    className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full outline-none bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
                     name="tournament_level"
                     id="tournament_level"
                     onChange={(e) => setFieldValue('tournament_level', e.value)}
@@ -485,7 +493,7 @@ function TournamentAddEdit() {
                   {
                     errors.tournament_level && touched.tournament_level
                       ?
-                      <small className='text-red-600 mt-2'>{errors.tournament_level}</small>
+                      <small className='text-sm font-semibold text-red-600 px-1'>{errors.tournament_level}</small>
                       :
                       null
                   }
@@ -493,7 +501,7 @@ function TournamentAddEdit() {
                 <div className="flex flex-col w-full">
                   <label className="mb-2">Prize</label>
                   <input
-                    className="w-full outline-blue-200 rounded-lg border-2 border-gray-200 py-3 px-3 text-sm"
+                    className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
                     placeholder="Enter Prize Money"
                     type="text"
                     name="prize"
@@ -505,7 +513,7 @@ function TournamentAddEdit() {
                   {
                     errors.prize && touched.prize
                       ?
-                      <small className='text-red-600 mt-2'>{errors.prize}</small>
+                      <small className='text-sm font-semibold text-red-600 px-1'>{errors.prize}</small>
                       :
                       null
                   }
@@ -519,7 +527,7 @@ function TournamentAddEdit() {
               <div className='w-full flex flex-col'>
                 <label className="mb-2">About Tournament</label>
                 <textarea
-                  className="w-full outline-blue-200 text-sm rounded-lg px-4 py-3 border-2 border-gray-200"
+                  className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
                   name="about_tournament"
                   placeholder='Write something about tournament'
                   rows="6"
@@ -533,7 +541,7 @@ function TournamentAddEdit() {
             {/* -----------------------Refree_Details---------------------------*/}
             <div className="my-5">
               <div className="py-5">
-                <h3 className="text-2xl font-semibold text-[#ee6730]">
+                <h3 className="text-xl sm:text-2xl font-semibold text-[#ee6730]">
                   Referee Information:
                 </h3>
               </div>
@@ -543,7 +551,7 @@ function TournamentAddEdit() {
                     <div className="flex flex-col w-full">
                       <label className="mb-2">Referee Name *</label>
                       <input
-                        className="w-full outline-blue-200 rounded-lg border-2 border-gray-200 py-3 px-3 text-sm"
+                        className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-3 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
                         placeholder="Enter Referee Name"
                         type="text"
                         name={`referees.${index}.name`}
@@ -552,7 +560,7 @@ function TournamentAddEdit() {
                         value={values?.referees[index].name}
                       />
                       {touched.referees && touched.referees[index] && errors.referees && errors.referees[index] ? (
-                        <small className="text-red-600 mt-2">
+                        <small className="text-sm font-semibold text-red-600 px-1">
                           {errors.referees[index]?.name}
                         </small>
                       ) : null}
@@ -560,7 +568,7 @@ function TournamentAddEdit() {
                     <div className="flex flex-col w-full">
                       <label className="mb-2">Referee Mobile *</label>
                       <input
-                        className="w-full  rounded-lg bg-white border-2 px-3 outline-blue-200 border-gray-200 py-3 text-sm"
+                        className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-3 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
                         type="text"
                         placeholder="Enter Referee Mobile"
                         name={`referees.${index}.mobile`}
@@ -570,7 +578,7 @@ function TournamentAddEdit() {
                       />
 
                       {touched.referees && touched.referees[index] && errors.referees && errors.referees[index] ? (
-                        <small className="text-red-600 mt-2">
+                        <small className="text-sm font-semibold text-red-600 px-1">
                           {errors.referees[index]?.mobile}
                         </small>
                       ) : null}
@@ -608,7 +616,7 @@ function TournamentAddEdit() {
             {/* -----------------------Sponsor_Details---------------------------*/}
             <div className="my-5">
               <div className="py-5">
-                <h3 className="text-2xl font-semibold text-[#ee6730]">
+                <h3 className="text-xl sm:text-2xl font-semibold text-[#ee6730]">
                   Sponsor Information:
                 </h3>
               </div>
@@ -619,7 +627,7 @@ function TournamentAddEdit() {
                     <div className="flex flex-col w-full">
                       <label className="mb-2">Sponsor Name *</label>
                       <input
-                        className="w-full outline-blue-200 rounded-lg border-2 border-gray-200 py-3 px-3 text-sm"
+                        className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-3 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
                         placeholder="Enter Sponsor Name"
                         type="text"
                         name={`sponsors.${index}.name`}
@@ -628,7 +636,7 @@ function TournamentAddEdit() {
                         value={values?.sponsors[index]?.name}
                       />
                       {touched.sponsors && touched.sponsors[index] && errors.sponsors && errors.sponsors[index] ? (
-                        <small className="text-red-600 mt-2">
+                        <small className="text-sm font-semibold text-red-600 px-1">
                           {errors.sponsors[index]?.name}
                         </small>
                       ) : null}
@@ -639,7 +647,7 @@ function TournamentAddEdit() {
                       </label>
                       <div className="flex items-center">
                         <input
-                          className="w-full h-12 cursor-pointer rounded-lg bg-white border-2 border-gray-200 py-[9px] px-3 text-sm"
+                          className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
                           type="file"
                           name={`sponsors.${index}.logo`}
                           accept=".png, .jpg, .jpeg"
@@ -667,7 +675,7 @@ function TournamentAddEdit() {
                         )}
                       </div>
                       {touched.sponsors && touched.sponsors[index] && errors.sponsors && errors.sponsors[index] ? (
-                        <small className="text-red-600 mt-2">
+                        <small className="text-sm font-semibold text-red-600 px-1">
                           {errors.sponsors[index]?.logo}
                         </small>
                       ) : null}
