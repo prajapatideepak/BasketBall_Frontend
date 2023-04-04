@@ -46,9 +46,10 @@ const PlayerList = () => {
                     <AiOutlineSearch className="group-hover:scale-110 duration-300" />
                   </button>
                 </div>
-                <div className="flex w-full flex-col items-center lg:px-8  space-y-6 py-3 sm:py-5 xl:py-10 ">
+                <div className="flex w-full flex-col items-center lg:px-8  space-y-6 py-3 sm:py-0 ">
                   {data?.data && data?.data?.length > 0 ? (
                     data?.data.map((player, index) => {
+                      console.log(player)
                       return (
                         <Link
                           key={player.id}
@@ -98,7 +99,7 @@ const PlayerList = () => {
                                       className="text-sm sm:text-lg md:text-2xl lg:text-3xl 
                              font-bold text-white"
                                     >
-                                      {player?.player_statistics?.matches_played ? player?.player_statistics?.matches_played : "0"}
+                                      {player?.player_statistics[0]?.matches_played ? player?.player_statistics[0]?.matches_played : "0"}
                                     </h1>
                                     <span className="text-[8px] sm:text-[9px] md:text-[11px] lg:text-xs xl:text-base text-white font-semibold">
                                       Total Match
@@ -109,7 +110,7 @@ const PlayerList = () => {
                                       className="text-sm sm:text-lg md:text-2xl lg:text-3xl 
                              font-bold text-green-600"
                                     >
-                                      {player?.player_statistics?.matches_won ? player?.player_statistics?.matches_won : "0"}
+                                      {player?.player_statistics[0]?.matches_won ? player?.player_statistics[0]?.matches_won : "0"}
                                     </h1>
                                     <span className="text-[8px] sm:text-[9px] md:text-[11px] lg:text-xs xl:text-base text-white font-semibold">
                                       Match Won
@@ -120,7 +121,7 @@ const PlayerList = () => {
                                       className="text-sm sm:text-lg md:text-2xl lg:text-3xl 
                              font-bold text-red-600"
                                     >
-                                      {player?.player_statistics?.matches_lost ? player?.player_statistics?.matches_lost : "0"}
+                                      {player?.player_statistics[0]?.matches_lost ? player?.player_statistics[0]?.matches_lost : "0"}
                                     </h1>
                                     <span className="text-[8px] sm:text-[9px] md:text-[11px] lg:text-xs xl:text-base text-white font-semibold">
                                       Match lost
@@ -131,7 +132,7 @@ const PlayerList = () => {
                                       className="text-sm sm:text-lg md:text-2xl lg:text-3xl
                              font-bold text-green-600"
                                     >
-                                      {player?.player_statistics?.points ? player?.player_statistics?.points : "0"}
+                                      {player?.player_statistics[0]?.points ? player?.player_statistics[0]?.points : "0"}
                                     </h1>
                                     <span className="text-[8px] sm:text-[9px] md:text-[11px] lg:text-xs xl:text-base text-white font-semibold">
                                       Total Points
@@ -175,7 +176,7 @@ const PlayerList = () => {
                     onClick={(e) => {
                       setPageNo(() => pageNo + 1);
                     }}
-                    disabled={data?.data?.length < 5}
+                    disabled={data?.data?.length < 10}
                     className="cursor-pointer disabled:opacity-30 disabled:cursor-default p-2 border rounded border-gray-400"
                   >
                     {" "}

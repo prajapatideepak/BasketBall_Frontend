@@ -49,7 +49,7 @@ export default function PlayerProfile() {
   const handleEdit = () => {
     dispatch(setBasicInfoForm(data.SinglePlayerDetails));
     dispatch(setGameInfoForm(data.SinglePlayerDetails));
-    navigate("/player/register", {
+    navigate("/player/add-edit", {
       state: {
         isEdit: true,
       },

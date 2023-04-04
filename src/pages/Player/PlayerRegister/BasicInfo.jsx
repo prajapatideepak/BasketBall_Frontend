@@ -15,7 +15,7 @@ const BasicInfo = ({ index, setIndex }) => {
   const [img, setImg] = React.useState(defaultImage);
   const [photo, setPhoto] = React.useState("");
   const { PlayerForm } = useSelector((state) => state.player);
-  console.log(PlayerForm.gameInfo)
+  console.log(PlayerForm)
   const { values, touched, errors, handleChange, handleSubmit, handleBlur } =
     useFormik({
       initialValues: PlayerForm.basicInfo,
@@ -31,6 +31,24 @@ const BasicInfo = ({ index, setIndex }) => {
     setPhoto(() => e.target.files[0]);
     setImg(URL.createObjectURL(photo));
   }
+
+    function handleImageUpload(e) {
+    setPhoto(() => e.target.files[0]);
+    setImg(URL.createObjectURL(photo));
+  }
+  // React.useEffect(() => {
+  //   if (thing.isError) {
+  //     toast.error(thing?.error?.data?.message);
+  //   }
+  //   if (thing.isSuccess) {
+  //     if (thing?.data?.success) {
+  //       toast.success("Team Registration Successfull ");
+
+  //       navigate(`/team/profile-detail/${thing?.data?.team?.id}`);
+  //     }
+  //   }
+  // }, [thing.isError, thing.isSuccess]);
+
 
   return (
     <>
