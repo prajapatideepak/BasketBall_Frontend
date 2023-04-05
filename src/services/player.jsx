@@ -3,17 +3,19 @@ import { api } from "./api";
 export const playerApi = api.injectEndpoints({
   endpoints: (build) => ({
     getAllPlayers: build.query({
-      query: () => "players",
+      query: ({ pageNo, search }) =>
+        `player/list/${pageNo}&${search == "" || search == "" ? "search" : search
+        }`,
     }),
 
     getPlayerDetails: build.query({
-      query: (player_id) => `players/details/${player_id}`,
+      query: (player_id) => `player/details/${player_id}`,
     }),
 
     registerPlayer: build.mutation({
       query: (body) => {
         return {
-          url: "players/registration",
+          url: "player/registration",
           method: "POST",
           body: body,
         };
@@ -39,6 +41,6 @@ export const {
   useGetAllPlayersQuery,
   useGetPlayerDetailsQuery,
   useRegisterPlayerMutation,
-  useUpdatePlayerDetailsMutation,
+  useUpdatePlayerDetailsMutation, 
   useSearchPlayerByNumbmerQuery,
 } = playerApi;

@@ -16,8 +16,8 @@ export default function PlayerRegister() {
     <div className="px-3 lg:px-16 py-5 min-h-screen">
       <div className=" flex justify-center items-center">
         <div>
-          <h1 className=" items-end  text-center text-2xl lg:text-3xl">
-          {location?.state?.isEdit ? "Edit Team" : "Team Registration"}
+          <h1 className=" items-end  text-center font-semibold text-2xl lg:text-3xl">
+          {location?.state?.isEdit ? "Edit Player" : "Player Registration"}
           </h1>
         </div>
         <img src={"/icons/playing_icon.png"} className="w-20" />

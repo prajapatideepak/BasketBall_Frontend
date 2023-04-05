@@ -7,6 +7,7 @@ import Button from "../../../Component/Button";
 import MatchCard from "../../../Component/MatchCard";
 import { useGetTeamDetailQuery } from "../../../services/team";
 import Loader from "../../../Component/Loader";
+import moment from "moment";
 
 function TeamProfileDetail() {
   const params = useParams();
@@ -29,7 +30,7 @@ function TeamProfileDetail() {
             ...team,
             first_name: team.players.first_name,
             id: team.players.id,
-         
+            playing_position: team.players.playing_position,
           };
         }),
       },
@@ -254,7 +255,10 @@ function TeamProfileDetail() {
                           photo={item.players.photo}
                           name={item.players.first_name}
                           position={item.playing_position}
-                          age={12}
+                          age={moment().diff(
+                            item.players.date_of_birth,
+                            "years"
+                          )}
                           jersey_no={item.players.jersey_no}
                         />
                       );

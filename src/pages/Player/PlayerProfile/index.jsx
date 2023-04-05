@@ -4,9 +4,10 @@ import MatchCard from "../../../Component/MatchCard";
 import TeamCard from "../../../Component/TeamCard";
 import { motion } from "framer-motion";
 import PlayerAvtar from "../PlayerAvtar";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { findPlayer } from "../../../redux/actions/Player";
+import { setBasicInfoForm } from "../../../redux/actions/Player";
 import PlayerInfo from "./PlayerInfo";
 import PlayerStatics from "./PlayerStatics";
 import Notification from "../../../Component/Notification/Notification";
@@ -15,13 +16,16 @@ import { GiExitDoor } from "react-icons/gi";
 import { ImExit } from "react-icons/im";
 import { useGetPlayerDetailsQuery } from '../../../services/player';
 import Loader from "../../../Component/Loader";
+import { setGameInfoForm } from "../../../redux/actions/Player";
+
 
 
 
 export default function PlayerProfile() {
   const params = useParams();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { data, isLoading, error } = useGetPlayerDetailsQuery(params.id);
-  console.log(data)
   const [currentTab, setCurrentTab] = React.useState(2);
   const [currentTabMatches, setCurrentTabMatches] = React.useState([]);
 
@@ -41,20 +45,46 @@ export default function PlayerProfile() {
       });
     });
   }
+
+  const handleEdit = () => {
+    dispatch(setBasicInfoForm(data.SinglePlayerDetails));
+    dispatch(setGameInfoForm(data.SinglePlayerDetails));
+    navigate("/player/add-edit", {
+      state: {
+        isEdit: true,
+      },
+    });
+  };
+
   return (
     <section className="min-h-screen-fit">
       <div>
         {isLoading && <Loader />}
         {data && (
           <div>
-            <div className="mx-auto px-6 py-10 sm:px-20 sm:py-12 md:px-20 md:py-12 lg:px-24 xl:px-28 2xl:px-32 min-h-screen  ">
+            <div className="mx-auto  px-6 py-10 sm:px-20 sm:py-12 md:px-20 md:py-12 lg:px-24 xl:px-28 2xl:px-32 min-h-screen  ">
               {/* Player Detail Section */}
-              <div className="flex flex-col lg:flex-row space-y-5 ">
+              <div className="flex flex-col relative lg:flex-row space-y-5 ">
                 <div className="lg:w-1/2 flex">
                   <PlayerAvtar player={data} />
                 </div>
                 <div className="flex-1    ">
                   <PlayerInfo PlayerDetail={data} />
+                </div>
+                <div className="absolute right-0 bottom-0 mr-10">
+                  <button
+                    type="button"
+                    className="bg-[#ee6730] relative inline-flex items-center justify-center px-8 py-2 overflow-hidden text-white rounded-lg cursor-pointer group mr-3"
+                    onClick={handleEdit}
+                  >
+                    <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-slate-900 rounded-lg group-hover:w-full group-hover:h-56"></span>
+                    <span className="relative">
+                      Edit
+                    </span>
+                  </button>
+                </div>
+                <div>
+
                 </div>
               </div>
               {/* Player Detail Section End */}
