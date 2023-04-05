@@ -71,7 +71,7 @@ const PlayerList = () => {
                                 </h1>
                               </div>
                               {/* avtar start */}
-                              <div className="text-center sm:w-1/2 items-center  justify-center space-x-5 lg:space-x-10 xl:space-x-10 sm:space-x-6 lg:py-6 flex  ">
+                              <div className="text-center sm:w-1/2 overflow-hidden items-center  justify-center space-x-5 lg:space-x-10 xl:space-x-10 sm:space-x-6 lg:py-6 flex  ">
                                 <img
                                   src={player?.photo ? player?.photo : defaultImage}
                                   className=" object-cover w-12 h-12 sm:w-14 sm:h-14 lg:w-[70px] lg:h-[70px] xl:w-20 xl:h-20 2xl:w-[85px]  2xl:h-[85px] rounded-full border-2 sm:border-4 border-slate-700 "
@@ -81,13 +81,20 @@ const PlayerList = () => {
                                     {player?.playing_position ? player?.playing_position : "...."}
                                   </h1>
                                 </div>
-                                <div className="flex flex-col justify-start items-start w-1/5 ">
-                                  <h1 className="text-white font-bold text-base sm:text-lg md:text-xl lg:text-[25px] text-start ">
-                                    {player?.first_name}
-                                  </h1>
-                                  <h1 className="text-gray-600 font-bold text-[8px] sm:text-[10px] lg:text-xs xl:text-sm text-start ">
-                                    {player?.team_players[0]?.teams?.team_name ? player?.team_players[0]?.teams?.team_name : "...."}
-                                  </h1>
+                                <div className="flex flex-col justify-start items-start w-full">
+                                  <div className="bg-red-600 w-full">
+
+                                    <h1 className="text-white font-bold text-base sm:text-lg md:text-xl lg:text-[25px] text-start ">
+                                      {player?.first_name}
+                                      {player?.first_name}
+                                      {player?.first_name}
+                                    </h1>
+                                  </div>
+                                  <div className="bg-green-600 w-full">
+                                    <h1 className="text-gray-600 font-bold text-[8px] sm:text-[10px] lg:text-xs xl:text-sm text-start ">
+                                      {player?.team_players[0]?.teams?.team_name ? player?.team_players[0]?.teams?.team_name : "...."}
+                                    </h1>
+                                  </div>
                                 </div>
                               </div>
                               {/* avtar end */}
