@@ -150,10 +150,10 @@ const BasicInfo = ({ index, setIndex }) => {
               </label>
               <input
                 type="text"
-                id="mobile"
-                className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
-                name="mobile"
-                value={values.mobile}
+                id="mobileNo"
+                className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-gray-200     placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
+                name="mobileNo"
+                value={values.mobileNo}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 placeholder="Enter Your Mobile Number"
@@ -263,8 +263,9 @@ const BasicInfo = ({ index, setIndex }) => {
                 </div>
               </div>
               <span
-                className={`text-sm font-semibold  text-red-600 px-1 ${errors.gender && touched.gender ? "" : "hidden  "
-                  }`}
+                className={`text-sm font-semibold  text-red-600 px-1 ${
+                  errors.gender && touched.gender ? "" : "hidden  "
+                }`}
               >
                 {errors.gender && touched.gender ? errors.gender : null}
               </span>
