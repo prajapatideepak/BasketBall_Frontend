@@ -19,8 +19,9 @@ const GameInfo = ({ index, setIndex }) => {
   const navigate = useNavigate();
   const [playerRegistration, { ...thing }] = useRegisterPlayerMutation();
   const [playerUpdate, { ...updateData }] = useUpdatePlayerDetailsMutation();
+  console.log(updateData , "hjbh")
   const { PlayerForm } = useSelector((state) => state.player);
-  console.log(PlayerForm.basicInfo)
+  console.log(location.state , "location")
   const { values, errors, touched, handleSubmit, handleChange, handleBlur } =
     useFormik({
       initialValues: PlayerForm.gameInfo,
@@ -34,7 +35,12 @@ const GameInfo = ({ index, setIndex }) => {
             PlayerInfo: PlayerForm,
           });
           fb.append("data", ok);
-          playerRegistration(fb).then(console.log("ho gaya"));
+          if (location?.state?.isEdit) {
+            fb.append("id", location.state.id);
+            playerUpdate(fb).then(console.log("update ho gai"));
+          } else {
+            playerRegistration(fb).then(console.log("ho gaya"));
+          }
         } catch (err) {
           console.log(err);
         }
@@ -56,6 +62,18 @@ const GameInfo = ({ index, setIndex }) => {
       }
     }
   }, [thing.isError, thing.isSuccess]);
+
+  React.useEffect(() => {
+    if (updateData.isError) {
+      toast.error(updateData?.error?.data?.message);
+    }
+    if (updateData.isSuccess) {
+      if (updateData?.data?.success) {
+        toast.success("Player Update Successfull ");
+        navigate(`/player/${thing?.data?.data?.id}`);
+      }
+    }
+  }, [updateData.isError, updateData.isSuccess]);
 
   return (
     <>

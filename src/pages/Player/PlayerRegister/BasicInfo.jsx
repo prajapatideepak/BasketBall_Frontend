@@ -15,7 +15,6 @@ const BasicInfo = ({ index, setIndex }) => {
   const [img, setImg] = React.useState(defaultImage);
   const [photo, setPhoto] = React.useState("");
   const { PlayerForm } = useSelector((state) => state.player);
-  console.log(PlayerForm.basicInfo)
   const { values, touched, errors, handleChange, handleSubmit, handleBlur } =
     useFormik({
       initialValues: PlayerForm.basicInfo,

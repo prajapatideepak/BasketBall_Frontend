@@ -25,7 +25,7 @@ export const playerApi = api.injectEndpoints({
     updatePlayerDetails: build.mutation({
       query(body) {
         return {
-          url: `player/update/${player_id}`,
+          url: 'player/update',
           method: "PUT",
           body: body,
         };

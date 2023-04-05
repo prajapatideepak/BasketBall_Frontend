@@ -49,9 +49,10 @@ export default function PlayerProfile() {
   const handleEdit = () => {
     dispatch(setBasicInfoForm(data.SinglePlayerDetails));
     dispatch(setGameInfoForm(data.SinglePlayerDetails));
-    navigate("/player/add-edit", {
+    navigate(`/player/add-edit`, {
       state: {
         isEdit: true,
+        player_id : data.SinglePlayerDetails.id
       },
     });
   };
