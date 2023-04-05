@@ -10,16 +10,14 @@ import Loader from "../../../Component/Loader";
 import moment from "moment";
 
 function TeamProfileDetail() {
-  const params = useParams();
-  const { team_id } = params;
+  const { team_id } = useParams();
   const navigate = useNavigate();
-  const { isLoading, data, isError } = useGetTeamDetailQuery({
+  const { isLoading, data } = useGetTeamDetailQuery({
     teamId: team_id,
   });
 
   const isPublicView = false;
 
-  console.log(data?.data);
   const handleEdit = () => {
     navigate("/team/add-edit", {
       state: {
@@ -37,7 +35,6 @@ function TeamProfileDetail() {
     });
   };
 
-  console.log("my data", data?.data);
   const [currentTab, setCurrentTab] = React.useState(3);
   const [currentTabMatches, setCurrentTabMatches] = React.useState([]);
 
@@ -57,8 +54,6 @@ function TeamProfileDetail() {
     }
   };
 
-  console.log(allMatches);
-
   const navigateToTournamentProfile = (tournament_id) => {
     navigate(`/tournament-profile/${tournament_id}`);
   };
@@ -75,7 +70,6 @@ function TeamProfileDetail() {
     });
   }
 
-  console.log("length", data?.data);
   return (
     <section className="min-h-screen-fit">
       <div>
