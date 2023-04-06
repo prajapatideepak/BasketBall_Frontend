@@ -32,7 +32,7 @@ export const playerApi = api.injectEndpoints({
       },
     }),
     searchPlayerByNumbmer: build.query({
-      query: ({ number }) => `players/search/${number}`,
+      query: ({ number }) => `player/search/${number}`,
     }),
   }),
 });

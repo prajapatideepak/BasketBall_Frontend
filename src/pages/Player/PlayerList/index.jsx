@@ -17,6 +17,7 @@ const PlayerList = () => {
     pageNo: pageNo - 1,
     search,
   });
+  const itemsPerPage = 2;
   return (
     <section className="min-h-screen-fit">
       <div>
@@ -47,11 +48,12 @@ const PlayerList = () => {
                 <div className="flex w-full flex-col items-center lg:px-8  space-y-6 py-3 sm:py-0 ">
                   {data?.data && data?.data?.length > 0 ? (
                     data?.data.map((player, index) => {
+                      console.log(player)
                       return (
                         <Link
                           key={player.id}
                           className="w-full  scale-105"
-                          to={`/player/${player.id}`}
+                          to={`/player/profile-detail/${player.id}`}
                         >
                           <div className="duration-300 relative justify-end bg-black rounded-lg text-white overflow-hidden shadow-xl cursor-pointer hover:scale-[1.03] w-6/7  md:w-full h-full ">
                             <div className=" flex justify-end items-center ">
@@ -64,7 +66,7 @@ const PlayerList = () => {
                             <div className=" flex flex-col  px-5 sm:px-8 lg:px-12  sm:flex-row w-full h-full absolute top-0 content-start py-2 ">
                               <div className="bg-gradient-to-b  from-[#e64100]  absolute  md:top-[-32px] md:left-[-20px] w-10 h-10 rotate-[30deg] top-[-15px] left-[-15px] md:h-20 md:w-14 content-start md:rotate-[45deg] flex justify-center items-center">
                                 <h1 className="rotate-[-30deg] md:rotate-[315deg] text-xs font-bold md:text-lg mt-1 ml-5 md:ml-6">
-                                  {index + 1}
+                                  {pageNo == 1 ? index + 1 : index + 11}
                                 </h1>
                               </div>
                               {/* avtar start */}

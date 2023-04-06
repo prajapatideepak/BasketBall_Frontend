@@ -33,7 +33,7 @@ function TeamCard({ teamDetails }) {
             )}
           </div>
         </div>
-        <div className="w-full sm:4/5 md:w-3/5 bg-pink-600 flex justify-center lg:justify-end items-center gap-2.5 sm:gap-6 lg:gap-10 mr-2 lg:mt-0 mt-8">
+        <div className="w-full sm:4/5 md:w-3/5 flex justify-center lg:justify-end items-center gap-2.5 sm:gap-6 lg:gap-10 mr-2 lg:mt-0 mt-8">
           <div className="flex flex-col justify-center items-center">
             <h4 className="font-medium text-gray-200 lg:text-base sm:text-sm text-xs">
               Total Players

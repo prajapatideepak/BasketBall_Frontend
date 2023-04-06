@@ -12,7 +12,7 @@ const BasicInfo = ({ index, setIndex }) => {
   const dispatch = useDispatch();
   const location = useLocation();
   const defaultImage = "/CBL_Images/player-default-profile.webp";
-  const [img, setImg] = React.useState(defaultImage);
+  const [img, setImg] = React.useState( defaultImage);
   const [photo, setPhoto] = React.useState("");
   const { PlayerForm } = useSelector((state) => state.player);
   const { values, touched, errors, handleChange, handleSubmit, handleBlur } =
@@ -21,19 +21,14 @@ const BasicInfo = ({ index, setIndex }) => {
       validationSchema: basicInfoSchema,
       onSubmit: (values) => {
         setIndex(2);
-        dispatch(setBasicInfoForm({ ...values, photo: photo }));
+        dispatch(setBasicInfoForm({ ...values, logo: photo }));
       },
     });
-
   function handleImageUpload(e) {
     setPhoto(() => e.target.files[0]);
     setImg(URL.createObjectURL(photo));
   }
-
-  function handleRemoveImage() {
-    setImg(URL.createObjectURL(defaultImage));
-  }
-
+  
   return (
     <>
       <form className="flex w-full  space-x-3">
@@ -56,23 +51,14 @@ const BasicInfo = ({ index, setIndex }) => {
                 <div className="profile_img_overlay absolute flex flex-col justify-center items-center">
                   <input
                     type="file"
-                    id="photo"
+                    id="logo"
                     className="rounded-md w-16"
                     accept=".png, .jpg, .jpeg"
-                    name="photo"
-                    value={values.img}
+                    name="logo"
                     onChange={(e) => handleImageUpload(e)}
                     onBlur={handleBlur}
                     onInput={(e) => handleImageUpload(e)}
                   />
-                  {img != defaultImage ? (
-                    <button
-                      className="bg-red-600 px-1 rounded text-white hover:bg-red-400 mt-5 flex items-center justify-center gap-3"
-                      onClick={handleRemoveImage}
-                    >
-                      <span> Remove</span>
-                    </button>
-                  ) : null}
                 </div>
               </div>
             </div>
