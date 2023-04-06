@@ -23,7 +23,6 @@ const PrivateRoutes = () => {
   return (
     <Routes>
       <Route element={<PrivateLayout />}>
-        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/match" element={<MatchsList />} />
         <Route path="/match-details/:id" element={<MatchDetails />} />
         <Route
@@ -41,8 +40,8 @@ const PrivateRoutes = () => {
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/registration" element={<AfterRole />} />
         <Route path="/term&condition" element={<TermsandConditions />} />
-        <Route path="/*" element={<PageNotFound />} />
         <Route path="/" element={<Dashboard />} />
+        <Route path="/*" element={<PageNotFound />} />
         
         <Route index element={<Dashboard />} />
       </Route>

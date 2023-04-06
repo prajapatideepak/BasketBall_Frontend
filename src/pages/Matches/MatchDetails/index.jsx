@@ -70,7 +70,7 @@ const MatchDetails = () => {
               src="/CBL_Images/logo5.png"
             />
             <h2 className="xss:text-xs xs:text-lg md:text-xl text-orange-100 font-semibold">
-              Jetha ki Babita
+              RJ Fighters
             </h2>
           </div>
           {/* team detail end here  */}
@@ -112,7 +112,7 @@ const MatchDetails = () => {
               src="/CBL_Images/logo3.png"
             />
             <h2 className="xss:text-xs xs:text-lg md:text-xl text-white font-semibold">
-              Champak ki Sonu
+              Super Warriors
             </h2>
           </div>
           {/* Team 2 Detail */}

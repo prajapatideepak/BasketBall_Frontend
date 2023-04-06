@@ -8,50 +8,62 @@ import "yup-phone"
 import { HiArrowLeft } from "react-icons/hi"
 import { toast } from 'react-toastify';
 import { BsFillPatchCheckFill } from "react-icons/bs"
+import { useSignupMutation } from "../../services/authentication"
 
 
 const signUpSchema = Yup.object({
-    fullname: Yup.string().min(2).max(25).matches(/^[a-zA-Z]+$/, "Please enter only characters").required("Please enter your full name"),
-    lastname: Yup.string().min(2).max(25).matches(/^[a-zA-Z]+$/, "Please enter only characters").required("Please enter your last name"),
+    fullname: Yup.string().min(2).max(25).matches(/^[a-zA-Z ]+$/, "Please enter only characters").required("Please enter your full name"),
     email: Yup.string().email().required("Please enter your email"),
     phone: Yup.string().min(10).max(10).matches(/^[0-9]+$/, "Please enter only numbers").phone(null, true, "Invalid phone number").required("Please enter your phone number"),
     password: Yup.string().required("Please enter password"),
     Confirmpassword: Yup.string().required("Confirm password is required").oneOf([Yup.ref("password"), null], "Confirm Password must match"),
     terms: Yup.string().required("Please select Terms and Conditions"),
-    policy: Yup.string().required("Please select Terms and Conditions")
 });
 
 
 const initialValues = {
     fullname: "",
-    lastname: "",
     email: "",
     phone: "",
     password: "",
     Confirmpassword: "",
     terms: "",
-    policy: ""
 };
-
-
 
 
 function Register() {
 
-    const notify = () => toast("Link Send Successfully!!");
     const [isOnSubmit, setIsOnSubmit] = React.useState(false);
+
+    const [signup, {isLoading}] = useSignupMutation()
 
     const { values, errors, handleBlur, touched, handleChange, handleSubmit } = useFormik({
         initialValues: initialValues,
         validationSchema: signUpSchema,
-        onSubmit(res) {
-            console.log(res, "Res")
-            setIsOnSubmit(true)
-            notify()
+        async onSubmit(data) {
+            const res = await signup(data);
+
+            console.log(res)
+             if (res.error) {
+                toast.error(res.error.data.message);
+            }
+            else if (res.data.success) {
+                setIsOnSubmit(true)
+            }
         }
     })
 
-    console.log(errors, "formik")
+    React.useEffect(() => {
+        // Define the 'otpless' function
+        window.otpless = (otplessUser) => {
+        // Retrieve the user's details after successful login
+        const waName = otplessUser.waName;
+        const waNumber = otplessUser.waNumber;
+                
+        // Handle the signup/signin process
+        // ...
+        };
+        }, []);
 
 
     return (
@@ -67,15 +79,16 @@ function Register() {
                                 <BsFillPatchCheckFill className="text-5xl text-green-700" />
                             </div>
                             <div className="space-y-2">
-                                <p className='font-semibold text-gray-500 text-center text-2xl sm:text-base '>The verification link is  send successfully to on your</p>
-                                <p className='font-semibold text-gray-500 text-center text-2xl sm:text-base '> Mail or SMS Please check it.</p>
+                                <p className='font-semibold text-green-500 text-center text-2xl sm:text-base '>Signup Successful !</p>
+                                <p className='font-semibold text-gray-500 text-center text-2xl sm:text-base '>Verification link has been send to your</p>
+                                <p className='font-semibold text-gray-500 text-center text-2xl sm:text-base '> Email or SMS. Please check it.</p>
                             </div>
-                            <Link to={"/login"}>
+                            {/* <Link to={"/login"}>
                                 <div className='flex justify-center  py-5 items-center font-semibold text-slate-400 cursor-pointer hover:text-black space-x-2'>
                                     <HiArrowLeft className='text-xl' />
-                                    <p className=''>Back to Account Create</p>
+                                    <p className=''>Login</p>
                                 </div>
-                            </Link>
+                            </Link> */}
                         </div>
                         <h1 className={`${isOnSubmit ? "hidden" : "block"} text-[#ee6730] text-3xl text-center font-bold`}>Sign Up</h1>
                         <div className={`${isOnSubmit ? "hidden" : "block"}`}>
@@ -84,7 +97,7 @@ function Register() {
                                 <p>Continue with Google</p>
                             </div>
                             <div className='flex text-slate-500 justify-center  text-lg  items-center'>
-                                Or
+                                OR
                             </div>
                             <div className="py-5">
                                 <form action="" className="space-y-5" onSubmit={handleSubmit}>
@@ -160,9 +173,9 @@ function Register() {
                                         <div className="confirmpassword flex flex-col space-y-2 w-full ">
                                             <label htmlFor="confirm password">Confirm password</label>
                                             <input type="password"
-                                                name="Confirm password"
+                                                name="Confirmpassword"
                                                 id="Confirm password"
-                                                value={values.confirm_password}
+                                                value={values.Confirmpassword}
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
                                                 className="rounded-md py-2 px-3 outline-non border border-slate-300 outline-blue-200"
@@ -197,12 +210,13 @@ function Register() {
                                         </div>
                                     </div>
 
-                                    <button type="submit" className="
+                                    <button type="submit" className={` ${isLoading ? 'opacity-70' : ''}
                                     bg-slate-900   relative inline-flex items-center justify-center w-full px-4 py-1.5 
-                                    sm:px-8 sm:py-[10px] overflow-hidden font-medium tracking-tighter text-white rounded-lg cursor-pointer group"
+                                    sm:px-8 sm:py-[10px] overflow-hidden font-medium tracking-tighter text-white rounded-lg cursor-pointer group`}
+                                    disabled={isLoading}
                                     >
-                                        <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#ee6730] rounded-lg group-hover:w-full group-hover:h-56"></span>
-                                        <span className="relative">Create Account</span>
+                                        <span className={`absolute w-0 h-0 transition-all duration-500 ease-out bg-[#ee6730] rounded-lg group-hover:w-full ${isLoading ? '' : "group-hover:h-56"}`}></span>
+                                        <span className="relative">{isLoading ? 'Loading...' : 'Create Account'}</span>
                                     </button>
                                     <p className="text-slate-500 flex justify-center items-center">Already have an account?
                                         <Link to={"/Login"}>

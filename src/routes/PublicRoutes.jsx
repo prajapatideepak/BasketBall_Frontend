@@ -11,6 +11,7 @@ import Password from '../pages/Pass/Password'
 import Gallery from '../pages/Gallery'
 import ForgetPassword from "../pages/Pass/ForgetPassword"
 import Role from '../pages/Role'
+import PageNotFound from "../pages/Error";
 import TermsandConditions from '../pages/Term&Condistions'
 
 const PublicRoutes = () => (
@@ -26,7 +27,8 @@ const PublicRoutes = () => (
             <Route path='/role' element={<Role />} />
             <Route path="/ForgetPassword" element={<ForgetPassword />} />
             <Route path="/term&condition" element={<TermsandConditions />} />
-            <Route path="/Password" element={<Password />} /> 
+            <Route path="/Password" element={<Password />} />
+            <Route path="/*" element={<PageNotFound />} /> 
             <Route index element={<LandingPage />} />
         </Route>
     </Routes>

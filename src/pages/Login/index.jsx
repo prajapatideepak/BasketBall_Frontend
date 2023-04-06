@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { authentication } from "../../redux/actions/User";
 import { useLocalStorage } from "../../hooks/localStorage";
 import { useGoogleLogin } from '@react-oauth/google';
+import { useSigninMutation } from "../../services/authentication";
 
 const signUpSchema = Yup.object({
   mobile: Yup.string()
@@ -27,8 +28,9 @@ const initialValues = {
 
 function Login() {
   const dispatch = useDispatch();
-  const notify = () => toast.success("Login Successfull!!");
   const navigate = useNavigate();
+
+  const [signin, {isLoading}] = useSigninMutation()
 
   const login = useGoogleLogin({
     onSuccess: tokenResponse => console.log(tokenResponse),
@@ -39,12 +41,19 @@ function Login() {
     useFormik({
       initialValues: initialValues,
       validationSchema: signUpSchema,
-      onSubmit(res) {
-        console.log(res, "Res");
-        dispatch(authentication(res));
-        useLocalStorage({ key: "user", value: "eas" });
-        notify();
-        navigate("/");
+      async onSubmit(data) {
+        const res = await signin(data)
+        console.log(res.data)
+        if (res.error) {
+          toast.error(res.error.data.message);
+        }
+        else if (res.data.success) {
+          navigate("/"); 
+          dispatch(authentication(res.data.token, res.data.user));
+          toast.success(res.data.message);
+          useLocalStorage({ key: "token", value: res.data.token });
+          useLocalStorage({ key: "user", value: res.data.user });
+        }
       },
     });
 
