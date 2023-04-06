@@ -50,7 +50,7 @@ function MatchesCrad({ match }) {
                 ?
                 <div className='flex justify-center items-center'>
                   <h3 className="text:xl xs:text-2xl sm:text-3xl md:text-4xl font-bold">{match.team_1_score}</h3>
-                  <span className="text-2xl sm:text-3xl text-4xl font-bold px-1">-</span>
+                  <span className="text-2xl sm:text-3xl font-bold px-1">-</span>
                   <h3 className="text:xl xs:text-2xl sm:text-3xl md:text-4xl font-bold">{match.team_2_score}</h3>
                 </div>
                 :
@@ -58,7 +58,7 @@ function MatchesCrad({ match }) {
                   ?
                 <div className='flex justify-center items-center'>
                   <h3 className="text:xl xs:text-2xl sm:text-3xl md:text-4xl font-bold">{match.team_1_score}</h3>
-                  <span className="text-2xl sm:text-3xl text-4xl font-bold px-1">-</span>
+                  <span className="text-2xl sm:text-3xl font-bold px-1">-</span>
                   <h3 className="text:xl xs:text-2xl sm:text-3xl md:text-4xl font-bold">{match.team_2_score}</h3>
                 </div>
                 :
