@@ -170,9 +170,8 @@ function TeamRegister() {
     age_cutoff: [],
   };
   const validationSchema = Yup.object({
-    // tournament_category: Yup.string().required("Categoryy is required"),
-    // age_cutoff: Yup.string().required("Age_Cutoff is required"),
-    players: Yup.string().required("Select Players"),
+    tournament_category: Yup.array().min(1),
+    age_cutoff: Yup.array().min(1),
   });
 
   const {
@@ -187,32 +186,23 @@ function TeamRegister() {
   } = useFormik({
     validationSchema,
     initialValues,
-    onSubmit: (registrationData) => {
-      console.log("go");
-      console.log("andar ka", registrationData);
+    onSubmit: (data) => {
       // ---------------- Confirmation for update -----------------------
-      Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be register team in this tournament!!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, Register it!",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          const response = "Register";
-          if (response) {
-            navigate("/tournament");
-            toast.success("Team Register Successfully!");
-          } else {
-            toast.error("Something went wrong");
-          }
-        }
+
+      // console.log("Click ho ra h he");
+      console.log("data", {
+        ...data,
+        tournament_id: tournamentDetails.id,
+        team_id: selectedTeam,
       });
     },
   });
-  console.log(values);
+
+  React.useEffect(() => {
+    const team = teamData?.data?.data.find((team) => {
+      return team.id == selectedTeam;
+    });
+  }, [selectedTeam]);
   // console.log(tournamentDetails);
   return (
     <section className="min-h-screen">
@@ -288,7 +278,7 @@ function TeamRegister() {
                         >
                           <input
                             type="checkbox"
-                            name={"category"}
+                            name={"tournament_category"}
                             id={category}
                             onChange={handleChange}
                             onBlur={handleBlur}
@@ -358,90 +348,8 @@ function TeamRegister() {
                 ) : null}
               </div>
             </div>
-            <div className="w-full">
-              <h1 className=" font-semibold text-lg md:text-2xl">
-                Player List
-              </h1>
-              <div className="md:px-5 py-2 rounded-md my-5 px-2 ">
-                <ul className="flex px-2 2xl:px-10 justify-between bg-gray-300 py-[10px] rounded-md text-black font-medium ">
-                  {TeamPlayers.length > 0 ? (
-                    <li className="w-20 text-center flex justify-center items-center space-x-2  ">
-                      <p className="hidden lg:block  2xl:text-[16px]">All</p>
-                      <input
-                        type="checkbox"
-                        name="AllSelect"
-                        id=""
-                        className="cursor-pointer"
-                        onChange={handleSelectPlayer}
-                      />
-                    </li>
-                  ) : null}
-                  <li className="w-10 text-center text-xs md:text-[12px] lg:text-base 2xl:text-[16px] ">
-                    Sr.No
-                  </li>
-                  <li className="w-32 text-center text-xs md:text-[12px] lg:text-base 2xl:text-[16px] ">
-                    Name
-                  </li>
-                  <li className="w-10 text-center text-xs md:text-[12px] lg:text-base 2xl:text-[16px] ">
-                    Age
-                  </li>
-                  <li className="w-32 text-center text-xs md:text-[12px] lg:text-base 2xl:text-[16px] ">
-                    Captain
-                  </li>
-                </ul>
-                <div className="overflow-y-auto  overflow-hidden">
-                  {TeamPlayers.length > 0 ? (
-                    TeamPlayers.map((player, i) => {
-                      return (
-                        <ul
-                          key={i}
-                          className="flex px-1 items-center space-x-2 justify-between font-normal md:px-2 2xl:px-10 py-2 md:py-5 bg-white shadow-md rounded-lg cursor-pointer hover:bg-gray-100 my-3"
-                        >
-                          <li className="w-20 text-center flex justify-center items-center  text-[8px] sm:text-[9.5px] md:text-[12px] 2xl:text-base ">
-                            <input
-                              type="checkbox"
-                              checked={player?.isChecked || false}
-                              onChange={handleChange}
-                              onClick={handleSelectPlayer}
-                              onBlur={handleBlur}
-                              value={player.id}
-                              name="player"
-                              id="player"
-                              className="cursor-pointer"
-                            />
-                          </li>
-                          <li className="w-10 text-center flex items-center justify-center text-xs lg:text-sm xl:text-base">
-                            {i + 1}
-                          </li>
-                          <li className="w-32 text-center flex items-center justify-center text-xs lg:text-sm xl:text-base">
-                            {player.name}
-                          </li>
-                          <li className="w-10 text-center flex items-center justify-center text-xs lg:text-sm xl:text-base">
-                            {player.age}
-                          </li>
-                          <li className="w-32 text-center flex items-center justify-center text-xs lg:text-sm xl:text-base">
-                            {player.name}
-                          </li>
-                        </ul>
-                      );
-                    })
-                  ) : (
-                    <div className="bg-red-100 w-full mt-4 text-center rounded-md">
-                      <h4 className="text-red-700 text-xs lg:text-base  font-medium p-2">
-                        No Players Found
-                      </h4>
-                    </div>
-                  )}
-                </div>
-                {errors.players && touched.players ? (
-                  <small className="text-red-600 flex justify-end items-end mt-2">
-                    {errors.players}
-                  </small>
-                ) : null}
-              </div>
-            </div>
 
-            {TeamPlayers.length == 0 ? (
+            {selectedTeam != 0 ? (
               <div className="flex justify-center md:justify-end md:items-end w-full space-x-5 py-3 md:py-3 ">
                 <button
                   className="bg-slate-900 relative inline-flex items-center justify-center md:px-6 py-2 px-4  overflow-hidden text-white rounded-lg cursor-pointer group"
@@ -453,7 +361,8 @@ function TeamRegister() {
                 <button
                   type="submit"
                   className="bg-[#ee6730] relative inline-flex items-center justify-center md:px-6 py-2 px-4  overflow-hidden text-white rounded-lg cursor-pointer group"
-                  onClick={() => handleSubmit}
+                  onClick={(e) => handleSubmit()}
+                  // onClick={(e) => console.log("clicked")}
                 >
                   <span className="absolute w-0 h-0 transition-all duration-500 ease-out  bg-slate-900 rounded-lg group-hover:w-full group-hover:h-56"></span>
                   <span className="relative text-sm xl:text-base">SUBMIT</span>
