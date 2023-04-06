@@ -293,6 +293,9 @@ function TeamProfileDetail() {
                         <th className="border whitespace-nowrap px-2 py-3 text-sm text-gray-300 uppercase border-gray-700 whitespace-nowrap font-semibold text-left sm:text-base text-xs xs:text-sm">
                           City
                         </th>
+                        <th className="border whitespace-nowrap px-2 py-3 text-sm text-gray-300 uppercase border-gray-700 whitespace-nowrap font-semibold text-left sm:text-base text-xs xs:text-sm">
+                          Status
+                        </th>
                         {!isPublicView ? (
                           <th className="border whitespace-nowrap px-2 py-3 text-sm text-gray-300 uppercase border-gray-700 whitespace-nowrap font-semibold text-left sm:text-base text-xs xs:text-sm">
                             Action
@@ -330,6 +333,21 @@ function TeamProfileDetail() {
                               </td>
                               <td className="whitespace-nowrap px-2">
                                 {tournaments.address}
+                              </td>
+                              <td className="whitespace-nowrap px-2">
+                                {item.is_selected == 1 ? (
+                                  <span className="text-sm bg-green-800 p-1 px-3 text-white font-bold rounded-full  ">
+                                    Approved
+                                  </span>
+                                ) : item.is_selected == 0 ? (
+                                  <span className="text-sm bg-red-500 p-1 px-3 text-white font-bold rounded-full  ">
+                                    Rejected
+                                  </span>
+                                ) : (
+                                  <span className="text-sm bg-gray-600 p-1 px-3 text-white font-bold rounded-full  ">
+                                    Pending
+                                  </span>
+                                )}
                               </td>
                               {!isPublicView ? (
                                 <td className="whitespace-nowrap px-2">

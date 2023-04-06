@@ -7,11 +7,16 @@ import { GiTrophyCup } from "react-icons/gi";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import { useGetTournamentDetailsQuery } from "../../../services/tournament";
-import { useGetuserTeamsQuery } from "../../../services/team";
+import {
+  useGetuserTeamsQuery,
+  useTeamtoTournamentMutation,
+} from "../../../services/team";
 import Loader from "../../../component/Loader";
 
 function TeamRegister() {
   const navigate = useNavigate();
+  const [teamtoTournament, { ...something }] = useTeamtoTournamentMutation();
+  console.log(something);
   let userId = 1;
   const { tournament_id } = useParams();
   const { data, isLoading, isSuccess, error, refetch } =
@@ -144,25 +149,17 @@ function TeamRegister() {
     setTeam(allteams);
   }, []);
 
-  const handleSelectPlayer = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    const checked = e.target.checked;
-    if (name === "AllSelect") {
-      let AllPlayers = TeamPlayers.map((player) => {
-        return { ...player, isChecked: checked };
-      });
-      setTeamPlayers(AllPlayers);
-    } else {
-      let AllPlayers = TeamPlayers.map((player) =>
-        player.id == value ? { ...player, isChecked: checked } : player
-      );
-      setTeamPlayers(AllPlayers);
-      let SelectedPlayer = AllPlayers.filter((AllPlayers) => {
-        return AllPlayers.isChecked == true;
-      });
+  React.useEffect(() => {
+    if (something.isError) {
+      toast.error(something?.error?.data?.message);
     }
-  };
+    if (something.isSuccess) {
+      if (something?.data?.success) {
+        navigate(`/team/profile-detail/${something?.data?.data.team_id}`);
+        toast.success("Team Registration Successfull ");
+      }
+    }
+  }, [something.isError, something.isSuccess]);
 
   // ------------ Form Validation ------------
   const initialValues = {
@@ -190,11 +187,13 @@ function TeamRegister() {
       // ---------------- Confirmation for update -----------------------
 
       // console.log("Click ho ra h he");
-      console.log("data", {
+      const newData = {
         ...data,
         tournament_id: tournamentDetails.id,
         team_id: selectedTeam,
-      });
+      };
+
+      teamtoTournament(newData).then(console.log("ss"));
     },
   });
 
@@ -203,7 +202,7 @@ function TeamRegister() {
       return team.id == selectedTeam;
     });
   }, [selectedTeam]);
-  // console.log(tournamentDetails);
+
   return (
     <section className="min-h-screen">
       {isLoading && <Loader />}
@@ -252,7 +251,7 @@ function TeamRegister() {
                   <div className="flex justify-center w-full items-center mt-16 md:mt-24">
                     <AiOutlineTeam className="text-2xl xs:text-3xl sm:text-5xl text-gray-400 mr-2" />
                     <p className="text-xs xs:text-sm sm:text-lg font-medium text-gray-400">
-                      Team Not Found
+                      Please make your team to Register in Tournament
                     </p>
                   </div>
                 )}

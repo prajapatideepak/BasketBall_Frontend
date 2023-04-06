@@ -21,6 +21,13 @@ export const teamApi = api.injectEndpoints({
         body,
       }),
     }),
+    teamtoTournament: build.mutation({
+      query: (body) => ({
+        url: "team/tournament/register",
+        method: "POST",
+        body,
+      }),
+    }),
     teamUpdate: build.mutation({
       query: (body) => ({
         url: "team/update",
@@ -37,4 +44,5 @@ export const {
   useTeamRegistrationMutation,
   useTeamUpdateMutation,
   useGetuserTeamsQuery,
+  useTeamtoTournamentMutation,
 } = teamApi;
