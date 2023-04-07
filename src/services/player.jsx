@@ -4,7 +4,8 @@ export const playerApi = api.injectEndpoints({
   endpoints: (build) => ({
     getAllPlayers: build.query({
       query: ({ pageNo, search }) =>
-        `player/list/${pageNo}&${search == "" || search == "" ? "search" : search
+        `player/list/${pageNo}&${
+          search == "" || search == "" ? "search" : search
         }`,
     }),
 
@@ -41,6 +42,6 @@ export const {
   useGetAllPlayersQuery,
   useGetPlayerDetailsQuery,
   useRegisterPlayerMutation,
-  useUpdatePlayerDetailsMutation, 
+  useUpdatePlayerDetailsMutation,
   useSearchPlayerByNumbmerQuery,
 } = playerApi;

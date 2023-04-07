@@ -220,7 +220,11 @@ function TeamAddEdit() {
         Be the player that raises the bar, be relentless, be a game changer.
       </p>
       <div className="mx-auto lg:px-10 ">
-        <form action="" onSubmit={handleSubmit} className=" rounded-lg shadow-xl px-5 py-5 md:px-10 md:py-8">
+        <form
+          action=""
+          onSubmit={handleSubmit}
+          className=" rounded-lg shadow-xl px-5 py-5 md:px-10 md:py-8"
+        >
           <div className="">
             <h3 className=" text-xl sm:text-2xl font-semibold text-[#ee6730]">
               Team Information:
@@ -615,10 +619,10 @@ function TeamAddEdit() {
                 {thing.isLoading
                   ? "SUBMIT..."
                   : updateData.isLoading
-                    ? "Updating..."
-                    : location?.state?.isEdit
-                      ? "UPDATE"
-                      : "SUBMIT"}
+                  ? "Updating..."
+                  : location?.state?.isEdit
+                  ? "UPDATE"
+                  : "SUBMIT"}
               </span>
             </button>
           </div>
