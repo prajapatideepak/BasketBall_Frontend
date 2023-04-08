@@ -5,13 +5,31 @@ import { AiFillCloseCircle } from "react-icons/ai";
 
 export default function PlayerAvtar({ player }) {
   const [model, setModel] = React.useState(false);
-  console.log(player.SinglePlayerDetails.team_players[0])
+  const [playerBio, setPlayerBio] = React.useState('')
+  const [showReadMore, setShowReadMore] = React.useState(false)
+
+  function truncateString(str, num) {
+    // If the length of str is less than or equal to num
+    // just return str--don't truncate it.
+    if (str.length <= num) {
+      return str
+    }
+    setShowReadMore(true)
+    // Return str truncated with '...' concatenated to the end of str.
+    return str.slice(0, num) + '...'
+  }
+
+  React.useEffect(()=>{
+    const player_bio = truncateString(player?.SinglePlayerDetails.about, 50)
+    setPlayerBio(player_bio)
+  },[])
+
   return (
     <div className="relative">
       {model && (
-        <div className="absolute w-full h-full  z-30 ">
+        <div className="absolute w-full h-full z-30 ">
           <div className="flex justify-center opacity-100 ">
-            <div className="h-full mx-auto opacity-100 shadow-2xl rounded-md mt-10 2xl:mt-52  bg-white w-2/3 z-50">
+            <div className="h-full mx-auto opacity-100 shadow-2xl rounded-md mt-10 2xl:mt-40  bg-white w-full z-50">
               <div className="">
                 <div className="flex justify-end ">
                   <button
@@ -65,19 +83,25 @@ export default function PlayerAvtar({ player }) {
             <div className=" w-full flex justify-center items-center">
               <div className="flex items-center justify-center w-1/2 h-full">
                 <p className='text-center text-gray-600 text-sm overflow-hidden'>
-                  {player?.SinglePlayerDetails.about}
+                  {playerBio}
                 </p>
               </div>
             </div>
-            <div onClick={(e) => setModel(true)}>
-              {
-                player?.SinglePlayerDetails?.about?.length > 50 ?
 
-                  <h1 className="text-center text-sm cursor-pointer font-semibold">...Read More</h1>
-                  :
-                  ""
-              }
-            </div>
+            {
+              showReadMore
+              ?
+                <div onClick={(e) => setModel(true)}>
+                  {
+                    player?.SinglePlayerDetails?.about?.length > 50 ?
+
+                      <h1 className="text-center text-sm cursor-pointer font-semibold">...Read More</h1>
+                      :
+                      ""
+                  }
+                </div>
+              : null
+            }
           </div>
         </div>
       </div>

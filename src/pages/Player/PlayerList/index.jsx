@@ -66,7 +66,7 @@ const PlayerList = () => {
                             <div className=" flex flex-col  px-5 sm:px-8 lg:px-12  sm:flex-row w-full h-full absolute top-0 content-start py-2 ">
                               <div className="bg-gradient-to-b  from-[#e64100]  absolute  md:top-[-32px] md:left-[-20px] w-10 h-10 rotate-[30deg] top-[-15px] left-[-15px] md:h-20 md:w-14 content-start md:rotate-[45deg] flex justify-center items-center">
                                 <h1 className="rotate-[-30deg] md:rotate-[315deg] text-xs font-bold md:text-lg mt-1 ml-5 md:ml-6">
-                                  {pageNo == 1 ? index + 1 : index + 11}
+                                  {(index+1) + ((pageNo-1)*10)}
                                 </h1>
                               </div>
                               {/* avtar start */}

@@ -28,7 +28,7 @@ const BasicInfo = ({ index, setIndex }) => {
     setPhoto(() => e.target.files[0]);
     setImg(URL.createObjectURL(photo));
   }
-  
+    
   return (
     <>
       <form className="flex w-full  space-x-3">
