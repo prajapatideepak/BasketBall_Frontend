@@ -28,22 +28,28 @@ const GameInfo = ({ index, setIndex }) => {
         await dispatch(setGameInfoForm(values));
         try {
           const fb = new FormData();
-          fb.append("photo", PlayerForm.basicInfo?.photo);
+          fb.append("logo", PlayerForm.basicInfo?.logo);
           let ok = JSON.stringify({
             PlayerInfo: PlayerForm,
           });
           fb.append("data", ok);
-          playerRegistration(fb).then(console.log("ho gaya"));
+          if (location?.state?.isEdit) {
+            fb.append("id", location.state.id);
+            playerUpdate(fb).then(console.log("update ho gai"));
+          } else {
+            playerRegistration(fb).then(console.log("ho gaya"));
+          }
         } catch (err) {
           console.log(err);
         }
       },
     });
 
+    
   function setValues() {
     dispatch(setGameInfoForm(values));
   }
-
+  console.log(thing?.error?.data?.message)
   React.useEffect(() => {
     if (thing.isError) {
       toast.error(thing?.error?.data?.message);
@@ -51,10 +57,22 @@ const GameInfo = ({ index, setIndex }) => {
     if (thing.isSuccess) {
       if (thing?.data?.success) {
         toast.success("Player Registration Successfull ");
-        navigate(`/player/${thing?.data?.data?.id}`);
+        navigate(`/player/profile-detail/${thing?.data?.data?.id}`);
       }
     }
   }, [thing.isError, thing.isSuccess]);
+
+  React.useEffect(() => {
+    if (updateData.isError) {
+      toast.error(updateData?.error?.data?.message);
+    }
+    if (updateData.isSuccess) {
+      if (updateData?.data?.success) {
+        toast.success("Player Update Successfull ");
+        navigate(`/player/profile-detail/${updateData?.data?.data?.id}`);
+      }
+    }
+  }, [updateData.isError, updateData.isSuccess]);
 
   return (
     <>
@@ -194,7 +212,10 @@ const GameInfo = ({ index, setIndex }) => {
           <button
             type="button"
             className="bg-[#ee6730] relative inline-flex items-center justify-center px-7 py-2 overflow-hidden text-white rounded-lg cursor-pointer group mr-3"
-            onClick={() => navigate(-1)}
+            onClick={(e) => {
+              dispatch(setGameInfoForm(values));
+              setIndex(index - 1);
+            }}
           >
             <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-slate-900 rounded-lg group-hover:w-full group-hover:h-56"></span>
             <span className="relative">Cancel</span>
@@ -222,10 +243,10 @@ const GameInfo = ({ index, setIndex }) => {
             {thing.isLoading
               ? "SUBMIT..."
               : updateData.isLoading
-              ? "Updating..."
-              : location?.state?.isEdit
-              ? "UPDATE"
-              : "SUBMIT"}
+                ? "Updating..."
+                : location?.state?.isEdit
+                  ? "UPDATE"
+                  : "SUBMIT"}
           </span>
         </button>
       </div>

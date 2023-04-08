@@ -7,7 +7,7 @@ const PlayerSlice = createSlice({
     PlayerDetail: {},
     PlayerForm: {
       basicInfo: {
-        photo : "/CBL_Images/player-default-profile.webp",
+        logo : "",
         first_name: "",
         middle_name: "",
         last_name: "",

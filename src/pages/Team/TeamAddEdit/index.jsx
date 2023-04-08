@@ -128,7 +128,7 @@ function TeamAddEdit() {
       })
     );
   };
-
+  console.log(thing)
   React.useEffect(() => {
     if (thing.isError) {
       toast.error(thing?.error?.data?.message);
@@ -197,7 +197,7 @@ function TeamAddEdit() {
     );
   }, []);
 
-  console.log("captain", captain);
+  // console.log("captain", captain);
   React.useEffect(() => {
     console.log(data?.data);
     if (data?.data) {
@@ -205,7 +205,7 @@ function TeamAddEdit() {
     }
   }, [data.isSuccess, data]);
 
-  console.log("search", searchedPlayers);
+  // console.log("search", searchedPlayers);
   return (
     <section className="min-h-screen-fit py-5 px-8">
       <div className=" flex justify-center items-center">
