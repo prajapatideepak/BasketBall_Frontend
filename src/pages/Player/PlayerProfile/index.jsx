@@ -26,10 +26,10 @@ export default function PlayerProfile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { data, isLoading, error } = useGetPlayerDetailsQuery(params.id);
+  console.log(data)
   const [currentTab, setCurrentTab] = React.useState(2);
   const [currentTabMatches, setCurrentTabMatches] = React.useState([]);
-
-  let allMatches =
+  let allMatches =    
     data?.data && data?.data.team_1_matches && data?.data.team_2_matches
       ? [...data?.data.team_1_matches, ...data?.data.team_2_matches]
       : [];
@@ -49,12 +49,16 @@ export default function PlayerProfile() {
   const handleEdit = () => {
     dispatch(setBasicInfoForm(data.SinglePlayerDetails));
     dispatch(setGameInfoForm(data.SinglePlayerDetails));
-    navigate("/player/add-edit", {
+    navigate(`/player/add-edit`, {
       state: {
         isEdit: true,
+        player_id : data.SinglePlayerDetails.id,
+        photo : data.SinglePlayerDetails.photo
       },
     });
   };
+
+
 
   return (
     <section className="min-h-screen-fit">
@@ -65,7 +69,7 @@ export default function PlayerProfile() {
             <div className="mx-auto  px-6 py-10 sm:px-20 sm:py-12 md:px-20 md:py-12 lg:px-24 xl:px-28 2xl:px-32 min-h-screen  ">
               {/* Player Detail Section */}
               <div className="flex flex-col relative lg:flex-row space-y-5 ">
-                <div className="lg:w-1/2 flex">
+                <div className="lg:w-1/2 justify-center items-center flex">
                   <PlayerAvtar player={data} />
                 </div>
                 <div className="flex-1    ">

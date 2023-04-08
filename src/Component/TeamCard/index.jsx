@@ -9,7 +9,7 @@ function TeamCard({ teamDetails }) {
       className="w-full bg-gray-800 mt-2 mb-5 rounded-lg cursor-pointer hover:opacity-80"
       onClick={() => navigate(`/team/profile-detail/${teamDetails.id}`)}
     >
-      <div className="flex lg:flex-row flex-col lg:justify-start justify-center items-center p-5 h-full">
+      <div className="flex lg:flex-row  flex-col lg:justify-start justify-center items-center p-5 h-full">
         <div className="flex w-full sm:w-4/5 md:w-2/4 lg:w-2/5">
           <div className="team_logo w-1/3 lg:w-24">
             <img

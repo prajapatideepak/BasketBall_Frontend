@@ -1,7 +1,6 @@
 import React from "react";
 
 export default function ({ PlayerDetail }) {
-  console.log(PlayerDetail)
   return (
     <div className="left-0 rounded-2xl right-0 bg-black mx-0 text-white">
       {/* <h1 className="py-1 text-center font-bold">Player statistics</h1> */}

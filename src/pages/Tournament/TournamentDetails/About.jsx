@@ -25,7 +25,7 @@ const About = ({tournamentDetails}) => {
                 <label className="mb-2 text-xs xs:text-sm md:text-base text-gray-400">Start Date</label>
                 <div className="border-2 border-orange-100 px-2 py-2 my-2 rounded-lg bg-white capitalize font-medium text-xs xs:text-sm md:text-base">
                   <p>
-                    { moment(tournamentDetails.start_date).format("D MMM YYYY")}
+                    {moment(tournamentDetails.start_date).format("D MMM YYYY")}
                   </p>
                 </div>
               </div>

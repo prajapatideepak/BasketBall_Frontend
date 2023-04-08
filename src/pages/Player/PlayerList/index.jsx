@@ -13,12 +13,11 @@ const PlayerList = () => {
   const defaultImage = "/CBL_Images/60111-removebg-preview.png";
   const [search, setSearch] = React.useState("");
   const [pageNo, setPageNo] = React.useState(1);
-  // const rojki = useGetAllPlayersQuery({ pageNo: pageNo - 1, search });
-  // const { isLoading, data } = rojki;
   const { isLoading, data } = useGetAllPlayersQuery({
     pageNo: pageNo - 1,
     search,
   });
+  const itemsPerPage = 2;
   return (
     <section className="min-h-screen-fit">
       <div>
@@ -54,7 +53,7 @@ const PlayerList = () => {
                         <Link
                           key={player.id}
                           className="w-full  scale-105"
-                          to={`/player/${player.id}`}
+                          to={`/player/profile-detail/${player.id}`}
                         >
                           <div className="duration-300 relative justify-end bg-black rounded-lg text-white overflow-hidden shadow-xl cursor-pointer hover:scale-[1.03] w-6/7  md:w-full h-full ">
                             <div className=" flex justify-end items-center ">
@@ -64,25 +63,27 @@ const PlayerList = () => {
                                 className="w-28 h-28 opacity-20"
                               />
                             </div>
-                            <div className=" flex flex-col sm:flex-row w-full h-full absolute top-0 content-start py-2 ">
+                            <div className=" flex flex-col  px-5 sm:px-8 lg:px-12  sm:flex-row w-full h-full absolute top-0 content-start py-2 ">
                               <div className="bg-gradient-to-b  from-[#e64100]  absolute  md:top-[-32px] md:left-[-20px] w-10 h-10 rotate-[30deg] top-[-15px] left-[-15px] md:h-20 md:w-14 content-start md:rotate-[45deg] flex justify-center items-center">
                                 <h1 className="rotate-[-30deg] md:rotate-[315deg] text-xs font-bold md:text-lg mt-1 ml-5 md:ml-6">
-                                  {index + 1}
+                                  {(index+1) + ((pageNo-1)*10)}
                                 </h1>
                               </div>
                               {/* avtar start */}
-                              <div className="text-center sm:w-1/2 items-center  justify-center space-x-5 lg:space-x-10 xl:space-x-10 sm:space-x-6 lg:py-6 flex  ">
-                                <img
-                                  src={player?.photo ? player?.photo : defaultImage}
-                                  className=" object-cover w-12 h-12 sm:w-14 sm:h-14 lg:w-[70px] lg:h-[70px] xl:w-20 xl:h-20 2xl:w-[85px]  2xl:h-[85px] rounded-full border-2 sm:border-4 border-slate-700 "
-                                />
-                                <div className="flex justify-center items-center w-1/4  ">
+                              <div className="text-center sm:w-[65%]   w-full items-center justify-start  lg:py-6 flex  ">
+                                <div className="w-1/3 lg:w-40 ">
+                                  <img
+                                    src={player?.photo}
+                                    className=" object-cover w-20 h-20 rounded-full border-2 sm:border-4 border-slate-700 "
+                                  />
+                                </div>
+                                <div className="flex justify-center items-center w-1/2">
                                   <h1 className="text-gray-600 font-bold xs:text-xs sm:text-xs lg:text-base uppercase">
                                     {player?.playing_position ? player?.playing_position : "...."}
                                   </h1>
                                 </div>
-                                <div className="flex flex-col justify-start items-start w-1/5 ">
-                                  <h1 className="text-white font-bold text-base sm:text-lg md:text-xl lg:text-[25px] text-start ">
+                                <div className="flex flex-col w-full justify-start">
+                                  <h1 className="text-white font-bold text-base sm:text-lg md:text-xl lg:text-[24px] text-start ">
                                     {player?.first_name}
                                   </h1>
                                   <h1 className="text-gray-600 font-bold text-[8px] sm:text-[10px] lg:text-xs xl:text-sm text-start ">
@@ -92,17 +93,17 @@ const PlayerList = () => {
                               </div>
                               {/* avtar end */}
                               {/* statiscs start */}
-                              <div className="2xl:justify-start py-1  g:p-2 w-full sm:w-1/2 flex items-center justify-center xl:pl-10   ">
-                                <div className="grid xxs:grid-cols-2 xs:grid-cols-4 text-black place-content-center gap-3 lg:gap-5 xl:gap-12 2xl:gap-16   ">
+                              <div className="2xl:justify-end py-1 g:p-2 w-full sm:w-[35%] flex items-center justify-center  ">
+                                <div className="flex justify-between w-full ">
                                   <div className="text-center    ">
                                     <h1
-                                      className="text-sm sm:text-lg md:text-2xl lg:text-3xl 
+                                      className="text-sm sm:text-lg md:text-2xl  lg:text-3xl 
                              font-bold text-white"
                                     >
                                       {player?.player_statistics[0]?.matches_played ? player?.player_statistics[0]?.matches_played : "0"}
                                     </h1>
                                     <span className="text-[8px] sm:text-[9px] md:text-[11px] lg:text-xs xl:text-base text-white font-semibold">
-                                      Total Match
+                                      Total
                                     </span>
                                   </div>
                                   <div className="text-center    ">
@@ -113,7 +114,7 @@ const PlayerList = () => {
                                       {player?.player_statistics[0]?.matches_won ? player?.player_statistics[0]?.matches_won : "0"}
                                     </h1>
                                     <span className="text-[8px] sm:text-[9px] md:text-[11px] lg:text-xs xl:text-base text-white font-semibold">
-                                      Match Won
+                                      Won
                                     </span>
                                   </div>
                                   <div className="text-center    ">
@@ -124,7 +125,7 @@ const PlayerList = () => {
                                       {player?.player_statistics[0]?.matches_lost ? player?.player_statistics[0]?.matches_lost : "0"}
                                     </h1>
                                     <span className="text-[8px] sm:text-[9px] md:text-[11px] lg:text-xs xl:text-base text-white font-semibold">
-                                      Match lost
+                                      lost
                                     </span>
                                   </div>
                                   <div className="text-center    ">
@@ -135,7 +136,7 @@ const PlayerList = () => {
                                       {player?.player_statistics[0]?.points ? player?.player_statistics[0]?.points : "0"}
                                     </h1>
                                     <span className="text-[8px] sm:text-[9px] md:text-[11px] lg:text-xs xl:text-base text-white font-semibold">
-                                      Total Points
+                                      Points
                                     </span>
                                   </div>
                                 </div>
