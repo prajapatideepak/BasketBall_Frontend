@@ -6,7 +6,7 @@ function MatchCard({ match }) {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/match-details/${match.match_id}`);
+    navigate(`/match-details/${match.id}`);
   };
 
   const months = [
