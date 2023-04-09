@@ -26,13 +26,13 @@ function Matches({matches}) {
         let onGoing = []
 
         matches?.map((match)=>{
-            if(match.is_live){
+            if(match.status == 2){
                 onGoing.push(match)
             }
-            else if(match.is_successfull == 1){
+            else if(match.status == 3){
                 past.push(match)
             }
-            else if(match.is_successfull == 0){
+            else if(match.status == 1){
                 upcoming.push(match)
             }
         })
@@ -41,7 +41,7 @@ function Matches({matches}) {
         setPastMatches(past);
         setOngoingMatches(onGoing);
         setUpcomingMatches(upcoming)
-    }, []);
+    }, [matches]);
     
     return (
         <div>

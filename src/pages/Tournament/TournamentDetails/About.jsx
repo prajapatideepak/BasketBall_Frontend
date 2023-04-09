@@ -13,9 +13,9 @@ const About = ({isOrganizer, tournamentDetails}) => {
       <section className="">
         <div className=''>
           {/* -----------------------Tounament_Details---------------------------*/}
-          {/* <div className=''>
+          <div className=''>
               <h3 className='text-2xl font-semibold text-[#ee6730]'>Tournament Information:</h3>
-            </div> */}
+            </div>
           {/* Starting Date && Ending Date && Tournament Type */}
           <div className="flex flex-col md:flex-row  gap-6 my-7 ">
             <div className="flex sm:space-x-5  w-full sm:flex-row flex-col">
@@ -93,7 +93,7 @@ const About = ({isOrganizer, tournamentDetails}) => {
             <div className='w-full flex flex-col'>
               <label className="mb-2 text-gray-400 text-xs xs:text-sm md:text-base">About Tournament</label>
               <div className={`border-2 border-orange-100 px-2 py-2 capitalize font-medium rounded-lg bg-white overflow-y-auto text-xs xs:text-sm md:text-base`}>
-                {tournamentDetails.about}
+                {tournamentDetails.about == '' || !tournamentDetails.about ? '--' : tournamentDetails.about}
               </div>
             </div>
           </div>
@@ -147,7 +147,7 @@ const About = ({isOrganizer, tournamentDetails}) => {
                   })
                   :
                   <div className="bg-red-100 w-full mt-4 text-center">
-                    <h4 className='text-red-700 font-medium p-2 text-xs xs:text-sm md:text-base'>No Referee Found</h4>
+                    <h4 className='text-red-700 font-medium p-2 text-xs xs:text-sm md:text-base'>No Referees Found</h4>
                   </div>
               }
 

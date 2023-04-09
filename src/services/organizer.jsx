@@ -20,6 +20,10 @@ export const organizerApi = api.injectEndpoints({
         : [{ type: "TournamentsOfOrganizer", id: "LIST" }]
     }),
 
+    tournamentSchedule: build.query({
+        query: (tournament_id) => `tournament/schedule/${tournament_id}`,
+    }),
+
     teamsRequest: build.query({
         query: (tournament_id) => `tournament/teams-request/${tournament_id}`,
         providesTags: (result, error) => [
@@ -35,9 +39,9 @@ export const organizerApi = api.injectEndpoints({
         ],
     }),
     acceptTeamRequest: build.mutation({
-        query(tournament_id, team_id){
+        query({tournament_id, team_id}){
             return {
-                url: `tournament/accept/${tournament_id}`,
+                url: `tournament/teams-request/accept/${tournament_id}`,
                 method: "PUT",
                 body: { team_id },
                 headers:{ 'Content-Type': 'application/json' }
@@ -47,9 +51,9 @@ export const organizerApi = api.injectEndpoints({
     }),
 
     rejectTeamRequest: build.mutation({
-        query(tournament_id, team_id, reject_reason){
+        query({tournament_id, team_id, reject_reason}){
             return {
-                url: `tournament/accept/${tournament_id}`,
+                url: `tournament/teams-request/reject/${tournament_id}`,
                 method: "PUT",
                 body: { 
                     team_id, 
@@ -153,6 +157,7 @@ export const organizerApi = api.injectEndpoints({
 export const {
     useTournamentsOfOrganizerQuery,
     useTeamsRequestQuery,
+    useTournamentScheduleQuery,
     useAcceptTeamRequestMutation,
     useRejectTeamRequestMutation,
     useStartTournamentMutation,

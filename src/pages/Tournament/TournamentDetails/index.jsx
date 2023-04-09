@@ -47,7 +47,7 @@ function TournamentDetails() {
     <Sponsors sponsors={tournamentDetails.tournament_sponsors} />,
     <Gallery galleryDetails={tournamentDetails.gallery} />,
     <About isOrganizer={isOrganizer} tournamentDetails={tournamentDetails} />,
-    <Admin tournamentDetails={tournamentDetails} refetchData={refetch} />
+    <Admin tournamentDetails={tournamentDetails} teams={tournamentDetails.tournament_teams} refetchData={refetch} />
   ];
 
   const handleRegisterInTournament = () =>{
@@ -66,7 +66,7 @@ function TournamentDetails() {
     <section className="min-h-screen-fit">
       <div className="mx-auto px-10 py-4 sm:px-20 sm:py-6 md:px-20 md:py-8 lg:px-24 xl:px-28 2xl:px-32 bg-black">
         <div className="flex justify-center items-center">
-          <div className="team-logo-container flex justify-center items-center rounded-full">
+          <div className="team-logo-container w-16 h-16 xs:w-20 xs:h-20 sm:w-28 sm:h-28 flex justify-center items-center overflow-hidden rounded-full border-2 border-gray-500">
             <picture></picture>
             <source
               srcSet={!tournamentDetails.logo ? '/CBL_Images/basketball_team_logo_2.webp': tournamentDetails.logo}
@@ -74,7 +74,7 @@ function TournamentDetails() {
             />
             <img
               src={!tournamentDetails.logo ? '/CBL_Images/basketball_team_logo_2.webp': tournamentDetails.logo}
-              className="rounded-full border-2 border-gray-500 shadow-lg w-16 h-16 xs:w-20 xs:h-20 sm:w-28 sm:h-28"
+              className="object-contain w-full h-full"
             />
           </div>
           <div className="flex flex-col justify-center items-cente ml-3">
