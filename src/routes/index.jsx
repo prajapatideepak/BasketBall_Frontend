@@ -14,10 +14,10 @@ import { useSelector } from "react-redux";
 import AdminRoutes from "./adminRoutes";
 import { QueryClient, QueryClientProvider } from "react-query";
 
-export let currentUser = false;
 const AppRoutes = () => {
   // const { PlayerForm } = useSelector((state) => state.playerReducer);
   const { token } = useSelector((state) => state.user);
+
   const queryClient = new QueryClient();
   return (
     <>

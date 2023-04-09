@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { RxCross1 } from "react-icons/rx";
 import { AiFillInstagram } from "react-icons/ai";
@@ -8,6 +9,8 @@ import DropDownmenu from "./DropDownmenu";
 import { NavLink, Link, Outlet, useNavigate } from "react-router-dom";
 
 function AsideMenuMain() {
+  const { user } = useSelector((state) => state.user);
+
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
 
@@ -108,6 +111,19 @@ function AsideMenuMain() {
                 </h1>
               </NavLink>
             </li>
+            {
+              user.is_organizer
+              ?
+                <li className="nav-item" onClick={() => setOpen(!open)}>
+                  <NavLink className={({isActive}) => (isActive ? "active" : 'none')} to={"/tournament/organizer"} >
+                    <h1 className="relative text-white text-base md:text-base lg:text-base xl:text-lg  my-5 md:my-0">
+                      Your Tournaments
+                    </h1>
+                  </NavLink>
+                </li>
+              :
+                null
+            }
             <li className="nav-item md:hidden" onClick={() => setOpen(!open)}>
               <NavLink className={({isActive}) => (isActive ? "active" : 'none')} to={"/team/profile"} >
                 <h1 className="relative text-white text-base md:text-base lg:text-base xl:text-lg my-[16px] lg:my-0">

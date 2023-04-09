@@ -43,7 +43,7 @@ function Login() {
       validationSchema: signUpSchema,
       async onSubmit(data) {
         const res = await signin(data)
-        console.log(res.data)
+        
         if (res.error) {
           toast.error(res.error.data.message);
         }
