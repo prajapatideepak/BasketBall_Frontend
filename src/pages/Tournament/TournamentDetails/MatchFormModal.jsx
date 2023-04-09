@@ -1,9 +1,13 @@
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Select from "react-select";
 import { Modal } from "../../../Component/Modal";
+import { useMatchFormationMutation } from "../../../services/tournamentOrganizer";
 
-function MatchFormModal({ showModal, handleShowModal }) {
+function MatchFormModal({ showModal, handleShowModal, refetchData, tournamentDetails }) {
+  const {tournament_id} = useParams();
+
   const [formationType, setFormationType] = React.useState("");
   const [genderType, setGenderType] = React.useState("");
   const [ageCategory, setAgeCategory] = React.useState("");
@@ -11,6 +15,7 @@ function MatchFormModal({ showModal, handleShowModal }) {
   const [isFormByGroup, setIsFormByGroup] = React.useState(null);
   const [error, setError] = useState("");
 
+  const [matchFormation, {isLoading}] = useMatchFormationMutation();
   const customStyles = {
     control: (provided, state) => ({
       ...provided,
@@ -69,7 +74,7 @@ function MatchFormModal({ showModal, handleShowModal }) {
   };
 
   const handleRoundName = (e) => {
-    const regex = new RegExp(/^[a-zA-Z]+$/);
+    const regex = new RegExp(/^[a-zA-Z ]+$/);
     if (!regex.test(e.target.value)) {
       setError("Enter only characters");
     }
@@ -84,7 +89,7 @@ function MatchFormModal({ showModal, handleShowModal }) {
     setIsFormByGroup(JSON.parse(e.target.value));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (
@@ -98,10 +103,24 @@ function MatchFormModal({ showModal, handleShowModal }) {
       return;
     }
 
-    //api call
-    handleModalClose(false);
-  };
+    const response = await matchFormation({
+      tournament_id: tournament_id, 
+      is_formation_by_group: isFormByGroup, 
+      formation_method: formationType.value, 
+      round_name: roundName, 
+      gender_type: genderType.value, 
+      age_type: ageCategory.value
+    });
 
+     if(response.error){
+      toast.error(response.error.data.message)
+    }
+    else if(response.data.success){
+      refetchData()
+      toast.success(response.data.message);
+      // handleModalClose(false);
+    }
+  };
   return (
     <Modal open={showModal} onClose={handleModalClose}>
       <Modal.Description className="inline-block w-full max-w-md p-6 my-8 text-left align-middle transition-all transform bg-gray-700 shadow-xl rounded-lg ">
@@ -152,7 +171,7 @@ function MatchFormModal({ showModal, handleShowModal }) {
                   isSearchable={false}
                   styles={customStyles}
                   options={[
-                    { value: "round robin", label: "Round Robin" },
+                    { value: "league", label: "Round Robin" },
                     { value: "knockout", label: "Knockout" },
                   ]}
                 />
@@ -172,13 +191,13 @@ function MatchFormModal({ showModal, handleShowModal }) {
                   onChange={handleGenderType}
                   isSearchable={false}
                   styles={customStyles}
-                  options={[
-                    { value: "boys", label: "Boys" },
-                    { value: "men", label: "Men" },
-                    { value: "women", label: "Women" },
-                    { value: "girls", label: "Girls" },
-                    { value: "mixed", label: "Mixed" },
-                  ]}
+                  options={
+                    tournamentDetails.gender_types.map((item) => ({
+                      value: item,
+                      label: item,
+                    }))
+                  }
+                  
                 />
               </div>
               <div>
@@ -196,15 +215,12 @@ function MatchFormModal({ showModal, handleShowModal }) {
                   onChange={handleAgeCategory}
                   isSearchable={false}
                   styles={customStyles}
-                  options={[
-                    { value: "under 14", label: "Under 14" },
-                    { value: "under 16", label: "Under 16" },
-                    { value: "under 17", label: "Under 17" },
-                    { value: "under 19", label: "Under 19" },
-                    { value: "under 21", label: "Under 21" },
-                    { value: "under 25", label: "Under 25" },
-                    { value: "under 27", label: "Under 27" },
-                  ]}
+                  options={
+                    tournamentDetails.age_categories.map((item) => ({
+                      value: item,
+                      label: item,
+                    }))
+                  }
                 />
               </div>
               <div>
@@ -264,9 +280,10 @@ function MatchFormModal({ showModal, handleShowModal }) {
               <button
                 type="button"
                 onClick={handleSubmit}
-                className="w-28 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                disabled={isLoading}
+                className={`${isLoading ? 'opacity-60' : ''} w-28 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800`}
               >
-                Submit
+                {isLoading ? 'Loading...' : 'Submit'}
               </button>
             </div>
             {error != "" ? (

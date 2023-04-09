@@ -1,11 +1,16 @@
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Modal } from "../../../Component/Modal";
+import { useCreatePoolsMutation } from "../../../services/tournamentOrganizer";
 
-function CreatePoolModal({ showModal, handleShowModal }) {
+function CreatePoolModal({ showModal, handleShowModal, refetchData }) {
+  const {tournament_id} = useParams();
   const [totalGroups, setTotalGroups] = React.useState("");
   const [teamsPerGroup, setTeamsPerGroup] = React.useState("");
   const [error, setError] = useState("");
+
+  const [createPools, {isLoading}] = useCreatePoolsMutation()
 
   const handleModalClose = () => {
     setTotalGroups("");
@@ -38,7 +43,7 @@ function CreatePoolModal({ showModal, handleShowModal }) {
     setTeamsPerGroup(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (totalGroups == "" || teamsPerGroup == "") {
@@ -57,7 +62,16 @@ function CreatePoolModal({ showModal, handleShowModal }) {
     }
 
     //api call
-    handleModalClose(false);
+    const response = await createPools({tournament_id: tournament_id, total_groups: totalGroups, teams_per_group: teamsPerGroup});
+    console.log(response)
+    if(response.error){
+      toast.error(response.error.data.message)
+    }
+    else if(response.data.success){
+      refetchData()
+      toast.success(response.data.message);
+      handleModalClose(false);
+    }
   };
 
   return (
@@ -137,9 +151,10 @@ function CreatePoolModal({ showModal, handleShowModal }) {
               <button
                 type="button"
                 onClick={handleSubmit}
+                disabled={isLoading}
                 className="w-28 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               >
-                Submit
+                {isLoading? "Loading..." : 'Submit'}
               </button>
             </div>
             {error != "" ? (

@@ -2,28 +2,22 @@ import React from 'react'
 import TournamentCard from '../../../Component/TournamentCard';
 import { GiDiamondTrophy } from 'react-icons/gi';
 import Heading from '../../../Component/Heading';
+import { useTournamentsOfOrganizerQuery } from '../../../services/tournamentOrganizer';
+import Loader from '../../../component/Loader';
 
 function TournamentsOfOrganizer() {
-    const [allTournaments, setAllTournaments] = React.useState([
-        {
-            tournament_id: 1,
-            logo: '/CBL_Images/tournament_logo_1.webp',
-            tournament_name: 'Kon Banega Champion',
-            start_date: '10/02/2023',
-            end_date: '10/13/2023',
-            level: 'National',
-            city: 'Ahmedabad'
-        },
-        {
-            tournament_id: 1,
-            logo: '/CBL_Images/tournament_logo_2.webp',
-            tournament_name: 'Youngster League',
-            start_date: '11/08/2023',
-            end_date: '11/19/2023',
-            level: 'National',
-            city: 'Mumbai'
-        },
-    ])
+    const [tournaments, setTournaments] = React.useState([])
+    const {data, isLoading, error} = useTournamentsOfOrganizerQuery();
+
+    React.useEffect(()=>{
+        if(data?.success){
+            setTournaments(data.tournaments)
+        }
+    },[data])
+
+    if(isLoading){
+        return <Loader/>
+    }
 
     return (
         <section className="min-h-screen-fit">
@@ -31,9 +25,9 @@ function TournamentsOfOrganizer() {
                 <Heading text="Your Tournaments" />
                 <div className='flex flex-wrap justify-center items-center gap-4 sm:gap-8 md:gap-12 mt-10 sm:mt-12 md:mt-16'>
                     {
-                        allTournaments.length > 0
+                        tournaments.length > 0
                         ?  
-                            allTournaments.map((tournament, index) =>{
+                            tournaments.map((tournament, index) =>{
                                 return(
                                     <TournamentCard key={index} tournament={tournament}/>
                                 )

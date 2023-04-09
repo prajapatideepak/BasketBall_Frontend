@@ -5,6 +5,8 @@ const validFileExtensions = { image: ['jpg', 'png', 'jpeg'] };
 function isValidFileType(fileName, fileType) {
   return fileName && validFileExtensions[fileType].indexOf(fileName.split('.').pop()) > -1;
 }
+const today = new Date();
+today.setHours(0, 0, 0, 0)
 
 export const TournamentInfoSchema = Yup.object({
     tournament_name: Yup.string()
@@ -42,7 +44,7 @@ export const TournamentInfoSchema = Yup.object({
       Object.values(value).some(Boolean)
     ),
 
-    starting_date: Yup.date().max(Yup.ref('ending_date'), "End date Can't be before Start date").required("Please Select Start Date"),
+    starting_date: Yup.date().max(Yup.ref('ending_date'), "End date Can't be before Start date").required("Please Select Start Date").min(today, "Date cannot be in the past"),
 
     ending_date: Yup.date().min(Yup.ref('starting_date'), "End date can't be before Start date").required('Please Select End Date'),
 

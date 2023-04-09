@@ -348,10 +348,13 @@ function Admin({tournamentDetails, refetchData}) {
       <CreatePoolModal
         showModal={createPoolModal}
         handleShowModal={setCreatePoolModal}
+        refetchData={refetchData}
       />
       <MatchFormModal
         showModal={matchFormModal}
         handleShowModal={setMatchFormModal}
+        refetchData={refetchData}
+        tournamentDetails={tournamentDetails}
       />
       <RejectReasonModal
         showModal={rejectReasonModal}

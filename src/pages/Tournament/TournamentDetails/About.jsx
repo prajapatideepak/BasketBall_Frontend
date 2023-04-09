@@ -5,9 +5,7 @@ import Button from '../../../Component/Button'
 import moment from 'moment'
 
 
-const About = ({tournamentDetails}) => {
-  const isPublicView = false;
-  const params = useParams();
+const About = ({isOrganizer, tournamentDetails}) => {
   const navigate = useNavigate();
 
   return (
@@ -134,11 +132,11 @@ const About = ({tournamentDetails}) => {
                                 ? 
                                   '--' 
                                 : 
-                                  isPublicView 
+                                  isOrganizer 
                                   ?
-                                      `XXXXXX${item.mobile.slice(5,9)}`
+                                    item.mobile
                                   :
-                                      item.mobile
+                                    `XXXXXX${item.mobile.slice(5,9)}`
                                 }
                             </p>
                           </div>
@@ -159,8 +157,8 @@ const About = ({tournamentDetails}) => {
 
           {/* Clear_Button && Submit_Button */}
           {
-            !isPublicView
-              ?
+            isOrganizer
+            ?
               <div className='mt-2 w-full flex justify-center lg:justify-end items-center'>
                 {/* <Button text="Edit Team"  /> */}
                 <button
@@ -173,7 +171,7 @@ const About = ({tournamentDetails}) => {
                   <span className="relative text-xs xs:text-sm md:text-base">Edit Tournament</span>
                 </button>
               </div>
-              :
+            :
               null
           }
         </div>

@@ -1,7 +1,7 @@
 import React from "react";
 export default function PageNotFound() {
   return (
-    <div className="text-center py-60 lg:py-36">
+    <div className="text-center py-60 lg:py-36" style={{minHeight: 'calc(100vh - 70px)'}}>
       <h1 className="text-7xl md:text-9xl font-bold text-black py-2">404</h1>
       <h2 className="md:text-4xl text-2xl lg:text-5xl font-bold text-[#ee6730] py-2">
         Page not found
