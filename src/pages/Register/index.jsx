@@ -43,7 +43,6 @@ function Register() {
         async onSubmit(data) {
             const res = await signup(data);
 
-            console.log(res)
              if (res.error) {
                 toast.error(res.error.data.message);
             }

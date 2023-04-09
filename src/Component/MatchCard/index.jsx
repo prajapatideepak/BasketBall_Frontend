@@ -9,28 +9,7 @@ function MatchCard({ match }) {
     navigate(`/match-details/${match.id}`);
   };
 
-  const months = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
-
-  let match_date = new Date(match.date);
-  match_date = `${match_date.getDate()} ${
-    months[match_date.getMonth()]
-  } ${match_date.getFullYear()}`;
-
   // const match_time
-  // console.log(
   //   "match",
   //   match?.match_quarters?.[match.match_quarters.length - 1]?.team_1_points
   // );
@@ -112,14 +91,14 @@ function MatchCard({ match }) {
             <div className="w-full text-center">
               <p className="pt-3 text-gray-500 text-xs xs:text-sm sm:text-base">
                 {
-                  !match.date
+                  !match.start_date
                   ?
                     "Coming soon..."
                   : 
                     <>
-                      {moment(match.start_date).format("MM/DD/YYYY")}
+                      {moment(match.start_date).format("DD-MM-YYYY")}
                       <span className="ml-2 font-medium">
-                        {moment(match.start_time).format("h:mm a")}
+                        {moment(match.start_time, "h:mm a").format("h:mm A")}
                       </span>
                     </>
                 }

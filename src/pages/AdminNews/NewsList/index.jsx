@@ -95,7 +95,6 @@ const NewsList = () => {
     }
   })
   const handleDelete = (News_id) => {
-    console.log(News_id)
     const newlist = NewsList.filter((News) => News.News_id != News_id)
     setNewsList(newlist);
   }

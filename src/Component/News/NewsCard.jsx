@@ -2,9 +2,8 @@ import React from "react";
 import LazyLoad from "react-lazyload";
 import { Link } from "react-router-dom";
 export default function NewsCard(news) {
-  console.log("ok", news);
+
   let tags = news?.news?.tags?.split(",");
-  console.log("tags ", tags);
   return (
     <div className="w-full cursor-pointer relative shadow-2xl rounded  ">
       <Link

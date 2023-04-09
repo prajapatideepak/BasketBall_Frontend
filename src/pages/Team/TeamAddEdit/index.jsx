@@ -45,7 +45,6 @@ function TeamAddEdit() {
     onSubmit: (data) => {
       // //If captain not se  lected
       if (captain === 0) {
-        console.log("andar gaya");
         toast.error("Please select team captain");
         return;
       }
@@ -127,7 +126,6 @@ function TeamAddEdit() {
       })
     );
   };
-  console.log(thing)
   React.useEffect(() => {
     if (thing.isError) {
       toast.error(thing?.error?.data?.message);
@@ -196,15 +194,12 @@ function TeamAddEdit() {
     );
   }, []);
 
-  // console.log("captain", captain);
   React.useEffect(() => {
-    console.log(data?.data);
     if (data?.data) {
       setSearchedPlayers((e) => [{ ...data?.data?.data }]);
     }
   }, [data.isSuccess, data]);
 
-  // console.log("search", searchedPlayers);
   return (
     <section className="min-h-screen-fit py-5 px-8">
       <div className=" flex justify-center items-center">

@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { RxDotFilled } from "react-icons/rx"
 
-function MatchesCrad({ match }) {
+function MatchesCard({ match }) {
   const navigate = useNavigate();
   const handleClick = () => {
     navigate(`/match-details/${match.match_id}`)
@@ -98,4 +98,4 @@ function MatchesCrad({ match }) {
 }
 
 
-export default MatchesCrad
+export default MatchesCard

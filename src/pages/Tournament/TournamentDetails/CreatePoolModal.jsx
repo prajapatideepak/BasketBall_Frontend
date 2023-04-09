@@ -63,7 +63,6 @@ function CreatePoolModal({ showModal, handleShowModal, refetchData }) {
 
     //api call
     const response = await createPools({tournament_id: tournament_id, total_groups: totalGroups, teams_per_group: teamsPerGroup});
-    console.log(response)
     if(response.error){
       toast.error(response.error.data.message)
     }

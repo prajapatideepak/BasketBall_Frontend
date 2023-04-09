@@ -15,7 +15,6 @@ import Loader from "../../../component/Loader";
 function TeamRegister() {
   const navigate = useNavigate();
   const [teamtoTournament, { ...something }] = useTeamtoTournamentMutation();
-  console.log(something);
   let userId = 1;
   const { tournament_id } = useParams();
   const { data, isLoading, isSuccess, error, refetch } =
@@ -76,8 +75,6 @@ function TeamRegister() {
       return team.id == selectedTeam;
     });
   }, [selectedTeam]);
-
-  console.log(tournamentDetails);
 
   return (
     <section className="min-h-screen">

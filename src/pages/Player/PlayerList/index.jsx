@@ -48,7 +48,6 @@ const PlayerList = () => {
                 <div className="flex w-full flex-col items-center lg:px-8  space-y-6 py-3 sm:py-0 ">
                   {data?.data && data?.data?.length > 0 ? (
                     data?.data.map((player, index) => {
-                      console.log(player)
                       return (
                         <Link
                           key={player.id}

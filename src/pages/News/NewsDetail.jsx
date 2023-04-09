@@ -86,9 +86,7 @@ const newsDetail = [
 
 const   NewsDetail = () => {
   const navigate = useNavigate();
-  console.log(newsDetail);
   const params = useParams();
-  console.log(params);
 
   const news = newsDetail.find((n) => {
     return n.id == params.id;

@@ -2,7 +2,6 @@ import React from 'react'
 import LazyLoad from 'react-lazyload';
 
 export default function AboutUsCard({name}) {
-    console.log(name)
   return (
     <div className={`flex space-x-5  flex-col  lg:flex-row justify-around  ${name%2==0 ? "flex-row-reverse": ""} my-3 `}>
           <div className="w-full lg:w-1/2 flex justify-center mx-auto flex-col">

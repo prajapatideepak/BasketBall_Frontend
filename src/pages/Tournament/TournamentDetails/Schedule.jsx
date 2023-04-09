@@ -1,16 +1,72 @@
 import React from 'react'
 import moment from "moment";
 import {useNavigate, useParams} from 'react-router-dom'
+import { toast } from "react-toastify";
 import Loader from '../../../component/Loader';
 import { useTournamentScheduleQuery } from '../../../services/organizer';
+import { useUpdateMatchDetailsMutation } from '../../../services/match';
 
 function Schedule({isOrganizer}) {
     const navigate = useNavigate();
     const {tournament_id} = useParams();
 
     const [schedule, setSchedule] = React.useState([]);
+    const [isEdit, setIsEdit] = React.useState(false);
+    const [matchAddress, setMatchAddress] = React.useState('');
+    const [matchDate, setMatchDate] = React.useState('');
+    const [matchTime, setMatchTime] = React.useState('');
+    const [editMatchId, setEditMatchId] = React.useState(-1);
 
-    const {data, isLoading } = useTournamentScheduleQuery(tournament_id)
+    const {data, isLoading, refetch } = useTournamentScheduleQuery(tournament_id)
+    const [updateMatchDetails, {...updatingMatch}] = useUpdateMatchDetailsMutation()
+
+    const handleEdit = (match_id, start_date, start_time, address) => {
+        setIsEdit(true)
+        setEditMatchId(match_id)
+        setMatchAddress(address)
+        setMatchDate(start_date != '' && start_date != null ? moment(start_date).format('YYYY-MM-D') : '')
+        setMatchTime(start_time != null ? start_time : '')
+    }
+
+    const handleSave = async (match_id) => {
+        if(matchAddress == '' || matchDate == '' || matchTime == ''){
+            return toast.error('Please fill the fields')
+        }
+
+        const response = await updateMatchDetails({match_id: match_id, match_date: moment(matchDate).format('YYYY-MM-D'), match_time: matchTime, match_address: matchAddress})
+
+        if(response.error){
+            toast.error(response.error.data.message)
+        }
+        else if(response.data.success){
+            refetch()
+            toast.success(response.data.message);
+            setIsEdit(false)
+            setEditMatchId(-1)
+            setMatchAddress('')
+            setMatchDate('')
+            setMatchTime('')
+        }
+    }
+    const handleCancel = () => {
+        setIsEdit(false)
+        setEditMatchId(-1)
+        setMatchAddress('')
+        setMatchDate('')
+        setMatchTime('')
+    }
+
+    const handleMatchDate = (e) => {
+        setMatchDate(e.target.value)
+    }
+
+    const handleMatchTime = (e) => {
+        setMatchTime(e.target.value)
+    }
+
+    const handleAddress = (e) => {
+        setMatchAddress(e.target.value)
+    }
 
     React.useEffect(()=>{
         if(data?.success){
@@ -54,9 +110,15 @@ function Schedule({isOrganizer}) {
                                             <th scope="col" className="px-6 py-3 whitespace-nowrap">
                                                 Address
                                             </th>
-                                            <th scope="col" className="px-6 py-3 whitespace-nowrap">
-                                                Action
-                                            </th>
+                                            {
+                                                isOrganizer
+                                                ?
+                                                    <th scope="col" className="px-6 py-3 whitespace-nowrap">
+                                                        Action
+                                                    </th>
+                                                :
+                                                    null
+                                            }
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -73,38 +135,78 @@ function Schedule({isOrganizer}) {
                                                         VS
                                                     </td>
                                                     <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                        <span className="cursor-pointer hover:text-gray-300" onClick={()=> navigate(`/team/profile-detail/1`)}>{match.team_1.team_name}</span>
+                                                        <span className="cursor-pointer hover:text-gray-300" onClick={()=> navigate(`/team/profile-detail/1`)}>{match.team_2.team_name}</span>
                                                     </td>
                                                     <td className="px-6 py-4 whitespace-nowrap">
                                                         {
-                                                            match.start_date != '' && match.start_date != undefined
+                                                            isEdit && editMatchId == match.id
                                                             ?
-                                                                <>
-                                                                    {moment(match.start_date).format("MM/DD/YYYY")}
-                                                                </>
+                                                                <input type="date" className="bg-gray-400 text-white rounded-sm px-2" 
+                                                                value={moment(matchDate).format('YYYY-MM-DD')}
+                                                                onChange={handleMatchDate} />
                                                             :
-                                                                "--"
+                                                                match.start_date != '' && match.start_date != undefined
+                                                                ?
+                                                                    <>
+                                                                        {moment(match.start_date).format("DD/MM/YYYY")}
+                                                                    </>
+                                                                :
+                                                                    "--"
                                                         }
                                                     </td>
                                                     <td className="px-6 py-4 whitespace-nowrap">
                                                         {
-                                                           match.start_time != '' && match.start_time != undefined
+                                                            isEdit && editMatchId == match.id
                                                             ?
-                                                                <>
-                                                                    {moment(match.start_time).format("h:mm a")}
-                                                                </>
+                                                                <input type="time" className="bg-gray-400 text-white rounded-sm px-2"
+                                                                value={matchTime} onChange={handleMatchTime} />
                                                             :
-                                                                "--"
+                                                                match.start_time != '' && match.start_time != undefined
+                                                                ?
+                                                                    <>
+                                                                        {moment(match.start_time, 'h:mm a').format("h:mm A")}
+                                                                    </>
+                                                                :
+                                                                    "--"
                                                         }
                                                     </td>
                                                     <td className="px-6 py-4 whitespace-nowrap">
-                                                    {match.address}
-                                                    {/* <input type="text" className='w-full bg-transparent' disabled={true} name="match_address" id="" value="Sardar Patel Court, Sarkhej, Ahmedabad" /> */}
+                                                        {
+                                                            isEdit && editMatchId == match.id
+                                                            ?
+                                                                <input type="text" className='w-full bg-transparent border border-white rounded-sm px-1 text-white' name="match_address" id="" value={matchAddress} onChange={handleAddress} />
+                                                            :
+                                                                match.address
+                                                        }
                                                     </td>
-                                                    <td className="flex items-center px-6 py-4 whitespace-nowrap space-x-3">
-                                                        <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                                        <a href="#" className="font-medium text-red-600 dark:text-red-500 hover:underline">Remove</a>
-                                                    </td>
+                                                    {
+                                                        isOrganizer
+                                                        ?
+                                                            <td className="flex items-center px-6 py-4 whitespace-nowrap space-x-3">
+                                                                {
+                                                                    isEdit && editMatchId == match.id
+                                                                    ?
+                                                                        <>
+                                                                            <button className="font-medium text-blue-600 dark:text-blue-500 hover:underline" onClick={()=>handleSave(match.id)}>{
+                                                                                updatingMatch.isLoading
+                                                                                ?
+                                                                                    'Loading..'
+                                                                                :
+                                                                                    'Save'
+                                                                            }</button>
+                                                                            <button className="font-medium text-red-600 dark:text-red-500 hover:underline" onClick={handleCancel}>Cancel</button>
+                                                                        </>
+                                                                    
+                                                                    :
+                                                                        <>
+                                                                            <button className="font-medium text-blue-600 dark:text-blue-500 hover:underline" onClick={()=>handleEdit(match.id, match.start_date, match.start_time, match.address)}>Edit</button>
+                                                                            <button className="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</button>
+                                                                        </>
+                                                                }
+                                                            </td>
+                                                        :
+                                                            null
+                                                    }
                                                 </tr>
                                             })
                                         }

@@ -29,7 +29,6 @@ function ForgetPassword() {
         initialValues: initialValues,
         validationSchema: signUpSchema,
         onSubmit(res) {
-            console.log(res, "Res")
             setIsOnSubmit(true)
             notify()
             setTimeout(function () {
