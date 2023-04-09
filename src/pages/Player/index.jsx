@@ -11,7 +11,7 @@ const Player = () => {
         <Route>
           <Route path="/list" element={<PlayerList />} />
           <Route path="/add-edit" element={<PlayerRegister />} />
-          <Route path="/:id" element={<PlayerProfile />} />
+          <Route path="/profile-detail/:id" element={<PlayerProfile />} />
 
           <Route index element={<PlayerList />} />
         </Route>

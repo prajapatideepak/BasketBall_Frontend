@@ -12,44 +12,23 @@ const BasicInfo = ({ index, setIndex }) => {
   const dispatch = useDispatch();
   const location = useLocation();
   const defaultImage = "/CBL_Images/player-default-profile.webp";
-  const [img, setImg] = React.useState(defaultImage);
+  const [img, setImg] = React.useState( defaultImage);
   const [photo, setPhoto] = React.useState("");
   const { PlayerForm } = useSelector((state) => state.player);
-  console.log(PlayerForm)
   const { values, touched, errors, handleChange, handleSubmit, handleBlur } =
     useFormik({
       initialValues: PlayerForm.basicInfo,
       validationSchema: basicInfoSchema,
       onSubmit: (values) => {
-        console.log(values);
         setIndex(2);
-        dispatch(setBasicInfoForm({ ...values, photo: photo }));
+        dispatch(setBasicInfoForm({ ...values, logo: photo }));
       },
     });
-
   function handleImageUpload(e) {
     setPhoto(() => e.target.files[0]);
     setImg(URL.createObjectURL(photo));
   }
-
-    function handleImageUpload(e) {
-    setPhoto(() => e.target.files[0]);
-    setImg(URL.createObjectURL(photo));
-  }
-  // React.useEffect(() => {
-  //   if (thing.isError) {
-  //     toast.error(thing?.error?.data?.message);
-  //   }
-  //   if (thing.isSuccess) {
-  //     if (thing?.data?.success) {
-  //       toast.success("Team Registration Successfull ");
-
-  //       navigate(`/team/profile-detail/${thing?.data?.team?.id}`);
-  //     }
-  //   }
-  // }, [thing.isError, thing.isSuccess]);
-
-
+    
   return (
     <>
       <form className="flex w-full  space-x-3">
@@ -72,30 +51,17 @@ const BasicInfo = ({ index, setIndex }) => {
                 <div className="profile_img_overlay absolute flex flex-col justify-center items-center">
                   <input
                     type="file"
-                    id="photo"
+                    id="logo"
                     className="rounded-md w-16"
                     accept=".png, .jpg, .jpeg"
-                    name="photo"
-                    value={values.img}
+                    name="logo"
                     onChange={(e) => handleImageUpload(e)}
                     onBlur={handleBlur}
                     onInput={(e) => handleImageUpload(e)}
                   />
-                  {img != defaultImage ? (
-                    <button
-                      className="bg-red-600 px-1 rounded text-white hover:bg-red-400 mt-5 flex items-center justify-center gap-3"
-                      onClick={() => {
-                        setImg(defaultImage);
-                        // document.getElementById('file').value = ''
-                      }}
-                    >
-                      <span> Remove</span>
-                    </button>
-                  ) : null}
                 </div>
               </div>
             </div>
-
             <div className="">
               <label htmlFor="firstName" className="text-gray-700">
                 First Name
@@ -103,12 +69,12 @@ const BasicInfo = ({ index, setIndex }) => {
               </label>
               <input
                 type="text"
-                id="first_Name"
+                id="first_name"
                 className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
-                name="first_Name"
-                value={values.first_name}
+                name="first_name"
                 onChange={handleChange}
                 onBlur={handleBlur}
+                value={values.first_name}
                 placeholder="Enter Your First Name"
               />
               <span className="text-sm font-semibold text-red-600 px-1">
@@ -169,10 +135,10 @@ const BasicInfo = ({ index, setIndex }) => {
               </label>
               <input
                 type="text"
-                id="mobileNo"
-                className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-gray-200     placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
-                name="mobileNo"
-                value={values.mobileNo}
+                id="mobile"
+                className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
+                name="mobile"
+                value={values.mobile}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 placeholder="Enter Your Mobile Number"

@@ -38,6 +38,7 @@
     "react-slick": "^0.29.0",
     "react-toastify": "^9.1.1",
     "react-tooltip": "^5.10.0",
+    "read-more-react": "^1.0.10",
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.3.6",
     "sweetalert2": "^11.7.1",

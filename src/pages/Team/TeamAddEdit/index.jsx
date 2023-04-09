@@ -127,7 +127,7 @@ function TeamAddEdit() {
       })
     );
   };
-
+  console.log(thing)
   React.useEffect(() => {
     if (thing.isError) {
       toast.error(thing?.error?.data?.message);
@@ -196,7 +196,7 @@ function TeamAddEdit() {
     );
   }, []);
 
-  console.log("captain", captain);
+  // console.log("captain", captain);
   React.useEffect(() => {
     console.log(data?.data);
     if (data?.data) {
@@ -204,7 +204,7 @@ function TeamAddEdit() {
     }
   }, [data.isSuccess, data]);
 
-  console.log("search", searchedPlayers);
+  // console.log("search", searchedPlayers);
   return (
     <section className="min-h-screen-fit py-5 px-8">
       <div className=" flex justify-center items-center">
@@ -219,7 +219,11 @@ function TeamAddEdit() {
         Be the player that raises the bar, be relentless, be a game changer.
       </p>
       <div className="mx-auto lg:px-10 ">
-        <form action="" onSubmit={handleSubmit} className=" rounded-lg shadow-xl px-5 py-5 md:px-10 md:py-8">
+        <form
+          action=""
+          onSubmit={handleSubmit}
+          className=" rounded-lg shadow-xl px-5 py-5 md:px-10 md:py-8"
+        >
           <div className="">
             <h3 className=" text-xl sm:text-2xl font-semibold text-[#ee6730]">
               Team Information:
@@ -614,10 +618,10 @@ function TeamAddEdit() {
                 {thing.isLoading
                   ? "SUBMIT..."
                   : updateData.isLoading
-                    ? "Updating..."
-                    : location?.state?.isEdit
-                      ? "UPDATE"
-                      : "SUBMIT"}
+                  ? "Updating..."
+                  : location?.state?.isEdit
+                  ? "UPDATE"
+                  : "SUBMIT"}
               </span>
             </button>
           </div>

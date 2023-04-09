@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import Matches from "./Matches";
 import Teams from "./Teams";
 import Schedule from "./Schedule";
@@ -6,18 +6,18 @@ import Prize from "./Prize";
 import Sponsors from "./Sponsors";
 import Gallery from "./Gallery";
 import About from "./About";
-import Admin from './Admin';
+import Admin from "./Admin";
 import "./TournamentDetails.css";
 import TeamsModal from "./TeamsModal";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
-import Loader from '../../../component/Loader'
+import Loader from "../../../component/Loader";
 import { useGetTournamentDetailsQuery } from "../../../services/tournament";
 import { useIsAuthOrganizerQuery } from "../../../services/organizer";
 
 function TournamentDetails() {
-  const navigate = useNavigate()
-  const {tournament_id} = useParams();
+  const navigate = useNavigate();
+  const { tournament_id } = useParams();
   const [currentTab, setCurrentTab] = React.useState(0);
   const [openTeamsModal, setOpenTeamsModal] = React.useState(false);
   const [tournamentDetails, setTournamentDetails] = React.useState({});
@@ -50,13 +50,13 @@ function TournamentDetails() {
     <Admin tournamentDetails={tournamentDetails} teams={tournamentDetails.tournament_teams} refetchData={refetch} />
   ];
 
-  const handleRegisterInTournament = () =>{
+  const handleRegisterInTournament = () => {
     // if(!tournamentdetails.is_registration_open){
     //   return toast.error('Registration closed');
     // }
     // navigate(`/${tournament.tournament_id}/team-register`)
-    navigate(`/tournament/team-register`)
-  }
+    navigate(`/tournament/team-register/${tournament_id}`);
+  };
 
   if(isLoading || isOrganizer.isLoading){
     return <Loader />
@@ -173,9 +173,7 @@ function TournamentDetails() {
         </div>
       </div>
       <div className="mx-auto px-8 py-10 xs:px-10 xs:py-12 sm:px-20 sm:py-12 md:px-20 md:py-16 lg:px-24 xl:px-28 2xl:px-32">
-        {
-          tabs[currentTab]
-        }
+        {tabs[currentTab]}
       </div>
     </section>
   );
