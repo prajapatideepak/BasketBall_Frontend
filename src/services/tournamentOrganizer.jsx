@@ -8,6 +8,16 @@ export const tournamentOrganizerApi = api.injectEndpoints({
     
     tournamentsOfOrganizer: build.query({
       query: () => "tournament/organizer",
+      providesTags: (result, error)=>
+        result?.tournaments.length > 0
+        ? [
+        ...result?.tournaments.map(({ id }) => ({
+            type: "TournamentsOfOrganizer",
+            id: id,
+        })),
+        { type: "TournamentsOfOrganizer", id: "LIST" },
+        ]
+        : [{ type: "TournamentsOfOrganizer", id: "LIST" }]
     }),
 
     disqualifyTeam: build.mutation({

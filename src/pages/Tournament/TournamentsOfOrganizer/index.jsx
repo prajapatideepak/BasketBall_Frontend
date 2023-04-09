@@ -1,35 +1,47 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 import TournamentCard from '../../../Component/TournamentCard';
 import { GiDiamondTrophy } from 'react-icons/gi';
 import Heading from '../../../Component/Heading';
 import { useTournamentsOfOrganizerQuery } from '../../../services/tournamentOrganizer';
 import SmallLoader from '../../../component/SmallLoader';
+import { toast } from 'react-toastify';
 
 function TournamentsOfOrganizer() {
+    const navigate = useNavigate()
+    
     const [currentTab, setCurrentTab] = React.useState(1);
     const [upcomingTournaments, setUpcomingTournaments] = React.useState([]);
     const [ongoingTournaments, setOngoingTournaments] = React.useState([]);
     const [pastTournaments, setPastTournaments] = React.useState([]);
     const [currentTabTournaments, setCurrentTabTournaments] = React.useState([]);
-    const {data, isLoading, error} = useTournamentsOfOrganizerQuery();
+    const {data, isLoading, isError, error} = useTournamentsOfOrganizerQuery();
 
     React.useEffect(()=>{
-        const upcoming = [];
-        const ongoing = [];
-        const past = [];
-        data?.tournaments.map((tournament) => {
-            if (tournament.status == 1) {
-                upcoming.push(tournament);
-            } else if (tournament.status == 2) {
-                ongoing.push(tournament);
-            } else {
-                past.push(tournament);
-            }
-        });
+        if(data?.success){
+            const upcoming = [];
+            const ongoing = [];
+            const past = [];
+            data?.tournaments.map((tournament) => {
+                if (tournament.status == 1) {
+                    upcoming.push(tournament);
+                } else if (tournament.status == 2) {
+                    ongoing.push(tournament);
+                } else {
+                    past.push(tournament);
+                }
+            });
+    
+            setUpcomingTournaments(upcoming);
+            setOngoingTournaments(ongoing);
+            setPastTournaments(past);
+        }
 
-        setUpcomingTournaments(upcoming);
-        setOngoingTournaments(ongoing);
-        setPastTournaments(past);
+        if(isError){
+            toast.error(error.data.message)
+            navigate(-1)
+        }   
+
     },[data])
 
     React.useEffect(() => {

@@ -7,9 +7,9 @@ export const tournamentApi = api.injectEndpoints({
       providesTags: (result) =>
         result?.all_tournaments.length > 0
           ? [
-            ...result?.all_tournaments.map(({ tournament_id }) => ({
+            ...result?.all_tournaments.map(({ id }) => ({
               type: "Tournaments",
-              id: tournament_id,
+              id: id,
             })),
             { type: "Tournaments", id: "LIST" },
           ]
