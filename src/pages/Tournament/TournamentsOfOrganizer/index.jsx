@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import TournamentCard from '../../../Component/TournamentCard';
 import { GiDiamondTrophy } from 'react-icons/gi';
 import Heading from '../../../Component/Heading';
-import { useTournamentsOfOrganizerQuery } from '../../../services/tournamentOrganizer';
+import { useTournamentsOfOrganizerQuery } from '../../../services/organizer';
 import SmallLoader from '../../../component/SmallLoader';
 import { toast } from 'react-toastify';
 

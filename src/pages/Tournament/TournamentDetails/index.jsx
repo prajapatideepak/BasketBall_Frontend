@@ -13,7 +13,7 @@ import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 import Loader from '../../../component/Loader'
 import { useGetTournamentDetailsQuery } from "../../../services/tournament";
-import { useIsAuthOrganizerQuery } from "../../../services/tournamentOrganizer";
+import { useIsAuthOrganizerQuery } from "../../../services/organizer";
 
 function TournamentDetails() {
   const navigate = useNavigate()

@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Select from "react-select";
 import { Modal } from "../../../Component/Modal";
-import { useMatchFormationMutation } from "../../../services/tournamentOrganizer";
+import { useMatchFormationMutation } from "../../../services/organizer";
 
 function MatchFormModal({ showModal, handleShowModal, refetchData, tournamentDetails }) {
   const {tournament_id} = useParams();

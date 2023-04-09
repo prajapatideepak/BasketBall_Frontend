@@ -2,7 +2,7 @@ import React from 'react'
 import {useNavigate, useParams} from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { toast } from 'react-toastify';
-import { useDisqualifyTeamMutation } from '../../../services/tournamentOrganizer';
+import { useDisqualifyTeamMutation } from '../../../services/organizer';
 
 function TournamentTeamCard({isOrganizer, teamDetails, refetchData}) {
     const navigate = useNavigate();

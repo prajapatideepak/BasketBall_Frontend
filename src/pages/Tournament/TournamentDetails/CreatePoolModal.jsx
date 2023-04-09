@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Modal } from "../../../Component/Modal";
-import { useCreatePoolsMutation } from "../../../services/tournamentOrganizer";
+import { useCreatePoolsMutation } from "../../../services/organizer";
 
 function CreatePoolModal({ showModal, handleShowModal, refetchData }) {
   const {tournament_id} = useParams();
