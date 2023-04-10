@@ -6,31 +6,10 @@ function MatchCard({ match }) {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/match-details/${match.match_id}`);
+    navigate(`/match-details/${match.id}`);
   };
 
-  const months = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
-
-  let match_date = new Date(match.date);
-  match_date = `${match_date.getDate()} ${
-    months[match_date.getMonth()]
-  } ${match_date.getFullYear()}`;
-
   // const match_time
-  // console.log(
   //   "match",
   //   match?.match_quarters?.[match.match_quarters.length - 1]?.team_1_points
   // );
@@ -48,10 +27,10 @@ function MatchCard({ match }) {
           </div>
           <div className="w-full flex justify-around">
             <div className="flex flex-col justify-center items-center">
-              <div className="w-14 h-14 xs:w-20 xs:h-20 md:w-24 md:h-24 flex justify-center items-center rounded-full border-2">
+              <div className="w-14 h-14 xs:w-20 xs:h-20 md:w-24 md:h-24 flex justify-center items-center rounded-full border-2 overflow-hidden">
                 <img
                   src={match.team_1.logo}
-                  className="object-contain rounded-full"
+                  className="object-contain w-full h-full"
                   alt=""
                 />
               </div>
@@ -85,10 +64,10 @@ function MatchCard({ match }) {
               </div>
             )}
             <div className="flex flex-col justify-center items-center">
-              <div className="w-14 h-14 xs:w-20 xs:h-20 md:w-24 md:h-24 flex justify-center items-center rounded-full border-2">
+              <div className="w-14 h-14 xs:w-20 xs:h-20 md:w-24 md:h-24 flex justify-center items-center rounded-full border-2 overflow-hidden">
                 <img
                   src={match.team_2.logo}
-                  className="object-contain rounded-full"
+                  className="object-contain w-full h-full"
                   alt=""
                 />
               </div>
@@ -111,10 +90,18 @@ function MatchCard({ match }) {
           ) : (
             <div className="w-full text-center">
               <p className="pt-3 text-gray-500 text-xs xs:text-sm sm:text-base">
-                {moment(match.start_date_time).format("MM/DD/YYYY")}
-                <span className="ml-2 font-medium">
-                  {moment(match.start_date_time).format("h:mm a")}
-                </span>
+                {
+                  !match.start_date
+                  ?
+                    "Coming soon..."
+                  : 
+                    <>
+                      {moment(match.start_date).format("DD-MM-YYYY")}
+                      <span className="ml-2 font-medium">
+                        {moment(match.start_time, "h:mm a").format("h:mm A")}
+                      </span>
+                    </>
+                }
               </p>
             </div>
           )}

@@ -13,6 +13,7 @@ import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 import Loader from "../../../component/Loader";
 import { useGetTournamentDetailsQuery } from "../../../services/tournament";
+import { useIsAuthOrganizerQuery } from "../../../services/organizer";
 
 function TournamentDetails() {
   const navigate = useNavigate();
@@ -21,32 +22,32 @@ function TournamentDetails() {
   const [openTeamsModal, setOpenTeamsModal] = React.useState(false);
   const [tournamentDetails, setTournamentDetails] = React.useState({});
   const handleOpenTeamsModal = () => setOpenTeamsModal(!openTeamsModal);
+  const [isOrganizer, setIsOrganizer] = React.useState(false)
 
-  const { data, isLoading, error, refetch } =
-    useGetTournamentDetailsQuery(tournament_id);
-
-  const is_organizer = true;
-
+  const { data, isLoading, error, refetch } = useGetTournamentDetailsQuery(tournament_id)
+  const is_organizer = useIsAuthOrganizerQuery(tournament_id)
+ 
   useEffect(() => {
     if (data) {
-      setTournamentDetails(data);
+      setTournamentDetails(data.tournamentDetails);
     }
   }, [data]);
 
+  useEffect(() => {
+    if(is_organizer.data){
+      setIsOrganizer(is_organizer.data.success)
+    }
+  },[is_organizer.data])
+
   const tabs = [
-    <Matches matches={tournamentDetails?.tournamentDetails?.matches} />,
-    <Teams teams={tournamentDetails?.tournamentDetails?.tournament_teams} />,
-    <Schedule />,
-    <Prize prize={tournamentDetails?.tournamentDetails?.prize} />,
-    <Sponsors
-      sponsors={tournamentDetails?.tournamentDetails?.tournament_sponsors}
-    />,
-    <Gallery galleryDetails={tournamentDetails?.tournamentDetails?.gallery} />,
-    <About tournamentDetails={tournamentDetails?.tournamentDetails} />,
-    <Admin
-      tournamentDetails={tournamentDetails?.tournamentDetails}
-      refetchData={refetch}
-    />,
+    <Matches matches={tournamentDetails.matches} />,
+    <Teams isOrganizer={isOrganizer} teams={tournamentDetails.tournament_teams}  tournamentDetails={tournamentDetails} refetchData={refetch} />,
+    <Schedule isOrganizer={isOrganizer} />,
+    <Prize prize={tournamentDetails.prize} />,
+    <Sponsors sponsors={tournamentDetails.tournament_sponsors} />,
+    <Gallery galleryDetails={tournamentDetails.gallery} />,
+    <About isOrganizer={isOrganizer} tournamentDetails={tournamentDetails} />,
+    <Admin tournamentDetails={tournamentDetails} teams={tournamentDetails.tournament_teams} refetchData={refetch} />
   ];
 
   const handleRegisterInTournament = () => {
@@ -57,30 +58,30 @@ function TournamentDetails() {
     navigate(`/tournament/team-register/${tournament_id}`);
   };
 
-  if (isLoading) {
-    return <Loader />;
+  if(isLoading || isOrganizer.isLoading){
+    return <Loader />
   }
 
   return (
     <section className="min-h-screen-fit">
       <div className="mx-auto px-10 py-4 sm:px-20 sm:py-6 md:px-20 md:py-8 lg:px-24 xl:px-28 2xl:px-32 bg-black">
         <div className="flex justify-center items-center">
-          <div className="team-logo-container flex justify-center items-center rounded-full">
+          <div className="team-logo-container w-16 h-16 xs:w-20 xs:h-20 sm:w-28 sm:h-28 flex justify-center items-center overflow-hidden rounded-full border-2 border-gray-500">
             <picture></picture>
             <source
-              srcSet={tournamentDetails?.tournamentDetails?.logo}
+              srcSet={!tournamentDetails.logo ? '/CBL_Images/basketball_team_logo_2.webp': tournamentDetails.logo}
               type="image/webp"
             />
             <img
-              src={tournamentDetails?.tournamentDetails?.logo}
-              className="rounded-full border-2 border-gray-500 shadow-lg w-16 h-16 xs:w-20 xs:h-20 sm:w-28 sm:h-28"
+              src={!tournamentDetails.logo ? '/CBL_Images/basketball_team_logo_2.webp': tournamentDetails.logo}
+              className="object-contain w-full h-full"
             />
           </div>
           <div className="flex flex-col justify-center items-cente ml-3">
             <h1 className="text-lg xs:text-2xl sm:text-3xl text-gray-200 font-semibold py-4">
-              {tournamentDetails?.tournamentDetails?.tournament_name}
+              {tournamentDetails.tournament_name}
             </h1>
-            {tournamentDetails?.tournamentDetails?.status == 1 ? (
+            {tournamentDetails.status == 1 ? (
               <div className="w-full flex justify-center">
                 <div className="w-40">
                   <button
@@ -158,7 +159,7 @@ function TournamentDetails() {
             >
               About
             </h1>
-            {is_organizer ? (
+            {isOrganizer ? (
               <h1
                 className={`md:w-28 sm:w-24 w-20 flex justify-center items-center font-semibold ${
                   currentTab == 7 ? "bg-[#F5F5F7] text-[#ee6730]" : ""

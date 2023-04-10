@@ -26,7 +26,6 @@ export default function PlayerProfile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { data, isLoading, error } = useGetPlayerDetailsQuery(params.id);
-  console.log(data)
   const [currentTab, setCurrentTab] = React.useState(2);
   const [currentTabMatches, setCurrentTabMatches] = React.useState([]);
   let allMatches =    

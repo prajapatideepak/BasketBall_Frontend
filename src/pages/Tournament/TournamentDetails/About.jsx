@@ -5,9 +5,7 @@ import Button from '../../../Component/Button'
 import moment from 'moment'
 
 
-const About = ({tournamentDetails}) => {
-  const isPublicView = false;
-  const params = useParams();
+const About = ({isOrganizer, tournamentDetails}) => {
   const navigate = useNavigate();
 
   return (
@@ -15,9 +13,9 @@ const About = ({tournamentDetails}) => {
       <section className="">
         <div className=''>
           {/* -----------------------Tounament_Details---------------------------*/}
-          {/* <div className=''>
+          <div className=''>
               <h3 className='text-2xl font-semibold text-[#ee6730]'>Tournament Information:</h3>
-            </div> */}
+            </div>
           {/* Starting Date && Ending Date && Tournament Type */}
           <div className="flex flex-col md:flex-row  gap-6 my-7 ">
             <div className="flex sm:space-x-5  w-full sm:flex-row flex-col">
@@ -95,7 +93,7 @@ const About = ({tournamentDetails}) => {
             <div className='w-full flex flex-col'>
               <label className="mb-2 text-gray-400 text-xs xs:text-sm md:text-base">About Tournament</label>
               <div className={`border-2 border-orange-100 px-2 py-2 capitalize font-medium rounded-lg bg-white overflow-y-auto text-xs xs:text-sm md:text-base`}>
-                {tournamentDetails.about}
+                {tournamentDetails.about == '' || !tournamentDetails.about ? '--' : tournamentDetails.about}
               </div>
             </div>
           </div>
@@ -134,11 +132,11 @@ const About = ({tournamentDetails}) => {
                                 ? 
                                   '--' 
                                 : 
-                                  isPublicView 
+                                  isOrganizer 
                                   ?
-                                      `XXXXXX${item.mobile.slice(5,9)}`
+                                    item.mobile
                                   :
-                                      item.mobile
+                                    `XXXXXX${item.mobile.slice(5,9)}`
                                 }
                             </p>
                           </div>
@@ -149,7 +147,7 @@ const About = ({tournamentDetails}) => {
                   })
                   :
                   <div className="bg-red-100 w-full mt-4 text-center">
-                    <h4 className='text-red-700 font-medium p-2 text-xs xs:text-sm md:text-base'>No Referee Found</h4>
+                    <h4 className='text-red-700 font-medium p-2 text-xs xs:text-sm md:text-base'>No Referees Found</h4>
                   </div>
               }
 
@@ -159,8 +157,8 @@ const About = ({tournamentDetails}) => {
 
           {/* Clear_Button && Submit_Button */}
           {
-            !isPublicView
-              ?
+            isOrganizer
+            ?
               <div className='mt-2 w-full flex justify-center lg:justify-end items-center'>
                 {/* <Button text="Edit Team"  /> */}
                 <button
@@ -173,7 +171,7 @@ const About = ({tournamentDetails}) => {
                   <span className="relative text-xs xs:text-sm md:text-base">Edit Tournament</span>
                 </button>
               </div>
-              :
+            :
               null
           }
         </div>

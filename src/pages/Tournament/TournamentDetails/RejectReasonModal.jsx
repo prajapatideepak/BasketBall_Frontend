@@ -1,10 +1,17 @@
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Modal } from "../../../Component/Modal";
+import { useRejectTeamRequestMutation } from "../../../services/organizer";
 
-function RejectReasonModal({ showModal, handleShowModal }) {
+function RejectReasonModal({ showModal, handleShowModal, setRejectTeamId, rejectTeamId, refetchData }) {
+  const {tournament_id} = useParams();
+
   const [reason, setReason] = React.useState("");
   const [error, setError] = useState("");
+
+  const [rejectTeamRequest, {isLoading}] = useRejectTeamRequestMutation();
+
 
   const handleModalClose = () => {
     setReason("");
@@ -13,7 +20,7 @@ function RejectReasonModal({ showModal, handleShowModal }) {
   };
 
   const handleRejectReason = (e) => {
-    const regex = new RegExp(/^[a-zA-Z]+$/);
+    const regex = new RegExp(/^[a-zA-Z ]+$/);
     if (!regex.test(e.target.value)) {
       setError("Enter only characters");
     } else {
@@ -24,7 +31,7 @@ function RejectReasonModal({ showModal, handleShowModal }) {
   };
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (reason == "") {
@@ -32,13 +39,23 @@ function RejectReasonModal({ showModal, handleShowModal }) {
       return;
     }
 
-    const regex = new RegExp(/^[a-zA-Z]+$/);
+    const regex = new RegExp(/^[a-zA-Z ]+$/);
     if (!regex.test(reason)) {
       setError("Enter only characters");
       return;
     } 
 
-    //api call
+    const response = await rejectTeamRequest({tournament_id: tournament_id, team_id: rejectTeamId, reject_reason: reason})
+
+    if(response.error){
+      toast.error(response.error.data.message)
+    }
+    else if(response.data.success){
+      refetchData()
+      toast.success(response.data.message);
+    }
+
+    setRejectTeamId('')
     handleModalClose(false);
   };
 
@@ -99,9 +116,10 @@ function RejectReasonModal({ showModal, handleShowModal }) {
               <button
                 type="button"
                 onClick={handleSubmit}
-                className="w-28 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                disabled={isLoading}
+                className={`${isLoading ? 'opacity-70': ''} w-28 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800`}
               >
-                Submit
+                {isLoading ? 'Loading...' : 'Submit'}
               </button>
             </div>
             {error != "" ? (

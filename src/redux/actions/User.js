@@ -1,25 +1,17 @@
 import { useLocalStorage } from "../../hooks/localStorage";
-import { setToken } from "../slices/UserSlice";
+import { setToken, setUser } from "../slices/UserSlice";
 
-export const authentication = (data) => {
-  const temp = {
-    email: "wellbenix@gmail.com",
-    password: "1234",
-  };
+export const authentication = (token, user) => {
   return async (dispatch) => {
-    console.log("so");
-    // if (temp.email.toLowerCase() == data.email.toLowerCase()) {
-    //   if (temp.password == data.password) {
-    dispatch(setToken("gmaspfep3r1r3123225412"));
-    //   }
-    // }
+    dispatch(setToken(token));
+    dispatch(setUser(user));
   };
 };
 
 export const logout = () => {
   localStorage.clear();
-  console.log("ass");
   return async (dispatch) => {
     dispatch(setToken(""));
+    dispatch(setUser(""));
   };
 };

@@ -78,6 +78,8 @@ function TournamentAddEdit() {
   };
 
   const handleremovesponsor = (index) => {
+    errors?.sponsors?.splice(index,1)
+    values?.sponsors?.splice(index,1)
     const list = [...sponsorlist];
     list.splice(index, 1);
     setsponsorlist(list);
@@ -158,7 +160,9 @@ function TournamentAddEdit() {
       const age_categories = [];
       for (const key in data.age_cutoff) {
         if (data.age_cutoff[key] == true) {
-          age_categories.push(key);
+          age_categories.push(
+            `${key.split('_')[0]} ${key.split('_')[1]}`
+          );
         }
       }
 
@@ -187,8 +191,8 @@ function TournamentAddEdit() {
       }
       else if (register.data.success) {
         toast.success(register.data.message)
+        //navigate to page where tournaments of organizers are shown
       }
-      //navigate to page where tournaments of organizers are shown
     },
   });
 
@@ -659,11 +663,9 @@ function TournamentAddEdit() {
                         {
                           values.sponsors[index].logo != ''
                             ?
-                            <img src={URL.createObjectURL(values.sponsors[index].logo)} className="w-12 h-12 rounded-full mx-3" alt="" />
+                              <img src={URL.createObjectURL(values.sponsors[index].logo)} className="w-12 h-12 rounded-full mx-3" alt="" />
                             :
-                            <div className="w-[55px] h-12 rounded-full border mx-3">
-
-                            </div>
+                              <div className="w-[55px] h-12 rounded-full border mx-3"></div>
                         }
                         {sponsorlist.length > 1 && (
                           <div

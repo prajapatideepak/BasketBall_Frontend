@@ -40,7 +40,6 @@ const GameInfo = ({ index, setIndex }) => {
             playerRegistration(fb).then(console.log("ho gaya"));
           }
         } catch (err) {
-          console.log(err);
         }
       },
     });
@@ -49,7 +48,6 @@ const GameInfo = ({ index, setIndex }) => {
   function setValues() {
     dispatch(setGameInfoForm(values));
   }
-  console.log(thing?.error?.data?.message)
   React.useEffect(() => {
     if (thing.isError) {
       toast.error(thing?.error?.data?.message);

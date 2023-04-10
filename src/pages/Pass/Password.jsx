@@ -31,13 +31,11 @@ function Password() {
         initialValues: initialValues,
         validationSchema: signUpSchema,
         onSubmit(res) {
-            console.log(res, "Res")
             notify()
             navigate("/login")
         }
     })
 
-    console.log(errors, "formik")
 
 
     return (

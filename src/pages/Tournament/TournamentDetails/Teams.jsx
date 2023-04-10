@@ -3,32 +3,61 @@ import { AiOutlineTeam } from "react-icons/ai";
 import { FaFilter } from "react-icons/fa";
 import TournamentTeamCard from "./TournamentTeamCard";
 
-function Teams({teams}) {
-  const teamDetails = [
-    {
-      team_id: 1001,
-      team_logo: "/CBL_Images/basketball_team_logo_1.webp",
-      team_name: "Mehta Ke Mahaarathi",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adip, Lorem ipsum dolor sit amet, consectetur adip",
-      total_players: 7,
-      matches_played: 22,
-      matches_won: 18,
-      matches_lost: 4,
-      is_disqualified: 0,
-    },
-    {
-      team_id: 1002,
-      team_logo: "/CBL_Images/basketball_team_logo_2.webp",
-      team_name: "Jetha Ke Jabaaz",
-      description: "",
-      total_players: 8,
-      matches_played: 12,
-      matches_won: 8,
-      matches_lost: 4,
-      is_disqualified: 1,
-    },
-  ];
+function Teams({isOrganizer, teams, tournamentDetails, refetchData}) {
+  const [allTeams, setAllTeams] = React.useState(teams)
+  const [genderType, setGenderType] = React.useState('')
+  const [ageCategory, setAgeCategory] = React.useState('')
+
+  const handleAgeChange = (e) =>{
+    setAgeCategory(e.target.value)
+    setAllTeams(()=>{
+      return teams.filter(t =>
+        (
+          e.target.value == ''
+          ?
+            true
+          :
+            t.age_categories.includes(e.target.value) 
+        )
+        && 
+        (
+          genderType == ''
+          ?
+            true
+          :
+            t.gender_type.includes(genderType)
+        )
+      )
+    })
+  }
+
+  const handleGenderChange = (e) =>{
+    setGenderType(e.target.value)
+    setAllTeams(()=>{
+      return teams.filter(t =>
+        (
+          e.target.value == ''
+          ?
+            true
+          :
+            t.gender_type.includes(e.target.value) 
+        )
+        && 
+        (
+          ageCategory == ''
+          ?
+            true
+          :
+            t.age_categories.includes(ageCategory)
+        )
+      )
+    })
+  }
+
+  React.useEffect(() => {
+    setAllTeams(teams)
+  }, [teams]);
+  
   return (
     <div>
       <div className="mb-5">
@@ -43,13 +72,19 @@ function Teams({teams}) {
                 Age Category
               </label>
               <select
-                name=""
+                name="age_category"
                 id=""
-                className="bg-gray-100 outline-none w-24 px-2 py-1 border text-sm lg:text-base"
+                onChange={handleAgeChange}
+                className="bg-gray-100 outline-none w-24 px-2 py-1 border text-sm"
               >
                 <option value="">All</option>
-                <option value="">Under 19</option>
-                <option value="">Under 25</option>
+                {
+                  tournamentDetails.age_categories.map((item, index) =>{
+                    return(
+                      <option key={index} value={item} className="capitalize">{item}</option>
+                    )
+                  })
+                }
               </select>
             </div>
             <div className="flex justify-center items-center md:flex-row flex-col space-y-1 md:space-y-0 md:space-x-2">
@@ -57,25 +92,28 @@ function Teams({teams}) {
                 Gender Type
               </label>
               <select
-                name=""
+                name="gender_type"
                 id=""
-                className="bg-gray-100 outline-none w-24 px-2 py-1 border text-sm lg:text-base"
+                onChange={handleGenderChange}
+                className="bg-gray-100 outline-none w-24 px-2 py-1 border text-sm"
               >
                 <option value="">All</option>
-                <option value="">Boys</option>
-                <option value="">Girls</option>
-                <option value="">Men</option>
-                <option value="">Women</option>
-                <option value="">Mixed</option>
+                {
+                  tournamentDetails.gender_types.map((item, index) =>{
+                    return(
+                      <option key={index} value={item} className="capitalize">{item}</option>
+                    )
+                  })
+                }
               </select>
             </div>
           </div>
         </div>
       </div>
-      {teams.length > 0 ? (
+      {allTeams.length > 0 ? (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 mt-10">
-          {teams.map((team, i) => {
-            return <TournamentTeamCard key={i} teamDetails={team} />;
+          {allTeams.map((team, i) => {
+            return <TournamentTeamCard key={i} isOrganizer={isOrganizer} teamDetails={team} refetchData={refetchData} />;
           })}
         </div>
       ) : (
