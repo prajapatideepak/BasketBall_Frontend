@@ -25,4 +25,4 @@ export const matchApi = api.injectEndpoints({
   }),
 });
 
-export const { useUpdateMatchDetailsMutation } = matchApi;
+export const { useUpdateMatchDetailsMutation, useGetMatchListQuery } = matchApi;
