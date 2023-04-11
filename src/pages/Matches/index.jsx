@@ -1,24 +1,16 @@
 import React from "react";
-import { useParams, useNavigate } from "react-router-dom";
 import { GiBasketballBall } from "react-icons/gi";
 import Heading from "../../Component/Heading";
-import MatchesCrad from "../../Component/Matches cards";
 import { useGetMatchListQuery } from "../../services/match";
 import MatchCard from "../../Component/MatchCard";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 
 function MatchList() {
-  const params = useParams();
-  const navigate = useNavigate();
-  const isPublicView = false;
   const [currentTab, setCurrentTab] = React.useState(1);
-  const [currentTabMatches, setCurrentTabMatches] = React.useState([]);
   const [pageNo, setPageNo] = React.useState(0);
 
   console.log(currentTab);
   const data = useGetMatchListQuery({ pageNo: pageNo, status: currentTab });
-
-  console.log(data?.data?.data);
 
   return (
     <section className="min-h-screen-fit">
@@ -102,7 +94,7 @@ function MatchList() {
               onClick={(e) => {
                 setPageNo(() => pageNo - 1);
               }}
-              disabled={pageNo == 1}
+              disabled={pageNo == 0}
               className="cursor-pointer disabled:cursor-default disabled:opacity-30 p-2 border rounded border-gray-400"
             >
               <IoIosArrowBack />

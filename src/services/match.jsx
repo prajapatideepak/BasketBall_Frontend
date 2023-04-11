@@ -19,10 +19,17 @@ export const matchApi = api.injectEndpoints({
       },
       invalidatesTags: [{ type: "Tournaments", id: "LIST" }],
     }),
+    getMatchDetail: build.query({
+      query: (matchId) => `match/${matchId}`,
+    }),
     getMatchList: build.query({
       query: ({ pageNo, status }) => `match/list/${status}&${pageNo}`,
     }),
   }),
 });
 
-export const { useUpdateMatchDetailsMutation, useGetMatchListQuery } = matchApi;
+export const {
+  useUpdateMatchDetailsMutation,
+  useGetMatchListQuery,
+  useGetMatchDetailQuery,
+} = matchApi;
