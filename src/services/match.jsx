@@ -2,6 +2,10 @@ import { api } from "./api";
 
 export const matchApi = api.injectEndpoints({
   endpoints: (build) => ({
+    getMatchScore: build.query({ 
+      query: (match_id) => `match/score/${match_id}`
+    }),
+
     updateMatchDetails: build.mutation({
       query({match_id, match_date, match_time, match_address}) {
         return {
@@ -24,4 +28,5 @@ export const matchApi = api.injectEndpoints({
 
 export const {
   useUpdateMatchDetailsMutation,
+  useGetMatchScoreQuery
 } = matchApi;
