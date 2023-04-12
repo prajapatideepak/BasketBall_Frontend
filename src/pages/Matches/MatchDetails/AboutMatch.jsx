@@ -3,7 +3,7 @@ import moment from "moment";
 
 export default function ({ data }) {
   return (
-    <div id="about" className="px-6 py-12">
+    <div id="about" className="p-4">
       {/* tournamet branding */}
       <div className="text-center">
         <img
