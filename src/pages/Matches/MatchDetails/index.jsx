@@ -96,7 +96,86 @@ const MatchDetails = () => {
               })}
             </div>
           </div>
-          <div>{tabs[tabIndex]}</div>
+          {/* <div>{tabs[tabIndex]}</div> */}
+          <div id="scoretable" className="w-4/5 mx-auto text-center">
+            <div class="flex flex-col mt-8">
+              <div class="overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative">
+                <table class="border-collapse table-auto w-full whitespace-no-wrap bg-white table-striped relative">
+                  <thead>
+                    <tr class="text-left">
+                      <th
+                        class="py-2 px-3 sticky top-0 bg-gray-800 text-white"
+                        rowspan="2"
+                      >
+                        Quarter
+                      </th>
+                      <th
+                        class="py-2 px-3 sticky top-0 bg-gray-800 text-white"
+                        colspan="2"
+                      >
+                        <div class="flex items-center justify-center">
+                          <div class="h-4 w-4 rounded-full bg-orange-500 mr-2"></div>
+                          {data?.data?.match_data?.data?.team_1.team_name}
+                        </div>
+                      </th>
+                      <th
+                        class="py-2 px-3 sticky top-0 bg-gray-800 text-white"
+                        colspan="2"
+                      >
+                        <div class="flex items-center justify-center">
+                          <div class="h-4 w-4 rounded-full bg-blue-500 mr-2"></div>
+                          {data?.data?.match_data?.data?.team_2.team_name}
+                        </div>
+                      </th>
+                      <th
+                        class="py-2 px-3 sticky top-0 bg-gray-800 text-white"
+                        rowspan="2"
+                      >
+                        Winner
+                      </th>
+                    </tr>
+                    <tr>
+                      <th class="bg-gray-700 text-white px-3 py-2">Fouls</th>
+                      <th class="bg-gray-700 text-white px-3 py-2">Points</th>
+                      <th class="bg-gray-700 text-white px-3 py-2">Fouls</th>
+                      <th class="bg-gray-700 text-white px-3 py-2">Points</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {data?.data?.match_data?.all_quarters?.map((q) => {
+                      return (
+                        <tr key={q?.id}>
+                          <td class="border-t px-3 py-2">
+                            {q?.quarter_number}
+                          </td>
+                          <td class="border-t px-3 py-2">{q?.team_1_fouls}</td>
+                          <td class="border-t px-3 py-2">{q?.team_1_points}</td>
+                          <td class="border-t px-3 py-2">{q?.team_2_fouls}</td>
+                          <td class="border-t px-3 py-2">{q?.team_2_points}</td>
+                          <td class="border-t px-3 py-2">
+                            <div class="flex items-center justify-center">
+                              {q?.won_by_team_id ==
+                              data?.data?.match_data?.data?.team_1.id ? (
+                                <div class="h-4 w-4 rounded-full bg-orange-500 mr-2"></div>
+                              ) : (
+                                <div class="h-4 w-4 rounded-full bg-blue-500 mr-2"></div>
+                              )}
+                              {q?.won_by_team_id ==
+                              data?.data?.match_data?.data?.team_1.id
+                                ? data?.data?.match_data?.data?.team_1
+                                    ?.team_name
+                                : data?.data?.match_data?.data?.team_2
+                                    ?.team_name}
+                            </div>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
       )}
     </section>
