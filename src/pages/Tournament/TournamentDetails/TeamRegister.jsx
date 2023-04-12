@@ -87,7 +87,7 @@ function TeamRegister() {
               {tournamentDetails?.tournament_name}
             </p>
           </div>
-          <div className="text-2xl font-bold text-center px-3 py-16 text-gray-800">
+          <div className="text-2xl font-semibold text-center px-3 py-16 text-gray-800">
             {!tournamentDetails?.is_registration_open &&
               (tournamentDetails?.status == 2 ? (
                 <div className="">

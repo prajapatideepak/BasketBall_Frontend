@@ -7,14 +7,14 @@ export const matchApi = api.injectEndpoints({
     }),
 
     updateMatchDetails: build.mutation({
-      query({match_id, match_date, match_time, match_address}) {
+      query({ match_id, match_date, match_time, match_address }) {
         return {
           url: `match/update/${match_id}`,
           method: "PUT",
           body: {
             start_date: match_date,
             start_time: match_time,
-            address: match_address
+            address: match_address,
           },
           headers: {
             "Content-Type": "application/json",
@@ -23,10 +23,18 @@ export const matchApi = api.injectEndpoints({
       },
       invalidatesTags: [{ type: "Tournaments", id: "LIST" }],
     }),
+    getMatchDetail: build.query({
+      query: (matchId) => `match/${matchId}`,
+    }),
+    getMatchList: build.query({
+      query: ({ pageNo, status }) => `match/list/${status}&${pageNo}`,
+    }),
   }),
 });
 
 export const {
   useUpdateMatchDetailsMutation,
-  useGetMatchScoreQuery
+  useGetMatchScoreQuery,
+  useGetMatchListQuery,
+  useGetMatchDetailQuery,
 } = matchApi;
