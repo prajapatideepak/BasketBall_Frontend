@@ -23,9 +23,24 @@ export const matchApi = api.injectEndpoints({
       },
       invalidatesTags: [{ type: "Tournaments", id: "LIST" }],
     }),
+
+    deleteMatch: build.mutation({
+      query({match_id, tournament_id}) {
+        return {
+          url: `match/delete/${tournament_id}/${match_id}`,
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        };
+      },
+      invalidatesTags: [{ type: "Tournaments", id: "LIST" }],
+    }),
+
     getMatchDetail: build.query({
       query: (matchId) => `match/${matchId}`,
     }),
+
     getMatchList: build.query({
       query: ({ pageNo, status }) => `match/list/${status}&${pageNo}`,
     }),
@@ -34,6 +49,7 @@ export const matchApi = api.injectEndpoints({
 
 export const {
   useUpdateMatchDetailsMutation,
+  useDeleteMatchMutation,
   useGetMatchScoreQuery,
   useGetMatchListQuery,
   useGetMatchDetailQuery,

@@ -113,7 +113,7 @@ function Teams({isOrganizer, teams, tournamentDetails, refetchData}) {
       {allTeams.length > 0 ? (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 mt-10">
           {allTeams.map((team, i) => {
-            return <TournamentTeamCard key={i} isOrganizer={isOrganizer} teamDetails={team} refetchData={refetchData} />;
+            return <TournamentTeamCard key={i} index={i+1} isOrganizer={isOrganizer} teamDetails={team} refetchData={refetchData} />;
           })}
         </div>
       ) : (
