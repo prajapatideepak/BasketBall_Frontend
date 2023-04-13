@@ -24,6 +24,7 @@ function Match_cards({ match }) {
     <>
       <div className="relative min-w-[260px] xs:min-w-[320px] sm:min-w-[350px] md:min-w-[350px] max-w-[440px] h-[190px] sm:h-[200px] md:h-[185px] border-0 hover:border-2 hover:border-gray-400 hover:border-dashed group rounded-lg" onClick={handleClick} key={match.match_id}>
         <div className="absolute flex transition-all duration-300 ease-in-out cursor-pointer top-[-2px] left-[-2px] w-full h-full group-hover:left-[-10px] group-hover:top-[-10px] hover:left-[-10px] hover:top-[-10px] bg-white shadow-xl rounded-lg">
+         {/* Live match  */}
           {
             match?.is_live == 1
               ?
@@ -81,6 +82,7 @@ function Match_cards({ match }) {
                 null
             }
             <div className='flex flex-col items-center text-white gap-2 py-1 w-full '>
+            {/* First Team Details */}
               <div className='flex justify-start items-center w-full'>
                 <div className='flex  justify-between items-center w-[95%]'>
                   <div className="t_1  flex  justify-start w-full items-center gap-2">
@@ -89,6 +91,7 @@ function Match_cards({ match }) {
                     </div>
                     <h1 className='text-black font-extrabold text-center uppercase'>{match?.first_team}</h1>
                   </div>
+                {/* Wining Team */}
                   {
                     match?.is_live == 2
                       ?
@@ -113,6 +116,7 @@ function Match_cards({ match }) {
                     null
                 }
               </div>
+              {/* Secound Team Details */}
               <div className='flex justify-start items-center w-full'>
                 <div className='flex  justify-between items-center w-[95%]'>
                   <div className="t_1  flex  justify-start w-full items-center gap-2  ">
@@ -121,6 +125,7 @@ function Match_cards({ match }) {
                     </div>
                     <h1 className='text-black font-extrabold text-center uppercase'>{match?.secound_team}</h1>
                   </div>
+                  {/* Wining Team */}
                   {
                     match?.is_live == 2
                       ?

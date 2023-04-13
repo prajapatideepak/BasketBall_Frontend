@@ -10,8 +10,14 @@ import News_cards from "../../Component/Dashboard/News_cards";
 import Tournaments_cards from "../../Component/Dashboard/Tournaments_cards";
 import { GiBasketballBall } from 'react-icons/gi';
 import { useNavigate } from 'react-router-dom'
+import { useGetMatchLiveQuery} from "../../services/match";
+import { useGetAllTournamentsQuery} from "../../services/tournament";
+
 
 const Dashboard = () => {
+  const data = useGetMatchLiveQuery();
+  const tournaments = useGetAllTournamentsQuery();
+  console.log(tournaments)
   const navigate = useNavigate();
   const matchlist = () => {
     navigate(`/match`)
@@ -22,6 +28,7 @@ const Dashboard = () => {
   const newslist = () => {
     navigate(`/news`)
   }
+  
   const SliderData = [
     {
       id: 1,
@@ -259,7 +266,7 @@ const Dashboard = () => {
     <div className="min-h-screen ">
       {/* Main Slider for live and upcoming matches */}
       <div className="bg-black">
-        <MatchLive slides={SliderData} />
+        <MatchLive slides={data?.data?.data} />
       </div>
 
       {/* Live and Upcoming match   */}
