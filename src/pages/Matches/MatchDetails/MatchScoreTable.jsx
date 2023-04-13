@@ -3,6 +3,12 @@ import React from "react";
 export default function MatchScoreTable({ data }) {
   return (
     <div id="scoretable" className=" mx-auto text-center">
+      {data?.data?.match_data?.data?.status == 1 && (
+        <div className="text-lg md:text-2xl py-8 ">
+          {" "}
+          Currently Not available{" "}
+        </div>
+      )}
       {(data?.data?.match_data?.data?.status == 2 ||
         data?.data?.match_data?.data?.status == 3) && (
         <div className="flex flex-col md:my-8">
