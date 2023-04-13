@@ -40,6 +40,7 @@ const GameInfo = ({ index, setIndex }) => {
             playerRegistration(fb).then(console.log("ho gaya"));
           }
         } catch (err) {
+          console.log(err)
         }
       },
     });

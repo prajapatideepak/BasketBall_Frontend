@@ -7,7 +7,6 @@ import moment from 'moment'
 
 
 function Match_cards({ match }) {
-  console.log(match, "match")
   const navigate = useNavigate();
   const handleClick = () => {
     navigate(`/match-details/${match.id}`)
@@ -126,7 +125,7 @@ function Match_cards({ match }) {
                   }
                 </div>
                 {
-                  match?.status == 3
+                  match?.status == 3 && match.won_by_team_id == match.team_1.id
                     ?
                     <div className=' w-[5%]'>
                       <div className='flex justify-end items-end'>
@@ -161,7 +160,7 @@ function Match_cards({ match }) {
                   }
                 </div>
                 {
-                  match?.status == 3 
+                  match?.status == 3 && match.won_by_team_id == match.team_2.id
                     ?
                     <div className=' w-[5%]'>
                       <div className='flex justify-end items-end'>

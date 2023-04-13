@@ -10,20 +10,22 @@ import { AiFillCloseCircle } from "react-icons/ai";
 import * as Yup from "yup"
 import Swal from "sweetalert2";
 import { useFormik } from 'formik'
+import { useRegisterNewsMutation } from "../../../services/news";
+
 
 
 const signUpSchema = Yup.object({
-  Image: Yup.string().required("Please select image"),
+  photo: Yup.string().required("Please select image"),
   Title: Yup.string().required("Please enter title"),
   Tags: Yup.string().required("Please enter tags"),
   Date: Yup.string().required("Please select date"),
   Description: Yup.string().required("Please enter description")
 });
 
-
 const NewsList = () => {
   const navigate = useNavigate();
   const [model, setModel] = React.useState(false);
+  const [newsRegistration, { ...thing }] = useRegisterNewsMutation();
   const NewsList = [
     {
       News_id: 1,
@@ -59,8 +61,9 @@ const NewsList = () => {
     }
   ]
   const [NewsLists, setNewsList] = React.useState(NewsList)
+
   const initialValues = {
-    Image: "",
+    photo: "",
     Title: "",
     Tags: "",
     Date: "",
@@ -71,33 +74,48 @@ const NewsList = () => {
     initialValues: initialValues,
     validationSchema: signUpSchema,
     onSubmit(data) {
-      // ---------------- Confirmation for update -----------------------
-      Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be Add News!!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, Add it!",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          const response = "Create";
-          if (response) {
-            navigate('/news')
-            toast.success("News Add Successfully!");
-            setModel(false)
-          } else {
-            toast.error("Something went wrong");
-          }
-        }
-      });
+      try {
+        const fb = new FormData();
+        // if (location?.state?.isEdit) {
+        //   fb.append("id", location.state.id);
+        //   playerUpdate(fb).then(console.log("update ho gai"));
+        // } else {
+          newsRegistration(fb).then(console.log("ho gaya"));
+        // }
+      } catch (err) {
+        console.log(err)
+      }
     }
   })
   const handleDelete = (News_id) => {
     const newlist = NewsList.filter((News) => News.News_id != News_id)
     setNewsList(newlist);
   }
+
+  React.useEffect(() => {
+    if (thing.isError) {
+      toast.error(thing?.error?.data?.message);
+    }
+    if (thing.isSuccess) {
+      if (thing?.data?.success) {
+        toast.success("News Addes Successfull ");
+        setModel(false)
+      }
+    }
+  }, [thing.isError, thing.isSuccess]);
+
+  // React.useEffect(() => {
+  //   if (updateData.isError) {
+  //     toast.error(updateData?.error?.data?.message);
+  //   }
+  //   if (updateData.isSuccess) {
+  //     if (updateData?.data?.success) {
+  //       toast.success("Player Update Successfull ");
+  //       navigate(`/player/profile-detail/${updateData?.data?.data?.id}`);
+  //     }
+  //   }
+  // }, [updateData.isError, updateData.isSuccess]);
+
   return (
     <>
       <div className='relative'>
@@ -120,16 +138,16 @@ const NewsList = () => {
                         <div className="firstname flex flex-col space-y-2 w-full ">
                           <label htmlFor="Firstname">Photo</label>
                           <input type="file"
-                            name='Image'
-                            value={values.Image}
+                            name='photo'
+                            value={values.photo}
                             onChange={handleChange}
                             onBlur={handleBlur}
                             className="rounded-md py-[3px] md:py-[3px] w-full xl:py-2 px-3 outline-non border border-slate-300 outline-blue-200"
 
                           />
-                          {errors.Image && touched.Image
+                          {errors.photo && touched.photo
                             ?
-                            <p className='form-error text-red-600 text-sm font-semibold'>{errors.Image}</p>
+                            <p className='form-error text-red-600 text-sm font-semibold'>{errors.photo}</p>
                             :
                             null}
                         </div>
@@ -252,15 +270,15 @@ const NewsList = () => {
                     return (
                       <ul key={index} className='flex items-center space-x-2 justify-between font-normal md:px-2 2xl:px-10 py-2 rounded-lg cursor-pointer hover:bg-gray-100 bg-white shadow-sm my-3'>
                         <li className='w-20 text-[6px] sm:text-[8.5px] md:text-[12px] 2xl:text-sm text-center'>{News.News_id}</li>
-                        <li className='w-20 flex justify-center items-center'> 
+                        <li className='w-20 flex justify-center items-center'>
                           <img src={News.photo} alt="" className='rounded-full border -[3px] shadow-sm w-5 h-5 sm:w-8 sm:h-8 md:w-14 md:h-14 2xl:w-20 2xl:h-20' />
-                        </li> 
+                        </li>
                         <li className='w-20 text-center text-[6px] sm:text-[8.5px] md:text-[12px] 2xl:text-sm '>{News.Title}</li>
                         <li className='w-20 text-center text-[6px] sm:text-[8.5px] md:text-[12px] 2xl:text-sm '>{News.Tags}</li>
                         <li className='w-52 text-center text-[6px] sm:text-[8.5px] md:text-[12px] 2xl:text-sm overflow-hidden'>{News.Description}</li>
                         <li className='w-20 text-center text-[6px] sm:text-[8.5px] md:text-[12px] 2xl:text-sm'>{News.Date}</li>
                         <li className='w-20 text-center flex flex-col md:flex-row items-center justify-center space-y-2 md:space-y-0 md:space-x-3'>
-                          <FiEdit className='text-[11px] md:text-sm lg:text-[19px] ' onClick={() => setModel(true)}  />
+                          <FiEdit className='text-[11px] md:text-sm lg:text-[19px] ' onClick={() => setModel(true)} />
                           <MdDelete className='text-[11px] md:text-sm lg:text-[21px] text-red-500' onClick={() => handleDelete(News.News_id)} />
                         </li>
                       </ul>

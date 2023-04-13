@@ -10,15 +10,19 @@ import News_cards from "../../Component/Dashboard/News_cards";
 import Tournaments_cards from "../../Component/Dashboard/Tournaments_cards";
 import { GiBasketballBall } from 'react-icons/gi';
 import { useNavigate } from 'react-router-dom'
-import { useGetMatchLiveQuery} from "../../services/match";
-import { useGetAllTournamentsQuery} from "../../services/tournament";
+import { useGetMatchLiveQuery } from "../../services/match";
+import { useGetAllTournamentsQuery } from "../../services/tournament";
+import { useGetAllNewsQuery } from "../../services/news";
 
 
 const Dashboard = () => {
   const data = useGetMatchLiveQuery();
-  console.log(data?.data?.data)
+  // console.log(data?.data?.data)
   const tournaments = useGetAllTournamentsQuery();
+  const news = useGetAllNewsQuery();
+  // console.log(tournaments?.data?.all_tournaments)
   const navigate = useNavigate();
+  console.log(news)
   const matchlist = () => {
     navigate(`/match`)
   }
@@ -28,7 +32,7 @@ const Dashboard = () => {
   const newslist = () => {
     navigate(`/news`)
   }
-  
+
   const SliderData = [
     {
       id: 1,
@@ -324,9 +328,9 @@ const Dashboard = () => {
         </div>
         <div id="tournament" className="w-full flex justify-start px-6 xl:px-14 items-center gap-5 xl:gap-3  scroll-smooth  overflow-x-auto scrollbar-hide pt-10 pb-10 lg:py-8">
           {
-            tournament.length > 0
+            tournaments?.data?.all_tournaments?.length > 0
               ?
-              tournament.map((tournament, index) => {
+              tournaments?.data?.all_tournaments?.map((tournament, index) => {
                 return (
                   <Tournaments_cards
                     key={index}
