@@ -19,14 +19,14 @@ function MatchLive({ slides }) {
   let slideInterval;
   let intervalTime = 5000
 
-  const prevSlide = () => {
-    const isFirstSlide = currentIndex === 0;
-    const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1;
-    setCurrentIndex(newIndex);
-  };
+  // const prevSlide = () => {
+  //   const isFirstSlide = currentIndex === 0;
+  //   const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1;
+  //   setCurrentIndex(newIndex);
+  // };
 
   const nextSlide = () => {
-    const isLastSlide = currentIndex === slides.length - 1;
+    const isLastSlide = currentIndex === slides?.length - 1;
     const newIndex = isLastSlide ? 0 : currentIndex + 1;
     setProgressBar(0)
     setCurrentIndex(newIndex);
@@ -86,13 +86,19 @@ function MatchLive({ slides }) {
                     <div className='flex items-start flex-col py-2 lg:py-3'>
                       <div className='flex items-center space-x-2'>
                         <p className='text-white text-[15px]'>
-                          {moment(item?.created_at).subtract(10, 'days').calendar()}
+                          {
+                            item.start_date ?
+
+                              moment(item?.start_date).format('DD / MM / YY')
+                               :
+                              "Comming Soon"
+                          }
                           <span className='ml-1'>
-                           -  Munday
+                            -  Munday
                           </span> ,
                         </p>
                         <p className='text-black font-bold text-[15px]'>
-                          {moment(item?.created_at).format("LT")}
+                          {item?.start_time ? item?.start_time : ""}
                         </p>
                       </div>
                       <p className='text-white font-bold text-sm sm:text-[15px] lg:text-lg'>{item?.tournaments?.tournament_name}</p>

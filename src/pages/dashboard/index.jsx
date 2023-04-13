@@ -16,8 +16,8 @@ import { useGetAllTournamentsQuery} from "../../services/tournament";
 
 const Dashboard = () => {
   const data = useGetMatchLiveQuery();
+  console.log(data?.data?.data)
   const tournaments = useGetAllTournamentsQuery();
-  console.log(tournaments)
   const navigate = useNavigate();
   const matchlist = () => {
     navigate(`/match`)
@@ -288,9 +288,9 @@ const Dashboard = () => {
         </div>
         <div id="match" className=" w-full flex justify-start px-6 xl:px-14 items-center gap-5 xl:gap-3 scroll-smooth  overflow-x-auto scrollbar-hide pt-10 pb-10 lg:py-8">
           {
-            match.length > 0
+            data?.data?.data?.length > 0
               ?
-              match.map((match, slideIndex) => {
+              data?.data?.data?.map((match, slideIndex) => {
                 return (
                   <Match_cards key={slideIndex} match={match} />
                 )
