@@ -17,12 +17,9 @@ import { useGetAllNewsQuery } from "../../services/news";
 
 const Dashboard = () => {
   const data = useGetMatchLiveQuery();
-  // console.log(data?.data?.data)
   const tournaments = useGetAllTournamentsQuery();
   const news = useGetAllNewsQuery();
-  // console.log(tournaments?.data?.all_tournaments)
   const navigate = useNavigate();
-  console.log(news)
   const matchlist = () => {
     navigate(`/match`)
   }
@@ -404,9 +401,9 @@ const Dashboard = () => {
         </div>
         <div id="news" className=" w-full  flex justify-start px-6 xl:px-14 items-center gap-5   scroll-smooth  overflow-x-auto scrollbar-hide py-8">
           {
-            News.length > 0
+            news?.data?.AllNews?.length > 0
               ?
-              News.map((news, index) => {
+              news?.data?.AllNews?.map((news, index) => {
                 return (
                   <News_cards
                     key={index}

@@ -29,6 +29,15 @@ export const newsApi = api.injectEndpoints({
                 };
             },
         }),
+
+        deleteNewsDetails: build.mutation({
+            query(id) {
+                return {
+                    url: `news/delete/${id}`,
+                    method: "delete",
+                };
+            },
+        }),
     }),
 });
 
@@ -37,5 +46,6 @@ export const {
     useGetAllNewsQuery,
     useGetNewsDetailsQuery,
     useRegisterNewsMutation,
-    useUpdateNewsDetailsMutation
+    useUpdateNewsDetailsMutation,
+    useDeleteNewsDetailsMutation
 } = newsApi;

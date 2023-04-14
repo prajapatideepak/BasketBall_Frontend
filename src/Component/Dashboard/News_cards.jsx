@@ -3,8 +3,11 @@
 import React from 'react'
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom'
+import moment from 'moment'
+
 
 function News_cards({ news }) {
+    console.log(news)
     let tags = news?.tags?.split(",");
     const navigate = useNavigate();
     const handleClick = () => {
@@ -25,20 +28,20 @@ function News_cards({ news }) {
                 className="relative min-w-[260px] hover:scale-110  duration-300 xs:min-w-[320px] sm:min-w-[350px] md:min-w-[330px] max-w-[300px] h-[200px] md:h-[195px] 
          group ">
                 <div className="absolute cursor-pointer w-full h-full  shadow-lg flex flex-col justify-center items-center  overflow-hidden " >
-                    <img src={news.image} alt="" className=' bg-cover bg-center h-full w-full' />
+                    <img src={news.photo} alt="" className=' bg-cover bg-center h-full w-full' />
                     <div className='bg-gradient-to-b from-black/60 group-hover:from-black/40 duration-300  h-full w-full absolute'>
                         <div className='bg-gradient-to-r from-black absolute bottom-0 w-full py-3 space-y-1 '>
                             <div className='flex justify-start items-center gap-4 px-4 '>
-                                {tags.map((tag, index) => (
+                                {tags?.map((tag, index) => (
                                     <span key={index} className="bg-orange-600 px-3 font-semibold text-white text-sm rounded ">{tag} </span>
                                 ))}
                             </div>
                             <div className='px-4 space-y-2'>
                                 <h1 className='text-white font-semibold text-sm '>
-                                    {news.title}
+                                    {news.description}
                                 </h1>
                                 <p className='text-xs text-[#ee6730] font-semibold'>
-                                    {news.date}
+                                    {moment(news.created_at).format('DD / MM / YY')}
                                 </p>
                             </div>
                         </div>

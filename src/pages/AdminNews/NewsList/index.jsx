@@ -1,6 +1,5 @@
 import React, { lazy } from 'react'
-import { Route, Routes, Navigate, NavLink } from 'react-router-dom'
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { TbFilePlus } from "react-icons/tb"
 import { MdDelete } from "react-icons/md"
 import { FiEdit } from "react-icons/fi"
@@ -15,7 +14,8 @@ import {
   useRegisterNewsMutation,
   useUpdateNewsDetailsMutation,
   useGetAllNewsQuery,
-  useGetNewsDetailsQuery
+  useGetNewsDetailsQuery,
+  useDeleteNewsDetailsMutation
 } from "../../../services/news";
 
 
@@ -30,9 +30,11 @@ import {
 
 const NewsList = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [model, setModel] = React.useState(false);
   const [photo, setphoto] = React.useState("");
-  const {data} = useGetAllNewsQuery({});
+  const { data } = useGetAllNewsQuery({});
+  const { deletenews, isLoading, error } = useDeleteNewsDetailsMutation();
   const [newsRegistration, { ...thing }] = useRegisterNewsMutation();
   const [newsUpdate, { ...updateData }] = useUpdateNewsDetailsMutation();
   // const {data, isLoading, error } = useGetNewsDetailsQuery(params.id);
@@ -73,11 +75,10 @@ const NewsList = () => {
   }
 
   const handleDelete = (id) => {
-    const newlist = data?.AllNews.filter((News) => News.id != id)
-    setNewsList(newlist);
+
   }
 
-  const handleUpdate = (id) => {
+  const handleUpdate = () => {
     setModel(true)
   }
 
