@@ -66,7 +66,9 @@ function TeamAddEdit() {
 
         if (location?.state?.isEdit) {
           fb.append("id", location.state.teamDetail.id);
-          teamUpdate(fb).then(console.log("update ho gai"));
+          teamUpdate({ body: fb, team_id: location.state.teamDetail.id }).then(
+            console.log("update ho gai")
+          );
         } else {
           teamRegistration(fb).then(console.log("ho gaya"));
         }
