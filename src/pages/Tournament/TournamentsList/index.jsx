@@ -29,6 +29,7 @@ function TournamentsList() {
       }
     });
 
+    setCurrentTabTournaments(ongoing)
     setUpcomingTournaments(upcoming);
     setOngoingTournaments(ongoing);
     setPastTournaments(past);

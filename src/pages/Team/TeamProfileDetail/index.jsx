@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import PlayerCard from "./PlayerCard";
 import "./TeamProfileDetail.css";
 import { AxiosError } from "axios";
@@ -11,12 +11,14 @@ import moment from "moment";
 
 function TeamProfileDetail() {
   const { team_id } = useParams();
+  const location = useLocation();
+  console.log(location);
   const navigate = useNavigate();
   const { isLoading, data } = useGetTeamDetailQuery({
     teamId: team_id,
   });
 
-  const isPublicView = false;
+  const isPublicView = !location?.state?.isPublic;
 
   const handleEdit = () => {
     navigate("/team/add-edit", {
@@ -43,8 +45,9 @@ function TeamProfileDetail() {
       ? [...data?.data.team_1_matches, ...data?.data.team_2_matches]
       : [];
 
-  const handleUnenrollTournament = (tournament_id) => {
+  const handleUnenrollTournament = (tournament_id, is_selected) => {
     try {
+      console.log(tournament_id);
     } catch (error) {
       if (error instanceof AxiosError) {
         toast.error(error.response.data.message);
@@ -293,9 +296,12 @@ function TeamProfileDetail() {
                         <th className="border px-2 py-3 text-gray-300 uppercase border-gray-700 whitespace-nowrap font-semibold text-left sm:text-base text-xs xs:text-sm">
                           City
                         </th>
-                        <th className="border whitespace-nowrap px-2 py-3 text-sm text-gray-300 uppercase border-gray-700 whitespace-nowrap font-semibold text-left sm:text-base text-xs xs:text-sm">
-                          Status
-                        </th>
+                        {!isPublicView ? (
+                          <th className="border whitespace-nowrap px-2 py-3 text-sm text-gray-300 uppercase border-gray-700 whitespace-nowrap font-semibold text-left sm:text-base text-xs xs:text-sm">
+                            Status
+                          </th>
+                        ) : null}
+
                         {!isPublicView ? (
                           <th className="border px-2 py-3 text-gray-300 uppercase border-gray-700 whitespace-nowrap font-semibold text-left sm:text-base text-xs xs:text-sm">
                             Action
@@ -334,28 +340,34 @@ function TeamProfileDetail() {
                               <td className="whitespace-nowrap px-2">
                                 {tournaments.address}
                               </td>
-                              <td className="whitespace-nowrap px-2">
-                                {item.is_selected == 1 ? (
-                                  <span className="text-sm bg-green-800 p-1 px-3 text-white font-bold rounded-full  ">
-                                    Approved
-                                  </span>
-                                ) : item.is_selected == 0 ? (
-                                  <span className="text-sm bg-red-500 p-1 px-3 text-white font-bold rounded-full  ">
-                                    Rejected
-                                  </span>
-                                ) : (
-                                  <span className="text-sm bg-gray-600 p-1 px-3 text-white font-bold rounded-full  ">
-                                    Pending
-                                  </span>
-                                )}
-                              </td>
+                              {!isPublicView ? (
+                                <td className="whitespace-nowrap px-2">
+                                  {item.is_selected == 1 ? (
+                                    <span className="text-sm bg-green-800 p-1 px-3 text-white font-bold rounded-full  ">
+                                      Approved
+                                    </span>
+                                  ) : item.is_selected == 0 ? (
+                                    <span className="text-sm bg-red-500 p-1 px-3 text-white font-bold rounded-full  ">
+                                      Rejected
+                                    </span>
+                                  ) : (
+                                    <span className="text-sm bg-gray-600 p-1 px-3 text-white font-bold rounded-full  ">
+                                      Pending
+                                    </span>
+                                  )}
+                                </td>
+                              ) : null}
+
                               {!isPublicView ? (
                                 <td className="whitespace-nowrap px-2">
                                   {/* if tournament started then disable it */}
                                   <button
                                     className="bg-red-500 text-white px-2 py-0.5 rounded-md hover:opacity-60"
                                     onClick={() =>
-                                      handleUnenrollTournament(tournaments.id)
+                                      handleUnenrollTournament(
+                                        item.is_selected,
+                                        tournaments?.id
+                                      )
                                     }
                                   >
                                     Unenroll

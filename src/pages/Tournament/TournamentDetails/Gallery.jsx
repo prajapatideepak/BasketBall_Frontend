@@ -37,7 +37,7 @@ function Gallery({galleryDetails}) {
                     }
                 </Masonry>
             :
-                <div className="w-full text-center mt-12">
+                <div className="w-full text-center mt-12 py-5">
                     <h4 className='text-lg font-medium text-gray-400'>No Images Found</h4>
                 </div>
         }

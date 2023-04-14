@@ -29,8 +29,8 @@ export const teamApi = api.injectEndpoints({
       }),
     }),
     teamUpdate: build.mutation({
-      query: (body) => ({
-        url: "team/update",
+      query: ({ body, team_id }) => ({
+        url: `team/update/${team_id}`,
         method: "PUT",
         body,
       }),
