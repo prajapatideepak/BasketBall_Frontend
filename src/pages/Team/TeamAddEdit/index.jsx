@@ -136,7 +136,9 @@ function TeamAddEdit() {
       if (thing?.data?.success) {
         toast.success("Team Registration Successfull ");
 
-        navigate(`/team/profile-detail/${thing?.data?.team?.id}`);
+        navigate(`/team/profile-detail/${thing?.data?.team?.id}`, {
+          state: { isPublic: true },
+        });
       }
     }
   }, [thing.isError, thing.isSuccess]);
@@ -148,7 +150,9 @@ function TeamAddEdit() {
     if (updateData.isSuccess) {
       if (updateData?.data?.success) {
         toast.success("Team Update   Successfull ");
-        navigate(`/team/profile-detail/${updateData?.data?.team?.id}`);
+        navigate(`/team/profile-detail/${updateData?.data?.team?.id}`, {
+          state: { isPublic: true },
+        });
       }
     }
   }, [updateData.isError, updateData.isSuccess]);
