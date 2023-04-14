@@ -117,6 +117,18 @@ export const organizerApi = api.injectEndpoints({
         }
     }),
 
+    requalifyTeam: build.mutation({
+        query: ({tournament_id, team_id})=>{
+            return {
+                url: `tournament/requalify-team/${tournament_id}/${team_id}`,
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }; 
+        }
+    }),
+
     createPools: build.mutation({
         query: ({tournament_id, total_groups, teams_per_group})=>{
             return {
@@ -166,6 +178,7 @@ export const {
     useEndRegistrationMutation,
     useIsAuthOrganizerQuery,
     useDisqualifyTeamMutation,
+    useRequalifyTeamMutation,
     useCreatePoolsMutation,
     useMatchFormationMutation
 } = organizerApi;

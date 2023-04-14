@@ -248,7 +248,7 @@ function MatchFormModal({ showModal, handleShowModal, refetchData, tournamentDet
                   htmlFor="is_form_by_group"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Form the matches by group ?
+                  Form the matches by pools ?
                 </label>
                 <div className="flex space-x-4">
                   <div className="flex text-gray-200 space-x-2">

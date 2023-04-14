@@ -2,9 +2,10 @@ import React from 'react'
 import moment from "moment";
 import {useNavigate, useParams} from 'react-router-dom'
 import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 import Loader from '../../../component/Loader';
 import { useTournamentScheduleQuery } from '../../../services/organizer';
-import { useUpdateMatchDetailsMutation } from '../../../services/match';
+import { useUpdateMatchDetailsMutation, useDeleteMatchMutation } from '../../../services/match';
 
 function Schedule({isOrganizer}) {
     const navigate = useNavigate();
@@ -19,6 +20,7 @@ function Schedule({isOrganizer}) {
 
     const {data, isLoading, refetch } = useTournamentScheduleQuery(tournament_id)
     const [updateMatchDetails, {...updatingMatch}] = useUpdateMatchDetailsMutation()
+    const [deleteMatch, {...deletingMatch}] = useDeleteMatchMutation()
 
     const handleEdit = (match_id, start_date, start_time, address) => {
         setIsEdit(true)
@@ -66,6 +68,29 @@ function Schedule({isOrganizer}) {
 
     const handleAddress = (e) => {
         setMatchAddress(e.target.value)
+    }
+
+    const handleMatchDelete = async (match_id) => {
+        Swal.fire({
+            title: "Are you sure to delete the match?",
+            text: "",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Delete",
+        }).then(async(result) => {
+            if (result.isConfirmed) {
+                const response = await deleteMatch({match_id, tournament_id})
+                 if(response.error){
+                    toast.error(response.error.data.message)
+                }
+                else if(response.data.success){
+                    refetch()
+                    toast.success(response.data.message);
+                }
+            }
+        });
     }
 
     React.useEffect(()=>{
@@ -200,7 +225,10 @@ function Schedule({isOrganizer}) {
                                                                     :
                                                                         <>
                                                                             <button className="font-medium text-blue-600 dark:text-blue-500 hover:underline" onClick={()=>handleEdit(match.id, match.start_date, match.start_time, match.address)}>Edit</button>
-                                                                            <button className="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</button>
+                                                                            <button 
+                                                                            className="font-medium text-red-600 dark:text-red-500 hover:underline"
+                                                                            onClick={()=>handleMatchDelete(match.id)}
+                                                                            >Delete</button>
                                                                         </>
                                                                 }
                                                             </td>

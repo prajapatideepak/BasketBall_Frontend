@@ -40,7 +40,7 @@ function MatchCard({ match }) {
                 </p>
               </div>
             </div>
-            {match.status == 1 ? (
+            {match.status == 1 || match.status == 3? (
               <div className="flex justify-center items-center mx-auto">
                 <span className="text-2xl font-medium">VS</span>
               </div>
@@ -51,6 +51,7 @@ function MatchCard({ match }) {
                     match?.match_quarters?.[match.match_quarters.length - 1]
                       ?.team_1_points
                   }
+                  {console.log(match)}
                 </h3>
                 <span className="text-2xl sm:text-3xl font-bold px-1">
                   -
@@ -81,10 +82,20 @@ function MatchCard({ match }) {
           {match.status == 3 ? (
             <div className="w-full text-center">
               <p className="pt-3 text-gray-500 text-xs xs:text-sm sm:text-base">
-                <span className="text-green-600 font-medium">
-                  {match.won_by_team?.team_name}{" "}
-                </span>
-                won the match
+                {
+                  !match.won_by_team_id
+                  ?
+                    <span className="font-medium">
+                       Match Draw
+                      </span>
+                  :
+                    <>
+                      <span className="text-green-600 font-medium">
+                        {match.won_by_team?.team_name}{" "}
+                      </span>
+                      won the match
+                    </>
+                }
               </p>
             </div>
           ) : (
