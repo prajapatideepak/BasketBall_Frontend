@@ -15,7 +15,7 @@ function TeamProfile() {
         <Heading text="Your Teams" />
         {teamData?.data?.data?.length > 0 ? (
           teamData?.data?.data?.map((team, i) => {
-            return <TeamCard key={i} teamDetails={team} />;
+            return <TeamCard key={i} teamDetails={team} isPublic={true} />;
           })
         ) : (
           <div className="flex justify-center items-center mt-16 md:mt-24">

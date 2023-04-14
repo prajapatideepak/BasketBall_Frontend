@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import PlayerCard from "./PlayerCard";
 import "./TeamProfileDetail.css";
 import { AxiosError } from "axios";
@@ -11,12 +11,14 @@ import moment from "moment";
 
 function TeamProfileDetail() {
   const { team_id } = useParams();
+  const location = useLocation();
+  console.log(location);
   const navigate = useNavigate();
   const { isLoading, data } = useGetTeamDetailQuery({
     teamId: team_id,
   });
 
-  const isPublicView = false;
+  const isPublicView = !location?.state?.isPublic;
 
   const handleEdit = () => {
     navigate("/team/add-edit", {
