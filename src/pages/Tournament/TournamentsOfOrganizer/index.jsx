@@ -5,6 +5,7 @@ import { GiDiamondTrophy } from 'react-icons/gi';
 import { MdDelete } from 'react-icons/md';
 import Heading from '../../../Component/Heading';
 import { useTournamentsOfOrganizerQuery } from '../../../services/organizer';
+import { useDeleteTournamentDetailsMutation } from '../../../services/tournament';
 import SmallLoader from '../../../component/SmallLoader';
 import { toast } from 'react-toastify';
 
@@ -17,10 +18,19 @@ function TournamentsOfOrganizer() {
     const [pastTournaments, setPastTournaments] = React.useState([]);
     const [pendingOrRejectedTournaments, setPendingOrRejectedTournaments] = React.useState([]);
     const [currentTabTournaments, setCurrentTabTournaments] = React.useState([]);
-    const {data, isLoading, isError, error} = useTournamentsOfOrganizerQuery();
+    
+    const {data, isLoading, isError, error, refetch} = useTournamentsOfOrganizerQuery();
+    const [deleteTournamentDetails, {...deletingTournament}] = useDeleteTournamentDetailsMutation()
 
-    const handleUnenrollTournament = (tournament_id) =>{
-
+    const handleUnenrollTournament = async (tournament_id) =>{
+        const response = await deleteTournamentDetails(tournament_id);
+        if (response.error) {
+            toast.error(response.error.data.message);
+        }
+        else if (response.data.success) {
+            refetch();
+            toast.success(response.data.message)
+        }
     }
 
     React.useEffect(()=>{
@@ -96,70 +106,77 @@ function TournamentsOfOrganizer() {
                                     }
                                 </div>
                             </div> */}
-                            {
-                                pendingOrRejectedTournaments.map((tournament, index) =>{
-                                    return (
-                                        <div key={index} className="table-container w-full flex lg:justify-center overflow-x-auto">
-                                            <table className="whitespace-nowrap w-full lg:w-3/5 mt-2 rounded-md overflow-hidden text-xs xs:text-sm">
-                                                <thead className="bg-gray-200">
-                                                    <tr>
-                                                        <th className="pl-5 pr-2 py-1.5 text-gray-500 uppercase whitespace-nowrap font-semibold text-left  text-xs">
-                                                        Sr.
-                                                        </th>
-                                                        <th className="px-2 py-1.5 text-gray-500 uppercase whitespace-nowrap font-semibold text-left text-xs">
-                                                        Tournament Name
-                                                        </th>
-                                                        <th className="px-2 py-1.5 text-gray-500 uppercase whitespace-nowrap font-semibold text-left text-xs">
-                                                        Status
-                                                        </th>
-                                                        <th className=" px-2 py-1.5 text-gray-500 uppercase whitespace-nowrap font-semibold text-left text-xs">
-                                                            Action
-                                                        </th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody className="bg-black sm:text-base xs:text-sm text-xs">
-                                                    <tr className="border-t-4 text-left mt-11">
-                                                        <th className="pl-5 font-medium text-gray-200 whitespace-nowrap pr-2 py-2 ">
-                                                            {index + 1}
-                                                        </th>
-                                                        <td className="px-2 whitespace-nowrap pr-2 text-gray-200">
-                                                            <span
-                                                            className="cursor-pointer hover:text-[#ee6730] font-medium"
-                                                            onClick={()=> navigate(`/tournament/${tournament.id}`)}
-                                                            >
-                                                            {tournament.tournament_name}
-                                                            </span>
-                                                        </td>
-                                                        <td className="whitespace-nowrap px-2 text-sm font-medium">
-                                                            {
-                                                                tournament.status == -1 
-                                                                ? 
-                                                                    <span className="text-red-500">
-                                                                        Rejected
+                            
+                            <div className="table-container w-full flex lg:justify-center overflow-x-auto">
+                                <table className="whitespace-nowrap w-full lg:w-3/5 mt-2 rounded-md overflow-hidden text-xs xs:text-sm">
+                                    <thead className="bg-gray-200">
+                                        <tr>
+                                            <th className="pl-5 pr-2 py-1.5 text-gray-500 uppercase whitespace-nowrap font-semibold text-left  text-xs">
+                                            Sr.
+                                            </th>
+                                            <th className="px-2 py-1.5 text-gray-500 uppercase whitespace-nowrap font-semibold text-left text-xs">
+                                            Tournament Name
+                                            </th>
+                                            <th className="px-2 py-1.5 text-gray-500 uppercase whitespace-nowrap font-semibold text-left text-xs">
+                                            Status
+                                            </th>
+                                            <th className=" px-2 py-1.5 text-gray-500 uppercase whitespace-nowrap font-semibold text-left text-xs">
+                                                Action
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="bg-black sm:text-base xs:text-sm text-xs">
+                                        {
+                                            pendingOrRejectedTournaments.map((tournament, index) =>{
+                                            return (
+                                                <tr key={index} className="border-t-4 text-left">
+                                                    <th className="pl-5 font-medium text-gray-200 whitespace-nowrap pr-2 py-2 ">
+                                                        {index + 1}
+                                                    </th>
+                                                    <td className="px-2 whitespace-nowrap pr-2 text-gray-200">
+                                                        <span
+                                                        className="cursor-pointer hover:text-[#ee6730] font-medium"
+                                                        onClick={()=> navigate(`/tournament/${tournament.id}`)}
+                                                        >
+                                                        {tournament.tournament_name}
+                                                        </span>
+                                                    </td>
+                                                    <td className="whitespace-nowrap px-2 text-sm font-medium">
+                                                        {
+                                                            tournament.status == -1 
+                                                            ? 
+                                                                <span className="text-red-500">
+                                                                    Rejected
+                                                                </span>
+                                                            : 
+                                                                tournament.status == 0 
+                                                                ?
+                                                                    <span className="text-gray-300">
+                                                                        Pending
                                                                     </span>
-                                                                : 
-                                                                    tournament.status == 0 
-                                                                    ?
-                                                                        <span className="text-gray-300">
-                                                                            Pending
-                                                                        </span>
-                                                                    :
-                                                                        null
-                                                            }
-                                                        </td>
-                                                        <td className="whitespace-nowrap px-2">
-                                                            <MdDelete className="text-xl text-red-500 cursor-pointer rounded-md hover:opacity-80"
-                                                            onClick={() =>
-                                                            handleUnenrollTournament(tournament.id)
-                                                            }/>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    )
-                                })
-                            }
+                                                                :
+                                                                    null
+                                                        }
+                                                    </td>
+                                                    <td className="whitespace-nowrap px-2">
+                                                        {
+                                                            deletingTournament.isLoading
+                                                            ?
+                                                             <span className='text-sm text-gray-300'>Loading...</span>
+                                                            :
+                                                                <MdDelete className="text-xl text-red-500 cursor-pointer rounded-md hover:opacity-80"
+                                                                onClick={() =>
+                                                                handleUnenrollTournament(tournament.id)
+                                                                }/>
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            )
+                                            })
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     :
                         null
