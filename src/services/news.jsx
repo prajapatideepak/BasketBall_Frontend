@@ -15,11 +15,27 @@ export const newsApi = api.injectEndpoints({
                 };
             },
         }),
+
+        getNewsDetails: build.query({
+            query: (id) => `news/details/${id}`,
+        }),
+
+        updateNewsDetails: build.mutation({
+            query(body) {
+                return {
+                    url: 'news/update',
+                    method: "PUT",
+                    body: body,
+                };
+            },
+        }),
     }),
 });
 
 
 export const {
     useGetAllNewsQuery,
+    useGetNewsDetailsQuery,
     useRegisterNewsMutation,
+    useUpdateNewsDetailsMutation
 } = newsApi;
