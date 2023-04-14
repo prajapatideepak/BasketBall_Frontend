@@ -293,7 +293,7 @@ function TeamProfileDetail() {
                         <th className="border px-2 py-3 text-gray-300 uppercase border-gray-700 whitespace-nowrap font-semibold text-left sm:text-base text-xs xs:text-sm">
                           City
                         </th>
-                        <th className="border whitespace-nowrap px-2 py-3 text-sm text-gray-300 uppercase border-gray-700 whitespace-nowrap font-semibold text-left sm:text-base text-xs xs:text-sm">
+                        <th className="border px-2 py-3 text-gray-300 uppercase border-gray-700 whitespace-nowrap font-semibold text-left sm:text-base text-xs xs:text-sm">
                           Status
                         </th>
                         {!isPublicView ? (
@@ -391,7 +391,7 @@ function TeamProfileDetail() {
                       <div
                         className={`${
                           currentTab == 3 ? "bg-[#ee6730]" : ""
-                        } hover:bg-[#ee6730] group cursor-pointer w-full text-center p-1 rounded-full mr-1.5`}
+                        } group cursor-pointer w-full text-center p-1 rounded-full mr-1.5`}
                         onClick={() => setCurrentTab(3)}
                       >
                         <h3
@@ -405,7 +405,7 @@ function TeamProfileDetail() {
                       <div
                         className={`${
                           currentTab == 1 ? "bg-[#ee6730]" : ""
-                        } hover:bg-[#ee6730] group cursor-pointer w-full text-center p-1 rounded-full`}
+                        } group cursor-pointer w-full text-center p-1 rounded-full`}
                         onClick={() => setCurrentTab(1)}
                       >
                         <h3

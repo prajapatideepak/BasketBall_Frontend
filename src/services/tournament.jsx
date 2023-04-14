@@ -34,14 +34,12 @@ export const tournamentApi = api.injectEndpoints({
       invalidatesTags: [{ type: "Tournaments", id: "LIST" }],
     }),
     updateTournamentDetails: build.mutation({
-      query(tournament_id, formData) {
+      query({tournament_id, formData}) {
+        console.log(tournament_id)
         return {
           url: `tournament/update/${tournament_id}`,
           method: "PUT",
           body: formData,
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
         };
       },
       invalidatesTags: (result, error, { tournament_id }) =>

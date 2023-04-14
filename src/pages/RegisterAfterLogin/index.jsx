@@ -85,11 +85,11 @@ export default function AfterRole() {
           return (
             <motion.div
               animate={{
-                borderColor: r.isSelected ? "#ee6730" : "white",
+                borderColor: r.isSelected ? "#ee6730" : "#ffffff",
                 // backgroundColor: r.isSelected ? '#FFFFFF' : "#F3F4F6",
-                boxShadow: r.isSelected
-                  ? "rgba(0, 0, 0, 0.35) 0px 5px 15px"
-                  : "",
+                // boxShadow: r.isSelected
+                //   ? "rgba(0, 0, 0, 0.35) 0px 5px 15px"
+                //   : "",
               }}
               transition={{
                 duration: .5,
@@ -122,7 +122,7 @@ export default function AfterRole() {
               </div>
               <motion.div
                 animate={{
-                  color: r.isSelected ? "#ee6730" : "black",
+                  color: r.isSelected ? "#ee6730" : "#000000",
                 }}
                 className="text-center m-2 rounded-md mx-10 text-sm lg:text-lg font-semibold"
               >

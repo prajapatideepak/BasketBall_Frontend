@@ -211,7 +211,7 @@ function TeamAddEdit() {
         <img src={"/icons/team_icon.png"} className="w-20" />
       </div>
       <p className="text-center text-gray-700 text-sm md:text-base italic pb-5">
-        Be the player that raises the bar, be relentless, be a game changer.
+        A team that works together, wins together, and celebrates together.
       </p>
       <div className="mx-auto lg:px-10 ">
         <form
