@@ -1,10 +1,13 @@
 import { tab } from "@material-tailwind/react";
 import React from "react";
 import { motion } from "framer-motion";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useGetMatchDetailQuery } from "../../../services/match";
 import Loader from "../../../Component/Loader";
 import MatchProfile from "./MatchProfile";
+import TeamPlayers from "./TeamPlayers";
+import AboutMatch from "./AboutMatch";
+import MatchScoreTable from "./MatchScoreTable";
 
 const MatchDetails = () => {
   const { id } = useParams();
@@ -17,6 +20,7 @@ const MatchDetails = () => {
   });
   console.log(win);
   console.log(data?.data?.match_data);
+  const [tabIndex, setTabIndex] = React.useState(0);
   const [menu, setMenu] = React.useState([
     {
       name: "Score Table",
@@ -40,10 +44,18 @@ const MatchDetails = () => {
     },
   ]);
 
+  const tabs = [
+    <MatchScoreTable data={data} />,
+    <TeamPlayers data={data} />,
+    "",
+    "",
+    <AboutMatch data={data} />,
+  ];
   function HandleChange(id) {
     setMenu(
       menu.map((m, index) => {
         if (index == id) {
+          setTabIndex(index);
           return { ...m, active: true };
         } else {
           return { ...m, active: false };
@@ -85,6 +97,7 @@ const MatchDetails = () => {
               })}
             </div>
           </div>
+          <div className=" md:px-16 md:py-8">{tabs[tabIndex]}</div>
         </div>
       )}
     </section>

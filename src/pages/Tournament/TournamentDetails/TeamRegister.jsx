@@ -10,7 +10,7 @@ import {
   useGetuserTeamsQuery,
   useTeamtoTournamentMutation,
 } from "../../../services/team";
-import Loader from "../../../component/Loader";
+import Loader from "../../../Component/Loader";
 
 function TeamRegister() {
   const navigate = useNavigate();
@@ -31,7 +31,9 @@ function TeamRegister() {
     }
     if (something.isSuccess) {
       if (something?.data?.success) {
-        navigate(`/team/profile-detail/${something?.data?.data.team_id}`);
+        navigate(`/team/profile-detail/${something?.data?.data.team_id}`, {
+          state: { isPublic: true },
+        });
         toast.success("Team Registration Successfull ");
       }
     }
@@ -70,6 +72,7 @@ function TeamRegister() {
     },
   });
 
+  console.log(something);
   React.useEffect(() => {
     const team = teamData?.data?.data.find((team) => {
       return team.id == selectedTeam;
@@ -259,7 +262,6 @@ function TeamRegister() {
                     <button
                       type="submit"
                       className="bg-[#ee6730] relative inline-flex items-center justify-center md:px-6 py-2 px-4  overflow-hidden text-white rounded-lg cursor-pointer group"
-                      onClick={(e) => handleSubmit()}
                     >
                       <span className="absolute w-0 h-0 transition-all duration-500 ease-out  bg-slate-900 rounded-lg group-hover:w-full group-hover:h-56"></span>
                       <span className="relative text-sm xl:text-base">

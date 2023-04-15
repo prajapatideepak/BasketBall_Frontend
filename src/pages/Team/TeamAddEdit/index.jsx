@@ -66,7 +66,9 @@ function TeamAddEdit() {
 
         if (location?.state?.isEdit) {
           fb.append("id", location.state.teamDetail.id);
-          teamUpdate(fb).then(console.log("update ho gai"));
+          teamUpdate({ body: fb, team_id: location.state.teamDetail.id }).then(
+            console.log("update ho gai")
+          );
         } else {
           teamRegistration(fb).then(console.log("ho gaya"));
         }
@@ -134,7 +136,9 @@ function TeamAddEdit() {
       if (thing?.data?.success) {
         toast.success("Team Registration Successfull ");
 
-        navigate(`/team/profile-detail/${thing?.data?.team?.id}`);
+        navigate(`/team/profile-detail/${thing?.data?.team?.id}`, {
+          state: { isPublic: true },
+        });
       }
     }
   }, [thing.isError, thing.isSuccess]);
@@ -146,7 +150,9 @@ function TeamAddEdit() {
     if (updateData.isSuccess) {
       if (updateData?.data?.success) {
         toast.success("Team Update   Successfull ");
-        navigate(`/team/profile-detail/${updateData?.data?.team?.id}`);
+        navigate(`/team/profile-detail/${updateData?.data?.team?.id}`, {
+          state: { isPublic: true },
+        });
       }
     }
   }, [updateData.isError, updateData.isSuccess]);
