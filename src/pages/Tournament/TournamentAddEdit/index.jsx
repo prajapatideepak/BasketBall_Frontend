@@ -14,7 +14,7 @@ import { useRegisterTournamentMutation, useUpdateTournamentDetailsMutation } fro
 function TournamentAddEdit() {
   const location = useLocation();
   const [refereelist, setRefereelist] = React.useState([{ Referee: "" }]);
-  const [sponsorlist, setsponsorlist] = React.useState([{ Sponsor: "" }]);
+  const [sponsorlist, setsponsorlist] = React.useState([{ name: "", logo: "" }]);
   const [isSubmitting, setIsSubmitting] = React.useState(false)
   const navigate = useNavigate();
 
@@ -200,7 +200,7 @@ function TournamentAddEdit() {
     handleChange,
     handleSubmit,
   } = useFormik({
-    validationSchema: TournamentInfoSchema,
+    validationSchema: TournamentInfoSchema(location?.state?.isEdit),
     initialValues,
     onSubmit: async (data) => {
       //tournament_category
@@ -254,7 +254,12 @@ function TournamentAddEdit() {
       }
       else if (response.data.success) {
         toast.success(response.data.message)
-        //navigate to page where tournaments of organizers are shown
+        if(location?.state?.isEdit){
+          navigate(`/tournament/${location?.state?.tournamentDetails.id}`)
+        }
+        else{
+          navigate('/tournament/organizer')
+        }
       }
     },
   });
@@ -270,7 +275,8 @@ function TournamentAddEdit() {
 
       const sponsors = location?.state?.tournamentDetails.tournament_sponsors?.map((sponsor) =>{
         return {
-          Sponsor: ""
+          name: sponsor.title,
+          logo: sponsor.logo
         }
       })
       setsponsorlist(sponsors.length > 0 ? sponsors : sponsorlist);
@@ -722,7 +728,7 @@ function TournamentAddEdit() {
                   Sponsor Information:
                 </h3>
               </div>
-              {sponsorlist.map((singlesponsor, index) => (
+              {sponsorlist.map((sponsor, index) => (
                 <div key={index} className="flex flex-col  items-center">
                   <div className="flex flex-col lg:flex-row items-center w-full gap-7 py-4">
                     {/* Sponsor_Name && Sponsor_Logo */}
@@ -754,15 +760,27 @@ function TournamentAddEdit() {
                           name={`sponsors.${index}.logo`}
                           accept=".png, .jpg, .jpeg"
                           onChange={(e) => {
-                            setFieldValue(`sponsors.${index}.logo`, e.target.files[0] ? e.target.files[0] : '');
+                            setFieldValue(`sponsors.${index}.logo`, e.target.files[0] ? e.target.files[0] : sponsor.logo);
                           }}
                           onBlur={handleBlur}
                         />
                         {
-                          values.sponsors[index].logo != ''
+                          values.sponsors[index].logo != '' || sponsor.logo != ''
                             ?
                               <div className="w-12 h-12  rounded-full overflow-hidden mx-3">
-                                <img src={URL.createObjectURL(values.sponsors[index].logo)} className="w-full h-full" alt="" />
+                                <img 
+                                src={
+                                  values.sponsors[index].logo != '' 
+                                  ? 
+                                    !values.sponsors[index].logo.name && !values.sponsors[index].logo.size
+                                    ?
+                                      values.sponsors[index].logo
+                                    :
+                                      URL.createObjectURL(values.sponsors[index].logo)
+                                  : 
+                                    sponsor.logo 
+                                } 
+                                className="w-full h-full" alt="" />
                               </div>
                             :
                               <div className="w-12 h-12 rounded-full border mx-3">

@@ -8,7 +8,7 @@ function isValidFileType(fileName, fileType) {
 const today = new Date();
 today.setHours(0, 0, 0, 0)
 
-export const TournamentInfoSchema = Yup.object({
+export const TournamentInfoSchema = (isEdit)=> Yup.object({
     tournament_name: Yup.string()
       .matches(/^[a-zA-Z ]+$/, "Please enter only characters")
       .min(2, "Team name must be at least 2 characters")
@@ -44,9 +44,18 @@ export const TournamentInfoSchema = Yup.object({
       Object.values(value).some(Boolean)
     ),
 
-    starting_date: Yup.date().max(Yup.ref('ending_date'), "End date Can't be before Start date").required("Please Select Start Date").min(today, "Date cannot be in the past"),
+    starting_date: Yup.date()
+      .max(
+        Yup.ref('ending_date'), "End date Can't be before Start date"
+      )
+      .required("Please Select Start Date")
+      .min(today, "Date cannot be in the past"),
 
-    ending_date: Yup.date().min(Yup.ref('starting_date'), "End date can't be before Start date").required('Please Select End Date'),
+    ending_date: Yup.date()
+      .min(
+        Yup.ref('starting_date'), "End date can't be before Start date"
+        )
+      .required('Please Select End Date'),
 
     age_cutoff: Yup.object().shape({
       under_14: Yup.boolean(),
@@ -111,6 +120,9 @@ export const TournamentInfoSchema = Yup.object({
           .mixed()
           .test('fileSize', 'Logo is required', function (value) {
             const { name } = this.parent;
+            if(isEdit){
+              return true
+            }
             if (!name && !value) {
               return true; // both fields are optional
             }
@@ -122,12 +134,14 @@ export const TournamentInfoSchema = Yup.object({
           .test("is-valid-type", "Logo should be in jpg, jpeg or png format",
             value =>  {
               if(!value) return true
+              if(!value.name && !value.size) return true
               return isValidFileType(value && value.name.toLowerCase(), "image")
             }
           )
           .test("is-valid-size", "Max allowed size is 2MB",
             value => {
               if(!value) return true
+              if(!value.name && !value.size) return true
               return value && value.size <= 2097152
             }
           )
