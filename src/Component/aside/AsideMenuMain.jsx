@@ -90,7 +90,7 @@ function AsideMenuMain() {
         </div>
         <div
           className={` font-semibold text-gray-800 pb-10 lg:pb-0 lg:space-y-10 fixed
-                     z-50  pl-9 md:pl-0 right-0 w-full md:w-72 md:h-screen bg-red-500 lg:pr-0  flex flex-col justify-start items-start lg:justify-start md:items-center
+                     z-50  pl-9 md:pl-0 right-0 w-full md:w-72 md:h-screen bg-black lg:pr-0  flex flex-col justify-start items-start lg:justify-start md:items-center
                      duration-500 ease-in ${open
               ? "top-[66px] lg:top-[82px] xl:top-[80px] 2xl:top-[66px] opacity-100"
               : " top-[68px] lg:top-[85px] xl:top-[80px] 2xl:top-[68px]  right-[-800px] lg:opacity-100 opacity-0"
@@ -156,7 +156,7 @@ function AsideMenuMain() {
               </NavLink>
             </li>
             <li className="nav-item " onClick={() => setOpen(!open)}>
-              <NavLink className={({ isActive }) => (isActive ? "active" : 'none')} to={""} >
+              <NavLink className={({ isActive }) => (isActive ? "active" : 'none')} to={"/highlights"} >
                 <h1 className="relative text-white text-base md:text-base lg:text-base xl:text-lg my-[16px] lg:my-0">
                   Highlight
                 </h1>

@@ -44,13 +44,17 @@ export const matchApi = api.injectEndpoints({
     getMatchList: build.query({
       query: ({ pageNo, status }) => `match/list/${status}&${pageNo}`,
     }),
+    getMatches: build.query({
+      query: () => "match/matches",
+    })
   }),
 });
 
 export const {
+  useGetMatchScoreQuery,
   useUpdateMatchDetailsMutation,
   useDeleteMatchMutation,
-  useGetMatchScoreQuery,
-  useGetMatchListQuery,
   useGetMatchDetailQuery,
+  useGetMatchListQuery,
+  useGetMatchesQuery
 } = matchApi;

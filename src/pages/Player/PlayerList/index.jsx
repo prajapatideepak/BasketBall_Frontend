@@ -17,6 +17,7 @@ const PlayerList = () => {
     pageNo: pageNo - 1,
     search,
   });
+  console.log(data)
   const itemsPerPage = 2;
   return (
     <section className="min-h-screen-fit">

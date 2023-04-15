@@ -3,6 +3,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 function MatchCard({ match }) {
+  console.log(match)
   const navigate = useNavigate();
 
   const handleClick = () => {
