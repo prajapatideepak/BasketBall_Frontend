@@ -50,7 +50,7 @@ function TournamentCard({ tournament }) {
                     ? "/CBL_Images/tournament_logo_2.webp"
                     : tournament.logo
                 }
-                className="object-contain h-full w-full"
+                className="object-cover h-full w-full"
                 alt="Logo"
               />
             </div>
