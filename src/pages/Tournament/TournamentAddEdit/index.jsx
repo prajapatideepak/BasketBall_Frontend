@@ -284,14 +284,21 @@ function TournamentAddEdit() {
           <div className=" flex justify-center items-center">
             <div>
               <h1 className=" items-end  text-center text-lg font-semibold sm:text-2xl lg:text-3xl">
-                {location?.state?.isEdit ? "Tornament Edit" : "Tournament Registration"}
+                {location?.state?.isEdit ? "Tournament Edit" : "Tournament Registration"}
               </h1>
             </div>
             <img src={"/icons/tournament_icon.png"} className="w-20" />
           </div>
-          <p className="text-center text-gray-700 text-sm md:text-base italic pb-5">
-            The court is set, the teams are ready, let the games begin!
-          </p>
+          {
+            location?.state?.isEdit 
+            ?
+              null
+            :
+              <p className="text-center text-gray-700 text-sm md:text-base italic pb-5">
+                The court is set, the teams are ready, let the games begin!
+              </p>
+
+          }
         </div>
         <div className='mx-auto px-5 sm:px-10 py-10 lg:px-10 shadow-xl rounded-md'>
           <form action="" onSubmit={handleSubmit} encType="multipart/form-data">
@@ -644,7 +651,7 @@ function TournamentAddEdit() {
                 <div key={index} className="flex flex-col  items-center ">
                   <div className="flex flex-col lg:flex-row items-center w-full gap-6 py-4 ">
                     <div className="flex flex-col w-full">
-                      <label className="mb-2">Referee Name *</label>
+                      <label className="mb-2">Referee Name</label>
                       <input
                         className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-3 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
                         placeholder="Enter Referee Name"
@@ -661,7 +668,7 @@ function TournamentAddEdit() {
                       ) : null}
                     </div>
                     <div className="flex flex-col w-full">
-                      <label className="mb-2">Referee Mobile *</label>
+                      <label className="mb-2">Referee Mobile</label>
                       <input
                         className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-3 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
                         type="text"
@@ -720,7 +727,7 @@ function TournamentAddEdit() {
                   <div className="flex flex-col lg:flex-row items-center w-full gap-7 py-4">
                     {/* Sponsor_Name && Sponsor_Logo */}
                     <div className="flex flex-col w-full">
-                      <label className="mb-2">Sponsor Name *</label>
+                      <label className="mb-2">Sponsor Name</label>
                       <input
                         className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-3 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
                         placeholder="Enter Sponsor Name"
@@ -738,7 +745,7 @@ function TournamentAddEdit() {
                     </div>
                     <div className="flex flex-col w-full">
                       <label className="mb-2">
-                        Choose Logo * <span className="text-sm text-gray-400">( png, jpg, jpeg )</span>
+                        Choose Logo <span className="text-sm text-gray-400">( png, jpg, jpeg )</span>
                       </label>
                       <div className="flex items-center">
                         <input
@@ -747,16 +754,20 @@ function TournamentAddEdit() {
                           name={`sponsors.${index}.logo`}
                           accept=".png, .jpg, .jpeg"
                           onChange={(e) => {
-                            setFieldValue(`sponsors.${index}.logo`, e.target.files[0]);
+                            setFieldValue(`sponsors.${index}.logo`, e.target.files[0] ? e.target.files[0] : '');
                           }}
                           onBlur={handleBlur}
                         />
                         {
                           values.sponsors[index].logo != ''
                             ?
-                              <img src={URL.createObjectURL(values.sponsors[index].logo)} className="w-12 h-12 rounded-full mx-3" alt="" />
+                              <div className="w-12 h-12  rounded-full overflow-hidden mx-3">
+                                <img src={URL.createObjectURL(values.sponsors[index].logo)} className="w-full h-full" alt="" />
+                              </div>
                             :
-                              <div className="w-[55px] h-12 rounded-full border mx-3"></div>
+                              <div className="w-12 h-12 rounded-full border mx-3">
+
+                              </div>
                         }
                         {sponsorlist.length > 1 && (
                           <div
