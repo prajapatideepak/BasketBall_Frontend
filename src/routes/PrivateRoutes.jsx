@@ -29,7 +29,7 @@ const PrivateRoutes = () => {
           path="/profile-detail/:team_id"
           element={<TeamProfileDetail />}
         />
-        <Route path="/Visitor-profile" element={<VisitorProfile />} />
+        <Route path="/visitor-profile" element={<VisitorProfile />} />
         <Route path="/role" element={<Role />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="news/*" element={<News />} />
