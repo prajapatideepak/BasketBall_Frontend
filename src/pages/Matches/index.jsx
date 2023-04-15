@@ -3,13 +3,13 @@ import { GiBasketballBall } from "react-icons/gi";
 import Heading from "../../Component/Heading";
 import { useGetMatchListQuery } from "../../services/match";
 import MatchCard from "../../Component/MatchCard";
+import SmallLoader from "../../Component/SmallLoader";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 
 function MatchList() {
   const [currentTab, setCurrentTab] = React.useState(1);
   const [pageNo, setPageNo] = React.useState(0);
 
-  console.log(currentTab);
   const data = useGetMatchListQuery({ pageNo: pageNo, status: currentTab });
 
   return (
@@ -64,9 +64,7 @@ function MatchList() {
         </div>
         {data.isFetching && (
           <div className="px-6 py-12 flex justify-center">
-            <p className="text-xs xs:text-sm sm:text-lg font-medium text-gray-400">
-              Please wait.....
-            </p>
+            <SmallLoader/>
           </div>
         )}
         {!data.isFetching && data.isSuccess && (

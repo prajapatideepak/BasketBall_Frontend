@@ -35,7 +35,7 @@ function Schedule({isOrganizer}) {
             return toast.error('Please fill the fields')
         }
 
-        const response = await updateMatchDetails({match_id: match_id, match_date: moment(matchDate).format('YYYY-MM-D'), match_time: matchTime, match_address: matchAddress})
+        const response = await updateMatchDetails({tournament_id, match_id, match_date: moment(matchDate).format('YYYY-MM-D'), match_time: matchTime, match_address: matchAddress})
 
         if(response.error){
             toast.error(response.error.data.message)

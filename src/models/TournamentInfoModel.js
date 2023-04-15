@@ -120,7 +120,7 @@ export const TournamentInfoSchema = (isEdit)=> Yup.object({
           .mixed()
           .test('fileSize', 'Logo is required', function (value) {
             const { name } = this.parent;
-            if(isEdit){
+            if(isEdit && value){
               return true
             }
             if (!name && !value) {
