@@ -10,13 +10,13 @@ import News_cards from "../../Component/Dashboard/News_cards";
 import Tournaments_cards from "../../Component/Dashboard/Tournaments_cards";
 import { GiBasketballBall } from 'react-icons/gi';
 import { useNavigate } from 'react-router-dom'
-import { useGetMatchLiveQuery } from "../../services/match";
+import { useGetMatchesQuery } from "../../services/match";
 import { useGetAllTournamentsQuery } from "../../services/tournament";
 import { useGetAllNewsQuery } from "../../services/news";
 
 
 const Dashboard = () => {
-  const data = useGetMatchLiveQuery();
+  const data = useGetMatchesQuery();
   const tournaments = useGetAllTournamentsQuery();
   const news = useGetAllNewsQuery();
   const navigate = useNavigate();
@@ -275,7 +275,7 @@ const Dashboard = () => {
         <div className="px-7 md:px-10">
           <div className="flex justify-between items-center xl:pr-8">
             <h1 className="font-bold text-lg md:text-2xl  lg:text-3xl text-black">
-              Leagues on Courtside :
+              Matches :
             </h1>
             <div className="flex items-center text-[13px] font-semibold cursor-pointer hover:underline " onClick={matchlist}>
               <p className="hidden sm:block sm:text-[10px] lg:text-[11px]">Discover More</p>
@@ -310,7 +310,7 @@ const Dashboard = () => {
         <div className="px-7 md:px-10">
           <div className="flex justify-between items-center xl:pr-8">
             <h1 className="font-bold text-lg md:text-2xl  lg:text-3xl text-black">
-              Tournament :
+              Tournaments :
             </h1>
             <div className="flex items-center text-[13px] font-semibold cursor-pointer hover:underline " onClick={tournamentlist}>
               <p className="hidden sm:block sm:text-[10px] lg:text-[11px]">Discover More</p>
@@ -345,7 +345,7 @@ const Dashboard = () => {
       </div>
 
       {/* Highlights previus matches  */}
-      <div className="relative">
+      {/* <div className="relative">
         <div className="px-7 md:px-10">
           <div className="flex justify-between items-center xl:pr-8">
             <h1 className="font-bold text-lg md:text-2xl  lg:text-3xl text-black">
@@ -380,7 +380,7 @@ const Dashboard = () => {
               </div>
           }
         </div>
-      </div>
+      </div> */}
 
       {/* News previus matches  */}
       <div className=" pb-5 relative ">

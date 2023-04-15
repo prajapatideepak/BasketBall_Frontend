@@ -24,7 +24,7 @@ function Match_cards({ match }) {
     <>
       <div className="relative min-w-[260px] xs:min-w-[320px] sm:min-w-[350px] md:min-w-[350px] max-w-[440px] h-[190px] sm:h-[200px] md:h-[185px] border-0 hover:border-2 hover:border-gray-400 hover:border-dashed group rounded-lg"
         onClick={handleClick} key={match.id}>
-        <div className="absolute flex transition-all duration-300 ease-in-out cursor-pointer top-[-2px] left-[-2px] w-full h-full group-hover:left-[-10px] group-hover:top-[-10px] hover:left-[-10px] hover:top-[-10px] bg-white shadow-xl rounded-lg">
+        <div className="absolute flex transition-all duration-300 ease-in-out cursor-pointer top-[-2px] left-[-2px] w-full h-full group-hover:left-[-10px] group-hover:top-[-10px] shadow-[#ea5a2e12] hover:left-[-10px] hover:top-[-10px] bg-white shadow-xl rounded-lg">
           {/* Live match  */}
           {
             match?.status == 2
@@ -72,7 +72,7 @@ function Match_cards({ match }) {
                     <p className='text-black font-semibold uppercase'>
                       {match.round_name ? match.round_name : ""}
                     </p>
-                    <p className='text-slate-500 text-[15px] font-medium'><span>{match.start_date ? moment(match?.start_date).format('ll') : null}</span> / Munday</p>
+                    <p className='text-slate-500 text-[15px] font-medium'><span>{match.start_date ? moment(match?.start_date).format('ll') : null}</span></p>
                     <p className='text-black font-bold text-[15px]'>{match?.start_time ? match.start_time : ""} </p>
                   </div>
                 </div>
@@ -93,8 +93,7 @@ function Match_cards({ match }) {
                     <p className='text-black font-semibold uppercase'>
                       {match.round_name ? match.round_name : ""}
                     </p>
-                    <p className='text-slate-500 text-[15px] font-medium'><span>{match.start_date ? moment(match?.start_date).format('ll') : ""}</span> / Sun</p>
-                    <p className='text-black font-bold text-[15px]'>{match?.start_time ? match.start_time : ""} </p>
+                    <p className='text-slate-500 text-[15px] font-medium'><span>{match.start_date ? moment(match?.start_date).format('ll') : ""}</span></p>
                   </div>
                 </div>
                 :
