@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import React from "react";
 import { MdDone } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import Button from "../../Component/Button";
 import Heading from "../../Component/Heading";
@@ -9,6 +10,7 @@ import Heading from "../../Component/Heading";
 
 export default function AfterRole() {
   const navigate = useNavigate();
+  const { user } = useSelector(state => state.user)
 
   const [role, setRole] = React.useState([
     {
@@ -82,6 +84,8 @@ export default function AfterRole() {
       </div>
       <div className="grid my-14 rounded-lg  xl:px-8 xl:mx-10 xs:grid-cols-1 w-full justify-center sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-10 ">
         {role.map((r, i) => {
+          if(user.is_player && r.title == 'Player') return
+          if(user.is_visitor && r.title == 'Visitor') return
           return (
             <motion.div
               animate={{
@@ -105,7 +109,6 @@ export default function AfterRole() {
                 }}
                 animate={{
                   backgroundColor: r.isSelected ? "#ee6730" : "#F3F4F6",
-
                   opacity: 1,
                 }}
                 transition={{
