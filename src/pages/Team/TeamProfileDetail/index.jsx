@@ -45,9 +45,9 @@ function TeamProfileDetail() {
       ? [...data?.data.team_1_matches, ...data?.data.team_2_matches]
       : [];
 
-  const handleUnenrollTournament = (tournament_id, is_selected) => {
+  const handleUnenrollTournament = (tour, tournament_id) => {
     try {
-      console.log(tournament_id);
+      console.log("sa", tournament_id);
     } catch (error) {
       if (error instanceof AxiosError) {
         toast.error(error.response.data.message);
@@ -370,7 +370,7 @@ function TeamProfileDetail() {
                                       )
                                     }
                                   >
-                                    Unenroll
+                                    Cancel Request
                                   </button>
                                 </td>
                               ) : null}
