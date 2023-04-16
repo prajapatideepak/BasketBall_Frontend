@@ -12,6 +12,8 @@ function AsideMenuMain() {
   const { user } = useSelector((state) => state.user);
 
   const [open, setOpen] = React.useState(false);
+  const [isMenu, setIsMenu] = React.useState(false);
+
   const navigate = useNavigate();
 
   return (
@@ -89,8 +91,8 @@ function AsideMenuMain() {
           </ul>
         </div>
         <div
-          className={` font-semibold text-gray-800 pb-10 lg:pb-0 lg:space-y-10 fixed
-                     z-50  pl-9 md:pl-0 right-0 w-full md:w-72 md:h-screen bg-black lg:pr-0  flex flex-col justify-start items-start lg:justify-start md:items-center
+          className={` font-semibold bg-black mt-0.5 text-gray-800 pb-10 lg:pb-0 lg:space-y-10 fixed
+                     z-50  pl-9 md:pl-0 right-0 w-full md:w-72 md:h-screen lg:pr-0  flex flex-col justify-start items-start lg:justify-start md:items-center
                      duration-500 ease-in ${open
               ? "top-[66px] lg:top-[82px] xl:top-[80px] 2xl:top-[66px] opacity-100"
               : " top-[68px] lg:top-[85px] xl:top-[80px] 2xl:top-[68px]  right-[-800px] lg:opacity-100 opacity-0"
@@ -118,6 +120,19 @@ function AsideMenuMain() {
                   <NavLink className={({isActive}) => (isActive ? "active" : 'none')} to={"/tournament/organizer"} >
                     <h1 className="relative text-white text-base md:text-base lg:text-base xl:text-lg  my-5 md:my-0">
                       Your Tournaments
+                    </h1>
+                  </NavLink>
+                </li>
+              :
+                null
+            }
+            {
+              user.is_manager
+              ?
+                <li className="nav-item" onClick={() => setOpen(!open)}>
+                  <NavLink className={({isActive}) => (isActive ? "active" : 'none')} to={"/team/profile"} >
+                    <h1 className="relative text-white text-base md:text-base lg:text-base xl:text-lg  my-5 md:my-0">
+                      Your Teams
                     </h1>
                   </NavLink>
                 </li>
@@ -207,16 +222,16 @@ function AsideMenuMain() {
 
         <div className="flex items-center space-x-2 lg:space-x-5">
           <div className="">
-            <DropDownmenu />
+            <DropDownmenu setOpen={setOpen} setIsMenu={setIsMenu} isMenu={isMenu}/>
           </div>
           <div
-            className=" px-1 py-[2px]  rounded-md"
-            onClick={() => setOpen(!open)}
+            className="px-1 py-[2px]  rounded-md w-8"
+            onClick={() => {setIsMenu(false); setOpen(!open)}}
           >
             {open ? (
-              <RxCross1 className="text-slate-400 hover:text-white  cursor-pointer hover:rotate-90 duration-700 text-[22px]" />
+              <RxCross1 className="text-slate-400 hover:text-white  cursor-pointer transition-all duration-700 text-[22px]" />
             ) : (
-              <RxHamburgerMenu className="text-slate-400 hover:text-white hover:rotate-90 duration-700  cursor-pointer text-2xl" />
+              <RxHamburgerMenu className="text-slate-400 hover:text-white transition-all duration-700  cursor-pointer text-2xl" />
             )}
           </div>
         </div>

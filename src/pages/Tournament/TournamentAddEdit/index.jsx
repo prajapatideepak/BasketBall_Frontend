@@ -4,20 +4,22 @@ import { useFormik } from "formik";
 import { FaUserPlus } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { toast } from "react-toastify";
+import moment from 'moment'
 import Select from "react-select";
 import { useNavigate, useLocation } from "react-router-dom";
 import Heading from "../../../Component/Heading";
 import { TournamentInfoSchema } from "../../../models/TournamentInfoModel";
-import { useRegisterTournamentMutation } from "../../../services/tournament";
+import { useRegisterTournamentMutation, useUpdateTournamentDetailsMutation } from "../../../services/tournament";
 
 function TournamentAddEdit() {
-  // const location = useLocation();
+  const location = useLocation();
   const [refereelist, setRefereelist] = React.useState([{ Referee: "" }]);
-  const [sponsorlist, setsponsorlist] = React.useState([{ Sponsor: "" }]);
+  const [sponsorlist, setsponsorlist] = React.useState([{ name: "", logo: "" }]);
   const [isSubmitting, setIsSubmitting] = React.useState(false)
   const navigate = useNavigate();
 
   const [registerTournament] = useRegisterTournamentMutation();
+  const [updateTournamentDetails] = useUpdateTournamentDetailsMutation();
 
   const customStyles = {
     control: (provided, state) => ({
@@ -86,17 +88,11 @@ function TournamentAddEdit() {
   };
 
   // ------------ Form Validation ------------
-  const initialValues = {
-    tournament_name: location?.state?.isEdit
-      ? location?.state?.tournament_name
-      : "",
-    tournament_logo: location?.state?.isEdit
-      ? location?.state?.tournament_logo
-      : "",
-    starting_date: location?.state?.isEdit
-      ? location?.state?.starting_date
-      : "",
-    ending_date: location?.state?.isEdit ? location?.state?.ending_date : "",
+  const addTournamentValues = {
+    tournament_name: "",
+    tournament_logo: "",
+    starting_date: "",
+    ending_date: "",
     tournament_category: {
       boys: false,
       girls: false,
@@ -113,27 +109,86 @@ function TournamentAddEdit() {
       under_25: false,
       under_27: false,
     },
-    tournament_level: location?.state?.isEdit
-      ? location?.state?.tournament_level
-      : "",
-    city_name: location?.state?.isEdit ? location?.state?.city_name : "",
-    about_tournament: location?.state?.isEdit
-      ? location?.state?.about_tournament
-      : "",
+    tournament_level: "",
+    city_name: "",
+    about_tournament: "",
     referees: [
       {
-        name: location?.state?.isEdit ? location?.state?.referee_name : "",
-        mobile: location?.state?.isEdit ? location?.state?.referee_mobile : ""
+        name: "",
+        mobile: ""
       },
     ],
     sponsors: [
       {
-        name: location?.state?.isEdit ? location?.state?.sponsor_name : "",
-        logo: location?.state?.isEdit ? location?.state?.sponsor_logo : ""
+        name: "",
+        logo: ""
       }
     ],
-    prize: location?.state?.isEdit ? location?.state?.prize : "",
+    prize: "",
   };
+
+  const editTournamentValues = {
+    tournament_name: location?.state?.tournamentDetails.tournament_name,
+    tournament_logo: "",
+    starting_date: location?.state?.tournamentDetails.start_date ? moment(location?.state?.tournamentDetails.start_date).format("YYYY-MM-DD") : '',
+    ending_date: location?.state?.tournamentDetails.end_date ? moment(location?.state?.tournamentDetails.end_date).format("YYYY-MM-DD") : '',
+    tournament_category: {
+      boys: location?.state?.tournamentDetails.gender_types?.includes('boys'),
+      girls: location?.state?.tournamentDetails.gender_types?.includes('girls'),
+      men: location?.state?.tournamentDetails.gender_types?.includes('men'),
+      women: location?.state?.tournamentDetails.gender_types?.includes('women'),
+      mixed: location?.state?.tournamentDetails.gender_types?.includes('mixed'),
+    },
+    age_cutoff: {
+      under_14: location?.state?.tournamentDetails.age_categories?.includes('under 14'),
+      under_16: location?.state?.tournamentDetails.age_categories?.includes('under 16'),
+      under_17: location?.state?.tournamentDetails.age_categories?.includes('under 17'),
+      under_19: location?.state?.tournamentDetails.age_categories?.includes('under 19'),
+      under_21: location?.state?.tournamentDetails.age_categories?.includes('under 21'),
+      under_25: location?.state?.tournamentDetails.age_categories?.includes('under 25'),
+      under_27: location?.state?.tournamentDetails.age_categories?.includes('under 27'),
+    },
+    tournament_level: location?.state?.tournamentDetails.level,
+    city_name: location?.state?.tournamentDetails.address,
+    about_tournament: location?.state?.tournamentDetails.about == null ? '' : location?.state?.tournamentDetails.about,
+    referees: 
+      location?.state?.tournamentDetails.tournament_referees.length > 0
+      ?
+        location?.state?.tournamentDetails.tournament_referees?.map((referee)=>{
+          return {
+              name: referee.name,
+              mobile: referee.mobile
+            }
+        })
+      :
+        [
+          {
+            name: '',
+            mobile: ''
+          }
+        ]
+    ,
+    sponsors:
+      location?.state?.tournamentDetails.tournament_sponsors.length > 0
+      ?
+        location?.state?.tournamentDetails.tournament_sponsors?.map((sponsor)=>{
+          return {
+              name: sponsor.title,
+              logo: sponsor.logo
+            }
+        })
+      :
+        [
+          {
+            name: '',
+            logo: ''
+          }
+        ]
+    ,
+    prize: location?.state?.tournamentDetails.prize == null ? '' : location?.state?.tournamentDetails.prize,
+  };
+
+  const initialValues = location?.state?.isEdit ? editTournamentValues : addTournamentValues
 
   const {
     values,
@@ -145,7 +200,7 @@ function TournamentAddEdit() {
     handleChange,
     handleSubmit,
   } = useFormik({
-    validationSchema: TournamentInfoSchema,
+    validationSchema: TournamentInfoSchema(location?.state?.isEdit),
     initialValues,
     onSubmit: async (data) => {
       //tournament_category
@@ -184,17 +239,49 @@ function TournamentAddEdit() {
       }
 
       setIsSubmitting(true);
-      const register = await registerTournament(formdata)
-      setIsSubmitting(false);
-      if (register.error) {
-        toast.error(register.error.data.message);
+      let response = null
+      
+      if(location?.state?.isEdit){
+        response = await updateTournamentDetails({tournament_id: location?.state?.tournamentDetails.id , formData: formdata})
       }
-      else if (register.data.success) {
-        toast.success(register.data.message)
-        //navigate to page where tournaments of organizers are shown
+      else{
+        response = await registerTournament(formdata)
+      }
+
+      setIsSubmitting(false);
+      if (response.error) {
+        toast.error(response.error.data.message);
+      }
+      else if (response.data.success) {
+        toast.success(response.data.message)
+        if(location?.state?.isEdit){
+          navigate(`/tournament/${location?.state?.tournamentDetails.id}`)
+        }
+        else{
+          navigate('/tournament/organizer')
+        }
       }
     },
   });
+
+  React.useEffect(() => {
+    if(location?.state?.isEdit){
+      const referees = location?.state?.tournamentDetails.tournament_referees?.map((referee) =>{
+        return {
+          Referee: ""
+        }
+      })
+      setRefereelist(referees.length > 0 ? referees : refereelist);
+
+      const sponsors = location?.state?.tournamentDetails.tournament_sponsors?.map((sponsor) =>{
+        return {
+          name: sponsor.title,
+          logo: sponsor.logo
+        }
+      })
+      setsponsorlist(sponsors.length > 0 ? sponsors : sponsorlist);
+    }
+  },[])
 
   return (
     <>
@@ -203,14 +290,21 @@ function TournamentAddEdit() {
           <div className=" flex justify-center items-center">
             <div>
               <h1 className=" items-end  text-center text-lg font-semibold sm:text-2xl lg:text-3xl">
-                {location?.state?.isEdit ? "Tornament Edit" : "Tournament Registration"}
+                {location?.state?.isEdit ? "Tournament Edit" : "Tournament Registration"}
               </h1>
             </div>
             <img src={"/icons/tournament_icon.png"} className="w-20" />
           </div>
-          <p className="text-center text-gray-700 text-sm md:text-base italic pb-5">
-            Be the player that raises the bar, be relentless, be a game changer.
-          </p>
+          {
+            location?.state?.isEdit 
+            ?
+              null
+            :
+              <p className="text-center text-gray-700 text-sm md:text-base italic pb-5">
+                The court is set, the teams are ready, let the games begin!
+              </p>
+
+          }
         </div>
         <div className='mx-auto px-5 sm:px-10 py-10 lg:px-10 shadow-xl rounded-md'>
           <form action="" onSubmit={handleSubmit} encType="multipart/form-data">
@@ -486,6 +580,16 @@ function TournamentAddEdit() {
                     onBlur={handleBlur}
                     isSearchable={false}
                     styles={customStyles}
+                    defaultValue={
+                      location?.state?.isEdit
+                      ?
+                        {
+                          value: location?.state?.tournamentDetails.level,  
+                          label: location?.state?.tournamentDetails.level.charAt(0).toUpperCase() + location?.state?.tournamentDetails.level.slice(1) 
+                        }
+                      : 
+                        null
+                    }
                     options={[
                       { value: "international", label: "International" },
                       { value: "national", label: "National" },
@@ -553,7 +657,7 @@ function TournamentAddEdit() {
                 <div key={index} className="flex flex-col  items-center ">
                   <div className="flex flex-col lg:flex-row items-center w-full gap-6 py-4 ">
                     <div className="flex flex-col w-full">
-                      <label className="mb-2">Referee Name *</label>
+                      <label className="mb-2">Referee Name</label>
                       <input
                         className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-3 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
                         placeholder="Enter Referee Name"
@@ -570,7 +674,7 @@ function TournamentAddEdit() {
                       ) : null}
                     </div>
                     <div className="flex flex-col w-full">
-                      <label className="mb-2">Referee Mobile *</label>
+                      <label className="mb-2">Referee Mobile</label>
                       <input
                         className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-3 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
                         type="text"
@@ -624,12 +728,12 @@ function TournamentAddEdit() {
                   Sponsor Information:
                 </h3>
               </div>
-              {sponsorlist.map((singlesponsor, index) => (
+              {sponsorlist.map((sponsor, index) => (
                 <div key={index} className="flex flex-col  items-center">
                   <div className="flex flex-col lg:flex-row items-center w-full gap-7 py-4">
                     {/* Sponsor_Name && Sponsor_Logo */}
                     <div className="flex flex-col w-full">
-                      <label className="mb-2">Sponsor Name *</label>
+                      <label className="mb-2">Sponsor Name</label>
                       <input
                         className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-3 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
                         placeholder="Enter Sponsor Name"
@@ -647,7 +751,7 @@ function TournamentAddEdit() {
                     </div>
                     <div className="flex flex-col w-full">
                       <label className="mb-2">
-                        Choose Logo * <span className="text-sm text-gray-400">( png, jpg, jpeg )</span>
+                        Choose Logo <span className="text-sm text-gray-400">( png, jpg, jpeg )</span>
                       </label>
                       <div className="flex items-center">
                         <input
@@ -656,16 +760,32 @@ function TournamentAddEdit() {
                           name={`sponsors.${index}.logo`}
                           accept=".png, .jpg, .jpeg"
                           onChange={(e) => {
-                            setFieldValue(`sponsors.${index}.logo`, e.target.files[0]);
+                            setFieldValue(`sponsors.${index}.logo`, e.target.files[0] ? e.target.files[0] : sponsor.logo);
                           }}
                           onBlur={handleBlur}
                         />
                         {
-                          values.sponsors[index].logo != ''
+                          values.sponsors[index].logo != '' || sponsor.logo != ''
                             ?
-                              <img src={URL.createObjectURL(values.sponsors[index].logo)} className="w-12 h-12 rounded-full mx-3" alt="" />
+                              <div className="w-12 h-12  rounded-full overflow-hidden mx-3">
+                                <img 
+                                src={
+                                  values.sponsors[index].logo != '' 
+                                  ? 
+                                    !values.sponsors[index].logo.name && !values.sponsors[index].logo.size
+                                    ?
+                                      values.sponsors[index].logo
+                                    :
+                                      URL.createObjectURL(values.sponsors[index].logo)
+                                  : 
+                                    sponsor.logo 
+                                } 
+                                className="w-full h-full" alt="" />
+                              </div>
                             :
-                              <div className="w-[55px] h-12 rounded-full border mx-3"></div>
+                              <div className="w-12 h-12 rounded-full border mx-3">
+
+                              </div>
                         }
                         {sponsorlist.length > 1 && (
                           <div
@@ -744,15 +864,15 @@ function TournamentAddEdit() {
                 <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#ee6730] rounded-lg group-hover:w-full group-hover:h-56"></span>
                 <span className="relative">
                   {
-                    location?.state?.isEdit
+                    isSubmitting
                       ?
-                      "UPDATE"
+                      'Loading...'
                       :
-                      isSubmitting
+                        location?.state?.isEdit
                         ?
-                        'Loading...'
+                          'UPDATE'
                         :
-                        "SUBMIT"
+                          "SUBMIT"
                   }
                 </span>
               </button>

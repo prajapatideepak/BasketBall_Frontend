@@ -175,7 +175,7 @@ export default function PlayerProfile() {
                   )}
                 </div>
                 <div className=" py-4">
-                  <div className="px-1 text-lg lg:w-1/3 mx-auto  py-1 text-white  flex  text-center justify-center items-center mt-2 rounded-full space-x-2 bg-black">
+                  <div className="px-1 text-lg w-48 xs:w-52 md:w-64 mx-auto  py-1 text-white  flex  text-center justify-center items-center mt-2 rounded-full space-x-2 bg-black">
                     <motion.span
                       animate={{
                         backgroundColor: currentTab === 2 ? "#ee6730" : "#000000",

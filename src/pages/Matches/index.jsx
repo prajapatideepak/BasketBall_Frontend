@@ -3,6 +3,7 @@ import { GiBasketballBall } from "react-icons/gi";
 import Heading from "../../Component/Heading";
 import { useGetMatchListQuery } from "../../services/match";
 import MatchCard from "../../Component/MatchCard";
+import SmallLoader from "../../Component/SmallLoader";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 
 function MatchList() {
@@ -15,11 +16,11 @@ function MatchList() {
       <div className="mx-auto px-10 py-12 sm:px-20 sm:py-12 md:px-20 md:py-16 lg:px-24 xl:px-28 2xl:px-32">
         <Heading text="Matches" />
         <div className="flex justify-center items-center">
-          <div className="xs:w-4/5 sm:w-2/4 lg:w-1/3 p-1 rounded-full flex justify-around items-center bg-black">
+          <div className="w-48 xs:w-72 sm:w-72 md:w-80 p-1 rounded-full flex justify-around items-center bg-black">
             <div
               className={`${
                 currentTab == 2 ? "bg-[#ee6730]" : ""
-              } hover:bg-[#ee6730] group cursor-pointer w-full text-center p-1 rounded-full`}
+              } group cursor-pointer w-full text-center p-1 rounded-full`}
               onClick={() => setCurrentTab(2)}
             >
               <h3
@@ -33,7 +34,7 @@ function MatchList() {
             <div
               className={`${
                 currentTab == 1 ? "bg-[#ee6730]" : ""
-              } hover:bg-[#ee6730] group cursor-pointer w-full text-center mx-1.5 p-1 rounded-full`}
+              } group cursor-pointer w-full text-center mx-1.5 p-1 rounded-full`}
               onClick={() => setCurrentTab(1)}
             >
               <h3
@@ -47,7 +48,7 @@ function MatchList() {
             <div
               className={`${
                 currentTab == 3 ? "bg-[#ee6730]" : ""
-              } hover:bg-[#ee6730] group cursor-pointer w-full text-center p-1 rounded-full`}
+              } group cursor-pointer w-full text-center p-1 rounded-full`}
               onClick={() => setCurrentTab(3)}
             >
               <h3
@@ -62,9 +63,7 @@ function MatchList() {
         </div>
         {data.isFetching && (
           <div className="px-6 py-12 flex justify-center">
-            <p className="text-xs xs:text-sm sm:text-lg font-medium text-gray-400">
-              Please wait.....
-            </p>
+            <SmallLoader/>
           </div>
         )}
         {!data.isFetching && data.isSuccess && (

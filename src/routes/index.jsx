@@ -17,7 +17,6 @@ import { QueryClient, QueryClientProvider } from "react-query";
 const AppRoutes = () => {
   // const { PlayerForm } = useSelector((state) => state.playerReducer);
   const { token } = useSelector((state) => state.user);
-
   const queryClient = new QueryClient();
   return (
     <>

@@ -118,7 +118,7 @@ function MatchFormModal({ showModal, handleShowModal, refetchData, tournamentDet
     else if(response.data.success){
       refetchData()
       toast.success(response.data.message);
-      // handleModalClose(false);
+      handleModalClose(false);
     }
   };
   return (

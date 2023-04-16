@@ -1,13 +1,6 @@
-import { lazy } from 'react'
-import Heading from '../../../Component/Heading'
-import { useParams, useNavigate } from 'react-router-dom';
-import Button from '../../../Component/Button'
 import moment from 'moment'
 
-
 const About = ({isOrganizer, tournamentDetails}) => {
-  const navigate = useNavigate();
-
   return (
     <>
       <section className="">
@@ -151,29 +144,8 @@ const About = ({isOrganizer, tournamentDetails}) => {
                   </div>
               }
 
-
             </div>
           </div>
-
-          {/* Clear_Button && Submit_Button */}
-          {
-            isOrganizer
-            ?
-              <div className='mt-2 w-full flex justify-center lg:justify-end items-center'>
-                {/* <Button text="Edit Team"  /> */}
-                <button
-                  type="button"
-                  onClick={() => { navigate('/tournament/add-edit') }}
-                  disabled={!tournamentDetails.is_details_editable}
-                  className="bg-[#ee6730] relative inline-flex items-center justify-center px-3  xs:px-6 sm:px-10 py-2 overflow-hidden text-white rounded-lg cursor-pointer group mr-3"
-                >
-                  <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-slate-900 rounded-lg group-hover:w-full group-hover:h-56"></span>
-                  <span className="relative text-xs xs:text-sm md:text-base">Edit Tournament</span>
-                </button>
-              </div>
-            :
-              null
-          }
         </div>
       </section>
     </>

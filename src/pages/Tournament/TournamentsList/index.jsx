@@ -54,7 +54,7 @@ function TournamentsList() {
             <div
               className={`${
                 currentTab == 1 ? "bg-[#ee6730]" : ""
-              } hover:bg-[#ee6730] group cursor-pointer w-full text-center p-1 rounded-full`}
+              } group cursor-pointer w-full text-center p-1 rounded-full`}
               onClick={() => setCurrentTab(1)}
             >
               <h3
@@ -68,7 +68,7 @@ function TournamentsList() {
             <div
               className={`${
                 currentTab == 2 ? "bg-[#ee6730]" : ""
-              } hover:bg-[#ee6730] group cursor-pointer w-full text-center mx-1.5 p-1 rounded-full`}
+              } group cursor-pointer w-full text-center mx-1.5 p-1 rounded-full`}
               onClick={() => setCurrentTab(2)}
             >
               <h3
@@ -82,7 +82,7 @@ function TournamentsList() {
             <div
               className={`${
                 currentTab == 3 ? "bg-[#ee6730]" : ""
-              } hover:bg-[#ee6730] group cursor-pointer w-full text-center p-1 rounded-full`}
+              } group cursor-pointer w-full text-center p-1 rounded-full`}
               onClick={() => setCurrentTab(3)}
             >
               <h3

@@ -1,5 +1,6 @@
-import { lazy } from "react";
-import { Route, Routes, Navigate } from "react-router-dom";
+import React, { lazy } from "react";
+import { Route, Routes, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import PrivateLayout from "../layouts/PrivateLayout";
 import Team from "../pages/Team";
 import AboutUs from "../pages/AboutUs";
@@ -18,8 +19,32 @@ import PageNotFound from "../pages/Error";
 import MatchDetails from "../pages/Matches/MatchDetails";
 import Scoreboard from "../pages/Scoreboard";
 import Tournament from "../pages/Tournament";
+import Loader from '../Component/Loader';
+import { toast } from 'react-toastify';
+import { authentication } from "../redux/actions/User";
+import { useGetUserDataQuery } from "../services/user";
 
 const PrivateRoutes = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const { token } = useSelector((state) => state.user);
+
+  const {data, isLoading, isError, error} = useGetUserDataQuery();
+  
+  React.useEffect(() => {
+    if (isError) {
+      toast.error(error?.data.message);
+      navigate('/')
+    }
+    else if (data?.success) {
+      dispatch(authentication(token, data.user));
+    }
+  }, [data]);
+
+  if(isLoading){
+    return <Loader/>
+  }
   return (
     <Routes>
       <Route element={<PrivateLayout />}>
@@ -29,7 +54,7 @@ const PrivateRoutes = () => {
           path="/profile-detail/:team_id"
           element={<TeamProfileDetail />}
         />
-        <Route path="/Visitor-profile" element={<VisitorProfile />} />
+        <Route path="/visitor-profile" element={<VisitorProfile />} />
         <Route path="/role" element={<Role />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="news/*" element={<News />} />
