@@ -10,6 +10,9 @@ module.exports = {
       xs: "330px",
       ...defaultTheme.screens,
     },
+    fontFamily : {
+      roboto: "'Roboto', sans-serif"
+    },
   },
   plugins: [
     require("tailwindcss-debug-screens"),

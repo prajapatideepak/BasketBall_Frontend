@@ -11,6 +11,7 @@ import Heading from "../../Component/Heading";
 export default function AfterRole() {
   const navigate = useNavigate();
   const { user } = useSelector(state => state.user)
+  console.log(user)
 
   const [role, setRole] = React.useState([
     {
@@ -68,7 +69,7 @@ export default function AfterRole() {
     }
   }
   return (
-    <div className="flex flex-col  justify-center px-8 items-center lg:px-20 lg:py-5 " style={{minHeight: 'calc(100vh - 70px)'}}>
+    <div className="flex flex-col lg:justify-center px-8 items-center lg:px-20 lg:py-5 " style={{minHeight: 'calc(100vh - 70px)'}}>
       <div className="mt-5 text-center flex flex-col justify-center w-full lg:px-20 space-y-3 ">
         {/* <Heading
           text={"Select Your Role"}
@@ -82,7 +83,7 @@ export default function AfterRole() {
           or Team Manager and Dominate the Court
         </p>
       </div>
-      <div className="grid my-14 rounded-lg  xl:px-8 xl:mx-10 w-full justify-center sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-10 ">
+      <div className=" my-14 rounded-lg flex flex-wrap justify-center gap-10 sm:gap-8 md:gap-12">
         {role.map((r, i) => {
           if(user.is_player && r.title == 'Player') return
           if(user.is_visitor && r.title == 'Visitor') return
@@ -100,7 +101,7 @@ export default function AfterRole() {
               }}
               onClick={(e) => handleClick(i)}
               key={i}
-              className="cursor-pointer relative w-full bg-white lg:pt-3 xl:pb-8 hover:scale-110 duration-500  rounded-lg shadow-lg shadow-black/20  border-4   "
+              className="cursor-pointer relative w-full sm:w-1/3 lg:w-1/4 xl:w-1/5  bg-white flex justify-center items-center flex-col lg:pt-3 xl:pb-8 hover:scale-110 duration-500  rounded-lg shadow-lg shadow-black/20  border-4   "
             >
               <motion.div
                 key={i}

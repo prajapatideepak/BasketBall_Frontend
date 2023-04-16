@@ -64,16 +64,24 @@ const PublicLayout = () => {
                             </li>
                         </Link>
                         <Link to={"/login"}>
-                            <li className='cursor-pointer  text-white border rounded-2xl text-center lg:px-8 lg py-1 hover:border-[#ee6730] hover:bg-[#ee6730]
-                        hover:text-white text-base md:text-lg lg:text-base xl:text-sm duration-700' onClick={() => setOpen(!open)}>
-
-                                login
+                            <li onClick={() => setOpen(!open)} className=''>
+                                <button
+                                    type="reset"
+                                    className="bg-[#ee6730] hover:text-[#ee6730] relative inline-flex items-center justify-center w-full px-8 py-2 lg:py-1 overflow-hidden text-white rounded-full cursor-pointer group my-4">
+                                    <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-white  rounded-lg group-hover:w-full group-hover:h-56"></span>
+                                    <span className="relative">Login</span>
+                                </button>
                             </li>
+
                         </Link>
                         <Link to={"/register"}>
-                            <li className='cursor-pointer text-white border rounded-2xl text-center  lg:px-8 py-1 hover:border-[#ee6730] hover:bg-[#ee6730]
-                        hover:text-white text-base md:text-lg lg:text-base xl:text-sm duration-700 my-4 lg:my-0' onClick={() => setOpen(!open)}>
-                                Register
+                            <li onClick={() => setOpen(!open)}>
+                                <button
+                                    type="reset"
+                                    className="bg-[#ee6730] hover:text-[#ee6730] relative inline-flex items-center justify-center w-full px-8 py-2 lg:py-1 overflow-hidden text-white rounded-full cursor-pointer group my-4 ">
+                                    <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-white  rounded-lg group-hover:w-full group-hover:h-56"></span>
+                                    <span className="relative">Register</span>
+                                </button>
                             </li>
                         </Link>
                     </ul>
