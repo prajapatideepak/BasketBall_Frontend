@@ -1,69 +1,63 @@
 import React from "react"
 import image from "../../../public/CBL_Images/60111-removebg-preview.png"
-import { Link } from 'react-router-dom'
 import { useFormik } from 'formik'
 import * as Yup from "yup"
 import "yup-phone"
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2'
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux"
+import { useUpdateProfileMutation } from "../../services/user"
 
-
-
-
-const signUpSchema = Yup.object({
-  firstname: Yup.string().min(2).max(25).matches(/^[a-zA-Z]+$/, "Please enter only characters").required("Please enter your first name"),
-  lastname: Yup.string().min(2).max(25).matches(/^[a-zA-Z]+$/, "Please enter only characters").required("Please enter your last name"),
-  email: Yup.string().email().required("Please enter your email"),
+const profileSchema = Yup.object({
+  full_name: Yup.string().min(2).max(25).matches(/^[a-zA-Z ]+$/, "Please enter only characters").required("Please enter full name"),
+  email: Yup.string().email("Please enter valid email").required("Please enter your email"),
   phone: Yup.string().min(10).max(10).matches(/^[0-9]+$/, "Please enter only numbers").phone(null, true, "Invalid phone number").required("Please enter your phone number"),
   password: Yup.string().required("Please enter password"),
-  confirmpassword: Yup.string().required("Confirm password is required").oneOf([Yup.ref("password"), null], "Confirm Password must match"),
+  confirmpassword: Yup.string().required("Confirm password is required").oneOf([Yup.ref("password"), null], "Password not match"),
 });
 
-
-const initialValues = {
-  firstname: "shad",
-  lastname: "shad",
-  email: "shad@gmail.com",
-  phone: "1234567890",
-  password: "shad",
-  confirmpassword: "shad",
-};
-
-
-
-
 function VisitorProfile() {
-
-  const [isOnSubmit, setIsOnSubmit] = React.useState(false);
+  const navigate = useNavigate();
+  const { user } = useSelector((state) => state.user);
+  
   const [updatetoggle, setupdatetoggle] = React.useState(true)
   const [submittoggle, setsubmittoggle] = React.useState(false)
   const [isEnable, setIsEnable] = React.useState(true);
-  const navigate = useNavigate();
 
+  const [updateProfile, {isLoading}] = useUpdateProfileMutation()
+  
+
+  const initialValues = {
+    full_name: user.name,
+    email: user.email,
+    phone: user.mobile,
+    password: "Wellbenix",
+    confirmpassword: "Wellbenix",
+  };
 
   const { values, errors, handleBlur, touched, handleChange, handleSubmit } = useFormik({
     initialValues: initialValues,
-    validationSchema: signUpSchema,
-    onSubmit(res) {
-      // ---------------- Confirmation for update -----------------------
+    validationSchema: profileSchema,
+    onSubmit(data) {
       Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be update your profile!",
+        title: "You sure to update your profile!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, update it!'
-      }).then((result) => {
+        confirmButtonText: 'Yes, update'
+      }).then(async(result) => {
         if (result.isConfirmed) {
-          const response = "Done";
-          if (response) {
-            navigate('/');
-            toast.success('Profile Update Successfully!')
+
+          const response = await updateProfile(data)
+
+          if(response.error){
+            toast.error(response.error.data.message)
           }
-          else {
-            toast.error('Something went wrong')
+          else if(response.data.success){
+            navigate('/');
+            toast.success(response.data.message);
           }
         }
       })
@@ -78,15 +72,12 @@ function VisitorProfile() {
   }
 
   // --------------- Clear Button -----------------------------------
-  function handleclear() {
+  function handleCancel() {
     setupdatetoggle(true)
     setIsEnable(true);
     setsubmittoggle(false)
+    navigate('/')
   }
-
-
-
-
 
   return (
     <>
@@ -95,41 +86,24 @@ function VisitorProfile() {
         <form action="" className=" w-full 2xl:w-[70%]  px-5 md:px-10 py-5 md:py-7  rounded-2xl bg-white shadow-2xl " onSubmit={handleSubmit}>
           <div className="flex flex-col justify-center items-center pb-8 md:pb-7 space-y-2">
             <img src={image} alt="" className="w-28 lg:w-[15%] border rounded-full p-2 px-4 bg-[#ee6730]" />
-            <p className="text-[#ee6730] font-semibold text-2xl">Visitor Profile</p>
+            <p className="text-[#ee6730] font-semibold text-2xl">Profile</p>
           </div>
           <div className="space-y-5">
             <div className="flex flex-col md:flex-row justify-center items-center space-y-5 md:space-x-10 md:space-y-0  ">
-              <div className="firstname flex flex-col space-y-2 w-full ">
-                <label htmlFor="Firstname">First Name</label>
+              <div className="full_name flex flex-col space-y-2 w-full ">
+                <label htmlFor="full_name">Full Name</label>
                 <input type="text"
-                  name="firstname"
+                  name="full_name"
                   disabled={isEnable}
-                  value={values.firstname}
-                  id="firstname"
+                  value={values.full_name}
+                  id="full_name"
                   onChange={handleChange}
                   onBlur={handleBlur}
                   className="rounded-md py-2 px-3 w-full bg-slate-100 focus:bg-white outline-blue-200"
-                  placeholder="Enter your fist name " />
-                {errors.firstname && touched.firstname
+                  placeholder="Enter your full name " />
+                {errors.full_name && touched.full_name
                   ?
-                  <p className='form-error text-red-600 text-sm font-semibold'>{errors.firstname}</p>
-                  :
-                  null}
-              </div>
-              <div className="lastname flex flex-col space-y-2 w-full ">
-                <label htmlFor="lastname">Last Name</label>
-                <input type="text"
-                  name="lastname"
-                  id="lastname"
-                  disabled={isEnable}
-                  value={values.lastname}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  className="rounded-md py-2 px-3 bg-slate-100 focus:bg-white outline-blue-200"
-                  placeholder="Enter your last name " />
-                {errors.lastname && touched.lastname
-                  ?
-                  <p className='form-error text-red-600 text-sm font-semibold'>{errors.lastname}</p>
+                  <p className='form-error text-red-600 text-sm font-semibold'>{errors.full_name}</p>
                   :
                   null}
               </div>
@@ -158,7 +132,7 @@ function VisitorProfile() {
                   name="phone"
                   id="phone"
                   value={values.phone}
-                  disabled={isEnable}
+                  disabled={true}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   className="rounded-md py-2 px-3 bg-slate-100 focus:bg-white outline-blue-200"
@@ -214,7 +188,7 @@ function VisitorProfile() {
                   onClick={handleupdate}
                 >
                   <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#ee6730] rounded-lg group-hover:w-full group-hover:h-56"></span>
-                  <span className="relative">Update</span>
+                  <span className="relative">Edit Profile</span>
                 </button>
               </div>
               :
@@ -223,20 +197,20 @@ function VisitorProfile() {
             {submittoggle ?
               <div className="w-full flex justify-center py-4 ">
                 <button
-                  type="reset"
                   className="bg-[#ee6730] relative inline-flex items-center justify-center px-8 py-2 overflow-hidden text-white rounded-lg cursor-pointer group mr-3"
-                  onClick={handleclear}
+                  onClick={handleCancel}
                 >
                   <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-slate-900 rounded-lg group-hover:w-full group-hover:h-56"></span>
-                  <span className="relative">Clear</span>
+                  <span className="relative">Cancel</span>
                 </button>
                 <button
                   type="submit"
-                  className="bg-slate-900 relative inline-flex items-center justify-center px-6 py-2 overflow-hidden text-white rounded-lg cursor-pointer group"
+                  disabled={isLoading}
+                  className={`${isLoading ? 'opacity-60' : ''} bg-slate-900 relative inline-flex items-center justify-center px-6 py-2 overflow-hidden text-white rounded-lg cursor-pointer group`}
                   onClick={handleSubmit}
                 >
                   <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#ee6730] rounded-lg group-hover:w-full group-hover:h-56"></span>
-                  <span className="relative">SUBMIT</span>
+                  <span className="relative">{isLoading ? 'Loading...' : 'Update'}</span>
                 </button>
               </div>
               :

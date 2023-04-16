@@ -10,8 +10,15 @@ import News_cards from "../../Component/Dashboard/News_cards";
 import Tournaments_cards from "../../Component/Dashboard/Tournaments_cards";
 import { GiBasketballBall } from 'react-icons/gi';
 import { useNavigate } from 'react-router-dom'
+import { useGetMatchesQuery } from "../../services/match";
+import { useGetAllTournamentsQuery } from "../../services/tournament";
+import { useGetAllNewsQuery } from "../../services/news";
+
 
 const Dashboard = () => {
+  const data = useGetMatchesQuery();
+  const tournaments = useGetAllTournamentsQuery();
+  const news = useGetAllNewsQuery();
   const navigate = useNavigate();
   const matchlist = () => {
     navigate(`/match`)
@@ -22,6 +29,7 @@ const Dashboard = () => {
   const newslist = () => {
     navigate(`/news`)
   }
+
   const SliderData = [
     {
       id: 1,
@@ -259,7 +267,7 @@ const Dashboard = () => {
     <div className="min-h-screen ">
       {/* Main Slider for live and upcoming matches */}
       <div className="bg-black">
-        <MatchLive slides={SliderData} />
+        <MatchLive slides={data?.data?.data} />
       </div>
 
       {/* Live and Upcoming match   */}
@@ -267,7 +275,7 @@ const Dashboard = () => {
         <div className="px-7 md:px-10">
           <div className="flex justify-between items-center xl:pr-8">
             <h1 className="font-bold text-lg md:text-2xl  lg:text-3xl text-black">
-              Leagues on Courtside :
+              Matches :
             </h1>
             <div className="flex items-center text-[13px] font-semibold cursor-pointer hover:underline " onClick={matchlist}>
               <p className="hidden sm:block sm:text-[10px] lg:text-[11px]">Discover More</p>
@@ -281,9 +289,9 @@ const Dashboard = () => {
         </div>
         <div id="match" className=" w-full flex justify-start px-6 xl:px-14 items-center gap-5 xl:gap-3 scroll-smooth  overflow-x-auto scrollbar-hide pt-10 pb-10 lg:py-8">
           {
-            match.length > 0
+            data?.data?.data?.length > 0
               ?
-              match.map((match, slideIndex) => {
+              data?.data?.data?.map((match, slideIndex) => {
                 return (
                   <Match_cards key={slideIndex} match={match} />
                 )
@@ -302,7 +310,7 @@ const Dashboard = () => {
         <div className="px-7 md:px-10">
           <div className="flex justify-between items-center xl:pr-8">
             <h1 className="font-bold text-lg md:text-2xl  lg:text-3xl text-black">
-              Tournament :
+              Tournaments :
             </h1>
             <div className="flex items-center text-[13px] font-semibold cursor-pointer hover:underline " onClick={tournamentlist}>
               <p className="hidden sm:block sm:text-[10px] lg:text-[11px]">Discover More</p>
@@ -317,9 +325,9 @@ const Dashboard = () => {
         </div>
         <div id="tournament" className="w-full flex justify-start px-6 xl:px-14 items-center gap-5 xl:gap-3  scroll-smooth  overflow-x-auto scrollbar-hide pt-10 pb-10 lg:py-8">
           {
-            tournament.length > 0
+            tournaments?.data?.all_tournaments?.length > 0
               ?
-              tournament.map((tournament, index) => {
+              tournaments?.data?.all_tournaments?.map((tournament, index) => {
                 return (
                   <Tournaments_cards
                     key={index}
@@ -337,7 +345,7 @@ const Dashboard = () => {
       </div>
 
       {/* Highlights previus matches  */}
-      <div className="relative">
+      {/* <div className="relative">
         <div className="px-7 md:px-10">
           <div className="flex justify-between items-center xl:pr-8">
             <h1 className="font-bold text-lg md:text-2xl  lg:text-3xl text-black">
@@ -372,7 +380,7 @@ const Dashboard = () => {
               </div>
           }
         </div>
-      </div>
+      </div> */}
 
       {/* News previus matches  */}
       <div className=" pb-5 relative ">
@@ -393,9 +401,9 @@ const Dashboard = () => {
         </div>
         <div id="news" className=" w-full  flex justify-start px-6 xl:px-14 items-center gap-5   scroll-smooth  overflow-x-auto scrollbar-hide py-8">
           {
-            News.length > 0
+            news?.data?.AllNews?.length > 0
               ?
-              News.map((news, index) => {
+              news?.data?.AllNews?.map((news, index) => {
                 return (
                   <News_cards
                     key={index}

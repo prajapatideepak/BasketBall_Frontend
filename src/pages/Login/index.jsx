@@ -8,7 +8,6 @@ import { Formik, useFormik } from "formik";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 import { authentication } from "../../redux/actions/User";
-import { useLocalStorage } from "../../hooks/localStorage";
 import { useGoogleLogin } from '@react-oauth/google';
 import { useSigninMutation } from "../../services/authentication";
 
@@ -51,8 +50,6 @@ function Login() {
           navigate("/"); 
           dispatch(authentication(res.data.token, res.data.user));
           toast.success(res.data.message);
-          useLocalStorage({ key: "token", value: res.data.token });
-          useLocalStorage({ key: "user", value: res.data.user });
         }
       },
     });
@@ -134,10 +131,11 @@ function Login() {
           <div className="py-1">
             <button
               type="submit"
-              className="bg-slate-900  relative inline-flex items-center justify-center w-full px-4 py-1.5 sm:px-8 sm:py-[10px] overflow-hidden font-medium tracking-tighter text-white rounded-lg cursor-pointer group"
+              disabled={isLoading}
+              className={`${isLoading? 'opacity-60' : ''} bg-slate-900  relative inline-flex items-center justify-center w-full px-4 py-1.5 sm:px-8 sm:py-[10px] overflow-hidden font-medium tracking-tighter text-white rounded-lg cursor-pointer group`}
             >
               <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#ee6730] rounded-lg group-hover:w-full group-hover:h-56"></span>
-              <span className="relative">SUBMIT</span>
+              <span className="relative">{isLoading? 'Loading...' : 'SUBMIT'}</span>
             </button>
           </div>
         </form>

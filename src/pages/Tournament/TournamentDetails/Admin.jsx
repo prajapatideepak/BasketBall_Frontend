@@ -273,16 +273,34 @@ function Admin({tournamentDetails, refetchData, teams}) {
             :
               null
           }
-          <div className="mt-2">
-            <div className="md:w-40">
+          <div className="mt-2 mr-4">
+            <div className="md:w-56">
               <Button
                 margin={false}
-                text="Upload Image"
+                text="Upload Gallery Image"
                 dataModalTarget="authentication-modal"
                 dataModalToggle="authentication-modal"
                 onClick={handleImageUpload}
               />
             </div>
+          </div>
+          <div className='mt-2'>
+            <button
+              type="button"
+              onClick={() => { 
+                navigate('/tournament/add-edit', {
+                  state: {
+                    isEdit: true,
+                    tournamentDetails
+                  }
+                }) 
+              }}
+              disabled={!tournamentDetails.is_details_editable}
+              className="bg-[#ee6730] relative inline-flex items-center justify-center w-full px-4 py-2 xs:py-2.5 sm:px-8 sm:py-2.5 overflow-hidden text-white rounded-lg cursor-pointer group mr-3"
+            >
+              <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-slate-900 rounded-lg group-hover:w-full group-hover:h-56"></span>
+              <span className="relative text-xs xs:text-sm md:text-base">Edit Tournament</span>
+            </button>
           </div>
         </div>
       </div>
@@ -290,7 +308,7 @@ function Admin({tournamentDetails, refetchData, teams}) {
         tournamentDetails.status != 3 && tournamentDetails.status != -1 
         ?
           <>
-            <div className="mt-10 flex flex-wrap sm:justify-start justify-center space-y-2 space-x-0 xs:space-y-0 xs:space-x-1 sm:space-x-6 sm:space-y-0">
+            {/* <div className="mt-10 flex flex-wrap sm:justify-start justify-center space-y-2 space-x-0 xs:space-y-0 xs:space-x-1 sm:space-x-6 sm:space-y-0">
               <div className="flex flex-col justify-center items-center w-36 h-20 md:w-40 md:h-24 rounded-md shadow-lg">
                 <h3 className="text-xs sm:text-base md:text-lg font-semibold mt-1">Total Teams</h3>
                 <div>
@@ -309,7 +327,7 @@ function Admin({tournamentDetails, refetchData, teams}) {
                   <h3 className="text-base sm:text-lg md:text-xl font-semibold text-gray-500 mt-1">{disqualifiedTeams}</h3>
                 </div>
               </div>
-            </div>
+            </div> */}
             <div className="mt-10">
               <h3 className="text-lg text-gray-600 font-semibold">Teams Requests</h3>
               <div className="table-container relative overflow-x-auto shadow-md sm:rounded-lg mt-5">

@@ -18,8 +18,7 @@ const MatchDetails = () => {
       team2: 0,
     };
   });
-  console.log(win);
-  console.log(data?.data?.match_data);
+
   const [tabIndex, setTabIndex] = React.useState(0);
   const [menu, setMenu] = React.useState([
     {
@@ -81,7 +80,7 @@ const MatchDetails = () => {
                     }}
                     animate={{
                       backgroundColor: tab.active ? "#ee6730" : "",
-                      color: tab.active ? "white" : "",
+                      color: tab.active ? "#ffffff" : "",
                       opacity: 1,
                     }}
                     transition={{

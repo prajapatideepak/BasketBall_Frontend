@@ -34,14 +34,11 @@ export const tournamentApi = api.injectEndpoints({
       invalidatesTags: [{ type: "Tournaments", id: "LIST" }],
     }),
     updateTournamentDetails: build.mutation({
-      query(tournament_id, formData) {
+      query({tournament_id, formData}) {
         return {
           url: `tournament/update/${tournament_id}`,
           method: "PUT",
           body: formData,
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
         };
       },
       invalidatesTags: (result, error, { tournament_id }) =>
@@ -52,6 +49,16 @@ export const tournamentApi = api.injectEndpoints({
           ]
           : [{ type: "Tournaments", id: "LIST" }],
     }),
+
+    deleteTournamentDetails: build.mutation({
+      query(tournament_id) {
+        return {
+          url: `tournament/delete/${tournament_id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: [{ type: "Tournaments", id: "LIST" }],
+    }),
   }),
 });
 
@@ -60,4 +67,5 @@ export const {
   useGetTournamentDetailsQuery,
   useRegisterTournamentMutation,
   useUpdateTournamentDetailsMutation,
+  useDeleteTournamentDetailsMutation,
 } = tournamentApi;

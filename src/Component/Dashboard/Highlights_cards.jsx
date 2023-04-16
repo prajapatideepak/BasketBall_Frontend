@@ -5,19 +5,19 @@ import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 
 function Hilights_Cards({ highlights }) {
-    const prevSlide = () => {
-        var highlights = document.getElementById("highlights")
-        highlights.scrollLeft = highlights.scrollLeft - 380;
-    };
+    // const prevSlide = () => {
+    //     var highlights = document.getElementById("highlights")
+    //     highlights.scrollLeft = highlights.scrollLeft - 380;
+    // };
 
-    const nextSlide = () => {
-        var highlights = document.getElementById("highlights")
-        highlights.scrollLeft = highlights.scrollLeft + 380;
-    };
+    // const nextSlide = () => {
+    //     var highlights = document.getElementById("highlights")
+    //     highlights.scrollLeft = highlights.scrollLeft + 380;
+    // };
 
     return (
         <>
-            <div className="relative  hover:scale-110  duration-300 min-w-[260px] xs:min-w-[320px] sm:min-w-[350px] md:min-w-[330px] max-w-[300px] h-[250px] cursor-pointer  group ">
+            {/* <div className="relative  hover:scale-110  duration-300 min-w-[260px] xs:min-w-[320px] sm:min-w-[350px] md:min-w-[330px] max-w-[300px] h-[250px] cursor-pointer  group ">
                 <div className='h-44 w-[100%] bg-gradient-to-t from-black/50 absolute'>
 
                 </div>
@@ -33,19 +33,19 @@ function Hilights_Cards({ highlights }) {
                     </div>
                     <p className='font-semibold text-slate-500'>{highlights.tournament}</p>
                 </div>
-            </div>
+            </div> */}
             {/* Left Arrow  */}
-            <div onClick={prevSlide}
+            {/* <div onClick={prevSlide}
                 className="justify-center hidden lg:block absolute left-2 bottom-[47%] active:scale-90 hover:bg-black duration-300 group items-center p-2 bg-white  text-black shadow-xl  rounded-full cursor-pointer">
                 <FaChevronLeft
                     className="text-lg group-hover:text-white" />
-            </div>
+            </div> */}
             {/* Right Arrow  */}
-            <div onClick={nextSlide}
+            {/* <div onClick={nextSlide}
                 className="justify-center hidden lg:block absolute bottom-[47%] right-2 active:scale-90 hover:bg-black duration-300 group items-center p-2 bg-white  text-black shadow-xl  rounded-full cursor-pointer">
                 <FaChevronRight
                     className="text-lg group-hover:text-white" />
-            </div>
+            </div> */}
         </>
     )
 }

@@ -9,8 +9,7 @@ import { NavLink, Link, Outlet, useNavigate } from "react-router-dom";
 import { logout } from "../../redux/actions/User";
 import { useDispatch } from "react-redux";
 
-function DropDownmenu() {
-  const [isMenu, setismenu] = React.useState(false);
+function DropDownmenu({setOpen, isMenu, setIsMenu}) {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -19,7 +18,7 @@ function DropDownmenu() {
       <div className="">
         <div
           className="flex items-center space-x-2 cursor-pointer"
-          onClick={() => setismenu(!isMenu)}
+          onClick={() => {setOpen(false); setIsMenu(!isMenu)}}
         >
           <div className="">
             <FaUserCircle className="text-4xl text-white" />
@@ -39,9 +38,9 @@ function DropDownmenu() {
       >
         <ul className="py-3 px-2">
           <p className="text-gray-400 py-2">Profile settings</p>
-          <Link to={"/Visitor-profile"}>
+          <Link to={"/visitor-profile"}>
             <li
-              onClick={() => setismenu(false)}
+              onClick={() => setIsMenu(false)}
               className="flex items-center justify-between my-2 cursor-pointer hover:bg-[#ee6730] duration-150 px-2  py-2 rounded-md  "
             >
               <div className="flex items-center space-x-3 text-white">
@@ -55,7 +54,7 @@ function DropDownmenu() {
           </Link>
           <Link>
             <li
-              onClick={() => setismenu(false)}
+              onClick={() => setIsMenu(false)}
               className="flex items-center justify-between my-2 cursor-pointer hover:bg-[#ee6730] duration-150 px-2  py-1 rounded-md  "
             >
               <div className="flex items-center space-x-3 text-white">
@@ -74,7 +73,7 @@ function DropDownmenu() {
           </Link>
           <Link>
             <li
-              onClick={() => setismenu(false)}
+              onClick={() => setIsMenu(false)}
               className="flex items-center justify-between my-2 cursor-pointer hover:bg-[#ee6730] duration-150 px-2  py-2 rounded-md  "
             >
               <div className="flex items-center space-x-3 text-white">

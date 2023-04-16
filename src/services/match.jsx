@@ -7,9 +7,9 @@ export const matchApi = api.injectEndpoints({
     }),
 
     updateMatchDetails: build.mutation({
-      query({ match_id, match_date, match_time, match_address }) {
+      query({ tournament_id, match_id, match_date, match_time, match_address }) {
         return {
-          url: `match/update/${match_id}`,
+          url: `match/update/${tournament_id}/${match_id}`,
           method: "PUT",
           body: {
             start_date: match_date,
@@ -44,13 +44,17 @@ export const matchApi = api.injectEndpoints({
     getMatchList: build.query({
       query: ({ pageNo, status }) => `match/list/${status}&${pageNo}`,
     }),
+    getMatches: build.query({
+      query: () => "match/matches",
+    })
   }),
 });
 
 export const {
+  useGetMatchScoreQuery,
   useUpdateMatchDetailsMutation,
   useDeleteMatchMutation,
-  useGetMatchScoreQuery,
-  useGetMatchListQuery,
   useGetMatchDetailQuery,
+  useGetMatchListQuery,
+  useGetMatchesQuery
 } = matchApi;

@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import React from "react";
 import { MdDone } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import Button from "../../Component/Button";
 import Heading from "../../Component/Heading";
@@ -9,12 +10,13 @@ import Heading from "../../Component/Heading";
 
 export default function AfterRole() {
   const navigate = useNavigate();
+  const { user } = useSelector(state => state.user)
 
   const [role, setRole] = React.useState([
     {
       title: "Visitor",
       isSelected: false,
-      path: "/player/add-edit",
+      path: "/",
       icon: "/icons/847.jpg",
     },
     {
@@ -24,7 +26,7 @@ export default function AfterRole() {
       icon: "/icons/player.png",
     },
     {
-      title: "Team Owner",
+      title: "Team Manager",
       isSelected: false,
       path: "/team/add-edit",
       icon: "/icons/Team.png",
@@ -66,7 +68,7 @@ export default function AfterRole() {
     }
   }
   return (
-    <div className="flex flex-col  justify-center px-8 items-center lg:px-20 lg:py-5 ">
+    <div className="flex flex-col  justify-center px-8 items-center lg:px-20 lg:py-5 " style={{minHeight: 'calc(100vh - 70px)'}}>
       <div className="mt-5 text-center flex flex-col justify-center w-full lg:px-20 space-y-3 ">
         {/* <Heading
           text={"Select Your Role"}
@@ -80,16 +82,18 @@ export default function AfterRole() {
           or Team Manager and Dominate the Court
         </p>
       </div>
-      <div className="grid my-14 rounded-lg  xl:px-8 xl:mx-10 xs:grid-cols-1 w-full justify-center sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-10 ">
+      <div className="grid my-14 rounded-lg  xl:px-8 xl:mx-10 w-full justify-center sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-10 ">
         {role.map((r, i) => {
+          if(user.is_player && r.title == 'Player') return
+          if(user.is_visitor && r.title == 'Visitor') return
           return (
             <motion.div
               animate={{
-                borderColor: r.isSelected ? "#ee6730" : "white",
+                borderColor: r.isSelected ? "#ee6730" : "#ffffff",
                 // backgroundColor: r.isSelected ? '#FFFFFF' : "#F3F4F6",
-                boxShadow: r.isSelected
-                  ? "rgba(0, 0, 0, 0.35) 0px 5px 15px"
-                  : "",
+                // boxShadow: r.isSelected
+                //   ? "rgba(0, 0, 0, 0.35) 0px 5px 15px"
+                //   : "",
               }}
               transition={{
                 duration: .5,
@@ -105,7 +109,6 @@ export default function AfterRole() {
                 }}
                 animate={{
                   backgroundColor: r.isSelected ? "#ee6730" : "#F3F4F6",
-
                   opacity: 1,
                 }}
                 transition={{
@@ -122,7 +125,7 @@ export default function AfterRole() {
               </div>
               <motion.div
                 animate={{
-                  color: r.isSelected ? "#ee6730" : "black",
+                  color: r.isSelected ? "#ee6730" : "#000000",
                 }}
                 className="text-center m-2 rounded-md mx-10 text-sm lg:text-lg font-semibold"
               >

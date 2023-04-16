@@ -74,7 +74,7 @@ function TournamentDetails() {
             />
             <img
               src={!tournamentDetails.logo ? '/CBL_Images/basketball_team_logo_2.webp': tournamentDetails.logo}
-              className="object-contain w-full h-full"
+              className="object-cover w-full h-full"
             />
           </div>
           <div className="flex flex-col justify-center items-cente ml-3">
