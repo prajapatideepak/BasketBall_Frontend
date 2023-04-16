@@ -13,9 +13,15 @@ export const userApi = api.injectEndpoints({
       },
       invalidatesTags:[{ type: 'User'}],
     }),
+
+    getUserData: build.query({
+      query: () => 'user/detail'
+    }),
+    providesTags: [{ type: 'User'}]
   }),
 });
 
 export const {
   useUpdateProfileMutation,
+  useGetUserDataQuery
 } = userApi;
