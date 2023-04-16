@@ -16,7 +16,7 @@ export default function AfterRole() {
     {
       title: "Visitor",
       isSelected: false,
-      path: "/player/add-edit",
+      path: "/",
       icon: "/icons/847.jpg",
     },
     {
@@ -26,7 +26,7 @@ export default function AfterRole() {
       icon: "/icons/player.png",
     },
     {
-      title: "Team Owner",
+      title: "Team Manager",
       isSelected: false,
       path: "/team/add-edit",
       icon: "/icons/Team.png",
@@ -68,7 +68,7 @@ export default function AfterRole() {
     }
   }
   return (
-    <div className="flex flex-col  justify-center px-8 items-center lg:px-20 lg:py-5 ">
+    <div className="flex flex-col  justify-center px-8 items-center lg:px-20 lg:py-5 " style={{minHeight: 'calc(100vh - 70px)'}}>
       <div className="mt-5 text-center flex flex-col justify-center w-full lg:px-20 space-y-3 ">
         {/* <Heading
           text={"Select Your Role"}
@@ -82,7 +82,7 @@ export default function AfterRole() {
           or Team Manager and Dominate the Court
         </p>
       </div>
-      <div className="grid my-14 rounded-lg  xl:px-8 xl:mx-10 xs:grid-cols-1 w-full justify-center sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-10 ">
+      <div className="grid my-14 rounded-lg  xl:px-8 xl:mx-10 w-full justify-center sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-10 ">
         {role.map((r, i) => {
           if(user.is_player && r.title == 'Player') return
           if(user.is_visitor && r.title == 'Visitor') return
