@@ -4,6 +4,9 @@ import { WhatsappIcon } from "react-share";
 import { WhatsappShareButton } from "react-share";
 import { useNavigate } from "react-router-dom";
 import { BiArrowBack } from "react-icons/bi";
+import { useGetNewsDetailsQuery } from "../../services/news";
+import moment from 'moment'
+
 
 const newsDetail = [
   {
@@ -87,12 +90,13 @@ const newsDetail = [
 const   NewsDetail = () => {
   const navigate = useNavigate();
   const params = useParams();
+  const { data, isLoading, error } = useGetNewsDetailsQuery(params.id);
 
   const news = newsDetail.find((n) => {
     return n.id == params.id;
   });
 
-  let tags = news?.tags?.split(",");
+  let tags = data?.oneNewsDetails?.tags?.split(",");
 
   return (
     <div className="flex justify-center min-h-screen ">
@@ -109,17 +113,17 @@ const   NewsDetail = () => {
           </button>
         </div>
         <div className=" px-12 py-4 space-y-3 ">
-          <h1 className="text-2xl  lg:text-5xl ">{news?.title}</h1>
+          <h1 className="text-2xl  lg:text-5xl ">{data?.oneNewsDetails?.title}</h1>
           <div className="flex  pt-4 space-x-3 text-xs font-bold uppercase italic">
-            {tags.map((tag) => (
+            {tags?.map((tag) => (
               <span className="bg-orange-600 px-3 text-white  rounded ">
                 {tag}{" "}
               </span>
             ))}
-            <span className="text-right">{news.date}</span>
+            <span className="text-right">{moment(data?.oneNewsDetails).format('DD / MM / YY')}</span>
           </div>
-          <img className="mx-auto rounded  font-sans" src={news.image} />
-          <p className=" text-sm md:text-base pt-4  ">{news.description}</p>
+          <img className="mx-auto rounded  font-sans" src={data?.oneNewsDetails?.photo} />
+          <p className=" text-sm md:text-base pt-4  ">{data?.oneNewsDetails?.description}</p>
           <div className=" flex justify-end items-center space-x-2">
             <span className="italic font-semibold text-lg"> Share on</span>
             <WhatsappShareButton

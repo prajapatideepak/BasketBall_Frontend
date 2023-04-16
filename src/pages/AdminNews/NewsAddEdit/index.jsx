@@ -59,7 +59,7 @@ const NewsAddEdit = () => {
         <div className='flex w-full justify-center items-center'>
           <div className=' bg-white shadow-lg rounded-md  my-5 w-[80%] py-10  px-10'>
             <h1 className=' font-semibold text-2xl pb-10'>
-              Add News
+              Add 
             </h1>
             <form action="" className="space-y-10" onSubmit={handleSubmit}>
               <div className='flex items-center space-x-10'>
