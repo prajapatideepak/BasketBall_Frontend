@@ -29,7 +29,7 @@ const AppRoutes = () => {
               </>
             ) : (
               <>
-                <Route path="/*" element={<AdminRoutes />} />
+                <Route path="/*" element={<PublicRoutes />} />
                 <Route path="*" element={<Navigate to="/" />} />
               </>
             )}

@@ -57,7 +57,7 @@ const PlayerList = () => {
                           <div className="duration-300 relative justify-end bg-black rounded-lg text-white overflow-hidden shadow-xl cursor-pointer hover:scale-[1.03] w-6/7  md:w-full h-full ">
                             <div className=" flex justify-end items-center ">
                               <img
-                                src={player.team_players[0]?.teams?.logo}
+                                src={player?.team_players[0]?.teams?.logo ? player?.team_players[0]?.teams?.logo : ""}
                                 alt=""
                                 className="w-28 h-28 opacity-20"
                               />
@@ -72,7 +72,7 @@ const PlayerList = () => {
                               <div className="text-center sm:w-[65%]   w-full items-center justify-start  lg:py-6 flex  ">
                                 <div className="w-1/3 lg:w-40 ">
                                   <img
-                                    src={player?.photo}
+                                    src={player?.photo ? player?.photo : "/CBL_Images/60111-removebg-preview.png"}
                                     className=" object-cover w-20 h-20 rounded-full border-2 sm:border-4 border-slate-700 "
                                   />
                                 </div>

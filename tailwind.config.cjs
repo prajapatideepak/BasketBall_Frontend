@@ -11,7 +11,7 @@ module.exports = {
       ...defaultTheme.screens,
     },
     fontFamily : {
-      roboto: "'Roboto', sans-serif"
+      roboto: "'Poppins', sans-serif"
     },
   },
   plugins: [
