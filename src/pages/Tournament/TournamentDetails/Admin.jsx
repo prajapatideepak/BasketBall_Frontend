@@ -433,6 +433,7 @@ function Admin({tournamentDetails, refetchData, teams}) {
         showModal={createPoolModal}
         handleShowModal={setCreatePoolModal}
         refetchData={refetchData}
+        tournamentDetails={tournamentDetails}
       />
       <MatchFormModal
         showModal={matchFormModal}

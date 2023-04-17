@@ -19,6 +19,7 @@ function Schedule({isOrganizer}) {
     const [editMatchId, setEditMatchId] = React.useState(-1);
 
     const {data, isLoading, refetch } = useTournamentScheduleQuery(tournament_id)
+   
     const [updateMatchDetails, {...updatingMatch}] = useUpdateMatchDetailsMutation()
     const [deleteMatch, {...deletingMatch}] = useDeleteMatchMutation()
 

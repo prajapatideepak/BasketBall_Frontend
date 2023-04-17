@@ -2,33 +2,57 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Modal } from "../../../Component/Modal";
+import Select from "react-select";
 import { useCreatePoolsMutation } from "../../../services/organizer";
 
-function CreatePoolModal({ showModal, handleShowModal, refetchData }) {
+function CreatePoolModal({ showModal, handleShowModal, refetchData, tournamentDetails }) {
   const {tournament_id} = useParams();
-  const [totalGroups, setTotalGroups] = React.useState("");
   const [teamsPerGroup, setTeamsPerGroup] = React.useState("");
+  const [genderType, setGenderType] = React.useState("");
+  const [ageCategory, setAgeCategory] = React.useState("");
   const [error, setError] = useState("");
 
   const [createPools, {isLoading}] = useCreatePoolsMutation()
 
+  const customStyles = {
+    control: (provided, state) => ({
+      ...provided,
+      backgroundColor: "rgb(75 85 99)",
+      borderColor: "rgb(107 114 128)",
+      borderRadius: "8px",
+      minHeight: "44px",
+      height: "44px",
+      boxShadow: state.isFocused ? null : null,
+    }),
+
+    valueContainer: (provided, state) => ({
+      ...provided,
+      height: "44px",
+      padding: "0 6px",
+    }),
+
+    singleValue: (provided) => ({
+      ...provided,
+      color: "white",
+    }),
+
+    input: (provided, state) => ({
+      ...provided,
+      margin: "0px",
+    }),
+    indicatorSeparator: (state) => ({
+      display: "none",
+    }),
+    indicatorsContainer: (provided, state) => ({
+      ...provided,
+      height: "44px",
+    }),
+  };
+
   const handleModalClose = () => {
-    setTotalGroups("");
     setTeamsPerGroup("");
     handleShowModal(false);
     setError("");
-  };
-
-  const handleTotalGroup = (e) => {
-    const regex = new RegExp(/^[0-9]+$/);
-    if (!regex.test(e.target.value)) {
-      setError("Enter only numbers");
-    }
-    else{
-      setError('')
-    }
-    
-    setTotalGroups(e.target.value);
   };
 
   const handleTeamsPerGroup = (e) => {
@@ -43,26 +67,37 @@ function CreatePoolModal({ showModal, handleShowModal, refetchData }) {
     setTeamsPerGroup(e.target.value);
   };
 
+  const handleGenderType = (data) => {
+    setGenderType(data);
+  };
+
+  const handleAgeCategory = (data) => {
+    setAgeCategory(data);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (totalGroups == "" || teamsPerGroup == "") {
+    if (teamsPerGroup == "" || genderType == "" ||
+      ageCategory == "") {
       setError("All fields are required");
       return;
     }
 
     const regex = new RegExp(/^[0-9]+$/);
-    if (!regex.test(totalGroups)) {
-      setError("Enter only numbers");
-      return
-    }
-    else if (!regex.test(teamsPerGroup)) {
+    if (!regex.test(teamsPerGroup)) {
       setError("Enter only numbers");
       return;
     }
 
     //api call
-    const response = await createPools({tournament_id: tournament_id, total_groups: totalGroups, teams_per_group: teamsPerGroup});
+    const response = await createPools({
+      tournament_id: tournament_id, 
+      teams_per_group: teamsPerGroup, 
+      gender_type: genderType.value, 
+      age_type: ageCategory.value
+    });
+    
     if(response.error){
       toast.error(response.error.data.message)
     }
@@ -108,26 +143,6 @@ function CreatePoolModal({ showModal, handleShowModal, refetchData }) {
           <div className="px-4 py-4 space-y-6">
             <div>
               <label
-                htmlFor="total_groups"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >
-                Total groups
-              </label>
-              <input
-                type="text"
-                name="total_groups"
-                id="total_groups"
-                value={totalGroups}
-                className="w-full border border-[#6B7280] outline-none focus:border-blue-500 text-white px-2 py-2  rounded-md"
-                style={{
-                  backgroundColor: "rgb(75 85 99)",
-                }}
-                onChange={handleTotalGroup}
-                placeholder="Enter no. of groups to be formed"
-              />
-            </div>
-            <div>
-              <label
                 htmlFor="teams_per_group"
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
@@ -146,6 +161,53 @@ function CreatePoolModal({ showModal, handleShowModal, refetchData }) {
                 placeholder="Enter no. of teams per group"
               />
             </div>
+            <div>
+                <label
+                  htmlFor="gender_type"
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  Gender Type
+                </label>
+                <Select
+                  className="w-full outline-blue-200"
+                  name="gender_type"
+                  id="gender_type"
+                  value={genderType}
+                  onChange={handleGenderType}
+                  isSearchable={false}
+                  styles={customStyles}
+                  options={
+                    tournamentDetails.gender_types.map((item) => ({
+                      value: item,
+                      label: item,
+                    }))
+                  }
+                  
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="age_category"
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  Age Category
+                </label>
+                <Select
+                  className="w-full outline-blue-200"
+                  name="age_category"
+                  id="age_category"
+                  value={ageCategory}
+                  onChange={handleAgeCategory}
+                  isSearchable={false}
+                  styles={customStyles}
+                  options={
+                    tournamentDetails.age_categories.map((item) => ({
+                      value: item,
+                      label: item,
+                    }))
+                  }
+                />
+              </div>
             <div className="mt-5 text-right">
               <button
                 type="button"

@@ -113,7 +113,9 @@ function Teams({isOrganizer, teams, tournamentDetails, refetchData}) {
       {allTeams.length > 0 ? (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 mt-10">
           {allTeams.map((team, i) => {
-            return <TournamentTeamCard key={i} index={i+1} isOrganizer={isOrganizer} teamDetails={team} refetchData={refetchData} />;
+            return team.tournament_teams_reg_type.map((item, index)=>{
+              return <TournamentTeamCard key={index} isOrganizer={isOrganizer} teamDetails={team} teamCategoryType={item} is_disqualified={item.is_disqualified} tournament_teams_id={item.id} refetchData={refetchData} />;
+            })
           })}
         </div>
       ) : (

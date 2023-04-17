@@ -106,10 +106,13 @@ export const organizerApi = api.injectEndpoints({
     }),
 
     disqualifyTeam: build.mutation({
-        query: ({tournament_id, team_id})=>{
+        query: ({tournament_id, tournament_teams_id})=>{
             return {
-                url: `tournament/disqualify-team/${tournament_id}/${team_id}`,
+                url: `tournament/disqualify-team/${tournament_id}`,
                 method: "PUT",
+                body:{
+                    tournament_teams_id
+                },
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -118,10 +121,13 @@ export const organizerApi = api.injectEndpoints({
     }),
 
     requalifyTeam: build.mutation({
-        query: ({tournament_id, team_id})=>{
+        query: ({tournament_id, tournament_teams_id})=>{
             return {
-                url: `tournament/requalify-team/${tournament_id}/${team_id}`,
+                url: `tournament/requalify-team/${tournament_id}`,
                 method: "PUT",
+                body:{
+                    tournament_teams_id
+                },
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -130,13 +136,14 @@ export const organizerApi = api.injectEndpoints({
     }),
 
     createPools: build.mutation({
-        query: ({tournament_id, total_groups, teams_per_group})=>{
+        query: ({tournament_id, teams_per_group, gender_type, age_type})=>{
             return {
                 url: `tournament/create-groups/${tournament_id}`,
                 method: "PUT",
                 body:{
-                    total_groups,
                     teams_per_group,
+                    gender_type,
+                    age_type
                 },
                 headers: {
                     "Content-Type": "application/json",
