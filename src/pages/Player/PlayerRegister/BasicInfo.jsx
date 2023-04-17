@@ -11,7 +11,7 @@ import "../../../Component/Style/PlayerProfile.css";
 const BasicInfo = ({ index, setIndex }) => {
   const dispatch = useDispatch();
   const location = useLocation();
-  const defaultImage = "/CBL_Images/player-default-profile.webp";
+  const defaultImage = "/CBL_Images/60111-removebg-preview.png";
   const [img, setImg] = React.useState( defaultImage);
   const [photo, setPhoto] = React.useState("");
   const { PlayerForm } = useSelector((state) => state.player);

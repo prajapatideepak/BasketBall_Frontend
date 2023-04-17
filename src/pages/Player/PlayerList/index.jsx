@@ -17,7 +17,6 @@ const PlayerList = () => {
     pageNo: pageNo - 1,
     search,
   });
-  console.log(data)
   const itemsPerPage = 2;
   return (
     <section className="min-h-screen-fit">
@@ -66,7 +65,7 @@ const PlayerList = () => {
                             <div className=" flex flex-col  px-5 sm:px-8 lg:px-12  sm:flex-row w-full h-full absolute top-0 content-start py-2 ">
                               <div className="bg-gradient-to-b  from-[#e64100]  absolute  md:top-[-32px] md:left-[-20px] w-10 h-10 rotate-[30deg] top-[-15px] left-[-15px] md:h-20 md:w-14 content-start md:rotate-[45deg] flex justify-center items-center">
                                 <h1 className="rotate-[-30deg] md:rotate-[315deg] text-xs font-bold md:text-lg mt-1 ml-5 md:ml-6">
-                                  {(index+1) + ((pageNo-1)*10)}
+                                  {(index + 1) + ((pageNo - 1) * 10)}
                                 </h1>
                               </div>
                               {/* avtar start */}
@@ -159,37 +158,45 @@ const PlayerList = () => {
                   )}
 
                 </div>
-                <div className="flex  justify-center items-center text-gray-400 py-5 space-x-2 mt-5 text-sm">
-                  <button
-                    onClick={(e) => {
-                      setPageNo(() => pageNo - 1);
-                    }}
-                    disabled={pageNo == 1}
-                    className="cursor-pointer disabled:cursor-default disabled:opacity-30 p-2 border rounded border-gray-400"
-                  >
-                    <IoIosArrowBack />
-                  </button>
-                  <div className="cursor-pointer px-4 py-1  border rounded bg-[#ee6730] text-base text-white shadow-xl">
-                    {" "}
-                    {pageNo}
-                  </div>
-                  <button
-                    onClick={(e) => {
-                      setPageNo(() => pageNo + 1);
-                    }}
-                    disabled={data?.data?.length < 10}
-                    className="cursor-pointer disabled:opacity-30 disabled:cursor-default p-2 border rounded border-gray-400"
-                  >
-                    {" "}
-                    <IoIosArrowForward />
-                  </button>
-                </div>
+                {
+                  data.length < 0 ?
+                    <div className="flex  justify-center items-center text-gray-400 py-5 space-x-2 mt-5 text-sm">
+                      <button
+                        onClick={(e) => {
+                          setPageNo(() => pageNo - 1);
+                        }}
+                        disabled={pageNo == 1}
+                        className="cursor-pointer disabled:cursor-default disabled:opacity-30 p-2 border rounded border-gray-400"
+                      >
+                        <IoIosArrowBack />
+                      </button>
+                      <div className="cursor-pointer px-4 py-1  border rounded bg-[#ee6730] text-base text-white shadow-xl">
+                        {" "}
+                        {pageNo}
+                      </div>
+                      <button
+                        onClick={(e) => {
+                          setPageNo(() => pageNo + 1);
+                        }}
+                        disabled={data?.data?.length < 10}
+                        className="cursor-pointer disabled:opacity-30 disabled:cursor-default p-2 border rounded border-gray-400"
+                      >
+                        {" "}
+                        <IoIosArrowForward />
+                      </button>
+                    </div>
+                    :
+                    null
+                }
               </div>
             </div>
           </div>
         )}
       </div>
     </section>
+
+
+
 
   );
 };

@@ -1,7 +1,10 @@
 import React from "react";
 import Heading from "../../../Component/Heading";
+import moment from 'moment'
+
 
 export default function PlayerInfo({ PlayerDetail }) {
+  console.log(PlayerDetail)
   return (
     <div className="mx-auto text-center">
       <div className="flex justify-center ">
@@ -17,27 +20,33 @@ export default function PlayerInfo({ PlayerDetail }) {
 
         <div className="flex flex-wrap p-2  gap-2 lg:gap-3">
           <div className="bg-white px-2 py-1 rounded-lg border-2 border-orange-100 shadow-xl">
-            <span className="text-xs md:text-base">Height -</span>
+            <span className="text-xs md:text-base">Height : </span>
             <span className="text-xs md:text-sm font-semibold ">
               {PlayerDetail?.SinglePlayerDetails?.height}cm
             </span>
           </div>
           <div className="bg-white px-2 py-1 rounded-lg border-2 border-orange-100 shadow-xl">
-            <span className="text-xs md:text-base">Weight -</span>
+            <span className="text-xs md:text-base">Weight : </span>
             <span className="text-xs md:text-sm font-semibold ">
               {PlayerDetail?.SinglePlayerDetails?.weight}KG
             </span>
           </div>
 
           <div className="bg-white px-2 py-1 rounded-lg border-2 border-orange-100 shadow-xl">
-            <span className="text-xs md:text-base">Date of birth - </span>
+            <span className="text-xs md:text-base">Date of birth : </span>
             <span className="text-xs md:text-sm font-semibold ">
-              {PlayerDetail?.SinglePlayerDetails?.date_of_birth}
+              {
+                PlayerDetail?.SinglePlayerDetails?.date_of_birth ?
+
+                  moment(PlayerDetail?.SinglePlayerDetails?.date_of_birth).format('DD / MM / YY')
+                  :
+                  ""
+              }
             </span>
           </div>
 
           <div className="bg-white px-2 py-1 rounded-lg border-2 border-orange-100 shadow-xl">
-            <span className="text-xs md:text-base">From - </span>
+            <span className="text-xs md:text-base">From : </span>
             <span className="text-xs md:text-sm font-semibold ">
               Ahmedabad , Gujarat
             </span>
@@ -51,14 +60,14 @@ export default function PlayerInfo({ PlayerDetail }) {
 
         <div className="flex flex-wrap p-2  gap-3">
           <div className="bg-white px-2 py-1 rounded-lg border-2 border-orange-100 shadow-xl">
-            <span className="text-xs md:text-base">Jersey Number -</span>
-            <span className="text-xs md:text-sm font-semibold    px-4">
+            <span className="text-xs md:text-base">Jersey Number : </span>
+            <span className="text-xs md:text-sm font-semibold px-1">
               {PlayerDetail?.SinglePlayerDetails?.jersey_no}
             </span>
           </div>
           <div className="bg-white px-2 py-1 rounded-lg border-2 border-orange-100 shadow-xl">
-            <span className="text-xs md:text-base">Game Position - </span>
-            <span className="text-xs md:text-sm font-semibold ">
+            <span className="text-xs md:text-base">Game Position : </span>
+            <span className="text-xs md:text-sm font-semibold capitalize ">
               {PlayerDetail?.SinglePlayerDetails?.playing_position}
             </span>
           </div>
@@ -70,7 +79,7 @@ export default function PlayerInfo({ PlayerDetail }) {
 
         <div className="flex flex-wrap p-2  ">
           <div className="bg-white   px-2 py-1 rounded-lg border-2 border-orange-100 shadow-xl">
-            <span className="text-xs md:text-base">Email - </span>
+            <span className="text-xs md:text-base">Email : </span>
             <span className="text-xs md:text-sm font-semibold ">
               {PlayerDetail?.SinglePlayerDetails?.users?.email}
             </span>
