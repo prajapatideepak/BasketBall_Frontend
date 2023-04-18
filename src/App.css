@@ -83,3 +83,7 @@
   transform: scale(1.08);
 }
 
+.landing-sub
+{
+  letter-spacing: 10px;
+}
