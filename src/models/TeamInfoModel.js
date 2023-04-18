@@ -5,7 +5,8 @@ export const TeamInfoSchema = Yup.object({
     .matches(/^[a-zA-Z ]+$/, "Please enter only characters")
     .min(2, "Team name must be at least 2 characters")
     .max(25, "Team name should not be more than 25 characters")
-    .required("Please Enter Team Name "),
+    .required("Please Enter Team Name ")
+    .matches(/^\s*\S[\s\S]*$/, "Invalid Name"),
   coach_name: Yup.string()
     .matches(/^[a-zA-Z ]+$/, "Please enter only characters")
     .min(2, "Coach name must be at least 2 characters")
