@@ -8,6 +8,7 @@ import MatchCard from "../../../Component/MatchCard";
 import { useGetTeamDetailQuery } from "../../../services/team";
 import Loader from "../../../Component/Loader";
 import moment from "moment";
+import { array } from "yup";
 
 function TeamProfileDetail() {
   const { team_id } = useParams();
@@ -45,7 +46,7 @@ function TeamProfileDetail() {
       ? [...data?.data.team_1_matches, ...data?.data.team_2_matches]
       : [];
 
-  const handleUnenrollTournament = (tour, tournament_id) => {
+    const handleUnenrollTournament = (tour, tournament_id) => {
     try {
       console.log("sa", tournament_id);
     } catch (error) {

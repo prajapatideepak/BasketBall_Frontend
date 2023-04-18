@@ -45,8 +45,8 @@ function TeamRegister() {
     age_cutoff: [],
   };
   const validationSchema = Yup.object({
-    tournament_category: Yup.array().min(1),
-    age_cutoff: Yup.array().min(1),
+    tournament_category: Yup.string().min(1),
+    age_cutoff: Yup.string().min(1),
   });
 
   const {
@@ -174,7 +174,7 @@ function TeamRegister() {
                                 className="flex bg-gray-200 hover:shadow-md px-5  py-3 rounded-md shadow-sm w-full flex-row  items-center space-x-3"
                               >
                                 <input
-                                  type="checkbox"
+                                  type="radio"
                                   name={"tournament_category"}
                                   id={category}
                                   onChange={handleChange}
@@ -219,7 +219,7 @@ function TeamRegister() {
                                     className="flex bg-gray-200 hover:shadow-md px-5 py-3 rounded-md shadow-sm w-full items-center space-x-3"
                                   >
                                     <input
-                                      type="checkbox"
+                                      type="radio"
                                       name={"age_cutoff"}
                                       id={age_cutoff}
                                       onChange={handleChange}
