@@ -20,13 +20,11 @@ import {
 
 
 
-// const signUpSchema = Yup.object({
-//   // photo: Yup.string().required("Please select image"),
-//   title: Yup.string().required("Please enter title"),
-//   Tags: Yup.string().required("Please enter tags"),
-//   Date: Yup.string().required("Please select date"),
-//   description: Yup.string().required("Please enter description")
-// });
+const signUpSchema = Yup.object({
+  title: Yup.string().required("Please enter title"),
+  tags: Yup.string().required("Please enter tags"),
+  description: Yup.string().required("Please enter description")
+});
 
 const NewsList = () => {
   const navigate = useNavigate();
@@ -34,6 +32,7 @@ const NewsList = () => {
   const [model, setModel] = React.useState(false);
   const [photo, setphoto] = React.useState("");
   const { data } = useGetAllNewsQuery({});
+  console.log(data)
   const { deletenews, isLoading, error } = useDeleteNewsDetailsMutation();
   const [newsRegistration, { ...thing }] = useRegisterNewsMutation();
   const [newsUpdate, { ...updateData }] = useUpdateNewsDetailsMutation();
@@ -43,13 +42,12 @@ const NewsList = () => {
     photo: "",
     title: "",
     // Tags: "",
-    // Date: "",
     description: "",
   };
 
   const { values, errors, handleBlur, touched, handleChange, handleSubmit } = useFormik({
     initialValues: initialValues,
-    // validationSchema: signUpSchema,
+    validationSchema: signUpSchema,
     onSubmit(data) {
       try {
         const fd = new FormData();
@@ -75,10 +73,15 @@ const NewsList = () => {
   }
 
   const handleDelete = (id) => {
-
+      
   }
 
-  const handleUpdate = () => {
+  const handleUpdate = (id) => {
+    let updatenews = data?.AllNews?.find((n)=>{
+      return n?.id == id
+    })
+
+    console.log(updatenews , "sdgn kfdfk ")
     setModel(true)
   }
 
@@ -145,29 +148,29 @@ const NewsList = () => {
                             onBlur={handleBlur}
                             className="rounded-md py-1 md:py-[5px] xl:py-[10px] px-3 outline-non border border-slate-300 outline-blue-200"
                             placeholder="Enter title " />
-                          {/* {errors.title && touched.title
+                          {errors.title && touched.title
                             ?
                             <p className='form-error text-red-600 text-sm font-semibold'>{errors.title}</p>
                             :
-                            null} */}
+                            null}
                         </div>
                       </div>
                       <div className='flex flex-col lg:flex-row items-center space-y-5 lg:space-y-0 lg:space-x-5 xl:space-x-10'>
                         <div className="flex flex-col space-y-2 w-full ">
                           <label htmlFor="phone">Tags</label>
                           <input type="text"
-                            name="Tags"
-                            id="Tags"
+                            name="tags"
+                            id="tags"
                             value={values.Tags}
                             onChange={handleChange}
                             onBlur={handleBlur}
                             className="rounded-md py-1 md:py-[5px] xl:py-[10px] px-3 outline-non border border-slate-300 outline-blue-200"
                             placeholder="Enter tags " />
-                          {errors.Tags && touched.Tags
+                          {/* {errors.Tags && touched.Tags
                             ?
                             <p className='form-error text-red-600 text-sm font-semibold'>{errors.Tags}</p>
                             :
-                            null}
+                            null} */}
                         </div>
                         <div className="flex flex-col space-y-2 w-full ">
                           <label htmlFor="Description">Description</label>
@@ -179,11 +182,11 @@ const NewsList = () => {
                             onBlur={handleBlur}
                             className="rounded-md py-1 md:py-[5px] xl:py-[10px] px-3 w-[100%] outline-non border  border-slate-300 outline-blue-200"
                             placeholder="Enter description " />
-                          {/* {errors.description && touched.description
+                          {errors.description && touched.description
                           ?
                           <p className='form-error text-red-600 text-sm font-semibold'>{errors.description}</p>
                           :
-                          null} */}
+                          null}
                         </div>
                       </div>
                       <div className='flex justify-center items-center w-full space-x-5 '>

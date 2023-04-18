@@ -63,7 +63,7 @@ export default function PlayerAvtar({ player }) {
         <div className="flex flex-col items-center  mx-auto ">
           <img
             className="mx-auto w-32 h-32 md:w-44 md:h-44 lg:w-60 lg:h-60 object-cover shadow rounded-full"
-            src={player?.SinglePlayerDetails?.photo ? player?.SinglePlayerDetails?.photo : ""}
+            src={player?.SinglePlayerDetails?.photo ? player?.SinglePlayerDetails?.photo : "/CBL_Images/60111-removebg-preview.png"}
           />
 
           <div className="p-2 justify-center items-center space-y-1  ">
@@ -75,7 +75,7 @@ export default function PlayerAvtar({ player }) {
                 {player?.SinglePlayerDetails?.team_players[0]?.teams?.team_name ? player?.SinglePlayerDetails?.team_players[0]?.teams?.team_name : "--"}
               </span>
               <span>-</span>
-              <span className="px-2  text-xs italic bg-gray-800 font-semibold text-white rounded-lg ">
+              <span className="px-2  text-xs italic bg-gray-800 font-semibold text-white rounded-lg capitalize ">
                 {player?.SinglePlayerDetails?.playing_position}
               </span>
             </div>

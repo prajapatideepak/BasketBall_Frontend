@@ -17,7 +17,6 @@ const PlayerList = () => {
     pageNo: pageNo - 1,
     search,
   });
-  console.log(data)
   const itemsPerPage = 2;
   return (
     <section className="min-h-screen-fit">
@@ -58,7 +57,7 @@ const PlayerList = () => {
                           <div className="duration-300 relative justify-end bg-black rounded-lg text-white overflow-hidden shadow-xl cursor-pointer hover:scale-[1.03] w-6/7  md:w-full h-full ">
                             <div className=" flex justify-end items-center ">
                               <img
-                                src={player.team_players[0]?.teams?.logo}
+                                src={player?.team_players[0]?.teams?.logo ? player?.team_players[0]?.teams?.logo : ""}
                                 alt=""
                                 className="w-28 h-28 opacity-20"
                               />
@@ -66,14 +65,14 @@ const PlayerList = () => {
                             <div className=" flex flex-col  px-5 sm:px-8 lg:px-12  sm:flex-row w-full h-full absolute top-0 content-start py-2 ">
                               <div className="bg-gradient-to-b  from-[#e64100]  absolute  md:top-[-32px] md:left-[-20px] w-10 h-10 rotate-[30deg] top-[-15px] left-[-15px] md:h-20 md:w-14 content-start md:rotate-[45deg] flex justify-center items-center">
                                 <h1 className="rotate-[-30deg] md:rotate-[315deg] text-xs font-bold md:text-lg mt-1 ml-5 md:ml-6">
-                                  {(index+1) + ((pageNo-1)*10)}
+                                  {(index + 1) + ((pageNo - 1) * 10)}
                                 </h1>
                               </div>
                               {/* avtar start */}
                               <div className="text-center sm:w-[65%]   w-full items-center justify-start  lg:py-6 flex  ">
                                 <div className="w-1/3 lg:w-40 ">
                                   <img
-                                    src={player?.photo}
+                                    src={player?.photo ? player?.photo : "/CBL_Images/60111-removebg-preview.png"}
                                     className=" object-cover w-20 h-20 rounded-full border-2 sm:border-4 border-slate-700 "
                                   />
                                 </div>
@@ -159,37 +158,45 @@ const PlayerList = () => {
                   )}
 
                 </div>
-                <div className="flex  justify-center items-center text-gray-400 py-5 space-x-2 mt-5 text-sm">
-                  <button
-                    onClick={(e) => {
-                      setPageNo(() => pageNo - 1);
-                    }}
-                    disabled={pageNo == 1}
-                    className="cursor-pointer disabled:cursor-default disabled:opacity-30 p-2 border rounded border-gray-400"
-                  >
-                    <IoIosArrowBack />
-                  </button>
-                  <div className="cursor-pointer px-4 py-1  border rounded bg-[#ee6730] text-base text-white shadow-xl">
-                    {" "}
-                    {pageNo}
-                  </div>
-                  <button
-                    onClick={(e) => {
-                      setPageNo(() => pageNo + 1);
-                    }}
-                    disabled={data?.data?.length < 10}
-                    className="cursor-pointer disabled:opacity-30 disabled:cursor-default p-2 border rounded border-gray-400"
-                  >
-                    {" "}
-                    <IoIosArrowForward />
-                  </button>
-                </div>
+                {
+                  data.length < 0 ?
+                    <div className="flex  justify-center items-center text-gray-400 py-5 space-x-2 mt-5 text-sm">
+                      <button
+                        onClick={(e) => {
+                          setPageNo(() => pageNo - 1);
+                        }}
+                        disabled={pageNo == 1}
+                        className="cursor-pointer disabled:cursor-default disabled:opacity-30 p-2 border rounded border-gray-400"
+                      >
+                        <IoIosArrowBack />
+                      </button>
+                      <div className="cursor-pointer px-4 py-1  border rounded bg-[#ee6730] text-base text-white shadow-xl">
+                        {" "}
+                        {pageNo}
+                      </div>
+                      <button
+                        onClick={(e) => {
+                          setPageNo(() => pageNo + 1);
+                        }}
+                        disabled={data?.data?.length < 10}
+                        className="cursor-pointer disabled:opacity-30 disabled:cursor-default p-2 border rounded border-gray-400"
+                      >
+                        {" "}
+                        <IoIosArrowForward />
+                      </button>
+                    </div>
+                    :
+                    null
+                }
               </div>
             </div>
           </div>
         )}
       </div>
     </section>
+
+
+
 
   );
 };

@@ -61,7 +61,7 @@ function MatchLive({ slides }) {
             <div className={index === currentIndex ? 'slide active ' : 'slide'}
               key={index}>
               {index === currentIndex && (
-                <img src='../../CBL_Images/background4.webp' alt="" className=' w-full h-[240px] sm:h-full md:h-[400px] lg:h-[450px]  xl:h-full bg-cover bg-center' />
+                <img src='../../CBL_Images/slider1.jpg' alt="" className=' w-full h-[240px] sm:h-full md:h-[400px] lg:h-[450px]  xl:h-full bg-cover bg-center' />
               )}
               {index == currentIndex && (
                 <div className='bg-gradient-to-t from-black absolute h-[240px] sm:h-[300px] md:h-[400px] lg:h-[450px] xl:h-[500px] 2xl:h-[600px] top-0 min-w-full   '>
