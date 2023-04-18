@@ -9,8 +9,9 @@ const PublicLayout = () => {
     const [open, setOpen] = React.useState(false);
 
     return (
-        <div className='w-full'>
-            <div className="py-3 h-[70px] bg-transparent px-9 md:flex items-center justify-between sticky top-0 z-[9999] w-full">
+        <div className='w-full relative'>
+       
+            <div className="py-3 h-[70px] bg-[#F5F5F7] px-9 md:flex items-center justify-between sticky top-0 z-[9999] w-full">
                 <div className="w-[18%] sm:w-[10%] md:w-[8%] xl:w-[6%] 2xl:w-[4%] ">
                     <img
                         src="/CBL_Images/logo.png"
@@ -88,11 +89,12 @@ const PublicLayout = () => {
                 </div>
 
             </div>
-            <div className='bg-white w-full -z-50  '>
-            {/* <div className='bg-[#F5F5F7] w-full -z-50  '> */}
+            <div className='bg-[#F5F5F7] w-full -z-50  '>
                 <Outlet />
             </div>
-
+            <div className='bg-[#ee6730] w-1/2 h-full absolute top-0'>
+            1
+        </div>
         </div>
 
     )

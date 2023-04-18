@@ -6,51 +6,51 @@ import { RxArrowRight } from "react-icons/rx";
 function LandingPage() {
   return (
     <>
-      <div className="min-h-screen ">
-        <div className=" flex flex-col px-10 lg:px-20 items-start justify-between ">
-          <div className=" pb-24 sm:pb-5 md:pb-2 w-full flex  flex-col justify-between items-center  md:items-start   ">
-            <div
-              className=" z-40 sm:space-y-0 2xl:space-y-4 text-white    || mt-2 md:mt-5 lg:mt-32 || 
-                flex flex-col justify-center items-center sm:items-start lg:justify-center "
-            >
-              <h1 className="xs:text-[44px] font-roboto italic  sm:text-[55px] md:text-7xl lg:text-[80px] text-[#ee6730] xl:text-8xl font-semibold 2xl:text-[96px]  uppercase">
-                streetball
-              </h1>
-              <div className="flex items-center space-x-5">
-                <h1 
+      <div className="min-h-screen relative " style={{ minHeight: "calc(100vh - 70px)" }}>
+        {/* <div className=" flex flex-col px-10 lg:px-20 items-start justify-between "> */}
+        {/* <div className=" pb-24 sm:pb-5 absolute top-0 md:pb-2 w-full flex  flex-col justify-between items-center  md:items-start   ">
+          <div
+            className=" z-40 sm:space-y-0 2xl:space-y-4 text-white    || mt-2 md:mt-5 lg:mt-32 || 
+                flex flex-col justify-center items-center sm:items-start lg:justify-center px-20 "
+          >
+            <h1 className="xs:text-[44px] font-roboto italic  sm:text-[55px] md:text-7xl lg:text-[80px] text-[#ee6730] xl:text-8xl font-semibold 2xl:text-[96px]  uppercase">
+              streetball
+            </h1>
+            <div className="flex items-center space-x-5">
+              <h1
                 className="landing-sub text-black text-4xl italic  font-semibold  uppercase ">
-                  BasketBall
-                </h1>
-                <h1 className="landing-sub text-black text-4xl italic  font-semibold  uppercase ">
-                  League
-                </h1>
-              </div>
-              <p
-                className="text-center sm:text-start ||  sm:mr-80 md:w-[300px] lg:w-[350px] text-black xl:w-[500px] || text-xs sm:text-sm md:text-sm lg:font-normal 2xl:text-base  ||
+                BasketBall
+              </h1>
+              <h1 className="landing-sub text-black text-4xl italic  font-semibold  uppercase ">
+                League
+              </h1>
+            </div>
+            <p
+              className="text-center sm:text-start ||  sm:mr-80 md:w-[300px] lg:w-[350px] text-black xl:w-[500px] || text-xs sm:text-sm md:text-sm lg:font-normal 2xl:text-base  ||
                      py-2 "
+            >
+              Use in khelo India, khel mahakumb, state level tournament,
+              district level tournament, inter university, any professional
+              league.
+            </p>
+            <Link className="Link" to={"/register"}>
+              <button
+                type="submit"
+                className="bg-[#ee6730]  relative inline-flex items-center border hover:border-[#ea592e] justify-center w-full px-8 py-1.5 sm:px-8 my-2 sm:py-[5px] 2xl:px-20 2xl:py-2 overflow-hidden font-medium tracking-tighter text-white hover:text-[#ee6730] rounded-lg cursor-pointer group"
               >
-                Use in khelo India, khel mahakumb, state level tournament,
-                district level tournament, inter university, any professional
-                league.
-              </p>
-              <Link className="Link" to={"/register"}>
-                <button
-                  type="submit"
-                  className="bg-[#ee6730]  relative inline-flex items-center border hover:border-[#ea592e] justify-center w-full px-8 py-1.5 sm:px-8 my-2 sm:py-[5px] 2xl:px-20 2xl:py-2 overflow-hidden font-medium tracking-tighter text-white hover:text-[#ee6730] rounded-lg cursor-pointer group"
-                >
-                  <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-white rounded-lg group-hover:w-full group-hover:h-56"></span>
-                  <span className="relative flex justify-center items-center flex-row">
-                    Register
-                  </span>
-                </button>
-              </Link>
-            </div>
-            <div className="img sm:absolute right-0 sm:top-40 md:top-40 lg:top-20 2xl:top-20 h-[350px] w-[350px] sm:h-[400px] sm:w-[380px] md:h-[400px] md:w-[400px] lg:h-[450px] lg:w-[450px] xl:h-[480px] xl:w-[480px] 2xl:h-[500px] 2xl:w-[850px]  ">
-              <img src="/CBL_Images/dfd98fa5-d35b-4533-8d4a-07d3ead4ab97.jpg" alt="landing" className="" />
-            </div>
+                <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-white rounded-lg group-hover:w-full group-hover:h-56"></span>
+                <span className="relative flex justify-center items-center flex-row">
+                  Register
+                </span>
+              </button>
+            </Link>
           </div>
-        </div>
-        <div className="w-full px-10 flex items-center justify-center sm:justify-start gap-10 lg:mt-16  mb-5">
+          <div className="img sm:absolute right-0 sm:top-40 mt-16 md:top-40 lg:top-20 2xl:top-0 h-[350px] w-[350px] sm:h-[400px] sm:w-[380px] md:h-[400px] md:w-[400px] lg:h-[450px] lg:w-[450px] xl:h-[480px] xl:w-[480px] 2xl:h-[600px] 2xl:w-[600px]  mr-28  ">
+            <img src="/CBL_Images/Lovepik_com-401268745-nba-basketball.png" alt="landing" className=" w-full" />
+          </div>
+        </div> */}
+        {/* </div> */}
+        <div className="w-full absolute bottom-20 px-10 flex items-center justify-center sm:justify-start gap-10 lg:mt-16  mb-5">
           <img
             src="../../CBL_Images/mahakumbh.png"
             alt=""
