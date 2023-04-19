@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import Button from "../../../Component/Button";
 import { toast } from "react-toastify";
+import { useMatchPlayersMutation } from "../../../services/team";
 
 export default function MatchPlayerSelection() {
   const location = useLocation();
   console.log(location.state);
   const MatchData = location.state;
-
+  const [matchPlayers, ...matchPlayersData] = useMatchPlayersMutation();
   const team1Color = "text-orange-500";
   const team2Color = "text-blue-600";
   const [captain, setCaptain] = useState(MatchData?.team?.captain_id);
@@ -43,8 +44,10 @@ export default function MatchPlayerSelection() {
       return;
     }
     if (!captain) {
-      toast.error("Please Select Captain");
+      return toast.error("Please Select Captain");
     }
+
+    matchPlayers({ body: finalPlayer, team_id: MatchData?.team.id });
   }
   return (
     <div className="px-6 py-12">
