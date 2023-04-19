@@ -3,9 +3,10 @@ import moment from "moment";
 import {useNavigate, useParams} from 'react-router-dom'
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
-import Loader from '../../../component/Loader';
+import SmallLoader from '../../../component/SmallLoader';
 import { useTournamentScheduleQuery } from '../../../services/organizer';
 import { useUpdateMatchDetailsMutation, useDeleteMatchMutation } from '../../../services/match';
+import { useSendScoreboardLinkMutation } from '../../../services/scoreboard';
 import ScorerModal from './ScorerModal';
 
 function Schedule({isOrganizer}) {
@@ -26,6 +27,7 @@ function Schedule({isOrganizer}) {
    
     const [updateMatchDetails, {...updatingMatch}] = useUpdateMatchDetailsMutation()
     const [deleteMatch, {...deletingMatch}] = useDeleteMatchMutation()
+    const [sendScoreboardLink, {...sendingLink}] = useSendScoreboardLinkMutation()
 
     const handleEdit = (match_id, start_date, start_time, address) => {
         setIsEdit(true)
@@ -75,9 +77,10 @@ function Schedule({isOrganizer}) {
         setMatchAddress(e.target.value)
     }
 
-    const handleViewScorer = (scorerDetails) =>{
+    const handleViewScorer = (match) =>{
         setIsViewScorerDetails(true)
-        setScorerDetails(scorerDetails)
+        setEditMatchId(match.id)
+        setScorerDetails(match.scorekeeper)
         setShowAddScorerModal(true)
     }
 
@@ -110,7 +113,26 @@ function Schedule({isOrganizer}) {
     }
 
     const handleSendLink = async (match) => {
+
+        const response = await sendScoreboardLink({
+            tournament_id: match.tournament_id, 
+            match_id: match.id, 
+            scorer_email:  match.scorekeeper.email,
+            scorer_token: match.scorekeeper.token,
+            team_1: match.team_1.team_name, 
+            team_2: match.team_2.team_name, 
+            match_start_date: moment(match.start_date).format("DD/MM/YYYY"), 
+            match_start_time: moment(match.start_time, 'h:mm a').format("h:mm A"), 
+            address: match.address
+        })
         
+        if(response.error){
+            toast.error(response.error.data.message)
+        }
+        else if(response.data.success){
+            refetch()
+            toast.success(response.data.message);
+        }
     }
 
     React.useEffect(()=>{
@@ -120,7 +142,7 @@ function Schedule({isOrganizer}) {
     },[data])
 
     if(isLoading){
-        return <Loader/>
+        return <SmallLoader/>
     }
 
     return (
@@ -246,9 +268,8 @@ function Schedule({isOrganizer}) {
                                                                         :
                                                                             <td className=" px-6 py-4 whitespace-nowrap space-x-3">
                                                                                 <span className="flex items-center">
-                                                                                    <button className=" text-blue-500 hover:underline cursor-pointer font-medium" onClick={()=> handleViewScorer(match.scorekeeper)}>View</button>
+                                                                                    <button className=" text-blue-500 hover:underline cursor-pointer font-medium" onClick={()=> handleViewScorer(match)}>View</button>
                                                                                     <button className=" mx-3 text-orange-300 hover:underline cursor-pointer font-medium" onClick={()=> handleSendLink(match)}>Send Link</button>
-                                                                                    <button className="text-blue-500 hover:underline cursor-pointer font-medium" onClick={()=> handleAddUpdateScorer(match.id)}>Change</button>
                                                                                 </span>
                                                                             </td>
                                                                     }

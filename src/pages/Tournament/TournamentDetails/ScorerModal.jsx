@@ -9,14 +9,15 @@ function ScorerModal({ showModal, handleShowModal, matchId, refetchData, isViewS
   const [scorerName, setScorerName] = React.useState("");
   const [scorerEmail, setScorerEmail] = React.useState("");
   const [scorerMobile, setScorerMobile] = React.useState("");
+  const [isEdit, setIsEdit] = React.useState(false);
   const [error, setError] = useState("");
 
   const [updateMatchScorer, {isLoading}] = useUpdateMatchScorerMutation()
 
   const handleModalClose = () => {  
     handleShowModal(false);
-    
     setTimeout(() => {
+      setIsEdit(false)
       setIsViewScorerDetails(false)
       setScorerName("");
       setScorerEmail("");
@@ -63,6 +64,10 @@ function ScorerModal({ showModal, handleShowModal, matchId, refetchData, isViewS
     
     setScorerMobile(e.target.value);
   };
+
+  const handleEditScorer = () => {
+    setIsEdit(true)
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -115,7 +120,7 @@ function ScorerModal({ showModal, handleShowModal, matchId, refetchData, isViewS
   };
 
   React.useEffect(() => {
-    if(isViewScorerDetails){
+    if(scorerDetails?.name){
       setScorerName(scorerDetails.name)
       setScorerEmail(scorerDetails.email)
       setScorerMobile(scorerDetails.mobile)
@@ -188,7 +193,7 @@ function ScorerModal({ showModal, handleShowModal, matchId, refetchData, isViewS
                 name=""
                 id=""
                 value={scorerEmail}
-                disabled={isViewScorerDetails}
+                disabled={isViewScorerDetails && !isEdit}
                 className="w-full border border-[#6B7280] outline-none focus:border-blue-500 text-white px-2 py-2  rounded-md"
                 style={{
                   backgroundColor: "rgb(75 85 99)",
@@ -219,7 +224,38 @@ function ScorerModal({ showModal, handleShowModal, matchId, refetchData, isViewS
               />
             </div>
             {
-              !isViewScorerDetails &&
+              isViewScorerDetails
+              ?
+                isEdit
+                ?
+                  <div className="text-center">
+                    <button
+                      type="button"
+                      onClick={()=>{setIsEdit(false); handleModalClose()}}
+                      className={`w-28 text-white bg-red-600 hover:opacity-60 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm mt-4 mr-4 px-5 py-2 text-center dark:bg-red-600 dark:hover:opacity-60 dark:focus:ring-blue-800`}
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleSubmit}
+                      disabled={isLoading}
+                      className={`${isLoading ? 'opacity-60' : ''} w-28 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800`}
+                    >
+                      {isLoading? "Loading..." : 'Submit'}
+                    </button>
+                  </div>
+                :
+                  <div className="mt-5 text-right">
+                    <button
+                      type="button"
+                      onClick={handleEditScorer}
+                      className={`w-28 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800`}
+                    >
+                      Edit
+                    </button>
+                  </div>
+              :
                 <>
                   <div className="mt-5 text-right">
                     <button
