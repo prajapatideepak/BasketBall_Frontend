@@ -17,6 +17,7 @@ import { useGetAllNewsQuery } from "../../services/news";
 
 const Dashboard = () => {
   const data = useGetMatchesQuery();
+  
   const tournaments = useGetAllTournamentsQuery();
   const news = useGetAllNewsQuery();
   const navigate = useNavigate();

@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import Loader from '../../../component/Loader';
 import { useTournamentScheduleQuery } from '../../../services/organizer';
 import { useUpdateMatchDetailsMutation, useDeleteMatchMutation } from '../../../services/match';
+import ScorerModal from './ScorerModal';
 
 function Schedule({isOrganizer}) {
     const navigate = useNavigate();
@@ -17,6 +18,9 @@ function Schedule({isOrganizer}) {
     const [matchDate, setMatchDate] = React.useState('');
     const [matchTime, setMatchTime] = React.useState('');
     const [editMatchId, setEditMatchId] = React.useState(-1);
+    const [showAddScorerModal, setShowAddScorerModal] = React.useState(false)
+    const [isViewScorerDetails, setIsViewScorerDetails] = React.useState(false)
+    const [scorerDetails, setScorerDetails] = React.useState({})
 
     const {data, isLoading, refetch } = useTournamentScheduleQuery(tournament_id)
    
@@ -71,6 +75,17 @@ function Schedule({isOrganizer}) {
         setMatchAddress(e.target.value)
     }
 
+    const handleViewScorer = (scorerDetails) =>{
+        setIsViewScorerDetails(true)
+        setScorerDetails(scorerDetails)
+        setShowAddScorerModal(true)
+    }
+
+    const handleAddUpdateScorer = (match_id) => {
+        setEditMatchId(match_id)
+        setShowAddScorerModal(true)
+    }
+
     const handleMatchDelete = async (match_id) => {
         Swal.fire({
             title: "Are you sure to delete the match?",
@@ -92,6 +107,10 @@ function Schedule({isOrganizer}) {
                 }
             }
         });
+    }
+
+    const handleSendLink = async (match) => {
+        
     }
 
     React.useEffect(()=>{
@@ -141,9 +160,14 @@ function Schedule({isOrganizer}) {
                                                 {
                                                     isOrganizer
                                                     ?
-                                                        <th scope="col" className="px-6 py-3 whitespace-nowrap">
-                                                            Action
-                                                        </th>
+                                                        <>
+                                                            <th scope="col" className="px-6 py-3 whitespace-nowrap">
+                                                                Scorer
+                                                            </th>
+                                                            <th scope="col" className="px-6 py-3 whitespace-nowrap">
+                                                                Action
+                                                            </th>
+                                                        </>
                                                     :
                                                         null
                                                 }
@@ -210,31 +234,51 @@ function Schedule({isOrganizer}) {
                                                         {
                                                             isOrganizer
                                                             ?
-                                                                <td className="flex items-center px-6 py-4 whitespace-nowrap space-x-3">
+                                                                <>  
                                                                     {
-                                                                        isEdit && editMatchId == match.id
+                                                                        !match.scorekeeper_id
                                                                         ?
-                                                                            <>
-                                                                                <button className="font-medium text-blue-600 dark:text-blue-500 hover:underline" onClick={()=>handleSave(match.id)}>{
-                                                                                    updatingMatch.isLoading
-                                                                                    ?
-                                                                                        'Loading..'
-                                                                                    :
-                                                                                        'Save'
-                                                                                }</button>
-                                                                                <button className="font-medium text-red-600 dark:text-red-500 hover:underline" onClick={handleCancel}>Cancel</button>
-                                                                            </>
-                                                                        
+                                                                            <td className=" px-6 py-4 whitespace-nowrap space-x-3">
+                                                                                <span className="flex items-center">
+                                                                                    <button className=" text-blue-500 hover:underline cursor-pointer font-medium" onClick={()=> handleAddUpdateScorer(match.id) }>Add</button>
+                                                                                </span>
+                                                                            </td>
                                                                         :
-                                                                            <>
-                                                                                <button className="font-medium text-blue-600 dark:text-blue-500 hover:underline" onClick={()=>handleEdit(match.id, match.start_date, match.start_time, match.address)}>Edit</button>
-                                                                                <button 
-                                                                                className="font-medium text-red-600 dark:text-red-500 hover:underline"
-                                                                                onClick={()=>handleMatchDelete(match.id)}
-                                                                                >Delete</button>
-                                                                            </>
+                                                                            <td className=" px-6 py-4 whitespace-nowrap space-x-3">
+                                                                                <span className="flex items-center">
+                                                                                    <button className=" text-blue-500 hover:underline cursor-pointer font-medium" onClick={()=> handleViewScorer(match.scorekeeper)}>View</button>
+                                                                                    <button className=" mx-3 text-orange-300 hover:underline cursor-pointer font-medium" onClick={()=> handleSendLink(match)}>Send Link</button>
+                                                                                    <button className="text-blue-500 hover:underline cursor-pointer font-medium" onClick={()=> handleAddUpdateScorer(match.id)}>Change</button>
+                                                                                </span>
+                                                                            </td>
                                                                     }
-                                                                </td>
+                                                                    <td className="flex items-center px-6 py-4 whitespace-nowrap space-x-3">
+                                                                        {
+                                                                            isEdit && editMatchId == match.id
+                                                                            ?
+                                                                                <>
+                                                                                    <button className="font-medium text-blue-600 dark:text-blue-500 hover:underline" onClick={()=>handleSave(match.id)}>{
+                                                                                        updatingMatch.isLoading
+                                                                                        ?
+                                                                                            'Loading..'
+                                                                                        :
+                                                                                            'Save'
+                                                                                    }</button>
+                                                                                    <button className="font-medium text-red-600 dark:text-red-500 hover:underline" onClick={handleCancel}>Cancel</button>
+                                                                                </>
+                                                                            
+                                                                            :
+                                                                                <>
+                                                                                    <button className="font-medium text-blue-600 dark:text-blue-500 hover:underline" onClick={()=>handleEdit(match.id, match.start_date, match.start_time, match.address)}>Edit</button>
+                                                                                    <button 
+                                                                                    disabled={deletingMatch.isLoading}
+                                                                                    className={`${deletingMatch.isLoading ? 'opacity-60' : ''} font-medium text-red-600 dark:text-red-500 hover:underline`}
+                                                                                    onClick={()=>handleMatchDelete(match.id)}
+                                                                                    >Delete</button>
+                                                                                </>
+                                                                        }
+                                                                    </td>
+                                                                </>
                                                             :
                                                                 null
                                                         }
@@ -252,6 +296,15 @@ function Schedule({isOrganizer}) {
                         </div>
                 }
             </div>
+            <ScorerModal 
+                showModal={showAddScorerModal} 
+                handleShowModal={setShowAddScorerModal} 
+                matchId={editMatchId} 
+                refetchData={refetch}
+                isViewScorerDetails={isViewScorerDetails}
+                setIsViewScorerDetails={setIsViewScorerDetails}
+                scorerDetails={scorerDetails}
+            />
         </div>
     )
 }

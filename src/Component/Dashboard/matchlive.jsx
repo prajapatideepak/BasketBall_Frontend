@@ -33,6 +33,12 @@ function MatchLive({ slides }) {
     setCurrentIndex(newIndex);
   };
 
+  const array=[
+    "/CBL_Images/background1.webp",
+    "/CBL_Images/background2.webp",
+    "/CBL_Images/background3.webp",
+    "/CBL_Images/background4.webp"
+  ]
 
   function auto() {
     slideInterval = setInterval(nextSlide, intervalTime)
@@ -61,7 +67,7 @@ function MatchLive({ slides }) {
             <div className={index === currentIndex ? 'slide active ' : 'slide'}
               key={index}>
               {index === currentIndex && (
-                <img src='../../CBL_Images/background4.webp' alt="" className=' w-full h-[240px] sm:h-full md:h-[400px] lg:h-[450px]  xl:h-full bg-cover bg-center' />
+                <img src={array[index]} alt="" className=' w-full h-[240px] sm:h-full md:h-[400px] lg:h-[450px]  xl:h-full bg-cover bg-center' />
               )}
               {index == currentIndex && (
                 <div className='bg-gradient-to-t from-black absolute h-[240px] sm:h-[300px] md:h-[400px] lg:h-[450px] xl:h-[500px] 2xl:h-[600px] top-0 min-w-full   '>
@@ -120,10 +126,10 @@ function MatchLive({ slides }) {
                         <div className="w-8 h-8 sm:w-12 sm:h-12 md:w-14 md:h-20 lg:w-16 lg:h-16  xl:w-[80px] xl:h-[80px]">
                           <img src={item?.team_1?.logo} className="object-contain h-full w-full rounded-full " alt="" />
                         </div>
-                        <h1 className={`${item.status == 3 && item.won_by_team.team_name == item.team_1.team_name ? "underline" : ""} font-extrabold text-xs sm:text-lg xl:text-4xl 2xl:text-[42px] text-center uppercase`}>{item?.team_1?.team_name}</h1>
+                        <h1 className={`${item.status == 3 && item?.won_by_team?.team_name == item.team_1.team_name ? "underline" : ""} font-extrabold text-xs sm:text-lg xl:text-4xl 2xl:text-[42px] text-center uppercase`}>{item?.team_1?.team_name}</h1>
                         <div className=''>
                           {
-                            item.status == 3 && item.won_by_team.team_name == item.team_1.team_name ?
+                            item.status == 3 && item?.won_by_team?.team_name == item.team_1.team_name ?
                               <div className='flex items-center bg-green-600 px-2 py-1 rounded-md ml-3 mt-2 space-x-1'>
                                 <GiTrophyCup className='xxs:text-xs sm:text-xs lg:text-lg text-white' />
                                 <p className='xxs:text-[10px] sm:text-xs lg:text-sm font-semibold'>Won</p>
@@ -136,10 +142,10 @@ function MatchLive({ slides }) {
                         <div className="w-8 h-8 sm:w-12 sm:h-12 md:w-14 md:h-20 lg:w-16 lg:h-16  xl:w-[80px] xl:h-[80px]">
                           <img src={item?.team_2?.logo} className="object-contain h-full w-full rounded-full " alt="" />
                         </div>
-                        <h1 className={`${item.status == 3 && item.won_by_team.team_name == item.team_2.team_name ? "underline" : ""} font-extrabold text-xs sm:text-lg xl:text-4xl 2xl:text-[42px] text-center uppercase`}>{item?.team_2?.team_name}</h1>
+                        <h1 className={`${item.status == 3 && item?.won_by_team?.team_name == item.team_2.team_name ? "underline" : ""} font-extrabold text-xs sm:text-lg xl:text-4xl 2xl:text-[42px] text-center uppercase`}>{item?.team_2?.team_name}</h1>
                         <div className=''>
                           {
-                            item.status == 3 && item.won_by_team.team_name == item.team_2.team_name ?
+                            item.status == 3 && item?.won_by_team?.team_name == item.team_2.team_name ?
                               <div className='flex items-center bg-green-600 px-2 py-1 rounded-md ml-3 mt-2 space-x-1'>
                                 <GiTrophyCup className='xxs:text-xs sm:text-xs lg:text-lg text-white' />
                                 <p className='xxs:text-[10px] sm:text-xs lg:text-sm font-semibold'>Won</p>
@@ -202,31 +208,31 @@ function MatchLive({ slides }) {
                 {
                   slides.map((slide, slideIndex) => {
                     return (
-                      <div key={slideIndex} className="relative cursor-pointer" onClick={() => goToSlide(slideIndex)}>
-                        <svg className="w-12 h-12 relative rotate-[-90deg]">
+                      <div key={slideIndex} className="relative cursor-pointer flex justify-center items-center" onClick={() => goToSlide(slideIndex)}>
+                        <svg className="w-12 h-12 relative rotate-[-90deg] flex justify-center items-center">
                           <circle
                             className="text-gray-500"
-                            strokeWidth="3"
+                            strokeWidth="1"
                             stroke="currentColor"
                             fill="transparent"
-                            r="18"
-                            cx="25"
-                            cy="25"
+                            r="20"
+                            cx="24"
+                            cy="24"
                           />
                           <circle
                             className={`${slideIndex === currentIndex ? 'text-[#ee6730]' : 'text-gray-500'} transition-all`}
-                            strokeWidth="3"
-                            strokeDasharray={30 * 2 * Math.PI}
-                            strokeDashoffset={(30 * 2 * Math.PI) - progressBar / 100 * (30 * 2 * Math.PI)}
+                            strokeWidth="1.5"
+                            strokeDasharray={0}
+                            strokeDashoffset={0}
                             strokeLinecap="round"
                             stroke="currentColor"
                             fill="transparent"
-                            r="18"
-                            cx="25"
-                            cy="25"
+                            r="20"
+                            cx="24"
+                            cy="24"
                           />
                         </svg>
-                        <span className="w-10 absolute text-lg text-white top-2 left-1.5 text-center">{slideIndex + 1}</span>
+                        <span className="w-10 absolute text-sm text-white text-center">{slideIndex + 1}</span>
                       </div>
                     )
                   })

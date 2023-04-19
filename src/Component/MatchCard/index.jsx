@@ -30,7 +30,7 @@ function MatchCard({ match }) {
               <div className="w-14 h-14 xs:w-20 xs:h-20 md:w-24 md:h-24 flex justify-center items-center rounded-full border-2 overflow-hidden">
                 <img
                   src={match.team_1.logo}
-                  className="object-contain w-full h-full"
+                  className="object-cover w-full h-full"
                   alt=""
                 />
               </div>
@@ -68,7 +68,7 @@ function MatchCard({ match }) {
               <div className="w-14 h-14 xs:w-20 xs:h-20 md:w-24 md:h-24 flex justify-center items-center rounded-full border-2 overflow-hidden">
                 <img
                   src={match.team_2.logo}
-                  className="object-contain w-full h-full"
+                  className="object-cover w-full h-full"
                   alt=""
                 />
               </div>

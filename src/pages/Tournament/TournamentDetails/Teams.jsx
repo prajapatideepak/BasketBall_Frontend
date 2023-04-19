@@ -7,50 +7,79 @@ function Teams({isOrganizer, teams, tournamentDetails, refetchData}) {
   const [allTeams, setAllTeams] = React.useState(teams)
   const [genderType, setGenderType] = React.useState('')
   const [ageCategory, setAgeCategory] = React.useState('')
-
+  
   const handleAgeChange = (e) =>{
     setAgeCategory(e.target.value)
-    setAllTeams(()=>{
-      return teams.filter(t =>
-        (
-          e.target.value == ''
-          ?
-            true
-          :
-            t.age_categories.includes(e.target.value) 
+    setAllTeams((data)=>{
+      let all_teams = JSON.parse(JSON.stringify(teams))
+      all_teams = all_teams.filter((item)=>{
+        const result = item.tournament_teams_reg_type.filter(t =>
+          {
+            return (
+              e.target.value == ''
+              ?
+                true
+              :
+                t.age_category == e.target.value 
+            )
+            && 
+            (
+              genderType == ''
+              ?
+                true
+              :
+                t.gender_type == genderType
+            )
+
+          }
         )
-        && 
-        (
-          genderType == ''
-          ?
-            true
-          :
-            t.gender_type.includes(genderType)
-        )
-      )
+
+        if(result.length > 0){
+          item.tournament_teams_reg_type = result.slice(0, result.length)
+          return true
+        }
+        else {
+          return false
+        }
+      })
+      return all_teams
     })
   }
 
   const handleGenderChange = (e) =>{
     setGenderType(e.target.value)
-    setAllTeams(()=>{
-      return teams.filter(t =>
-        (
-          e.target.value == ''
-          ?
-            true
-          :
-            t.gender_type.includes(e.target.value) 
+    setAllTeams((data)=>{
+      let all_teams = JSON.parse(JSON.stringify(teams))
+      all_teams = all_teams.filter((item)=>{
+        const result = item.tournament_teams_reg_type.filter(t =>
+          {
+            return (
+              e.target.value == ''
+              ?
+                true
+              :
+                t.gender_type == e.target.value
+            )
+            && 
+            (
+              ageCategory == ''
+              ?
+                true
+              :
+                t.age_category == ageCategory
+            )
+          }
         )
-        && 
-        (
-          ageCategory == ''
-          ?
-            true
-          :
-            t.age_categories.includes(ageCategory)
-        )
-      )
+
+        if(result.length > 0){
+          item.tournament_teams_reg_type = result.slice(0, result.length)
+          return true
+        }
+        else {
+          return false
+        }
+      })
+      return all_teams
     })
   }
 
@@ -112,11 +141,20 @@ function Teams({isOrganizer, teams, tournamentDetails, refetchData}) {
       </div>
       {allTeams.length > 0 ? (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 mt-10">
-          {allTeams.map((team, i) => {
-            return team.tournament_teams_reg_type.map((item, index)=>{
-              return <TournamentTeamCard key={index} isOrganizer={isOrganizer} teamDetails={team} teamCategoryType={item} is_disqualified={item.is_disqualified} tournament_teams_id={item.id} refetchData={refetchData} />;
+          {
+            allTeams.map((team, i) => {
+              return team.tournament_teams_reg_type.map((item, index)=>{
+                return <TournamentTeamCard 
+                key={index} 
+                isOrganizer={isOrganizer} 
+                teamDetails={team} 
+                teamCategoryType={item} 
+                is_disqualified={item.is_disqualified} 
+                tournament_teams_id={item.id} 
+                refetchData={refetchData} />;
+              })
             })
-          })}
+          }
         </div>
       ) : (
         <div className="flex justify-center items-center mt-16 md:mt-24">
