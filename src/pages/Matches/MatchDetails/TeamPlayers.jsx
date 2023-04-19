@@ -7,11 +7,17 @@ export default function TeamPlayers({ data }) {
   const { user } = useSelector((state) => state.user);
   const navigate = useNavigate();
 
-  function handleNavigate(teamId) {
+  function handleNavigate(isTeam_1) {
     navigate("/match/playerselection", {
       state: {
-        matchId: data?.data?.match_data?.data?.id,
-        teamId: teamId,
+        match: data?.data?.match_data?.data,
+        team: isTeam_1
+          ? data?.data?.match_data?.data?.team_1
+          : data?.data?.match_data?.data?.team_2,
+        teamPlayers: isTeam_1
+          ? data?.data?.match_data?.team_1_players
+          : data?.data?.match_data?.team_2_players,
+        isTeam_1: isTeam_1,
       },
     });
   }
@@ -59,9 +65,7 @@ export default function TeamPlayers({ data }) {
                 // margin={false}
                 // isDisabled={startTourLoading.isLoading}
                 text={"Edit Players"}
-                onClick={(e) =>
-                  handleNavigate(data?.data?.match_data?.data?.team_1.id)
-                }
+                onClick={(e) => handleNavigate(true)}
               />
             </div>
           </div>
@@ -109,9 +113,7 @@ export default function TeamPlayers({ data }) {
                 // margin={false}
                 // isDisabled={startTourLoading.isLoading}
                 text={"Edit Players"}
-                onClick={(e) =>
-                  handleNavigate(data?.data?.match_data?.data?.team_2.id)
-                }
+                onClick={(e) => handleNavigate(false)}
               />
             </div>
           </div>
