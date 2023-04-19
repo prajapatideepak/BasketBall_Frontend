@@ -15,9 +15,17 @@ export default function TeamPlayers({ data }) {
           ? data?.data?.match_data?.data?.team_1
           : data?.data?.match_data?.data?.team_2,
         teamPlayers: isTeam_1
-          ? data?.data?.match_data?.team_1_players
-          : data?.data?.match_data?.team_2_players,
+          ? data?.data?.match_data?.data?.team_1?.team_players
+          : data?.data?.match_data?.data?.team_2?.team_players,
         isTeam_1: isTeam_1,
+        captain: (isTeam_1
+          ? data?.data?.match_data?.team_1_players
+          : data?.data?.match_data?.team_2_players
+        ).find((p) => p.is_captain == true),
+        selectedPlayer: (isTeam_1
+          ? data?.data?.match_data?.team_1_players
+          : data?.data?.match_data?.team_2_players
+        ).map((p) => p.player_id),
       },
     });
   }

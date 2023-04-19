@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../../../Component/Button";
 import { toast } from "react-toastify";
 import { useMatchPlayersMutation } from "../../../services/team";
@@ -7,13 +7,16 @@ import { useMatchPlayersMutation } from "../../../services/team";
 export default function MatchPlayerSelection() {
   const location = useLocation();
   console.log(location.state);
+  const navigate = useNavigate();
   const MatchData = location.state;
-  const [matchPlayers, ...matchPlayersData] = useMatchPlayersMutation();
+  const [matchPlayers, { ...matchPlayersData }] = useMatchPlayersMutation();
   const team1Color = "text-orange-500";
   const team2Color = "text-blue-600";
-  const [captain, setCaptain] = useState(MatchData?.team?.captain_id);
-  const [selectedPlayers, setSelectedPlayers] = useState([]);
-
+  const [captain, setCaptain] = useState(MatchData?.captain?.players.id);
+  const [selectedPlayers, setSelectedPlayers] = useState([
+    ...MatchData?.selectedPlayer,
+  ]);
+  console.log(captain, "captain");
   console.log(selectedPlayers);
   const handleSelect = (playerId) => {
     if (selectedPlayers.includes(playerId)) {
@@ -27,24 +30,43 @@ export default function MatchPlayerSelection() {
     setCaptain(playerId);
   };
 
+  React.useEffect(() => {
+    if (matchPlayersData.isError) {
+      toast.error(matchPlayersData?.error?.data?.message);
+    }
+    if (matchPlayersData.isSuccess) {
+      if (matchPlayersData?.data?.success) {
+        toast.success("Team Registration Successfull ");
+        console.log(matchPlayersData?.data);
+        navigate(`/match-details/${MatchData?.match?.id}`);
+      }
+    }
+  }, [matchPlayersData.isError, matchPlayersData.isSuccess]);
+
+  console.log(matchPlayersData);
   function handleSubmit() {
-    let finalPlayer = MatchData.teamPlayers.filter((player) => {
-      if (selectedPlayers.includes(player.id)) {
-        return {
+    let finalPlayer = MatchData.teamPlayers.reduce((newArray, player) => {
+      if (selectedPlayers.includes(player.player_id)) {
+        newArray.push({
           player_id: player.players.id,
           match_id: MatchData?.match?.id,
           is_caption: player.players.id == captain,
           team_id: MatchData?.team.id,
-        };
+        });
       }
-    });
-
+      return newArray;
+    }, []);
+    console.log(MatchData?.match?.id, "asdsd");
+    console.log(finalPlayer);
     if (finalPlayer.length < 1) {
       toast.error("Please Select Player");
       return;
     }
     if (!captain) {
       return toast.error("Please Select Captain");
+    }
+    if (!selectedPlayers.includes(captain)) {
+      return toast.error("Caption must be selected");
     }
 
     matchPlayers({ body: finalPlayer, team_id: MatchData?.team.id });
@@ -78,7 +100,7 @@ export default function MatchPlayerSelection() {
             {MatchData?.teamPlayers.map((player) => (
               <div
                 key={player.id}
-                className={`grid grid-cols-3   text-xs sm:text-lg mt-2 rounded-lg  shadow-2xl`}
+                className={`grid grid-cols-3 bg-white  text-xs sm:text-lg mt-2 rounded-lg  shadow-2xl`}
               >
                 <div className="sm:px-4 py-2">
                   {player.players.first_name} {player.players.last_name}
@@ -92,7 +114,7 @@ export default function MatchPlayerSelection() {
                       name="captain"
                       value={player.player_id}
                       checked={captain === player.player_id}
-                      onChange={() => handleCaptainSelect(player.id)}
+                      onChange={() => handleCaptainSelect(player.player_id)}
                       className="mr-2"
                     />
                     <label
@@ -106,13 +128,13 @@ export default function MatchPlayerSelection() {
                 <div className="sm:px-4 py-2 ">
                   <button
                     className={`px-2 py-1 text-sm rounded ${
-                      selectedPlayers.includes(player.id)
+                      selectedPlayers.includes(player.player_id)
                         ? "bg-green-500 text-white"
                         : "bg-red-500 text-white"
                     }`}
-                    onClick={() => handleSelect(player.id)}
+                    onClick={() => handleSelect(player.player_id)}
                   >
-                    {selectedPlayers.includes(player.id)
+                    {selectedPlayers.includes(player.player_id)
                       ? "Selected"
                       : "Not Selected"}
                   </button>
