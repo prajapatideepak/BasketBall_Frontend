@@ -124,7 +124,7 @@ function MatchLive({ slides }) {
                     <div className='flex flex-col items-center text-white lg:gap-3 lg:py-2'>
                       <div className="t_1  flex  justify-start w-full items-center gap-2 ">
                         <div className="w-8 h-8 sm:w-12 sm:h-12 md:w-14 md:h-20 lg:w-16 lg:h-16  xl:w-[80px] xl:h-[80px]">
-                          <img src={item?.team_1?.logo} className="object-contain h-full w-full rounded-full " alt="" />
+                          <img src={item?.team_1?.logo} className="object-contain h-full w-full rounded-full border-2 " alt="" />
                         </div>
                         <h1 className={`${item.status == 3 && item.won_by_team.team_name == item.team_1.team_name ? "underline" : ""} font-extrabold text-xs sm:text-lg xl:text-4xl 2xl:text-[42px] text-center uppercase`}>{item?.team_1?.team_name}</h1>
                         <div className=''>
