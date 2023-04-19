@@ -10,11 +10,11 @@ import * as Yup from "yup";
 import Swal from "sweetalert2";
 import { useFormik } from "formik";
 import moment from "moment";
+import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import {
   useRegisterNewsMutation,
   useUpdateNewsDetailsMutation,
   useGetAllNewsQuery,
-  useGetNewsDetailsQuery,
   useDeleteNewsDetailsMutation,
 } from "../../../services/news";
 
@@ -29,23 +29,24 @@ const NewsList = () => {
   const location = useLocation();
   const [model, setModel] = React.useState(false);
   const [photo, setphoto] = React.useState("");
-  const { data } = useGetAllNewsQuery({});
-  console.log(data);
-  const { deletenews, isLoading, error } = useDeleteNewsDetailsMutation();
   const [newsRegistration, { ...thing }] = useRegisterNewsMutation();
   const [newsUpdate, { ...updateData }] = useUpdateNewsDetailsMutation();
-  // const {data, isLoading, error } = useGetNewsDetailsQuery(params.id);
-  // const [newsLists, setNewsList] = React.useState(data?.AllNews)
-  const initialValues = {
+  console.log(newsUpdate)
+  const [pageNo, setPageNo] = React.useState(1);
+  const [value, setValue] = React.useState({
     photo: "",
     title: "",
-    // Tags: "",
+    Tags: "",
     description: "",
-  };
+  });
+  console.log(value)
+  const { isLoading, data } = useGetAllNewsQuery({
+    pageNo: pageNo - 1,
+  });
 
   const { values, errors, handleBlur, touched, handleChange, handleSubmit } =
     useFormik({
-      initialValues: initialValues,
+      initialValues: value,
       validationSchema: signUpSchema,
       onSubmit(data) {
         try {
@@ -55,9 +56,9 @@ const NewsList = () => {
             NewsInfo: data,
           });
           fd.append("data", ok);
-          // if (location?.state?.isEdit) {
-          //   fb.append("id", location.state.id);
-          //   playerUpdate(fb).then(console.log("update ho gai"));
+          // if (value) {
+          //   fb.append("id", value.id);
+          //   useUpdateNewsDetailsMutation(fb).then(console.log("update ho gai"));
           // } else {
           newsRegistration(fd).then(console.log("ho gaya"));
           // }
@@ -71,14 +72,16 @@ const NewsList = () => {
     setphoto(e.target.files[0]);
   }
 
-  const handleDelete = (id) => {};
+  const handleDelete = (id) => { 
+    useDeleteNewsDetailsMutation(id)
+  };
 
   const handleUpdate = (id) => {
     let updatenews = data?.AllNews?.find((n) => {
       return n?.id == id;
     });
-
     console.log(updatenews, "sdgn kfdfk ");
+    setValue(updatenews)
     setModel(true);
   };
 
@@ -95,13 +98,13 @@ const NewsList = () => {
   }, [thing.isError, thing.isSuccess]);
 
   // React.useEffect(() => {
-  //   if (updateData.isError) {
-  //     toast.error(updateData?.error?.data?.message);
+  //   if (newsUpdate.isError) {
+  //     toast.error(newsUpdate?.error?.data?.message);
   //   }
   //   if (updateData.isSuccess) {
   //     if (updateData?.data?.success) {
-  //       toast.success("Player Update Successfull ");
-  //       navigate(`/player/profile-detail/${updateData?.data?.data?.id}`);
+  //       toast.success("News Updated Successfull ");
+  //       setModel(false);
   //     }
   //   }
   // }, [updateData.isError, updateData.isSuccess]);
@@ -139,6 +142,7 @@ const NewsList = () => {
                           <input
                             type="file"
                             name="photo"
+                            // value={value.photo ? value.photo : ""}
                             accept=".png, .jpg, .jpeg"
                             onChange={(e) => handleImageUpload(e)}
                             className="rounded-md py-[3px] md:py-[3px] w-full xl:py-2 px-3 outline-non border border-slate-300 outline-blue-200"
@@ -150,7 +154,7 @@ const NewsList = () => {
                             type="text"
                             name="title"
                             id="title"
-                            value={values.title}
+                            value={value.title ? value.title : values.title}
                             onChange={handleChange}
                             onBlur={handleBlur}
                             className="rounded-md py-1 md:py-[5px] xl:py-[10px] px-3 outline-non border border-slate-300 outline-blue-200"
@@ -170,7 +174,7 @@ const NewsList = () => {
                             type="text"
                             name="tags"
                             id="tags"
-                            value={values.Tags}
+                            value={value.Tags ? value.Tags : values.Tags}
                             onChange={handleChange}
                             onBlur={handleBlur}
                             className="rounded-md py-1 md:py-[5px] xl:py-[10px] px-3 outline-non border border-slate-300 outline-blue-200"
@@ -188,7 +192,7 @@ const NewsList = () => {
                             type="text"
                             name="description"
                             id="description"
-                            value={values.description}
+                            value={value.description ? value.description : values.description}
                             onChange={handleChange}
                             onBlur={handleBlur}
                             className="rounded-md py-1 md:py-[5px] xl:py-[10px] px-3 w-[100%] outline-non border  border-slate-300 outline-blue-200"
@@ -204,19 +208,20 @@ const NewsList = () => {
                       <div className="flex justify-center items-center w-full space-x-5 ">
                         <button
                           type="submit"
-                          className="
+                          disabled={isLoading}
+                          className={`${isLoading ? "bg-[#ee6730]" : "#ee6730"}
                bg-slate-900   relative inline-flex items-center justify-center  px-4 py-1.5 
-              sm:px-8 sm:py-[6px] xl:px-32 xl:py-2 overflow-hidden font-medium tracking-tighter text-white rounded-lg cursor-pointer group"
+              sm:px-8 sm:py-[6px] xl:px-32 xl:py-2 overflow-hidden font-medium tracking-tighter text-white rounded-lg cursor-pointer group`}
                         >
                           <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#ee6730] rounded-lg group-hover:w-full group-hover:h-56"></span>
                           <span className="relative">
                             {thing.isLoading
                               ? "SUBMIT..."
                               : updateData.isLoading
-                              ? "Updating..."
-                              : location?.state?.isEdit
-                              ? "UPDATE"
-                              : "SUBMIT"}
+                                ? "Updating..."
+                                : location?.state?.isEdit
+                                  ? "UPDATE"
+                                  : "SUBMIT"}
                           </span>
                         </button>
                       </div>
@@ -324,6 +329,36 @@ const NewsList = () => {
                 </div>
               )}
             </div>
+            {
+              data?.AllNews?.length > 0 ?
+                <div className="flex  justify-center items-center text-gray-400 py-5 space-x-2 mt-5 text-sm">
+                  <button
+                    onClick={(e) => {
+                      setPageNo(() => pageNo - 1);
+                    }}
+                    disabled={pageNo == 1}
+                    className="cursor-pointer disabled:cursor-default disabled:opacity-30 p-2 border rounded border-gray-400"
+                  >
+                    <IoIosArrowBack />
+                  </button>
+                  <div className="cursor-pointer px-4 py-1  border rounded bg-[#ee6730] text-base text-white shadow-xl">
+                    {" "}
+                    {pageNo}
+                  </div>
+                  <button
+                    onClick={(e) => {
+                      setPageNo(() => pageNo + 1);
+                    }}
+                    disabled={data?.AllNews?.length < 10}
+                    className="cursor-pointer disabled:opacity-30 disabled:cursor-default p-2 border rounded border-gray-400"
+                  >
+                    {" "}
+                    <IoIosArrowForward />
+                  </button>
+                </div>
+                :
+                null
+            }
           </div>
         </div>
       </div>
