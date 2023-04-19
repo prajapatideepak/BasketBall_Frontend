@@ -1,17 +1,20 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
+import Button from "../../../Component/Button";
+import { toast } from "react-toastify";
+import { useMatchPlayersMutation } from "../../../services/team";
 
 export default function MatchPlayerSelection() {
   const location = useLocation();
   console.log(location.state);
   const MatchData = location.state;
-
-  const team1Color = "text-orange-600";
+  const [matchPlayers, ...matchPlayersData] = useMatchPlayersMutation();
+  const team1Color = "text-orange-500";
   const team2Color = "text-blue-600";
   const [captain, setCaptain] = useState(MatchData?.team?.captain_id);
   const [selectedPlayers, setSelectedPlayers] = useState([]);
 
-  console.log(captain, "ca");
+  console.log(selectedPlayers);
   const handleSelect = (playerId) => {
     if (selectedPlayers.includes(playerId)) {
       setSelectedPlayers(selectedPlayers.filter((id) => id !== playerId));
@@ -24,36 +27,58 @@ export default function MatchPlayerSelection() {
     setCaptain(playerId);
   };
 
+  function handleSubmit() {
+    let finalPlayer = MatchData.teamPlayers.filter((player) => {
+      if (selectedPlayers.includes(player.id)) {
+        return {
+          player_id: player.players.id,
+          match_id: MatchData?.match?.id,
+          is_caption: player.players.id == captain,
+          team_id: MatchData?.team.id,
+        };
+      }
+    });
+
+    if (finalPlayer.length < 1) {
+      toast.error("Please Select Player");
+      return;
+    }
+    if (!captain) {
+      return toast.error("Please Select Captain");
+    }
+
+    matchPlayers({ body: finalPlayer, team_id: MatchData?.team.id });
+  }
   return (
-    <div className="px-6 py-8">
+    <div className="px-6 py-12">
       <div className="flex flex-row justify-center items-center">
-        <h1 className=" text-2xl md:text-4xl font-bold">
+        <h1 className=" text-2xl md:text-4xl font-bold ">
           <span className={`mr-2 ${team1Color}`}>
             {MatchData?.match?.team_1.team_name}
           </span>
-          <span className="italic text-gray-500">VS</span>
+          <span className="italic opacity-50 text-gray-500">VS</span>
           <span className={`ml-2 ${team2Color}`}>
             {MatchData?.match?.team_2.team_name}
           </span>
         </h1>
       </div>
 
-      <div className=" py-8 font-semibold ">
-        <h1>Select Your Players for this Match</h1>
+      <div className=" md:py-8 font-semibold ">
+        {/* <h1>This is</h1> */}
         <div className="sm:px-8 py-8 text-center ">
-          <div className="w-full  overflow-x-scroll   border-gray-200">
+          <div className="w-full  overflow-x-scroll shadow-2xl rounded-lg   border-gray-200">
             <div
-              className={`bg-gray-700  text-white   grid grid-cols-3  text-xs   rounded p-1 sm:text-lg`}
+              className={`bg-black  text-white   grid grid-cols-3  text-xs   rounded p-1 sm:text-lg`}
             >
               <div className="sm:px-4 sm:py-2 ">Player Name</div>
               <div className="sm:px-4 sm:py-2 ">Captain</div>
               <div className="sm:px-4 sm:py-2 ">Select/Not Select</div>
             </div>
 
-            {MatchData.teamPlayers.map((player) => (
+            {MatchData?.teamPlayers.map((player) => (
               <div
                 key={player.id}
-                className={`grid grid-cols-3   text-xs sm:text-lg mt-2 rounded-lg shadow-2xl bg-gray-200`}
+                className={`grid grid-cols-3   text-xs sm:text-lg mt-2 rounded-lg  shadow-2xl`}
               >
                 <div className="sm:px-4 py-2">
                   {player.players.first_name} {player.players.last_name}
@@ -80,7 +105,7 @@ export default function MatchPlayerSelection() {
                 </div>
                 <div className="sm:px-4 py-2 ">
                   <button
-                    className={`px-2 py-1 rounded ${
+                    className={`px-2 py-1 text-sm rounded ${
                       selectedPlayers.includes(player.id)
                         ? "bg-green-500 text-white"
                         : "bg-red-500 text-white"
@@ -94,6 +119,11 @@ export default function MatchPlayerSelection() {
                 </div>
               </div>
             ))}
+          </div>
+          <div className="flex justify-end">
+            <div>
+              <Button text={"Submit"} onClick={handleSubmit} />
+            </div>
           </div>
         </div>
       </div>
