@@ -1,9 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Button from "../../../Component/Button";
+import { useSelector } from "react-redux";
 
 export default function TeamPlayers({ data }) {
+  const { user } = useSelector((state) => state.user);
+  console.log(user?.id);
+  console.log("data of match", data?.data?.match_data?.data?.team_1.user_id);
   return (
-    <div className="px-6 py-8 md:flex items-center space-y-7 md:space-y-0 md:space-x-8">
+    <div className="px-6 py-8 md:flex items-start space-y-7 md:space-y-0 md:space-x-8">
       {/* for team 1 */}
       <div className="w-full md:w-1/2">
         <h1 className="text-center text-orange-600 text-xl md:text-3xl p-2 font-bold ">
@@ -38,6 +43,18 @@ export default function TeamPlayers({ data }) {
             })}
           </div>
         </div>
+        {data?.data?.match_data?.data?.team_1.user_id == user?.id && (
+          <div className="flex justify-end">
+            <div>
+              <Button
+                // margin={false}
+                // isDisabled={startTourLoading.isLoading}
+                text={"Edit Players"}
+                // onClick={handleStartTournament}
+              />
+            </div>
+          </div>
+        )}
       </div>
 
       {/* for team 2 */}
@@ -74,6 +91,18 @@ export default function TeamPlayers({ data }) {
             })}
           </div>
         </div>
+        {data?.data?.match_data?.data?.team_1.user_id == user?.id && (
+          <div className="flex justify-end">
+            <div>
+              <Button
+                // margin={false}
+                // isDisabled={startTourLoading.isLoading}
+                text={"Edit Players"}
+                // onClick={handleStartTournament}
+              />
+            </div>
+          </div>
+        )}
       </div>
       {/* team 2 end */}
     </div>
