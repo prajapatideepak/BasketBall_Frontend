@@ -7,8 +7,12 @@ import * as Yup from "yup"
 import "yup-phone"
 import { HiArrowLeft } from "react-icons/hi"
 import { toast } from 'react-toastify';
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { authentication } from "../../redux/actions/User";
+import { useGoogleLogin } from '@react-oauth/google';
 import { BsFillPatchCheckFill } from "react-icons/bs"
-import { useSignupMutation } from "../../services/authentication"
+import { useSignupMutation, useGoogleLoginMutation } from "../../services/authentication"
 
 
 const signUpSchema = Yup.object({
@@ -32,10 +36,13 @@ const initialValues = {
 
 
 function Register() {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const [isOnSubmit, setIsOnSubmit] = React.useState(false);
 
     const [signup, {isLoading}] = useSignupMutation()
+    const [googleLogin, {...googleAuth}] = useGoogleLoginMutation()
 
     const { values, errors, handleBlur, touched, handleChange, handleSubmit } = useFormik({
         initialValues: initialValues,
@@ -47,10 +54,27 @@ function Register() {
                 toast.error(res.error.data.message);
             }
             else if (res.data.success) {
-                setIsOnSubmit(true)
+                // setIsOnSubmit(true)
             }
         }
     })
+
+    const loginWithGoogle = async (access_token)=>{
+        const res = await googleLogin(access_token)
+        if (res.error) {
+            toast.error(res.error.data.message);
+        }
+        else if (res.data.success) {
+            navigate("/"); 
+            dispatch(authentication(res.data.token, res.data.user));
+            toast.success(res.data.message);
+        }
+    }
+
+    const login = useGoogleLogin({
+        onSuccess: (tokenResponse) => loginWithGoogle(tokenResponse.access_token),
+        onError: error => {toast.error(error)}
+    });
 
     React.useEffect(() => {
         // Define the 'otpless' function
@@ -91,7 +115,12 @@ function Register() {
                         </div>
                         <h1 className={`${isOnSubmit ? "hidden" : "block"} text-[#ee6730] text-3xl text-center font-bold`}>Sign Up</h1>
                         <div className={`${isOnSubmit ? "hidden" : "block"}`}>
-                            <div className='border py-2 my-8 flex justify-center items-center px-5 rounded-md space-x-2 cursor-pointer hover:border-[#ee6730] duration-200'>
+                            <div className={`${googleAuth.isLoading ? 'opacity-60' : ''} border py-2 my-8 flex justify-center items-center px-5 rounded-md space-x-2 cursor-pointer hover:border-[#ee6730] duration-200`} 
+                            onClick={()=>{
+                                if(googleAuth.isLoading) return
+                                login();
+                            }}
+                            >
                                 <img src={google} alt="" className='w-7' />
                                 <p>Continue with Google</p>
                             </div>

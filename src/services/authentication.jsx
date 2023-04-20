@@ -26,10 +26,33 @@ export const authenticationApi = api.injectEndpoints({
       },
       invalidatesTags: [{ type: "User"}],
     }),
+    
+    googleLogin: build.mutation({
+      query: (access_token) => {
+        return {
+          url: "user/google-login",
+          method: "POST",
+          body: {access_token},
+          headers:{ 'Content-Type': 'application/json' }
+        };
+      },
+      invalidatesTags: [{ type: "User"}],
+    }),
+
+    verifyAccount: build.query({
+      query: ({user_id, token}) => {
+        return{
+          url: `user/verify-account/${user_id}/${token}`,
+          method: 'GET'
+        }
+      }
+    })
   }),
 });
 
 export const {
   useSigninMutation,
   useSignupMutation,
+  useGoogleLoginMutation,
+  useVerifyAccountQuery,
 } = authenticationApi;

@@ -11,8 +11,8 @@ today.setHours(0, 0, 0, 0)
 export const TournamentInfoSchema = (isEdit)=> Yup.object({
     tournament_name: Yup.string()
       .matches(/^[a-zA-Z ]+$/, "Please enter only characters")
-      .min(2, "Team name must be at least 2 characters")
-      .max(25, "Team name should not be more than 25 characters")
+      .min(3, "Team name must be at least 3 characters")
+      .max(40, "Team name should not be more than 40 characters")
       .required("Please Enter Tournament Name "),
 
     tournament_logo: Yup.mixed()

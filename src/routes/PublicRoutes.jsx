@@ -8,6 +8,7 @@ import News from '../pages/News'
 import Register from '../pages/Register'
 import "../App.css"
 import Password from '../pages/Pass/Password'
+import VerifyAccount from '../pages/VerifyAccount'
 import Gallery from '../pages/Gallery'
 import ForgetPassword from "../pages/Pass/ForgetPassword"
 import Role from '../pages/Role'
@@ -31,6 +32,7 @@ const PublicRoutes = () => (
             <Route path="/*" element={<PageNotFound />} /> 
             <Route index element={<LandingPage />} />
         </Route>
+        <Route path="/user/verify/:user_id/:token" element={<VerifyAccount />} />
     </Routes>
 )
 

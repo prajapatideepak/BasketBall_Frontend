@@ -6,7 +6,6 @@ export const authentication = (token, user) => {
     dispatch(setToken(token));
     dispatch(setUser(user));
     useLocalStorage({ key: "token", value: token });
-    useLocalStorage({ key: "user", value: user });
   };
 };
 
