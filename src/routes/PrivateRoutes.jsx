@@ -47,7 +47,6 @@ const PrivateRoutes = () => {
     return <Loader />;
   }
 
-  console.log(user)
   return (
     <Routes>
       {

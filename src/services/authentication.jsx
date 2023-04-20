@@ -50,7 +50,36 @@ export const authenticationApi = api.injectEndpoints({
 
     resendVerificationLink: build.mutation({
       query: () => 'user/resend-verification-link'
-    })
+    }),
+    
+    sendResetPasswordLink: build.mutation({
+      query: (email) =>{
+         return {
+          url: 'user/send-reset-password-link',
+          method: "POST",
+          body: {
+            email
+          },
+          headers:{ 'Content-Type': 'application/json' }
+        };
+      } 
+    }),
+
+    resetPassword: build.mutation({
+      query: ({token, password}) =>{
+         return {
+          url: 'user/reset-password',
+          method: "POST",
+          body: {
+            token,
+            newPassword: password
+          },
+          headers:{ 'Content-Type': 'application/json' }
+        };
+      } 
+    }),
+
+
   }),
 });
 
@@ -59,5 +88,7 @@ export const {
   useSignupMutation,
   useGoogleLoginMutation,
   useVerifyAccountQuery,
-  useResendVerificationLinkMutation
+  useResendVerificationLinkMutation,
+  useSendResetPasswordLinkMutation,
+  useResetPasswordMutation,
 } = authenticationApi;

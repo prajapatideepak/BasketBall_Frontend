@@ -255,13 +255,14 @@ const GameInfo = ({ index, setIndex }) => {
         )}
         <button
           type="submit"
-          className="bg-slate-900 relative inline-flex items-center justify-center px-6 py-2 overflow-hidden text-white rounded-lg cursor-pointer group"
+          disabled={thing.isLoading || updateData.isLoading}
+          className={`${thing.isLoading || updateData.isLoading ? 'opacity-60' : ''} bg-slate-900 relative inline-flex items-center justify-center px-6 py-2 overflow-hidden text-white rounded-lg cursor-pointer group`}
           onClick={handleSubmit}
         >
           <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#ee6730] rounded-lg group-hover:w-full group-hover:h-56"></span>
           <span className="relative">
             {thing.isLoading
-              ? "SUBMIT..."
+              ? "Loading..."
               : updateData.isLoading
                 ? "Updating..."
                 : location?.state?.isEdit

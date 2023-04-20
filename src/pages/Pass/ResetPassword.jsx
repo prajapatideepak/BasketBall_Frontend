@@ -1,11 +1,12 @@
 import React from 'react'
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet, useParams } from 'react-router-dom'
 import { HiArrowLeft } from "react-icons/hi"
 import { FiKey } from "react-icons/fi"
 import { Formik, useFormik } from 'formik'
 import * as Yup from "yup"
 import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
+import { useResetPasswordMutation } from '../../services/authentication'
 import image from "../../../public/CBL_Images/7xm.xyz732342.jpg"
 
 const signUpSchema = Yup.object({
@@ -20,23 +21,27 @@ const initialValues = {
 
 };
 
-
 function ResetPassword() {
 
-    const notify = () => toast("Password reset Successfully!!");
     const navigate = useNavigate();
+    const {token} = useParams()
 
+    const [resetPassword, {isLoading}] = useResetPasswordMutation()
 
     const { values, errors, handleBlur, touched, handleChange, handleSubmit } = useFormik({
         initialValues: initialValues,
         validationSchema: signUpSchema,
-        onSubmit(res) {
-            notify()
-            navigate("/login")
+        async onSubmit(data) {
+            const response = await resetPassword({token, password: data.password})
+            if (response.error) {
+                toast.error(response.error.data.message);
+            }
+            else if (response.data.success) {
+                navigate("/login")
+                toast.success(response.data.message);
+            }
         }
     })
-
-
 
     return (
         <div className='flex sm:justify-center lg:justify-start xl:justify-between items-center h-screen bg-white px-10 lg:px-20'>
@@ -97,9 +102,14 @@ function ResetPassword() {
                             </div>
                         </div>
                         <div className='py-10'>
-                        <button type="submit" className="bg-slate-900  relative inline-flex items-center justify-center w-full px-4 py-1.5 sm:px-8 sm:py-[10px] overflow-hidden font-medium tracking-tighter text-white rounded-lg cursor-pointer group">
+                        <button 
+                        type="submit" 
+                        disabled={isLoading}
+                        className={`${isLoading ? 'opacity-60' : ''} bg-slate-900  relative inline-flex items-center justify-center w-full px-4 py-1.5 sm:px-8 sm:py-[10px] overflow-hidden font-medium tracking-tighter text-white rounded-lg cursor-pointer group`}>
                             <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#ee6730] rounded-lg group-hover:w-full group-hover:h-56"></span>
-                            <span className="relative">Reset Password</span>
+                            <span className="relative">
+                                {isLoading ? 'Loading...' :"Reset Password"}
+                            </span>
                         </button>
                         </div>
                     </form>
@@ -108,7 +118,7 @@ function ResetPassword() {
                 <Link to={"/login"}>
                     <div className='flex justify-center  items-center font-semibold text-slate-400 cursor-pointer hover:text-black space-x-2'>
                         <HiArrowLeft className='text-xl' />
-                        <p className=''>Back to Log in</p>
+                        <p className=''>Back to Login</p>
                     </div>
                 </Link>
             </div>

@@ -27,7 +27,7 @@ const PublicRoutes = () => (
             <Route path='/role' element={<Role />} />
             <Route path="/forget-password" element={<ForgetPassword />} />
             <Route path="/terms-and-condition" element={<TermsandConditions />} />
-            <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="/reset-password/:token" element={<ResetPassword />} />
             <Route path="/*" element={<PageNotFound />} /> 
             <Route index element={<LandingPage />} />
         </Route>
