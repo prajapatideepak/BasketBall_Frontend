@@ -66,18 +66,19 @@ export default function TeamPlayers({ data }) {
             })}
           </div>
         </div>
-        {data?.data?.match_data?.data?.team_1.user_id == user?.id && (
-          <div className="flex justify-end">
-            <div>
-              <Button
-                // margin={false}
-                // isDisabled={startTourLoading.isLoading}
-                text={"Edit Players"}
-                onClick={(e) => handleNavigate(true)}
-              />
+        {data?.data?.match_data?.data?.team_1.user_id == user?.id &&
+          data?.data?.match_data?.data?.status == 1 && (
+            <div className="flex justify-end">
+              <div>
+                <Button
+                  // margin={false}
+                  // isDisabled={startTourLoading.isLoading}
+                  text={"Edit Players"}
+                  onClick={(e) => handleNavigate(true)}
+                />
+              </div>
             </div>
-          </div>
-        )}
+          )}
       </div>
 
       {/* for team 2 */}
@@ -114,18 +115,19 @@ export default function TeamPlayers({ data }) {
             })}
           </div>
         </div>
-        {data?.data?.match_data?.data?.team_2.user_id == user?.id && (
-          <div className="flex justify-end">
-            <div>
-              <Button
-                // margin={false}
-                // isDisabled={startTourLoading.isLoading}
-                text={"Edit Players"}
-                onClick={(e) => handleNavigate(false)}
-              />
+        {data?.data?.match_data?.data?.team_2.user_id == user?.id &&
+          data?.data?.match_data?.data?.status == 1 && (
+            <div className="flex justify-end">
+              <div>
+                <Button
+                  // margin={false}
+                  // isDisabled={startTourLoading.isLoading}
+                  text={"Edit Players"}
+                  onClick={(e) => handleNavigate(false)}
+                />
+              </div>
             </div>
-          </div>
-        )}
+          )}
       </div>
       {/* team 2 end */}
     </div>
