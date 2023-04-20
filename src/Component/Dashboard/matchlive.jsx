@@ -33,6 +33,12 @@ function MatchLive({ slides }) {
     setCurrentIndex(newIndex);
   };
 
+  const array=[
+    "/CBL_Images/slider1.jpg",
+    "/CBL_Images/slider2.jpg",
+    "/CBL_Images/slider3.jpg",
+    "/CBL_Images/slider4.jpg"
+  ]
 
   function auto() {
     slideInterval = setInterval(nextSlide, intervalTime)
@@ -61,7 +67,7 @@ function MatchLive({ slides }) {
             <div className={index === currentIndex ? 'slide active ' : 'slide'}
               key={index}>
               {index === currentIndex && (
-                <img src='../../CBL_Images/slider1.jpg' alt="" className=' w-full h-[240px] sm:h-full md:h-[400px] lg:h-[450px]  xl:h-full bg-cover bg-center' />
+                <img src={array[index]} alt="" className=' w-full h-[240px] sm:h-full md:h-[400px] lg:h-[450px]  xl:h-full bg-cover bg-center' />
               )}
               {index == currentIndex && (
                 <div className='bg-gradient-to-t from-black absolute h-[240px] sm:h-[300px] md:h-[400px] lg:h-[450px] xl:h-[500px] 2xl:h-[600px] top-0 min-w-full   '>
@@ -118,7 +124,7 @@ function MatchLive({ slides }) {
                     <div className='flex flex-col items-center text-white lg:gap-3 lg:py-2'>
                       <div className="t_1  flex  justify-start w-full items-center gap-2 ">
                         <div className="w-8 h-8 sm:w-12 sm:h-12 md:w-14 md:h-20 lg:w-16 lg:h-16  xl:w-[80px] xl:h-[80px]">
-                          <img src={item?.team_1?.logo} className="object-contain h-full w-full rounded-full " alt="" />
+                          <img src={item?.team_1?.logo} className="object-contain h-full w-full rounded-full border-2 " alt="" />
                         </div>
                         <h1 className={`${item.status == 3 && item.won_by_team.team_name == item.team_1.team_name ? "underline" : ""} font-extrabold text-xs sm:text-lg xl:text-4xl 2xl:text-[42px] text-center uppercase`}>{item?.team_1?.team_name}</h1>
                         <div className=''>
@@ -197,7 +203,7 @@ function MatchLive({ slides }) {
               //   ))}
               // </div>
               <div
-                className="flex absolute bottom-3 sm:bottom-4 2xl:bottom-10 lg:space-x-6 space-x-5 left-[33%] sm:left-[37%] lg:left-[25%] xl:left-[26%] 2xl:left-[30%]  lg:px-40 "
+                className=" absolute  w-full flex justify-center items-center bottom-3 sm:bottom-4 2xl:bottom-10 lg:space-x-6 space-x-5  "
               >
                 {
                   slides.map((slide, slideIndex) => {
@@ -206,7 +212,7 @@ function MatchLive({ slides }) {
                         <svg className="w-12 h-12 relative rotate-[-90deg]">
                           <circle
                             className="text-gray-500"
-                            strokeWidth="3"
+                            strokeWidth="2"
                             stroke="currentColor"
                             fill="transparent"
                             r="18"
