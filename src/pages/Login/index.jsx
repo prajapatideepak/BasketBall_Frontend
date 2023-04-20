@@ -144,7 +144,7 @@ function Login() {
               ) : null}
             </div>
           </div>
-          <Link to={"/ForgetPassword"}>
+          <Link to={"/forget-password"}>
             <div className=" flex justify-end items-end">
               <h1 className="text-sm underline font-semibold text-[#ee6730] cursor-pointer">
                 Forget Password?

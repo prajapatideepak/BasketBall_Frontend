@@ -7,7 +7,6 @@ import moment from 'moment'
 
 
 function News_cards({ news }) {
-    console.log(news)
     let tags = news?.tags?.split(",");
     const navigate = useNavigate();
 

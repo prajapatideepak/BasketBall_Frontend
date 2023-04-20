@@ -51,7 +51,6 @@ function MatchCard({ match }) {
                     match?.match_quarters?.[match.match_quarters.length - 1]
                       ?.team_1_points
                   }
-                  {console.log(match)}
                 </h3>
                 <span className="text-2xl sm:text-3xl font-bold px-1">
                   -

@@ -29,7 +29,6 @@ const AddEditGallery = () => {
   const { isLoading, data } = useGetAllGalleryQuery({
     pageNo: pageNo - 1,
   });
-  console.log(data)
   const [galleryRegistration, { ...thing }] = useRegisterGalleryMutation();
   const initialValues = {
     category: ""
@@ -67,7 +66,6 @@ const AddEditGallery = () => {
     let updategallery = data?.data?.find((n) => {
       return n?.id == id;
     });
-    console.log(updategallery, "sdgn kfdfk ");
     setModel(true);
     setValue(updategallery)
   };

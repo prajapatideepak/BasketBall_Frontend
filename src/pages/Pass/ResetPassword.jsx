@@ -21,7 +21,7 @@ const initialValues = {
 };
 
 
-function Password() {
+function ResetPassword() {
 
     const notify = () => toast("Password reset Successfully!!");
     const navigate = useNavigate();
@@ -116,4 +116,4 @@ function Password() {
     )
 }
 
-export default Password
+export default ResetPassword

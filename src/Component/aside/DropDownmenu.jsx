@@ -15,7 +15,6 @@ function DropDownmenu({setOpen, isMenu, setIsMenu}) {
   const dispatch = useDispatch();
   const { user } = useSelector((state)=> state.user)
 
-  console.log(user)
   return (
     <>
       <div className="">
