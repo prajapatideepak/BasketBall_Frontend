@@ -126,10 +126,10 @@ function MatchLive({ slides }) {
                         <div className="w-8 h-8 sm:w-12 sm:h-12 md:w-14 md:h-20 lg:w-16 lg:h-16  xl:w-[80px] xl:h-[80px]">
                           <img src={item?.team_1?.logo} className="object-contain h-full w-full rounded-full border-2 " alt="" />
                         </div>
-                        <h1 className={`${item.status == 3 && item.won_by_team.team_name == item.team_1.team_name ? "underline" : ""} font-extrabold text-xs sm:text-lg xl:text-4xl 2xl:text-[42px] text-center uppercase`}>{item?.team_1?.team_name}</h1>
+                        <h1 className={`${item?.status == 3 && item?.won_by_team?.team_name == item?.team_1?.team_name ? "underline" : ""} font-extrabold text-xs sm:text-lg xl:text-4xl 2xl:text-[42px] text-center uppercase`}>{item?.team_1?.team_name}</h1>
                         <div className=''>
                           {
-                            item.status == 3 && item.won_by_team.team_name == item.team_1.team_name ?
+                            item?.status == 3 && item?.won_by_team?.team_name == item?.team_1?.team_name ?
                               <div className='flex items-center bg-green-600 px-2 py-1 rounded-md ml-3 mt-2 space-x-1'>
                                 <GiTrophyCup className='xxs:text-xs sm:text-xs lg:text-lg text-white' />
                                 <p className='xxs:text-[10px] sm:text-xs lg:text-sm font-semibold'>Won</p>
@@ -140,12 +140,12 @@ function MatchLive({ slides }) {
                       </div>
                       <div className="t_1  flex  justify-start w-full items-center gap-2 ">
                         <div className="w-8 h-8 sm:w-12 sm:h-12 md:w-14 md:h-20 lg:w-16 lg:h-16  xl:w-[80px] xl:h-[80px]">
-                          <img src={item?.team_2?.logo} className="object-contain h-full w-full rounded-full " alt="" />
+                          <img src={item?.team_2?.logo} className="object-contain h-full w-full rounded-full border-2 " alt="" />
                         </div>
-                        <h1 className={`${item.status == 3 && item.won_by_team.team_name == item.team_2.team_name ? "underline" : ""} font-extrabold text-xs sm:text-lg xl:text-4xl 2xl:text-[42px] text-center uppercase`}>{item?.team_2?.team_name}</h1>
+                        <h1 className={`${item?.status == 3 && item?.won_by_team?.team_name == item?.team_2?.team_name ? "underline" : ""} font-extrabold text-xs sm:text-lg xl:text-4xl 2xl:text-[42px] text-center uppercase`}>{item?.team_2?.team_name}</h1>
                         <div className=''>
                           {
-                            item.status == 3 && item.won_by_team.team_name == item.team_2.team_name ?
+                            item?.status == 3 && item?.won_by_team?.team_name == item.team_2?.team_name ?
                               <div className='flex items-center bg-green-600 px-2 py-1 rounded-md ml-3 mt-2 space-x-1'>
                                 <GiTrophyCup className='xxs:text-xs sm:text-xs lg:text-lg text-white' />
                                 <p className='xxs:text-[10px] sm:text-xs lg:text-sm font-semibold'>Won</p>

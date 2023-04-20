@@ -18,13 +18,16 @@ import { useGetAllNewsQuery } from "../../services/news";
 const Dashboard = () => {
   const data = useGetMatchesQuery();
   const tournaments = useGetAllTournamentsQuery();
-  const news = useGetAllNewsQuery();
+  const [pageNo, setPageNo] = React.useState(1);
+  const news = useGetAllNewsQuery({
+    pageNo: pageNo - 1,
+  });
   const navigate = useNavigate();
   const matchlist = () => {
     navigate(`/match`)
   }
   const tournamentlist = () => {
-    navigate(`/tournaments`)
+    navigate(`/tournament`)
   }
   const newslist = () => {
     navigate(`/news`)
