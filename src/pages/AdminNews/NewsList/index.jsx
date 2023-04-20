@@ -48,7 +48,7 @@ const NewsList = () => {
   const { isLoading, data } = useGetAllNewsQuery({
     pageNo: pageNo - 1,
   });
-  
+    console.log(data)
   const { values, errors, handleBlur, touched, handleChange, handleSubmit } =
     useFormik({
       initialValues: value ,
@@ -355,7 +355,7 @@ const NewsList = () => {
                     onClick={(e) => {
                       setPageNo(() => pageNo + 1);
                     }}
-                    disabled={data?.AllNews?.length < 10}
+                    disabled={data?.AllNews?.length < 12}
                     className="cursor-pointer disabled:opacity-30 disabled:cursor-default p-2 border rounded border-gray-400"
                   >
                     {" "}

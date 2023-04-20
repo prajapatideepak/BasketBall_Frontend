@@ -7,20 +7,24 @@ import moment from 'moment'
 
 
 function News_cards({ news }) {
+    console.log(news)
     let tags = news?.tags?.split(",");
     const navigate = useNavigate();
+
     const handleClick = () => {
         navigate(`/news/${news?.id}/${news.title.split(" ").join("-")}`)
     }
     const prevSlide = () => {
         var news = document.getElementById("news")
-        match.scrollLeft = news.scrollLeft - 380;
+        news.scrollLeft = news.scrollLeft - 360;
     };
 
     const nextSlide = () => {
         var news = document.getElementById("news")
         news.scrollLeft = news.scrollLeft + 380;
     };
+
+
     return (
         <>
             <div onClick={handleClick}
@@ -31,14 +35,14 @@ function News_cards({ news }) {
                     <div className='bg-gradient-to-b from-black/60 group-hover:from-black/40 duration-300  h-full w-full absolute'>
                         <div className='bg-gradient-to-r from-black absolute bottom-0 w-full py-3 space-y-1 '>
                             <div className='flex justify-start items-center gap-4 px-4 '>
+                                <h1 className='text-white font-semibold text-base'>
+                                {news.title}
+                                </h1>
+                            </div>
+                            <div className='px-4 space-y-2 py-1'>
                                 {tags?.map((tag, index) => (
                                     <span key={index} className="bg-orange-600 px-3 font-semibold text-white text-sm rounded ">{tag} </span>
                                 ))}
-                            </div>
-                            <div className='px-4 space-y-2'>
-                                <h1 className='text-white font-semibold text-sm '>
-                                    {news.description}
-                                </h1>
                                 <p className='text-xs text-[#ee6730] font-semibold'>
                                     {moment(news.created_at).format('DD / MM / YY')}
                                 </p>

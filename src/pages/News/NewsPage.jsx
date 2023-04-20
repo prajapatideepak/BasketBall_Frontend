@@ -7,6 +7,8 @@ import { getNewsData } from "../../redux/actions/News";
 import Heading from "../../Component/Heading";
 import { useGetAllNewsQuery } from "../../services/news";
 import { BsCameraFill } from "react-icons/bs"
+import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
+
 
 
 const NewsPage = () => {
@@ -15,6 +17,7 @@ const NewsPage = () => {
   const { isLoading, data } = useGetAllNewsQuery({
     pageNo: pageNo - 1,
   });
+  
   console.log(data?.AllNews)
   React.useEffect(() => {
     dispatch(getNewsData());
@@ -43,7 +46,7 @@ const NewsPage = () => {
               <p className='text-xs xs:text-sm sm:text-lg lg:text-xl font-medium text-gray-400'>News not found</p>
             </div>
             :
-            <div className="mx-6 lg:mx-12 pt-5">
+            <div className="mx-6 lg:mx-12 pt-5 ">
               <div className="lg:grid space-y-5 grid-cols-1 md:grid-cols-2  lg:grid-cols-4 gap-8     ">
                 <div className="w-full col-span-3 row-span-1 h-full">
                   <NewsCard news={data?.AllNews?.[0]} />
@@ -72,6 +75,37 @@ const NewsPage = () => {
               </div>
             </div>
         }
+
+        {
+                  data?.AllNews?.length > 0 ?
+                    <div className="flex  justify-center items-center text-gray-400 py-5 space-x-2 mt-5 text-sm">
+                      <button
+                        onClick={(e) => {
+                          setPageNo(() => pageNo - 1);
+                        }}
+                        disabled={pageNo == 1}
+                        className="cursor-pointer disabled:cursor-default disabled:opacity-30 p-2 border rounded border-gray-400"
+                      >
+                        <IoIosArrowBack />
+                      </button>
+                      <div className="cursor-pointer px-4 py-1  border rounded bg-[#ee6730] text-base text-white shadow-xl">
+                        {" "}
+                        {pageNo}
+                      </div>
+                      <button
+                        onClick={(e) => {
+                          setPageNo(() => pageNo + 1);
+                        }}
+                        disabled={data?.data?.length < 10}
+                        className="cursor-pointer disabled:opacity-30 disabled:cursor-default p-2 border rounded border-gray-400"
+                      >
+                        {" "}
+                        <IoIosArrowForward />
+                      </button>
+                    </div>
+                    :
+                    null
+                }
       </div>
     </div>
   );
