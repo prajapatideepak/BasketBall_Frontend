@@ -77,7 +77,7 @@ export default function MatchProfile({ data }) {
               <div className="text-4xl px-6 scale-110 text-center bg-white shadow-xl text-black italic  py-1 text-">
                 Vs
               </div>
-              <div className=" bg-blue-600 shadow-xl rounded-b-none rounded-r-xl rounded-br-none  px-8 py-2">
+              <div className=" bg-blue-500 shadow-xl rounded-b-none rounded-r-xl rounded-br-none  px-8 py-2">
                 {data?.data?.match_data?.live_quarter?.team_2_points}
               </div>
               <div className="col-span-3 bg-black text-white py-1 shadow-2xl flex justify-around  w-full mx-auto mb-2 font-semibold rounded-b-xl text-lg items-center space-x-3">

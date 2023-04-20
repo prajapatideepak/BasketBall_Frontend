@@ -54,7 +54,7 @@ function Register() {
                 toast.error(res.error.data.message);
             }
             else if (res.data.success) {
-                // setIsOnSubmit(true)
+                setIsOnSubmit(true)
             }
         }
     })

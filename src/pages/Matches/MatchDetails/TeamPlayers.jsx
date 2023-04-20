@@ -1,9 +1,37 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import Button from "../../../Component/Button";
+import { useSelector } from "react-redux";
 
 export default function TeamPlayers({ data }) {
+  const { user } = useSelector((state) => state.user);
+  const navigate = useNavigate();
+
+  function handleNavigate(isTeam_1) {
+    navigate("/match/playerselection", {
+      state: {
+        match: data?.data?.match_data?.data,
+        team: isTeam_1
+          ? data?.data?.match_data?.data?.team_1
+          : data?.data?.match_data?.data?.team_2,
+        teamPlayers: isTeam_1
+          ? data?.data?.match_data?.data?.team_1?.team_players
+          : data?.data?.match_data?.data?.team_2?.team_players,
+        isTeam_1: isTeam_1,
+        captain: (isTeam_1
+          ? data?.data?.match_data?.team_1_players
+          : data?.data?.match_data?.team_2_players
+        ).find((p) => p.is_captain == true),
+        selectedPlayer: (isTeam_1
+          ? data?.data?.match_data?.team_1_players
+          : data?.data?.match_data?.team_2_players
+        ).map((p) => p.player_id),
+      },
+    });
+  }
+
   return (
-    <div className="px-6 py-8 md:flex items-center space-y-7 md:space-y-0 md:space-x-8">
+    <div className="px-6 py-8 md:flex items-start space-y-7 md:space-y-0 md:space-x-8">
       {/* for team 1 */}
       <div className="w-full md:w-1/2">
         <h1 className="text-center text-orange-600 text-xl md:text-3xl p-2 font-bold ">
@@ -38,6 +66,18 @@ export default function TeamPlayers({ data }) {
             })}
           </div>
         </div>
+        {data?.data?.match_data?.data?.team_1.user_id == user?.id && (
+          <div className="flex justify-end">
+            <div>
+              <Button
+                // margin={false}
+                // isDisabled={startTourLoading.isLoading}
+                text={"Edit Players"}
+                onClick={(e) => handleNavigate(true)}
+              />
+            </div>
+          </div>
+        )}
       </div>
 
       {/* for team 2 */}
@@ -74,6 +114,18 @@ export default function TeamPlayers({ data }) {
             })}
           </div>
         </div>
+        {data?.data?.match_data?.data?.team_2.user_id == user?.id && (
+          <div className="flex justify-end">
+            <div>
+              <Button
+                // margin={false}
+                // isDisabled={startTourLoading.isLoading}
+                text={"Edit Players"}
+                onClick={(e) => handleNavigate(false)}
+              />
+            </div>
+          </div>
+        )}
       </div>
       {/* team 2 end */}
     </div>

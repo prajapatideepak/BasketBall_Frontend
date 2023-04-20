@@ -19,31 +19,31 @@ import PageNotFound from "../pages/Error";
 import MatchDetails from "../pages/Matches/MatchDetails";
 import Scoreboard from "../pages/Scoreboard";
 import Tournament from "../pages/Tournament";
-import Loader from '../Component/Loader';
-import { toast } from 'react-toastify';
+import Loader from "../Component/Loader";
+import { toast } from "react-toastify";
 import { authentication } from "../redux/actions/User";
 import { useGetUserDataQuery } from "../services/user";
+import MatchPlayerSelection from "../pages/Matches/MatchPlayerSelection";
 
 const PrivateRoutes = () => {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { token } = useSelector((state) => state.user);
 
-  const {data, isLoading, isError, error} = useGetUserDataQuery();
-  
+  const { data, isLoading, isError, error } = useGetUserDataQuery();
+
   React.useEffect(() => {
     if (isError) {
       toast.error(error?.data.message);
-      navigate('/')
-    }
-    else if (data?.success) {
+      navigate("/");
+    } else if (data?.success) {
       dispatch(authentication(token, data.user));
     }
   }, [data]);
 
-  if(isLoading){
-    return <Loader/>
+  if (isLoading) {
+    return <Loader />;
   }
   return (
     <Routes>
@@ -63,11 +63,15 @@ const PrivateRoutes = () => {
         <Route path="tournament/*" element={<Tournament />} />
         <Route path="team/*" element={<Team />} />
         <Route path="/contact" element={<ContactUs />} />
+        <Route
+          path="/match/playerselection"
+          element={<MatchPlayerSelection />}
+        />
         <Route path="/registration" element={<AfterRole />} />
         <Route path="/term&condition" element={<TermsandConditions />} />
         <Route path="/" element={<Dashboard />} />
         <Route path="/*" element={<PageNotFound />} />
-        
+
         <Route index element={<Dashboard />} />
       </Route>
       <Route path="/scoreboard/:match_id/:token" element={<Scoreboard />} />

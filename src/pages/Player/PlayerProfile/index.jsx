@@ -10,7 +10,6 @@ import { findPlayer } from "../../../redux/actions/Player";
 import { setBasicInfoForm } from "../../../redux/actions/Player";
 import PlayerInfo from "./PlayerInfo";
 import PlayerStatics from "./PlayerStatics";
-import Notification from "../../../Component/Notification/Notification";
 import { AiFillEye } from "react-icons/ai";
 import { GiExitDoor } from "react-icons/gi";
 import { ImExit } from "react-icons/im";
@@ -19,12 +18,11 @@ import Loader from "../../../Component/Loader";
 import { setGameInfoForm } from "../../../redux/actions/Player";
 
 
-
-
 export default function PlayerProfile() {
   const params = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const {user} = useSelector((state)=> state.user)
   const { data, isLoading, error } = useGetPlayerDetailsQuery(params.id);
   const [currentTab, setCurrentTab] = React.useState(2);
   const [currentTabMatches, setCurrentTabMatches] = React.useState([]);
@@ -32,6 +30,7 @@ export default function PlayerProfile() {
     data?.data && data?.data.team_1_matches && data?.data.team_2_matches
       ? [...data?.data.team_1_matches, ...data?.data.team_2_matches]
       : [];
+
 
   React.useEffect(() => {
     handleTabChange();
@@ -74,7 +73,10 @@ export default function PlayerProfile() {
                 <div className="flex-1    ">
                   <PlayerInfo PlayerDetail={data} />
                 </div>
-                <div className="absolute right-0 bottom-0 mr-10">
+                
+                {
+                  data.SinglePlayerDetails.users.id == user.id ?
+                  <div className="absolute right-0 bottom-0 mr-10">
                   <button
                     type="button"
                     className="bg-[#ee6730] relative inline-flex items-center justify-center px-8 py-2 overflow-hidden text-white rounded-lg cursor-pointer group mr-3"
@@ -85,7 +87,11 @@ export default function PlayerProfile() {
                       Edit
                     </span>
                   </button>
-                </div>
+                </div> 
+                :
+                ""
+                }
+                
                 <div>
 
                 </div>
@@ -96,9 +102,6 @@ export default function PlayerProfile() {
               <PlayerStatics PlayerDetail={data} />
               {/* Player Statics End */}
 
-              {/* ------------------notification Section -------------*/}
-              {data?.SinglePlayerDetails?.id == params.id && <Notification />}
-              {/*--------- notification seciton end--------------- */}
 
               {/* new sec */}
               <div className="flex flex-col ">
