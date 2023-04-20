@@ -50,7 +50,7 @@ function Match_cards({ match }) {
                     <p className='text-black font-semibold uppercase'>
                       {match.round_name ? match.round_name : ""}
                     </p>
-                    <p className='text-slate-500 text-[15px] font-medium'><span>{match.start_date ? moment(match?.start_date).format('ll') : "Comming Soon"}</span> / Mun </p>
+                    <p className='text-slate-500 text-[15px] font-medium'><span>{match.start_date ? moment(match?.start_date).format('ll') : "Comming Soon"}</span></p>
                     <p className='text-black font-bold text-[15px]'>{match?.start_time}  </p>
                   </div>
                 </div>
@@ -105,23 +105,12 @@ function Match_cards({ match }) {
                 <div className='flex  justify-between items-center w-[95%]'>
                   <div className="t_1  flex  justify-start w-full items-center gap-2">
                     <div className="w-10 sm:w-12 h-10 sm:h-12 md:w-[40px] md:h-[40px] xl:w-10 xl:h-10">
-                      <img src={match?.team_1.logo} className="object-contain h-full w-full rounded-full " alt="" />
+                      <img src={match?.team_1.logo} className="object-contain h-full w-full rounded-full  border-2 border-gray-400 shadow-xl " alt="" />
                     </div>
                     <h1 className='text-black font-extrabold text-center uppercase'>{match?.team_1.team_name}</h1>
                   </div>
                   {/* Wining Team */}
-                  {
-                    match?.status == 3
-                      ?
-                      <div className='flex items-center '>
-                        <h1 className='font-bold text-black text-xl'>
-                          {/* {match?.team_1_score} */}
-                          10
-                        </h1>
-                      </div>
-                      :
-                      null
-                  }
+                  
                 </div>
                 {
                   match?.status == 3 && match.won_by_team_id == match.team_1.id
@@ -140,23 +129,12 @@ function Match_cards({ match }) {
                 <div className='flex  justify-between items-center w-[95%]'>
                   <div className="t_1  flex  justify-start w-full items-center gap-2  ">
                     <div className="w-10 sm:w-12 h-10 sm:h-12 md:w-[40px] md:h-[40px] xl:w-10 xl:h-10">
-                      <img src={match?.team_2.logo} className="object-contain h-full w-full rounded-full " alt="" />
+                      <img src={match?.team_2.logo} className="object-contain h-full w-full rounded-full border-2 border-gray-400 shadow-xl " alt="" />
                     </div>
                     <h1 className='text-black font-extrabold text-center uppercase'>{match?.team_2.team_name}</h1>
                   </div>
                   {/* Wining Team */}
-                  {
-                    match?.status == 3
-                      ?
-                      <div className='flex items-center '>
-                        <h1 className='font-bold text-black text-xl'>
-                          {/* {match?.team_2_score} */}
-                          20
-                        </h1>
-                      </div>
-                      :
-                      null
-                  }
+                 
                 </div>
                 {
                   match?.status == 3 && match.won_by_team_id == match.team_2.id

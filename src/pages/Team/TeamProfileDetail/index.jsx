@@ -46,9 +46,9 @@ function TeamProfileDetail() {
       ? [...data?.data.team_1_matches, ...data?.data.team_2_matches]
       : [];
 
-    const handleUnenrollTournament = (tour, tournament_id) => {
+  const handleUnenrollTournament = (data) => {
     try {
-      console.log("sa", tournament_id);
+      console.log("sa", data);
     } catch (error) {
       if (error instanceof AxiosError) {
         toast.error(error.response.data.message);
@@ -365,10 +365,10 @@ function TeamProfileDetail() {
                                   <button
                                     className="bg-red-500 text-white px-2 py-0.5 rounded-md hover:opacity-60"
                                     onClick={() =>
-                                      handleUnenrollTournament(
-                                        item.is_selected,
-                                        tournaments?.id
-                                      )
+                                      handleUnenrollTournament({
+                                        ...item,
+                                        tournament_id: tournaments?.id,
+                                      })
                                     }
                                   >
                                     Cancel Request
@@ -432,6 +432,16 @@ function TeamProfileDetail() {
                     </div>
                   </div>
                   <div className="matches-container">
+                    {!isPublicView && currentTab == 1 && (
+                      <div className="text-gray-600 italic text-lg text-center pt-8">
+                        {" "}
+                        <span className="font-bold ">Note : </span>{" "}
+                        <span className="text-base ">
+                          You can Edit Your Players for match in match Detail
+                          page
+                        </span>{" "}
+                      </div>
+                    )}
                     <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-8 md:gap-12 mt-10 sm:mt-12 md:mt-16">
                       {currentTabMatches.length > 0 ? (
                         currentTabMatches.map((match, index) => {
