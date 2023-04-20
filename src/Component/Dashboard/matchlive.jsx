@@ -203,7 +203,7 @@ function MatchLive({ slides }) {
               //   ))}
               // </div>
               <div
-                className="flex absolute bottom-3 sm:bottom-4 2xl:bottom-10 lg:space-x-6 space-x-5 left-[33%] sm:left-[37%] lg:left-[25%] xl:left-[26%] 2xl:left-[30%]  lg:px-40 "
+                className=" absolute  w-full flex justify-center items-center bottom-3 sm:bottom-4 2xl:bottom-10 lg:space-x-6 space-x-5  "
               >
                 {
                   slides.map((slide, slideIndex) => {
@@ -212,7 +212,7 @@ function MatchLive({ slides }) {
                         <svg className="w-12 h-12 relative rotate-[-90deg]">
                           <circle
                             className="text-gray-500"
-                            strokeWidth="3"
+                            strokeWidth="2"
                             stroke="currentColor"
                             fill="transparent"
                             r="18"

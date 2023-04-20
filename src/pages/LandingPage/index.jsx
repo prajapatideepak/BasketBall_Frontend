@@ -7,23 +7,23 @@ function LandingPage() {
   return (
     <>
       <div className="min-h-screen relative " style={{ minHeight: "calc(100vh - 70px)" }}>
-        <div className="contant grid grid-cols-2 py-5">
-                        <div className="flex flex-col w-full justify-center items-start mt-20 px-32 z-50 space-y-5 ">
-                            <h1 className="xs:text-[44px] font-roboto text-black italic font-bold sm:text-[55px] md:text-7xl lg:text-[80px] text-blabg-black
+        <div className="contant grid grid-flow-row lg:grid-cols-2 ">
+                        <div className="flex flex-col w-full justify-center items-center lg:items-start lg:mt-20 lg:px-10 xl:px-32 space-y-2 lg:space-y-5 order-2 lg:order-1 z-50 ">
+                            <h1 className="xs:text-[44px] font-roboto text-black italic font-bold sm:text-6xl md:text-7xl lg:text-[80px] text-blabg-black
                              xl:text-8xl  2xl:text-[120px]  uppercase ">
                                 Corporate
                             </h1>
-                            <div className="flex items-center space-x-8">
+                            <div className="flex flex-col sm:flex-row items-center space-x-8">
                                 <h1
-                                    className="landing-sub text-[#ee6730] text-4xl italic  font-bold  uppercase ">
+                                    className="landing-sub text-[#ee6730] lg:text-4xl italic  font-bold  uppercase ">
                                     BasketBall
                                 </h1>
-                                <h1 className="landing-sub text-black text-4xl italic  font-bold  uppercase ">
+                                <h1 className="landing-sub text-black lg:text-4xl italic  font-bold  uppercase ">
                                     League
                                 </h1>
                             </div>
                             <p
-                                className="text-center sm:text-start ||  sm:mr-80 md:w-[300px] lg:w-[350px] text-black  xl:w-[500px] || text-xs sm:text-sm md:text-sm lg:font-normal 2xl:text-base  ||
+                                className="text-center sm:text-center lg:text-start || sm:px-20 lg:px-0 text-black  xl:w-[500px] || text-xs sm:text-sm md:text-sm lg:font-normal 2xl:text-base  ||
                      py-2 "
                             >
                                 Use in khelo India, khel mahakumb, state level tournament,
@@ -77,8 +77,8 @@ function LandingPage() {
                                 />
                             </div>
                         </div>
-                        <div className="right flex items-center w-full justify-center">
-                            <div className="img sm:absolute right-0 sm:top-40 mt-16 md:top-40 lg:top-20 2xl:top-0 h-[350px] w-[350px] sm:h-[400px] sm:w-[380px] md:h-[400px] md:w-[400px] lg:h-[450px] lg:w-[450px] xl:h-[480px] xl:w-[480px] 2xl:h-[600px] 2xl:w-[800px] mr-20">
+                        <div className="right flex items-center w-full justify-center order-1 lg:order-2">
+                            <div className="img lg:absolute right-0 mt-10 lg:top-6 2xl:top-0 h-[230px] w-[280px] sm:h-[300px] sm:w-[380px] md:h-[400px] md:w-[400px] lg:w-[550px] xl:w-[600px] 2xl:h-[600px] 2xl:w-[800px] lg:mr-10 xl:mr-20">
                                 <img src="/CBL_Images/portrait-two-basketball-players-training-dribbling-isolated-white-studio-background.jpg" alt="landing" className=" w-full" />
                             </div>
                         </div>

@@ -4,7 +4,7 @@ import { TbFilePlus } from "react-icons/tb";
 import { MdDelete } from "react-icons/md";
 import { FiEdit } from "react-icons/fi";
 import { toast } from "react-toastify";
-import { TbNews } from "react-icons/tb";
+import { GrGallery } from "react-icons/gr";
 import { AiFillCloseCircle } from "react-icons/ai";
 import * as Yup from "yup";
 import Swal from "sweetalert2";
@@ -115,7 +115,7 @@ const AddEditGallery = () => {
                       className=" space-y-5 xl:space-y-10 "
                       onSubmit={handleSubmit}
                     >
-                      <div className="flex flex-col  items-center space-y-5 md:space-y-4">
+                      <div className="flex flex-col  items-center space-y-5 md:space-y-5">
                         <div className="firstname flex flex-col space-y-2 w-full ">
                           <label htmlFor="Firstname">Photo</label>
                           <input
@@ -129,16 +129,18 @@ const AddEditGallery = () => {
                         </div>
                         <div className="email flex flex-col space-y-2  w-full ">
                           <label htmlFor="email">Category</label>
-                          <input
-                            type="text"
+                          <select
                             name="category"
                             id="category"
-                            value={values.title}
+                            className="rounded-md py-[3px] md:py-[3px] w-full xl:py-2 px-3 outline-non border border-slate-300 outline-blue-200"
+                            value={values.category}
                             onChange={handleChange}
                             onBlur={handleBlur}
-                            className="rounded-md py-1 md:py-[5px] xl:py-[10px] px-3 outline-non border border-slate-300 outline-blue-200"
-                            placeholder="Enter category "
-                          />
+                          >
+                            <option value="">Select Category</option>
+                            <option value="champ">Champ</option>
+                            <option value="award">Awards</option>
+                          </select>
                           {errors.category && touched.category ? (
                             <p className="form-error text-red-600 text-sm font-semibold">
                               {errors.category}
@@ -252,15 +254,15 @@ const AddEditGallery = () => {
                 })
               ) : (
                 <div className="flex justify-center items-center w-full py-10">
-                  <TbNews className=" text-2xl sm:text-3xl md:text-[30px] text-gray-400 mr-2" />
-                  <p className="text-xs xs:text-sm sm:text-lg 2xl:text-[23px] font-medium text-gray-400">
+                  <GrGallery className=" text-2xl sm:text-3xl md:text-[30px] text-gray-400 mr-2" />
+                  <p className="text-xs xs:text-sm sm:text-lg 2xl:text-[20px] font-medium text-gray-400">
                     Gallery Not Found
                   </p>
                 </div>
               )}
             </div>
             {
-              data?.data?.length > 10 ?
+              data?.data?.length > 0 ?
                 <div className="flex  justify-center items-center text-gray-400 py-5 space-x-2 mt-5 text-sm">
                   <button
                     onClick={(e) => {

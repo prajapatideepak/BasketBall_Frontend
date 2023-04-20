@@ -4,7 +4,7 @@ import Match_cards from "../../Component/Dashboard/Match_cards";
 import { BiChevronRight } from "react-icons/bi"
 import { FaPhotoVideo } from "react-icons/fa"
 import { GiDiamondTrophy } from "react-icons/gi"
-import { BsFillCameraReelsFill } from "react-icons/bs"
+import { BsCameraFill } from "react-icons/bs"
 import Hilights_Cards from "../../Component/Dashboard/Highlights_cards";
 import News_cards from "../../Component/Dashboard/News_cards";
 import Tournaments_cards from "../../Component/Dashboard/Tournaments_cards";
@@ -413,7 +413,7 @@ const Dashboard = () => {
               })
               :
               <div className='flex justify-center items-center w-full py-5'>
-                <BsFillCameraReelsFill className=" text-2xl sm:text-3xl md:text-4xl text-gray-400 mr-2" />
+                <BsCameraFill className=" text-2xl sm:text-3xl md:text-4xl text-gray-400 mr-2" />
                 <p className='text-xs xs:text-sm sm:text-lg font-medium text-gray-400'>No News Found</p>
               </div>
           }

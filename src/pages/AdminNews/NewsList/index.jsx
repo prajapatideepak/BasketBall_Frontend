@@ -4,7 +4,7 @@ import { TbFilePlus } from "react-icons/tb";
 import { MdDelete } from "react-icons/md";
 import { FiEdit } from "react-icons/fi";
 import { toast } from "react-toastify";
-import { TbNews } from "react-icons/tb";
+import { BsCameraFill } from "react-icons/bs";
 import { AiFillCloseCircle } from "react-icons/ai";
 import * as Yup from "yup";
 import Swal from "sweetalert2";
@@ -328,9 +328,9 @@ const NewsList = () => {
                 })
               ) : (
                 <div className="flex justify-center items-center w-full py-10">
-                  <TbNews className=" text-2xl sm:text-3xl md:text-[30px] text-gray-400 mr-2" />
-                  <p className="text-xs xs:text-sm sm:text-lg 2xl:text-[23px] font-medium text-gray-400">
-                    New Not Found
+                  <BsCameraFill className=" text-2xl sm:text-3xl md:text-[30px] text-gray-400 mr-2" />
+                  <p className="text-xs xs:text-sm sm:text-lg 2xl:text-[20px] font-medium text-gray-400">
+                    News Not Found
                   </p>
                 </div>
               )}
