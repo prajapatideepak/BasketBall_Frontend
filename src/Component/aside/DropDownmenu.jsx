@@ -58,7 +58,7 @@ function DropDownmenu({setOpen, isMenu, setIsMenu}) {
           {
             user.is_player
             ?
-              <Link to={"/player/profile-detail/2"}>
+              <Link to={`/player/profile-detail/${user.players[0].id}`}>
                 <li
                   onClick={() => setIsMenu(false)}
                   className="flex items-center justify-between my-2 cursor-pointer hover:bg-[#ee6730] duration-150 px-2  py-2 rounded-md  "
