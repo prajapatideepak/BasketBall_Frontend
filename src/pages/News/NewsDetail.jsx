@@ -91,7 +91,6 @@ const   NewsDetail = () => {
   const navigate = useNavigate();
   const params = useParams();
   const { data, isLoading, error } = useGetNewsDetailsQuery(params.id);
-
   const news = newsDetail.find((n) => {
     return n.id == params.id;
   });

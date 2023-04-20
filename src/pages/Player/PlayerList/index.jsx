@@ -17,7 +17,6 @@ const PlayerList = () => {
     pageNo: pageNo - 1,
     search,
   });
-  const itemsPerPage = 2;
   return (
     <section className="min-h-screen-fit">
       <div>
@@ -159,7 +158,7 @@ const PlayerList = () => {
 
                 </div>
                 {
-                  data.length < 0 ?
+                  data.length > 10 ?
                     <div className="flex  justify-center items-center text-gray-400 py-5 space-x-2 mt-5 text-sm">
                       <button
                         onClick={(e) => {

@@ -5,7 +5,7 @@ import moment from 'moment'
 
 
 export default function NewsCard(news) {
-  console.log(news, "skjdvn")
+  console.log(news)
   let tags = news?.news?.tags?.split(",");
   return (
     <div className="w-full cursor-pointer relative shadow-2xl rounded  ">

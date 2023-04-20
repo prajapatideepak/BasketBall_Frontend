@@ -4,15 +4,18 @@ import { FaUserCircle } from "react-icons/fa";
 import { FiChevronRight } from "react-icons/fi";
 import { MdOutlineLogout } from "react-icons/md";
 import { GoKey } from "react-icons/go";
-import { MdPublishedWithChanges } from "react-icons/md";
+import { GiBasketballJersey, GiDiamondTrophy } from "react-icons/gi";
+import { RiTeamFill } from "react-icons/ri";
 import { NavLink, Link, Outlet, useNavigate } from "react-router-dom";
 import { logout } from "../../redux/actions/User";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 function DropDownmenu({setOpen, isMenu, setIsMenu}) {
   const navigate = useNavigate();
-
   const dispatch = useDispatch();
+  const { user } = useSelector((state)=> state.user)
+
+  console.log(user)
   return (
     <>
       <div className="">
@@ -47,44 +50,71 @@ function DropDownmenu({setOpen, isMenu, setIsMenu}) {
                 <div className="rounded-full px-1 py-1 bg-white text-black flex justify-center border items-center ">
                   <FaUserAlt />
                 </div>
-                <h1 className="text-sm font-semibold">View Profile</h1>
+                <h1 className="text-sm font-semibold">User Profile</h1>
               </div>
               <FiChevronRight className="text-white" />
             </li>
           </Link>
-          <Link>
-            <li
-              onClick={() => setIsMenu(false)}
-              className="flex items-center justify-between my-2 cursor-pointer hover:bg-[#ee6730] duration-150 px-2  py-1 rounded-md  "
-            >
-              <div className="flex items-center space-x-3 text-white">
-                <div className="rounded-full px-1 py-1 bg-white text-black flex justify-center border items-center ">
-                  <MdPublishedWithChanges />
-                </div>
-                <div className="flex flex-col">
-                  <h1 className="text-sm font-semibold">Change Role</h1>
-                  <p className="text-sm font-semibold text-slate-400">
-                    Visitor
-                  </p>
-                </div>
-              </div>
-              <FiChevronRight className="text-white" />
-            </li>
-          </Link>
-          <Link>
-            <li
-              onClick={() => setIsMenu(false)}
-              className="flex items-center justify-between my-2 cursor-pointer hover:bg-[#ee6730] duration-150 px-2  py-2 rounded-md  "
-            >
-              <div className="flex items-center space-x-3 text-white">
-                <div className="rounded-full px-1 py-1 bg-white text-black flex justify-center border items-center ">
-                  <GoKey />
-                </div>
-                <h1 className="text-sm font-semibold">Forget Password</h1>
-              </div>
-              <FiChevronRight className="text-white" />
-            </li>
-          </Link>
+          {
+            user.is_player
+            ?
+              <Link to={"/player/profile-detail/2"}>
+                <li
+                  onClick={() => setIsMenu(false)}
+                  className="flex items-center justify-between my-2 cursor-pointer hover:bg-[#ee6730] duration-150 px-2  py-2 rounded-md  "
+                >
+                  <div className="flex items-center space-x-3 text-white">
+                    <div className="rounded-full px-1 py-1 bg-white text-black flex justify-center border items-center ">
+                      <GiBasketballJersey />
+                    </div>
+                    <h1 className="text-sm font-semibold">Player Profile</h1>
+                  </div>
+                  <FiChevronRight className="text-white" />
+                </li>
+              </Link>
+            :
+              null
+          }
+          {
+            user.is_manager
+            ?
+              <Link to={"/team/profile"}>
+                <li
+                  onClick={() => setIsMenu(false)}
+                  className="flex items-center justify-between my-2 cursor-pointer hover:bg-[#ee6730] duration-150 px-2  py-2 rounded-md  "
+                >
+                  <div className="flex items-center space-x-3 text-white">
+                    <div className="rounded-full px-1 py-1 bg-white text-black flex justify-center border items-center ">
+                      <RiTeamFill />
+                    </div>
+                    <h1 className="text-sm font-semibold">Team Profile</h1>
+                  </div>
+                  <FiChevronRight className="text-white" />
+                </li>
+              </Link>
+            :
+              null
+          }
+          {
+            user.is_organizer
+            ?
+              <Link to={"/tournament/organizer"}>
+                <li
+                  onClick={() => setIsMenu(false)}
+                  className="flex items-center justify-between my-2 cursor-pointer hover:bg-[#ee6730] duration-150 px-2  py-2 rounded-md  "
+                >
+                  <div className="flex items-center space-x-3 text-white">
+                    <div className="rounded-full px-1 py-1 bg-white text-black flex justify-center border items-center ">
+                      <GiDiamondTrophy />
+                    </div>
+                    <h1 className="text-sm font-semibold">Tournament Profile</h1>
+                  </div>
+                  <FiChevronRight className="text-white" />
+                </li>
+              </Link>
+            :
+              null
+          }
           <Link>
             <li
               onClick={() => {

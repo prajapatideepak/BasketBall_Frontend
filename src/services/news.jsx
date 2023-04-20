@@ -3,7 +3,7 @@ import { api } from "./api";
 export const newsApi = api.injectEndpoints({
     endpoints: (build) => ({
         getAllNews: build.query({
-            query: () => "news",
+            query: ({pageNo}) => `news/${pageNo}`,
         }),
 
         registerNews: build.mutation({

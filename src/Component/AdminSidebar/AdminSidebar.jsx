@@ -248,7 +248,7 @@ function AdminSidebar() {
                           News
                         </p>
                       </Link>
-                      <Link className="Link" to={"/Gallery"}>
+                      <Link className="Link" to={"/gallery"}>
                         <p className="text-base leading-4 pl-3 cursor-pointer pt-7 text-gray-400">
                           Gallery
                         </p>
