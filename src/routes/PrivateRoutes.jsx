@@ -19,6 +19,7 @@ import PageNotFound from "../pages/Error";
 import MatchDetails from "../pages/Matches/MatchDetails";
 import Scoreboard from "../pages/Scoreboard";
 import Tournament from "../pages/Tournament";
+import ResendVerificationEmail from "../pages/ResendVerificationEmail";
 import Loader from "../Component/Loader";
 import { toast } from "react-toastify";
 import { authentication } from "../redux/actions/User";
@@ -29,7 +30,7 @@ const PrivateRoutes = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { token } = useSelector((state) => state.user);
+  const { token, user } = useSelector((state) => state.user);
 
   const { data, isLoading, isError, error } = useGetUserDataQuery();
 
@@ -45,35 +46,47 @@ const PrivateRoutes = () => {
   if (isLoading) {
     return <Loader />;
   }
+
   return (
     <Routes>
-      <Route element={<PrivateLayout />}>
-        <Route path="/match" element={<MatchsList />} />
-        <Route path="/match-details/:id" element={<MatchDetails />} />
-        <Route
-          path="/profile-detail/:team_id"
-          element={<TeamProfileDetail />}
-        />
-        <Route path="/visitor-profile" element={<VisitorProfile />} />
-        <Route path="/role" element={<Role />} />
-        <Route path="/about" element={<AboutUs />} />
-        <Route path="news/*" element={<News />} />
-        <Route path="/gallery" element={<Gallery />} />
-        <Route path="player/*" element={<Player />} />
-        <Route path="tournament/*" element={<Tournament />} />
-        <Route path="team/*" element={<Team />} />
-        <Route path="/contact" element={<ContactUs />} />
-        <Route
-          path="/match/playerselection"
-          element={<MatchPlayerSelection />}
-        />
-        <Route path="/registration" element={<AfterRole />} />
-        <Route path="/term&condition" element={<TermsandConditions />} />
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/*" element={<PageNotFound />} />
+      {
+        !user.is_verified
+        ?
+          <>
+            <Route path="/user/resend-verification-link/:user_id" element={<ResendVerificationEmail />} />
+            <Route path="/*" element={<PageNotFound />} />
+            <Route index element={<ResendVerificationEmail />} />
+          </>
+        :
+          <Route element={<PrivateLayout />}>
+            <Route path="/match" element={<MatchsList />} />
+            <Route path="/match-details/:id" element={<MatchDetails />} />
+            <Route
+              path="/profile-detail/:team_id"
+              element={<TeamProfileDetail />}
+            />
+            <Route path="/visitor-profile" element={<VisitorProfile />} />
+            <Route path="/role" element={<Role />} />
+            <Route path="/about" element={<AboutUs />} />
+            <Route path="news/*" element={<News />} />
+            <Route path="/gallery" element={<Gallery />} />
+            <Route path="player/*" element={<Player />} />
+            <Route path="tournament/*" element={<Tournament />} />
+            <Route path="team/*" element={<Team />} />
+            <Route path="/contact" element={<ContactUs />} />
+            <Route
+              path="/match/playerselection"
+              element={<MatchPlayerSelection />}
+            />
+            <Route path="/registration" element={<AfterRole />} />
+            <Route path="/term&condition" element={<TermsandConditions />} />
+            <Route path="/" element={<Dashboard />} />
+                
+            <Route path="/*" element={<PageNotFound />} />
 
-        <Route index element={<Dashboard />} />
-      </Route>
+            <Route index element={<Dashboard />} />
+          </Route>
+      }
       <Route path="/scoreboard/:match_id/:token" element={<Scoreboard />} />
     </Routes>
   );

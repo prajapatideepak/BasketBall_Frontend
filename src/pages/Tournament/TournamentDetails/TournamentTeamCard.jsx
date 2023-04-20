@@ -4,14 +4,14 @@ import Swal from 'sweetalert2';
 import { toast } from 'react-toastify';
 import { useDisqualifyTeamMutation, useRequalifyTeamMutation } from '../../../services/organizer';
 
-function TournamentTeamCard({isOrganizer, teamDetails, index, refetchData}) {
+function TournamentTeamCard({isOrganizer, teamDetails, is_disqualified, tournament_teams_id, teamCategoryType, refetchData}) {
     const navigate = useNavigate();
     const {tournament_id} = useParams()
 
     const [disqualifyTeam, {...disqualifying}] = useDisqualifyTeamMutation()
     const [requalifyTeam, {...requalifying}] = useRequalifyTeamMutation()
 
-    const {team_id, teams, is_disqualified} = teamDetails
+    const {team_id, teams} = teamDetails
 
     const handleNavigateToTeamProfile = () =>{
         navigate(`/team/profile-detail/${team_id}`)
@@ -28,7 +28,7 @@ function TournamentTeamCard({isOrganizer, teamDetails, index, refetchData}) {
         confirmButtonText: 'Yes, disqualify'
       }).then(async(result) => {
         if (result.isConfirmed) {
-            const response = await disqualifyTeam({tournament_id: tournament_id, team_id: team_id})
+            const response = await disqualifyTeam({tournament_id, tournament_teams_id})
             if(response.error){
                 toast.error(response.error.data.message)
             }
@@ -51,7 +51,7 @@ function TournamentTeamCard({isOrganizer, teamDetails, index, refetchData}) {
         confirmButtonText: 'Yes, requalify'
       }).then(async(result) => {
         if (result.isConfirmed) {
-            const response = await requalifyTeam({tournament_id: tournament_id, team_id: team_id})
+            const response = await requalifyTeam({tournament_id, tournament_teams_id})
             if(response.error){
                 toast.error(response.error.data.message)
             }
@@ -67,7 +67,6 @@ function TournamentTeamCard({isOrganizer, teamDetails, index, refetchData}) {
         <div className="w-full relative overflow-hidden bg-gray-800 rounded-lg">
             <div className="bg-gradient-to-b  from-[#e64100]  absolute  md:top-[-40px] md:left-[-25px] w-10 h-10 rotate-[35deg] top-[-15px] left-[-15px] md:h-20 md:w-14 content-start md:rotate-[45deg] flex justify-center items-center">
                 <h1 className="rotate-[-35deg] md:rotate-[315deg] text-xs font-medium md:text-base mt-1 ml-5 md:ml-8 text-white">
-                    {index}
                 </h1>
             </div>
             <div className='flex lg:flex-row flex-col lg:justify-start justify-center items-center py-3 pr-3 pl-5 h-full'>
@@ -107,6 +106,19 @@ function TournamentTeamCard({isOrganizer, teamDetails, index, refetchData}) {
                             :
                                 <p className="text-xs sm:text-sm mt-1 xl:mt-2 text-gray-400 text-ellipsis line-clamp-2 overflow-hidden">....</p>
                         }
+                        <div className="flex justify-end text-gray-500">
+                            {
+                                <>
+                                    <span className='capitalize'>
+                                        {teamCategoryType.age_category}
+                                    </span>
+                                    <span className='mx-2 text-gray-600'>|</span>
+                                    <span className='capitalize'>
+                                        {teamCategoryType.gender_type}
+                                    </span>
+                                </>
+                            }
+                        </div>
                     </div>
                 </div>
             </div>

@@ -9,7 +9,7 @@ import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 import { authentication } from "../../redux/actions/User";
 import { useGoogleLogin } from '@react-oauth/google';
-import { useSigninMutation } from "../../services/authentication";
+import { useSigninMutation, useGoogleLoginMutation } from "../../services/authentication";
 
 const signUpSchema = Yup.object({
   mobile: Yup.string()
@@ -30,9 +30,29 @@ function Login() {
   const navigate = useNavigate();
 
   const [signin, {isLoading}] = useSigninMutation()
+  const [googleLogin, {...googleAuth}] = useGoogleLoginMutation()
 
+  const loginWithGoogle = async (access_token)=>{
+    const res = await googleLogin(access_token)
+     if (res.error) {
+        toast.error(res.error.data.message);
+      }
+      else if (res.data.success) {
+        
+        if(!res.data.user.is_verified){
+          navigate("/user/resend-verification-link"); 
+
+        }
+        else{
+          navigate("/"); 
+          dispatch(authentication(res.data.token, res.data.user));
+          toast.success(res.data.message);
+        }
+      }
+  }
+  
   const login = useGoogleLogin({
-    onSuccess: tokenResponse => console.log(tokenResponse),
+    onSuccess: (tokenResponse) => loginWithGoogle(tokenResponse.access_token),
     onError: error => {toast.error(error)}
   });
 
@@ -69,7 +89,10 @@ function Login() {
             Wellcome back! Please enter your details.
           </p>
         </div>
-        <div className="border py-2 my-7 flex justify-center items-center px-5 rounded-md space-x-2 cursor-pointer hover:border-[#ee6730] duration-200" onClick={()=>login()}>
+        <div className={`${googleAuth.isLoading ? 'opacity-60' : ''} border py-2 my-7 flex justify-center items-center px-5 rounded-md space-x-2 cursor-pointer hover:border-[#ee6730] duration-200`} onClick={()=>{
+          if(googleAuth.isLoading) return
+          login();
+        }}>
           <img src={google} alt="" className="w-7" />
           <p>Log in with Google</p>
         </div>
@@ -121,7 +144,7 @@ function Login() {
               ) : null}
             </div>
           </div>
-          <Link to={"/ForgetPassword"}>
+          <Link to={"/forget-password"}>
             <div className=" flex justify-end items-end">
               <h1 className="text-sm underline font-semibold text-[#ee6730] cursor-pointer">
                 Forget Password?

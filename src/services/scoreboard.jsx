@@ -7,6 +7,28 @@ export const scoreboardApi = api.injectEndpoints({
       query: ({match_id, token}) => `scoreboard/auth-scorekeeper/${match_id}/${token}`
     }),
 
+    sendScoreboardLink: build.mutation({
+      query: ({tournament_id, match_id, scorer_email, scorer_token, team_1, team_2, match_start_date, match_start_time, address}) =>{
+        return {
+          url: `mail/scoreboard-link/${tournament_id}`,
+          body:{
+             match_id, 
+             scorer_email,
+             scorer_token,
+             team_1, 
+             team_2, 
+             match_start_date, 
+             match_start_time, 
+             address
+          },
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      }
+    }),
+
     startMatch: build.mutation({
       query({match_id, token}) {
         return {
@@ -18,6 +40,7 @@ export const scoreboardApi = api.injectEndpoints({
         };
       },
     }),
+    
     endMatch: build.mutation({
       query({match_id, token}) {
         return {
@@ -29,6 +52,7 @@ export const scoreboardApi = api.injectEndpoints({
         };
       },
     }),
+
     addTeamPoint: build.mutation({
       query: ({match_id, token, team_id, player_id, point_type})=>{
         return{
@@ -45,6 +69,7 @@ export const scoreboardApi = api.injectEndpoints({
         }
       }
     }),
+
     addPlayerFoul: build.mutation({
       query: ({match_id, token, player_id})=>{
         return{
@@ -59,6 +84,7 @@ export const scoreboardApi = api.injectEndpoints({
         }
       }
     }),
+
     addTeamFoul: build.mutation({
       query: ({match_id, token, team_id})=>{
         return{
@@ -73,6 +99,7 @@ export const scoreboardApi = api.injectEndpoints({
         }
       }
     }),
+
     changeQuarter: build.mutation({
       query: ({match_id, token})=>{
         return{
@@ -84,6 +111,7 @@ export const scoreboardApi = api.injectEndpoints({
         }
       }
     }),
+
     undoScore: build.mutation({
       query: ({match_id, token})=>{
         return{
@@ -100,6 +128,7 @@ export const scoreboardApi = api.injectEndpoints({
 
 export const {
   useIsAuthScorekeeperQuery,
+  useSendScoreboardLinkMutation,
   useStartMatchMutation,
   useEndMatchMutation,
   useAddTeamPointMutation,

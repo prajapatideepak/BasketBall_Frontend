@@ -10,11 +10,13 @@ today.setHours(0, 0, 0, 0)
 
 export const TournamentInfoSchema = (isEdit)=> Yup.object({
     tournament_name: Yup.string()
+      .transform((value, originalValue) => {
+          return originalValue.trim();
+      })
       .matches(/^[a-zA-Z ]+$/, "Please enter only characters")
-      .min(2, "Team name must be at least 2 characters")
-      .max(25, "Team name should not be more than 25 characters")
+      .min(3, "Team name must be at least 3 characters")
+      .max(40, "Team name should not be more than 40 characters")
       .required("Please Enter Tournament Name "),
-
     tournament_logo: Yup.mixed()
       .test("is-valid-type", "Logo should be in jpg, jpeg or png format",
         value => {
@@ -31,6 +33,9 @@ export const TournamentInfoSchema = (isEdit)=> Yup.object({
       }),
 
     city_name: Yup.string()
+      .transform((value, originalValue) => {
+          return originalValue.trim();
+      })
       .matches(/^[a-zA-Z]+$/, "Please Enter Only Characters")
       .required("Please Enter City Name"),
 
@@ -74,6 +79,9 @@ export const TournamentInfoSchema = (isEdit)=> Yup.object({
     referees: Yup.array().of(
       Yup.object().shape({
         name: Yup.string()
+          .transform((value, originalValue) => {
+              return originalValue.trim();
+          })
           .matches(/^[a-zA-Z ]+$/, "Please enter only characters")
           .min(2, "Referee name must be at least 2 characters")
           .max(25, "Referee name should not be more than 25 characters")
@@ -89,6 +97,9 @@ export const TournamentInfoSchema = (isEdit)=> Yup.object({
           }),
 
         mobile: Yup.string()
+          .transform((value, originalValue) => {
+              return originalValue.trim();
+          })
           .matches(/^[0-9]+$/, "Please Enter Only Numbers")
           .min(10, "Mobile number should be at least 10 digits")
           .max(10, "Mobile number should not be more than 10 digits")
@@ -108,6 +119,9 @@ export const TournamentInfoSchema = (isEdit)=> Yup.object({
     sponsors: Yup.array().of(
       Yup.object().shape({
         name: Yup.string()
+          .transform((value, originalValue) => {
+            return originalValue.trim();
+          })
           .matches(/^[a-zA-Z ]+$/, "Please Enter Only Characters")
           .min(2, "Sponsor name must be at least 2 characters")
           .max(25, "Sponsor name should not be more than 25 characters")

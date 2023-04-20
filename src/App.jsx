@@ -2,6 +2,7 @@ import React from "react";
 import AppRoutes from "./routes";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
+import ErrorBoundry from './Component/ErrorBoundry'
 
 function App() {
   if (process.env.NODE_ENV == "development") {
@@ -9,7 +10,9 @@ function App() {
   }
   return (
     <Provider store={store}>
-      <AppRoutes />
+      <ErrorBoundry>
+        <AppRoutes />
+      </ErrorBoundry>
     </Provider>
   );
 }

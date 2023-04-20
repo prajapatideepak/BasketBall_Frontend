@@ -208,31 +208,31 @@ function MatchLive({ slides }) {
                 {
                   slides.map((slide, slideIndex) => {
                     return (
-                      <div key={slideIndex} className="relative cursor-pointer" onClick={() => goToSlide(slideIndex)}>
-                        <svg className="w-12 h-12 relative rotate-[-90deg]">
+                      <div key={slideIndex} className="relative cursor-pointer flex justify-center items-center" onClick={() => goToSlide(slideIndex)}>
+                        <svg className="w-12 h-12 relative rotate-[-90deg] flex justify-center items-center">
                           <circle
                             className="text-gray-500"
                             strokeWidth="2"
                             stroke="currentColor"
                             fill="transparent"
-                            r="18"
-                            cx="25"
-                            cy="25"
+                            r="20"
+                            cx="24"
+                            cy="24"
                           />
                           <circle
                             className={`${slideIndex === currentIndex ? 'text-[#ee6730]' : 'text-gray-500'} transition-all`}
-                            strokeWidth="3"
-                            strokeDasharray={30 * 2 * Math.PI}
-                            strokeDashoffset={(30 * 2 * Math.PI) - progressBar / 100 * (30 * 2 * Math.PI)}
+                            strokeWidth="1.5"
+                            strokeDasharray={0}
+                            strokeDashoffset={0}
                             strokeLinecap="round"
                             stroke="currentColor"
                             fill="transparent"
-                            r="18"
-                            cx="25"
-                            cy="25"
+                            r="20"
+                            cx="24"
+                            cy="24"
                           />
                         </svg>
-                        <span className="w-10 absolute text-lg text-white top-2 left-1.5 text-center">{slideIndex + 1}</span>
+                        <span className="w-10 absolute text-sm text-white text-center">{slideIndex + 1}</span>
                       </div>
                     )
                   })

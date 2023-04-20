@@ -7,16 +7,41 @@ import * as Yup from "yup"
 import "yup-phone"
 import { HiArrowLeft } from "react-icons/hi"
 import { toast } from 'react-toastify';
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { authentication } from "../../redux/actions/User";
+import { useGoogleLogin } from '@react-oauth/google';
 import { BsFillPatchCheckFill } from "react-icons/bs"
-import { useSignupMutation } from "../../services/authentication"
+import { useSignupMutation, useGoogleLoginMutation } from "../../services/authentication"
 
 
 const signUpSchema = Yup.object({
-    fullname: Yup.string().min(2).max(25).matches(/^[a-zA-Z ]+$/, "Please enter only characters").required("Please enter your full name"),
-    email: Yup.string().email().required("Please enter your email"),
-    phone: Yup.string().min(10).max(10).matches(/^[0-9]+$/, "Please enter only numbers").phone(null, true, "Invalid phone number").required("Please enter your phone number"),
+    fullname: Yup.string()
+    .transform((value, originalValue) => {
+        return originalValue.trim();
+    })
+    .min(2, "Name must be atleast 2 characters long")
+    .max(25, "Name shouldn't be more than 25 characters").matches(/^[a-zA-Z ]+$/, "Please enter only characters").required("Please enter your full name"),
+
+    email: Yup.string().email()
+    .transform((value, originalValue) => {
+        return originalValue.trim();
+    })
+    .required("Please enter your email"),
+
+    phone: Yup.string()
+    .transform((value, originalValue) => {
+        return originalValue.trim();
+    })
+    .min(10, "Enter valid mobile no.").max(10, "Enter valid mobile no.").matches(/^[0-9]+$/, "Please enter only numbers").phone(null, true, "Invalid phone number").required("Please enter your phone number"),
     password: Yup.string().required("Please enter password"),
-    Confirmpassword: Yup.string().required("Confirm password is required").oneOf([Yup.ref("password"), null], "Confirm Password must match"),
+
+    Confirmpassword: Yup.string().required("Confirm password is required")
+    .transform((value, originalValue) => {
+        return originalValue.trim();
+    })
+    .oneOf([Yup.ref("password"), null], "Confirm Password must match"),
+
     terms: Yup.string().required("Please select Terms and Conditions"),
 });
 
@@ -32,10 +57,13 @@ const initialValues = {
 
 
 function Register() {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const [isOnSubmit, setIsOnSubmit] = React.useState(false);
 
     const [signup, {isLoading}] = useSignupMutation()
+    const [googleLogin, {...googleAuth}] = useGoogleLoginMutation()
 
     const { values, errors, handleBlur, touched, handleChange, handleSubmit } = useFormik({
         initialValues: initialValues,
@@ -51,6 +79,23 @@ function Register() {
             }
         }
     })
+
+    const loginWithGoogle = async (access_token)=>{
+        const res = await googleLogin(access_token)
+        if (res.error) {
+            toast.error(res.error.data.message);
+        }
+        else if (res.data.success) {
+            navigate("/"); 
+            dispatch(authentication(res.data.token, res.data.user));
+            toast.success(res.data.message);
+        }
+    }
+
+    const login = useGoogleLogin({
+        onSuccess: (tokenResponse) => loginWithGoogle(tokenResponse.access_token),
+        onError: error => {toast.error(error)}
+    });
 
     React.useEffect(() => {
         // Define the 'otpless' function
@@ -91,7 +136,12 @@ function Register() {
                         </div>
                         <h1 className={`${isOnSubmit ? "hidden" : "block"} text-[#ee6730] text-3xl text-center font-bold`}>Sign Up</h1>
                         <div className={`${isOnSubmit ? "hidden" : "block"}`}>
-                            <div className='border py-2 my-8 flex justify-center items-center px-5 rounded-md space-x-2 cursor-pointer hover:border-[#ee6730] duration-200'>
+                            <div className={`${googleAuth.isLoading ? 'opacity-60' : ''} border py-2 my-8 flex justify-center items-center px-5 rounded-md space-x-2 cursor-pointer hover:border-[#ee6730] duration-200`} 
+                            onClick={()=>{
+                                if(googleAuth.isLoading) return
+                                login();
+                            }}
+                            >
                                 <img src={google} alt="" className='w-7' />
                                 <p>Continue with Google</p>
                             </div>
@@ -136,7 +186,7 @@ function Register() {
                                                 null}
                                         </div>
                                         <div className="phone flex flex-col space-y-2 w-full ">
-                                            <label htmlFor="phone">Phone</label>
+                                            <label htmlFor="phone">Mobile</label>
                                             <input type="text"
                                                 name="phone"
                                                 id="phone"
@@ -197,7 +247,7 @@ function Register() {
                                                     onChange={handleChange}
                                                     onBlur={handleBlur}
                                                 />
-                                                <Link to={"/term&condition"}>
+                                                <Link to={"/terms-and-condition"}>
                                                     <p className="text-base text-[#ee6730] cursor-pointer">Terms and Conditions</p>
                                                 </Link>
                                             </div>

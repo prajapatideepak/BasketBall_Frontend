@@ -6,35 +6,37 @@ import { FiKey } from "react-icons/fi"
 import { useFormik } from 'formik'
 import * as Yup from "yup"
 import { toast } from 'react-toastify';
-import { useNavigate } from "react-router-dom";
+import { useSendResetPasswordLinkMutation } from '../../services/authentication'
 import "yup-phone"
 
 const signUpSchema = Yup.object({
-    phone: Yup.string().phone(null, true, "Invalid phone number").required("Please enter your phone number")
+    email: Yup.string().email("Please enter valid email").required("Please enter your email")
+    .transform((value, originalValue) => {
+        return originalValue.trim();
+    })
 });
 
 const initialValues = {
-    phone: ""
+    email: ""
 };
 
 function ForgetPassword() {
 
-
-    const notify = () => toast("Link Send Successfully!!");
     const [isOnSubmit, setIsOnSubmit] = React.useState(false);
-    const navigate = useNavigate();
 
+    const [sendResetPasswordLink, {isLoading}] = useSendResetPasswordLinkMutation()
 
     const { values, errors, handleBlur, touched, handleChange, handleSubmit } = useFormik({
         initialValues: initialValues,
         validationSchema: signUpSchema,
-        onSubmit(res) {
-            setIsOnSubmit(true)
-            notify()
-            setTimeout(function () {
-                navigate("/Password")
-            }, 2000);
-
+        async onSubmit(data) {
+            const response = await sendResetPasswordLink(data.email)
+            if (response.error) {
+                toast.error(response.error.data.message);
+            }
+            else if (response.data.success) {
+                setIsOnSubmit(true)
+            }
         }
     })
 
@@ -52,38 +54,40 @@ function ForgetPassword() {
                     </div>
                 </div>
                 <div className='py-3 space-y-3'>
-                    <h1 className='text-3xl font-bold text-center'>Reset your password</h1>
+                    <h1 className={`${isOnSubmit ? "hidden" : "block"} text-3xl font-bold text-center`}>Reset your password</h1>
                     <div className={`${isOnSubmit ? "hidden" : "block"}`}>
-                        <p className='font-semibold text-gray-500 text-center text-xs sm:text-base '>No worries. we'll send you reset password link.</p>
-                        <p className='font-semibold text-gray-500 text-center text-xs sm:text-base '>On your Email or SMS</p>
+                        <p className='font-semibold text-gray-500 text-center text-xs sm:text-base '>No worries, we'll send you reset password link</p>
+                        <p className='font-semibold text-gray-500 text-center text-xs sm:text-base '>on your email</p>
                     </div>
-                    <div className={`${isOnSubmit ? "block" : "hidden"}`}>
-                        <p className='font-semibold text-gray-500 text-center text-xs sm:text-base '>The verification link is  send to on Mail or SMS.</p>
-                        <p className='font-semibold text-gray-500 text-center text-xs sm:text-base '>Please check it.</p>
+                    <div className={`${isOnSubmit ? "block" : "hidden"} text-green-600`}>
+                        <p className='font-semibold text-center text-xs sm:text-base '>Reset password link has been sent to your email.</p>
+                        <p className='font-semibold text-center text-xs sm:text-base '>Please check it.</p>
                     </div>
                 </div>
                 <div className={`${isOnSubmit ? "hidden" : "block"} py-3`}>
                     <form action="" className=' space-y-2' onSubmit={handleSubmit}>
-                        <label htmlFor="Email" className='font-semibold text-base'>Phone</label>
+                        <label htmlFor="Email" className='font-semibold text-base'>Email</label>
                         <input type="text"
                             value={values.phone}
-                            placeholder='Enter your phone number'
+                            placeholder='Enter your email number'
                             autoComplete='off'
-                            name='phone'
-                            id='phone'
+                            name='email'
+                            id='email'
                             onChange={handleChange}
                             onBlur={handleBlur}
                             className='w-full rounded-md py-2 px-3 outline-non border border-slate-300 outline-blue-200 ' />
-                        {errors.phone && touched.phone
+                        {
+                            errors.email && touched.email
                             ?
-                            <p className='form-error text-red-600 text-sm font-semibold'>{errors.phone}</p>
+                                <p className='form-error text-red-600 text-sm font-semibold'>{errors.email}</p>
                             :
-                            null}
+                                null
+                        }
 
                         <div className='py-5'>
-                            <button type="submit" className="bg-slate-900  relative inline-flex items-center justify-center w-full px-4 py-1.5 sm:px-8 sm:py-[10px] overflow-hidden font-medium tracking-tighter text-white rounded-lg cursor-pointer group">
+                            <button type="submit" disabled={isLoading} className={`${isLoading ? 'opacity-60' : ''} bg-slate-900  relative inline-flex items-center justify-center w-full px-4 py-1.5 sm:px-8 sm:py-[10px] overflow-hidden font-medium tracking-tighter text-white rounded-lg cursor-pointer group`}>
                                 <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#ee6730] rounded-lg group-hover:w-full group-hover:h-56"></span>
-                                <span className="relative">SEND</span>
+                                <span className="relative">{isLoading ? 'Loading...' : 'SEND'}</span>
                             </button>
                         </div>
                     </form>
@@ -92,7 +96,7 @@ function ForgetPassword() {
                 <Link to={"/login"}>
                     <div className='flex justify-center py-3 items-center font-semibold text-slate-400 cursor-pointer hover:text-black space-x-2'>
                         <HiArrowLeft className='text-xl' />
-                        <p className=''>Back to Log in</p>
+                        <p className=''>Back to Login</p>
                     </div>
                 </Link>
             </div>

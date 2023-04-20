@@ -3,7 +3,6 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 function MatchCard({ match }) {
-  console.log(match)
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -31,7 +30,7 @@ function MatchCard({ match }) {
               <div className="w-14 h-14 xs:w-20 xs:h-20 md:w-24 md:h-24 flex justify-center items-center rounded-full border-2 overflow-hidden">
                 <img
                   src={match.team_1.logo}
-                  className="object-contain w-full h-full"
+                  className="object-cover w-full h-full"
                   alt=""
                 />
               </div>
@@ -52,7 +51,6 @@ function MatchCard({ match }) {
                     match?.match_quarters?.[match.match_quarters.length - 1]
                       ?.team_1_points
                   }
-                  {console.log(match)}
                 </h3>
                 <span className="text-2xl sm:text-3xl font-bold px-1">
                   -
@@ -69,7 +67,7 @@ function MatchCard({ match }) {
               <div className="w-14 h-14 xs:w-20 xs:h-20 md:w-24 md:h-24 flex justify-center items-center rounded-full border-2 overflow-hidden">
                 <img
                   src={match.team_2.logo}
-                  className="object-contain w-full h-full"
+                  className="object-cover w-full h-full"
                   alt=""
                 />
               </div>
