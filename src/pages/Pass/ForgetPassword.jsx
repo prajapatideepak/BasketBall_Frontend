@@ -10,11 +10,14 @@ import { useNavigate } from "react-router-dom";
 import "yup-phone"
 
 const signUpSchema = Yup.object({
-    phone: Yup.string().phone(null, true, "Invalid phone number").required("Please enter your phone number")
+    email: Yup.string().email().required("Please enter your email")
+    .transform((value, originalValue) => {
+        return originalValue.trim();
+    })
 });
 
 const initialValues = {
-    phone: ""
+    email: ""
 };
 
 function ForgetPassword() {
@@ -55,28 +58,28 @@ function ForgetPassword() {
                     <h1 className='text-3xl font-bold text-center'>Reset your password</h1>
                     <div className={`${isOnSubmit ? "hidden" : "block"}`}>
                         <p className='font-semibold text-gray-500 text-center text-xs sm:text-base '>No worries. we'll send you reset password link.</p>
-                        <p className='font-semibold text-gray-500 text-center text-xs sm:text-base '>On your Email or SMS</p>
+                        <p className='font-semibold text-gray-500 text-center text-xs sm:text-base '>On your Email</p>
                     </div>
                     <div className={`${isOnSubmit ? "block" : "hidden"}`}>
-                        <p className='font-semibold text-gray-500 text-center text-xs sm:text-base '>The verification link is  send to on Mail or SMS.</p>
+                        <p className='font-semibold text-gray-500 text-center text-xs sm:text-base '>Reset password link has been sent to your email.</p>
                         <p className='font-semibold text-gray-500 text-center text-xs sm:text-base '>Please check it.</p>
                     </div>
                 </div>
                 <div className={`${isOnSubmit ? "hidden" : "block"} py-3`}>
                     <form action="" className=' space-y-2' onSubmit={handleSubmit}>
-                        <label htmlFor="Email" className='font-semibold text-base'>Phone</label>
+                        <label htmlFor="Email" className='font-semibold text-base'>email</label>
                         <input type="text"
                             value={values.phone}
-                            placeholder='Enter your phone number'
+                            placeholder='Enter your email number'
                             autoComplete='off'
-                            name='phone'
-                            id='phone'
+                            name='email'
+                            id='email'
                             onChange={handleChange}
                             onBlur={handleBlur}
                             className='w-full rounded-md py-2 px-3 outline-non border border-slate-300 outline-blue-200 ' />
-                        {errors.phone && touched.phone
+                        {errors.email && touched.email
                             ?
-                            <p className='form-error text-red-600 text-sm font-semibold'>{errors.phone}</p>
+                            <p className='form-error text-red-600 text-sm font-semibold'>{errors.email}</p>
                             :
                             null}
 

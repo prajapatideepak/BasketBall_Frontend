@@ -16,11 +16,32 @@ import { useSignupMutation, useGoogleLoginMutation } from "../../services/authen
 
 
 const signUpSchema = Yup.object({
-    fullname: Yup.string().min(2).max(25).matches(/^[a-zA-Z ]+$/, "Please enter only characters").required("Please enter your full name"),
-    email: Yup.string().email().required("Please enter your email"),
-    phone: Yup.string().min(10).max(10).matches(/^[0-9]+$/, "Please enter only numbers").phone(null, true, "Invalid phone number").required("Please enter your phone number"),
+    fullname: Yup.string()
+    .transform((value, originalValue) => {
+        return originalValue.trim();
+    })
+    .min(2, "Name must be atleast 2 characters long")
+    .max(25, "Name shouldn't be more than 25 characters").matches(/^[a-zA-Z ]+$/, "Please enter only characters").required("Please enter your full name"),
+
+    email: Yup.string().email()
+    .transform((value, originalValue) => {
+        return originalValue.trim();
+    })
+    .required("Please enter your email"),
+
+    phone: Yup.string()
+    .transform((value, originalValue) => {
+        return originalValue.trim();
+    })
+    .min(10, "Enter valid mobile no.").max(10, "Enter valid mobile no.").matches(/^[0-9]+$/, "Please enter only numbers").phone(null, true, "Invalid phone number").required("Please enter your phone number"),
     password: Yup.string().required("Please enter password"),
-    Confirmpassword: Yup.string().required("Confirm password is required").oneOf([Yup.ref("password"), null], "Confirm Password must match"),
+
+    Confirmpassword: Yup.string().required("Confirm password is required")
+    .transform((value, originalValue) => {
+        return originalValue.trim();
+    })
+    .oneOf([Yup.ref("password"), null], "Confirm Password must match"),
+
     terms: Yup.string().required("Please select Terms and Conditions"),
 });
 
@@ -165,7 +186,7 @@ function Register() {
                                                 null}
                                         </div>
                                         <div className="phone flex flex-col space-y-2 w-full ">
-                                            <label htmlFor="phone">Phone</label>
+                                            <label htmlFor="phone">Mobile</label>
                                             <input type="text"
                                                 name="phone"
                                                 id="phone"
