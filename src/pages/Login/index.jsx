@@ -38,9 +38,16 @@ function Login() {
         toast.error(res.error.data.message);
       }
       else if (res.data.success) {
-        navigate("/"); 
-        dispatch(authentication(res.data.token, res.data.user));
-        toast.success(res.data.message);
+        
+        if(!res.data.user.is_verified){
+          navigate("/user/resend-verification-link"); 
+
+        }
+        else{
+          navigate("/"); 
+          dispatch(authentication(res.data.token, res.data.user));
+          toast.success(res.data.message);
+        }
       }
   }
   

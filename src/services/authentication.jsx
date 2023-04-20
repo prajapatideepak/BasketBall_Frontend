@@ -46,6 +46,10 @@ export const authenticationApi = api.injectEndpoints({
           method: 'GET'
         }
       }
+    }),
+
+    resendVerificationLink: build.mutation({
+      query: () => 'user/resend-verification-link'
     })
   }),
 });
@@ -55,4 +59,5 @@ export const {
   useSignupMutation,
   useGoogleLoginMutation,
   useVerifyAccountQuery,
+  useResendVerificationLinkMutation
 } = authenticationApi;
