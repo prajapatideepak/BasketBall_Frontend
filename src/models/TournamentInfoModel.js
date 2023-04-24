@@ -10,8 +10,11 @@ today.setHours(0, 0, 0, 0)
 
 export const TournamentInfoSchema = (isEdit)=> Yup.object({
     tournament_name: Yup.string()
-      .transform((value, originalValue) => {
-          return originalValue.trim();
+      .test('trim', 'Must not contain leading or trailing spaces', (value) => {
+        if (value) {
+          return value.trim() === value; 
+        }
+        return true;
       })
       .matches(/^[a-zA-Z ]+$/, "Please enter only characters")
       .min(3, "Team name must be at least 3 characters")
@@ -33,8 +36,11 @@ export const TournamentInfoSchema = (isEdit)=> Yup.object({
       }),
 
     city_name: Yup.string()
-      .transform((value, originalValue) => {
-          return originalValue.trim();
+      .test('trim', 'Must not contain leading or trailing spaces', (value) => {
+        if (value) {
+          return value.trim() === value; 
+        }
+        return true;
       })
       .matches(/^[a-zA-Z]+$/, "Please Enter Only Characters")
       .required("Please Enter City Name"),
@@ -79,8 +85,11 @@ export const TournamentInfoSchema = (isEdit)=> Yup.object({
     referees: Yup.array().of(
       Yup.object().shape({
         name: Yup.string()
-          .transform((value, originalValue) => {
-              return originalValue.trim();
+          .test('trim', 'Must not contain leading or trailing spaces', (value) => {
+            if (value) {
+              return value.trim() === value; 
+            }
+            return true;
           })
           .matches(/^[a-zA-Z ]+$/, "Please enter only characters")
           .min(2, "Referee name must be at least 2 characters")
@@ -97,8 +106,11 @@ export const TournamentInfoSchema = (isEdit)=> Yup.object({
           }),
 
         mobile: Yup.string()
-          .transform((value, originalValue) => {
-              return originalValue.trim();
+          .test('trim', 'Must not contain leading or trailing spaces', (value) => {
+            if (value) {
+              return value.trim() === value; 
+            }
+            return true;
           })
           .matches(/^[0-9]+$/, "Please Enter Only Numbers")
           .min(10, "Mobile number should be at least 10 digits")
@@ -119,8 +131,11 @@ export const TournamentInfoSchema = (isEdit)=> Yup.object({
     sponsors: Yup.array().of(
       Yup.object().shape({
         name: Yup.string()
-          .transform((value, originalValue) => {
-            return originalValue.trim();
+          .test('trim', 'Must not contain leading or trailing spaces', (value) => {
+            if (value) {
+              return value.trim() === value; 
+            }
+            return true;
           })
           .matches(/^[a-zA-Z ]+$/, "Please Enter Only Characters")
           .min(2, "Sponsor name must be at least 2 characters")
