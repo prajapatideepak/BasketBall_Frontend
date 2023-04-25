@@ -24,6 +24,24 @@ export const matchApi = api.injectEndpoints({
       invalidatesTags: [{ type: "Tournaments", id: "LIST" }],
     }),
 
+    updateMatchScorer: build.mutation({
+      query: ({tournament_id, match_id, scorer_name, scorer_email, scorer_mobile}) =>{
+        return {
+          url: `match/add-update-scorekeeper/${tournament_id}/${match_id}`,
+          method: "PUT",
+          body: {
+            scorekeeper_name: scorer_name, 
+            scorekeeper_email: scorer_email, 
+            scorekeeper_mobile: scorer_mobile
+          },
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      },
+      invalidatesTags: [{ type: "Tournaments", id: "LIST" }],
+    }),
+
     deleteMatch: build.mutation({
       query({match_id, tournament_id}) {
         return {
@@ -53,6 +71,7 @@ export const matchApi = api.injectEndpoints({
 export const {
   useGetMatchScoreQuery,
   useUpdateMatchDetailsMutation,
+  useUpdateMatchScorerMutation,
   useDeleteMatchMutation,
   useGetMatchDetailQuery,
   useGetMatchListQuery,

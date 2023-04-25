@@ -12,6 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import AdminRoutes from "./adminRoutes";
+import VerifyAccount from '../pages/VerifyAccount'
 import { QueryClient, QueryClientProvider } from "react-query";
 
 const AppRoutes = () => {
@@ -23,6 +24,7 @@ const AppRoutes = () => {
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <Routes>
+            <Route path="/user/verify/:user_id/:token" element={<VerifyAccount />} />
             {token ? (
               <>
                 <Route path="/*" element={<PrivateRoutes />} />

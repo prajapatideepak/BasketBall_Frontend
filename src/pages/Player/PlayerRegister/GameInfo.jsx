@@ -5,27 +5,33 @@ import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { setGameInfoForm } from "../../../redux/actions/Player";
 import { GameInfoSchema } from "../../../models/GameInfoModel";
+import { authentication } from "../../../redux/actions/User";
 import { toast } from "react-toastify";
-
 import {
   useRegisterPlayerMutation,
   useUpdatePlayerDetailsMutation,
 } from "../../../services/player";
+import { useGetUserDataQuery } from "../../../services/user";
 import BasicInfo from "./BasicInfo";
 
 const GameInfo = ({ index, setIndex }) => {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
+  
+  const userDetails = useGetUserDataQuery();
   const [playerRegistration, { ...thing }] = useRegisterPlayerMutation();
   const [playerUpdate, { ...updateData }] = useUpdatePlayerDetailsMutation();
+
+  const { token } = useSelector((state) => state.user);
   const { PlayerForm } = useSelector((state) => state.player);
+
   const { values, errors, touched, handleSubmit, handleChange, handleBlur } =
     useFormik({
       initialValues: PlayerForm.gameInfo,
       validationSchema: GameInfoSchema,
       onSubmit: async (values) => {
-        await dispatch(setGameInfoForm(values));
+        dispatch(setGameInfoForm(values));
         try {
           const fb = new FormData();
           fb.append("logo", PlayerForm.basicInfo?.logo);
@@ -35,9 +41,9 @@ const GameInfo = ({ index, setIndex }) => {
           fb.append("data", ok);
           if (location?.state?.isEdit) {
             fb.append("id", location.state.id);
-            playerUpdate(fb).then(console.log("update ho gai"));
+            await playerUpdate(fb);
           } else {
-            playerRegistration(fb).then(console.log("ho gaya"));
+            await playerRegistration(fb);
           }
         } catch (err) {
           console.log(err)
@@ -49,13 +55,28 @@ const GameInfo = ({ index, setIndex }) => {
   function setValues() {
     dispatch(setGameInfoForm(values));
   }
+
+  React.useEffect(() => {
+    if (userDetails.isError) {
+      toast.error(userDetails.error?.data.message);
+      navigate("/");
+    } else if (userDetails.data?.success) {
+      dispatch(authentication(token, userDetails.data.user));
+    }
+
+    if(thing.isSuccess) {
+      userDetails.refetch()
+    }
+    
+  }, [userDetails.data, thing.isSuccess]);
+  
   React.useEffect(() => {
     if (thing.isError) {
       toast.error(thing?.error?.data?.message);
     }
     if (thing.isSuccess) {
       if (thing?.data?.success) {
-        toast.success("Player Registration Successfull ");
+        toast.success("Player registration successful");
         navigate(`/player/profile-detail/${thing?.data?.data?.id}`);
       }
     }
@@ -67,7 +88,7 @@ const GameInfo = ({ index, setIndex }) => {
     }
     if (updateData.isSuccess) {
       if (updateData?.data?.success) {
-        toast.success("Player Update Successfull ");
+        toast.success("Player profile updated successfully ");
         navigate(`/player/profile-detail/${updateData?.data?.data?.id}`);
       }
     }
@@ -234,13 +255,14 @@ const GameInfo = ({ index, setIndex }) => {
         )}
         <button
           type="submit"
-          className="bg-slate-900 relative inline-flex items-center justify-center px-6 py-2 overflow-hidden text-white rounded-lg cursor-pointer group"
+          disabled={thing.isLoading || updateData.isLoading}
+          className={`${thing.isLoading || updateData.isLoading ? 'opacity-60' : ''} bg-slate-900 relative inline-flex items-center justify-center px-6 py-2 overflow-hidden text-white rounded-lg cursor-pointer group`}
           onClick={handleSubmit}
         >
           <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#ee6730] rounded-lg group-hover:w-full group-hover:h-56"></span>
           <span className="relative">
             {thing.isLoading
-              ? "SUBMIT..."
+              ? "Loading..."
               : updateData.isLoading
                 ? "Updating..."
                 : location?.state?.isEdit

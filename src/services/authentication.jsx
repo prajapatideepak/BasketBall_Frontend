@@ -26,10 +26,69 @@ export const authenticationApi = api.injectEndpoints({
       },
       invalidatesTags: [{ type: "User"}],
     }),
+    
+    googleLogin: build.mutation({
+      query: (access_token) => {
+        return {
+          url: "user/google-login",
+          method: "POST",
+          body: {access_token},
+          headers:{ 'Content-Type': 'application/json' }
+        };
+      },
+      invalidatesTags: [{ type: "User"}],
+    }),
+
+    verifyAccount: build.query({
+      query: ({user_id, token}) => {
+        return{
+          url: `user/verify-account/${user_id}/${token}`,
+          method: 'GET'
+        }
+      }
+    }),
+
+    resendVerificationLink: build.mutation({
+      query: () => 'user/resend-verification-link'
+    }),
+    
+    sendResetPasswordLink: build.mutation({
+      query: (email) =>{
+         return {
+          url: 'user/send-reset-password-link',
+          method: "POST",
+          body: {
+            email
+          },
+          headers:{ 'Content-Type': 'application/json' }
+        };
+      } 
+    }),
+
+    resetPassword: build.mutation({
+      query: ({token, password}) =>{
+         return {
+          url: 'user/reset-password',
+          method: "POST",
+          body: {
+            token,
+            newPassword: password
+          },
+          headers:{ 'Content-Type': 'application/json' }
+        };
+      } 
+    }),
+
+
   }),
 });
 
 export const {
   useSigninMutation,
   useSignupMutation,
+  useGoogleLoginMutation,
+  useVerifyAccountQuery,
+  useResendVerificationLinkMutation,
+  useSendResetPasswordLinkMutation,
+  useResetPasswordMutation,
 } = authenticationApi;

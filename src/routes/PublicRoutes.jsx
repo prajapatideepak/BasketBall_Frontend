@@ -7,7 +7,7 @@ import Login from '../pages/Login'
 import News from '../pages/News'
 import Register from '../pages/Register'
 import "../App.css"
-import Password from '../pages/Pass/Password'
+import ResetPassword from '../pages/Pass/ResetPassword'
 import Gallery from '../pages/Gallery'
 import ForgetPassword from "../pages/Pass/ForgetPassword"
 import Role from '../pages/Role'
@@ -25,9 +25,9 @@ const PublicRoutes = () => (
             <Route path="news/*" element={<News />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path='/role' element={<Role />} />
-            <Route path="/ForgetPassword" element={<ForgetPassword />} />
-            <Route path="/term&condition" element={<TermsandConditions />} />
-            <Route path="/Password" element={<Password />} />
+            <Route path="/forget-password" element={<ForgetPassword />} />
+            <Route path="/terms-and-condition" element={<TermsandConditions />} />
+            <Route path="/reset-password/:token" element={<ResetPassword />} />
             <Route path="/*" element={<PageNotFound />} /> 
             <Route index element={<LandingPage />} />
         </Route>
