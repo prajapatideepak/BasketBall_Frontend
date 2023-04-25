@@ -12,9 +12,10 @@ const BasicInfo = ({ index, setIndex }) => {
   const dispatch = useDispatch();
   const location = useLocation();
   const defaultImage = "/CBL_Images/60111-removebg-preview.png";
-  const [img, setImg] = React.useState( defaultImage);
-  const [photo, setPhoto] = React.useState("");
   const { PlayerForm } = useSelector((state) => state.player);
+  const [img, setImg] = React.useState(PlayerForm.basicInfo.photo ? PlayerForm.basicInfo.photo : defaultImage);
+  const [photo, setPhoto] = React.useState(PlayerForm.basicInfo.photo ? PlayerForm.basicInfo.photo : "");
+  console.log(PlayerForm.basicInfo.photo)
   const { values, touched, errors, handleChange, handleSubmit, handleBlur } =
     useFormik({
       initialValues: PlayerForm.basicInfo,
