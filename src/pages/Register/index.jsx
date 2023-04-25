@@ -12,34 +12,49 @@ import { useDispatch } from "react-redux";
 import { authentication } from "../../redux/actions/User";
 import { useGoogleLogin } from '@react-oauth/google';
 import { BsFillPatchCheckFill } from "react-icons/bs"
+import ReCAPTCHA from "react-google-recaptcha";
+import { RECAPTCHA_SITE_KEY } from '../../../constant'
 import { useSignupMutation, useGoogleLoginMutation } from "../../services/authentication"
 
 
 const signUpSchema = Yup.object({
     fullname: Yup.string()
-    .transform((value, originalValue) => {
-        return originalValue.trim();
+    .test('trim', 'Must not contain leading or trailing spaces', (value) => {
+      if (value) {
+        return value.trim() === value; 
+      }
+      return true;
     })
     .min(2, "Name must be atleast 2 characters long")
     .max(25, "Name shouldn't be more than 25 characters").matches(/^[a-zA-Z ]+$/, "Please enter only characters").required("Please enter your full name"),
 
     email: Yup.string().email()
-    .transform((value, originalValue) => {
-        return originalValue.trim();
+    .test('trim', 'Must not contain leading or trailing spaces', (value) => {
+      if (value) {
+        return value.trim() === value; 
+      }
+      return true;
     })
     .required("Please enter your email"),
 
     phone: Yup.string()
-    .transform((value, originalValue) => {
-        return originalValue.trim();
+    .test('trim', 'Must not contain leading or trailing spaces', (value) => {
+      if (value) {
+        return value.trim() === value; 
+      }
+      return true;
     })
     .min(10, "Enter valid mobile no.").max(10, "Enter valid mobile no.").matches(/^[0-9]+$/, "Please enter only numbers").phone(null, true, "Invalid phone number").required("Please enter your phone number"),
-    password: Yup.string().required("Please enter password"),
+    password: Yup.string()
+    .required("Please enter password")
+    .test('trim', 'Must not contain leading or trailing spaces', (value) => {
+      if (value) {
+        return value.trim() === value; 
+      }
+      return true;
+    }),
 
     Confirmpassword: Yup.string().required("Confirm password is required")
-    .transform((value, originalValue) => {
-        return originalValue.trim();
-    })
     .oneOf([Yup.ref("password"), null], "Confirm Password must match"),
 
     terms: Yup.string().required("Please select Terms and Conditions"),
@@ -61,6 +76,8 @@ function Register() {
     const navigate = useNavigate();
 
     const [isOnSubmit, setIsOnSubmit] = React.useState(false);
+    const [recaptcha, setRecaptcha] = React.useState("")
+    const [recaptchaError, setRecaptchaError] = React.useState(false)
 
     const [signup, {isLoading}] = useSignupMutation()
     const [googleLogin, {...googleAuth}] = useGoogleLoginMutation()
@@ -69,6 +86,15 @@ function Register() {
         initialValues: initialValues,
         validationSchema: signUpSchema,
         async onSubmit(data) {
+            if(recaptcha == ''){
+                setRecaptchaError(true);
+                return
+            }
+            if(recaptchaError){
+                return
+            }
+
+            data.recaptcha = recaptcha
             const res = await signup(data);
 
              if (res.error) {
@@ -97,6 +123,15 @@ function Register() {
         onError: error => {toast.error(error)}
     });
 
+    const handleRecaptcha = (value) => {
+        setRecaptchaError(false)
+        setRecaptcha(value)
+
+        setTimeout(() => {
+            setRecaptchaError(true)
+        }, 60000);
+    }
+
     React.useEffect(() => {
         // Define the 'otpless' function
         window.otpless = (otplessUser) => {
@@ -108,7 +143,6 @@ function Register() {
         // ...
         };
         }, []);
-
 
     return (
         <>
@@ -257,6 +291,18 @@ function Register() {
                                                 :
                                                 null}
                                         </div>
+                                    </div>
+                                    <div className="flex flex-col justify-center items-center w-full md:space-y-0 md:space-x-5 space-y-5 lg:space-x-7">
+                                        <ReCAPTCHA
+                                            name="recaptcha"
+                                            sitekey= {RECAPTCHA_SITE_KEY}
+                                            onChange={handleRecaptcha}
+                                        />
+                                         {recaptchaError
+                                            ?
+                                            <p className='form-error text-red-600 text-[12px] font-semibold'>Please verify you are not a robot</p>
+                                            :
+                                            null}
                                     </div>
 
                                     <button type="submit" className={` ${isLoading ? 'opacity-70' : ''}
