@@ -24,7 +24,7 @@ function DropDownmenu({setOpen, isMenu, setIsMenu}) {
             <FaUserCircle className="text-4xl text-white" />
           </div>
           <div className="hidden xl:block">
-            <p className="text-base text-[#ee6730] font-semibold">Visitor</p>
+            <p className="text-base text-[#ee6730] font-semibold capitalize">{user.name.split(' ')[0]}</p>
           </div>
         </div>
       </div>

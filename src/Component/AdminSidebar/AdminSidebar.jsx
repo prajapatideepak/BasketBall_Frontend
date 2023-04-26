@@ -15,7 +15,7 @@ function AdminSidebar() {
         <div className="h-full bg-gray-900 p-4">
           <div className="flex w-full h-full">
             <div className=" flex flex-col h-full justify-between">
-              <div className>
+              <div>
                 <div className="flex items-center">
                   <img
                     src="/CBL_Images/logo.png"
@@ -31,7 +31,7 @@ function AdminSidebar() {
                 </div>
                 <div className="mt-10 flex items-center relative">
                   {show ? (
-                    <div arial-label="search" className="w-56 relative w-full">
+                    <div arial-label="search" className="relative w-full">
                       <div className="absolute p-2">
                         <svg
                           width={20}
@@ -118,7 +118,7 @@ function AdminSidebar() {
                 </div>
                 <div className="flex items-center">
                   <ul aria-orientation="vertical">
-                    <Link className="Link" to={"/"}>
+                    <Link className="Link" to={"admin"}>
                       <li
                         tabIndex={0}
                         role="button"
@@ -139,7 +139,7 @@ function AdminSidebar() {
                         </svg>
                       </li>
                     </Link>
-                    <Link className="Link" to={"/team"}>
+                    <Link className="Link" to={"admin/team"}>
                       <li
                         tabIndex={0}
                         role="button"
@@ -160,7 +160,7 @@ function AdminSidebar() {
                         </svg>
                       </li>
                     </Link>
-                    <Link className="Link" to={"/tournament"}>
+                    <Link className="Link" to={"admin/tournament"}>
                       <li
                         tabIndex={0}
                         role="button"
@@ -170,7 +170,7 @@ function AdminSidebar() {
                         <BsTrophy className="text-gray-400 text-lg" />
                       </li>
                     </Link>
-                    <Link className="Link" to={"/players"}>
+                    <Link className="Link" to={"admin/players"}>
                       <li
                         tabIndex={0}
                         role="button"
@@ -181,7 +181,7 @@ function AdminSidebar() {
                       </li>
                     </Link>
 
-                    <Link className="Link" to={"/news"}>
+                    <Link className="Link" to={"admin/news"}>
                       <li
                         tabIndex={0}
                         role="button"
@@ -191,7 +191,7 @@ function AdminSidebar() {
                         <BiNews className="text-gray-400 text-xl" />
                       </li>
                     </Link>
-                    <Link className="Link" to={"/gallery"}>
+                    <Link className="Link" to={"admin/gallery"}>
                       <li
                         tabIndex={0}
                         role="button"
@@ -223,32 +223,32 @@ function AdminSidebar() {
                   </ul>
                   {show && (
                     <div className="w-full mt-10">
-                      <Link className="Link" to={"/"}>
+                      <Link className="Link" to={"admin/"}>
                         <p className="text-base leading-4 pl-3 cursor-pointer text-gray-400">
                           Overview
                         </p>
                       </Link>
-                      <Link className="Link" to={"/team"}>
+                      <Link className="Link" to={"admin/team"}>
                         <p className="text-base leading-4 pl-3 cursor-pointer pt-7 text-gray-400">
                           Team
                         </p>
                       </Link>
-                      <Link className="Link" to={"/tournament"}>
+                      <Link className="Link" to={"admin/tournament"}>
                         <p className="text-base leading-4 pl-3 cursor-pointer pt-7 text-gray-400">
                           Tournament
                         </p>
                       </Link>
-                      <Link className="Link" to={"/players"}>
+                      <Link className="Link" to={"admin/players"}>
                         <p className="text-base leading-4 pl-3 cursor-pointer pt-7 text-gray-400">
                           Players
                         </p>
                       </Link>
-                      <Link className="Link" to={"/news"}>
+                      <Link className="Link" to={"admin/news"}>
                         <p className="text-base leading-4 pl-3 cursor-pointer pt-7 text-gray-400">
                           News
                         </p>
                       </Link>
-                      <Link className="Link" to={"/gallery"}>
+                      <Link className="Link" to={"admin/gallery"}>
                         <p className="text-base leading-4 pl-3 cursor-pointer pt-7 text-gray-400">
                           Gallery
                         </p>
