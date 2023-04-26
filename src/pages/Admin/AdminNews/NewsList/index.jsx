@@ -45,13 +45,14 @@ const NewsList = () => {
     tags: "",
     description: "",
   });
+  console.log(value , "value")
   const { isLoading, data } = useGetAllNewsQuery({
     pageNo: pageNo - 1,
   });
     console.log(data)
   const { values, errors, handleBlur, touched, handleChange, handleSubmit } =
     useFormik({
-      initialValues: value ,
+      initialValues: value ? value : initialValues ,
       validationSchema: signUpSchema,
       onSubmit(data) {
         try {
