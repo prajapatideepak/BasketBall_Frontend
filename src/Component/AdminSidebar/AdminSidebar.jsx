@@ -118,7 +118,7 @@ function AdminSidebar() {
                 </div>
                 <div className="flex items-center">
                   <ul aria-orientation="vertical">
-                    <Link className="Link" to={"admin"}>
+                    <Link className="Link" to={"/admin"}>
                       <li
                         tabIndex={0}
                         role="button"
@@ -139,11 +139,11 @@ function AdminSidebar() {
                         </svg>
                       </li>
                     </Link>
-                    <Link className="Link" to={"admin/team"}>
+                    <Link className="Link" to={"admin/all-teams"}>
                       <li
                         tabIndex={0}
                         role="button"
-                        aria-label="Team"
+                        aria-label="Teams"
                         className="cursor-pointer mt-6"
                       >
                         <svg
@@ -160,11 +160,11 @@ function AdminSidebar() {
                         </svg>
                       </li>
                     </Link>
-                    <Link className="Link" to={"admin/tournament"}>
+                    <Link className="Link" to={"admin/all-tournaments"}>
                       <li
                         tabIndex={0}
                         role="button"
-                        aria-label="Tournament"
+                        aria-label="Tournaments"
                         className="cursor-pointer mt-6"
                       >
                         <BsTrophy className="text-gray-400 text-lg" />
@@ -223,19 +223,19 @@ function AdminSidebar() {
                   </ul>
                   {show && (
                     <div className="w-full mt-10">
-                      <Link className="Link" to={"admin/"}>
+                      <Link className="Link" to={"/admin"}>
                         <p className="text-base leading-4 pl-3 cursor-pointer text-gray-400">
                           Overview
                         </p>
                       </Link>
-                      <Link className="Link" to={"admin/team"}>
+                      <Link className="Link" to={"admin/all-teams"}>
                         <p className="text-base leading-4 pl-3 cursor-pointer pt-7 text-gray-400">
-                          Team
+                          Teams
                         </p>
                       </Link>
-                      <Link className="Link" to={"admin/tournament"}>
+                      <Link className="Link" to={"admin/all-tournaments"}>
                         <p className="text-base leading-4 pl-3 cursor-pointer pt-7 text-gray-400">
-                          Tournament
+                          Tournaments
                         </p>
                       </Link>
                       <Link className="Link" to={"admin/players"}>

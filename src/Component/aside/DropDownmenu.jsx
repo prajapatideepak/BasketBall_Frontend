@@ -2,7 +2,7 @@ import React from "react";
 import { FaUserAlt } from "react-icons/fa";
 import { FaUserCircle } from "react-icons/fa";
 import { FiChevronRight } from "react-icons/fi";
-import { MdOutlineLogout } from "react-icons/md";
+import { MdOutlineLogout, MdAdminPanelSettings } from "react-icons/md";
 import { GiBasketballJersey, GiDiamondTrophy } from "react-icons/gi";
 import { RiTeamFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
@@ -105,6 +105,26 @@ function DropDownmenu({setOpen, isMenu, setIsMenu}) {
                       <GiDiamondTrophy />
                     </div>
                     <h1 className="text-sm font-semibold">Tournament Profile</h1>
+                  </div>
+                  <FiChevronRight className="text-white" />
+                </li>
+              </Link>
+            :
+              null
+          }
+          {
+            user.is_admin
+            ?
+              <Link to={"/admin"}>
+                <li
+                  onClick={() => setIsMenu(false)}
+                  className="flex items-center justify-between my-2 cursor-pointer hover:bg-[#ee6730] duration-150 px-2  py-2 rounded-md  "
+                >
+                  <div className="flex items-center space-x-3 text-white">
+                    <div className="rounded-full px-1 py-1 bg-white text-black flex justify-center border items-center ">
+                      <MdAdminPanelSettings />
+                    </div>
+                    <h1 className="text-sm font-semibold">Admin Panel</h1>
                   </div>
                   <FiChevronRight className="text-white" />
                 </li>

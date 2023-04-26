@@ -1,17 +1,26 @@
 import React from "react";
 import Button from "../../../Component/Button";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 import BasicInfo from "./BasicInfo";
 import GameInfo from "./GameInfo";
 import { MdDone } from "react-icons/md";
 import { motion } from "framer-motion";
+
 export default function PlayerRegister() {
   const [index, setIndex] = React.useState(1);
   const location = useLocation();
+  const navigate = useNavigate();
+  const { user } = useSelector((state) => state.user);
 
+  
   React.useEffect(() => {
+    if(user.is_player && !location?.state?.isEdit){
+      navigate('/')
+    }
     window.scrollTo(0, 0);
   }, [index]);
+
   return (
     <div className="px-3 lg:px-16 py-5 min-h-screen">
       <div className=" flex justify-center items-center">

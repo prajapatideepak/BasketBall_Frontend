@@ -11,8 +11,7 @@ export default function AdminDashboard() {
       <div className="py-4 px-3">
         <h1 className="text-xl md:text-3xl  font-semibold">Hello 👋, Deepak</h1>
         <p className="lg:py-1 lg:px-2 text-base text-gray-700">
-          {" "}
-          Here's What's happening in Your Web portal{" "}
+          Here's What's happening in Your Web portal
         </p>
       </div>
 

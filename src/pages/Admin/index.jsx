@@ -4,16 +4,20 @@ import AdminDashboard from "./AdminDashboard";
 import AdminNews from "./AdminNews";
 import AddEditGallery from "./AdminGallery";
 import PageNotFound from "../../pages/Error";
+import AllTournaments from './AllTournaments';
+import AllTeams from './AllTeams';
 
 function Admin() {
   return (
     <Routes>
-        <Route>
-          <Route path="/" element={<AdminDashboard />} />
-          <Route path="/news/*" element={<AdminNews />} />
-          <Route path="/gallery" element={<AddEditGallery />} />
-          <Route path="/*" element={<PageNotFound />} />
-        </Route>
+      <Route>
+        <Route path="/" element={<AdminDashboard />} />
+        <Route path="/news/*" element={<AdminNews />} />
+        <Route path="/all-tournaments" element={<AllTournaments />} />
+        <Route path="/all-teams" element={<AllTeams />} />
+        <Route path="/gallery" element={<AddEditGallery />} />
+        <Route path="/*" element={<PageNotFound />} />
+      </Route>
     </Routes>
   )
 }
