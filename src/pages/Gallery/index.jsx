@@ -15,6 +15,7 @@ const Gallery = () => {
     const { isLoading, data } = useGetAllGalleryQuery({
         pageNo: pageNo - 1,
     });
+    console.log(data?.length)
     const breakpointColumnsObj = {
         default: 4,
         1100: 3,
