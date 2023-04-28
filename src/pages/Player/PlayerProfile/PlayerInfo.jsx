@@ -81,18 +81,25 @@ export default function PlayerInfo({ PlayerDetail }) {
         </div>
       </div>
       {/* for contact infor */}
-      <div className="text-left ">
-        <h2 className="text-xl py-2">Contact Information</h2>
+      {
 
-        <div className="flex flex-wrap p-2  ">
-          <div className="bg-white   px-2 py-1 rounded-lg border-2 border-orange-100 shadow-xl">
-            <span className="text-xs md:text-base">Email : </span>
-            <span className="text-xs md:text-sm font-semibold ">
-              {PlayerDetail?.SinglePlayerDetails?.users?.email}
-            </span>
+        PlayerDetail?.SinglePlayerDetails.users.id == user.id 
+        ?
+          <div className="text-left ">
+            <h2 className="text-xl py-2">Contact Information</h2>
+
+            <div className="flex flex-wrap p-2  ">
+              <div className="bg-white   px-2 py-1 rounded-lg border-2 border-orange-100 shadow-xl">
+                <span className="text-xs md:text-base">Email : </span>
+                <span className="text-xs md:text-sm font-semibold">
+                  {PlayerDetail?.SinglePlayerDetails?.users?.email}
+                </span>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        :
+          null
+      }
     </div>
   );
 }
