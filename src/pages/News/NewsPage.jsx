@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getNewsData } from "../../redux/actions/News";
 import Heading from "../../Component/Heading";
 import { useGetAllNewsQuery } from "../../services/news";
-import { BsCameraFill } from "react-icons/bs"
+import { HiOutlineNewspaper } from "react-icons/hi"
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 
 
@@ -41,7 +41,7 @@ const NewsPage = () => {
           :
           data?.AllNews?.length < 1 ?
             <div className='flex justify-center items-center w-full py-5 mt-48'>
-              <BsCameraFill className=" text-2xl sm:text-3xl md:text-4xl text-gray-400 mr-2" />
+              <HiOutlineNewspaper className=" text-2xl sm:text-3xl md:text-4xl text-gray-400 mr-2" />
               <p className='text-xs xs:text-sm sm:text-lg lg:text-xl font-medium text-gray-400'>News not found</p>
             </div>
             :

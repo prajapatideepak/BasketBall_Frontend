@@ -18,6 +18,7 @@ const Gallery = () => {
         pageNo: pageNo - 1,
         category: category
     });
+    console.log(data?.length)
     const breakpointColumnsObj = {
         default: 4,
         1100: 3,

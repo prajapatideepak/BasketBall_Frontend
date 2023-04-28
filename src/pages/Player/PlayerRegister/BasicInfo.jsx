@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { setBasicInfoForm } from "../../../redux/actions/Player";
 import { basicInfoSchema } from "../../../models/BasicInfoModel";
 import "../../../Component/Style/PlayerProfile.css";
+import moment from 'moment'
+
 
 const BasicInfo = ({ index, setIndex }) => {
   const dispatch = useDispatch();
@@ -15,21 +17,26 @@ const BasicInfo = ({ index, setIndex }) => {
   const { PlayerForm } = useSelector((state) => state.player);
   const [img, setImg] = React.useState(PlayerForm.basicInfo.photo ? PlayerForm.basicInfo.photo : defaultImage);
   const [photo, setPhoto] = React.useState(PlayerForm.basicInfo.photo ? PlayerForm.basicInfo.photo : "");
-  
+
   const { values, touched, errors, handleChange, handleSubmit, handleBlur } =
     useFormik({
       initialValues: PlayerForm.basicInfo,
       validationSchema: basicInfoSchema,
       onSubmit: (values) => {
         setIndex(2);
-        dispatch(setBasicInfoForm({ ...values, logo: photo }));
+        dispatch(setBasicInfoForm({ ...values, logo: photo, date_of_birth: date_of_birth }));
       },
     });
+
   function handleImageUpload(e) {
     setPhoto(() => e.target.files[0]);
     setImg(URL.createObjectURL(e.target.files[0]));
   }
-    
+
+  const handleDateChange = (e) => {
+    setDate(e.target.value);
+  }
+
   return (
     <>
       <form className="flex w-full  space-x-3">
@@ -183,9 +190,10 @@ const BasicInfo = ({ index, setIndex }) => {
                 id="date_of_birth"
                 className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
                 name="date_of_birth"
-                value={values.date_of_birth}
-                onChange={handleChange}
+                value={date_of_birth ? date_of_birth : values.date_of_birth}
+                onChange={(e) => handleDateChange(e)}
                 onBlur={handleBlur}
+                onInput={(e) => handleDateChange(e)}
               />
               <span className="text-sm font-semibold text-red-600 px-1">
                 {errors.date_of_birth && touched.date_of_birth ? errors.date_of_birth : null}
@@ -249,9 +257,8 @@ const BasicInfo = ({ index, setIndex }) => {
                 </div>
               </div>
               <span
-                className={`text-sm font-semibold  text-red-600 px-1 ${
-                  errors.gender && touched.gender ? "" : "hidden  "
-                }`}
+                className={`text-sm font-semibold  text-red-600 px-1 ${errors.gender && touched.gender ? "" : "hidden  "
+                  }`}
               >
                 {errors.gender && touched.gender ? errors.gender : null}
               </span>
