@@ -11,7 +11,8 @@ module.exports = {
       ...defaultTheme.screens,
     },
     fontFamily : {
-      roboto: "'Poppins', sans-serif"
+      roboto: "'Poppins', sans-serif",
+      cursu: "'Dancing Script', 'cursive'"
     },
   },
   plugins: [

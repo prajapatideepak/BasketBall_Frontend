@@ -146,9 +146,9 @@ function Register() {
 
     return (
         <>
-            <div className="  flex justify-center items-center px-10 sm:px-20  bg-white mt-5 lg:mt-8 ">
+            <div className="  flex justify-center items-center px-10 sm:px-20  bg-white mt-5 ">
                 <div className="flex xl:flow-row justify-center items-center">
-                    <div className=" 2xl:w-[50%]  xl:block hidden">
+                    <div className="2xl:w-[50%] xl:block hidden">
                         <img src={image} alt="" />
                     </div>
                     <div className=" w-[100%] xl:px-10 xl:mx-10 2xl:w-[50%]">

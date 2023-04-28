@@ -33,7 +33,7 @@ function MatchLive({ slides }) {
     setCurrentIndex(newIndex);
   };
 
-  const array=[
+  const array = [
     "/CBL_Images/slider1.jpg",
     "/CBL_Images/slider2.jpg",
     "/CBL_Images/slider3.jpg",
@@ -58,7 +58,6 @@ function MatchLive({ slides }) {
     setProgressBar(0)
     setCurrentIndex(slideIndex);
   };
-
   return (
     <div className='h-full w-full '>
       <div className='h-[240px] sm:h-[300px] md:h-[400px] lg:h-[450px] xl:h-[500px] 2xl:h-[600px] relative overflow-hidden'>
