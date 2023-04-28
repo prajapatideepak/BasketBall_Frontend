@@ -2,6 +2,10 @@ import { api } from "./api";
 
 export const adminApi = api.injectEndpoints({
   endpoints: (build) => ({
+    
+    dashboardDetails: build.query({
+      query: () => 'admin/dashboard-details'
+    }),
 
     tournamentsRequest: build.query({
       query: () => "admin/tournaments/requests",
@@ -42,6 +46,7 @@ export const adminApi = api.injectEndpoints({
 });
 
 export const {
+  useDashboardDetailsQuery,
   useTournamentsRequestQuery,
   useApproveTournamentMutation,
   useRejectTournamentMutation,

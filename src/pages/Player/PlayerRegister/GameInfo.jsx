@@ -102,7 +102,7 @@ const GameInfo = ({ index, setIndex }) => {
         onBlur={setValues}
         onChange={setValues}
       >
-        <div className="w-full  px-5  m-auto dark:bg-gray-800">
+        <div className="w-full  px-5  m-auto ">
           <h1 className="py-2 text-xl text-center md:text-left my-2 text-orange-600">
             Game Information
           </h1>

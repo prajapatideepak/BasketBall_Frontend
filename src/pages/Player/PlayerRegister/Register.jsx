@@ -39,7 +39,7 @@ export default function PlayerRegister() {
           <motion.div
             animate={{
               borderColor: "#ee6730",
-              boxShadow: index === 1 ? "rgba(0, 0, 0, 0.35) 0px 5px 15px" : "",
+              // boxShadow: index === 1 ? "rgba(0, 0, 0, 0.35) 0px 5px 15px" : "",
               backgroundColor: index > 1 ? "#ee6730" : "#FFFFFF",
               color: index > 1 ? "#FFFFFF" : "#ee6730",
               opacity: index == 2 ? 0.7 : 1,
@@ -54,7 +54,7 @@ export default function PlayerRegister() {
           <motion.div
             animate={{
               borderColor: index < 2 ? "#B0B6BF" : "#ee6730",
-              boxShadow: index === 2 ? "rgba(0, 0, 0, 0.35) 0px 5px 15px" : "",
+              // boxShadow: index === 2 ? "rgba(0, 0, 0, 0.35) 0px 5px 15px" : "",
               backgroundColor: index < 1 ? "#ee6730" : "#F5F5F7",
               color: index === 2 ? "#ee6730" : "#B0B6BF",
               opacity: index == 1 ? 0.7 : 1,

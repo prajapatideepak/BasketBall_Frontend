@@ -3,7 +3,7 @@ import { api } from "./api";
 export const galleryApi = api.injectEndpoints({
     endpoints: (build) => ({
         getAllGallery: build.query({
-            query: ({pageNo}) => `gallery/${pageNo}` ,
+            query: ({pageNo, category}) => `gallery/${category}/${pageNo}` ,
         }),
         
         registerGallery: build.mutation({
@@ -15,11 +15,21 @@ export const galleryApi = api.injectEndpoints({
                 };
             },
         }),
+
+        deleteGallery: build.mutation({
+            query: (id) => {
+                return {
+                    url: `gallery/delete/${id}`,
+                    method: "DELETE",
+                };
+            },
+        })
     }),
 });
 
 
 export const {
     useGetAllGalleryQuery,
-    useRegisterGalleryMutation
+    useRegisterGalleryMutation,
+    useDeleteGalleryMutation,
 } = galleryApi;

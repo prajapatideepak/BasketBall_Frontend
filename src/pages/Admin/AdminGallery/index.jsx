@@ -13,7 +13,8 @@ import moment from "moment";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import {
   useGetAllGalleryQuery,
-  useRegisterGalleryMutation
+  useRegisterGalleryMutation,
+  useDeleteGalleryMutation,
 } from "../../../services/gallery"
 
 const signUpSchema = Yup.object({
@@ -26,10 +27,12 @@ const AddEditGallery = () => {
   const [photo, setphoto] = React.useState("");
   const [model, setModel] = React.useState(false);
   const [pageNo, setPageNo] = React.useState(1);
-  const { isLoading, data } = useGetAllGalleryQuery({
+  const { isLoading, data, refetch } = useGetAllGalleryQuery({
     pageNo: pageNo - 1,
   });
   const [galleryRegistration, { ...thing }] = useRegisterGalleryMutation();
+  const [deleteGallery, {...deletingGallery}] = useDeleteGalleryMutation();
+
   const initialValues = {
     category: ""
   }
@@ -58,8 +61,27 @@ const AddEditGallery = () => {
     });
 
   const handleDelete = (id) => {
-    alert(id)
-    useDeleteNewsDetailsMutation(id)
+    Swal.fire({
+        title: 'Are you sure to delete this gallery image?',
+        text: "This gallery image will be deleted",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes'
+    }).then(async(result) => {
+      if (result.isConfirmed) {
+        const response = await deleteGallery(id)
+        console.log(response)
+        if(response.error){
+          toast.error(response.error.data.message)
+        }
+        else if(response.data.success){
+          toast.success(response.data.message)
+        }
+        refetch()
+      }
+    })
   };
 
   const handleUpdate = (id) => {
@@ -67,7 +89,7 @@ const AddEditGallery = () => {
       return n?.id == id;
     });
     setModel(true);
-    setValue(updategallery)
+    // setValue(updategallery)
   };
 
   React.useEffect(() => {
@@ -77,6 +99,7 @@ const AddEditGallery = () => {
     if (thing.isSuccess) {
       if (thing?.data?.success) {
         toast.success("Gallery Addes Successfull ");
+        refetch()
         setModel(false);
       }
     }
@@ -136,8 +159,8 @@ const AddEditGallery = () => {
                             onBlur={handleBlur}
                           >
                             <option value="">Select Category</option>
-                            <option value="champ">Champ</option>
-                            <option value="award">Awards</option>
+                            <option value="champions">Champions</option>
+                            <option value="awards">Achievement/Award</option>
                           </select>
                           {errors.category && touched.category ? (
                             <p className="form-error text-red-600 text-sm font-semibold">
@@ -188,7 +211,7 @@ const AddEditGallery = () => {
                 <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#ee6730] rounded-lg group-hover:w-full group-hover:h-56"></span>
                 <div className="flex items-center space-x-2">
                   <span className="relative text-[10px] sm:text-xs md:text-sm xl:text-base">
-                    Add Gallery
+                    Add Image
                   </span>
                   <TbFilePlus className="relative text-xs md:text-xl" />
                 </div>
@@ -203,7 +226,7 @@ const AddEditGallery = () => {
                   Photo
                 </li>
                 <li className="w-20 text-center text-[8px] sm:text-[9.5px] md:text-[12px] 2xl:text-base ">
-                  Title
+                  Category
                 </li>
                 <li className="w-20 text-center text-[8px] sm:text-[9.5px] md:text-[12px] 2xl:text-base ">
                   Date
@@ -226,10 +249,10 @@ const AddEditGallery = () => {
                         <img
                           src={Gallery?.photo ? Gallery?.photo : ""}
                           alt=""
-                          className="rounded-full border -[3px] shadow-sm w-5 h-5 sm:w-8 sm:h-8 md:w-14 md:h-14 2xl:w-20 2xl:h-20"
+                          className="border -[3px] shadow-sm w-5 h-5 sm:w-8 sm:h-8 md:w-14 md:h-14 2xl:w-20 2xl:h-20"
                         />
                       </li>
-                      <li className="w-20 text-center text-[6px] sm:text-[8.5px] md:text-[12px] 2xl:text-sm ">
+                      <li className="w-20 text-center text-[6px] sm:text-[8.5px] md:text-[12px] 2xl:text-sm capitalize">
                         {Gallery?.category ? Gallery?.category : ""}
                       </li>
                       <li className="w-20 text-center text-[6px] sm:text-[8.5px] md:text-[12px] 2xl:text-sm">
@@ -238,10 +261,10 @@ const AddEditGallery = () => {
                           : ""}
                       </li>
                       <li className="w-20 text-center flex flex-col md:flex-row items-center justify-center space-y-2 md:space-y-0 md:space-x-3">
-                        <FiEdit
+                        {/* <FiEdit
                           className="text-[11px] md:text-sm lg:text-[19px] "
                           onClick={() => handleUpdate(Gallery?.id ? Gallery?.id : "")}
-                        />
+                        /> */}
                         <MdDelete
                           className="text-[11px] md:text-sm lg:text-[21px] text-red-500"
                           onClick={() => handleDelete(Gallery?.id ? Gallery?.id : "")}
@@ -252,9 +275,9 @@ const AddEditGallery = () => {
                 })
               ) : (
                 <div className="flex justify-center items-center w-full py-10">
-                  <GrGallery className=" text-2xl sm:text-3xl md:text-[30px] text-gray-400 mr-2" />
-                  <p className="text-xs xs:text-sm sm:text-lg 2xl:text-[20px] font-medium text-gray-400">
-                    Gallery Not Found
+                  <GrGallery className=" text-xl sm:text-2xl md:text-[20px] text-gray-400 mr-2" />
+                  <p className="text-xs xs:text-sm sm:text-lg 2xl:text-[15px] font-medium text-gray-400">
+                    No gallery image found
                   </p>
                 </div>
               )}

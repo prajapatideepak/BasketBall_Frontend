@@ -181,7 +181,7 @@ function AllTournaments() {
                 className="font-normal rounded-lg cursor-pointer hover:bg-gray-100 bg-white shadow-sm"
               >
                 <td colSpan={10} className="md:px-2 2xl:px-10 py-2 text-[6px] sm:text-[8.5px] md:text-[12px] 2xl:text-sm text-center whitespace-nowrap text-gray-400 font-medium">
-                  No tournament found
+                  No tournament request found
                 </td>
               </tr>
             )}

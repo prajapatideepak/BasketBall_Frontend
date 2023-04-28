@@ -38,6 +38,7 @@ export const organizerApi = api.injectEndpoints({
                 : [{ type: "TeamsRequest", id: "LIST" }],
         ],
     }),
+
     acceptTeamRequest: build.mutation({
         query({tournament_id, team_id}){
             return {
@@ -169,6 +170,27 @@ export const organizerApi = api.injectEndpoints({
                 },
             }; 
         }
+    }),
+
+    uploadGalleryImage: build.mutation({
+        query({tournament_id, formData}){
+            return {
+                url: `tournament/gallery/${tournament_id}`,
+                method: "POST",
+                body: formData
+            };
+        },
+        invalidatesTags: [{ type: "TournamentGallery", id: "LIST" }],
+    }),
+
+    deleteGalleryImage: build.mutation({
+        query: ({tournament_id, gallery_id}) => {
+            return{
+                url: `tournament/gallery/${tournament_id}/${gallery_id}`,
+                method: "DELETE",
+            }
+        },
+        invalidatesTags: [{ type: "TournamentGallery", id: "LIST" }],
     })
   }),
 });
@@ -187,5 +209,7 @@ export const {
     useDisqualifyTeamMutation,
     useRequalifyTeamMutation,
     useCreatePoolsMutation,
-    useMatchFormationMutation
+    useMatchFormationMutation,
+    useUploadGalleryImageMutation,
+    useDeleteGalleryImageMutation,
 } = organizerApi;

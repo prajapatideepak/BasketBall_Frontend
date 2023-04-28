@@ -20,6 +20,13 @@
   width: 100%;
 }
 
+.active{
+  color: #ee6730 !important;
+  /* left: 0%;
+  width: 100%; */
+}
+
+
 /* Scrollbar style for browser */
 
 /* width */

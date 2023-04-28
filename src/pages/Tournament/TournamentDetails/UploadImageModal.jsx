@@ -1,11 +1,18 @@
 import { useState } from "react";
 import Select from "react-select";
+import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import { Modal } from "../../../Component/Modal";
+import { useUploadGalleryImageMutation } from "../../../services/organizer";
 
-export default function UploadImageModal({ open, handleOpen }) {
+export default function UploadImageModal({ open, handleOpen, refetchData }) {
+  const {tournament_id} = useParams()
+
   const [image, setImage] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [error, setError] = useState("");
+
+  const [uploadGalleryImage, {isLoading}] = useUploadGalleryImageMutation()
 
   const customStyles = {
     control: (provided, state) => ({
@@ -63,7 +70,7 @@ export default function UploadImageModal({ open, handleOpen }) {
     setSelectedCategory(value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (image == "" || selectedCategory == "" ) {
@@ -71,10 +78,21 @@ export default function UploadImageModal({ open, handleOpen }) {
       return;
     }
 
-    //api call
+    const formData = new FormData();
+    formData.append('image', e.target.image.files[0])
+    formData.append('category', e.target.category.value)
 
-    resetModal();
-    handleOpen();
+    const response = await uploadGalleryImage({tournament_id, formData})
+    
+    if(response.error){
+      toast.error(response.error.data.message)
+    }
+    else if(response.data.success){
+      toast.success(response.data.message)
+      refetchData()
+      resetModal();
+      handleOpen();
+    }
   };
 
   return (
@@ -152,9 +170,10 @@ export default function UploadImageModal({ open, handleOpen }) {
               </div>
               <button
                 type="submit"
-                className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                disabled = {isLoading}
+                className={`${isLoading ? 'opacity-60' : ''} w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800`}
               >
-                Upload
+                {isLoading ? 'Loading...' : 'Upload'}
               </button>
               {error != "" ? (
                 <div className="text-center">

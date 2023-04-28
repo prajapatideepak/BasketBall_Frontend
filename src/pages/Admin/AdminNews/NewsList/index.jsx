@@ -31,6 +31,7 @@ const NewsList = () => {
   const [photo, setphoto] = React.useState("");
   const [newsRegistration, { ...thing }] = useRegisterNewsMutation();
   const [newsUpdate, { ...updateData }] = useUpdateNewsDetailsMutation();
+  const [deleteNewsDetails, {...deleteNews}] = useDeleteNewsDetailsMutation()
   const [pageNo, setPageNo] = React.useState(1);
 
   const initialValues = {
@@ -45,11 +46,11 @@ const NewsList = () => {
     tags: "",
     description: "",
   });
-  console.log(value , "value")
-  const { isLoading, data } = useGetAllNewsQuery({
+
+  const { isLoading, data, refetch } = useGetAllNewsQuery({
     pageNo: pageNo - 1,
   });
-    console.log(data)
+
   const { values, errors, handleBlur, touched, handleChange, handleSubmit } =
     useFormik({
       initialValues: value ? value : initialValues ,
@@ -78,16 +79,34 @@ const NewsList = () => {
     setphoto(e.target.files[0]);
   }
 
-  const handleDelete = (id) => {
-    alert(id)
-    useDeleteNewsDetailsMutation(id)
+  const handleDelete = async (id) => {
+    Swal.fire({
+        title: 'Are you sure to delete this news?',
+        text: "The news will be deleted",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes'
+    }).then(async(result) => {
+      if (result.isConfirmed) {
+        const response = await deleteNewsDetails(id)
+        if(response.error){
+          toast.error(response.error.data.message)
+        }
+        else if(response.data.success){
+          toast.success(response.data.message)
+        }
+        refetch()
+      }
+    })
   };
 
   const handleUpdate = (id) => {
     let updatenews = data?.AllNews?.find((n) => {
       return n?.id == id;
     });
-    console.log(updatenews, "sdgn kfdfk ");
+
     setValue(updatenews)
     setModel(true);
   };
@@ -98,7 +117,8 @@ const NewsList = () => {
     }
     if (thing.isSuccess) {
       if (thing?.data?.success) {
-        toast.success("News Addes Successfull ");
+        toast.success("News Added Successfully");
+        refetch()
         setModel(false);
       }
     }
@@ -297,7 +317,7 @@ const NewsList = () => {
                         <img
                           src={News?.photo ? News?.photo : ""}
                           alt=""
-                          className="rounded-full border -[3px] shadow-sm w-5 h-5 sm:w-8 sm:h-8 md:w-14 md:h-14 2xl:w-20 2xl:h-20"
+                          className="border -[3px] shadow-sm w-5 h-5 sm:w-8 sm:h-8 md:w-14 md:h-14 2xl:w-20 2xl:h-20"
                         />
                       </li>
                       <li className="w-20 text-center text-[6px] sm:text-[8.5px] md:text-[12px] 2xl:text-sm ">
@@ -315,10 +335,10 @@ const NewsList = () => {
                           : ""}
                       </li>
                       <li className="w-20 text-center flex flex-col md:flex-row items-center justify-center space-y-2 md:space-y-0 md:space-x-3">
-                        <FiEdit
+                        {/* <FiEdit
                           className="text-[11px] md:text-sm lg:text-[19px] "
                           onClick={() => handleUpdate(News?.id ? News?.id : "")}
-                        />
+                        /> */}
                         <MdDelete
                           className="text-[11px] md:text-sm lg:text-[21px] text-red-500"
                           onClick={() => handleDelete(News?.id ? News?.id : "")}
@@ -359,12 +379,11 @@ const NewsList = () => {
                     disabled={data?.AllNews?.length < 12}
                     className="cursor-pointer disabled:opacity-30 disabled:cursor-default p-2 border rounded border-gray-400"
                   >
-                    {" "}
                     <IoIosArrowForward />
                   </button>
                 </div>
                 :
-                null
+                  null
             }
           </div>
         </div>

@@ -15,7 +15,7 @@ export const api = createApi({
   reducerPath: "api",
   baseQuery: baseQuery,
   tagTypes: [
-    "User, Players, Teams, Tournaments, TournamentsOfOrganizer, TeamsRequest, TeamsOfManager , News , Gallery, TournamentsRequest",
+    "User, Players, Teams, Tournaments, TournamentsOfOrganizer, TeamsRequest, TeamsOfManager , News , Gallery, TournamentsRequest, TournamentGallery",
   ],
   endpoints: () => ({}),
 });

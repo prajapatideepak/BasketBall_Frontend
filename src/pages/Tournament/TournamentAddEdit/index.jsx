@@ -237,11 +237,12 @@ function TournamentAddEdit() {
       for (let i = 0; i < data.sponsors.length; i++) {
         formdata.append(`sponsors_logo${i}`, data.sponsors[i].logo)
       }
-
+      
       setIsSubmitting(true);
       let response = null
       
       if(location?.state?.isEdit){
+        formdata.append('old_url', location?.state?.tournamentDetails.logo)
         response = await updateTournamentDetails({tournament_id: location?.state?.tournamentDetails.id , formData: formdata})
       }
       else{
