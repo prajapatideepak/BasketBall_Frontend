@@ -304,25 +304,25 @@ const NewsList = () => {
             </div>
             <div className="md:px-5 py-3">
               <ul className="flex md:px-2 2xl:px-10 justify-between bg-gray-300 md:rounded-lg py-[10px] shadow-sm text-black font-medium px-2 ">
-                <li className="w-20 text-center text-[8px] sm:text-[9.5px] md:text-[12px] 2xl:text-base ">
+                <li className="w-20 text-left text-[8px] sm:text-[9.5px] md:text-[12px] 2xl:text-base ">
                   Sr No
                 </li>
-                <li className="w-20 text-center text-[8px] sm:text-[9.5px] md:text-[12px] 2xl:text-base ">
+                <li className="w-20 text-left text-[8px] sm:text-[9.5px] md:text-[12px] 2xl:text-base ">
                   Photo
                 </li>
-                <li className="w-20 text-center text-[8px] sm:text-[9.5px] md:text-[12px] 2xl:text-base ">
+                <li className="w-20 text-left text-[8px] sm:text-[9.5px] md:text-[12px] 2xl:text-base ">
                   Title
                 </li>
-                <li className="w-20 text-center text-[8px] sm:text-[9.5px] md:text-[12px] 2xl:text-base ">
+                <li className="w-20 text-left text-[8px] sm:text-[9.5px] md:text-[12px] 2xl:text-base ">
                   Tags
                 </li>
-                <li className="w-52 text-center text-[8px] sm:text-[9.5px] md:text-[12px] 2xl:text-base ">
+                <li className="w-52 text-left text-[8px] sm:text-[9.5px] md:text-[12px] 2xl:text-base ">
                   Description
                 </li>
-                <li className="w-20 text-center text-[8px] sm:text-[9.5px] md:text-[12px] 2xl:text-base ">
+                <li className="w-20 text-left text-[8px] sm:text-[9.5px] md:text-[12px] 2xl:text-base ">
                   Date
                 </li>
-                <li className="w-20 text-center text-[8px] sm:text-[9.5px] md:text-[12px] 2xl:text-base ">
+                <li className="w-20 text-left text-[8px] sm:text-[9.5px] md:text-[12px] 2xl:text-base ">
                   Action
                 </li>
               </ul>
@@ -333,7 +333,7 @@ const NewsList = () => {
                       key={index}
                       className="flex items-center space-x-2 justify-between font-normal md:px-2 2xl:px-10 py-2 rounded-lg cursor-pointer hover:bg-gray-100 bg-white shadow-sm my-3"
                     >
-                      <li className="w-20 text-[6px] sm:text-[8.5px] md:text-[12px] 2xl:text-sm text-center">
+                      <li className="w-20 text-[6px] sm:text-[8.5px] md:text-[12px] 2xl:text-sm text-left">
                         {News?.id ? News?.id : ""}
                       </li>
                       <li className="w-20 flex justify-center items-center">
@@ -343,21 +343,21 @@ const NewsList = () => {
                           className="border -[3px] shadow-sm w-5 h-5 sm:w-8 sm:h-8 md:w-14 md:h-14 2xl:w-20 2xl:h-20"
                         />
                       </li>
-                      <li className="w-20 text-center text-[6px] sm:text-[8.5px] md:text-[12px] 2xl:text-sm ">
+                      <li className="w-20 text-left text-[6px] sm:text-[8.5px] md:text-[12px] 2xl:text-sm ">
                         {News?.title ? News?.title : ""}
                       </li>
-                      <li className="w-20 text-center text-[6px] sm:text-[8.5px] md:text-[12px] 2xl:text-sm ">
+                      <li className="w-20 text-left text-[6px] sm:text-[8.5px] md:text-[12px] 2xl:text-sm ">
                         {News?.tags ? News?.tags : ""}
                       </li>
-                      <li className="w-52 text-center text-[6px] sm:text-[8.5px] md:text-[12px] 2xl:text-sm overflow-hidden">
+                      <li className="w-52 text-left text-[6px] sm:text-[8.5px] md:text-[12px] 2xl:text-sm overflow-hidden">
                         {News?.description ? News?.description : ""}
                       </li>
-                      <li className="w-20 text-center text-[6px] sm:text-[8.5px] md:text-[12px] 2xl:text-sm">
+                      <li className="w-20 text-left text-[6px] sm:text-[8.5px] md:text-[12px] 2xl:text-sm">
                         {News.created_at
                           ? moment(News?.created_at).format("DD / MM / YY")
                           : ""}
                       </li>
-                      <li className="w-20 text-center flex flex-col md:flex-row items-center justify-center space-y-2 md:space-y-0 md:space-x-3">
+                      <li className="w-20 text-left flex flex-col md:flex-row items-center justify-start space-y-2 md:space-y-0 md:space-x-3">
                         {/* <FiEdit
                           className="text-[11px] md:text-sm lg:text-[19px] "
                           onClick={() => handleUpdate(News?.id ? News?.id : "")}
