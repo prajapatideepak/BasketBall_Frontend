@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { BsTrophy } from "react-icons/bs";
 import { GiBasketballJersey } from "react-icons/gi";
 import { BiNews } from "react-icons/bi";
-import { Link } from "react-router-dom";
-
+import { NavLink } from "react-router-dom";
+import '../../App.css'
 import { GrGallery } from "react-icons/gr";
+
 function AdminSidebar() {
   const [show, setShow] = useState(true);
   const [tooltipStatus, setTooltipStatus] = useState(0);
@@ -15,7 +16,7 @@ function AdminSidebar() {
         <div className="h-full bg-gray-900 p-4">
           <div className="flex w-full h-full">
             <div className=" flex flex-col h-full justify-between">
-              <div className>
+              <div>
                 <div className="flex items-center">
                   <img
                     src="/CBL_Images/logo.png"
@@ -24,14 +25,14 @@ function AdminSidebar() {
                   {show && (
                     <div className="pl-3" id="closed">
                       <h1 className="text-2xl text-gray-400 font-sans">
-                        Dashboard
+                        Admin Panel
                       </h1>
                     </div>
                   )}
                 </div>
                 <div className="mt-10 flex items-center relative">
                   {show ? (
-                    <div arial-label="search" className="w-56 relative w-full">
+                    <div arial-label="search" className="relative w-full">
                       <div className="absolute p-2">
                         <svg
                           width={20}
@@ -118,7 +119,7 @@ function AdminSidebar() {
                 </div>
                 <div className="flex items-center">
                   <ul aria-orientation="vertical">
-                    <Link className="Link" to={"/"}>
+                    <NavLink className={({ isActive }) => (isActive ? "active" : 'none')} to={"/admin"}>
                       <li
                         tabIndex={0}
                         role="button"
@@ -138,12 +139,12 @@ function AdminSidebar() {
                           />
                         </svg>
                       </li>
-                    </Link>
-                    <Link className="Link" to={"/team"}>
+                    </NavLink>
+                    {/* <NavLink className={({ isActive }) => (isActive ? "active" : 'none')} to={"admin/all-teams"}>
                       <li
                         tabIndex={0}
                         role="button"
-                        aria-label="Team"
+                        aria-label="Teams"
                         className="cursor-pointer mt-6"
                       >
                         <svg
@@ -159,18 +160,18 @@ function AdminSidebar() {
                           />
                         </svg>
                       </li>
-                    </Link>
-                    <Link className="Link" to={"/tournament"}>
+                    </NavLink> */}
+                    <NavLink className={({ isActive }) => (isActive ? "active" : 'none')} to={"admin/all-tournaments"}>
                       <li
                         tabIndex={0}
                         role="button"
-                        aria-label="Tournament"
+                        aria-label="Tournaments Request"
                         className="cursor-pointer mt-6"
                       >
                         <BsTrophy className="text-gray-400 text-lg" />
                       </li>
-                    </Link>
-                    <Link className="Link" to={"/players"}>
+                    </NavLink>
+                    {/* <NavLink className={({ isActive }) => (isActive ? "active" : 'none')} to={"admin/players"}>
                       <li
                         tabIndex={0}
                         role="button"
@@ -179,9 +180,9 @@ function AdminSidebar() {
                       >
                         <GiBasketballJersey className="text-gray-400 text-xl" />
                       </li>
-                    </Link>
+                    </NavLink> */}
 
-                    <Link className="Link" to={"/news"}>
+                    <NavLink className={({ isActive }) => (isActive ? "active" : 'none')} to={"admin/news"}>
                       <li
                         tabIndex={0}
                         role="button"
@@ -190,8 +191,8 @@ function AdminSidebar() {
                       >
                         <BiNews className="text-gray-400 text-xl" />
                       </li>
-                    </Link>
-                    <Link className="Link" to={"/gallery"}>
+                    </NavLink>
+                    <NavLink className={({ isActive }) => (isActive ? "active" : 'none')} to={"admin/gallery"}>
                       <li
                         tabIndex={0}
                         role="button"
@@ -200,8 +201,8 @@ function AdminSidebar() {
                       >
                         <GrGallery className=" bg-gray-400 text-lg" />
                       </li>
-                    </Link>
-                    <li
+                    </NavLink>
+                    {/* <li
                       tabIndex={0}
                       role="button"
                       aria-label="Notifications"
@@ -219,43 +220,43 @@ function AdminSidebar() {
                           fill="#9CA3AF"
                         />
                       </svg>
-                    </li>
+                    </li> */}
                   </ul>
                   {show && (
                     <div className="w-full mt-10">
-                      <Link className="Link" to={"/"}>
+                      <NavLink className={({ isActive }) => (isActive ? "active" : 'none')} to={"/admin"}>
                         <p className="text-base leading-4 pl-3 cursor-pointer text-gray-400">
                           Overview
                         </p>
-                      </Link>
-                      <Link className="Link" to={"/team"}>
+                      </NavLink>
+                      {/* <NavLink className={({ isActive }) => (isActive ? "active" : 'none')} to={"admin/all-teams"}>
                         <p className="text-base leading-4 pl-3 cursor-pointer pt-7 text-gray-400">
-                          Team
+                          Teams
                         </p>
-                      </Link>
-                      <Link className="Link" to={"/tournament"}>
+                      </NavLink> */}
+                      <NavLink className={({ isActive }) => (isActive ? "active" : 'none')} to={"admin/all-tournaments"}>
                         <p className="text-base leading-4 pl-3 cursor-pointer pt-7 text-gray-400">
-                          Tournament
+                          Tournaments Request
                         </p>
-                      </Link>
-                      <Link className="Link" to={"/players"}>
+                      </NavLink>
+                      {/* <NavLink className={({ isActive }) => (isActive ? "active" : 'none')} to={"admin/players"}>
                         <p className="text-base leading-4 pl-3 cursor-pointer pt-7 text-gray-400">
                           Players
                         </p>
-                      </Link>
-                      <Link className="Link" to={"/news"}>
+                      </NavLink> */}
+                      <NavLink className={({ isActive }) => (isActive ? "active" : 'none')} to={"admin/news"}>
                         <p className="text-base leading-4 pl-3 cursor-pointer pt-7 text-gray-400">
                           News
                         </p>
-                      </Link>
-                      <Link className="Link" to={"/gallery"}>
+                      </NavLink>
+                      <NavLink className={({ isActive }) => (isActive ? "active" : 'none')} to={"admin/gallery"}>
                         <p className="text-base leading-4 pl-3 cursor-pointer pt-7 text-gray-400">
                           Gallery
                         </p>
-                      </Link>
-                      <p className="text-base leading-4 pl-3 cursor-pointer pt-7 text-gray-400">
+                      </NavLink>
+                      {/* <p className="text-base leading-4 pl-3 cursor-pointer pt-7 text-gray-400">
                         Notifications
-                      </p>
+                      </p> */}
                     </div>
                   )}
                 </div>

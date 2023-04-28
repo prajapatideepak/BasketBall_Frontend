@@ -8,12 +8,15 @@ import {
 } from "../../services/gallery"
 import Loader from '../../Component/Loader';
 import { GrGallery } from "react-icons/gr"
-
+import Pagination from 'react-responsive-pagination'
+import '../../Component/Pagination/pagination.css'
 
 const Gallery = () => {
     const [pageNo, setPageNo] = React.useState(1);
-    const { isLoading, data } = useGetAllGalleryQuery({
+    const [category, setCategory] = React.useState('all')
+    const { isLoading, data, refetch } = useGetAllGalleryQuery({
         pageNo: pageNo - 1,
+        category: category
     });
     console.log(data?.length)
     const breakpointColumnsObj = {
@@ -23,90 +26,30 @@ const Gallery = () => {
         500: 1
     };
 
-    // const allImages = [
-    //     {
-    //         id: 0,
-    //         imageUrl: 'https://images.unsplash.com/photo-1525609004556-c46c7d6cf023?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Y2Fyc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
-    //         category: 'champ'
-    //     },
-    //     {
-    //         id: 1,
-    //         imageUrl: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8Y2Fyc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
-    //         category: 'champ'
-    //     },
-    //     {
-    //         id: 2,
-    //         imageUrl: 'https://images.unsplash.com/photo-1514316454349-750a7fd3da3a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8Y2Fyc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
-    //         category: 'champ'
-    //     },
-    //     {
-    //         id: 3,
-    //         imageUrl: 'https://images.unsplash.com/photo-1542362567-b07e54358753?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fGNhcnN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
-    //         category: 'champ'
-    //     },
-    //     {
-    //         id: 4,
-    //         imageUrl: 'https://images.unsplash.com/photo-1462396881884-de2c07cb95ed?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fGNhcnN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
-    //         category: 'champ'
-    //     },
-    //     {
-    //         id: 5,
-    //         imageUrl: 'https://images.unsplash.com/photo-1558981403-c5f9899a28bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8YmlrZXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
-    //         category: 'award'
-    //     },
-    //     {
-    //         id: 6,
-    //         imageUrl: 'https://images.unsplash.com/photo-1610553556003-9b2ae8ef1b8e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YmlrZXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
-    //         category: 'award'
-    //     },
-    //     {
-    //         id: 7,
-    //         imageUrl: 'https://images.unsplash.com/photo-1626840362735-afb64615318d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8YmlrZXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
-    //         category: 'award'
-    //     },
-    //     {
-    //         id: 8,
-    //         imageUrl: 'https://images.unsplash.com/photo-1622185135505-2d795003994a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8YmlrZXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
-    //         category: 'award'
-    //     },
-    //     {
-    //         id: 9,
-    //         imageUrl: 'https://images.unsplash.com/photo-1620193827194-6ce9e26d668d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTJ8fGJpa2VzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-    //         category: 'award'
-    //     },
-    // ]
-
     const [currentTab, setCurrentTab] = React.useState(0)
     const [currentTabImages, setCurrentTabImages] = React.useState(data?.data)
     const [champsImages, setChampsImages] = React.useState([])
     const [awardsImages, setAwardsImages] = React.useState([]);
-    const [previewImage, setPreviewImage] = React.useState('')
-    React.useEffect(() => {
-        let champs = []
-        let awards = []
-        data?.data.map((image) => {
-            if (image.category == 'champ') {
-                champs.push(image)
-            }
-            else if (image.category == 'award') {
-                awards.push(image)
-            }
-        })
-        setChampsImages(champs);
-        setAwardsImages(awards)
-    }, []);
+    const [previewImage, setPreviewImage] = React.useState('');
 
     React.useEffect(() => {
-        if (currentTab == 1) {
-            setCurrentTabImages(champsImages);
+        setCurrentTabImages(data?.data)
+    },[data])
+
+    const handleTabChange = (value) => {
+        setCurrentTab(value)
+        setPageNo(1)
+        if(value == 1){
+            setCategory('champions')
         }
-        else if (currentTab == 2) {
-            setCurrentTabImages(awardsImages)
+        else if(value == 2){
+            setCategory('awards')
         }
-        else {
-            setCurrentTabImages(data?.data)
+        else{
+            setCategory('all')
         }
-    }, [currentTab])
+        refetch()
+    }
 
     return (
         <>
@@ -120,13 +63,13 @@ const Gallery = () => {
                     <div className="flex flex-wrap justify-center items-center gap-3 md:gap-5">
                         <span
                             className={`${currentTab == 0 ? 'bg-[#ee6730] text-white' : 'bg-orange-100 text-gray-600'} cursor-pointer px-4 py-1.5 text-xs sm:text-sm md:text-base rounded-full text-center`}
-                            onClick={() => setCurrentTab(0)}>All</span>
+                            onClick={() => handleTabChange(0)}>All</span>
                         <span
                             className={`${currentTab == 1 ? 'bg-[#ee6730] text-white' : 'bg-orange-100 text-gray-600'} cursor-pointer px-4 py-1.5 text-xs sm:text-sm md:text-base rounded-full text-center`}
-                            onClick={() => setCurrentTab(1)}>Champions</span>
+                            onClick={() => handleTabChange(1)}>Champions</span>
                         <span
                             className={`${currentTab == 2 ? 'bg-[#ee6730] text-white' : 'bg-orange-100 text-gray-600'} cursor-pointer px-4 py-1.5 text-xs sm:text-sm md:text-base rounded-full text-center`}
-                            onClick={() => setCurrentTab(2)}>Achievement & Awards</span>
+                            onClick={() => handleTabChange(2)}>Achievement & Awards</span>
                     </div>
                 </div>
 
@@ -137,8 +80,8 @@ const Gallery = () => {
                         currentTabImages?.length < 1
                             ?
                             <div className='flex justify-center items-center w-full py-5 mt-48'>
-                                <GrGallery className=" text-2xl sm:text-3xl md:text-4xl text-gray-400 mr-2" />
-                                <p className='text-xs xs:text-sm sm:text-lg lg:text-xl font-medium text-gray-400'>Gallery not found</p>
+                                <GrGallery className=" text-2xl sm:text-xl md:text-2xl text-gray-400 mr-2" />
+                                <p className='text-xs xs:text-sm sm:text-lg lg:text-xl font-medium text-gray-400'>No gallery image found</p>
                             </div>
                             :
                             <div className='mx-auto px-20 py-12 sm:px-24 sm:py-12 md:px-28 md:py-16'>
@@ -162,7 +105,14 @@ const Gallery = () => {
                                 </Masonry>
                             </div>
                 }
-
+                <div className='mx-auto px-20 py-12 sm:px-24 sm:py-12 md:px-28 md:py-16'>
+                    <Pagination
+                        total={data && data.pageCount ? data.pageCount : 0}
+                        current={pageNo}
+                        onPageChange={(page)=> setPageNo(page)}
+                        // previousLabel="Previous" nextLabel="Next"
+                    />
+                </div>
 
                 {
                     previewImage != ''

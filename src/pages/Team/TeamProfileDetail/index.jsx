@@ -382,7 +382,7 @@ function TeamProfileDetail() {
                         <tr>
                           <td
                             className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-base whitespace-nowrap p-4 font-semibold text-gray-400 text-center"
-                            colSpan="6"
+                            colSpan={6}
                           >
                             Your Team has not enrolled in any tournament
                           </td>

@@ -1,9 +1,24 @@
 import * as Yup from "yup";
 
 export const GameInfoSchema = Yup.object({
-  height: Yup.number().min(56).max(500),
-  weight: Yup.number().min(15).max(350),
-  playing_position: Yup.string().required("Please Select Your Position"),
-  jersey_no: Yup.number().min(0).max(999).required("Please Enter Your Jersey Number ").integer(),
-  about: Yup.string().required("Please Write Something about Yourself and Your Experience "),
+  height: Yup.number()
+  .min(100, "Height should be min 100 CM").max(230, "Height should not be greater than 230 CM"),
+  weight: Yup.number()
+  .min(15, "Weight should be min 15 KG").max(120, "Weight should not be greater than 120 KG"),
+  playing_position: Yup.string().required("Please select your position"),
+  jersey_no: Yup.number()
+    .min(1, "Jersey no. must be greater than 1")
+    .max(999, "Jersey no. should not be greater than 999")
+    .required("Please enter jersey number")
+    .integer(),
+    about: Yup.string()
+    .test('trim', 'About must not contain trailing spaces', (value) => {
+      if (value) {
+        return value.trimEnd() === value; 
+      }
+      return true;
+    })
+    .required(
+    "Please write something about yourself and your experience"
+  ),
 });
