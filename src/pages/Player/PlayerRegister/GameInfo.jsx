@@ -18,14 +18,13 @@ const GameInfo = ({ index, setIndex }) => {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
-  
   const userDetails = useGetUserDataQuery();
   const [playerRegistration, { ...thing }] = useRegisterPlayerMutation();
   const [playerUpdate, { ...updateData }] = useUpdatePlayerDetailsMutation();
 
   const { token } = useSelector((state) => state.user);
   const { PlayerForm } = useSelector((state) => state.player);
-
+  console.log(PlayerForm.basicInfo)
   const { values, errors, touched, handleSubmit, handleChange, handleBlur } =
     useFormik({
       initialValues: PlayerForm.gameInfo,
@@ -51,7 +50,7 @@ const GameInfo = ({ index, setIndex }) => {
       },
     });
 
-    
+
   function setValues() {
     dispatch(setGameInfoForm(values));
   }
@@ -64,12 +63,12 @@ const GameInfo = ({ index, setIndex }) => {
       dispatch(authentication(token, userDetails.data.user));
     }
 
-    if(thing.isSuccess) {
+    if (thing.isSuccess) {
       userDetails.refetch()
     }
-    
+
   }, [userDetails.data, thing.isSuccess]);
-  
+
   React.useEffect(() => {
     if (thing.isError) {
       toast.error(thing?.error?.data?.message);

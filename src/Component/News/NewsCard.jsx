@@ -36,8 +36,12 @@ export default function NewsCard(news) {
               ))}
             </div>
             <span className=" text-orange-600 text-normal font-bold ">
-
-              {moment(news?.news?.created_at).format('DD / MM / YY')}
+              {
+                news?.news?.created_at ?
+                  moment(news?.news?.created_at).format('DD / MM / YY')
+                  :
+                  ""
+              }
 
             </span>
           </div>

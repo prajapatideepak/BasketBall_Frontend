@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet, NavLink } from 'react-router-dom'
 import logo from "/images/cbl.webp"
 import Footer from '../Component/Footer';
 
@@ -28,75 +28,77 @@ const PublicLayout = () => {
                     </div>
                     <div className=''>
                         <ul className={`lg:space-x-10 font-semibold bg-black/100 text-gray-800 pb-10 lg:pb-0  absolute lg:static lg:z-auto
-                     -z-20 left-0 pl-9 lg:pl-0 pr-9 lg:pr-0 w-full lg:w-auto  bg-transparent flex flex-col lg:flex-row lg:items-center
+                     -z-20 left-0 pl-9 lg:pl-0 pr-9 lg:pr-0 w-full lg:w-auto flex flex-col lg:flex-row lg:items-center
                      duration-500 ease-in ${open ? "top-16 opacity-100 " : "top-[-500px] lg:opacity-100 opacity-0 duration-500"}`}>
-                            <Link className='Link' to={"/"} >
-                                <li className="nav-item" onClick={() => setOpen(!open)}>
+                            <li className="nav-item" onClick={() => setOpen(!open)}>
+                                <NavLink className={({ isActive }) => (isActive ? "active" : 'none')} to={"/"} >
                                     <h1 className='relative text-white text-base md:text-lg lg:text-base xl:text-lg   my-5 md:my-6 lg:my-0'>
                                         Home
                                     </h1>
-                                </li>
-                            </Link>
-                            <Link className='Link' to={"/about"} >
-                                <li className="nav-item" onClick={() => setOpen(!open)}>
+                                </NavLink>
+                            </li>
+                            <li className="nav-item" onClick={() => setOpen(!open)}>
+                                <NavLink className={({ isActive }) => (isActive ? "active" : 'none')} to={"/about"} >
                                     <h1 className='relative text-white text-base md:text-lg lg:text-base xl:text-lg  my-5 lg:my-0'>
                                         About
                                     </h1>
-                                </li>
-                            </Link>
-                            <Link className='Link' to={"/contact"} >
-                                <li className="nav-item" onClick={() => setOpen(!open)}>
+                                </NavLink>
+                            </li>
+                            <li className="nav-item" onClick={() => setOpen(!open)}>
+                                <NavLink className={({ isActive }) => (isActive ? "active" : 'none')} to={"/contact"} >
                                     <h1 className='relative text-white text-base md:text-lg lg:text-base xl:text-lg  my-5 lg:my-0'>
                                         Contact
                                     </h1>
-                                </li>
-                            </Link>
-                            <Link className='Link' to={"/news"} >
-                                <li className="nav-item" onClick={() => setOpen(!open)}>
+                                </NavLink>
+                            </li>
+                            <li className="nav-item" onClick={() => setOpen(!open)}>
+                                <NavLink className={({ isActive }) => (isActive ? "active" : 'none')} to={"/news"} >
                                     <h1 className='relative text-white text-base md:text-lg lg:text-base xl:text-lg  my-5 lg:my-0'>
                                         News
                                     </h1>
-                                </li>
-                            </Link>
-                            <Link className='Link' to={"/gallery"} >
-                                <li className="nav-item" onClick={() => setOpen(!open)}>
+                                </NavLink>
+                            </li>
+                            <li className="nav-item" onClick={() => setOpen(!open)}>
+                                <NavLink className={({ isActive }) => (isActive ? "active" : 'none')} to={"/gallery"} >
                                     <h1 className='relative text-white text-base md:text-lg lg:text-base xl:text-lg  my-4 lg:my-0'>
                                         Gallery
                                     </h1>
-                                </li>
-                            </Link>
-                            <Link to={"/login"}>
+                                </NavLink>
+                            </li>
+                            <div className='flex pl-3 space-x-4'>
                                 <li onClick={() => setOpen(!open)} className=''>
-                                    <button
-                                        type="reset"
-                                        className="bg-white text-[#ee6730] relative inline-flex items-center justify-center w-full px-8 py-2 lg:py-1 overflow-hidden hover:text-white rounded-full cursor-pointer group my-4">
-                                        <span className="absolute w-0 h-0 transition-all duration-500 ease-out  bg-[#ee6730]  rounded-lg group-hover:w-full group-hover:h-56"></span>
-                                        <span className="relative">Login</span>
-                                    </button>
-                                </li>
+                                    <NavLink to={"/login"}>
+                                        <button
+                                            type="reset"
+                                            className="bg-white text-[#ee6730] relative inline-flex items-center justify-center w-full px-8 py-2 lg:py-1 overflow-hidden hover:text-white rounded-full cursor-pointer group my-4">
+                                            <span className="absolute w-0 h-0 transition-all duration-500 ease-out  bg-[#ee6730]  rounded-lg group-hover:w-full group-hover:h-56"></span>
+                                            <span className="relative">Login</span>
+                                        </button>
 
-                            </Link>
-                            <Link to={"/register"}>
-                                <li onClick={() => setOpen(!open)}>
-                                    <button
-                                        type="reset"
-                                        className="bg-white text-[#ee6730] relative inline-flex items-center justify-center w-full px-8 py-2 lg:py-1 overflow-hidden hover:text-white rounded-full cursor-pointer group my-4 ">
-                                        <span className="absolute w-0 h-0 transition-all duration-500 ease-out  bg-[#ee6730]  rounded-lg group-hover:w-full group-hover:h-56"></span>
-                                        <span className="relative">Register</span>
-                                    </button>
+                                    </NavLink>
                                 </li>
-                            </Link>
+                                <li onClick={() => setOpen(!open)}>
+                                    <NavLink to={"/register"}>
+                                        <button
+                                            type="reset"
+                                            className="bg-white text-[#ee6730] relative inline-flex items-center justify-center w-full px-8 py-2 lg:py-1 overflow-hidden hover:text-white rounded-full cursor-pointer group my-4 ">
+                                            <span className="absolute w-0 h-0 transition-all duration-500 ease-out  bg-[#ee6730]  rounded-lg group-hover:w-full group-hover:h-56"></span>
+                                            <span className="relative">Register</span>
+                                        </button>
+                                    </NavLink>
+                                </li>
+                            </div>
                         </ul>
                     </div>
 
-                </div>
+                </div >
                 <div className=' w-full -z-50  '>
                     <Outlet />
                 </div>
                 <div>
-                    <Footer/>
+                    <Footer />
                 </div>
-            </div>
+            </div >
         </>
     )
 }

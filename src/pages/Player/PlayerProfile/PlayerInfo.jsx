@@ -7,6 +7,20 @@ import { useDispatch, useSelector } from "react-redux";
 export default function PlayerInfo({ PlayerDetail }) {
   const {user} = useSelector((state)=> state.user)
 
+  const [city, setCity] = React.useState('');
+  const [state, setState] = React.useState('');
+
+
+  React.useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(`https://api.postalpincode.in/pincode/${PlayerDetail?.SinglePlayerDetails?.pincode}`);
+      const json = await response.json();
+      setCity(json[0]?.PostOffice[0]?.District)
+      setState(json[0]?.PostOffice[0]?.State)
+  };
+  fetchData();
+}, []);
+
   return (
     <div className="mx-auto text-center">
       <div className="flex justify-center ">
@@ -55,7 +69,7 @@ export default function PlayerInfo({ PlayerDetail }) {
           <div className="bg-white px-2 py-1 rounded-lg border-2 border-orange-100 shadow-xl">
             <span className="text-xs md:text-base">From : </span>
             <span className="text-xs md:text-sm font-semibold ">
-              Ahmedabad , Gujarat
+               {city ? city : ""} , {state ? state : ""}
             </span>
           </div>
         </div>
