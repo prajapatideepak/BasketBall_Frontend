@@ -27,7 +27,7 @@ export default function AdminDashboard() {
           <div className="flex-1 ">
             <img
               className="rounded-xl object-cover w-full"
-              src={"CBL_Images/dash.jpg"}
+              src={"/CBL_Images/dash.jpg"}
             ></img>
           </div>
           <div className="p-2 w-1/2">
@@ -41,9 +41,8 @@ export default function AdminDashboard() {
         {/* end */}
 
         <div className=" flex relative justify-center items-center rounded-lg shadow-xl text-center bg-graddient-to-l from-orange-200 via-orange-400  to-orange-500 bg-white  ">
-          <div className="bg-green-300 animate-pulse  w-5 h-5 rounded-full absolute right-0 translate-x-1 -translate-y-1 top-0"></div>
           <div className="flex-1 ">
-            <img className="rounded-xl" src={"CBL_Images/dash.jpg"}></img>
+            <img className="rounded-xl" src={"/CBL_Images/dash.jpg"}></img>
           </div>
           <div className="p-2 md:w-1/2">
             <h1 className="text-xl md:text-4xl font-bold">{data?.ongoing_tournaments}</h1>
@@ -55,7 +54,7 @@ export default function AdminDashboard() {
         {/* start  */}
         <div className=" flex relative justify-center items-center rounded-lg shadow-xl text-center bg-graddient-to-l from-orange-200 via-orange-400  to-orange-500 bg-white  ">
           <div className="flex-1 ">
-            <img className="rounded-xl" src={"CBL_Images/dash.jpg"}></img>
+            <img className="rounded-xl" src={"/CBL_Images/dash.jpg"}></img>
           </div>
           <div className="p-2 w-1/2">
             <h1 className="text-xl md:text-4xl font-bold">{data?.total_teams}</h1>
@@ -70,7 +69,7 @@ export default function AdminDashboard() {
 
         <div className=" flex relative justify-center items-center rounded-lg shadow-xl text-center bg-graddient-to-l from-orange-200 via-orange-400  to-orange-500 bg-white  ">
           <div className="flex-1 ">
-            <img className="rounded-xl" src={"CBL_Images/dash.jpg"}></img>
+            <img className="rounded-xl" src={"/CBL_Images/dash.jpg"}></img>
           </div>
           <div className="p-2 w-1/2">
             <h1 className="text-xl md:text-4xl font-bold">{data?.total_players}</h1>

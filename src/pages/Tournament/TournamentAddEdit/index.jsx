@@ -304,7 +304,6 @@ function TournamentAddEdit() {
               <p className="text-center text-gray-700 text-sm md:text-base italic pb-5">
                 The court is set, the teams are ready, let the games begin!
               </p>
-
           }
         </div>
         <div className='mx-auto px-5 sm:px-10 py-10 lg:px-10 shadow-xl rounded-md'>

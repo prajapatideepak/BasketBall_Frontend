@@ -69,7 +69,7 @@ export default function PlayerInfo({ PlayerDetail }) {
           <div className="bg-white px-2 py-1 rounded-lg border-2 border-orange-100 shadow-xl">
             <span className="text-xs md:text-base">From : </span>
             <span className="text-xs md:text-sm font-semibold ">
-               {city ? city : ""} , {state ? state : ""}
+               {city ? city : ""}, {state ? state : ""}
             </span>
           </div>
         </div>

@@ -24,7 +24,6 @@ const GameInfo = ({ index, setIndex }) => {
 
   const { token } = useSelector((state) => state.user);
   const { PlayerForm } = useSelector((state) => state.player);
-  console.log(PlayerForm.basicInfo)
   const { values, errors, touched, handleSubmit, handleChange, handleBlur } =
     useFormik({
       initialValues: PlayerForm.gameInfo,
@@ -45,7 +44,7 @@ const GameInfo = ({ index, setIndex }) => {
             await playerRegistration(fb);
           }
         } catch (err) {
-          console.log(err)
+           toast.error(err.message);
         }
       },
     });

@@ -68,11 +68,10 @@ function TeamRegister() {
         team_id: selectedTeam,
       };
 
-      teamtoTournament(newData).then(console.log("ss"));
+      teamtoTournament(newData).then();
     },
   });
 
-  console.log(something);
   React.useEffect(() => {
     const team = teamData?.data?.data.find((team) => {
       return team.id == selectedTeam;

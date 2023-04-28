@@ -21,9 +21,17 @@
 }
 
 .active{
-  color: #ee6730 !important;
+  color: #ee6730;
   /* left: 0%;
   width: 100%; */
+}
+
+.active > svg{
+  color: #ee6730
+}
+
+.non-active{
+  color: gray
 }
 
 
