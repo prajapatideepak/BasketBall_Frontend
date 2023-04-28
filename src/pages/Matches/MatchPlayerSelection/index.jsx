@@ -6,7 +6,6 @@ import { useMatchPlayersMutation } from "../../../services/team";
 
 export default function MatchPlayerSelection() {
   const location = useLocation();
-  console.log(location.state);
   const navigate = useNavigate();
   const MatchData = location.state;
   const [matchPlayers, { ...matchPlayersData }] = useMatchPlayersMutation();
@@ -16,8 +15,7 @@ export default function MatchPlayerSelection() {
   const [selectedPlayers, setSelectedPlayers] = useState([
     ...MatchData?.selectedPlayer,
   ]);
-  console.log(captain, "captain");
-  console.log(selectedPlayers);
+
   const handleSelect = (playerId) => {
     if (selectedPlayers.includes(playerId)) {
       setSelectedPlayers(selectedPlayers.filter((id) => id !== playerId));
@@ -37,13 +35,11 @@ export default function MatchPlayerSelection() {
     if (matchPlayersData.isSuccess) {
       if (matchPlayersData?.data?.success) {
         toast.success("Team Registration Successfull ");
-        console.log(matchPlayersData?.data);
         navigate(`/match-details/${MatchData?.match?.id}`);
       }
     }
   }, [matchPlayersData.isError, matchPlayersData.isSuccess]);
 
-  console.log(matchPlayersData);
   function handleSubmit() {
     let finalPlayer = MatchData.teamPlayers.reduce((newArray, player) => {
       if (selectedPlayers.includes(player.player_id)) {
@@ -56,8 +52,6 @@ export default function MatchPlayerSelection() {
       }
       return newArray;
     }, []);
-    console.log(MatchData?.match?.id, "asdsd");
-    console.log(finalPlayer);
     if (finalPlayer.length < 1) {
       toast.error("Please Select Player");
       return;

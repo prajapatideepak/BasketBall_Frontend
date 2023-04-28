@@ -13,7 +13,6 @@ import { array } from "yup";
 function TeamProfileDetail() {
   const { team_id } = useParams();
   const location = useLocation();
-  console.log(location);
   const navigate = useNavigate();
   const { isLoading, data } = useGetTeamDetailQuery({
     teamId: team_id,

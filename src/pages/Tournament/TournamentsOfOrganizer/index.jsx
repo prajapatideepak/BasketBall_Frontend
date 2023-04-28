@@ -48,7 +48,6 @@ function TournamentsOfOrganizer() {
                 } else if(tournament.status == 3) {
                     past.push(tournament);
                 } else {
-                    console.log(tournament)
                     pendingOrRejected.push(tournament);
                 }
             });

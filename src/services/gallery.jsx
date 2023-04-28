@@ -6,6 +6,10 @@ export const galleryApi = api.injectEndpoints({
             query: ({pageNo, category}) => `gallery/${category}/${pageNo}` ,
         }),
         
+        getAdminGallery: build.query({
+            query: ({pageNo}) => `gallery/${pageNo}` ,
+        }),
+        
         registerGallery: build.mutation({
             query: (body) => {
                 return {
@@ -30,6 +34,7 @@ export const galleryApi = api.injectEndpoints({
 
 export const {
     useGetAllGalleryQuery,
+    useGetAdminGalleryQuery,
     useRegisterGalleryMutation,
     useDeleteGalleryMutation,
 } = galleryApi;

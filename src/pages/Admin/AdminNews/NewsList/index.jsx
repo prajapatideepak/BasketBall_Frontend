@@ -4,7 +4,7 @@ import { TbFilePlus } from "react-icons/tb";
 import { MdDelete } from "react-icons/md";
 import { FiEdit } from "react-icons/fi";
 import { toast } from "react-toastify";
-import { BsCameraFill } from "react-icons/bs";
+import { ImNewspaper } from "react-icons/im";
 import { AiFillCloseCircle } from "react-icons/ai";
 import * as Yup from "yup";
 import Swal from "sweetalert2";
@@ -67,10 +67,10 @@ const NewsList = () => {
           //   fb.append("id", value.id);
           //   useUpdateNewsDetailsMutation(fb).then(console.log("update ho gai"));
           // } else {
-          newsRegistration(fd).then(console.log("ho gaya"));
+          newsRegistration(fd).then();
           // }
         } catch (err) {
-          console.log(err);
+          toast.error(err.message);
         }
       },
     });
@@ -117,7 +117,7 @@ const NewsList = () => {
     }
     if (thing.isSuccess) {
       if (thing?.data?.success) {
-        toast.success("News Added Successfully");
+        toast.success(data.message);
         refetch()
         setModel(false);
       }
@@ -349,7 +349,7 @@ const NewsList = () => {
                 })
               ) : (
                 <div className="flex justify-center items-center w-full py-10">
-                  <BsCameraFill className=" text-2xl sm:text-3xl md:text-[30px] text-gray-400 mr-2" />
+                  <ImNewspaper className=" text-2xl sm:text-3xl md:text-[30px] text-gray-400 mr-2" />
                   <p className="text-xs xs:text-sm sm:text-lg 2xl:text-[20px] font-medium text-gray-400">
                     News Not Found
                   </p>

@@ -11,7 +11,7 @@ function Admin() {
   return (
     <Routes>
       <Route>
-        <Route path="/" element={<AdminDashboard />} />
+        <Route path="/dashboard" element={<AdminDashboard />} />
         <Route path="/news/*" element={<AdminNews />} />
         <Route path="/all-tournaments" element={<AllTournaments />} />
         <Route path="/all-teams" element={<AllTeams />} />

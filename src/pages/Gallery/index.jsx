@@ -7,7 +7,7 @@ import {
     useGetAllGalleryQuery,
 } from "../../services/gallery"
 import Loader from '../../Component/Loader';
-import { GrGallery } from "react-icons/gr"
+import { IoImagesSharp } from "react-icons/io5"
 import Pagination from 'react-responsive-pagination'
 import '../../Component/Pagination/pagination.css'
 
@@ -18,7 +18,7 @@ const Gallery = () => {
         pageNo: pageNo - 1,
         category: category
     });
-    console.log(data?.length)
+    
     const breakpointColumnsObj = {
         default: 4,
         1100: 3,
@@ -80,7 +80,7 @@ const Gallery = () => {
                         currentTabImages?.length < 1
                             ?
                             <div className='flex justify-center items-center w-full py-5 mt-48'>
-                                <GrGallery className=" text-2xl sm:text-xl md:text-2xl text-gray-400 mr-2" />
+                                <IoImagesSharp className=" text-2xl sm:text-xl md:text-2xl text-gray-400 mr-2" />
                                 <p className='text-xs xs:text-sm sm:text-lg lg:text-xl font-medium text-gray-400'>No gallery image found</p>
                             </div>
                             :

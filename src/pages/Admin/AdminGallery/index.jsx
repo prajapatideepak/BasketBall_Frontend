@@ -4,7 +4,7 @@ import { TbFilePlus } from "react-icons/tb";
 import { MdDelete } from "react-icons/md";
 import { FiEdit } from "react-icons/fi";
 import { toast } from "react-toastify";
-import { GrGallery } from "react-icons/gr";
+import { IoImagesSharp } from "react-icons/io5";
 import { AiFillCloseCircle } from "react-icons/ai";
 import * as Yup from "yup";
 import Swal from "sweetalert2";
@@ -12,7 +12,7 @@ import { useFormik } from "formik";
 import moment from "moment";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import {
-  useGetAllGalleryQuery,
+  useGetAdminGalleryQuery,
   useRegisterGalleryMutation,
   useDeleteGalleryMutation,
 } from "../../../services/gallery"
@@ -27,7 +27,7 @@ const AddEditGallery = () => {
   const [photo, setphoto] = React.useState("");
   const [model, setModel] = React.useState(false);
   const [pageNo, setPageNo] = React.useState(1);
-  const { isLoading, data, refetch } = useGetAllGalleryQuery({
+  const { isLoading, data, refetch } = useGetAdminGalleryQuery({
     pageNo: pageNo - 1,
   });
   const [galleryRegistration, { ...thing }] = useRegisterGalleryMutation();
@@ -40,7 +40,7 @@ const AddEditGallery = () => {
     useFormik({
       initialValues: initialValues,
       validationSchema: signUpSchema,
-      onSubmit(data) {
+      async onSubmit(data) {
         try {
           const fd = new FormData();
           fd.append("photo", photo);
@@ -52,10 +52,10 @@ const AddEditGallery = () => {
           //   fb.append("id", value.id);
           //   useUpdateNewsDetailsMutation(fb).then(console.log("update ho gai"));
           // } else {
-          galleryRegistration(fd).then(console.log("ho gaya"));
+          await galleryRegistration(fd);
           // }
         } catch (err) {
-          console.log(err);
+          toast.error(err.message)
         }
       },
     });
@@ -72,7 +72,6 @@ const AddEditGallery = () => {
     }).then(async(result) => {
       if (result.isConfirmed) {
         const response = await deleteGallery(id)
-        console.log(response)
         if(response.error){
           toast.error(response.error.data.message)
         }
@@ -98,7 +97,7 @@ const AddEditGallery = () => {
     }
     if (thing.isSuccess) {
       if (thing?.data?.success) {
-        toast.success("Gallery Addes Successfull ");
+        toast.success(thing?.data?.message);
         refetch()
         setModel(false);
       }
@@ -257,7 +256,7 @@ const AddEditGallery = () => {
                       </li>
                       <li className="w-20 text-center text-[6px] sm:text-[8.5px] md:text-[12px] 2xl:text-sm">
                         {Gallery?.created_at
-                          ? moment(Gallery?.created_at).format("DD / MM / YY")
+                          ? moment(Gallery?.created_at).format("DD/MM/YYYY")
                           : ""}
                       </li>
                       <li className="w-20 text-center flex flex-col md:flex-row items-center justify-center space-y-2 md:space-y-0 md:space-x-3">
@@ -275,7 +274,7 @@ const AddEditGallery = () => {
                 })
               ) : (
                 <div className="flex justify-center items-center w-full py-10">
-                  <GrGallery className=" text-xl sm:text-2xl md:text-[20px] text-gray-400 mr-2" />
+                  <IoImagesSharp className=" text-xl sm:text-2xl md:text-[20px] text-gray-400 mr-2" />
                   <p className="text-xs xs:text-sm sm:text-lg 2xl:text-[15px] font-medium text-gray-400">
                     No gallery image found
                   </p>

@@ -66,14 +66,12 @@ function TeamAddEdit() {
 
         if (location?.state?.isEdit) {
           fb.append("id", location.state.teamDetail.id);
-          teamUpdate({ body: fb, team_id: location.state.teamDetail.id }).then(
-            console.log("update ho gai")
-          );
+          teamUpdate({ body: fb, team_id: location.state.teamDetail.id }).then();
         } else {
-          teamRegistration(fb).then(console.log("ho gaya"));
+          teamRegistration(fb).then();
         }
       } catch (err) {
-        console.log(err);
+        toast.error(err.message);
       }
     },
   });
