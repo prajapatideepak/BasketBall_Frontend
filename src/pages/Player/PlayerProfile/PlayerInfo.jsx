@@ -1,10 +1,12 @@
 import React from "react";
 import Heading from "../../../Component/Heading";
 import moment from 'moment'
+import { useDispatch, useSelector } from "react-redux";
 
 
 export default function PlayerInfo({ PlayerDetail }) {
-  console.log(PlayerDetail)
+  const {user} = useSelector((state)=> state.user)
+
   return (
     <div className="mx-auto text-center">
       <div className="flex justify-center ">
@@ -22,24 +24,29 @@ export default function PlayerInfo({ PlayerDetail }) {
           <div className="bg-white px-2 py-1 rounded-lg border-2 border-orange-100 shadow-xl">
             <span className="text-xs md:text-base">Height : </span>
             <span className="text-xs md:text-sm font-semibold ">
-              {PlayerDetail?.SinglePlayerDetails?.height}cm
+              {PlayerDetail?.SinglePlayerDetails?.height} cm
             </span>
           </div>
           <div className="bg-white px-2 py-1 rounded-lg border-2 border-orange-100 shadow-xl">
             <span className="text-xs md:text-base">Weight : </span>
             <span className="text-xs md:text-sm font-semibold ">
-              {PlayerDetail?.SinglePlayerDetails?.weight}KG
+              {PlayerDetail?.SinglePlayerDetails?.weight} kg
             </span>
           </div>
 
           <div className="bg-white px-2 py-1 rounded-lg border-2 border-orange-100 shadow-xl">
-            <span className="text-xs md:text-base">Date of birth : </span>
+            <span className="text-xs md:text-base">{PlayerDetail?.SinglePlayerDetails.users.id == user.id 
+                  ? 'Date of Birth' : 'Age'} : </span>
             <span className="text-xs md:text-sm font-semibold ">
               {
-                PlayerDetail?.SinglePlayerDetails?.date_of_birth ?
-
-                  moment(PlayerDetail?.SinglePlayerDetails?.date_of_birth).format('DD / MM / YY')
+                PlayerDetail?.SinglePlayerDetails?.date_of_birth 
+                ?
+                  PlayerDetail?.SinglePlayerDetails.users.id == user.id 
+                  ?
+                    moment(PlayerDetail?.SinglePlayerDetails?.date_of_birth).format('DD / MM / YY')
                   :
+                    moment().diff(PlayerDetail?.SinglePlayerDetails?.date_of_birth, "years") 
+                :
                   ""
               }
             </span>
@@ -60,7 +67,7 @@ export default function PlayerInfo({ PlayerDetail }) {
 
         <div className="flex flex-wrap p-2  gap-3">
           <div className="bg-white px-2 py-1 rounded-lg border-2 border-orange-100 shadow-xl">
-            <span className="text-xs md:text-base">Jersey Number : </span>
+            <span className="text-xs md:text-base">Jersey Number :</span>
             <span className="text-xs md:text-sm font-semibold px-1">
               {PlayerDetail?.SinglePlayerDetails?.jersey_no}
             </span>
