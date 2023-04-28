@@ -17,14 +17,31 @@ import {
   useDeleteGalleryMutation,
 } from "../../../services/gallery"
 
-const signUpSchema = Yup.object({
-  category: Yup.string().required("Please enter category"),
+const validFileExtensions = { image: ['jpg', 'png', 'jpeg'] };
+
+function isValidFileType(fileName, fileType) {
+  return fileName && validFileExtensions[fileType].indexOf(fileName.split('.').pop()) > -1;
+}
+
+const gallerySchema = Yup.object({
+  photo: Yup.mixed()
+    .required('Please select an image')
+    .test("is-valid-type", "Logo should be in jpg, jpeg or png format",
+      value => {
+        return isValidFileType(value && value.name.toLowerCase(), "image")
+      })
+    .test("is-valid-size", "Max allowed size is 2MB", value => {
+      if (!value) {
+        return true; 
+      }
+      return value && value.size <= 2097152
+    }),
+  category: Yup.string().required("Please select category"),
 });
 
 const AddEditGallery = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [photo, setphoto] = React.useState("");
   const [model, setModel] = React.useState(false);
   const [pageNo, setPageNo] = React.useState(1);
   const { isLoading, data, refetch } = useGetAdminGalleryQuery({
@@ -34,16 +51,17 @@ const AddEditGallery = () => {
   const [deleteGallery, {...deletingGallery}] = useDeleteGalleryMutation();
 
   const initialValues = {
+    photo: '',
     category: ""
   }
-  const { values, errors, handleBlur, touched, handleChange, handleSubmit } =
+  const { values, errors, resetForm, handleBlur, touched, setFieldValue, handleChange, handleSubmit } =
     useFormik({
       initialValues: initialValues,
-      validationSchema: signUpSchema,
+      validationSchema: gallerySchema,
       async onSubmit(data) {
         try {
           const fd = new FormData();
-          fd.append("photo", photo);
+          fd.append("photo", data.photo);
           let ok = JSON.stringify({
             GalleryInfo: data,
           });
@@ -68,16 +86,21 @@ const AddEditGallery = () => {
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes'
+        confirmButtonText: 'Yes',
+        showLoaderOnConfirm: true,
+        allowOutsideClick: false,
+        preConfirm: async () => {
+          const response = await deleteGallery(id)
+          if(response.error){
+            toast.error(response.error.data.message)
+          }
+          else if(response.data.success){
+            toast.success(response.data.message)
+          }
+        }
     }).then(async(result) => {
       if (result.isConfirmed) {
-        const response = await deleteGallery(id)
-        if(response.error){
-          toast.error(response.error.data.message)
-        }
-        else if(response.data.success){
-          toast.success(response.data.message)
-        }
+        
         refetch()
       }
     })
@@ -88,7 +111,6 @@ const AddEditGallery = () => {
       return n?.id == id;
     });
     setModel(true);
-    // setValue(updategallery)
   };
 
   React.useEffect(() => {
@@ -99,14 +121,11 @@ const AddEditGallery = () => {
       if (thing?.data?.success) {
         toast.success(thing?.data?.message);
         refetch()
+        resetForm()
         setModel(false);
       }
     }
   }, [thing.isError, thing.isSuccess]);
-
-  function handleImageUpload(e) {
-    setphoto(e.target.files[0]);
-  }
 
   return (
     <>
@@ -119,6 +138,7 @@ const AddEditGallery = () => {
                   <div className="flex justify-end ">
                     <button
                       onClick={() => {
+                        resetForm()
                         setModel(false);
                       }}
                       className="absolute translate-x-4 -translate-y-4 font-bold text-2xl p-2 text-[#571217] "
@@ -141,11 +161,15 @@ const AddEditGallery = () => {
                           <input
                             type="file"
                             name="photo"
-                            // value={value.photo ? value.photo : ""}
                             accept=".png, .jpg, .jpeg"
-                            onChange={(e) => handleImageUpload(e)}
+                            onChange={(e) => setFieldValue("photo", e.target.files[0])}
                             className="rounded-md py-[3px] md:py-[3px] w-full xl:py-2 px-3 outline-non border border-slate-300 outline-blue-200"
                           />
+                          {errors.photo && touched.photo ? (
+                            <p className="form-error text-red-600 text-sm font-semibold">
+                              {errors.photo}
+                            </p>
+                          ) : null}
                         </div>
                         <div className="email flex flex-col space-y-2  w-full ">
                           <label htmlFor="email">Category</label>
@@ -171,8 +195,8 @@ const AddEditGallery = () => {
                       <div className="flex justify-center items-center w-full space-x-5 ">
                         <button
                           type="submit"
-                          disabled={isLoading}
-                          className={`${isLoading ? "bg-[#ee6730]" : "#ee6730"}
+                          disabled={thing.isLoading}
+                          className={`${thing.isLoading ? "opacity-60" : ""}
                bg-slate-900   relative inline-flex items-center justify-center  px-4 py-1.5 
               sm:px-8 sm:py-[6px] xl:px-32 xl:py-2 overflow-hidden font-medium tracking-tighter text-white rounded-lg cursor-pointer group`}
                         >
@@ -185,7 +209,7 @@ const AddEditGallery = () => {
                                 : location?.state?.isEdit
                                   ? "UPDATE"
                                   : "SUBMIT"} */}
-                            {thing.isLoading ? "SUBMIT..." : "SUBMIT"}
+                            {thing.isLoading ? "Loading..." : "SUBMIT"}
                           </span>
                         </button>
                       </div>
@@ -264,10 +288,13 @@ const AddEditGallery = () => {
                           className="text-[11px] md:text-sm lg:text-[19px] "
                           onClick={() => handleUpdate(Gallery?.id ? Gallery?.id : "")}
                         /> */}
-                        <MdDelete
-                          className="text-[11px] md:text-sm lg:text-[21px] text-red-500"
-                          onClick={() => handleDelete(Gallery?.id ? Gallery?.id : "")}
-                        />
+                        <button 
+                        disabled={deletingGallery.isLoading}
+                        onClick={() => handleDelete(Gallery?.id ? Gallery?.id : "")}>
+                          <MdDelete
+                            className="text-[11px] md:text-sm lg:text-[21px] text-red-500"
+                          />
+                        </button>
                       </li>
                     </ul>
                   );

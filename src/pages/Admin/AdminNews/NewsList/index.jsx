@@ -18,7 +18,25 @@ import {
   useDeleteNewsDetailsMutation,
 } from "../../../../services/news";
 
-const signUpSchema = Yup.object({
+const validFileExtensions = { image: ['jpg', 'png', 'jpeg'] };
+
+function isValidFileType(fileName, fileType) {
+  return fileName && validFileExtensions[fileType].indexOf(fileName.split('.').pop()) > -1;
+}
+
+const newsSchema = Yup.object({
+  photo: Yup.mixed()
+    .required('Please select an image')
+    .test("is-valid-type", "Logo should be in jpg, jpeg or png format",
+      value => {
+        return isValidFileType(value && value.name.toLowerCase(), "image")
+      })
+    .test("is-valid-size", "Max allowed size is 2MB", value => {
+      if (!value) {
+        return true; 
+      }
+      return value && value.size <= 2097152
+    }),
   title: Yup.string().required("Please enter title"),
   tags: Yup.string().required("Please enter tags"),
   description: Yup.string().required("Please enter description"),
@@ -28,7 +46,6 @@ const NewsList = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [model, setModel] = React.useState(false);
-  const [photo, setphoto] = React.useState("");
   const [newsRegistration, { ...thing }] = useRegisterNewsMutation();
   const [newsUpdate, { ...updateData }] = useUpdateNewsDetailsMutation();
   const [deleteNewsDetails, {...deleteNews}] = useDeleteNewsDetailsMutation()
@@ -51,14 +68,14 @@ const NewsList = () => {
     pageNo: pageNo - 1,
   });
 
-  const { values, errors, handleBlur, touched, handleChange, handleSubmit } =
+  const { values, errors, resetForm, handleBlur, touched, setFieldValue, handleChange, handleSubmit } =
     useFormik({
       initialValues: value ? value : initialValues ,
-      validationSchema: signUpSchema,
+      validationSchema: newsSchema,
       onSubmit(data) {
         try {
           const fd = new FormData();
-          fd.append("photo", photo);
+          fd.append("photo", data.photo);
           let ok = JSON.stringify({
             NewsInfo: data,
           });
@@ -75,10 +92,6 @@ const NewsList = () => {
       },
     });
 
-  function handleImageUpload(e) {
-    setphoto(e.target.files[0]);
-  }
-
   const handleDelete = async (id) => {
     Swal.fire({
         title: 'Are you sure to delete this news?',
@@ -87,16 +100,20 @@ const NewsList = () => {
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes'
+        confirmButtonText: 'Yes',
+        showLoaderOnConfirm: true,
+        allowOutsideClick: false,
+        preConfirm: async () => {
+          const response = await deleteNewsDetails(id)
+          if(response.error){
+            toast.error(response.error.data.message)
+          }
+          else if(response.data.success){
+            toast.success(response.data.message)
+          }
+        }
     }).then(async(result) => {
       if (result.isConfirmed) {
-        const response = await deleteNewsDetails(id)
-        if(response.error){
-          toast.error(response.error.data.message)
-        }
-        else if(response.data.success){
-          toast.success(response.data.message)
-        }
         refetch()
       }
     })
@@ -117,8 +134,9 @@ const NewsList = () => {
     }
     if (thing.isSuccess) {
       if (thing?.data?.success) {
-        toast.success(data.message);
+        toast.success(thing.data.message);
         refetch()
+        resetForm()
         setModel(false);
       }
     }
@@ -147,6 +165,7 @@ const NewsList = () => {
                   <div className="flex justify-end ">
                     <button
                       onClick={() => {
+                        resetForm()
                         setModel(false);
                       }}
                       className="absolute translate-x-4 -translate-y-4 font-bold text-2xl p-2 text-[#571217] "
@@ -169,11 +188,15 @@ const NewsList = () => {
                           <input
                             type="file"
                             name="photo"
-                            // value={value.photo ? value.photo : ""}
                             accept=".png, .jpg, .jpeg"
-                            onChange={(e) => handleImageUpload(e)}
+                            onChange={(e) => setFieldValue("photo", e.target.files[0])}
                             className="rounded-md py-[3px] md:py-[3px] w-full xl:py-2 px-3 outline-non border border-slate-300 outline-blue-200"
                           />
+                          {errors.photo && touched.photo ? (
+                            <p className="form-error text-red-600 text-sm font-semibold">
+                              {errors.photo}
+                            </p>
+                          ) : null}
                         </div>
                         <div className="email flex flex-col space-y-2  w-full ">
                           <label htmlFor="email">Title</label>
@@ -235,15 +258,15 @@ const NewsList = () => {
                       <div className="flex justify-center items-center w-full space-x-5 ">
                         <button
                           type="submit"
-                          disabled={isLoading}
-                          className={`${isLoading ? "bg-[#ee6730]" : "#ee6730"}
+                          disabled={thing.isLoading}
+                          className={`${thing.isLoading ? "opacity-60" : ""}
                bg-slate-900   relative inline-flex items-center justify-center  px-4 py-1.5 
               sm:px-8 sm:py-[6px] xl:px-32 xl:py-2 overflow-hidden font-medium tracking-tighter text-white rounded-lg cursor-pointer group`}
                         >
                           <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#ee6730] rounded-lg group-hover:w-full group-hover:h-56"></span>
                           <span className="relative">
                             {thing.isLoading
-                              ? "SUBMIT..."
+                              ? "Loading..."
                               : updateData.isLoading
                                 ? "Updating..."
                                 : location?.state?.isEdit
