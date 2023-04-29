@@ -79,7 +79,7 @@ function LandingPage() {
           </div>
           <div className="right flex items-center w-full justify-center order-1 lg:order-2">
             <div className="img lg:absolute right-0 mt-10 lg:top-6 2xl:top-0 h-[230px] w-[280px] sm:h-[300px] sm:w-[380px] md:h-[400px] md:w-[400px] lg:w-[550px] xl:w-[600px] 2xl:h-[600px] 2xl:w-[800px] lg:mr-10 xl:mr-20">
-              <img src="/CBL_Images/portrait-two-basketball-players-training-dribbling-isolated-white-studio-background.jpg" alt="landing" className=" w-full" />
+              <img src="/CBL_Images/landing.webp" alt="landing" className=" w-full" />
             </div>
           </div>
         </div>
