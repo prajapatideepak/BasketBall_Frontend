@@ -11,7 +11,6 @@ import PrivateRoutes from "./PrivateRoutes";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
-import AdminRoutes from "./adminRoutes";
 import VerifyAccount from '../pages/VerifyAccount'
 import { QueryClient, QueryClientProvider } from "react-query";
 

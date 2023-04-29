@@ -11,7 +11,6 @@ import Heading from "../../Component/Heading";
 export default function AfterRole() {
   const navigate = useNavigate();
   const { user } = useSelector(state => state.user)
-  console.log(user)
 
   const [role, setRole] = React.useState([
     {

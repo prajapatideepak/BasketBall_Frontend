@@ -24,7 +24,6 @@ const GameInfo = ({ index, setIndex }) => {
 
   const { token } = useSelector((state) => state.user);
   const { PlayerForm } = useSelector((state) => state.player);
-  console.log(PlayerForm.basicInfo)
   const { values, errors, touched, handleSubmit, handleChange, handleBlur } =
     useFormik({
       initialValues: PlayerForm.gameInfo,
@@ -45,7 +44,7 @@ const GameInfo = ({ index, setIndex }) => {
             await playerRegistration(fb);
           }
         } catch (err) {
-          console.log(err)
+           toast.error(err.message);
         }
       },
     });
@@ -101,7 +100,7 @@ const GameInfo = ({ index, setIndex }) => {
         onBlur={setValues}
         onChange={setValues}
       >
-        <div className="w-full  px-5  m-auto dark:bg-gray-800">
+        <div className="w-full  px-5  m-auto ">
           <h1 className="py-2 text-xl text-center md:text-left my-2 text-orange-600">
             Game Information
           </h1>

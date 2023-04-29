@@ -237,11 +237,12 @@ function TournamentAddEdit() {
       for (let i = 0; i < data.sponsors.length; i++) {
         formdata.append(`sponsors_logo${i}`, data.sponsors[i].logo)
       }
-
+      
       setIsSubmitting(true);
       let response = null
       
       if(location?.state?.isEdit){
+        formdata.append('old_url', location?.state?.tournamentDetails.logo)
         response = await updateTournamentDetails({tournament_id: location?.state?.tournamentDetails.id , formData: formdata})
       }
       else{
@@ -303,7 +304,6 @@ function TournamentAddEdit() {
               <p className="text-center text-gray-700 text-sm md:text-base italic pb-5">
                 The court is set, the teams are ready, let the games begin!
               </p>
-
           }
         </div>
         <div className='mx-auto px-5 sm:px-10 py-10 lg:px-10 shadow-xl rounded-md'>

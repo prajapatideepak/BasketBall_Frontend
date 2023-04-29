@@ -4,7 +4,7 @@ import { TbFilePlus } from "react-icons/tb";
 import { MdDelete } from "react-icons/md";
 import { FiEdit } from "react-icons/fi";
 import { toast } from "react-toastify";
-import { BsCameraFill } from "react-icons/bs";
+import { ImNewspaper } from "react-icons/im";
 import { AiFillCloseCircle } from "react-icons/ai";
 import * as Yup from "yup";
 import Swal from "sweetalert2";
@@ -16,9 +16,27 @@ import {
   useUpdateNewsDetailsMutation,
   useGetAllNewsQuery,
   useDeleteNewsDetailsMutation,
-} from "../../../services/news";
+} from "../../../../services/news";
 
-const signUpSchema = Yup.object({
+const validFileExtensions = { image: ['jpg', 'png', 'jpeg'] };
+
+function isValidFileType(fileName, fileType) {
+  return fileName && validFileExtensions[fileType].indexOf(fileName.split('.').pop()) > -1;
+}
+
+const newsSchema = Yup.object({
+  photo: Yup.mixed()
+    .required('Please select an image')
+    .test("is-valid-type", "Logo should be in jpg, jpeg or png format",
+      value => {
+        return isValidFileType(value && value.name.toLowerCase(), "image")
+      })
+    .test("is-valid-size", "Max allowed size is 2MB", value => {
+      if (!value) {
+        return true; 
+      }
+      return value && value.size <= 2097152
+    }),
   title: Yup.string().required("Please enter title"),
   tags: Yup.string().required("Please enter tags"),
   description: Yup.string().required("Please enter description"),
@@ -28,9 +46,9 @@ const NewsList = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [model, setModel] = React.useState(false);
-  const [photo, setphoto] = React.useState("");
   const [newsRegistration, { ...thing }] = useRegisterNewsMutation();
   const [newsUpdate, { ...updateData }] = useUpdateNewsDetailsMutation();
+  const [deleteNewsDetails, {...deleteNews}] = useDeleteNewsDetailsMutation()
   const [pageNo, setPageNo] = React.useState(1);
 
   const initialValues = {
@@ -45,19 +63,19 @@ const NewsList = () => {
     tags: "",
     description: "",
   });
-  console.log(value , "value")
-  const { isLoading, data } = useGetAllNewsQuery({
+
+  const { isLoading, data, refetch } = useGetAllNewsQuery({
     pageNo: pageNo - 1,
   });
-    console.log(data)
-  const { values, errors, handleBlur, touched, handleChange, handleSubmit } =
+
+  const { values, errors, resetForm, handleBlur, touched, setFieldValue, handleChange, handleSubmit } =
     useFormik({
       initialValues: value ? value : initialValues ,
-      validationSchema: signUpSchema,
+      validationSchema: newsSchema,
       onSubmit(data) {
         try {
           const fd = new FormData();
-          fd.append("photo", photo);
+          fd.append("photo", data.photo);
           let ok = JSON.stringify({
             NewsInfo: data,
           });
@@ -66,28 +84,46 @@ const NewsList = () => {
           //   fb.append("id", value.id);
           //   useUpdateNewsDetailsMutation(fb).then(console.log("update ho gai"));
           // } else {
-          newsRegistration(fd).then(console.log("ho gaya"));
+          newsRegistration(fd).then();
           // }
         } catch (err) {
-          console.log(err);
+          toast.error(err.message);
         }
       },
     });
 
-  function handleImageUpload(e) {
-    setphoto(e.target.files[0]);
-  }
-
-  const handleDelete = (id) => {
-    alert(id)
-    useDeleteNewsDetailsMutation(id)
+  const handleDelete = async (id) => {
+    Swal.fire({
+        title: 'Are you sure to delete this news?',
+        text: "The news will be deleted",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes',
+        showLoaderOnConfirm: true,
+        allowOutsideClick: false,
+        preConfirm: async () => {
+          const response = await deleteNewsDetails(id)
+          if(response.error){
+            toast.error(response.error.data.message)
+          }
+          else if(response.data.success){
+            toast.success(response.data.message)
+          }
+        }
+    }).then(async(result) => {
+      if (result.isConfirmed) {
+        refetch()
+      }
+    })
   };
 
   const handleUpdate = (id) => {
     let updatenews = data?.AllNews?.find((n) => {
       return n?.id == id;
     });
-    console.log(updatenews, "sdgn kfdfk ");
+
     setValue(updatenews)
     setModel(true);
   };
@@ -98,7 +134,9 @@ const NewsList = () => {
     }
     if (thing.isSuccess) {
       if (thing?.data?.success) {
-        toast.success("News Addes Successfull ");
+        toast.success(thing.data.message);
+        refetch()
+        resetForm()
         setModel(false);
       }
     }
@@ -127,6 +165,7 @@ const NewsList = () => {
                   <div className="flex justify-end ">
                     <button
                       onClick={() => {
+                        resetForm()
                         setModel(false);
                       }}
                       className="absolute translate-x-4 -translate-y-4 font-bold text-2xl p-2 text-[#571217] "
@@ -149,11 +188,15 @@ const NewsList = () => {
                           <input
                             type="file"
                             name="photo"
-                            // value={value.photo ? value.photo : ""}
                             accept=".png, .jpg, .jpeg"
-                            onChange={(e) => handleImageUpload(e)}
+                            onChange={(e) => setFieldValue("photo", e.target.files[0])}
                             className="rounded-md py-[3px] md:py-[3px] w-full xl:py-2 px-3 outline-non border border-slate-300 outline-blue-200"
                           />
+                          {errors.photo && touched.photo ? (
+                            <p className="form-error text-red-600 text-sm font-semibold">
+                              {errors.photo}
+                            </p>
+                          ) : null}
                         </div>
                         <div className="email flex flex-col space-y-2  w-full ">
                           <label htmlFor="email">Title</label>
@@ -215,15 +258,15 @@ const NewsList = () => {
                       <div className="flex justify-center items-center w-full space-x-5 ">
                         <button
                           type="submit"
-                          disabled={isLoading}
-                          className={`${isLoading ? "bg-[#ee6730]" : "#ee6730"}
+                          disabled={thing.isLoading}
+                          className={`${thing.isLoading ? "opacity-60" : ""}
                bg-slate-900   relative inline-flex items-center justify-center  px-4 py-1.5 
               sm:px-8 sm:py-[6px] xl:px-32 xl:py-2 overflow-hidden font-medium tracking-tighter text-white rounded-lg cursor-pointer group`}
                         >
                           <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#ee6730] rounded-lg group-hover:w-full group-hover:h-56"></span>
                           <span className="relative">
                             {thing.isLoading
-                              ? "SUBMIT..."
+                              ? "Loading..."
                               : updateData.isLoading
                                 ? "Updating..."
                                 : location?.state?.isEdit
@@ -261,25 +304,25 @@ const NewsList = () => {
             </div>
             <div className="md:px-5 py-3">
               <ul className="flex md:px-2 2xl:px-10 justify-between bg-gray-300 md:rounded-lg py-[10px] shadow-sm text-black font-medium px-2 ">
-                <li className="w-20 text-center text-[8px] sm:text-[9.5px] md:text-[12px] 2xl:text-base ">
+                <li className="w-20 text-left text-[8px] sm:text-[9.5px] md:text-[12px] 2xl:text-base ">
                   Sr No
                 </li>
-                <li className="w-20 text-center text-[8px] sm:text-[9.5px] md:text-[12px] 2xl:text-base ">
+                <li className="w-20 text-left text-[8px] sm:text-[9.5px] md:text-[12px] 2xl:text-base ">
                   Photo
                 </li>
-                <li className="w-20 text-center text-[8px] sm:text-[9.5px] md:text-[12px] 2xl:text-base ">
+                <li className="w-20 text-left text-[8px] sm:text-[9.5px] md:text-[12px] 2xl:text-base ">
                   Title
                 </li>
-                <li className="w-20 text-center text-[8px] sm:text-[9.5px] md:text-[12px] 2xl:text-base ">
+                <li className="w-20 text-left text-[8px] sm:text-[9.5px] md:text-[12px] 2xl:text-base ">
                   Tags
                 </li>
-                <li className="w-52 text-center text-[8px] sm:text-[9.5px] md:text-[12px] 2xl:text-base ">
+                <li className="w-52 text-left text-[8px] sm:text-[9.5px] md:text-[12px] 2xl:text-base ">
                   Description
                 </li>
-                <li className="w-20 text-center text-[8px] sm:text-[9.5px] md:text-[12px] 2xl:text-base ">
+                <li className="w-20 text-left text-[8px] sm:text-[9.5px] md:text-[12px] 2xl:text-base ">
                   Date
                 </li>
-                <li className="w-20 text-center text-[8px] sm:text-[9.5px] md:text-[12px] 2xl:text-base ">
+                <li className="w-20 text-left text-[8px] sm:text-[9.5px] md:text-[12px] 2xl:text-base ">
                   Action
                 </li>
               </ul>
@@ -290,35 +333,35 @@ const NewsList = () => {
                       key={index}
                       className="flex items-center space-x-2 justify-between font-normal md:px-2 2xl:px-10 py-2 rounded-lg cursor-pointer hover:bg-gray-100 bg-white shadow-sm my-3"
                     >
-                      <li className="w-20 text-[6px] sm:text-[8.5px] md:text-[12px] 2xl:text-sm text-center">
+                      <li className="w-20 text-[6px] sm:text-[8.5px] md:text-[12px] 2xl:text-sm text-left">
                         {News?.id ? News?.id : ""}
                       </li>
                       <li className="w-20 flex justify-center items-center">
                         <img
                           src={News?.photo ? News?.photo : ""}
                           alt=""
-                          className="rounded-full border -[3px] shadow-sm w-5 h-5 sm:w-8 sm:h-8 md:w-14 md:h-14 2xl:w-20 2xl:h-20"
+                          className="border -[3px] shadow-sm w-5 h-5 sm:w-8 sm:h-8 md:w-14 md:h-14 2xl:w-20 2xl:h-20"
                         />
                       </li>
-                      <li className="w-20 text-center text-[6px] sm:text-[8.5px] md:text-[12px] 2xl:text-sm ">
+                      <li className="w-20 text-left text-[6px] sm:text-[8.5px] md:text-[12px] 2xl:text-sm ">
                         {News?.title ? News?.title : ""}
                       </li>
-                      <li className="w-20 text-center text-[6px] sm:text-[8.5px] md:text-[12px] 2xl:text-sm ">
+                      <li className="w-20 text-left text-[6px] sm:text-[8.5px] md:text-[12px] 2xl:text-sm ">
                         {News?.tags ? News?.tags : ""}
                       </li>
-                      <li className="w-52 text-center text-[6px] sm:text-[8.5px] md:text-[12px] 2xl:text-sm overflow-hidden">
+                      <li className="w-52 text-left text-[6px] sm:text-[8.5px] md:text-[12px] 2xl:text-sm overflow-hidden">
                         {News?.description ? News?.description : ""}
                       </li>
-                      <li className="w-20 text-center text-[6px] sm:text-[8.5px] md:text-[12px] 2xl:text-sm">
+                      <li className="w-20 text-left text-[6px] sm:text-[8.5px] md:text-[12px] 2xl:text-sm">
                         {News.created_at
                           ? moment(News?.created_at).format("DD / MM / YY")
                           : ""}
                       </li>
-                      <li className="w-20 text-center flex flex-col md:flex-row items-center justify-center space-y-2 md:space-y-0 md:space-x-3">
-                        <FiEdit
+                      <li className="w-20 text-left flex flex-col md:flex-row items-center justify-start space-y-2 md:space-y-0 md:space-x-3">
+                        {/* <FiEdit
                           className="text-[11px] md:text-sm lg:text-[19px] "
                           onClick={() => handleUpdate(News?.id ? News?.id : "")}
-                        />
+                        /> */}
                         <MdDelete
                           className="text-[11px] md:text-sm lg:text-[21px] text-red-500"
                           onClick={() => handleDelete(News?.id ? News?.id : "")}
@@ -329,7 +372,7 @@ const NewsList = () => {
                 })
               ) : (
                 <div className="flex justify-center items-center w-full py-10">
-                  <BsCameraFill className=" text-2xl sm:text-3xl md:text-[30px] text-gray-400 mr-2" />
+                  <ImNewspaper className=" text-2xl sm:text-3xl md:text-[30px] text-gray-400 mr-2" />
                   <p className="text-xs xs:text-sm sm:text-lg 2xl:text-[20px] font-medium text-gray-400">
                     News Not Found
                   </p>
@@ -359,12 +402,11 @@ const NewsList = () => {
                     disabled={data?.AllNews?.length < 12}
                     className="cursor-pointer disabled:opacity-30 disabled:cursor-default p-2 border rounded border-gray-400"
                   >
-                    {" "}
                     <IoIosArrowForward />
                   </button>
                 </div>
                 :
-                null
+                  null
             }
           </div>
         </div>

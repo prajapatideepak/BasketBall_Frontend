@@ -13,12 +13,10 @@ import moment from 'moment'
 const BasicInfo = ({ index, setIndex }) => {
   const dispatch = useDispatch();
   const location = useLocation();
-  const defaultImage = "/CBL_Images/60111-removebg-preview.png";
+  const defaultImage = "/CBL_Images/player-default-profile.webp";
   const { PlayerForm } = useSelector((state) => state.player);
   const [img, setImg] = React.useState(PlayerForm.basicInfo.photo ? PlayerForm.basicInfo.photo : defaultImage);
   const [photo, setPhoto] = React.useState(PlayerForm.basicInfo.photo ? PlayerForm.basicInfo.photo : "");
-  const [date_of_birth, setDate] = React.useState(moment(PlayerForm.basicInfo.date_of_birth).format('YYYY-MM-DD'));
-
 
   const { values, touched, errors, handleChange, handleSubmit, handleBlur } =
     useFormik({
@@ -32,7 +30,7 @@ const BasicInfo = ({ index, setIndex }) => {
 
   function handleImageUpload(e) {
     setPhoto(() => e.target.files[0]);
-    setImg(URL.createObjectURL(photo));
+    setImg(URL.createObjectURL(e.target.files[0]));
   }
 
   const handleDateChange = (e) => {
@@ -42,7 +40,7 @@ const BasicInfo = ({ index, setIndex }) => {
   return (
     <>
       <form className="flex w-full  space-x-3">
-        <div className="w-full  px-5  m-auto dark:bg-gray-800">
+        <div className="w-full  px-5  m-auto ">
           <div className="grid text-lg lg:text-base grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-5  lg:gap-5">
             <div className="md:col-span-2 mt-5 flex items-center md:items-start md:justify-end flex-col">
               <h1 className="py-2 underline underline-offset-4 px-3 text-xl text-orange-600">
@@ -209,7 +207,7 @@ const BasicInfo = ({ index, setIndex }) => {
               </label>
               <div className="flex space-x-2 bg-white items-center text-gray-700 rounded-lg border border-gray-300 py-2 px-4">
                 <div className="flex  justify-center  items-center space-x-2">
-                  <label className="cursor-pointer" c htmlFor="male">
+                  <label className="cursor-pointer" htmlFor="male">
                     Male
                   </label>
                   <input

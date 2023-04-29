@@ -20,6 +20,21 @@
   width: 100%;
 }
 
+.active{
+  color: #ee6730;
+  /* left: 0%;
+  width: 100%; */
+}
+
+.active > svg{
+  color: #ee6730
+}
+
+.non-active{
+  color: gray
+}
+
+
 /* Scrollbar style for browser */
 
 /* width */

@@ -4,7 +4,7 @@ import { TbFilePlus } from "react-icons/tb";
 import { MdDelete } from "react-icons/md";
 import { FiEdit } from "react-icons/fi";
 import { toast } from "react-toastify";
-import { GrGallery } from "react-icons/gr";
+import { IoImagesSharp } from "react-icons/io5";
 import { AiFillCloseCircle } from "react-icons/ai";
 import * as Yup from "yup";
 import Swal from "sweetalert2";
@@ -12,35 +12,56 @@ import { useFormik } from "formik";
 import moment from "moment";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import {
-  useGetAllGalleryQuery,
-  useRegisterGalleryMutation
-} from "../../services/gallery"
+  useGetAdminGalleryQuery,
+  useRegisterGalleryMutation,
+  useDeleteGalleryMutation,
+} from "../../../services/gallery"
 
-const signUpSchema = Yup.object({
-  category: Yup.string().required("Please enter category"),
+const validFileExtensions = { image: ['jpg', 'png', 'jpeg'] };
+
+function isValidFileType(fileName, fileType) {
+  return fileName && validFileExtensions[fileType].indexOf(fileName.split('.').pop()) > -1;
+}
+
+const gallerySchema = Yup.object({
+  photo: Yup.mixed()
+    .required('Please select an image')
+    .test("is-valid-type", "Logo should be in jpg, jpeg or png format",
+      value => {
+        return isValidFileType(value && value.name.toLowerCase(), "image")
+      })
+    .test("is-valid-size", "Max allowed size is 2MB", value => {
+      if (!value) {
+        return true; 
+      }
+      return value && value.size <= 2097152
+    }),
+  category: Yup.string().required("Please select category"),
 });
 
 const AddEditGallery = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [photo, setphoto] = React.useState("");
   const [model, setModel] = React.useState(false);
   const [pageNo, setPageNo] = React.useState(1);
-  const { isLoading, data } = useGetAllGalleryQuery({
+  const { isLoading, data, refetch } = useGetAdminGalleryQuery({
     pageNo: pageNo - 1,
   });
   const [galleryRegistration, { ...thing }] = useRegisterGalleryMutation();
+  const [deleteGallery, {...deletingGallery}] = useDeleteGalleryMutation();
+
   const initialValues = {
+    photo: '',
     category: ""
   }
-  const { values, errors, handleBlur, touched, handleChange, handleSubmit } =
+  const { values, errors, resetForm, handleBlur, touched, setFieldValue, handleChange, handleSubmit } =
     useFormik({
       initialValues: initialValues,
-      validationSchema: signUpSchema,
-      onSubmit(data) {
+      validationSchema: gallerySchema,
+      async onSubmit(data) {
         try {
           const fd = new FormData();
-          fd.append("photo", photo);
+          fd.append("photo", data.photo);
           let ok = JSON.stringify({
             GalleryInfo: data,
           });
@@ -49,17 +70,40 @@ const AddEditGallery = () => {
           //   fb.append("id", value.id);
           //   useUpdateNewsDetailsMutation(fb).then(console.log("update ho gai"));
           // } else {
-          galleryRegistration(fd).then(console.log("ho gaya"));
+          await galleryRegistration(fd);
           // }
         } catch (err) {
-          console.log(err);
+          toast.error(err.message)
         }
       },
     });
 
   const handleDelete = (id) => {
-    alert(id)
-    useDeleteNewsDetailsMutation(id)
+    Swal.fire({
+        title: 'Are you sure to delete this gallery image?',
+        text: "This gallery image will be deleted",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes',
+        showLoaderOnConfirm: true,
+        allowOutsideClick: false,
+        preConfirm: async () => {
+          const response = await deleteGallery(id)
+          if(response.error){
+            toast.error(response.error.data.message)
+          }
+          else if(response.data.success){
+            toast.success(response.data.message)
+          }
+        }
+    }).then(async(result) => {
+      if (result.isConfirmed) {
+        
+        refetch()
+      }
+    })
   };
 
   const handleUpdate = (id) => {
@@ -67,7 +111,6 @@ const AddEditGallery = () => {
       return n?.id == id;
     });
     setModel(true);
-    setValue(updategallery)
   };
 
   React.useEffect(() => {
@@ -76,15 +119,13 @@ const AddEditGallery = () => {
     }
     if (thing.isSuccess) {
       if (thing?.data?.success) {
-        toast.success("Gallery Addes Successfull ");
+        toast.success(thing?.data?.message);
+        refetch()
+        resetForm()
         setModel(false);
       }
     }
   }, [thing.isError, thing.isSuccess]);
-
-  function handleImageUpload(e) {
-    setphoto(e.target.files[0]);
-  }
 
   return (
     <>
@@ -97,6 +138,7 @@ const AddEditGallery = () => {
                   <div className="flex justify-end ">
                     <button
                       onClick={() => {
+                        resetForm()
                         setModel(false);
                       }}
                       className="absolute translate-x-4 -translate-y-4 font-bold text-2xl p-2 text-[#571217] "
@@ -119,11 +161,15 @@ const AddEditGallery = () => {
                           <input
                             type="file"
                             name="photo"
-                            // value={value.photo ? value.photo : ""}
                             accept=".png, .jpg, .jpeg"
-                            onChange={(e) => handleImageUpload(e)}
+                            onChange={(e) => setFieldValue("photo", e.target.files[0])}
                             className="rounded-md py-[3px] md:py-[3px] w-full xl:py-2 px-3 outline-non border border-slate-300 outline-blue-200"
                           />
+                          {errors.photo && touched.photo ? (
+                            <p className="form-error text-red-600 text-sm font-semibold">
+                              {errors.photo}
+                            </p>
+                          ) : null}
                         </div>
                         <div className="email flex flex-col space-y-2  w-full ">
                           <label htmlFor="email">Category</label>
@@ -136,8 +182,8 @@ const AddEditGallery = () => {
                             onBlur={handleBlur}
                           >
                             <option value="">Select Category</option>
-                            <option value="champ">Champ</option>
-                            <option value="award">Awards</option>
+                            <option value="champions">Champions</option>
+                            <option value="awards">Achievement/Award</option>
                           </select>
                           {errors.category && touched.category ? (
                             <p className="form-error text-red-600 text-sm font-semibold">
@@ -149,8 +195,8 @@ const AddEditGallery = () => {
                       <div className="flex justify-center items-center w-full space-x-5 ">
                         <button
                           type="submit"
-                          disabled={isLoading}
-                          className={`${isLoading ? "bg-[#ee6730]" : "#ee6730"}
+                          disabled={thing.isLoading}
+                          className={`${thing.isLoading ? "opacity-60" : ""}
                bg-slate-900   relative inline-flex items-center justify-center  px-4 py-1.5 
               sm:px-8 sm:py-[6px] xl:px-32 xl:py-2 overflow-hidden font-medium tracking-tighter text-white rounded-lg cursor-pointer group`}
                         >
@@ -163,7 +209,7 @@ const AddEditGallery = () => {
                                 : location?.state?.isEdit
                                   ? "UPDATE"
                                   : "SUBMIT"} */}
-                            {thing.isLoading ? "SUBMIT..." : "SUBMIT"}
+                            {thing.isLoading ? "Loading..." : "SUBMIT"}
                           </span>
                         </button>
                       </div>
@@ -188,7 +234,7 @@ const AddEditGallery = () => {
                 <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#ee6730] rounded-lg group-hover:w-full group-hover:h-56"></span>
                 <div className="flex items-center space-x-2">
                   <span className="relative text-[10px] sm:text-xs md:text-sm xl:text-base">
-                    Add Gallery
+                    Add Image
                   </span>
                   <TbFilePlus className="relative text-xs md:text-xl" />
                 </div>
@@ -196,19 +242,19 @@ const AddEditGallery = () => {
             </div>
             <div className="md:px-5 py-3">
               <ul className="flex md:px-2 2xl:px-10 justify-between bg-gray-300 md:rounded-lg py-[10px] shadow-sm text-black font-medium px-2 ">
-                <li className="w-20 text-center text-[8px] sm:text-[9.5px] md:text-[12px] 2xl:text-base ">
+                <li className="w-20 text-left text-[8px] sm:text-[9.5px] md:text-[12px] 2xl:text-base ">
                   Sr No
                 </li>
-                <li className="w-20 text-center text-[8px] sm:text-[9.5px] md:text-[12px] 2xl:text-base ">
+                <li className="w-20 text-left text-[8px] sm:text-[9.5px] md:text-[12px] 2xl:text-base ">
                   Photo
                 </li>
-                <li className="w-20 text-center text-[8px] sm:text-[9.5px] md:text-[12px] 2xl:text-base ">
-                  Title
+                <li className="w-20 text-left text-[8px] sm:text-[9.5px] md:text-[12px] 2xl:text-base ">
+                  Category
                 </li>
-                <li className="w-20 text-center text-[8px] sm:text-[9.5px] md:text-[12px] 2xl:text-base ">
+                <li className="w-20 text-left text-[8px] sm:text-[9.5px] md:text-[12px] 2xl:text-base ">
                   Date
                 </li>
-                <li className="w-20 text-center text-[8px] sm:text-[9.5px] md:text-[12px] 2xl:text-base ">
+                <li className="w-20 text-left text-[8px] sm:text-[9.5px] md:text-[12px] 2xl:text-base ">
                   Action
                 </li>
               </ul>
@@ -219,42 +265,45 @@ const AddEditGallery = () => {
                       key={index}
                       className="flex items-center space-x-2 justify-between font-normal md:px-2 2xl:px-10 py-2 rounded-lg cursor-pointer hover:bg-gray-100 bg-white shadow-sm my-3"
                     >
-                      <li className="w-20 text-[6px] sm:text-[8.5px] md:text-[12px] 2xl:text-sm text-center">
+                      <li className="w-20 text-[6px] sm:text-[8.5px] md:text-[12px] 2xl:text-sm text-left">
                         {Gallery?.id ? Gallery?.id : ""}
                       </li>
                       <li className="w-20 flex justify-center items-center">
                         <img
                           src={Gallery?.photo ? Gallery?.photo : ""}
                           alt=""
-                          className="rounded-full border -[3px] shadow-sm w-5 h-5 sm:w-8 sm:h-8 md:w-14 md:h-14 2xl:w-20 2xl:h-20"
+                          className="border -[3px] shadow-sm w-5 h-5 sm:w-8 sm:h-8 md:w-14 md:h-14 2xl:w-20 2xl:h-20"
                         />
                       </li>
-                      <li className="w-20 text-center text-[6px] sm:text-[8.5px] md:text-[12px] 2xl:text-sm ">
+                      <li className="w-20 text-left text-[6px] sm:text-[8.5px] md:text-[12px] 2xl:text-sm capitalize">
                         {Gallery?.category ? Gallery?.category : ""}
                       </li>
-                      <li className="w-20 text-center text-[6px] sm:text-[8.5px] md:text-[12px] 2xl:text-sm">
+                      <li className="w-20 text-left text-[6px] sm:text-[8.5px] md:text-[12px] 2xl:text-sm">
                         {Gallery?.created_at
-                          ? moment(Gallery?.created_at).format("DD / MM / YY")
+                          ? moment(Gallery?.created_at).format("DD/MM/YYYY")
                           : ""}
                       </li>
-                      <li className="w-20 text-center flex flex-col md:flex-row items-center justify-center space-y-2 md:space-y-0 md:space-x-3">
-                        <FiEdit
+                      <li className="w-20 text-left flex flex-col md:flex-row items-center justify-start space-y-2 md:space-y-0 md:space-x-3">
+                        {/* <FiEdit
                           className="text-[11px] md:text-sm lg:text-[19px] "
                           onClick={() => handleUpdate(Gallery?.id ? Gallery?.id : "")}
-                        />
-                        <MdDelete
-                          className="text-[11px] md:text-sm lg:text-[21px] text-red-500"
-                          onClick={() => handleDelete(Gallery?.id ? Gallery?.id : "")}
-                        />
+                        /> */}
+                        <button 
+                        disabled={deletingGallery.isLoading}
+                        onClick={() => handleDelete(Gallery?.id ? Gallery?.id : "")}>
+                          <MdDelete
+                            className="text-[11px] md:text-sm lg:text-[21px] text-red-500"
+                          />
+                        </button>
                       </li>
                     </ul>
                   );
                 })
               ) : (
                 <div className="flex justify-center items-center w-full py-10">
-                  <GrGallery className=" text-2xl sm:text-3xl md:text-[30px] text-gray-400 mr-2" />
-                  <p className="text-xs xs:text-sm sm:text-lg 2xl:text-[20px] font-medium text-gray-400">
-                    Gallery Not Found
+                  <IoImagesSharp className=" text-xl sm:text-2xl md:text-[20px] text-gray-400 mr-2" />
+                  <p className="text-xs xs:text-sm sm:text-lg 2xl:text-[15px] font-medium text-gray-400">
+                    No gallery image found
                   </p>
                 </div>
               )}

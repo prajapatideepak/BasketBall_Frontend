@@ -448,7 +448,7 @@ function Admin({tournamentDetails, refetchData, teams}) {
         handleShowModal={setRejectReasonModal}
         refetchData={teamsRequest.refetch}
       />
-      <UploadImageModal open={imageUploadModal} handleOpen={handleOpen} />
+      <UploadImageModal open={imageUploadModal} handleOpen={handleOpen} refetchData={refetchData} />
     </div>
   );
 }

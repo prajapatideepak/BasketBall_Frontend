@@ -45,7 +45,7 @@ function TournamentDetails() {
     <Schedule isOrganizer={isOrganizer} />,
     <Prize prize={tournamentDetails.prize} />,
     <Sponsors sponsors={tournamentDetails.tournament_sponsors} />,
-    <Gallery galleryDetails={tournamentDetails.gallery} />,
+    <Gallery galleryDetails={tournamentDetails.gallery} refetchData={refetch} />,
     <About isOrganizer={isOrganizer} tournamentDetails={tournamentDetails} />,
     <Admin tournamentDetails={tournamentDetails} teams={tournamentDetails.tournament_teams} refetchData={refetch} />
   ];
