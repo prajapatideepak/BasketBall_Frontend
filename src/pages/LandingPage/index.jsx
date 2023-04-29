@@ -1,7 +1,5 @@
 import React from "react";
-import image from "../../../public/CBL_Images/main-img-1.webp";
-import { Link, Outlet } from "react-router-dom";
-import { RxArrowRight } from "react-icons/rx";
+import { Link} from "react-router-dom";
 
 function LandingPage() {
   return (
