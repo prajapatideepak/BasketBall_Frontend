@@ -4,13 +4,15 @@ import Heading from "../../Component/Heading";
 import { useGetMatchListQuery } from "../../services/match";
 import MatchCard from "../../Component/MatchCard";
 import SmallLoader from "../../Component/SmallLoader";
-import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
+import Pagination from 'react-responsive-pagination'
+import '../../Component/Pagination/pagination.css'
 
 function MatchList() {
   const [currentTab, setCurrentTab] = React.useState(1);
-  const [pageNo, setPageNo] = React.useState(0);
+  const [pageNo, setPageNo] = React.useState(1);
 
-  const data = useGetMatchListQuery({ pageNo: pageNo, status: currentTab });
+  const data = useGetMatchListQuery({ pageNo: pageNo - 1 , status: currentTab });
+  console.log(data.data)
   return (
     <section className="min-h-screen-fit">
       <div className="mx-auto px-10 py-12 sm:px-20 sm:py-12 md:px-20 md:py-16 lg:px-24 xl:px-28 2xl:px-32">
@@ -85,33 +87,16 @@ function MatchList() {
           </div>
         )}
 
-        {data?.data?.data.length > 0 && (
-          <div className="flex  justify-center items-center text-gray-400 py-5 space-x-2 mt-5 text-sm">
-            <button
-              onClick={(e) => {
-                setPageNo(() => pageNo - 1);
-              }}
-              disabled={pageNo == 0}
-              className="cursor-pointer disabled:cursor-default disabled:opacity-30 p-2 border rounded border-gray-400"
-            >
-              <IoIosArrowBack />
-            </button>
-            <div className="cursor-pointer px-4 py-1  border rounded bg-[#ee6730] text-base text-white shadow-xl">
-              {" "}
-              {pageNo + 1}
-            </div>
-            <button
-              onClick={(e) => {
-                setPageNo(() => pageNo + 1);
-              }}
-              disabled={data?.data?.data?.length < 5}
-              className="cursor-pointer disabled:opacity-30 disabled:cursor-default p-2 border rounded border-gray-400"
-            >
-              {" "}
-              <IoIosArrowForward />
-            </button>
+      
+        <div className='mx-auto px-20 py-12 sm:px-24 sm:py-12 md:px-28 md:py-16'>
+            <Pagination
+              total={data.data && data.data.pageCount ? data.data.pageCount : 0}
+              current={pageNo}
+              onPageChange={(page) => setPageNo(page)}
+            // previousLabel="Previous" nextLabel="Next"
+            />
           </div>
-        )}
+
       </div>
     </section>
   );

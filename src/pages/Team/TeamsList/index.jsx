@@ -8,7 +8,9 @@ import {
   AiOutlineBackward,
 } from "react-icons/ai";
 import { useGetTeamListQuery } from "../../../services/team";
-import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
+import Pagination from 'react-responsive-pagination'
+import '../../../Component/Pagination/pagination.css'
+
 
 function TeamsList() {
   const [search, setSearch] = React.useState("");
@@ -17,6 +19,8 @@ function TeamsList() {
     pageNo: pageNo - 1,
     search,
   });
+
+  console.log(data)
   return (
     <section className="min-h-screen">
       <div className="mx-auto px-10 py-12 sm:px-20 sm:py-12 md:px-20 md:py-16 lg:px-24 xl:px-28 2xl:px-32">
@@ -52,7 +56,7 @@ function TeamsList() {
         )}
 
         <div className="flex  justify-center items-center text-gray-400 py-5 space-x-2 mt-5 text-sm">
-          <button
+          {/* <button
             onClick={(e) => {
               setPageNo(() => pageNo - 1);
             }}
@@ -74,7 +78,17 @@ function TeamsList() {
           >
             {" "}
             <IoIosArrowForward />
-          </button>
+          </button> */}
+
+          <div className='mx-auto px-20 py-12 sm:px-24 sm:py-12 md:px-28 md:py-16'>
+            <Pagination
+              total={data && data.pageCount ? data.pageCount : 0}
+              current={pageNo}
+              onPageChange={(page) => setPageNo(page)}
+            // previousLabel="Previous" nextLabel="Next"
+            />
+          </div>
+
         </div>
       </div>
     </section>
