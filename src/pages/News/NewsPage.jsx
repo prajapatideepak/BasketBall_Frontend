@@ -17,7 +17,7 @@ const NewsPage = () => {
   const { isLoading, data } = useGetAllNewsQuery({
     pageNo: pageNo - 1,
   });
-  
+  console.log(data)
   React.useEffect(() => {
     dispatch(getNewsData());
   }, []);
@@ -80,7 +80,7 @@ const NewsPage = () => {
 
         <div className='mx-auto px-20 py-12 sm:px-24 sm:py-12 md:px-28 md:py-16'>
           <Pagination
-            total={data}
+            total={data && data.pageCount ? data.pageCount : 0}
             current={pageNo}
             onPageChange={(page) => setPageNo(page)}
           // previousLabel="Previous" nextLabel="Next"
