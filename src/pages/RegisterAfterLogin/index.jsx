@@ -68,15 +68,9 @@ export default function AfterRole() {
     }
   }
   return (
-    <div className="flex flex-col lg:justify-center px-8 items-center lg:px-20 lg:py-5 " style={{minHeight: 'calc(100vh - 70px)'}}>
+    <div className="flex flex-col lg:justify-center px-8 items-center lg:px-20 lg:py-5 " style={{ minHeight: 'calc(100vh - 70px)' }}>
       <div className="mt-5 text-center flex flex-col justify-center w-full lg:px-20 space-y-3 ">
-        {/* <Heading
-          text={"Select Your Role"}
-          className="text-2xl px-2"
-          margin={true}
-        /> */}
-        <h1 className="heading text-[30px] font-bold text-center text-[#ee6730] uppercase ">Select your role</h1>
-        
+        <h1 className="role-heading text-3xl font-bold text-center text-[#ee6730] uppercase ">Select your role</h1>
         <p className=" text-gray-500 p-1 text-center">
           Rise to the Top: Choose Your Role as Visitor, Player, Tournament Host,
           or Team Manager and Dominate the Court
@@ -84,8 +78,8 @@ export default function AfterRole() {
       </div>
       <div className=" my-14 rounded-lg flex flex-wrap justify-center gap-10 sm:gap-8 md:gap-12">
         {role.map((r, i) => {
-          if(user.is_player && r.title == 'Player') return
-          if(user.is_visitor && r.title == 'Visitor') return
+          if (user.is_player && r.title == 'Player') return
+          if (user.is_visitor && r.title == 'Visitor') return
           return (
             <motion.div
               animate={{
@@ -120,7 +114,7 @@ export default function AfterRole() {
                 <MdDone className="text-center text-white font-bold text-xl " />
               </motion.div>
               <div className="flex justify-center items-center   xl:h-[90%] w-full">
-              <img className="w-[60%] lg:w-[70%] xl:w-[60%]  mx-auto" src={r.icon} />
+                <img className="w-[60%] lg:w-[70%] xl:w-[60%]  mx-auto" src={r.icon} />
 
               </div>
               <motion.div

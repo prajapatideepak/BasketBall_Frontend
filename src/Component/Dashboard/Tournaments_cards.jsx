@@ -27,7 +27,7 @@ function Tournaments_cards({ tournament }) {
 
     return (
         <>
-            <div className="relative items-center hover:scale-105 duration-300 cursor-pointer shadow-lg shadow-[#ea5a2e99] xxs:w-full xs:min-w-full sm:min-w-[100px] md:min-w-[180px]  lg:max-w-[150] xl:w-[320px]  2xl:min-w-[350px]  h-[155px] sm:h-[155px] md:h-[165px] xl:h-[155px] 2xl:h-[180px]
+            <div className="relative items-center hover:scale-105 duration-300 cursor-pointer shadow-lg bg-white shadow-[#ea5a2e99] xxs:w-full xs:min-w-full sm:min-w-[100px] md:min-w-[180px]  lg:max-w-[150] xl:w-[320px]  2xl:min-w-[350px]  h-[155px] sm:h-[155px] md:h-[165px] xl:h-[155px] 2xl:h-[180px]
    group rounded-lg" onClick={handleClick}>
                 <div className='w-full flex justify-end items-end'>
                     <img src="/CBL_Images/495f339d-92fe-4b3c-a820-621336d292f6.jpg" alt="" className='rounded-lg w-2/4 xs:w-2/4 sm:w-1/2 lg:w-2/5 xl:w-[55%] 2xl:w-3/5' />
