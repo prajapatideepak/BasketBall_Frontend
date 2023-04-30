@@ -10,6 +10,7 @@ import moment from 'moment'
 
 
 function Tournaments_cards({ tournament }) {
+    console.log(tournament?.tournament_name?.length)
     const navigate = useNavigate();
     const handleClick = () => {
         navigate(`/tournament/${tournament.id}`);
@@ -26,7 +27,35 @@ function Tournaments_cards({ tournament }) {
 
     return (
         <>
-            <div className="flex justify-center items-center r:bg-white cursor-pointer shadow-lg shadow-[#ea5a2e12] xs:min-w-[145px] sm:min-w-[160px] md:min-w-[180px]  lg:max-w-[150] xl:w-[155px]  2xl:min-w-[350px]  h-[140px] sm:h-[155px] md:h-[165px] xl:h-[155px] 2xl:h-[175px]
+            <div className="relative items-center hover:scale-105 duration-300 cursor-pointer shadow-lg shadow-[#ea5a2e99] xxs:w-full xs:min-w-full sm:min-w-[100px] md:min-w-[180px]  lg:max-w-[150] xl:w-[320px]  2xl:min-w-[350px]  h-[155px] sm:h-[155px] md:h-[165px] xl:h-[155px] 2xl:h-[180px]
+   group rounded-lg" onClick={handleClick}>
+                <div className='w-full flex justify-end items-end'>
+                    <img src="/CBL_Images/495f339d-92fe-4b3c-a820-621336d292f6.jpg" alt="" className='rounded-lg w-2/4 xs:w-2/4 sm:w-1/2 lg:w-2/5 xl:w-[55%] 2xl:w-3/5' />
+                </div>
+                <div className='absolute left-6 top-6 space-y-3 w-1/2 '>
+                    <h1 className={`${tournament?.tournament_name?.length < 8 ?  "xs:text-3xl text-4xl uppercase" : "text-2xl uppercase"} uppercase font-bold `}>
+                    {tournament?.tournament_name}
+                    </h1>
+                    <div className='bg-[#ee6730] rounded-md text-center text-sm py-1 text-white w-40'>
+                        Ahmedabad
+                    </div>
+                </div>
+                <div className='w-full flex justify-center items-center z-[2] space-x-5 mt-5 xs:mt-7 md:mt-3 lg:mt-1 '>
+                    <BsCalendar2Week className=' text-base transition-all text-black' />
+                    <div className='flex  justify-center items-center   '>
+                        <p className=" transition-all text-black text-[10px] md:text-[12px] font-semibold xl:text-base">
+                            {moment(tournament.start_date).format('DD / MM / YY')}
+                        </p>
+                        <p className='mx-2  font-medium transition-all hidden md:block text-[#ee6730]  text-[7px] md:text-base'>to</p>
+                        <p className='mx-2  font-medium transition-all md:hidden text-[#ee6730]  text-[7px] md:text-base'>/</p>
+                        <p className="transition-all text-black text-[10px] md:text-[12px] font-semibold xl:text-base">
+                            {moment(tournament.end_date).format('DD / MM / YY')}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            {/* <div className="flex justify-center items-center r:bg-white cursor-pointer shadow-lg shadow-[#ea5a2e12] xs:min-w-[145px] sm:min-w-[160px] md:min-w-[180px]  lg:max-w-[150] xl:w-[155px]  2xl:min-w-[350px]  h-[140px] sm:h-[155px] md:h-[165px] xl:h-[155px] 2xl:h-[175px]
    group rounded-lg" onClick={handleClick}>
                 <div className='flex flex-col justify-start items-center w-full h-full mt-10 '>
                     {
@@ -63,7 +92,7 @@ function Tournaments_cards({ tournament }) {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
 
             {/* Left Arrow  */}
             <div onClick={prevSlide}
