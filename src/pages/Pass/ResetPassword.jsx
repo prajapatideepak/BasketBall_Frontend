@@ -7,7 +7,6 @@ import * as Yup from "yup"
 import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 import { useResetPasswordMutation } from '../../services/authentication'
-import image from "../../../public/CBL_Images/7xm.xyz732342.jpg"
 
 const signUpSchema = Yup.object({
     password: Yup.string().required("Please enter password"),
@@ -46,7 +45,7 @@ function ResetPassword() {
     return (
         <div className='flex sm:justify-center lg:justify-start xl:justify-between items-center h-screen bg-white px-10 lg:px-20'>
             <div className="img  hidden lg:block">
-                <img src={image} alt="landing" className="lg:w-[500px] lg:h-[400px]  xl:w-[650px] xl:h-[500px] 2xl:h-[500px] 2xl:w-[700px]" />
+                <img src="/CBL_Images/7xm.xyz732342.jpg" alt="landing" className="lg:w-[500px] lg:h-[400px]  xl:w-[650px] xl:h-[500px] 2xl:h-[500px] 2xl:w-[700px]" />
             </div>
             <div className='lg:px-10 lg:py-10  lg:relative 2xl:right-20'>
                 <div className='flex justify-center items-center mt-4 py-5 '>

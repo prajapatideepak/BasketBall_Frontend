@@ -24,17 +24,13 @@ const BasicInfo = ({ index, setIndex }) => {
       validationSchema: basicInfoSchema,
       onSubmit: (values) => {
         setIndex(2);
-        dispatch(setBasicInfoForm({ ...values, logo: photo, date_of_birth: date_of_birth }));
+        dispatch(setBasicInfoForm({ ...values, logo: photo }));
       },
     });
 
   function handleImageUpload(e) {
     setPhoto(() => e.target.files[0]);
     setImg(URL.createObjectURL(e.target.files[0]));
-  }
-
-  const handleDateChange = (e) => {
-    setDate(e.target.value);
   }
 
   return (
@@ -190,7 +186,7 @@ const BasicInfo = ({ index, setIndex }) => {
                 id="date_of_birth"
                 className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
                 name="date_of_birth"
-                value={date_of_birth ? date_of_birth : values.date_of_birth}
+                value={moment(values.date_of_birth).format("YYYY-MM-DD")}
                 onChange={(e) => handleDateChange(e)}
                 onBlur={handleBlur}
                 onInput={(e) => handleDateChange(e)}

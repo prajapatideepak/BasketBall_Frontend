@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import { Link, Outlet, NavLink } from 'react-router-dom'
-import logo from "/images/cbl.webp"
 import Footer from '../Component/Footer';
 
 

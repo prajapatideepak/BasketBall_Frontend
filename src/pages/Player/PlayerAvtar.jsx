@@ -1,5 +1,4 @@
 import React from "react";
-import ReadMoreReact from 'read-more-react';
 import { AiFillCloseCircle } from "react-icons/ai";
 
 
@@ -35,7 +34,6 @@ export default function PlayerAvtar({ player }) {
                   <button
                     onClick={(e) => {
                       setModel(!model);
-                      handleClick();
                     }}
                     className="absolute translate-x-4 -translate-y-4 font-bold text-2xl p-2 text-red-700"
                   >
@@ -63,7 +61,7 @@ export default function PlayerAvtar({ player }) {
         <div className="flex flex-col items-center  mx-auto ">
           <img
             className="mx-auto w-32 h-32 md:w-44 md:h-44 lg:w-60 lg:h-60 object-cover shadow rounded-full"
-            src={player?.SinglePlayerDetails?.photo ? player?.SinglePlayerDetails?.photo : "/CBL_Images/60111-removebg-preview.png"}
+            src={player?.SinglePlayerDetails?.photo ? player?.SinglePlayerDetails?.photo : "/CBL_Images/player-default-profile.webp"}
           />
 
           <div className="p-2 justify-center items-center space-y-1  ">

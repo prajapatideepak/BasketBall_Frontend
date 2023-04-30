@@ -1,5 +1,4 @@
 import React from "react"
-import image from "../../../public/CBL_Images/60111-removebg-preview.png"
 import { useFormik } from 'formik'
 import * as Yup from "yup"
 import "yup-phone"
@@ -85,7 +84,7 @@ function VisitorProfile() {
       <div className=" flex justify-center items-center mx-auto px-10 py-12 sm:px-20 sm:py-12 md:px-20 md:py-16 lg:px-24 xl:px-28 2xl:px-32 ">
         <form action="" className=" w-full 2xl:w-[70%]  px-5 md:px-10 py-5 md:py-7  rounded-2xl bg-white shadow-2xl " onSubmit={handleSubmit}>
           <div className="flex flex-col justify-center items-center pb-8 md:pb-7 space-y-2">
-            <img src={image} alt="" className="w-28 lg:w-[15%] border rounded-full p-2 px-4 bg-[#ee6730]" />
+            <img src="/CBL_Images/60111-removebg-preview.png" alt="" className="w-28 lg:w-[15%] border rounded-full p-2 px-4 bg-[#ee6730]" />
             <p className="text-[#ee6730] font-semibold text-2xl">Profile</p>
           </div>
           <div className="space-y-5">

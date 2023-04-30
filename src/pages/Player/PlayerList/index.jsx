@@ -10,7 +10,6 @@ import Loader from "../../../Component/Loader";
 
 
 const PlayerList = () => {
-  const defaultImage = "/CBL_Images/60111-removebg-preview.png";
   const [search, setSearch] = React.useState("");
   const [pageNo, setPageNo] = React.useState(1);
   const { isLoading, data } = useGetAllPlayersQuery({
@@ -71,7 +70,7 @@ const PlayerList = () => {
                               <div className="text-center sm:w-[65%]   w-full items-center justify-start  lg:py-6 flex  ">
                                 <div className="w-1/3 lg:w-40 ">
                                   <img
-                                    src={player?.photo ? player?.photo : "/CBL_Images/60111-removebg-preview.png"}
+                                    src={player?.photo ? player?.photo : "/CBL_Images/player-default-profile.webp"}
                                     className=" object-cover w-20 h-20 rounded-full border-2 sm:border-4 border-slate-700 "
                                   />
                                 </div>

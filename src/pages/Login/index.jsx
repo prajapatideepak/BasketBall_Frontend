@@ -2,8 +2,6 @@ import React from "react";
 import { Link, Outlet } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import image from "../../../public/CBL_Images/7xm.xyz288133.jpg";
-import google from "../../../public/CBL_Images/google.png";
 import { Formik, useFormik } from "formik";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
@@ -77,7 +75,7 @@ function Login() {
   return (
     <div className="flex justify-center items-center lg:space-x-32 xl:space-52 2xl:space-x-48 bg-gray-50 mt-5 lg:mt-8">
       <div className="img lg:w-[450px]  lg:h-[350px] xl:w-[500px] xl:h-[400px] 2xl:h-[600px] 2xl:w-[550px] hidden lg:block">
-        <img src={image} alt="landing" className="" />
+        <img src='/CBL_Images/7xm.xyz288133.jpg' alt="landing" className="" />
       </div>
 
       <div className=" 2xl:w-[27%] px-5 mt-4 sm lg:mt-0 ">
@@ -93,7 +91,7 @@ function Login() {
           if(googleAuth.isLoading) return
           login();
         }}>
-          <img src={google} alt="" className="w-7" />
+          <img src='/CBL_Images/google.png' alt="" className="w-7" />
           <p>Log in with Google</p>
         </div>
         <div className="flex text-slate-500 justify-center items-center">

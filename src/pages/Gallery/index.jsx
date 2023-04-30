@@ -18,7 +18,7 @@ const Gallery = () => {
         pageNo: pageNo - 1,
         category: category
     });
-    
+    console.log(data)
     const breakpointColumnsObj = {
         default: 4,
         1100: 3,
@@ -105,6 +105,8 @@ const Gallery = () => {
                                 </Masonry>
                             </div>
                 }
+
+
                 <div className='mx-auto px-20 py-12 sm:px-24 sm:py-12 md:px-28 md:py-16'>
                     <Pagination
                         total={data && data.pageCount ? data.pageCount : 0}
