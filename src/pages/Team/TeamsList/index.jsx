@@ -23,9 +23,11 @@ function TeamsList() {
   console.log(data)
   return (
     <section className="min-h-screen">
-      <div className="mx-auto px-10 py-12 sm:px-20 sm:py-12 md:px-20 md:py-16 lg:px-24 xl:px-28 2xl:px-32">
-        <Heading text="All Teams" />
-        <div className="flex m-5  justify-center ">
+      <div className="xs:py-10 py-10">
+        <h1 className="xs:text-5xl text-6xl  text-center font-bold  italic uppercase text-[#ee6730]  ">All Teams</h1>
+      </div>
+      <div className="mx-auto px-10 sm:px-20 md:px-20  lg:px-24 xl:px-28 2xl:px-32">
+        <div className="flex mb-10  justify-center ">
           <input
             type="text"
             onChange={(e) => {

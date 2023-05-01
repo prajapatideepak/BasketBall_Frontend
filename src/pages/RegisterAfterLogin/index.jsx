@@ -70,7 +70,7 @@ export default function AfterRole() {
   return (
     <div className="flex flex-col lg:justify-center px-8 items-center lg:px-20 lg:py-5 " style={{ minHeight: 'calc(100vh - 70px)' }}>
       <div className="mt-5 text-center flex flex-col justify-center w-full lg:px-20 space-y-3 ">
-        <h1 className="role-heading text-3xl font-bold text-center text-[#ee6730] uppercase ">Select your role</h1>
+        <h1 className="xs:text-5xl text-6xl  text-center font-bold  italic uppercase text-[#ee6730] mb-3 ">Select Your role</h1>
         <p className=" text-gray-500 p-1 text-center">
           Rise to the Top: Choose Your Role as Visitor, Player, Tournament Host,
           or Team Manager and Dominate the Court

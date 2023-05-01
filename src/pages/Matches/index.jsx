@@ -11,52 +11,48 @@ function MatchList() {
   const [currentTab, setCurrentTab] = React.useState(1);
   const [pageNo, setPageNo] = React.useState(1);
 
-  const data = useGetMatchListQuery({ pageNo: pageNo - 1 , status: currentTab });
+  const data = useGetMatchListQuery({ pageNo: pageNo - 1, status: currentTab });
   console.log(data.data)
   return (
     <section className="min-h-screen-fit">
-      <div className="mx-auto px-10 py-12 sm:px-20 sm:py-12 md:px-20 md:py-16 lg:px-24 xl:px-28 2xl:px-32">
-        <Heading text="Matches" />
+      <div className="xs:py-10 py-10 xl:py-14">
+        <h1 className="xs:text-5xl text-6xl  text-center font-bold  italic uppercase text-[#ee6730]  ">All Matches</h1>
+      </div>
+      <div className="mx-auto px-10  sm:px-20  md:px-20  lg:px-24 xl:px-28 2xl:px-32">
         <div className="flex justify-center items-center">
           <div className="w-48 xs:w-72 sm:w-72 md:w-80 p-1 rounded-full flex justify-around items-center bg-black">
             <div
-              className={`${
-                currentTab == 2 ? "bg-[#ee6730]" : ""
-              } group cursor-pointer w-full text-center p-1 rounded-full`}
+              className={`${currentTab == 2 ? "bg-[#ee6730]" : ""
+                } group cursor-pointer w-full text-center p-1 rounded-full`}
               onClick={() => setCurrentTab(2)}
             >
               <h3
-                className={`${
-                  currentTab == 2 ? "text-white" : "text-gray-300"
-                } group-hover:text-white font-semibold text-xs xs:text-sm md:text-base`}
+                className={`${currentTab == 2 ? "text-white" : "text-gray-300"
+                  } group-hover:text-white font-semibold text-xs xs:text-sm md:text-base`}
               >
                 Ongoing
               </h3>
             </div>
             <div
-              className={`${
-                currentTab == 1 ? "bg-[#ee6730]" : ""
-              } group cursor-pointer w-full text-center mx-1.5 p-1 rounded-full`}
+              className={`${currentTab == 1 ? "bg-[#ee6730]" : ""
+                } group cursor-pointer w-full text-center mx-1.5 p-1 rounded-full`}
               onClick={() => setCurrentTab(1)}
             >
               <h3
-                className={`${
-                  currentTab == 1 ? "text-white" : "text-gray-300"
-                } group-hover:text-white font-semibold text-xs xs:text-sm md:text-base`}
+                className={`${currentTab == 1 ? "text-white" : "text-gray-300"
+                  } group-hover:text-white font-semibold text-xs xs:text-sm md:text-base`}
               >
                 Upcoming
               </h3>
             </div>
             <div
-              className={`${
-                currentTab == 3 ? "bg-[#ee6730]" : ""
-              } group cursor-pointer w-full text-center p-1 rounded-full`}
+              className={`${currentTab == 3 ? "bg-[#ee6730]" : ""
+                } group cursor-pointer w-full text-center p-1 rounded-full`}
               onClick={() => setCurrentTab(3)}
             >
               <h3
-                className={`${
-                  currentTab == 3 ? "text-white" : "text-gray-300"
-                } group-hover:text-white font-semibold text-xs xs:text-sm md:text-base`}
+                className={`${currentTab == 3 ? "text-white" : "text-gray-300"
+                  } group-hover:text-white font-semibold text-xs xs:text-sm md:text-base`}
               >
                 Past
               </h3>
@@ -65,7 +61,7 @@ function MatchList() {
         </div>
         {data.isFetching && (
           <div className="px-6 py-12 flex justify-center">
-            <SmallLoader/>
+            <SmallLoader />
           </div>
         )}
         {!data.isFetching && data.isSuccess && (
@@ -87,15 +83,15 @@ function MatchList() {
           </div>
         )}
 
-      
+
         <div className='mx-auto px-20 py-12 sm:px-24 sm:py-12 md:px-28 md:py-16'>
-            <Pagination
-              total={data.data && data.data.pageCount ? data.data.pageCount : 0}
-              current={pageNo}
-              onPageChange={(page) => setPageNo(page)}
-            // previousLabel="Previous" nextLabel="Next"
-            />
-          </div>
+          <Pagination
+            total={data.data && data.data.pageCount ? data.data.pageCount : 0}
+            current={pageNo}
+            onPageChange={(page) => setPageNo(page)}
+          // previousLabel="Previous" nextLabel="Next"
+          />
+        </div>
 
       </div>
     </section>

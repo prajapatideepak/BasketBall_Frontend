@@ -7,14 +7,14 @@ import moment from 'moment'
 export default function NewsCard(news) {
   let tags = news?.news?.tags?.split(",");
   return (
-    <div className="w-full cursor-pointer relative shadow-2xl rounded  ">
+    <div className="w-full  cursor-pointer relative shadow-2xl rounded  ">
       <Link
         className="Link"
         to={`/news/${news?.news?.id}/${news?.news?.title.split(" ").join("-")}`}
       >
         <div className="w-full ">
           <LazyLoad placeholder={<Deepak />} once>
-            <img className=" rounded-2xl" src={news?.news?.photo} />
+            <img className=" rounded-2xl h-full w-full" src={news?.news?.photo} />
           </LazyLoad>
         </div>
         <div
