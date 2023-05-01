@@ -8,7 +8,7 @@ function LandingPage() {
         <div className="contant grid grid-flow-row lg:grid-cols-2 ">
           <div className="flex flex-col w-full justify-center items-center lg:items-start lg:mt-20 lg:px-10 xl:px-32 space-y-2 lg:space-y-5 order-2 lg:order-1 z-50 sm:pb-10 ">
             <h1 className="xs:text-[44px] font-roboto text-black italic font-bold sm:text-6xl md:text-7xl lg:text-[80px] text-blabg-black
-                             xl:text-8xl  2xl:text-[120px]  uppercase ">
+            xl:text-8xl  2xl:text-[120px]  uppercase ">
               Corporate
             </h1>
             <div className="flex flex-col sm:flex-row items-center space-x-8">
@@ -22,7 +22,7 @@ function LandingPage() {
             </div>
             <p
               className="text-center sm:text-center lg:text-start || sm:px-20 lg:px-0 text-black  xl:w-[500px] || text-xs sm:text-sm md:text-sm lg:font-normal 2xl:text-base  ||
-                     py-2 "
+              py-2 "
             >
               Use in khelo India, khel mahakumb, state level tournament,
               district level tournament, inter university, any professional

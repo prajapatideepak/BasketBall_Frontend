@@ -38,11 +38,11 @@ const ContactUs = () => {
   return (
     <>
       <section className=''>
-          <div className="pt-8 md:pt-12 lg:pt-20">
-            <Heading text="Contact Us" />
-          </div>
+      <div className="xs:py-10 py-10">
+          <h1 className="xs:text-5xl text-6xl  text-center font-bold  italic uppercase text-[#ee6730]  ">Contact Us</h1>
+        </div>
         <div className='flex justify-start -z-50'>
-          <div className='right-content w-full sm:w-2/4 lg:mx-32 md:mx-28 sm:mx-20 m-10 my-2'>
+          <div className='right-content w-full sm:w-2/4 lg:mx-32 md:mx-28 sm:mx-20 '>
             <h1 className='capitalize lg:mt-10 mb-5 sm:text-4xl text-xl font-medium text-[#ee6730]'>Get in touch</h1>
             <form onSubmit={handleSubmit}>
               <div className="">

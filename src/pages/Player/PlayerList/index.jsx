@@ -22,13 +22,12 @@ const PlayerList = () => {
         {isLoading && <Loader />}
         {data && (
           <div>
-            <div className="flex min-h-screen px-10 2xl:px-32 lg:px-14 py-8">
+            <div className="flex flex-col min-h-screen px-10 2xl:px-32 lg:px-14 ">
+              <div className="xs:py-10 py-10">
+                <h1 className="xs:text-5xl text-6xl  text-center font-bold  italic uppercase text-[#ee6730]  ">All Players</h1>
+              </div>
               <div className="mx-auto w-full">
-                <Heading
-                  className={"text-xl md:text-3xl px-3 sm:px-7 py-1"}
-                  text={"All Players"}
-                />
-                <div className="flex m-5  justify-center ">
+                <div className="flex mb-10 justify-center ">
                   <input
                     type="text"
                     onChange={(e) => {

@@ -22,11 +22,11 @@ export default function PlayerProfile() {
   const params = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const {user} = useSelector((state)=> state.user)
+  const { user } = useSelector((state) => state.user)
   const { data, isLoading, error } = useGetPlayerDetailsQuery(params.id);
   const [currentTab, setCurrentTab] = React.useState(2);
   const [currentTabMatches, setCurrentTabMatches] = React.useState([]);
-  let allMatches =    
+  let allMatches =
     data?.data && data?.data.team_1_matches && data?.data.team_2_matches
       ? [...data?.data.team_1_matches, ...data?.data.team_2_matches]
       : [];
@@ -50,8 +50,8 @@ export default function PlayerProfile() {
     navigate(`/player/add-edit`, {
       state: {
         isEdit: true,
-        player_id : data.SinglePlayerDetails.id,
-        photo : data.SinglePlayerDetails.photo
+        player_id: data.SinglePlayerDetails.id,
+        photo: data.SinglePlayerDetails.photo
       },
     });
   };
@@ -73,25 +73,25 @@ export default function PlayerProfile() {
                 <div className="flex-1    ">
                   <PlayerInfo PlayerDetail={data} />
                 </div>
-                
+
                 {
                   data.SinglePlayerDetails.users.id == user.id ?
-                  <div className="absolute right-0 bottom-0 mr-10">
-                  <button
-                    type="button"
-                    className="bg-[#ee6730] relative inline-flex items-center justify-center px-8 py-2 overflow-hidden text-white rounded-lg cursor-pointer group mr-3"
-                    onClick={handleEdit}
-                  >
-                    <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-slate-900 rounded-lg group-hover:w-full group-hover:h-56"></span>
-                    <span className="relative">
-                      Edit
-                    </span>
-                  </button>
-                </div> 
-                :
-                ""
+                    <div className="absolute right-0 bottom-0 mr-10">
+                      <button
+                        type="button"
+                        className="bg-[#ee6730] relative inline-flex items-center justify-center px-8 py-2 overflow-hidden text-white rounded-lg cursor-pointer group mr-3"
+                        onClick={handleEdit}
+                      >
+                        <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-slate-900 rounded-lg group-hover:w-full group-hover:h-56"></span>
+                        <span className="relative">
+                          Edit
+                        </span>
+                      </button>
+                    </div>
+                    :
+                    ""
                 }
-                
+
                 <div>
 
                 </div>
@@ -106,12 +106,8 @@ export default function PlayerProfile() {
               {/* new sec */}
               <div className="flex flex-col ">
                 <div className=" p-4 space-y-8  mt-4">
-                  <div className=" flex justify-center">
-                    <Heading
-                      text={"Team"}
-                      className={"text-center py-1 px-3 text-3xl"}
-                      margin={true}
-                    />
+                  <div className="xs:py-10 py-10">
+                    <h1 className="xs:text-5xl text-6xl  text-center font-bold  italic uppercase text-[#ee6730]  ">Team</h1>
                   </div>
                   {data?.SinglePlayerDetails?.id != params.id && (
                     <div className="flex  mx-auto">

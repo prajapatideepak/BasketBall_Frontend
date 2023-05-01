@@ -103,8 +103,10 @@
   letter-spacing: 10px;
 }
 
-.triengle 
+.role-heading 
 {
-  clip-path: polygon(0 0, 71% 0, 38% 100%, 0 100%);
+  letter-spacing: 7px;
 }
+
+
 
