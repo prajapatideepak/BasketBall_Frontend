@@ -24,7 +24,7 @@ export default function PlayerInfo({ PlayerDetail }) {
   return (
     <div className="mx-auto text-center">
       <div className="xs:py-10 py-5 xl:py-5">
-        <h1 className="xs:text-5xl text-6xl  text-center font-bold  italic uppercase text-[#ee6730]  ">Player Information</h1>
+        <h1 className="xs:text-4xl sm:text-4xl  text-center font-bold  italic uppercase text-[#ee6730]  ">Player Information</h1>
       </div>
       {/*  */}
       <div className="text-left pt-4 ">
