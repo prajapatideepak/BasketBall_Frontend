@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 
 export default function PlayerInfo({ PlayerDetail }) {
-  const {user} = useSelector((state)=> state.user)
+  const { user } = useSelector((state) => state.user)
 
   const [city, setCity] = React.useState('');
   const [state, setState] = React.useState('');
@@ -17,18 +17,14 @@ export default function PlayerInfo({ PlayerDetail }) {
       const json = await response.json();
       setCity(json[0]?.PostOffice[0]?.District)
       setState(json[0]?.PostOffice[0]?.State)
-  };
-  fetchData();
-}, []);
+    };
+    fetchData();
+  }, []);
 
   return (
     <div className="mx-auto text-center">
-      <div className="flex justify-center ">
-        <Heading
-          text={"Player Information"}
-          className="text-lg md:text-2xl text-center  "
-          margin={true}
-        />
+      <div className="xs:py-10 py-5 xl:py-5">
+        <h1 className="xs:text-5xl text-6xl  text-center font-bold  italic uppercase text-[#ee6730]  ">Player Information</h1>
       </div>
       {/*  */}
       <div className="text-left pt-4 ">
@@ -49,18 +45,18 @@ export default function PlayerInfo({ PlayerDetail }) {
           </div>
 
           <div className="bg-white px-2 py-1 rounded-lg border-2 border-orange-100 shadow-xl">
-            <span className="text-xs md:text-base">{PlayerDetail?.SinglePlayerDetails.users.id == user.id 
-                  ? 'Date of Birth' : 'Age'} : </span>
+            <span className="text-xs md:text-base">{PlayerDetail?.SinglePlayerDetails.users.id == user.id
+              ? 'Date of Birth' : 'Age'} : </span>
             <span className="text-xs md:text-sm font-semibold ">
               {
-                PlayerDetail?.SinglePlayerDetails?.date_of_birth 
-                ?
-                  PlayerDetail?.SinglePlayerDetails.users.id == user.id 
+                PlayerDetail?.SinglePlayerDetails?.date_of_birth
                   ?
+                  PlayerDetail?.SinglePlayerDetails.users.id == user.id
+                    ?
                     moment(PlayerDetail?.SinglePlayerDetails?.date_of_birth).format('DD / MM / YY')
+                    :
+                    moment().diff(PlayerDetail?.SinglePlayerDetails?.date_of_birth, "years")
                   :
-                    moment().diff(PlayerDetail?.SinglePlayerDetails?.date_of_birth, "years") 
-                :
                   ""
               }
             </span>
@@ -69,7 +65,7 @@ export default function PlayerInfo({ PlayerDetail }) {
           <div className="bg-white px-2 py-1 rounded-lg border-2 border-orange-100 shadow-xl">
             <span className="text-xs md:text-base">From : </span>
             <span className="text-xs md:text-sm font-semibold ">
-               {city ? city : ""}, {state ? state : ""}
+              {city ? city : ""}, {state ? state : ""}
             </span>
           </div>
         </div>
@@ -97,8 +93,8 @@ export default function PlayerInfo({ PlayerDetail }) {
       {/* for contact infor */}
       {
 
-        PlayerDetail?.SinglePlayerDetails.users.id == user.id 
-        ?
+        PlayerDetail?.SinglePlayerDetails.users.id == user.id
+          ?
           <div className="text-left ">
             <h2 className="text-xl py-2">Contact Information</h2>
 
@@ -111,7 +107,7 @@ export default function PlayerInfo({ PlayerDetail }) {
               </div>
             </div>
           </div>
-        :
+          :
           null
       }
     </div>
