@@ -1,5 +1,4 @@
 import React from 'react'
-import image from "../../../public/CBL_Images/7xm.xyz917787.jpg"
 import { Link } from 'react-router-dom'
 import { HiArrowLeft } from "react-icons/hi"
 import { FiKey } from "react-icons/fi"
@@ -43,7 +42,7 @@ function ForgetPassword() {
     return (
         <div className='flex sm:justify-center lg:justify-start xl:justify-between items-center h-screen bg-white px-10 lg:px-20'>
             <div className="img lg:w-[500px] lg:h-[500px] xl:w-[650px] xl:h-[650px] 2xl:h-[700px] 2xl:w-[700px] hidden lg:block">
-                <img src={image} alt="landing" className="" />
+                <img src="/CBL_Images/7xm.xyz917787.jpg" alt="landing" className="" />
             </div>
             <div className='lg:px-10 lg:py-10  lg:relative 2xl:right-20'>
                 <div className='flex justify-center items-center py-5 '>

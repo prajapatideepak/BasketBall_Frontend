@@ -6,11 +6,11 @@ import { Link } from "react-router-dom";
 import { useGetAllPlayersQuery } from '../../../services/player';
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import Loader from "../../../Component/Loader";
-
+import Pagination from 'react-responsive-pagination'
+import '../../../Component/Pagination/pagination.css'
 
 
 const PlayerList = () => {
-  const defaultImage = "/CBL_Images/60111-removebg-preview.png";
   const [search, setSearch] = React.useState("");
   const [pageNo, setPageNo] = React.useState(1);
   const { isLoading, data } = useGetAllPlayersQuery({
@@ -23,13 +23,12 @@ const PlayerList = () => {
         {isLoading && <Loader />}
         {data && (
           <div>
-            <div className="flex min-h-screen px-10 2xl:px-32 lg:px-14 py-8">
+            <div className="flex flex-col min-h-screen px-10 2xl:px-32 lg:px-14 ">
+              <div className="xs:py-10 py-10">
+                <h1 className="xs:text-5xl text-6xl  text-center font-bold  italic uppercase text-[#ee6730]  ">All Players</h1>
+              </div>
               <div className="mx-auto w-full">
-                <Heading
-                  className={"text-xl md:text-3xl px-3 sm:px-7 py-1"}
-                  text={"All Players"}
-                />
-                <div className="flex m-5  justify-center ">
+                <div className="flex mb-10 justify-center ">
                   <input
                     type="text"
                     onChange={(e) => {
@@ -71,7 +70,7 @@ const PlayerList = () => {
                               <div className="text-center sm:w-[65%]   w-full items-center justify-start  lg:py-6 flex  ">
                                 <div className="w-1/3 lg:w-40 ">
                                   <img
-                                    src={player?.photo ? player?.photo : "/CBL_Images/60111-removebg-preview.png"}
+                                    src={player?.photo ? player?.photo : "/CBL_Images/player-default-profile.webp"}
                                     className=" object-cover w-20 h-20 rounded-full border-2 sm:border-4 border-slate-700 "
                                   />
                                 </div>
@@ -157,36 +156,17 @@ const PlayerList = () => {
                   )}
 
                 </div>
-                {
-                  data.length > 10 ?
-                    <div className="flex  justify-center items-center text-gray-400 py-5 space-x-2 mt-5 text-sm">
-                      <button
-                        onClick={(e) => {
-                          setPageNo(() => pageNo - 1);
-                        }}
-                        disabled={pageNo == 1}
-                        className="cursor-pointer disabled:cursor-default disabled:opacity-30 p-2 border rounded border-gray-400"
-                      >
-                        <IoIosArrowBack />
-                      </button>
-                      <div className="cursor-pointer px-4 py-1  border rounded bg-[#ee6730] text-base text-white shadow-xl">
-                        {" "}
-                        {pageNo}
-                      </div>
-                      <button
-                        onClick={(e) => {
-                          setPageNo(() => pageNo + 1);
-                        }}
-                        disabled={data?.data?.length < 10}
-                        className="cursor-pointer disabled:opacity-30 disabled:cursor-default p-2 border rounded border-gray-400"
-                      >
-                        {" "}
-                        <IoIosArrowForward />
-                      </button>
-                    </div>
-                    :
-                    null
-                }
+
+
+                <div className='mx-auto px-20 py-12 sm:px-24 sm:py-12 md:px-28 md:py-16'>
+                  <Pagination
+                    total={data && data.pageCount ? data.pageCount : 0}
+                    current={pageNo}
+                    onPageChange={(page) => setPageNo(page)}
+                  // previousLabel="Previous" nextLabel="Next"
+                  />
+                </div>
+
               </div>
             </div>
           </div>

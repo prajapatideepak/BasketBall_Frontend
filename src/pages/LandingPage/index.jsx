@@ -1,7 +1,5 @@
 import React from "react";
-import image from "../../../public/CBL_Images/main-img-1.webp";
-import { Link, Outlet } from "react-router-dom";
-import { RxArrowRight } from "react-icons/rx";
+import { Link} from "react-router-dom";
 
 function LandingPage() {
   return (
@@ -10,7 +8,7 @@ function LandingPage() {
         <div className="contant grid grid-flow-row lg:grid-cols-2 ">
           <div className="flex flex-col w-full justify-center items-center lg:items-start lg:mt-20 lg:px-10 xl:px-32 space-y-2 lg:space-y-5 order-2 lg:order-1 z-50 sm:pb-10 ">
             <h1 className="xs:text-[44px] font-roboto text-black italic font-bold sm:text-6xl md:text-7xl lg:text-[80px] text-blabg-black
-                             xl:text-8xl  2xl:text-[120px]  uppercase ">
+            xl:text-8xl  2xl:text-[120px]  uppercase ">
               Corporate
             </h1>
             <div className="flex flex-col sm:flex-row items-center space-x-8">
@@ -24,7 +22,7 @@ function LandingPage() {
             </div>
             <p
               className="text-center sm:text-center lg:text-start || sm:px-20 lg:px-0 text-black  xl:w-[500px] || text-xs sm:text-sm md:text-sm lg:font-normal 2xl:text-base  ||
-                     py-2 "
+              py-2 "
             >
               Use in khelo India, khel mahakumb, state level tournament,
               district level tournament, inter university, any professional
@@ -79,7 +77,7 @@ function LandingPage() {
           </div>
           <div className="right flex items-center w-full justify-center order-1 lg:order-2">
             <div className="img lg:absolute right-0 mt-10 lg:top-6 2xl:top-0 h-[230px] w-[280px] sm:h-[300px] sm:w-[380px] md:h-[400px] md:w-[400px] lg:w-[550px] xl:w-[600px] 2xl:h-[600px] 2xl:w-[800px] lg:mr-10 xl:mr-20">
-              <img src="/CBL_Images/portrait-two-basketball-players-training-dribbling-isolated-white-studio-background.jpg" alt="landing" className=" w-full" />
+              <img src="/CBL_Images/landing.webp" alt="landing" className=" w-full" />
             </div>
           </div>
         </div>

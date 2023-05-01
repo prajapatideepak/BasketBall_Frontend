@@ -23,14 +23,12 @@ function AboutUs() {
 
   return (
     <div>
-      {/* <div className='heading-container flex justify-center items-center h-24 sm:h-32 md:h-48 bg-black'>
-                <span className='text-xl sm:text-2xl md:text-3xl lg:text-5xl font-semibold text-white'>
-                    About us
-                </span>
-            </div> */}
-      <div className=" text-center lg:text-left mx-auto px-10 py-12 sm:px-20 sm:py-12 md:px-20 md:py-12 lg:px-20 xl:px-20 2xl:px-32">
-        <h1 className="text-6xl text-center font-bold uppercase text-[#ee6730] ">About</h1>
-        <div className="py-8 ">
+      <div className=" lg:text-left mx-auto px-10 sm:px-20 md:px-20  lg:px-20 xl:px-20 2xl:px-32">
+        <div className="xs:py-10 py-10">
+          <h1 className="xs:text-5xl text-6xl  text-center font-bold  italic uppercase text-[#ee6730]  ">About Us</h1>
+        </div>
+
+        <div className="">
           <AboutUsCard key={1} name={1} />
         </div>
         <div>

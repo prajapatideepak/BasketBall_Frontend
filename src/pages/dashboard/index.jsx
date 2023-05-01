@@ -17,7 +17,6 @@ import { useGetAllNewsQuery } from "../../services/news";
 
 const Dashboard = () => {
   const data = useGetMatchesQuery();
-
   const tournaments = useGetAllTournamentsQuery();
   const [pageNo, setPageNo] = React.useState(1);
   const news = useGetAllNewsQuery({
@@ -38,8 +37,12 @@ const Dashboard = () => {
     <div className="min-h-screen ">
       {/* Main Slider for live and upcoming matches */}
       <div className="">
-        {/* <img src="/CBL_Images/OFFLINE.png" alt="" srcset="" /> */}
-        <MatchLive slides={data?.data?.data} />
+        {
+          data?.data?.data?.length == 0 ?
+            ""
+            :
+            <MatchLive slides={data?.data?.data} />
+        }
       </div>
 
       {/* Live and Upcoming match   */}
@@ -95,7 +98,7 @@ const Dashboard = () => {
           <div className="bg-gray-700 h-[1px] w-full my-1 bg-gradient-to-l from-slate-50">
           </div>
         </div>
-        <div id="tournament" className="w-full flex justify-start px-6 xl:px-14 items-center gap-5 xl:gap-3  scroll-smooth  overflow-x-auto scrollbar-hide pt-10 pb-10 lg:py-8">
+        <div id="tournament" className="w-full flex justify-start px-6 xl:px-14 items-center gap-5 scroll-smooth  overflow-x-auto scrollbar-hide pt-10 pb-10 lg:py-8">
           {
             tournaments?.data?.all_tournaments?.length > 0
               ?
@@ -115,44 +118,6 @@ const Dashboard = () => {
           }
         </div>
       </div>
-
-      {/* Highlights previus matches  */}
-      {/* <div className="relative">
-        <div className="px-7 md:px-10">
-          <div className="flex justify-between items-center xl:pr-8">
-            <h1 className="font-bold text-lg md:text-2xl  lg:text-3xl text-black">
-              Highlights :
-            </h1>
-            <div className="flex items-center text-[13px] font-semibold cursor-pointer hover:underline ">
-              <p className="hidden sm:block sm:text-[10px] lg:text-[11px]">Discover More</p>
-              <BiChevronRight className="text-base mt-1 sm:mt-0 lg:text-lg  xl:mt-1" />
-            </div>
-          </div>
-          <div className="bg-black h-[5px] w-32 my-1 relative top-[7px] left-2">
-          </div>
-          <div className="bg-gray-700 h-[1px] w-full my-1 bg-gradient-to-l from-slate-50">
-          </div>
-        </div>
-        <div id="highlights" className="w-full flex justify-start px-6 xl:px-14 items-center gap-5   scroll-smooth  overflow-x-auto scrollbar-hide pt-10 pb-10 lg:py-8">
-          {
-            highlights.length > 0
-              ?
-              highlights.map((highlights, index) => {
-                return (
-                  <Hilights_Cards
-                    key={index}
-                    highlights={highlights}
-                  />
-                )
-              })
-              :
-              <div className='flex justify-center items-center w-full py-5'>
-                <FaPhotoVideo className=" text-2xl sm:text-3xl md:text-4xl text-gray-400 mr-2" />
-                <p className='text-xs xs:text-sm sm:text-lg font-medium text-gray-400'>No Highlights Found</p>
-              </div>
-          }
-        </div>
-      </div> */}
 
       {/* News previus matches  */}
       <div className=" pb-5 relative ">

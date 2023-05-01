@@ -17,6 +17,8 @@ import {
   useGetAllNewsQuery,
   useDeleteNewsDetailsMutation,
 } from "../../../../services/news";
+import Pagination from 'react-responsive-pagination'
+import '../../../../Component/Pagination/pagination.css'
 
 const validFileExtensions = { image: ['jpg', 'png', 'jpeg'] };
 
@@ -33,7 +35,7 @@ const newsSchema = Yup.object({
       })
     .test("is-valid-size", "Max allowed size is 2MB", value => {
       if (!value) {
-        return true; 
+        return true;
       }
       return value && value.size <= 2097152
     }),
@@ -48,7 +50,7 @@ const NewsList = () => {
   const [model, setModel] = React.useState(false);
   const [newsRegistration, { ...thing }] = useRegisterNewsMutation();
   const [newsUpdate, { ...updateData }] = useUpdateNewsDetailsMutation();
-  const [deleteNewsDetails, {...deleteNews}] = useDeleteNewsDetailsMutation()
+  const [deleteNewsDetails, { ...deleteNews }] = useDeleteNewsDetailsMutation()
   const [pageNo, setPageNo] = React.useState(1);
 
   const initialValues = {
@@ -70,7 +72,7 @@ const NewsList = () => {
 
   const { values, errors, resetForm, handleBlur, touched, setFieldValue, handleChange, handleSubmit } =
     useFormik({
-      initialValues: value ? value : initialValues ,
+      initialValues: value ? value : initialValues,
       validationSchema: newsSchema,
       onSubmit(data) {
         try {
@@ -94,25 +96,25 @@ const NewsList = () => {
 
   const handleDelete = async (id) => {
     Swal.fire({
-        title: 'Are you sure to delete this news?',
-        text: "The news will be deleted",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes',
-        showLoaderOnConfirm: true,
-        allowOutsideClick: false,
-        preConfirm: async () => {
-          const response = await deleteNewsDetails(id)
-          if(response.error){
-            toast.error(response.error.data.message)
-          }
-          else if(response.data.success){
-            toast.success(response.data.message)
-          }
+      title: 'Are you sure to delete this news?',
+      text: "The news will be deleted",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes',
+      showLoaderOnConfirm: true,
+      allowOutsideClick: false,
+      preConfirm: async () => {
+        const response = await deleteNewsDetails(id)
+        if (response.error) {
+          toast.error(response.error.data.message)
         }
-    }).then(async(result) => {
+        else if (response.data.success) {
+          toast.success(response.data.message)
+        }
+      }
+    }).then(async (result) => {
       if (result.isConfirmed) {
         refetch()
       }
@@ -379,35 +381,16 @@ const NewsList = () => {
                 </div>
               )}
             </div>
-            {
-              data?.AllNews?.length > 0 ?
-                <div className="flex  justify-center items-center text-gray-400 py-5 space-x-2 mt-5 text-sm">
-                  <button
-                    onClick={(e) => {
-                      setPageNo(() => pageNo - 1);
-                    }}
-                    disabled={pageNo == 1}
-                    className="cursor-pointer disabled:cursor-default disabled:opacity-30 p-2 border rounded border-gray-400"
-                  >
-                    <IoIosArrowBack />
-                  </button>
-                  <div className="cursor-pointer px-4 py-1  border rounded bg-[#ee6730] text-base text-white shadow-xl">
-                    {" "}
-                    {pageNo}
-                  </div>
-                  <button
-                    onClick={(e) => {
-                      setPageNo(() => pageNo + 1);
-                    }}
-                    disabled={data?.AllNews?.length < 12}
-                    className="cursor-pointer disabled:opacity-30 disabled:cursor-default p-2 border rounded border-gray-400"
-                  >
-                    <IoIosArrowForward />
-                  </button>
-                </div>
-                :
-                  null
-            }
+
+            <div className='mx-auto px-20 py-12 sm:px-24 sm:py-12 md:px-28 md:py-10'>
+              <Pagination
+                total={data && data.pageCount ? data.pageCount : 0}
+                current={pageNo}
+                onPageChange={(page) => setPageNo(page)}
+              // previousLabel="Previous" nextLabel="Next"
+              />
+            </div>
+
           </div>
         </div>
       </div>

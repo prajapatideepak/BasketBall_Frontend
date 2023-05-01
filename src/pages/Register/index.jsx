@@ -1,7 +1,5 @@
 import React from "react"
-import image from "../../../public/CBL_Images/7xm.xyz557949.jpg"
 import { Link } from 'react-router-dom'
-import google from "../../../public/CBL_Images/google.png"
 import { useFormik } from 'formik'
 import * as Yup from "yup"
 import "yup-phone"
@@ -149,7 +147,7 @@ function Register() {
             <div className="  flex justify-center items-center px-10 sm:px-20  bg-white mt-5 ">
                 <div className="flex xl:flow-row justify-center items-center">
                     <div className="2xl:w-[50%] xl:block hidden">
-                        <img src={image} alt="" />
+                        <img src='/CBL_Images/7xm.xyz557949.jpg' alt="" />
                     </div>
                     <div className=" w-[100%] xl:px-10 xl:mx-10 2xl:w-[50%]">
                         <div className={`${isOnSubmit ? "block" : "hidden"} space-y-5 `}>
@@ -176,7 +174,7 @@ function Register() {
                                 login();
                             }}
                             >
-                                <img src={google} alt="" className='w-7' />
+                                <img src="/CBL_Images/google.png" alt="" className='w-7' />
                                 <p>Continue with Google</p>
                             </div>
                             <div className='flex text-slate-500 justify-center  text-lg  items-center'>
