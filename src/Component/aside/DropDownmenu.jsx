@@ -115,7 +115,7 @@ function DropDownmenu({setOpen, isMenu, setIsMenu}) {
           {
             user.is_admin
             ?
-              <Link to={"/admin"}>
+              <Link to={"/admin/dashboard"}>
                 <li
                   onClick={() => setIsMenu(false)}
                   className="flex items-center justify-between my-2 cursor-pointer hover:bg-[#ee6730] duration-150 px-2  py-2 rounded-md  "
