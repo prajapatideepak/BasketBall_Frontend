@@ -40,14 +40,14 @@ function LandingPage() {
                   </span>
                 </button>
               </Link>
-              <Link className="Link" to={"/register"}>
+              <Link className="Link" to={"/about"}>
                 <button
                   type="submit"
                   className="bg-[#ee6730] border-2  relative border-[#ee6730] hover:text-[#ee6730] inline-flex items-center justify-center w-full px-8 py-1.5 sm:px-8 my-2 sm:py-[5px] 2xl:px-20 2xl:py-2 overflow-hidden font-medium tracking-tighter text-white rounded-full cursor-pointer group"
                 >
                   <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-white rounded-lg group-hover:w-full group-hover:h-56"></span>
                   <span className="relative flex justify-center items-center flex-row">
-                    Register
+                    Get Start
                   </span>
                 </button>
               </Link>
