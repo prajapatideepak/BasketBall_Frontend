@@ -7,27 +7,48 @@ import { Accordion, AccordionHeader, AccordionBody } from "@material-tailwind/re
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import Heading from '../../Component/Heading';
+import sendEmail from '../../hooks/SendEmail'
+import { toast } from "react-toastify";
 
 const ContactUs = () => {
-    const initialValues={
-        name: '',
-        email: '',
-        message: ''
-    }
-    const validationSchema = Yup.object({
-        name: Yup.string().matches(/^[a-zA-Z ]+$/, "Please enter only characters").min(2).max(25).required("Name is required"),
-        email: Yup.string().email().required("Email is required"),
-        message: Yup.string().required("Message is required"),
-    })
+
+  const [isLoading, setIsLoading] = React.useState(false)
+
+  const initialValues={
+      name: '',
+      email: '',
+      message: ''
+  }
+  const validationSchema = Yup.object({
+    name: Yup.string().matches(/^[a-zA-Z ]+$/, "Please enter only characters").min(3,'Atleast 3 characters are required').max(30, "Name cannot be more than 30 characters long").required("Name is required"),
+    email: Yup.string().email('Please enter a valid email').required("Email is required"),
+    message: Yup.string().required("Message is required"),
+  })
 
 
-    const {values, errors, touched, isSubmitting, handleBlur, handleChange, handleSubmit} = useFormik({
-        validationSchema,
-        initialValues,
-        onSubmit : (data) => {
-            console.log(data)
+  const {values, errors, resetForm, touched, isSubmitting, handleBlur, handleChange, handleSubmit} = useFormik({
+      validationSchema,
+      initialValues,
+      onSubmit : async (data) => {
+        setIsLoading(true)
+        
+        const res = await sendEmail(
+          data.name,
+          data.email,
+          data.message
+        )
+
+        if(res == 'success'){
+          toast.success('Thanks for your feedback')
+          resetForm()
         }
-    })
+        else{
+          toast.error('Failed to send email')
+        }
+
+        setIsLoading(false)
+      }
+  })
   
   const [open, setOpen] = React.useState(1);
 
@@ -129,9 +150,9 @@ const ContactUs = () => {
 
 
                 <div>
-                  <button type="submit" className="bg-slate-900 my-10 relative inline-flex items-center justify-center w-full px-4 py-1.5 sm:px-8 sm:py-3 overflow-hidden font-mono font-medium tracking-tighter text-white rounded-lg cursor-pointer group">
+                  <button type="submit" disabled={isLoading} className={`${isLoading ? 'opacity-60'  : ''} bg-slate-900 my-10 relative inline-flex items-center justify-center w-full px-4 py-1.5 sm:px-8 sm:py-3 overflow-hidden font-mono font-medium tracking-tighter text-white rounded-lg cursor-pointer group`}>
                     <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#ee6730] rounded-lg group-hover:w-full group-hover:h-56"></span>
-                    <span className="relative">Submit</span>
+                    <span className="relative">{isLoading ? 'Loading...' : 'Submit'}</span>
                   </button>
                 </div>
 
@@ -241,8 +262,7 @@ const ContactUs = () => {
                   <IoMdMailOpen className='text-[#ee6730] text-2xl' />
                   <h1 className='ml-2 sm:ml-0 capitalize text-[#ee6730] font-medium mb-4'>Email us</h1>
                 </div>
-                <p className='text-gray-800 tracking-wide mb-1'>support@wellbenix.com</p>
-                <p className='text-gray-800 tracking-wide'>sales@wellbenix.com</p>
+                <p className='text-gray-800 tracking-wide mb-1'>wellbenix@gmail.com</p>
               </div>
             </div>
           </div>

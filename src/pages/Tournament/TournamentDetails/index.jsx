@@ -7,9 +7,8 @@ import Sponsors from "./Sponsors";
 import Gallery from "./Gallery";
 import About from "./About";
 import Admin from "./Admin";
+import Pools from "./Pools";
 import "./TournamentDetails.css";
-import TeamsModal from "./TeamsModal";
-import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 import Loader from "../../../component/Loader";
 import { useGetTournamentDetailsQuery } from "../../../services/tournament";
@@ -42,12 +41,13 @@ function TournamentDetails() {
   const tabs = [
     <Matches matches={tournamentDetails.matches} />,
     <Teams isOrganizer={isOrganizer} teams={tournamentDetails.tournament_teams}  tournamentDetails={tournamentDetails} refetchData={refetch} />,
+    <Pools tournamentTeams={tournamentDetails.tournament_teams} gender_types={tournamentDetails.gender_types} age_categories={tournamentDetails.age_categories} />,
     <Schedule isOrganizer={isOrganizer} />,
     <Prize prize={tournamentDetails.prize} />,
     <Sponsors sponsors={tournamentDetails.tournament_sponsors} />,
     <Gallery galleryDetails={tournamentDetails.gallery} refetchData={refetch} />,
     <About isOrganizer={isOrganizer} tournamentDetails={tournamentDetails} />,
-    <Admin tournamentDetails={tournamentDetails} teams={tournamentDetails.tournament_teams} refetchData={refetch} />
+    <Admin tournamentDetails={tournamentDetails} teams={tournamentDetails.tournament_teams} refetchData={refetch} />,
   ];
 
   const handleRegisterInTournament = () => {
@@ -125,7 +125,7 @@ function TournamentDetails() {
               } h-full cursor-pointer`}
               onClick={() => setCurrentTab(2)}
             >
-              Schedule
+              Pools
             </h1>
             <h1
               className={`md:w-28 sm:w-24 w-20 flex justify-center items-center  ${
@@ -133,7 +133,7 @@ function TournamentDetails() {
               } h-full cursor-pointer`}
               onClick={() => setCurrentTab(3)}
             >
-              Prize
+              Schedule
             </h1>
             <h1
               className={`md:w-28 sm:w-24 w-20 flex justify-center items-center  ${
@@ -141,7 +141,7 @@ function TournamentDetails() {
               } h-full cursor-pointer`}
               onClick={() => setCurrentTab(4)}
             >
-              Sponsors
+              Prize
             </h1>
             <h1
               className={`md:w-28 sm:w-24 w-20 flex justify-center items-center  ${
@@ -149,7 +149,7 @@ function TournamentDetails() {
               } h-full cursor-pointer`}
               onClick={() => setCurrentTab(5)}
             >
-              Gallery
+              Sponsors
             </h1>
             <h1
               className={`md:w-28 sm:w-24 w-20 flex justify-center items-center  ${
@@ -157,14 +157,22 @@ function TournamentDetails() {
               } h-full cursor-pointer`}
               onClick={() => setCurrentTab(6)}
             >
+              Gallery
+            </h1>
+            <h1
+              className={`md:w-28 sm:w-24 w-20 flex justify-center items-center  ${
+                currentTab == 7 ? "bg-[#F5F5F7] text-[#ee6730]" : ""
+              } h-full cursor-pointer`}
+              onClick={() => setCurrentTab(7)}
+            >
               About
             </h1>
             {isOrganizer ? (
               <h1
                 className={`md:w-28 sm:w-24 w-20 flex justify-center items-center font-semibold ${
-                  currentTab == 7 ? "bg-[#F5F5F7] text-[#ee6730]" : ""
+                  currentTab == 8 ? "bg-[#F5F5F7] text-[#ee6730]" : ""
                 } h-full cursor-pointer`}
-                onClick={() => setCurrentTab(7)}
+                onClick={() => setCurrentTab(8)}
               >
                 Admin*
               </h1>
