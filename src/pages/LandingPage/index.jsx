@@ -4,7 +4,7 @@ import { Link} from "react-router-dom";
 function LandingPage() {
   return (
     <>
-      <div className="min-h-screen relative " style={{ minHeight: "calc(100vh - 70px)" }}>
+      <div className="min-h-screen relative ">
         <div className="contant grid grid-flow-row lg:grid-cols-2 ">
           <div className="flex flex-col w-full justify-center items-center lg:items-start lg:mt-20 lg:px-10 xl:px-32 space-y-2 lg:space-y-5 order-2 lg:order-1 z-50 sm:pb-10 ">
             <h1 className="xs:text-[44px] font-roboto text-black italic font-bold sm:text-6xl md:text-7xl lg:text-[80px] text-blabg-black

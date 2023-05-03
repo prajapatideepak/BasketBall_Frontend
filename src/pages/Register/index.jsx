@@ -144,7 +144,7 @@ function Register() {
 
     return (
         <>
-            <div className=" flex xs:justify-center  items-center sm:block px-10 md:px-20  bg-white py-5 pb-10 sm:pb-12 min-h-screen ">
+            <div className=" flex xs:justify-center items-center sm:block px-10 md:px-20  bg-white py-5 pb-10 sm:pb-12 min-h-screen ">
                 <div className="flex xl:flow-row justify-center items-center">
                     <div className="2xl:w-[50%] xl:block hidden">
                         <img src='/CBL_Images/7xm.xyz557949.jpg' alt="" />

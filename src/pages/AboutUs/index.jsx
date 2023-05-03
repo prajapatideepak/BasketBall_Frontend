@@ -22,16 +22,15 @@ function AboutUs() {
   ];
 
   return (
-    <div>
-      <div className=" lg:text-left mx-auto px-10 sm:px-20 md:px-20  lg:px-20 xl:px-20 2xl:px-32">
+    <div className="">
+      <div className=" lg:text-left mx-auto px-10 sm:px-20 md:px-20 lg:px-20 xl:px-20 2xl:px-32 2xl:min-h-screen">
         <div className="xs:py-10 py-10">
           <h1 className="xs:text-5xl text-6xl  text-center font-bold  italic uppercase text-[#ee6730]  ">About Us</h1>
         </div>
-
         <div className="">
           <AboutUsCard key={1} name={1} />
         </div>
-        <div>
+        <div className="pb-32">
           <div className="text-center">
             <h1 className="text-3xl text-center ">CBL Features</h1>
             <p className="w-full md:w-2/3 mx-auto p-2 text-gray-800 italic">
