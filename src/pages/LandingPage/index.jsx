@@ -47,7 +47,7 @@ function LandingPage() {
                 >
                   <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-white rounded-lg group-hover:w-full group-hover:h-56"></span>
                   <span className="relative flex justify-center items-center flex-row">
-                    Get Start
+                    About Us 
                   </span>
                 </button>
               </Link>
