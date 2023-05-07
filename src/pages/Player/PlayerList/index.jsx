@@ -25,7 +25,7 @@ const PlayerList = () => {
           <div>
             <div className="flex flex-col min-h-screen px-10 2xl:px-32 lg:px-14 ">
               <div className="xs:py-10 py-10">
-                <h1 className="xs:text-5xl text-6xl  text-center font-bold  italic uppercase text-[#ee6730]  ">All Players</h1>
+                <h1 className="xs:text-3xl sm:text-3xl md:text-4xl text-center font-bold  italic uppercase text-[#ee6730]  ">All Players</h1>
               </div>
               <div className="mx-auto w-full">
                 <div className="flex mb-10 justify-center ">
@@ -55,9 +55,9 @@ const PlayerList = () => {
                           <div className="duration-300 relative justify-end bg-black rounded-lg text-white overflow-hidden shadow-xl cursor-pointer hover:scale-[1.03] w-6/7  md:w-full h-full ">
                             <div className=" flex justify-end items-center ">
                               <img
-                                src={player?.team_players[0]?.teams?.logo ? player?.team_players[0]?.teams?.logo : ""}
+                                src={player?.team_players[0]?.teams?.logo ? player?.team_players[0]?.teams?.logo : "/CBL_Images/24100.jpg"}
                                 alt=""
-                                className="w-28 h-28 opacity-20"
+                                className="w-28 h-28 opacity-20 mr-5"
                               />
                             </div>
                             <div className=" flex flex-col  px-5 sm:px-8 lg:px-12  sm:flex-row w-full h-full absolute top-0 content-start py-2 ">

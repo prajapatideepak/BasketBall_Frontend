@@ -53,7 +53,7 @@ export default function PlayerInfo({ PlayerDetail }) {
                   ?
                   PlayerDetail?.SinglePlayerDetails.users.id == user.id
                     ?
-                    moment(PlayerDetail?.SinglePlayerDetails?.date_of_birth).format('DD / MM / YY')
+                    moment(PlayerDetail?.SinglePlayerDetails?.date_of_birth).format('L')
                     :
                     moment().diff(PlayerDetail?.SinglePlayerDetails?.date_of_birth, "years")
                   :
