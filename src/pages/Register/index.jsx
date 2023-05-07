@@ -42,7 +42,7 @@ const signUpSchema = Yup.object({
       }
       return true;
     })
-    .min(10, "Enter valid mobile no.").max(10, "Enter valid mobile no.").matches(/^[0-9]+$/, "Please enter only numbers").phone(null, true, "Invalid phone number").required("Please enter your phone number"),
+    .min(10, "Enter valid mobile no.").max(10, "Enter valid mobile no.").matches(/^[0-9]+$/, "Please enter only numbers").phone(null, true, "Please enter your phone number").required("Please enter your phone number"),
     password: Yup.string()
     .required("Please enter password")
     .test('trim', 'Must not contain leading or trailing spaces', (value) => {
@@ -144,7 +144,7 @@ function Register() {
 
     return (
         <>
-            <div className="  flex justify-center items-center px-10 sm:px-20  bg-white mt-5 ">
+            <div className=" flex xs:justify-center items-center sm:block px-10 md:px-20  bg-white py-5 pb-10 sm:pb-12 min-h-screen ">
                 <div className="flex xl:flow-row justify-center items-center">
                     <div className="2xl:w-[50%] xl:block hidden">
                         <img src='/CBL_Images/7xm.xyz557949.jpg' alt="" />
@@ -311,7 +311,7 @@ function Register() {
                                         <span className={`absolute w-0 h-0 transition-all duration-500 ease-out bg-[#ee6730] rounded-lg group-hover:w-full ${isLoading ? '' : "group-hover:h-56"}`}></span>
                                         <span className="relative">{isLoading ? 'Loading...' : 'Create Account'}</span>
                                     </button>
-                                    <p className="text-slate-500 flex justify-center items-center">Already have an account?
+                                    <p className="text-slate-500 flex justify-center items-center pb-5">Already have an account?
                                         <Link to={"/Login"}>
                                             <span className="text-[#ee6730]  font-medium cursor-pointer px-1">Log in</span>
                                         </Link>

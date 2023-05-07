@@ -50,7 +50,7 @@ export default function MatchProfile({ data }) {
         {/*  */}
         {data?.data?.match_data?.data?.status == 1 && (
           <div className="text-white text-center opacity-60 ">
-            <h1 className="font-semibold text-3xl sm:text-5xl xl:text-7xl italic">
+            <h1 className="font-bold font-roboto text-3xl sm:text-5xl xl:text-7xl ">
               VS
             </h1>
           </div>
