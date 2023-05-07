@@ -55,9 +55,9 @@ const PlayerList = () => {
                           <div className="duration-300 relative justify-end bg-black rounded-lg text-white overflow-hidden shadow-xl cursor-pointer hover:scale-[1.03] w-6/7  md:w-full h-full ">
                             <div className=" flex justify-end items-center ">
                               <img
-                                src={player?.team_players[0]?.teams?.logo ? player?.team_players[0]?.teams?.logo : "/CBL_Images/24100.jpg"}
+                                src={player?.team_players[0]?.teams?.logo ? player?.team_players[0]?.teams?.logo : ""}
                                 alt=""
-                                className="w-28 h-28 opacity-20 mr-5"
+                                className="w-28 h-28 opacity-20 "
                               />
                             </div>
                             <div className=" flex flex-col  px-5 sm:px-8 lg:px-12  sm:flex-row w-full h-full absolute top-0 content-start py-2 ">
