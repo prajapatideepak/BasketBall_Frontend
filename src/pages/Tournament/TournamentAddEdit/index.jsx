@@ -335,7 +335,7 @@ function TournamentAddEdit() {
                 }
               </div>
               <div className="flex flex-col w-full">
-                <label className="mb-2">Choose Logo ( PNG, JPG, JPEG )</label>
+                <label className="mb-2">Choose Logo ( PNG, JPG, JPEG ) (size &lt; 1MB)</label>
                 <input
                   className="rounded-lg border-transparent appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
                   type="file"

@@ -25,7 +25,7 @@ const PlayerList = () => {
           <div>
             <div className="flex flex-col min-h-screen px-10 2xl:px-32 lg:px-14 ">
               <div className="xs:py-10 py-10">
-                <h1 className="xs:text-5xl text-6xl  text-center font-bold  italic uppercase text-[#ee6730]  ">All Players</h1>
+                <h1 className="xs:text-3xl sm:text-3xl md:text-4xl text-center font-bold  italic uppercase text-[#ee6730]  ">All Players</h1>
               </div>
               <div className="mx-auto w-full">
                 <div className="flex mb-10 justify-center ">
@@ -57,7 +57,7 @@ const PlayerList = () => {
                               <img
                                 src={player?.team_players[0]?.teams?.logo ? player?.team_players[0]?.teams?.logo : ""}
                                 alt=""
-                                className="w-28 h-28 opacity-20"
+                                className="w-28 h-28 opacity-20 "
                               />
                             </div>
                             <div className=" flex flex-col  px-5 sm:px-8 lg:px-12  sm:flex-row w-full h-full absolute top-0 content-start py-2 ">

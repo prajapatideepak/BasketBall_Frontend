@@ -11,7 +11,7 @@ function PlayerCard({ id, photo, name, position, age, jersey_no }) {
         boxShadow:
           "rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px",
       }}
-      onClick={() => navigate(`/player/${id}`)}
+      onClick={() => navigate(`/player/profile-detail/${id}`)}
     >
       <div className="overflow-hidden w-60 h-52 bg-white">
         <img

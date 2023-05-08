@@ -60,7 +60,7 @@ const ContactUs = () => {
     <>
       <section className=''>
         <div className="xs:py-10 py-10">
-          <h1 className="xs:text-5xl text-6xl  text-center font-bold  italic uppercase text-[#ee6730]  ">Contact Us</h1>
+          <h1 className="xs:text-3xl sm:text-3xl md:text-4xl text-center font-bold  italic uppercase text-[#ee6730]  ">Contact Us</h1>
         </div>
         <div className='flex justify-start -z-50'>
           <div className='right-content w-full sm:w-2/4 lg:mx-32 md:mx-28 sm:mx-20 '>

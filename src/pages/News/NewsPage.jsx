@@ -29,7 +29,7 @@ const NewsPage = () => {
     <div className="min-h-screen">
       <div>
         <div className="xs:py-10 py-10">
-          <h1 className="xs:text-5xl text-6xl  text-center font-bold  italic uppercase text-[#ee6730]  ">News</h1>
+          <h1 className="xs:text-3xl sm:text-3xl md:text-4xl text-center font-bold  italic uppercase text-[#ee6730] ">News</h1>
         </div>
         {
           isLoading ?
