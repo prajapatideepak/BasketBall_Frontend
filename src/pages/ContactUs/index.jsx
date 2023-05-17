@@ -14,42 +14,42 @@ const ContactUs = () => {
 
   const [isLoading, setIsLoading] = React.useState(false)
 
-  const initialValues={
-      name: '',
-      email: '',
-      message: ''
+  const initialValues = {
+    name: '',
+    email: '',
+    message: ''
   }
   const validationSchema = Yup.object({
-    name: Yup.string().matches(/^[a-zA-Z ]+$/, "Please enter only characters").min(3,'Atleast 3 characters are required').max(30, "Name cannot be more than 30 characters long").required("Name is required"),
+    name: Yup.string().matches(/^[a-zA-Z ]+$/, "Please enter only characters").min(3, 'Atleast 3 characters are required').max(30, "Name cannot be more than 30 characters long").required("Name is required"),
     email: Yup.string().email('Please enter a valid email').required("Email is required"),
     message: Yup.string().required("Message is required"),
   })
 
 
-  const {values, errors, resetForm, touched, isSubmitting, handleBlur, handleChange, handleSubmit} = useFormik({
-      validationSchema,
-      initialValues,
-      onSubmit : async (data) => {
-        setIsLoading(true)
-        
-        const res = await sendEmail(
-          data.name,
-          data.email,
-          data.message
-        )
+  const { values, errors, resetForm, touched, isSubmitting, handleBlur, handleChange, handleSubmit } = useFormik({
+    validationSchema,
+    initialValues,
+    onSubmit: async (data) => {
+      setIsLoading(true)
 
-        if(res == 'success'){
-          toast.success('Thanks for your feedback')
-          resetForm()
-        }
-        else{
-          toast.error('Failed to send email')
-        }
+      const res = await sendEmail(
+        data.name,
+        data.email,
+        data.message
+      )
 
-        setIsLoading(false)
+      if (res == 'success') {
+        toast.success('Thanks for your feedback')
+        resetForm()
       }
+      else {
+        toast.error('Failed to send email')
+      }
+
+      setIsLoading(false)
+    }
   })
-  
+
   const [open, setOpen] = React.useState(1);
 
   const handleOpen = (value) => {
@@ -59,8 +59,8 @@ const ContactUs = () => {
   return (
     <>
       <section className=''>
-      <div className="xs:py-10 py-10">
-          <h1 className="xs:text-5xl text-6xl  text-center font-bold  italic uppercase text-[#ee6730]  ">Contact Us</h1>
+        <div className="xs:py-10 py-10">
+          <h1 className="xs:text-3xl sm:text-3xl md:text-4xl text-center font-bold  italic uppercase text-[#ee6730]  ">Contact Us</h1>
         </div>
         <div className='flex justify-start -z-50'>
           <div className='right-content w-full sm:w-2/4 lg:mx-32 md:mx-28 sm:mx-20 '>
@@ -134,7 +134,7 @@ const ContactUs = () => {
                     placeholder="Enter your message..."
                     value={values.message}
                     onChange={handleChange}
-                      onBlur={handleBlur}
+                    onBlur={handleBlur}
                   />
                 </div>
                 <div className="mb-6">
@@ -150,7 +150,7 @@ const ContactUs = () => {
 
 
                 <div>
-                  <button type="submit" disabled={isLoading} className={`${isLoading ? 'opacity-60'  : ''} bg-slate-900 my-10 relative inline-flex items-center justify-center w-full px-4 py-1.5 sm:px-8 sm:py-3 overflow-hidden font-mono font-medium tracking-tighter text-white rounded-lg cursor-pointer group`}>
+                  <button type="submit" disabled={isLoading} className={`${isLoading ? 'opacity-60' : ''} bg-slate-900 my-10 relative inline-flex items-center justify-center w-full px-4 py-1.5 sm:px-8 sm:py-3 overflow-hidden font-mono font-medium tracking-tighter text-white rounded-lg cursor-pointer group`}>
                     <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#ee6730] rounded-lg group-hover:w-full group-hover:h-56"></span>
                     <span className="relative">{isLoading ? 'Loading...' : 'Submit'}</span>
                   </button>

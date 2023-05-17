@@ -20,9 +20,9 @@ const TermsandCondition = () => {
     return (
         <>
             <section className=''>
-                <div className="pt-8 md:pt-12 lg:pt-20">
-                    <Heading margin={true} text="Term & Conditions" />
-                </div>
+                <div className="xs:py-10 py-10">
+                <h1 className="xs:text-3xl sm:text-3xl md:text-4xl text-center font-bold  italic uppercase text-[#ee6730]  ">Term & Conditions</h1>
+              </div>
                 <div className=" px-10 py-10 lg:py-14 lg:px-32 pb-10 ">
                     {
                         Termsandcondition.map((item, index) => {

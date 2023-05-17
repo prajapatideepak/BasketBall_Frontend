@@ -170,13 +170,6 @@ function AsideMenuMain() {
                 </h1>
               </NavLink>
             </li>
-            <li className="nav-item " onClick={() => setOpen(!open)}>
-              <NavLink className={({ isActive }) => (isActive ? "active" : 'none')} to={"/highlights"} >
-                <h1 className="relative text-white text-base md:text-base lg:text-base xl:text-lg my-[16px] lg:my-0">
-                  Highlight
-                </h1>
-              </NavLink>
-            </li>
             <li className="nav-item md:hidden" onClick={() => setOpen(!open)}>
               <NavLink className={({ isActive }) => (isActive ? "active" : 'none')} to={"/gallery"} >
                 <h1 className="relative text-white text-base md:text-base lg:text-base xl:text-lg my-[16px] lg:my-0">

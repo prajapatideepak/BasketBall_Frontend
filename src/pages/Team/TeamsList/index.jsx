@@ -24,7 +24,7 @@ function TeamsList() {
   return (
     <section className="min-h-screen">
       <div className="xs:py-10 py-10">
-        <h1 className="xs:text-5xl text-6xl  text-center font-bold  italic uppercase text-[#ee6730]  ">All Teams</h1>
+        <h1 className="xs:text-3xl sm:text-3xl md:text-4xl text-center font-bold  italic uppercase text-[#ee6730] ">All Teams</h1>
       </div>
       <div className="mx-auto px-10 sm:px-20 md:px-20  lg:px-24 xl:px-28 2xl:px-32">
         <div className="flex mb-10  justify-center ">

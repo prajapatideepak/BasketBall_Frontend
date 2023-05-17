@@ -73,12 +73,12 @@ function Login() {
     });
 
   return (
-    <div className="flex justify-center items-center lg:space-x-32 xl:space-52 2xl:space-x-48 bg-gray-50 mt-5 lg:mt-8">
+    <div className="flex justify-center xs:items-start  items-center lg:space-x-32 xl:space-52 2xl:space-x-48 bg-gray-50 pt-16  pb-24 lg:pb-32 xl:min-h-screen">
       <div className="img lg:w-[450px]  lg:h-[350px] xl:w-[500px] xl:h-[400px] 2xl:h-[600px] 2xl:w-[550px] hidden lg:block">
         <img src='/CBL_Images/7xm.xyz288133.jpg' alt="landing" className="" />
       </div>
 
-      <div className=" 2xl:w-[27%] px-5 mt-4 sm lg:mt-0 ">
+      <div className=" 2xl:w-[27%] px-5 ">
         <div className=" space-y-3  ">
           <h1 className="text-3xl font-bold text-center uppercase text-[#ee6730]">
             Login
@@ -160,7 +160,7 @@ function Login() {
             </button>
           </div>
         </form>
-        <div className="text-center mt-5 text-slate-500">
+        <div className="text-center mt-5 text-slate-500 xs:pb-0 pb-16">
           Don't have an account?
           <Link to={"/register"}>
             <span className="hover:text-black font-semibold cursor-pointer text-[#ee6730] px-2">

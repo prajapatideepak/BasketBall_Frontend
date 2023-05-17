@@ -4,7 +4,7 @@ import { Link} from "react-router-dom";
 function LandingPage() {
   return (
     <>
-      <div className="min-h-screen relative " style={{ minHeight: "calc(100vh - 70px)" }}>
+      <div className="min-h-screen relative ">
         <div className="contant grid grid-flow-row lg:grid-cols-2 ">
           <div className="flex flex-col w-full justify-center items-center lg:items-start lg:mt-20 lg:px-10 xl:px-32 space-y-2 lg:space-y-5 order-2 lg:order-1 z-50 sm:pb-10 ">
             <h1 className="xs:text-[44px] font-roboto text-black italic font-bold sm:text-6xl md:text-7xl lg:text-[80px] text-blabg-black
@@ -40,14 +40,14 @@ function LandingPage() {
                   </span>
                 </button>
               </Link>
-              <Link className="Link" to={"/register"}>
+              <Link className="Link" to={"/about"}>
                 <button
                   type="submit"
                   className="bg-[#ee6730] border-2  relative border-[#ee6730] hover:text-[#ee6730] inline-flex items-center justify-center w-full px-8 py-1.5 sm:px-8 my-2 sm:py-[5px] 2xl:px-20 2xl:py-2 overflow-hidden font-medium tracking-tighter text-white rounded-full cursor-pointer group"
                 >
                   <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-white rounded-lg group-hover:w-full group-hover:h-56"></span>
                   <span className="relative flex justify-center items-center flex-row">
-                    Register
+                    About Us 
                   </span>
                 </button>
               </Link>

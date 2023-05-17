@@ -94,7 +94,7 @@ const PublicLayout = () => {
                 <div className=' w-full -z-50  '>
                     <Outlet />
                 </div>
-                <div>
+                <div className='absolute bottom-0 w-full'>
                     <Footer />
                 </div>
             </div >
