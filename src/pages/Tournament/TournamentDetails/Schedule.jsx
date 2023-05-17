@@ -113,7 +113,7 @@ function Schedule({isOrganizer}) {
     }
 
     const handleSendLink = async (match) => {
-
+        setEditMatchId(match.id)
         const response = await sendScoreboardLink({
             tournament_id: match.tournament_id, 
             match_id: match.id, 
@@ -125,6 +125,8 @@ function Schedule({isOrganizer}) {
             match_start_time: moment(match.start_time, 'h:mm a').format("h:mm A"), 
             address: match.address
         })
+
+        setEditMatchId(-1)
         
         if(response.error){
             toast.error(response.error.data.message)
@@ -268,8 +270,11 @@ function Schedule({isOrganizer}) {
                                                                         :
                                                                             <td className=" px-6 py-4 whitespace-nowrap space-x-3">
                                                                                 <span className="flex items-center">
-                                                                                    <button className=" text-blue-500 hover:underline cursor-pointer font-medium" onClick={()=> handleViewScorer(match)}>View</button>
-                                                                                    <button className=" mx-3 text-orange-300 hover:underline cursor-pointer font-medium" onClick={()=> handleSendLink(match)}>Send Link</button>
+                                                                                    <button 
+                                                                                    disabled={ editMatchId == match.id && sendingLink.isLoading
+                                                                                    }
+                                                                                    className={` text-blue-500 hover:underline cursor-pointer font-medium`} onClick={()=> handleViewScorer(match)}>View</button>
+                                                                                    <button className={`${editMatchId == match.id && sendingLink.isLoading ? 'opacity-60': ''} mx-3 text-orange-300 hover:underline cursor-pointer font-medium`} onClick={()=> handleSendLink(match)}>{editMatchId == match.id && sendingLink.isLoading ? 'sending...' : 'Send Link'}</button>
                                                                                 </span>
                                                                             </td>
                                                                     }
