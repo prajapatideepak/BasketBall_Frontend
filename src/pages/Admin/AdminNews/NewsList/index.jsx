@@ -360,10 +360,10 @@ const NewsList = () => {
                           : ""}
                       </li>
                       <li className="w-20 text-left flex flex-col md:flex-row items-center justify-start space-y-2 md:space-y-0 md:space-x-3">
-                        {/* <FiEdit
+                        <FiEdit
                           className="text-[11px] md:text-sm lg:text-[19px] "
                           onClick={() => handleUpdate(News?.id ? News?.id : "")}
-                        /> */}
+                        />
                         <MdDelete
                           className="text-[11px] md:text-sm lg:text-[21px] text-red-500"
                           onClick={() => handleDelete(News?.id ? News?.id : "")}

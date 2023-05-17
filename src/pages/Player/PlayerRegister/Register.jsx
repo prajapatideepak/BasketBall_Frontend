@@ -67,7 +67,7 @@ export default function PlayerRegister() {
             2
           </motion.div>
         </div>
-        {index <= 1 ? (
+        { index <= 1 ? (
           <BasicInfo index={index} setIndex={setIndex} />
         ) : (
           <GameInfo index={index} setIndex={setIndex} />

@@ -43,6 +43,7 @@ const signUpSchema = Yup.object({
       return true;
     })
     .min(10, "Enter valid mobile no.").max(10, "Enter valid mobile no.").matches(/^[0-9]+$/, "Please enter only numbers").phone(null, true, "Please enter your phone number").required("Please enter your phone number"),
+   
     password: Yup.string()
     .required("Please enter password")
     .test('trim', 'Must not contain leading or trailing spaces', (value) => {

@@ -4,6 +4,7 @@ import { FaFilter } from "react-icons/fa";
 import TournamentTeamCard from "./TournamentTeamCard";
 
 function Teams({isOrganizer, teams, tournamentDetails, refetchData}) {
+  console.log(teams)
   const [allTeams, setAllTeams] = React.useState(teams)
   const [genderType, setGenderType] = React.useState('')
   const [ageCategory, setAgeCategory] = React.useState('')
