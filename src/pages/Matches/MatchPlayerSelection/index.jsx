@@ -16,6 +16,7 @@ export default function MatchPlayerSelection() {
     ...MatchData?.selectedPlayer,
   ]);
 
+
   const handleSelect = (playerId) => {
     if (selectedPlayers.includes(playerId)) {
       setSelectedPlayers(selectedPlayers.filter((id) => id !== playerId));
@@ -41,7 +42,7 @@ export default function MatchPlayerSelection() {
   }, [matchPlayersData.isError, matchPlayersData.isSuccess]);
 
   function handleSubmit() {
-    let finalPlayer = MatchData.teamPlayers.reduce((newArray, player) => {
+    let finalPlayer = MatchData?.teamPlayers?.reduce((newArray, player) => {
       if (selectedPlayers.includes(player.player_id)) {
         newArray.push({
           player_id: player.players.id,
@@ -65,6 +66,7 @@ export default function MatchPlayerSelection() {
 
     matchPlayers({ body: finalPlayer, team_id: MatchData?.team.id });
   }
+
   return (
     <div className="px-6 py-12">
       <div className="flex flex-row justify-center items-center">
@@ -91,7 +93,7 @@ export default function MatchPlayerSelection() {
               <div className="sm:px-4 sm:py-2 ">Select/Not Select</div>
             </div>
 
-            {MatchData?.teamPlayers.map((player) => (
+            {MatchData?.teamPlayers?.map((player) => (
               <div
                 key={player.id}
                 className={`grid grid-cols-3 bg-white  text-xs sm:text-lg mt-2 rounded-lg  shadow-2xl`}

@@ -90,14 +90,12 @@ const PublicLayout = () => {
                         </ul>
                     </div>
 
-                </div >
+                </div>
                 <div className=' w-full -z-50  '>
                     <Outlet />
-                </div>
-                <div className='absolute bottom-0 w-full'>
                     <Footer />
                 </div>
-            </div >
+            </div>
         </>
     )
 }
