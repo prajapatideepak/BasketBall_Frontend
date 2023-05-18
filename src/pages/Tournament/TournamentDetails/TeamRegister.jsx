@@ -24,7 +24,8 @@ function TeamRegister() {
   const tournamentDetails = data?.tournamentDetails;
 
   const [selectedTeam, setSelectedTeam] = React.useState(0);
-
+  const [selectedcategory, setSelectedcategory] = React.useState("");
+  const [selectedage_cutoff, setselectedage_cutoff] = React.useState("");
   React.useEffect(() => {
     if (something.isError) {
       toast.error(something?.error?.data?.message);
@@ -41,8 +42,8 @@ function TeamRegister() {
 
   // ------------ Form Validation ------------
   const initialValues = {
-    tournament_category: [],
-    age_cutoff: [],
+    tournament_category: "",
+    age_cutoff: "",
   };
   const validationSchema = Yup.object({
     tournament_category: Yup.string().min(1),
@@ -64,10 +65,12 @@ function TeamRegister() {
     onSubmit: (data) => {
       const newData = {
         ...data,
+        tournament_category: selectedcategory,
+        age_cutoff: selectedage_cutoff,
         tournament_id: tournamentDetails.id,
         team_id: selectedTeam,
       };
-
+      console.log(newData)
       teamtoTournament(newData).then();
     },
   });
@@ -77,6 +80,8 @@ function TeamRegister() {
       return team.id == selectedTeam;
     });
   }, [selectedTeam]);
+
+
 
   return (
     <section className="min-h-screen">
@@ -124,11 +129,10 @@ function TeamRegister() {
                             key={index}
                             id={team.id}
                             onClick={(e) => setSelectedTeam(() => team?.id)}
-                            className={` ${
-                              team.id == selectedTeam
-                                ? "bg-[#ee6730] text-white"
-                                : "bg-white"
-                            } flex items-center xl:w-1/4 2xl:w-1/5 space-x-5 xl:space-x-2 justify-start font-normal px-5 py-5 lg:py-6 
+                            className={` ${team.id == selectedTeam
+                              ? "bg-[#ee6730] text-white"
+                              : "bg-white"
+                              } flex items-center xl:w-1/4 2xl:w-1/5 space-x-5 xl:space-x-2 justify-start font-normal px-5 py-5 lg:py-6 
                           rounded-lg cursor-pointer bg-white hover:scale-105 duration-300 shadow-md my-3`}
                           >
                             <div className="w-16  lg:w-20 flex justify-center items-center">
@@ -170,15 +174,17 @@ function TeamRegister() {
                               <div
                                 key={index}
                                 htmlFor={category}
-                                className="flex bg-gray-200 hover:shadow-md px-5  py-3 rounded-md shadow-sm w-full flex-row  items-center space-x-3"
+                                className="flex bg-gray-200 cursor-pointer hover:shadow-md px-5  py-3 rounded-md shadow-sm w-full flex-row  items-center space-x-3"
+                                onClick={(e) => setSelectedcategory(() => category)}
                               >
                                 <input
                                   type="radio"
                                   name={"tournament_category"}
                                   id={category}
-                                  onChange={handleChange}
-                                  onBlur={handleBlur}
-                                  value={category}
+                                  // onChange={handleChange}
+                                  // onBlur={handleBlur}
+                                  // value={selectedcategory}
+                                  checked={category == selectedcategory ? true : null}
                                   className="cursor-pointer"
                                 />
                                 <label
@@ -196,7 +202,7 @@ function TeamRegister() {
                       )}
                     </div>
                     {errors.tournament_category &&
-                    touched.tournament_category ? (
+                      touched.tournament_category ? (
                       <small className="text-red-600 mt-2">
                         {errors.tournament_category}
                       </small>
@@ -211,31 +217,34 @@ function TeamRegister() {
                       <div className="grid grid-rows md:grid-flow-row lg:grid-cols-3 gap-5 py-2 ">
                         {tournamentDetails?.age_categories.length > 0
                           ? tournamentDetails?.age_categories.map(
-                              (age_cutoff, index) => {
-                                return (
-                                  <div
-                                    key={index}
-                                    className="flex bg-gray-200 hover:shadow-md px-5 py-3 rounded-md shadow-sm w-full items-center space-x-3"
+                            (age_cutoff, index) => {
+                              return (
+                                <div
+                                  key={index}
+                                  className="flex bg-gray-200 hover:shadow-md px-5 py-3 rounded-md shadow-sm w-full items-center space-x-3"
+                                  onClick={(e) => setselectedage_cutoff(() => age_cutoff)}
+
+                                >
+                                  <input
+                                    type="radio"
+                                    name={"age_cutoff"}
+                                    id={age_cutoff}
+                                    // onChange={handleChange}
+                                    // onBlur={handleBlur}
+                                    // value={age_cutoff}
+                                    className="cursor-pointer"
+                                    checked={age_cutoff == selectedage_cutoff ? true : null}
+                                  />
+                                  <label
+                                    htmlFor={age_cutoff}
+                                    className="text-sm xl:text-base cursor-pointer "
                                   >
-                                    <input
-                                      type="radio"
-                                      name={"age_cutoff"}
-                                      id={age_cutoff}
-                                      onChange={handleChange}
-                                      onBlur={handleBlur}
-                                      value={age_cutoff}
-                                      className="cursor-pointer"
-                                    />
-                                    <label
-                                      htmlFor={age_cutoff}
-                                      className="text-sm xl:text-base cursor-pointer "
-                                    >
-                                      {age_cutoff.split("_").join(" ")}
-                                    </label>
-                                  </div>
-                                );
-                              }
-                            )
+                                    {age_cutoff.split("_").join(" ")}
+                                  </label>
+                                </div>
+                              );
+                            }
+                          )
                           : "No age cut off Available"}
                       </div>
                     </div>

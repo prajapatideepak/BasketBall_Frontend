@@ -107,7 +107,7 @@ function TournamentAddEdit() {
       under_19: false,
       under_21: false,
       under_25: false,
-      under_27: false,
+      opan_for_all: false,
     },
     tournament_level: "",
     city_name: "",
@@ -146,7 +146,7 @@ function TournamentAddEdit() {
       under_19: location?.state?.tournamentDetails.age_categories?.includes('under 19'),
       under_21: location?.state?.tournamentDetails.age_categories?.includes('under 21'),
       under_25: location?.state?.tournamentDetails.age_categories?.includes('under 25'),
-      under_27: location?.state?.tournamentDetails.age_categories?.includes('under 27'),
+      opan_for_all: location?.state?.tournamentDetails.age_categories?.includes('opan_for_all'),
     },
     tournament_level: location?.state?.tournamentDetails.level,
     city_name: location?.state?.tournamentDetails.address,
@@ -547,13 +547,13 @@ function TournamentAddEdit() {
                       </div>
                       <div className="flex md:flex-col xl:flex-row items-center space-x-3">
                         <input type="checkbox"
-                          name="age_cutoff.under_27"
+                          name="age_cutoff.opan_for_all"
                           id="age_cutoff"
                           onChange={handleChange}
                           onBlur={handleBlur}
-                          checked={values.age_cutoff.under_27}
+                          checked={values.age_cutoff.opan_for_all}
                           className="cursor-pointer" />
-                        <label htmlFor="Under 27" className="text-sm">Under 27</label>
+                        <label htmlFor="opan_for_all" className="text-sm">Open For All</label>
                       </div>
                     </div>
                   </div>
@@ -594,8 +594,8 @@ function TournamentAddEdit() {
                       { value: "international", label: "International" },
                       { value: "national", label: "National" },
                       { value: "state", label: "State" },
-                      { value: "Local", label: "Local" },
-                      { value: "friendly", label: "Friendly" },
+                      { value: "Distric", label: "Distric" },
+                      { value: "Other", label: "Other" },
                     ]}
                   />
                   {
