@@ -98,7 +98,7 @@ const Dashboard = () => {
           <div className="bg-gray-700 h-[1px] w-full my-1 bg-gradient-to-l from-slate-50">
           </div>
         </div>
-        <div id="tournament" className="w-full flex justify-start px-6 xl:px-14 items-center gap-5 scroll-smooth  overflow-x-auto scrollbar-hide pt-10 pb-10 lg:py-8">
+        <div id="tournament" className="w-full flex justify-start px-6 xl:px-14 items-center gap-5 scroll-smooth overflow-x-auto scrollbar-hide pt-10 pb-10 lg:py-8">
           {
             tournaments?.data?.all_tournaments?.length > 0
               ?

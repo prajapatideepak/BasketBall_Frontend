@@ -209,9 +209,9 @@ const BasicInfo = ({ index, setIndex }) => {
                   <input
                     className="w-4 h-4 cursor-pointer"
                     type="radio"
-                    checked={values.gender == "m"}
                     id="male"
                     name="gender"
+                    checked={values.gender == "m"}
                     value={"m"}
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -226,8 +226,8 @@ const BasicInfo = ({ index, setIndex }) => {
                     className="w-4 h-4 cursor-pointer"
                     type="radio"
                     id="female"
-                    checked={values.gender == "f"}
                     name="gender"
+                    checked={values.gender == "f"}
                     value={"f"}
                     onChange={handleChange}
                     onBlur={handleBlur}

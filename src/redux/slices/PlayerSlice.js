@@ -23,6 +23,7 @@ const PlayerSlice = createSlice({
         playing_position: "",
         jersey_no: "",
         about: "",
+        playing_medal : ""
       },
     },
     Notification: [],

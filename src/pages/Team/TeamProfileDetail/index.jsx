@@ -302,11 +302,11 @@ function TeamProfileDetail() {
                           </th>
                         ) : null}
 
-                        {!isPublicView ? (
+                        {/* {!isPublicView ? (
                           <th className="border px-2 py-3 text-gray-300 uppercase border-gray-700 whitespace-nowrap font-semibold text-left sm:text-base text-xs xs:text-sm">
                             Action
                           </th>
-                        ) : null}
+                        ) : null} */}
                       </tr>
                     </thead>
                     <tbody className="bg-white">
@@ -358,9 +358,9 @@ function TeamProfileDetail() {
                                 </td>
                               ) : null}
 
-                              {!isPublicView ? (
+                              {/* {!isPublicView ? (
                                 <td className="whitespace-nowrap px-2">
-                                  {/* if tournament started then disable it */}
+                                  if tournament started then disable it
                                   <button
                                     className="bg-red-500 text-white px-2 py-0.5 rounded-md hover:opacity-60"
                                     onClick={() =>
@@ -373,7 +373,7 @@ function TeamProfileDetail() {
                                     Cancel Request
                                   </button>
                                 </td>
-                              ) : null}
+                              ) : null} */}
                             </tr>
                           );
                         })

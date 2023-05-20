@@ -27,7 +27,7 @@ function News_cards({ news }) {
     return (
         <>
             <div onClick={handleClick}
-                className="relative min-w-[260px] hover:scale-110  duration-300 xs:min-w-[320px] rounded-lg sm:min-w-[350px] md:min-w-[330px] max-w-[300px] h-[200px] md:h-[195px] 
+                className="relative min-w-[260px] hover:scale-105  duration-300 xs:min-w-[320px] rounded-lg sm:min-w-[350px] md:min-w-[330px] max-w-[300px] h-[200px] md:h-[195px] 
          group ">
                 <div className="absolute cursor-pointer w-full h-full  shadow-lg flex flex-col justify-center items-center  overflow-hidden " >
                     <img src={news.photo} alt="" className=' bg-cover bg-center h-full w-full rounded-lg' />

@@ -6,6 +6,7 @@ export const GameInfoSchema = Yup.object({
   weight: Yup.number()
   .min(15, "Weight should be min 15 KG").max(120, "Weight should not be greater than 120 KG"),
   playing_position: Yup.string().required("Please select your position"),
+  playing_medal: Yup.string().required("Please select your medal"),
   jersey_no: Yup.number()
     .min(1, "Jersey no. must be greater than 1")
     .max(999, "Jersey no. should not be greater than 999")
