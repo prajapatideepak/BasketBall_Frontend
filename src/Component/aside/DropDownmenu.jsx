@@ -30,8 +30,7 @@ function DropDownmenu({setOpen, isMenu, setIsMenu}) {
       </div>
 
       <div
-        className={`${
-          isMenu
+        className={`${isMenu
             ? "active top-[80px] lg:top-[90px] 2xl:top-[78px] "
             : " inactive"
         } dropdown-menu bg-black duration-500 ease-in  shadow-lg p-2 absolute  right-3 w-64 top-[70px]   rounded-md `}

@@ -44,7 +44,7 @@ const GameInfo = ({ index, setIndex }) => {
             await playerRegistration(fb);
           }
         } catch (err) {
-           toast.error(err.message);
+          toast.error(err.message);
         }
       },
     });
@@ -196,7 +196,7 @@ const GameInfo = ({ index, setIndex }) => {
               </span>
             </div>
             {/* for last name */}
-            <div className=" md:col-span-2   ">
+            <div className="">
               <label htmlFor="Experience" className="text-gray-700">
                 Experience(Achievement)
                 <span className="text-red-500 required-dot">*</span>
@@ -217,11 +217,34 @@ const GameInfo = ({ index, setIndex }) => {
                   : null}
               </span>
             </div>
-            {/* for last name */}
+            <div className="">
+              <label htmlFor="playerPosition" className="text-gray-700">
+                Player Medal
+                <span className="text-red-500 required-dot">*</span>
+              </label>
+              <select
+                type="text"
+                id="playing_medal"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.playing_medal}
+                className=" rounded-lg border-transparent flex-1  border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
+                name="playing_medal"
+              >
+                <option value={""}>Select Medal</option>
 
-            {/* end row */}
+                <option value="National">National</option>
+                <option value="State">State</option>
+                <option value="District">District</option>
+                <option value="Other">Other</option>
+              </select>
+              <span className="text-sm font-semibold text-red-600 px-1">
+                {errors.playing_medal && touched.playing_medal
+                  ? errors.playing_medal
+                  : null}
+              </span>
+            </div>
 
-            {/* end row */}
           </div>
         </div>
       </form>

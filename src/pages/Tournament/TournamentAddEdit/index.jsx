@@ -80,8 +80,8 @@ function TournamentAddEdit() {
   };
 
   const handleremovesponsor = (index) => {
-    errors?.sponsors?.splice(index,1)
-    values?.sponsors?.splice(index,1)
+    errors?.sponsors?.splice(index, 1)
+    values?.sponsors?.splice(index, 1)
     const list = [...sponsorlist];
     list.splice(index, 1);
     setsponsorlist(list);
@@ -115,7 +115,8 @@ function TournamentAddEdit() {
     referees: [
       {
         name: "",
-        mobile: ""
+        mobile: "",
+        referee_category: ""
       },
     ],
     sponsors: [
@@ -124,7 +125,8 @@ function TournamentAddEdit() {
         logo: ""
       }
     ],
-    prize: "",
+    winner_prize: "",
+    runner_prize: "",
   };
 
   const editTournamentValues = {
@@ -151,33 +153,35 @@ function TournamentAddEdit() {
     tournament_level: location?.state?.tournamentDetails.level,
     city_name: location?.state?.tournamentDetails.address,
     about_tournament: location?.state?.tournamentDetails.about == null ? '' : location?.state?.tournamentDetails.about,
-    referees: 
+    referees:
       location?.state?.tournamentDetails.tournament_referees.length > 0
-      ?
-        location?.state?.tournamentDetails.tournament_referees?.map((referee)=>{
+        ?
+        location?.state?.tournamentDetails.tournament_referees?.map((referee) => {
           return {
-              name: referee.name,
-              mobile: referee.mobile
-            }
+            name: referee.name,
+            mobile: referee.mobile,
+            referee_category: referee.referee_category
+          }
         })
-      :
+        :
         [
           {
             name: '',
-            mobile: ''
+            mobile: '',
+            referee_category: ''
           }
         ]
     ,
     sponsors:
       location?.state?.tournamentDetails.tournament_sponsors.length > 0
-      ?
-        location?.state?.tournamentDetails.tournament_sponsors?.map((sponsor)=>{
+        ?
+        location?.state?.tournamentDetails.tournament_sponsors?.map((sponsor) => {
           return {
-              name: sponsor.title,
-              logo: sponsor.logo
-            }
+            name: sponsor.title,
+            logo: sponsor.logo
+          }
         })
-      :
+        :
         [
           {
             name: '',
@@ -185,7 +189,8 @@ function TournamentAddEdit() {
           }
         ]
     ,
-    prize: location?.state?.tournamentDetails.prize == null ? '' : location?.state?.tournamentDetails.prize,
+    winner_prize: location?.state?.tournamentDetails.winner_prize == null ? '' : location?.state?.tournamentDetails.winner_prize,
+    runner_prize: location?.state?.tournamentDetails.runner_prize == null ? '' : location?.state?.tournamentDetails.runner_prize,
   };
 
   const initialValues = location?.state?.isEdit ? editTournamentValues : addTournamentValues
@@ -203,6 +208,7 @@ function TournamentAddEdit() {
     validationSchema: TournamentInfoSchema(location?.state?.isEdit),
     initialValues,
     onSubmit: async (data) => {
+      console.log(data)
       //tournament_category
       const gender_types = [];
       for (const key in data.tournament_category) {
@@ -237,15 +243,15 @@ function TournamentAddEdit() {
       for (let i = 0; i < data.sponsors.length; i++) {
         formdata.append(`sponsors_logo${i}`, data.sponsors[i].logo)
       }
-      
+
       setIsSubmitting(true);
       let response = null
-      
-      if(location?.state?.isEdit){
+
+      if (location?.state?.isEdit) {
         formdata.append('old_url', location?.state?.tournamentDetails.logo)
-        response = await updateTournamentDetails({tournament_id: location?.state?.tournamentDetails.id , formData: formdata})
+        response = await updateTournamentDetails({ tournament_id: location?.state?.tournamentDetails.id, formData: formdata })
       }
-      else{
+      else {
         response = await registerTournament(formdata)
       }
 
@@ -255,10 +261,10 @@ function TournamentAddEdit() {
       }
       else if (response.data.success) {
         toast.success(response.data.message)
-        if(location?.state?.isEdit){
+        if (location?.state?.isEdit) {
           navigate(`/tournament/${location?.state?.tournamentDetails.id}`)
         }
-        else{
+        else {
           navigate('/tournament/organizer')
         }
       }
@@ -266,15 +272,15 @@ function TournamentAddEdit() {
   });
 
   React.useEffect(() => {
-    if(location?.state?.isEdit){
-      const referees = location?.state?.tournamentDetails.tournament_referees?.map((referee) =>{
+    if (location?.state?.isEdit) {
+      const referees = location?.state?.tournamentDetails.tournament_referees?.map((referee) => {
         return {
           Referee: ""
         }
       })
       setRefereelist(referees.length > 0 ? referees : refereelist);
 
-      const sponsors = location?.state?.tournamentDetails.tournament_sponsors?.map((sponsor) =>{
+      const sponsors = location?.state?.tournamentDetails.tournament_sponsors?.map((sponsor) => {
         return {
           name: sponsor.title,
           logo: sponsor.logo
@@ -282,7 +288,7 @@ function TournamentAddEdit() {
       })
       setsponsorlist(sponsors.length > 0 ? sponsors : sponsorlist);
     }
-  },[])
+  }, [])
 
   return (
     <>
@@ -297,10 +303,10 @@ function TournamentAddEdit() {
             <img src={"/icons/tournament_icon.png"} className="w-20" />
           </div>
           {
-            location?.state?.isEdit 
-            ?
+            location?.state?.isEdit
+              ?
               null
-            :
+              :
               <p className="text-center text-gray-700 text-sm md:text-base italic pb-5">
                 The court is set, the teams are ready, let the games begin!
               </p>
@@ -412,7 +418,6 @@ function TournamentAddEdit() {
                     null
                 }
               </div>
-
             </div>
             {/* Tournament Category && Age Cutoff */}
             <div className="flex flex-col md:flex-row  2 gap-6 my-7 ">
@@ -582,12 +587,12 @@ function TournamentAddEdit() {
                     styles={customStyles}
                     defaultValue={
                       location?.state?.isEdit
-                      ?
+                        ?
                         {
-                          value: location?.state?.tournamentDetails.level,  
-                          label: location?.state?.tournamentDetails.level.charAt(0).toUpperCase() + location?.state?.tournamentDetails.level.slice(1) 
+                          value: location?.state?.tournamentDetails.level,
+                          label: location?.state?.tournamentDetails.level.charAt(0).toUpperCase() + location?.state?.tournamentDetails.level.slice(1)
                         }
-                      : 
+                        :
                         null
                     }
                     options={[
@@ -606,7 +611,7 @@ function TournamentAddEdit() {
                       null
                   }
                 </div>
-                <div className="flex flex-col w-full">
+                {/* <div className="flex flex-col w-full">
                   <label className="mb-2">Prize</label>
                   <input
                     className="rounded-lg border-transparent appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
@@ -625,9 +630,49 @@ function TournamentAddEdit() {
                       :
                       null
                   }
+                </div> */}
+                <div className="flex flex-col sm:flex-row sm:space-x-5 w-full ">
+                  <div className="w-full">
+                    <label className="">Winner Price</label>
+                    <input
+                      className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 mt-2 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
+                      placeholder="Enter Runner Price"
+                      type="text"
+                      name="wenner_price"
+                      id="wenner_price"
+                      value={values.winner_prize}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+                    {
+                      errors.winner_prize && touched.winner_prize
+                        ?
+                        <small className='text-sm font-semibold text-red-600 px-1'>{errors.winner_prize}</small>
+                        :
+                        null
+                    }
+                  </div>
+                  <div className="w-full">
+                    <label className="">Runner Price</label>
+                    <input
+                      className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 mt-2 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
+                      placeholder="Enter Runner Price"
+                      type="text"
+                      name="runner_price"
+                      id="runner_price"
+                      value={values.runner_prize}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+                    {
+                      errors.runner_prize && touched.runner_prize
+                        ?
+                        <small className='text-sm font-semibold text-red-600 px-1'>{errors.runner_prize}</small>
+                        :
+                        null
+                    }
+                  </div>
                 </div>
-
-
               </div>
             </div>
             {/* About Tournament */}
@@ -688,6 +733,23 @@ function TournamentAddEdit() {
                       {touched.referees && touched.referees[index] && errors.referees && errors.referees[index] ? (
                         <small className="text-sm font-semibold text-red-600 px-1">
                           {errors.referees[index]?.mobile}
+                        </small>
+                      ) : null}
+                    </div>
+                    <div className="flex flex-col w-full">
+                      <label className="mb-2">Referee Category</label>
+                      <select name="referee_category"
+                        className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-3 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
+                        id="">
+                        <option value="">Select Referee Category</option>
+                        <option value="BFI">BFI</option>
+                        <option value="FIBA">FIBA</option>
+                        <option value="State Referee">State Referee</option>
+                        <option value="Local Referee">Local Referee</option>
+                      </select>
+                      {touched.referees && touched.referees[index] && errors.referees && errors.referees[index] ? (
+                        <small className="text-sm font-semibold text-red-600 px-1">
+                          {errors.referees[index]?.referee_category}
                         </small>
                       ) : null}
                     </div>
@@ -767,25 +829,25 @@ function TournamentAddEdit() {
                         {
                           values.sponsors[index].logo != '' || sponsor.logo != ''
                             ?
-                              <div className="w-12 h-12  rounded-full overflow-hidden mx-3">
-                                <img 
+                            <div className="w-12 h-12  rounded-full overflow-hidden mx-3">
+                              <img
                                 src={
-                                  values.sponsors[index].logo != '' 
-                                  ? 
-                                    !values.sponsors[index].logo.name && !values.sponsors[index].logo.size
+                                  values.sponsors[index].logo != ''
                                     ?
+                                    !values.sponsors[index].logo.name && !values.sponsors[index].logo.size
+                                      ?
                                       values.sponsors[index].logo
-                                    :
+                                      :
                                       URL.createObjectURL(values.sponsors[index].logo)
-                                  : 
-                                    sponsor.logo 
-                                } 
+                                    :
+                                    sponsor.logo
+                                }
                                 className="w-full h-full" alt="" />
-                              </div>
+                            </div>
                             :
-                              <div className="w-12 h-12 rounded-full border mx-3">
+                            <div className="w-12 h-12 rounded-full border mx-3">
 
-                              </div>
+                            </div>
                         }
                         {sponsorlist.length > 1 && (
                           <div
@@ -868,11 +930,11 @@ function TournamentAddEdit() {
                       ?
                       'Loading...'
                       :
-                        location?.state?.isEdit
+                      location?.state?.isEdit
                         ?
-                          'UPDATE'
+                        'UPDATE'
                         :
-                          "SUBMIT"
+                        "SUBMIT"
                   }
                 </span>
               </button>
