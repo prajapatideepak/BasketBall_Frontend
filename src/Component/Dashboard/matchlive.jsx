@@ -63,7 +63,6 @@ function MatchLive({ slides }) {
       <div className='h-[240px] sm:h-[300px] md:h-[400px] lg:h-[450px] xl:h-[500px] 2xl:h-[600px] relative overflow-hidden'>
         {
           slides?.map((item, index) => {
-            console.log(slides.length)
             return (
               <div className={index === currentIndex ? 'slide active ' : 'slide'}
                 key={index}>

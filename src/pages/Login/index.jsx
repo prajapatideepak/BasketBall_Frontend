@@ -36,7 +36,6 @@ function Login() {
         toast.error(res.error.data.message);
       }
       else if (res.data.success) {
-        
         if(!res.data.user.is_verified){
           navigate("/user/resend-verification-link"); 
 
