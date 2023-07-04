@@ -134,7 +134,16 @@ const About = ({isOrganizer, tournamentDetails}) => {
                             </p>
                           </div>
                         </div>
-
+                        <div className="flex flex-col w-full">
+                          <label className="mb-2 text-gray-400 text-xs xs:text-sm md:text-base">
+                            Referee Type
+                          </label>
+                          <div className="border-2 border-orange-100 px-2 py-2 rounded-lg bg-white capitalize font-medium text-xs xs:text-sm md:text-base">
+                            <p>
+                              {item.type == '' ? '--' : item.type}
+                            </p>
+                          </div>
+                        </div>
                       </div>
                     )
                   })
