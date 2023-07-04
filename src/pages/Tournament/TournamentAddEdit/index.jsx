@@ -107,7 +107,7 @@ function TournamentAddEdit() {
       under_19: false,
       under_21: false,
       under_25: false,
-      opan_for_all: false,
+      open: false,
     },
     tournament_level: "",
     city_name: "",
@@ -116,7 +116,7 @@ function TournamentAddEdit() {
       {
         name: "",
         mobile: "",
-        referee_category: ""
+        type: ""
       },
     ],
     sponsors: [
@@ -148,7 +148,7 @@ function TournamentAddEdit() {
       under_19: location?.state?.tournamentDetails.age_categories?.includes('under 19'),
       under_21: location?.state?.tournamentDetails.age_categories?.includes('under 21'),
       under_25: location?.state?.tournamentDetails.age_categories?.includes('under 25'),
-      opan_for_all: location?.state?.tournamentDetails.age_categories?.includes('opan_for_all'),
+      open: location?.state?.tournamentDetails.age_categories?.includes('open'),
     },
     tournament_level: location?.state?.tournamentDetails.level,
     city_name: location?.state?.tournamentDetails.address,
@@ -160,7 +160,7 @@ function TournamentAddEdit() {
           return {
             name: referee.name,
             mobile: referee.mobile,
-            referee_category: referee.referee_category
+            type: referee.type
           }
         })
         :
@@ -168,7 +168,7 @@ function TournamentAddEdit() {
           {
             name: '',
             mobile: '',
-            referee_category: ''
+            type: ''
           }
         ]
     ,
@@ -208,7 +208,6 @@ function TournamentAddEdit() {
     validationSchema: TournamentInfoSchema(location?.state?.isEdit),
     initialValues,
     onSubmit: async (data) => {
-      console.log(data)
       //tournament_category
       const gender_types = [];
       for (const key in data.tournament_category) {
@@ -236,7 +235,8 @@ function TournamentAddEdit() {
       formdata.append('gender_types', JSON.stringify(gender_types))
       formdata.append('age_categories', JSON.stringify(age_categories))
       formdata.append('level', data.tournament_level)
-      formdata.append('prize', data.prize)
+      formdata.append('winner_prize', data.winner_prize)
+      formdata.append('runner_prize', data.runner_prize)
       formdata.append('about', data.about_tournament)
       formdata.append('referees', JSON.stringify(data.referees))
       formdata.append('sponsors', JSON.stringify(data.sponsors))
@@ -552,13 +552,13 @@ function TournamentAddEdit() {
                       </div>
                       <div className="flex md:flex-col xl:flex-row items-center space-x-3">
                         <input type="checkbox"
-                          name="age_cutoff.opan_for_all"
+                          name="age_cutoff.open"
                           id="age_cutoff"
                           onChange={handleChange}
                           onBlur={handleBlur}
-                          checked={values.age_cutoff.opan_for_all}
+                          checked={values.age_cutoff.open}
                           className="cursor-pointer" />
-                        <label htmlFor="opan_for_all" className="text-sm">Open For All</label>
+                        <label htmlFor="open" className="text-sm">Open</label>
                       </div>
                     </div>
                   </div>
@@ -599,8 +599,8 @@ function TournamentAddEdit() {
                       { value: "international", label: "International" },
                       { value: "national", label: "National" },
                       { value: "state", label: "State" },
-                      { value: "Distric", label: "Distric" },
-                      { value: "Other", label: "Other" },
+                      { value: "district", label: "District" },
+                      { value: "other", label: "Other" },
                     ]}
                   />
                   {
@@ -638,8 +638,8 @@ function TournamentAddEdit() {
                       className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 mt-2 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
                       placeholder="Enter Runner Price"
                       type="text"
-                      name="wenner_price"
-                      id="wenner_price"
+                      name="winner_prize"
+                      id="winner_prize"
                       value={values.winner_prize}
                       onChange={handleChange}
                       onBlur={handleBlur}
@@ -653,13 +653,13 @@ function TournamentAddEdit() {
                     }
                   </div>
                   <div className="w-full">
-                    <label className="">Runner Price</label>
+                    <label className="">Runner-Up Price</label>
                     <input
                       className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 mt-2 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
                       placeholder="Enter Runner Price"
                       type="text"
-                      name="runner_price"
-                      id="runner_price"
+                      name="runner_prize"
+                      id="runner_prize"
                       value={values.runner_prize}
                       onChange={handleChange}
                       onBlur={handleBlur}
@@ -737,10 +737,13 @@ function TournamentAddEdit() {
                       ) : null}
                     </div>
                     <div className="flex flex-col w-full">
-                      <label className="mb-2">Referee Category</label>
-                      <select name="referee_category"
+                      <label className="mb-2">Referee Type</label>
+                      <select name={`referees.${index}.type`}
                         className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-3 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-transparent"
-                        id="">
+                        id=""
+                        onChange={handleChange}
+                        onBlur={handleBlur} 
+                        >
                         <option value="">Select Referee Category</option>
                         <option value="BFI">BFI</option>
                         <option value="FIBA">FIBA</option>
@@ -749,7 +752,7 @@ function TournamentAddEdit() {
                       </select>
                       {touched.referees && touched.referees[index] && errors.referees && errors.referees[index] ? (
                         <small className="text-sm font-semibold text-red-600 px-1">
-                          {errors.referees[index]?.referee_category}
+                          {errors.referees[index]?.type}
                         </small>
                       ) : null}
                     </div>

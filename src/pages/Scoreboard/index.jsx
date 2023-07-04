@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { toast } from 'react-toastify';
 import { AiOutlineUndo } from 'react-icons/ai'
+import { IoFlagSharp } from 'react-icons/io5'
 import { Tooltip } from 'react-tooltip'
 import PointButton from './PointButton';
 import FoulButton from './FoulButton';
@@ -429,15 +430,25 @@ function index() {
                     </div>
                     <div className='flex lg:flex-row flex-col lg:justify-between justify-center items-center lg:space-y-0 space-y-4 pt-2 pb-6 px-10'>
                         <div className="flex flex-2 flex-col">
+                            <div className='sm:pb-2 flex'>{
+                                 _.times(
+                                    matchDetails?.all_quarters?.length
+                                    ?
+                                        matchDetails?.all_quarters[ matchDetails?.all_quarters?.length - 1].team_1_fouls
+                                    :   0
+                                    , (i)=>(
+                                    <IoFlagSharp className='text-red-700 mr-2'/>
+                                 ))
+                            }</div>
                             <div className='sm:pb-1'>
                                 <p className='text-gray-400 lg:block hidden'>Points</p>
                                 <p className='text-lg font-semibold pb-2 bg-clip-text text-transparent bg-gradient-to-r from-gray-700 to-[#ee6730] text-center lg:hidden block'>{matchDetails?.data?.team_1?.team_name}</p>
                             </div>
                             <div className='flex lg:flex-col md:flex-row flex-col lg:space-x-0 space-x-5'>
                                 <div className="flex space-x-2 lg:mt-0 sm:mt-3 mt-1">
-                                    <PointButton text="Free Shot" disabled={disableBtns} onClick={()=>handleTeam1Point("free shot")} />
-                                    <PointButton text="In 3-point" disabled={disableBtns} onClick={()=>handleTeam1Point("in 3 point")} />
-                                    <PointButton text="Out 3-point" disabled={disableBtns} onClick={()=>handleTeam1Point("out 3 point")} />
+                                    <PointButton text="Free Throw" disabled={disableBtns} onClick={()=>handleTeam1Point("free shot")} />
+                                    <PointButton text="3 point" disabled={disableBtns} onClick={()=>handleTeam1Point("in 3 point")} />
+                                    <PointButton text="2 point" disabled={disableBtns} onClick={()=>handleTeam1Point("out 3 point")} />
                                 </div>
                                 <div className="flex flex-col mt-3 ">
                                     <div className='pb-1 lg:block hidden'>
@@ -460,15 +471,27 @@ function index() {
                             <Tooltip id="undo_btn" variant="dark" content="Undo last point" place='bottom' delayShow={500} />
                         </div>
                         <div className="flex flex-2 flex-col">
+                            <div className='sm:pb-2 flex justify-end'>
+                                {
+                                    _.times(
+                                    matchDetails?.all_quarters?.length
+                                    ?
+                                        matchDetails?.all_quarters[ matchDetails?.all_quarters?.length - 1].team_2_fouls
+                                    :   0
+                                    , (i)=>(
+                                        <IoFlagSharp className='text-red-700 ml-2'/>
+                                    ))
+                                }
+                            </div>
                             <div className='sm:pb-1 text-end'>
                                 <p className='text-gray-400 lg:block hidden'>Points</p>
                                 <p className='text-lg font-semibold pb-2 bg-clip-text text-transparent bg-gradient-to-r from-gray-700 to-[#ee6730] text-center lg:hidden block'>{matchDetails?.data?.team_2?.team_name}</p>
                             </div>
                             <div className='flex lg:flex-col md:flex-row flex-col lg:space-x-0 space-x-5'>
                                 <div className="flex space-x-2 lg:mt-0 sm:mt-3 mt-1">
-                                    <PointButton text="Free Shot" disabled={disableBtns} onClick={()=>handleTeam2Point("free shot")} />
-                                    <PointButton text="In 3-point" disabled={disableBtns} onClick={()=>handleTeam2Point("in 3 point")} />
-                                    <PointButton text="Out 3-point" disabled={disableBtns} onClick={()=>handleTeam2Point("out 3 point")} />
+                                    <PointButton text="Free Throw" disabled={disableBtns} onClick={()=>handleTeam2Point("free shot")} />
+                                    <PointButton text="3 point" disabled={disableBtns} onClick={()=>handleTeam2Point("in 3 point")} />
+                                    <PointButton text="2 point" disabled={disableBtns} onClick={()=>handleTeam2Point("out 3 point")} />
                                 </div>
                                 <div className="flex flex-col mt-3 ">
                                     <div className='pb-1 lg:block hidden'>
