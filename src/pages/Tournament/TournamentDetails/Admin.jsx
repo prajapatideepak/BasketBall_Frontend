@@ -19,6 +19,7 @@ import SmallLoader from '../../../Component/SmallLoader'
 import moment from 'moment'
 
 function Admin({tournamentDetails, refetchData, teams}) {
+  console.log(refetchData , "refatch")
   const navigate = useNavigate();
   const {tournament_id} = useParams();
 
